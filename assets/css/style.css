@@ -1370,3 +1370,11 @@ body.nav-open .navbar {
     color: rgba(0, 0, 0, 0.85);
     background-color: #fff;
 }
+
+/* Tighten slides button spacing on session titles */
+.session-title .btn {
+    padding: 0.15rem 0.45rem; /* tighter box */
+    line-height: 1.1;         /* reduce vertical slack */
+    font-size: 0.85rem;       /* slightly smaller text */
+    border-radius: 4px;       /* keep consistent rounding */
+}
