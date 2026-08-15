@@ -14,7 +14,7 @@ const navigation = editionNavigation(edition);
 const actions = currentEditionActionPaths(edition);
 ---
 
-<header class="site-header">
+<header class="site-header" data-nav-mode="inline">
   <a class="skip-link" href="#main-content">跳到主要内容</a>
   <div class="site-header__inner">
     <a class="site-brand" href={editionPath(edition)} aria-label={`${edition.titleZh} 首页`}>
@@ -39,6 +39,25 @@ const actions = currentEditionActionPaths(edition);
         菜单
       </button>
       <div class="site-navigation__panel" id="conference-navigation">
+        <div class="site-navigation__atmosphere" aria-hidden="true">
+          {
+            (
+              [
+                [72, 8, 4, '#111342'],
+                [80, 14, 6, '#6752c8'],
+                [88, 8, 3, '#f28a2b'],
+                [93, 18, 4, '#8f86bb'],
+                [84, 24, 3, '#2c908c'],
+                [14, 78, 3, '#6752c8'],
+                [78, 68, 5, '#f28a2b'],
+                [88, 76, 3, '#111342'],
+                [70, 82, 4, '#8f86bb'],
+              ] as const
+            ).map(([left, top, size, color]) => (
+              <i style={`left:${left}%;top:${top}%;width:${size}px;height:${size}px;background:${color}`}></i>
+            ))
+          }
+        </div>
         <nav aria-label={`${edition.year} 会议导航`}>
           <ul class="site-nav">
             {navigation.map((item) => (
@@ -63,25 +82,59 @@ const actions = currentEditionActionPaths(edition);
       </div>
     </div>
   </div>
+  <script is:inline>
+    {
+      const header = document.currentScript.parentElement;
+      const inner = header?.querySelector('.site-header__inner');
+      if (header instanceof HTMLElement && inner instanceof HTMLElement) {
+        const phone = window.matchMedia('(max-width: 47.99rem)').matches;
+        header.dataset.navMode = phone || inner.scrollWidth > inner.clientWidth + 1
+          ? 'compact'
+          : 'inline';
+      }
+    }
+  </script>
 </header>
 
 <script>
-  const navigation = document.querySelector<HTMLElement>('.site-navigation');
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const navigation = header?.querySelector<HTMLElement>('.site-navigation');
   const toggle = navigation?.querySelector<HTMLButtonElement>('.site-navigation__toggle');
   const panel = navigation?.querySelector<HTMLElement>('.site-navigation__panel');
-  const compactNavigation = window.matchMedia('(max-width: 74rem)');
+  const inner = header?.querySelector<HTMLElement>('.site-header__inner');
+  const phoneNavigation = window.matchMedia('(max-width: 47.99rem)');
+
+  const isCompact = () => header?.dataset.navMode === 'compact';
 
   const syncPanelAccessibility = () => {
     if (!panel) return;
-    if (compactNavigation.matches && !navigation?.hasAttribute('data-open')) {
+    if (isCompact() && !navigation?.hasAttribute('data-open')) {
       panel.setAttribute('aria-hidden', 'true');
     } else {
       panel.removeAttribute('aria-hidden');
     }
   };
 
+  const syncNavMode = () => {
+    if (!header || !inner) return;
+    const previous = header.dataset.navMode;
+    if (phoneNavigation.matches) {
+      header.dataset.navMode = 'compact';
+    } else {
+      header.dataset.navMode = 'inline';
+      if (inner.scrollWidth > inner.clientWidth + 1) {
+        header.dataset.navMode = 'compact';
+      }
+    }
+    if (previous === 'compact' && header.dataset.navMode !== 'compact') {
+      closeNavigation();
+      return;
+    }
+    syncPanelAccessibility();
+  };
+
   const openNavigation = () => {
-    if (!navigation || !toggle || !panel || !compactNavigation.matches) return;
+    if (!navigation || !toggle || !panel || !isCompact()) return;
     navigation.setAttribute('data-open', '');
     toggle.setAttribute('aria-expanded', 'true');
     toggle.setAttribute('aria-label', '收起会议导航');
@@ -103,20 +156,21 @@ const actions = currentEditionActionPaths(edition);
     else openNavigation();
   });
 
-  compactNavigation.addEventListener('change', () => {
+  phoneNavigation.addEventListener('change', () => {
     closeNavigation();
+    syncNavMode();
   });
 
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
-    if (!compactNavigation.matches || !navigation?.hasAttribute('data-open')) return;
+    if (!isCompact() || !navigation?.hasAttribute('data-open')) return;
     event.preventDefault();
     closeNavigation({ restoreFocus: true });
   });
 
   document.addEventListener('click', (event) => {
     if (
-      !compactNavigation.matches ||
+      !isCompact() ||
       !navigation?.hasAttribute('data-open') ||
       navigation.contains(event.target as Node)
     ) return;
@@ -129,6 +183,11 @@ const actions = currentEditionActionPaths(edition);
     }
   });
 
+  if (inner) {
+    const resizeObserver = new ResizeObserver(() => syncNavMode());
+    resizeObserver.observe(inner);
+  }
+  document.fonts?.ready.then(syncNavMode).catch(() => undefined);
   window.addEventListener('pagehide', () => closeNavigation());
-  syncPanelAccessibility();
+  syncNavMode();
 </script>

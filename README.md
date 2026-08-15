@@ -3,7 +3,7 @@
 This repository contains the X-AGI conference website and its permanent annual archives.
 
 The site is built as static HTML with Astro.
-Only the generated `dist/` directory should be deployed.
+OSS publishes the generated `upload/` directory, which is copied from a validated `dist/` build.
 
 ## Editions
 
@@ -97,11 +97,22 @@ npm run downloads:verify
 
 ## Deployment
 
-Build the site and deploy only `dist/`.
+Build the site and upload only `upload/`.
 Do not publish the repository root.
 
-CI publishes the verified `dist/` directory as the `site-dist` workflow artifact.
-Production deployment should promote that exact artifact rather than rebuilding from an unchecked working tree.
+```bash
+npm run build
+```
+
+A successful build validates `dist/`, then mirrors it into `upload/`.
+Sync the contents of `upload/` to the OSS bucket root so `index.html` sits at `/`.
+Leave `upload/README.md` in Git.
+It is not part of the public site.
+
+CI publishes the verified `dist/` directory as the `site-dist` workflow artifact, then deploys that same artifact to GitHub Pages.
+Do not point Pages at the repository root.
+The root is now Astro source, and Jekyll cannot build it.
+Production should promote that checked build, or an `upload/` folder generated from it, rather than rebuilding from an unchecked working tree.
 
 The hosting layer should serve HTML with a short cache lifetime and fingerprinted assets with a long immutable cache lifetime.
 The separate slide upload should preserve the exact `/2025/assets/slides/` paths recorded in the archive manifest.

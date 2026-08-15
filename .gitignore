@@ -5,3 +5,5 @@ dist/
 .astro/
 node_modules/
 output/
+upload/*
+!upload/README.md

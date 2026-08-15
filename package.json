@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npm run validate",
+    "build": "astro build && npm run validate && npm run prepare:upload",
     "preview": "astro preview",
     "check": "astro check",
     "validate": "node scripts/validate-build.mjs",
+    "prepare:upload": "node scripts/prepare-upload.mjs",
     "downloads:manifest": "node scripts/generate-archive-download-manifest.mjs",
     "downloads:verify": "node scripts/verify-archive-downloads.mjs",
     "test:unit": "node --test src/config/edition-status.test.ts src/scripts/connection-field.test.ts",
