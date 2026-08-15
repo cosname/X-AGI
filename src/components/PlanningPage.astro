@@ -1,0 +1,100 @@
+---
+import { currentEditionPageCopy } from '../config/edition-status';
+import { upcomingEdition } from '../config/site';
+import { conference2026 } from '../data/conference2026';
+import PageMasthead from './PageMasthead.astro';
+import PageNextStep from './PageNextStep.astro';
+
+interface Props {
+  page: 'speakers' | 'register';
+}
+
+const { page } = Astro.props;
+const copy = currentEditionPageCopy(page, conference2026, upcomingEdition);
+const isSpeakers = page === 'speakers';
+---
+
+<article class:list={['conference-page', 'conference-page--holding', `conference-page--${page}`]}>
+  <PageMasthead
+    eyebrow={isSpeakers ? 'SPEAKERS' : 'REGISTRATION'}
+    title={copy.label}
+    summary={
+      isSpeakers
+        ? '嘉宾名单将在确认后发布，所有信息将与正式日程保持一致。'
+        : conference2026.registration.description
+    }
+    status={copy.status}
+    connectionField
+  />
+
+  <div class="conference-page__body">
+  {isSpeakers ? (
+    <>
+      <section class="holding-page__body">
+        <div>
+          <p class="conference-kicker">PUBLISHING PRINCIPLE</p>
+          <h2>只发布已确认信息</h2>
+        </div>
+        <p>
+          嘉宾姓名、所属机构、报告题目与对应日程将在完成确认后统一更新，避免不完整信息影响参会判断。
+        </p>
+      </section>
+
+      <dl class="page-definition-list" aria-label="嘉宾页面将发布的信息">
+        <div><dt>嘉宾</dt><dd>姓名、机构与个人简介</dd></div>
+        <div><dt>报告</dt><dd>题目、摘要与所属方向</dd></div>
+        <div><dt>时间</dt><dd>对应日期、时段与会议环节</dd></div>
+      </dl>
+
+      <PageNextStep
+        titleId="speakers-next-step-title"
+        eyebrow={copy.next.eyebrow}
+        title={copy.next.title}
+        description={copy.next.description}
+        href={copy.next.href}
+        label={copy.next.label}
+      />
+    </>
+  ) : (
+    <>
+      <dl class="page-facts page-facts--registration" aria-label="报名关键信息">
+        <div>
+          <dt>日期</dt>
+          <dd>{conference2026.dates.display}</dd>
+        </div>
+        <div>
+          <dt>地点</dt>
+          <dd>{conference2026.venue.name}</dd>
+        </div>
+        <div>
+          <dt>状态</dt>
+          <dd>{conference2026.registration.status}</dd>
+        </div>
+      </dl>
+
+      <section class="holding-page__body">
+        <div>
+          <p class="conference-kicker">REGISTRATION</p>
+          <h2>普通参会与 Poster 共用一个入口</h2>
+        </div>
+        <div class="registration-panel">
+          <p>{conference2026.registration.description}</p>
+          <ul>
+            {conference2026.registration.notes.map((note) => <li>{note}</li>)}
+          </ul>
+          <a href={conference2026.registration.url} target="_blank" rel="noopener noreferrer">前往报名系统</a>
+        </div>
+      </section>
+
+      <PageNextStep
+        titleId="registration-next-step-title"
+        eyebrow={copy.next.eyebrow}
+        title={copy.next.title}
+        description={copy.next.description}
+        href={copy.next.href}
+        label={copy.next.label}
+      />
+    </>
+  )}
+  </div>
+</article>

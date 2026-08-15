@@ -1,0 +1,32 @@
+---
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { EditionConfig } from '../config/site';
+import type { EditionPage } from '../config/navigation';
+
+interface Props {
+  edition: EditionConfig;
+  activePage?: EditionPage;
+  pageTitle?: string;
+  description?: string;
+  canonicalPath: string;
+}
+
+const { edition, activePage = '', pageTitle, description, canonicalPath } = Astro.props;
+const title = pageTitle ? `${pageTitle} | ${edition.title}` : edition.title;
+---
+
+<BaseLayout
+  title={title}
+  description={description ?? edition.description}
+  canonicalPath={canonicalPath}
+  noIndex={edition.status === 'planning'}
+  bodyClass={`edition-site edition-${edition.year}`}
+>
+  <SiteHeader edition={edition} activePage={activePage} />
+  <main id="main-content">
+    <slot />
+  </main>
+  <SiteFooter edition={edition} />
+</BaseLayout>

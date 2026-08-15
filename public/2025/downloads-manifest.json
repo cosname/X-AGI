@@ -1,0 +1,114 @@
+{
+  "downloads": [
+    {
+      "path": "/2025/assets/slides/AI4Science/刘畅.pdf",
+      "bytes": 2991815,
+      "sha256": "98b70e04e95c33c7cf43a14b9ce788337e44a950f8aef5728374653e4fb71f4b"
+    },
+    {
+      "path": "/2025/assets/slides/AI4Science/许洪腾.pdf",
+      "bytes": 4715847,
+      "sha256": "bc60abd690579eca0820b90b68197e940647259fa0079af2ca6dafe21645b987"
+    },
+    {
+      "path": "/2025/assets/slides/Agent形态演变/于兆洋.pdf",
+      "bytes": 11966527,
+      "sha256": "f1cc61b97c9f045a5a8e5cffbd4c7dfd62646851bfc186368b9ea9e821a384da"
+    },
+    {
+      "path": "/2025/assets/slides/Agent形态演变/李博杰",
+      "bytes": 54,
+      "sha256": "79d4aee2c06aac57a4885b828a1a5d3351e11ccffdcbf0cac3ffe71919b75e4e"
+    },
+    {
+      "path": "/2025/assets/slides/Agent形态演变/李博杰.md",
+      "bytes": 74518,
+      "sha256": "94a291cb2ae70d1b531ae5fd4a3269a702f1c0df610138cbf6416d56d1bcbdd4"
+    },
+    {
+      "path": "/2025/assets/slides/Agent形态演变/董冠霆.pptx",
+      "bytes": 10138575,
+      "sha256": "7150be61a1b4c2653400add60052bb5b80945ab330eb58b13a96b4e518635b71"
+    },
+    {
+      "path": "/2025/assets/slides/Agent形态演变/高嘉煊.pptx",
+      "bytes": 5933197,
+      "sha256": "8070e2b57981591f3482cb5113b757b386eb1bc9d5962b76da6499d0ceabb32b"
+    },
+    {
+      "path": "/2025/assets/slides/Agent的产业应用/赵健博.pptx",
+      "bytes": 97312325,
+      "sha256": "6294de4f909712ebc0a837e1347b82fa7b4d3d2118a2eade3ce3c25442689910"
+    },
+    {
+      "path": "/2025/assets/slides/Keynote/李崇轩.pptx",
+      "bytes": 284961099,
+      "sha256": "a1d6065e0e3fc83c5aa473b32ace46c18d519a82db8cc787da24a828806c8b47"
+    },
+    {
+      "path": "/2025/assets/slides/具身智能/夏子炜.pdf",
+      "bytes": 4911794,
+      "sha256": "7c14ad1cf16e9a5348ca41905d920b9fdb61330b3c160749cbc9aaf929fa531c"
+    },
+    {
+      "path": "/2025/assets/slides/具身智能/胡迪.pptx",
+      "bytes": 381187541,
+      "sha256": "2ffca5c1ad45f823677e59780ca22e6a0c36aa9138427b11501f673e31296d56"
+    },
+    {
+      "path": "/2025/assets/slides/多模态理解与生成/Gen Li.pdf",
+      "bytes": 14055658,
+      "sha256": "2979eb74b3581da314868ddf2386729fccc13689805271d442fbe3f2519a4be4"
+    },
+    {
+      "path": "/2025/assets/slides/多模态理解与生成/洪蓝青.pdf",
+      "bytes": 1899624,
+      "sha256": "c9b0edb20b0d455a58106ad19cfbf901d82e2195fbc005a88693d706b75e02cd"
+    },
+    {
+      "path": "/2025/assets/slides/多模态理解与生成/王本友.pptx",
+      "bytes": 13991198,
+      "sha256": "bb27a344637a5db6b3f737dfa4ee0c4104aba8c7cde99a91e06aa2faa8a24452"
+    },
+    {
+      "path": "/2025/assets/slides/多模态理解与生成/罗维俭.pdf",
+      "bytes": 1579441,
+      "sha256": "ee941294957b5745bc8d0f21e29288087577c55be95cfb433bf3e654b8ef74bb"
+    },
+    {
+      "path": "/2025/assets/slides/大模型基础理论/方聪.pdf",
+      "bytes": 14855752,
+      "sha256": "5917d20778758748e3159fc1ff10ab4ffeb65d89d11d3c3656b9b5ec016a5a7d"
+    },
+    {
+      "path": "/2025/assets/slides/大模型基础理论/汪子乔.pptx",
+      "bytes": 7086580,
+      "sha256": "3d0bb51a3a2d92992239efbce4ac7e10b887ab301e8f9d85a726f36d86e61107"
+    },
+    {
+      "path": "/2025/assets/slides/大模型基础理论/滕佳烨.pptx",
+      "bytes": 4354651,
+      "sha256": "b4fb605ba3435a6d4457ca2e3c49df4e9ce6ce7f84716a4a3e16a6b761f1f83f"
+    },
+    {
+      "path": "/2025/assets/slides/大模型基础理论/马梓烨.pptx",
+      "bytes": 4604978,
+      "sha256": "dbcba4603adfd8c0b64ccd870476b35cc64e68511dcc48ee632271d679513bd4"
+    },
+    {
+      "path": "/2025/assets/slides/生物医药统计与大模型/俞声.pptx",
+      "bytes": 21284170,
+      "sha256": "609b5e008f7629169576afd63d9b7cb45ea737a69776f1a77793c3ef2d80cdc1"
+    },
+    {
+      "path": "/2025/assets/slides/生物医药统计与大模型/符天凡.pptx",
+      "bytes": 19960140,
+      "sha256": "cef5b1e91b952a05276d2a33257113e51d26041b255e4a4b6df7a9d160341ea9"
+    },
+    {
+      "path": "/2025/assets/slides/生物医药统计与大模型/金华清.pdf",
+      "bytes": 3888477,
+      "sha256": "05593399e29014498299024cccca52c82ab2bf007928180e2559d06c65cff7df"
+    }
+  ]
+}

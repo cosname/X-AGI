@@ -1,0 +1,253 @@
+---
+import pixelDataSource from '../data/hero-pixel-field.generated.json';
+import {
+  BASE_POSTERIOR_AMPLITUDE,
+  BASE_POSTERIOR_MEAN,
+  buildDensityBandPolygon,
+  buildDensityPolygon,
+  echoComponentForState,
+  STATIC_TERRAIN_LAYERS,
+  terrainComponentsForState,
+  TERRAIN_ECHOES,
+} from '../scripts/hero-pixel-field';
+
+type PixelRecord = [x: number, y: number, size: number, colorIndex: number, alphaIndex: number];
+type PixelData = {
+  artboard: { width: number; height: number; splitX: number };
+  palette: number[][];
+  alphaLevels: number[];
+  left: PixelRecord[];
+  right: PixelRecord[];
+  stats: { blocks: number };
+};
+type TreeSide = 'left' | 'right';
+type BranchKey = 'root' | 'trunk' | 'outer' | 'crown' | 'inner' | 'mid-outer';
+type BranchDefinition = {
+  key: BranchKey;
+  anchorX: number;
+  anchorY: number;
+  depth: number;
+};
+type TreeBranch = BranchDefinition & {
+  side: TreeSide;
+  records: PixelRecord[];
+  bounds: { left: number; top: number; right: number; bottom: number };
+};
+
+const pixelData = pixelDataSource as unknown as PixelData;
+const leftWidth = pixelData.artboard.splitX;
+const rightWidth = pixelData.artboard.width - pixelData.artboard.splitX;
+const artboardHeight = pixelData.artboard.height;
+const shapeUnit = pixelData.artboard.width / 128;
+
+const percentage = (value: number, basis: number) => `${((value / basis) * 100).toFixed(4)}%`;
+const isScalePixel = ([, , size, , alphaIndex]: PixelRecord) => size >= 3 && alphaIndex >= 10;
+const pixelStyle = ([x, y]: PixelRecord, width: number) => (
+  `left:${percentage(x, width)};top:${percentage(y, artboardHeight)}`
+);
+const scalePixelClass = (record: PixelRecord, branch: TreeBranch) => {
+  if (!isScalePixel(record)) return '';
+  const [x, y, size] = record;
+  const centerX = x + size / 2;
+  const centerY = y + size / 2;
+  const originX = centerX >= branch.anchorX ? 0 : 1;
+  const originY = centerY >= branch.anchorY ? 0 : 1;
+  return ` hp--scale hp--origin-${originX}${originY}`;
+};
+const blockSizes = Array.from(new Set([
+  ...pixelData.left.map((record) => record[2]),
+  ...pixelData.right.map((record) => record[2]),
+])).sort((a, b) => a - b);
+
+const tokenCss = [
+  ...pixelData.palette.map((color, index) => (
+    `.hero-pixel-field .hp.t${index}{--pixel-color:rgb(${color.join(' ')})}`
+  )),
+  ...pixelData.alphaLevels.map((alpha, index) => (
+    `.hero-pixel-field .hp.a${index}{--pixel-alpha:${alpha}}`
+  )),
+  ...blockSizes.map((size) => (
+    `.hero-pixel-field__tree-artboard--left .s${size}{--pixel-w:${percentage(size, leftWidth)};--pixel-h:${percentage(size, artboardHeight)}}`
+  )),
+  ...blockSizes.map((size) => (
+    `.hero-pixel-field__tree-artboard--right .s${size}{--pixel-w:${percentage(size, rightWidth)};--pixel-h:${percentage(size, artboardHeight)}}`
+  )),
+].join('');
+
+const leftDefinitions: BranchDefinition[] = [
+  { key: 'root', anchorX: 56, anchorY: 820, depth: 0.12 },
+  { key: 'trunk', anchorX: 56, anchorY: 620, depth: 0.36 },
+  { key: 'outer', anchorX: 104, anchorY: 330, depth: 0.96 },
+  { key: 'crown', anchorX: 104, anchorY: 330, depth: 1 },
+  { key: 'inner', anchorX: 108, anchorY: 347, depth: 0.78 },
+];
+
+const rightDefinitions: BranchDefinition[] = [
+  { key: 'root', anchorX: 546, anchorY: 820, depth: 0.12 },
+  { key: 'trunk', anchorX: 546, anchorY: 630, depth: 0.36 },
+  { key: 'mid-outer', anchorX: 551, anchorY: 430, depth: 0.82 },
+  { key: 'inner', anchorX: 528, anchorY: 410, depth: 0.76 },
+  { key: 'crown', anchorX: 536, anchorY: 325, depth: 1 },
+  { key: 'outer', anchorX: 551, anchorY: 350, depth: 0.96 },
+];
+
+const branchKeyFor = ([x, y]: PixelRecord, side: TreeSide): BranchKey => {
+  if (side === 'left') {
+    if (y >= 620) return 'root';
+    if (y >= 300 && x < 190) return 'trunk';
+    if (y < 360 && x < 105) return 'outer';
+    if (y < 275 && x >= 80) return 'crown';
+    return 'inner';
+  }
+  if (y >= 630) return 'root';
+  if (y >= 300 && x >= 620) return 'mid-outer';
+  if (y >= 300 && x >= 480) return 'trunk';
+  if (y >= 300) return 'inner';
+  if (x >= 555) return 'outer';
+  return 'crown';
+};
+
+const makeBranches = (
+  records: PixelRecord[],
+  side: TreeSide,
+  definitions: BranchDefinition[],
+): TreeBranch[] => definitions.map((definition) => {
+  const branchRecords = records.filter((record) => branchKeyFor(record, side) === definition.key);
+  return {
+    ...definition,
+    side,
+    records: branchRecords,
+    bounds: {
+      left: Math.min(...branchRecords.map((record) => record[0])),
+      top: Math.min(...branchRecords.map((record) => record[1])),
+      right: Math.max(...branchRecords.map((record) => record[0] + record[2])),
+      bottom: Math.max(...branchRecords.map((record) => record[1] + record[2])),
+    },
+  };
+});
+
+const leftBranches = makeBranches(pixelData.left, 'left', leftDefinitions);
+const rightBranches = makeBranches(pixelData.right, 'right', rightDefinitions);
+
+const basePaths = new Map(STATIC_TERRAIN_LAYERS.map((layer, index) => [
+  layer.key,
+  buildDensityPolygon(
+    pixelData.artboard.width,
+    shapeUnit,
+    layer.baseline,
+    terrainComponentsForState(layer, BASE_POSTERIOR_MEAN, BASE_POSTERIOR_AMPLITUDE),
+    index + 1,
+  ),
+]));
+
+const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBandPolygon(
+  pixelData.artboard.width,
+  pixelData.artboard.width / 84,
+  definition.baseline,
+  echoComponentForState(definition, BASE_POSTERIOR_MEAN, BASE_POSTERIOR_AMPLITUDE),
+);
+---
+
+<div
+  class="hero-pixel-field"
+  data-hero-pixel-field
+  data-render-mode="dom"
+  data-pixel-count={pixelData.stats.blocks}
+  data-ready="false"
+  aria-hidden="true"
+>
+  <div class="hero-pixel-field__trees">
+    <div class="hero-pixel-field__tree-position hero-pixel-field__tree-position--left" data-tree-position="left">
+      <div class="hero-pixel-field__tree-sway">
+        <div class="hero-pixel-field__tree-artboard hero-pixel-field__tree-artboard--left">
+          {leftBranches.map((branch) => (
+            <span
+              class={`hero-pixel-field__tree-branch hero-pixel-field__tree-branch--left-${branch.key}`}
+              data-tree-branch
+              data-branch-side={branch.side}
+              data-branch-depth={branch.depth}
+              data-branch-left={branch.bounds.left}
+              data-branch-top={branch.bounds.top}
+              data-branch-right={branch.bounds.right}
+              data-branch-bottom={branch.bounds.bottom}
+              data-branch-anchor-x={branch.anchorX}
+              data-branch-anchor-y={branch.anchorY}
+            >
+              {branch.records.map((record) => (
+                <i
+                  class={`hp t${record[3]} a${record[4]} s${record[2]}${scalePixelClass(record, branch)}`}
+                  style={pixelStyle(record, leftWidth)}
+                ></i>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-pixel-field__tree-position hero-pixel-field__tree-position--right" data-tree-position="right">
+      <div class="hero-pixel-field__tree-sway">
+        <div class="hero-pixel-field__tree-artboard hero-pixel-field__tree-artboard--right">
+          {rightBranches.map((branch) => (
+            <span
+              class={`hero-pixel-field__tree-branch hero-pixel-field__tree-branch--right-${branch.key}`}
+              data-tree-branch
+              data-branch-side={branch.side}
+              data-branch-depth={branch.depth}
+              data-branch-left={branch.bounds.left}
+              data-branch-top={branch.bounds.top}
+              data-branch-right={branch.bounds.right}
+              data-branch-bottom={branch.bounds.bottom}
+              data-branch-anchor-x={branch.anchorX}
+              data-branch-anchor-y={branch.anchorY}
+            >
+              {branch.records.map((record) => (
+                <i
+                  class={`hp t${record[3]} a${record[4]} s${record[2]}${scalePixelClass(record, branch)}`}
+                  style={pixelStyle(record, rightWidth)}
+                ></i>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <i class="hero-pixel-field__sanctuary" data-hero-sanctuary></i>
+  <i
+    class="hero-pixel-field__tree-terrain-occlusion"
+    data-terrain-occlusion="navy"
+    style={`--terrain-path:${basePaths.get('navy')}`}
+  ></i>
+
+  <div class="hero-pixel-field__terrain" data-probability-terrain>
+    {STATIC_TERRAIN_LAYERS.map((layer) => (
+      <div class={`hero-pixel-field__terrain-layer hero-pixel-field__terrain-layer--${layer.key}`} data-layer={layer.key}>
+        <i
+          class="hero-pixel-field__terrain-surface"
+          data-terrain-surface={layer.key}
+          style={`--terrain-rgb:${layer.color};--terrain-alpha:${layer.alpha};--terrain-path:${basePaths.get(layer.key)}`}
+        ></i>
+      </div>
+    ))}
+
+    <span class="hero-pixel-field__echo-field">
+      {TERRAIN_ECHOES.map((echo) => (
+        <i
+          class="hero-pixel-field__terrain-surface hero-pixel-field__terrain-echo"
+          data-echo={echo.index}
+          style={`--terrain-rgb:129 118 206;--terrain-alpha:${echo.alpha};--terrain-path:${echoPath(echo)}`}
+        ></i>
+      ))}
+    </span>
+  </div>
+</div>
+
+<style is:inline set:html={tokenCss}></style>
+
+<script>
+  import { initializeHeroPixelFields } from '../scripts/hero-pixel-field';
+
+  initializeHeroPixelFields();
+</script>

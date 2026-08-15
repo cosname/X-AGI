@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import { conference2026 } from '../data/conference2026';
+import hotelPlan from '../assets/2026/venue/beijing-friendship-hotel-plan.jpg';
+import palaceFloor from '../assets/2026/venue/friendship-palace-floor-2.jpg';
+
+const maps = [
+  {
+    ...conference2026.venue.maps[0],
+    image: hotelPlan,
+    width: 1551,
+    height: 1551,
+  },
+  {
+    ...conference2026.venue.maps[1],
+    image: palaceFloor,
+    width: 1846,
+    height: 1304,
+  },
+];
+---
+
+<section class="venue-maps" aria-labelledby="venue-maps-title">
+  <header class="venue-maps__heading">
+    <p class="conference-kicker">VENUE MAPS</p>
+    <h2 id="venue-maps-title">会场示意图</h2>
+    <p>大会主会场位于北京友谊宾馆友谊宫。下图可用于辨认园区入口、地铁站与友谊宫二层会议空间。</p>
+  </header>
+
+  <div class="venue-maps__grid">
+    {maps.map((map) => (
+      <figure>
+        <a href={map.image.src} target="_blank" rel="noopener noreferrer">
+          <Image
+            src={map.image}
+            alt={`${map.title}。${map.description}`}
+            width={map.width}
+            height={map.height}
+            widths={[720, 1100, map.width]}
+            sizes="(max-width: 64rem) calc(100vw - 2.5rem), 34rem"
+            quality={82}
+          />
+        </a>
+        <figcaption>
+          <strong>{map.title}</strong>
+          <span lang="en">{map.titleEn}</span>
+          <small>{map.description} 点击图片查看大图。</small>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+</section>

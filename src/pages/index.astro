@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { currentEdition, editionPath } from '../config/site';
+
+const destination = editionPath(currentEdition);
+---
+
+<BaseLayout
+  title={currentEdition.title}
+  description={currentEdition.description}
+  canonicalPath={destination}
+  noIndex
+>
+  <meta http-equiv="refresh" content={`0;url=${destination}`} slot="head" />
+  <main class="redirect-page">
+    <p>正在前往 X-AGI {currentEdition.year} 网站。</p>
+    <a href={destination}>如果页面没有自动跳转，请点击这里。</a>
+  </main>
+  <script is:inline define:vars={{ destination }}>
+    window.location.replace(destination);
+  </script>
+</BaseLayout>

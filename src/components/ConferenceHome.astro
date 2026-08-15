@@ -1,0 +1,136 @@
+---
+import { currentEditionActionPaths } from '../config/edition-status';
+import { upcomingEdition } from '../config/site';
+import { conference2026 } from '../data/conference2026';
+import ConferencePartners from './ConferencePartners.astro';
+import ConnectionField from './ConnectionField.astro';
+import HeroPixelField from './HeroPixelField.astro';
+import ScheduleDay from './ScheduleDay.astro';
+
+const actions = currentEditionActionPaths(upcomingEdition);
+---
+
+<div class="conference-home">
+  <section class="conference-hero" aria-labelledby="conference-title" data-connection-stage>
+    <div class="conference-hero__art" aria-hidden="true">
+      <HeroPixelField />
+    </div>
+
+    <div class="conference-hero__inner">
+      <div class="conference-hero__copy">
+        <h1 id="conference-title" data-connection-anchor="title" data-connection-exclusion>
+          <span class="conference-hero__year">2026</span>
+          <span class="conference-hero__name" data-title-ink>
+            <span class="conference-hero__wordmark conference-hero__ink" data-title-ink-surface>X-AGI</span>
+            <em class="conference-hero__title-zh conference-hero__ink" data-title-ink-surface>大会</em>
+          </span>
+        </h1>
+        <p class="conference-hero__tagline" lang="en" data-connection-exclusion>{conference2026.tagline}</p>
+        <p class="conference-hero__meta" data-connection-exclusion>
+          <time datetime={conference2026.dates.start}>{conference2026.dates.display}</time>
+          <span>{conference2026.venue.name}</span>
+        </p>
+      </div>
+      <div class="conference-actions" data-connection-exclusion>
+        <a class="conference-action conference-action--primary" href={conference2026.registration.url} target="_blank" rel="noopener noreferrer">
+          立即报名
+        </a>
+        <a class="conference-action conference-action--text" href={actions.schedule}>
+          查看大会日程
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="conference-manifesto" aria-labelledby="manifesto-title">
+    <h2 id="manifesto-title">
+      <span class="conference-manifesto__line">让研究、方法与人</span>
+      <span class="conference-manifesto__line">
+        <span class="conference-manifesto__phrase">在同一个场域里</span>
+        <span class="conference-manifesto__phrase">相遇。</span>
+      </span>
+    </h2>
+    <p>{conference2026.description}</p>
+  </section>
+
+  <section class="conference-formats" aria-labelledby="formats-title">
+    <header class="conference-formats__header">
+      <h2 id="formats-title">大会环节</h2>
+    </header>
+    <div class="conference-formats__stream">
+      {conference2026.mechanisms.map((mechanism) => (
+        <article>
+          <span aria-hidden="true">{mechanism.number}</span>
+          <div>
+            <h3 lang={mechanism.number === '02' ? 'en' : undefined}>{mechanism.title}</h3>
+            <p>{mechanism.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="conference-section conference-section--provenance" aria-labelledby="provenance-title">
+    <div class="conference-section__heading">
+      <h2 id="provenance-title">关于 X-AGI</h2>
+    </div>
+    <div class="conference-provenance__body">
+      <div class="conference-provenance__copy">
+        {conference2026.introduction.slice(1).map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <dl class="conference-provenance__matrix" aria-label="会议学术脉络">
+        <div><dt>学术脉络</dt><dd>中国 R 会议 / FAIC / 历届 X-AGI 活动</dd></div>
+        <div><dt>交叉方向</dt><dd>统计 / 数据科学 / 人工智能</dd></div>
+        <div><dt>聚焦主题</dt><dd>下一代 AI 研究者</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="conference-section conference-section--schedule" aria-labelledby="home-schedule-title">
+    <header class="conference-section__heading conference-section__heading--split">
+      <div>
+        <h2 id="home-schedule-title">三天会议结构</h2>
+      </div>
+      <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
+    </header>
+    <div class="schedule-list">
+      {conference2026.schedule.map((day, index) => <ScheduleDay day={day} index={index} />)}
+    </div>
+  </section>
+
+  <section
+    class="conference-poster-callout"
+    aria-labelledby="poster-callout-title"
+    data-connection-stage
+  >
+    <div class="conference-poster-callout__art" aria-hidden="true">
+      <ConnectionField variant="poster" />
+    </div>
+
+    <div class="conference-poster-callout__panel">
+      <div class="conference-poster-callout__title">
+        <p class="conference-kicker">RISING STAR</p>
+        <h2 id="poster-callout-title" lang="en" data-connection-anchor="title">
+          <span>Rising</span>
+          <span>Star</span>
+        </h2>
+      </div>
+      <div class="conference-poster-callout__body">
+        <p>{conference2026.poster.description}</p>
+        <dl>
+          <div><dt>申请要求</dt><dd>{conference2026.poster.requirements[0]}</dd></div>
+          <div><dt>报名截止时间</dt><dd>{conference2026.poster.deadline.date} {conference2026.poster.deadline.time}</dd></div>
+          <div><dt>入选权益</dt><dd>{conference2026.poster.benefits[0]}</dd></div>
+        </dl>
+        <a href={actions.poster}>查看申请要求与入选权益</a>
+      </div>
+    </div>
+  </section>
+
+  <ConferencePartners titleId="home-partners-title" />
+
+  <section class="conference-update-strip" aria-label="待发布信息">
+    <strong>即将发布</strong>
+    <p>{conference2026.pending.join(' / ')}</p>
+  </section>
+</div>

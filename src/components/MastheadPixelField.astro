@@ -1,0 +1,39 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div
+  class:list={['masthead-pixel-field', className]}
+  data-masthead-pixel-field
+  data-render-mode="canvas"
+  aria-hidden="true"
+>
+  <canvas class="masthead-pixel-field__canvas"></canvas>
+</div>
+
+<script>
+  import { initializeMastheadPixelFields } from '../scripts/masthead-pixel-field';
+
+  initializeMastheadPixelFields();
+</script>
+
+<style>
+  .masthead-pixel-field {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #f5f0ea;
+    pointer-events: none;
+  }
+
+  .masthead-pixel-field__canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

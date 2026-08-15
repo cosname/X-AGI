@@ -1,0 +1,40 @@
+---
+interface Props {
+  variant: 'masthead' | 'poster';
+  class?: string;
+}
+
+const { variant, class: className } = Astro.props;
+---
+
+<div
+  class:list={['connection-field', `connection-field--${variant}`, className]}
+  data-connection-field={variant}
+  data-render-mode="canvas"
+  aria-hidden="true"
+>
+  <canvas class="connection-field__canvas"></canvas>
+</div>
+
+<script>
+  import { initializeConnectionFields } from '../scripts/connection-field';
+
+  initializeConnectionFields();
+</script>
+
+<style>
+  .connection-field {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #f5f0ea;
+    pointer-events: none;
+  }
+
+  .connection-field__canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

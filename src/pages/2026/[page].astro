@@ -1,0 +1,34 @@
+---
+import type { GetStaticPaths } from 'astro';
+import EditionShell from '../../components/EditionShell.astro';
+import ConferencePage from '../../components/ConferencePage.astro';
+import PlanningPage from '../../components/PlanningPage.astro';
+import { currentEditionPageCopy, type CurrentEditionInnerPage } from '../../config/edition-status';
+import { editionPath, upcomingEdition } from '../../config/site';
+
+const conferencePages = ['about', 'schedule', 'poster', 'guide'] as const;
+
+export const getStaticPaths = (() =>
+  (['about', 'speakers', 'schedule', 'poster', 'guide', 'register'] as const satisfies readonly CurrentEditionInnerPage[]).map((page) => ({
+    params: { page },
+    props: { page },
+  }))) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: CurrentEditionInnerPage };
+const copy = currentEditionPageCopy(page, undefined, upcomingEdition);
+const isConferencePage = (conferencePages as readonly string[]).includes(page);
+---
+
+<EditionShell
+  edition={upcomingEdition}
+  activePage={page}
+  pageTitle={copy.label}
+  description={copy.description}
+  canonicalPath={editionPath(upcomingEdition, page)}
+>
+  {isConferencePage ? (
+    <ConferencePage variant={page as (typeof conferencePages)[number]} />
+  ) : (
+    <PlanningPage page={page as 'speakers' | 'register'} />
+  )}
+</EditionShell>

@@ -1,0 +1,47 @@
+---
+import { editionPath, upcomingEdition } from '../config/site';
+import { conference2026 } from '../data/conference2026';
+
+interface Props {
+  titleId: string;
+}
+
+const { titleId } = Astro.props;
+const partnerGroups = [
+  { label: '发起方', organizations: conference2026.initiators },
+  { label: '主办单位', organizations: conference2026.organizers },
+  { label: '协办单位', organizations: conference2026.coOrganizers },
+  { label: '赞助伙伴', organizations: conference2026.sponsors },
+] as const;
+---
+
+<section class="conference-partners" aria-labelledby={titleId}>
+  <header class="conference-partners__heading">
+    <p class="conference-kicker">PARTNERS</p>
+    <h2 id={titleId}>合作伙伴</h2>
+  </header>
+
+  <div class="conference-partners__groups">
+    {partnerGroups.map((group, index) => (
+      <section
+        class="conference-partners__group"
+        data-count={group.organizations.length}
+        aria-labelledby={`${titleId}-group-${index}`}
+      >
+        <h3 id={`${titleId}-group-${index}`}>{group.label}</h3>
+        <ul>
+          {group.organizations.map((organization) => <li>{organization}</li>)}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <footer class="conference-partners__links">
+    <a href={editionPath(upcomingEdition)}>会议网站</a>
+    <a href={conference2026.registration.url} target="_blank" rel="noopener noreferrer">Poster报名</a>
+    <address>
+      <span>联系我们：</span>
+      <a href={`mailto:${conference2026.contact}`}>{conference2026.contact}</a>
+    </address>
+  </footer>
+</section>

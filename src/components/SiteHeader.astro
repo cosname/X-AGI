@@ -1,0 +1,134 @@
+---
+import type { EditionConfig } from '../config/site';
+import { currentEditionActionPaths } from '../config/edition-status';
+import { editionPath } from '../config/site';
+import { editionNavigation, type EditionPage } from '../config/navigation';
+
+interface Props {
+  edition: EditionConfig;
+  activePage?: EditionPage;
+}
+
+const { edition, activePage = '' } = Astro.props;
+const navigation = editionNavigation(edition);
+const actions = currentEditionActionPaths(edition);
+---
+
+<header class="site-header">
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <div class="site-header__inner">
+    <a class="site-brand" href={editionPath(edition)} aria-label={`${edition.titleZh} 首页`}>
+      <img
+        class="site-brand__mark"
+        src="/brand/xagi-connect-logo.png"
+        alt=""
+        width="112"
+        height="112"
+        decoding="async"
+      />
+      <span class="site-brand__year">{edition.year}</span>
+    </a>
+    <div class="site-navigation">
+      <button
+        class="site-navigation__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="conference-navigation"
+        aria-label="打开会议导航"
+      >
+        菜单
+      </button>
+      <div class="site-navigation__panel" id="conference-navigation">
+        <nav aria-label={`${edition.year} 会议导航`}>
+          <ul class="site-nav">
+            {navigation.map((item) => (
+              <li>
+                <a
+                  href={editionPath(edition, item.page)}
+                  aria-current={activePage === item.page ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <a
+          class="site-header__action"
+          href={actions.register}
+          aria-current={activePage === 'register' ? 'page' : undefined}
+        >
+          立即报名
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const navigation = document.querySelector<HTMLElement>('.site-navigation');
+  const toggle = navigation?.querySelector<HTMLButtonElement>('.site-navigation__toggle');
+  const panel = navigation?.querySelector<HTMLElement>('.site-navigation__panel');
+  const compactNavigation = window.matchMedia('(max-width: 74rem)');
+
+  const syncPanelAccessibility = () => {
+    if (!panel) return;
+    if (compactNavigation.matches && !navigation?.hasAttribute('data-open')) {
+      panel.setAttribute('aria-hidden', 'true');
+    } else {
+      panel.removeAttribute('aria-hidden');
+    }
+  };
+
+  const openNavigation = () => {
+    if (!navigation || !toggle || !panel || !compactNavigation.matches) return;
+    navigation.setAttribute('data-open', '');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '收起会议导航');
+    toggle.textContent = '收起';
+    panel.removeAttribute('aria-hidden');
+  };
+
+  const closeNavigation = ({ restoreFocus = false } = {}) => {
+    navigation?.removeAttribute('data-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', '打开会议导航');
+    if (toggle) toggle.textContent = '菜单';
+    syncPanelAccessibility();
+    if (restoreFocus) toggle?.focus();
+  };
+
+  toggle?.addEventListener('click', () => {
+    if (navigation?.hasAttribute('data-open')) closeNavigation();
+    else openNavigation();
+  });
+
+  compactNavigation.addEventListener('change', () => {
+    closeNavigation();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (!compactNavigation.matches || !navigation?.hasAttribute('data-open')) return;
+    event.preventDefault();
+    closeNavigation({ restoreFocus: true });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (
+      !compactNavigation.matches ||
+      !navigation?.hasAttribute('data-open') ||
+      navigation.contains(event.target as Node)
+    ) return;
+    closeNavigation();
+  });
+
+  panel?.addEventListener('click', (event) => {
+    if (event.target instanceof Element && event.target.closest('a')) {
+      closeNavigation();
+    }
+  });
+
+  window.addEventListener('pagehide', () => closeNavigation());
+  syncPanelAccessibility();
+</script>
