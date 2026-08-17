@@ -27,7 +27,7 @@ const navigationByEdition: Record<EditionConfig['year'], readonly NavigationItem
     { page: '', label: '首页' },
     { page: 'about', label: '会议简介' },
     { page: 'schedule', label: '日程安排' },
-    { page: 'poster', label: 'Rising Stars Poster' },
+    { page: 'poster', label: '海报展示' },
     { page: 'guide', label: '参会指南' },
   ],
 };
