@@ -1,22 +1,15 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { currentEdition, editionPath } from '../config/site';
-
-const destination = editionPath(currentEdition);
+import Legacy2025Layout from '../layouts/Legacy2025Layout.astro';
+import LegacyHome from '../components/legacy/LegacyHome.astro';
+import { currentEdition } from '../config/site';
 ---
 
-<BaseLayout
+<Legacy2025Layout
+  edition={currentEdition}
   title={currentEdition.title}
   description={currentEdition.description}
-  canonicalPath={destination}
-  noIndex
+  canonicalPath="/"
+  home
 >
-  <meta http-equiv="refresh" content={`0;url=${destination}`} slot="head" />
-  <main class="redirect-page">
-    <p>正在前往 X-AGI {currentEdition.year} 网站。</p>
-    <a href={destination}>如果页面没有自动跳转，请点击这里。</a>
-  </main>
-  <script is:inline define:vars={{ destination }}>
-    window.location.replace(destination);
-  </script>
-</BaseLayout>
+  <LegacyHome edition={currentEdition} />
+</Legacy2025Layout>

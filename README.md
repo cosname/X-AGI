@@ -1,136 +1,189 @@
 # X-AGI Conference Website
 
-This repository contains the X-AGI conference website and its permanent annual archives.
+X-AGI 大会官网及年度归档的 Astro 静态站。
 
-The site is built as static HTML with Astro.
-OSS publishes the generated `upload/` directory, which is copied from a validated `dist/` build.
+- 正式网站：https://www.x-agi.cc
+- 代码仓库：https://github.com/cosname/X-AGI
+- 生产托管：阿里云 OSS `x-agi` 桶，地域 `cn-beijing`
+- 运行环境：Node.js 24、Astro 7、npm
 
-## Editions
+## 站点版本
 
-- `/2025/` is an immutable archive of the 2025 X-AGI and 18th China-R Conference website.
-- `/2026/` is the published website for the current conference edition.
-- `/` redirects to the edition selected by `currentEdition` in `src/config/site.ts`.
+同一次构建会生成正式站、历史归档和一套本地设计预览。
 
-The Git branch `archive/2025` and tag `x-agi-2025-final` preserve the original 2025 source and high-resolution assets.
+| 路径 | 用途 | 发布状态 |
+| --- | --- | --- |
+| `/`、`/about/`、`/schedule/` 等 | 2026 正式站，使用 2025 模板皮肤和 2026 官方内容 | 对外发布 |
+| `/2025/` | 2025 X-AGI 与第 18 届中国 R 会议归档 | 冻结发布 |
+| `/next/` | 米色纸面和像素树的新视觉方案 | 仅本地预览 |
+| `/2026/`、`/2026/<page>/` | 旧书签兼容入口 | 跳转至根路径正式页 |
 
-## Architecture
+`/next/` 会写入本地 `dist/`，但生产同步脚本会明确排除它。
+`robots.txt` 也会禁止抓取 `/next/`。
+
+根目录下的 `about.html`、`schedule.html` 等旧式 URL 会跳转到对应的 2025 归档页。
+这些文件用于兼容 2025 网站上线时产生的旧链接，不是 2026 正式路由。
+
+## 正式路由
+
+| 路径 | 页面 |
+| --- | --- |
+| `/` | 首页 |
+| `/about/` | 会议简介 |
+| `/schedule/` | 日程安排 |
+| `/poster/` | Rising Stars Poster |
+| `/guide/` | 参会指南 |
+| `/register/` | 报名、票价和百格活动表单 |
+| `/speakers/` | 跳转至 `/schedule/` |
+
+兼容跳转集中配置在 `astro.config.mjs`。
+
+## 内容与代码结构
 
 ```text
 src/
-  components/       Shared components for current and future editions
-  config/           Site, edition, and navigation configuration
-  data/             Conference content and generated DOM pixel coordinates
-  layouts/          Shared document layouts and metadata
-  pages/            Astro routes and generated endpoints
-  scripts/          Client interaction modules for decorative fields
-  styles/           Current-edition design tokens and global styles
+  config/
+    site.ts                    届次、路径、状态和皮肤
+    navigation.ts              导航和页面集合
+    edition-status.ts          页面标题、状态和下一步操作
+  data/
+    conference2026.ts          2026 官方内容的唯一数据源
+    legacy-partner-assets.ts   正式站合作单位 Logo 对照
+  layouts/
+    Legacy2025Layout.astro     当前正式站布局
+    BaseLayout.astro           新视觉预览布局
+  components/legacy/           当前正式站页面组件
+  components/                  停放中的新视觉组件
+  pages/                       Astro 路由和文本端点
+  styles/
+    legacy-2025.css            当前正式站样式补丁
+    global.css                 新视觉预览样式
 public/
-  2025/             Immutable legacy HTML archive
-    assets/         Edition-scoped legacy assets and vendored dependencies
+  2025/                        冻结的 2025 静态归档
+  2026/brand/                  2026 X-AGI 品牌资源
+  2026/logos/                  2026 合作单位 Logo
 scripts/
-  generate-archive-download-manifest.mjs
-  generate-hero-pixel-field.mjs
-  validate-build.mjs
-assets/slides/      Local archive downloads, intentionally excluded from Git
+  validate-build.mjs           构建产物硬校验
+  configure-oss.mjs            本机 ossutil 配置
+  sync-oss.mjs                 生产同步
 ```
 
-The 2025 archive remains plain HTML so historical content is not needlessly rewritten.
-The 2026 and future editions use shared Astro components and typed edition configuration.
-The 2026 homepage hero is server-rendered HTML and CSS rather than a Canvas or runtime image.
-Its asymmetric tree art is compiled into deterministic DOM pixel coordinates, while its probability landscape stays interactive through contained transforms and height updates.
+2026 文案、票价、组织单位、日程和报名状态只在 `src/data/conference2026.ts` 中维护。
+页面组件负责表现，不应复制一份独立业务数据。
 
-## Local development
+当前日程中的空报告位是尚未公布的占位数据。
+不要自行补写讲者、报告、赞助商或数字。
 
-Node.js 24 is the supported runtime.
+2026 品牌标志不包含 2025 年标志中的 `R`。
+正式赞助商名称是“智统数合”。
+构建校验会拒绝旧标志和错误名称。
+
+## 本地开发
+
+项目要求 Node.js 24，版本记录在 `.nvmrc`。
 
 ```bash
-npm install
+eval "$(fnm env)"
+fnm use 24
+npm ci
 npm run dev
 ```
 
-Astro serves the development site at `http://localhost:4321` by default.
+本地开发服务器默认位于 http://localhost:4321。
 
-The approved hero reference is an authoring input and is not shipped at runtime.
-Regenerate the checked-in DOM coordinates only when that reference changes:
-
-```bash
-node scripts/generate-hero-pixel-field.mjs /absolute/path/to/reference.png src/data/hero-pixel-field.generated.json --preview /tmp/xagi-hero-dom-preview.png
-```
-
-## Verification
-
-Run strict type and Astro checks:
+常用命令：
 
 ```bash
+npm run dev
 npm run check
-```
-
-Build and validate the site artifact:
-
-```bash
+npm run test:unit
+npm test
 npm run build
 ```
 
-The build validator checks generated HTML for duplicate IDs, broken local references, unmanaged archive downloads, and every non-archived page's HTML and initial local payload budgets.
-It also rejects runtime raster, Canvas, SVG, CSS URL, and image-set dependencies inside the pure DOM homepage hero.
+`npm test` 会依次运行单元测试、Astro 类型检查、静态构建和构建产物校验。
 
-## Archive downloads
+修改页面后至少检查以下路径的桌面和手机布局：
 
-Large slide files are intentionally not stored in Git or copied into `dist/`.
-They must be uploaded to `/2025/assets/slides/` by the selected object-storage release process.
+- `/`
+- `/about/`
+- `/schedule/`
+- `/poster/`
+- `/guide/`
+- `/register/`
+- `/2025/`
 
-The generated `public/2025/downloads-manifest.json` records every archive download with its path, byte size, and SHA-256 checksum.
+## 构建约束
 
-Regenerate the manifest after changing a local slide file:
+`scripts/validate-build.mjs` 会检查：
+
+- 重复 HTML `id`
+- 无法解析的本地链接和资源
+- 归档下载清单格式
+- 2026 官方文案是否实际渲染
+- 根首页是否为真实页面而不是跳转页
+- 2026 页面是否误用 2025 的旧 `R` 标志
+- 新视觉页面的 HTML 和初始资源体积预算
+
+正式站沿用了 2025 的大尺寸背景素材，因此带 `edition-legacy-2025` 标记的页面暂不执行新视觉的初始资源预算。
+
+## 生产发布
+
+正式生产环境是阿里云 OSS 上的 https://www.x-agi.cc。
+GitHub Actions 只负责验证构建并保存 `dist/` artifact，不负责生产发布。
+
+发布前需要安装 ossutil 2.x，并为桶 `x-agi` 准备最小权限的 RAM AccessKey。
+不要使用阿里云主账号密钥。
+不要把 AccessKey 写进仓库、Issue、PR 或聊天记录。
+
+首次配置：
 
 ```bash
-npm run downloads:manifest
+export OSS_ACCESS_KEY_ID='your-access-key-id'
+export OSS_ACCESS_KEY_SECRET='your-access-key-secret'
+npm run oss:configure
+unset OSS_ACCESS_KEY_ID OSS_ACCESS_KEY_SECRET
 ```
 
-Do not edit the generated manifest manually.
+配置会保存在本机 `~/.ossutilconfig`。
 
-Verify every local slide against the manifest before uploading the archive downloads:
+日常发布：
+
+```bash
+npm ci
+npm test
+OSS_DRY_RUN=1 npm run oss:sync
+npm run oss:sync
+```
+
+`npm run oss:sync` 只同步经过校验的 `dist/`，并排除 `next/**`。
+同步不会删除桶里只存在于远端的对象。
+不要给全站同步添加 `--delete`，否则可能删除 2025 slides 和访问日志。
+
+可以用 `OSS_BUCKET` 临时覆盖默认桶名。
+只有明确准备发布到另一个桶时才应使用该变量。
+
+## 2025 归档
+
+`public/2025/` 是冻结归档。
+除归档完整性、无障碍、安全或性能修补外，不应修改其中的会议事实、讲者、赞助商和文案。
+
+历史源站还保存在 `archive/2025` 分支和 `x-agi-2025-final` 标签中。
+
+大体积 slides 不存入 Git。
+它们应继续位于 OSS 的 `/2025/assets/slides/`，并与 `public/2025/downloads-manifest.json` 中的路径、大小和 SHA-256 一致。
 
 ```bash
 npm run downloads:verify
 ```
 
-## Deployment
+## 新视觉预览
 
-Build the site and upload only `upload/`.
-Do not publish the repository root.
+新视觉的入口位于 `src/pages/next/`，设计说明位于 `src/design-next/README.md`。
 
 ```bash
-npm run build
+npm run dev
 ```
 
-A successful build validates `dist/`, then mirrors it into `upload/`.
-Sync the contents of `upload/` to the OSS bucket root so `index.html` sits at `/`.
-Leave `upload/README.md` in Git.
-It is not part of the public site.
-
-CI publishes the verified `dist/` directory as the `site-dist` workflow artifact, then deploys that same artifact to GitHub Pages.
-Do not point Pages at the repository root.
-The root is now Astro source, and Jekyll cannot build it.
-Production should promote that checked build, or an `upload/` folder generated from it, rather than rebuilding from an unchecked working tree.
-
-The hosting layer should serve HTML with a short cache lifetime and fingerprinted assets with a long immutable cache lifetime.
-The separate slide upload should preserve the exact `/2025/assets/slides/` paths recorded in the archive manifest.
-
-## Performance budgets
-
-CI enforces the first three static artifact budgets.
-LCP and CLS are release targets that must be measured in a browser against the final CDN configuration.
-
-- Standard current-edition HTML should remain below 50 KB per page.
-- The DOM-pixel homepage may use up to 700 KB of raw HTML, but must remain below 75 KB when compressed and below 4,000 decorative pixel nodes.
-- The initial homepage local asset set should remain below 1 MB.
-- Every other current-edition page's initial local asset set should remain below 1.5 MB.
-- Mobile Largest Contentful Paint should remain below 2.5 seconds.
-- Cumulative Layout Shift should remain below 0.1.
-- New local images should use Astro's image pipeline rather than being added directly to `public/`.
-
-## 2025 archive maintenance
-
-The 2025 pages are intentionally frozen except for archive integrity, accessibility, security, or performance corrections that do not change conference content.
-New conference information belongs in the current edition configuration and components rather than in `public/2025/`.
+打开 http://localhost:4321/next/ 查看。
+在没有明确上线决定前，不要把这套页面同步到生产环境。

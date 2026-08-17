@@ -1,0 +1,105 @@
+---
+interface Props {
+  href: string;
+  density?: 'compact' | 'field';
+  class?: string;
+  target?: string;
+  rel?: string;
+  'aria-current'?: 'page';
+}
+
+const {
+  href,
+  density = 'field',
+  class: className,
+  target,
+  rel,
+  'aria-current': ariaCurrent,
+} = Astro.props;
+
+const palette = ['#111342', '#2f3199', '#6752c8', '#8f86bb', '#f28a2b', '#2c908c'];
+
+function hashSeed(input: string) {
+  let hash = 2166136261;
+  for (let index = 0; index < input.length; index += 1) {
+    hash ^= input.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function createRng(seed: number) {
+  return () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let next = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    next = (next + Math.imul(next ^ (next >>> 7), 61 | next)) ^ next;
+    return ((next ^ (next >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const random = createRng(hashSeed(`${href}:${density}`));
+
+type MosaicDot = {
+  left: number;
+  top: number;
+  size: number;
+  color: string;
+  opacity: number;
+  driftX?: number;
+  driftY?: number;
+  delay?: number;
+};
+
+function dustDots(): MosaicDot[] {
+  const compact = density === 'compact';
+  const count = compact ? 18 : 28;
+  const wellX = compact ? 34 : 32;
+  const wellY = compact ? 18 : 16;
+
+  return Array.from({ length: count }, (_, index) => {
+    let left = 50;
+    let top = 50;
+    let angle = 0;
+    for (let attempt = 0; attempt < 24; attempt += 1) {
+      angle = (index / count) * Math.PI * 2 + (random() - 0.5) * 0.9;
+      const reach = 1.12 + random() * 0.38;
+      left = 50 + Math.cos(angle) * wellX * reach;
+      top = 50 + Math.sin(angle) * wellY * reach;
+      const clearOfText = Math.abs(left - 50) > wellX * 0.98 || Math.abs(top - 50) > wellY * 0.98;
+      if (clearOfText) break;
+    }
+
+    const grain = index % 5 === 0 ? 4 : index % 2 === 0 ? 3 : 2;
+    return {
+      left: Math.min(96, Math.max(4, left)),
+      top: Math.min(94, Math.max(6, top)),
+      size: compact ? Math.min(grain, 3) : grain,
+      color: palette[Math.floor(random() * palette.length)],
+      opacity: 0.5 + random() * 0.42,
+      driftX: Math.cos(angle) * (1.1 + random() * 1.8),
+      driftY: Math.sin(angle) * (1.1 + random() * 1.8),
+      delay: random() * 160,
+    };
+  });
+}
+
+const dots = dustDots();
+---
+
+<a
+  class:list={['mosaic-action', `mosaic-action--${density}`, className]}
+  href={href}
+  target={target}
+  rel={rel}
+  aria-current={ariaCurrent}
+>
+  <span class="mosaic-action__field" aria-hidden="true">
+    {dots.map((dot) => (
+      <i
+        class="mosaic-action__dot"
+        style={`left:${dot.left.toFixed(2)}%;top:${dot.top.toFixed(2)}%;width:${dot.size}px;height:${dot.size}px;background:${dot.color};opacity:${dot.opacity.toFixed(2)};${dot.driftX != null ? `--drift-x:${dot.driftX.toFixed(2)}px;--drift-y:${dot.driftY?.toFixed(2)}px;--drift-delay:${dot.delay ?? 0}ms;` : ''}`}
+      />
+    ))}
+  </span>
+  <span class="mosaic-action__label"><slot /></span>
+</a>

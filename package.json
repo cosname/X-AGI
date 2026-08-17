@@ -1,23 +1,33 @@
 {
-  "name": "x-agi-website",
+  "name": "x-agi",
   "version": "2.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://www.x-agi.cc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosname/X-AGI.git"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "npm@11.7.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npm run validate && npm run prepare:upload",
+    "build": "astro build && npm run validate",
     "preview": "astro preview",
     "check": "astro check",
     "validate": "node scripts/validate-build.mjs",
-    "prepare:upload": "node scripts/prepare-upload.mjs",
+    "oss:configure": "node scripts/configure-oss.mjs",
+    "oss:sync": "node scripts/sync-oss.mjs",
     "downloads:manifest": "node scripts/generate-archive-download-manifest.mjs",
     "downloads:verify": "node scripts/verify-archive-downloads.mjs",
     "test:unit": "node --test src/config/edition-status.test.ts src/scripts/connection-field.test.ts",
     "test": "npm run test:unit && npm run check && npm run build"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.9",
-    "astro": "7.0.7",
+    "@astrojs/check": "0.9.10",
+    "astro": "7.2.2",
     "sharp": "0.35.3",
     "typescript": "6.0.3"
   }

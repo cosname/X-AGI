@@ -1,0 +1,58 @@
+---
+import { conference2026 } from '../../data/conference2026';
+
+const { poster, registration, scale } = conference2026;
+---
+
+<main class="main-content">
+  <div class="container custom-container">
+    <div class="info-card">
+      <div class="card-header">Rising Stars Poster</div>
+      <div class="card-body">
+        <p>{poster.headline}</p>
+        <p>{poster.description}</p>
+        <table class="legacy-fact-table">
+          <tbody>
+            <tr>
+              <th scope="row">规模</th>
+              <td>约 {scale.posters} 份 Poster</td>
+            </tr>
+            <tr>
+              <th scope="row">截止</th>
+              <td>
+                <time datetime={poster.deadline.dateTime}>
+                  {poster.deadline.date} {poster.deadline.time}
+                </time>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">入选权益</th>
+              <td>
+                <ul>
+                  {poster.benefits.map((benefit) => <li>{benefit}</li>)}
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">申请要求</th>
+              <td>
+                <ol>
+                  {poster.requirements.map((requirement) => <li>{requirement}</li>)}
+                </ol>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">报名入口</th>
+              <td>{registration.description}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <a class="legacy-apply" href={registration.url} target="_blank" rel="noopener noreferrer">
+            申请 Rising Stars Poster
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</main>

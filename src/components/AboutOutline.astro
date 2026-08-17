@@ -1,0 +1,109 @@
+---
+import { conference2026 } from '../data/conference2026';
+
+export type AboutOutlineItem = {
+  id: string;
+  label: string;
+  children?: readonly AboutOutlineItem[];
+};
+
+interface Props {
+  items: readonly AboutOutlineItem[];
+}
+
+const { items } = Astro.props;
+const ids = items.flatMap(function collect(item: AboutOutlineItem): string[] {
+  return [item.id, ...(item.children ?? []).flatMap(collect)];
+});
+---
+
+<nav class="conference-about__outline" aria-label={`${conference2026.name} 简介目录`} data-about-outline>
+  <div class="conference-about__rail" aria-hidden="true">
+    <i data-about-marker></i>
+  </div>
+  <ol>
+    {items.map((item) => (
+      <li>
+        <a href={`#${item.id}`} data-about-link={item.id}>{item.label}</a>
+        {item.children && item.children.length > 0 && (
+          <ol>
+            {item.children.map((child) => (
+              <li>
+                <a href={`#${child.id}`} data-about-link={child.id}>{child.label}</a>
+              </li>
+            ))}
+          </ol>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script is:inline define:vars={{ ids }}>
+  const outline = document.querySelector('[data-about-outline]');
+  const marker = outline?.querySelector('[data-about-marker]');
+  const links = Array.from(document.querySelectorAll('[data-about-link]'));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const headerOffset = () => {
+    const header = document.querySelector('.site-header');
+    return (header instanceof HTMLElement ? header.getBoundingClientRect().height : 72) + 28;
+  };
+
+  const setActive = (id) => {
+    if (!outline || !id) return;
+    links.forEach((link) => {
+      const current = link.dataset.aboutLink === id;
+      link.classList.toggle('is-active', current);
+      if (current) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    const active = outline.querySelector(`[data-about-link="${id}"]`);
+    if (!(active instanceof HTMLElement) || !(marker instanceof HTMLElement)) return;
+    marker.style.transform = `translateY(${active.offsetTop + active.offsetHeight / 2 - 7}px)`;
+    marker.style.opacity = '1';
+  };
+
+  const syncFromScroll = () => {
+    const line = headerOffset();
+    let current = ids[0];
+    for (const id of ids) {
+      const section = document.getElementById(id);
+      if (!section) continue;
+      if (section.getBoundingClientRect().top <= line) current = id;
+    }
+    setActive(current);
+  };
+
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const id = link.dataset.aboutLink;
+      const section = id ? document.getElementById(id) : null;
+      if (!section || !id) return;
+      event.preventDefault();
+      setActive(id);
+      section.scrollIntoView({
+        behavior: reduceMotion.matches ? 'auto' : 'smooth',
+        block: 'start',
+      });
+      history.replaceState(null, '', `#${id}`);
+    });
+  });
+
+  let frame = 0;
+  const onScroll = () => {
+    if (frame) return;
+    frame = window.requestAnimationFrame(() => {
+      frame = 0;
+      syncFromScroll();
+    });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  document.fonts?.ready.then(syncFromScroll).catch(() => undefined);
+  syncFromScroll();
+
+  const hash = decodeURIComponent(location.hash.replace(/^#/, ''));
+  if (ids.includes(hash)) setActive(hash);
+</script>

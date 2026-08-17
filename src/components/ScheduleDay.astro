@@ -1,19 +1,25 @@
 ---
+import type { ScheduleDay as ScheduleDayData, ScheduleSession } from '../data/conference2026';
+
 interface Props {
-  day: {
-    dateTime: string;
-    date: string;
-    weekday: string;
-    segments: readonly {
-      slot: string;
-      items: readonly string[];
-    }[];
-  };
+  day: ScheduleDayData;
   index: number;
   headingLevel?: 2 | 3;
 }
 
 const { day, index, headingLevel = 3 } = Astro.props;
+const sessions = day.sessions as readonly ScheduleSession[];
+
+function sessionLabel(session: ScheduleSession) {
+  return session.title ? `${session.period}：${session.title}` : `${session.period}：`;
+}
+
+function sessionItems(session: ScheduleSession) {
+  const talks = (session.talks ?? []).map((talk) =>
+    talk.speaker ? `${talk.speaker} ｜ ${talk.title}` : talk.title,
+  );
+  return [...(session.notes ?? []), ...talks];
+}
 ---
 
 <article class="schedule-day">
@@ -27,12 +33,12 @@ const { day, index, headingLevel = 3 } = Astro.props;
     <small>{day.weekday}</small>
   </header>
   <dl class="schedule-day__segments">
-    {day.segments.map((segment) => (
+    {sessions.map((session) => (
       <div class="schedule-day__segment">
-        <dt>{segment.slot}</dt>
+        <dt>{sessionLabel(session)}</dt>
         <dd>
           <ul>
-            {segment.items.map((item) => <li>{item}</li>)}
+            {sessionItems(session).map((item) => <li>{item}</li>)}
           </ul>
         </dd>
       </div>

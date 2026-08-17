@@ -21,7 +21,7 @@ const title = pageTitle ? `${pageTitle} | ${edition.title}` : edition.title;
   title={title}
   description={description ?? edition.description}
   canonicalPath={canonicalPath}
-  noIndex={edition.status === 'planning'}
+  noIndex={edition.status === 'planning' || edition.skin === 'next'}
   bodyClass={`edition-site edition-${edition.year}`}
 >
   <SiteHeader edition={edition} activePage={activePage} />

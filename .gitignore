@@ -1,9 +1,22 @@
+# Operating system and editor files
 .DS_Store
+
+# Dependencies and generated output
+node_modules/
+.astro/
+dist/
+output/
+npm-debug.log*
+
+# Local archive downloads
 slides/
 assets/slides/
-dist/
-.astro/
-node_modules/
-output/
-upload/*
-!upload/README.md
+
+# Local credentials and environment
+.ossutilconfig
+.env
+.env.*
+!.env.example
+
+# One-off repository context exports
+repo_context.txt

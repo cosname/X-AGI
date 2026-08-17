@@ -2,9 +2,14 @@ import type { APIRoute } from 'astro';
 import { editionPages } from '../config/navigation';
 import { editionPath, editions } from '../config/site';
 
-const paths = Object.values(editions)
-  .filter(({ status }) => status !== 'planning')
-  .flatMap((edition) => editionPages(edition).map((page) => editionPath(edition, page)));
+const paths = [
+  ...new Set([
+    '/',
+    ...Object.values(editions)
+      .filter(({ status }) => status !== 'planning')
+      .flatMap((edition) => editionPages(edition).map((page) => editionPath(edition, page))),
+  ]),
+];
 
 export const GET: APIRoute = ({ site }) => {
   const origin = site ?? new URL('https://www.x-agi.cc');

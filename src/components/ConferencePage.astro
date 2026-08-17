@@ -2,11 +2,29 @@
 import { currentEditionPageCopy } from '../config/edition-status';
 import { upcomingEdition } from '../config/site';
 import { conference2026 } from '../data/conference2026';
+import AboutOutline from './AboutOutline.astro';
 import ConferencePartners from './ConferencePartners.astro';
+import ConferenceProgram from './ConferenceProgram.astro';
 import PageMasthead from './PageMasthead.astro';
-import PageNextStep from './PageNextStep.astro';
-import ScheduleDay from './ScheduleDay.astro';
+import RisingStars from './RisingStars.astro';
 import VenueMaps from './VenueMaps.astro';
+
+const aboutPartnerNav = [
+  { id: 'about-initiators', label: '发起方', organizations: conference2026.initiators },
+  { id: 'about-organizers', label: '主办单位', organizations: conference2026.organizers },
+  { id: 'about-co-organizers', label: '协办单位', organizations: conference2026.coOrganizers },
+  { id: 'about-sponsors', label: '赞助伙伴', organizations: conference2026.sponsors },
+].filter((group) => group.organizations.length > 0);
+
+const aboutOutline = [
+  { id: 'about-positioning', label: conference2026.positioning },
+  { id: 'about-origin', label: '关于 X-AGI' },
+  {
+    id: 'about-partners',
+    label: '组织与合作',
+    children: aboutPartnerNav.map(({ id, label }) => ({ id, label })),
+  },
+];
 
 interface Props {
   variant: 'about' | 'schedule' | 'poster' | 'guide';
@@ -27,52 +45,33 @@ const copy = currentEditionPageCopy(variant, conference2026, upcomingEdition);
         connectionField
       />
 
-      <div class="conference-page__body">
-      <section class="conference-page__lead">
-        <h2>{conference2026.positioning}</h2>
-        <p>{conference2026.introduction[0]}</p>
-      </section>
+      <div class="conference-page__body conference-about">
+      <div class="conference-about__layout">
+        <AboutOutline items={aboutOutline} />
 
-      <dl class="page-facts" aria-label="会议关键信息">
-        <div>
-          <dt>日期</dt>
-          <dd>{conference2026.dates.display}</dd>
-        </div>
-        <div>
-          <dt>地点</dt>
-          <dd>{conference2026.venue.name}</dd>
-        </div>
-        <div>
-          <dt>核心方向</dt>
-          <dd>统计 / 数据科学 / 人工智能</dd>
-        </div>
-      </dl>
+        <div class="conference-about__document">
+          <section class="conference-about__section" id="about-positioning" aria-labelledby="about-positioning-title">
+            <header>
+              <h2 id="about-positioning-title">{conference2026.positioning}</h2>
+              <p class="conference-about__meta">
+                <time datetime={conference2026.dates.start}>{conference2026.dates.display}</time>
+                <span>{conference2026.venue.name}</span>
+                <span>统计 / 数据科学 / 人工智能</span>
+              </p>
+            </header>
+            <p>{conference2026.introduction[0]}</p>
+          </section>
 
-      <section class="conference-page__section">
-        <div>
-          <p class="conference-kicker">ORIGIN</p>
-          <h2>关于 X-AGI</h2>
-        </div>
-        <div class="conference-story__copy">
-          {conference2026.introduction.slice(1).map((paragraph, index) => (
-            <article>
-              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-              <p>{paragraph}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+          <section class="conference-about__section" id="about-origin" aria-labelledby="about-origin-title">
+            <h2 id="about-origin-title">关于 X-AGI</h2>
+            <div class="conference-about__copy">
+              {conference2026.introduction.slice(1).map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+          </section>
 
-      <ConferencePartners titleId="about-partners-title" />
-
-      <PageNextStep
-        titleId="about-next-step-title"
-        eyebrow={copy.next.eyebrow}
-        title={copy.next.title}
-        description={copy.next.description}
-        href={copy.next.href}
-        label={copy.next.label}
-      />
+          <ConferencePartners titleId="about-partners" variant="profiles" />
+        </div>
+      </div>
       </div>
     </>
   )}
@@ -83,42 +82,11 @@ const copy = currentEditionPageCopy(variant, conference2026, upcomingEdition);
         eyebrow="PROGRAM"
         title="日程安排"
         summary={`${conference2026.dates.compact} / ${conference2026.venue.scheduleName}`}
-        status="流程安排"
         connectionField
       />
 
       <div class="conference-page__body">
-      <dl class="page-facts page-facts--schedule" aria-label="会议时间与地点">
-        <div>
-          <dt>时间</dt>
-          <dd><time datetime={conference2026.dates.start}>{conference2026.dates.compact}</time></dd>
-        </div>
-        <div>
-          <dt>地点</dt>
-          <dd>{conference2026.venue.scheduleName}</dd>
-        </div>
-      </dl>
-
-      <section class="conference-page__schedule" aria-label="三天会议日程">
-        <header class="conference-page__schedule-heading">
-          <p class="conference-kicker">PROGRAM</p>
-          <h2>流程安排</h2>
-        </header>
-        <div class="schedule-list schedule-list--page">
-          {conference2026.schedule.map((day, index) => (
-            <ScheduleDay day={day} index={index} headingLevel={2} />
-          ))}
-        </div>
-      </section>
-
-      <PageNextStep
-        titleId="schedule-next-step-title"
-        eyebrow={copy.next.eyebrow}
-        title={copy.next.title}
-        description={copy.next.description}
-        href={copy.next.href}
-        label={copy.next.label}
-      />
+      <ConferenceProgram />
       </div>
     </>
   )}
@@ -133,66 +101,7 @@ const copy = currentEditionPageCopy(variant, conference2026, upcomingEdition);
         connectionField
       />
 
-      <div class="conference-page__body">
-      <section class="conference-page__lead conference-page__lead--poster">
-        <div>
-          <p class="conference-kicker">RISING STARS' POSTER</p>
-          <h2 lang="en">Rising Stars' Poster</h2>
-        </div>
-        <p>{conference2026.poster.description}</p>
-      </section>
-
-      <section class="poster-criteria" aria-label="Rising Star 申请要求与入选权益">
-        <article>
-          <header>
-            <span aria-hidden="true">01</span>
-            <div>
-              <p class="conference-kicker">ELIGIBILITY</p>
-              <h2>申请要求</h2>
-            </div>
-          </header>
-          <ul>
-            {conference2026.poster.requirements.map((requirement) => <li>{requirement}</li>)}
-          </ul>
-        </article>
-        <article>
-          <header>
-            <span aria-hidden="true">02</span>
-            <div>
-              <p class="conference-kicker">BENEFITS</p>
-              <h2>入选权益</h2>
-            </div>
-          </header>
-          <ul>
-            {conference2026.poster.benefits.map((benefit) => <li>{benefit}</li>)}
-          </ul>
-        </article>
-      </section>
-
-      <section class="poster-deadline" aria-labelledby="poster-deadline-title">
-        <div>
-          <p class="conference-kicker">DEADLINE</p>
-          <h2 id="poster-deadline-title">报名截止时间</h2>
-        </div>
-        <time datetime={conference2026.poster.deadline.dateTime}>
-          <strong>{conference2026.poster.deadline.date}</strong>
-          <span>{conference2026.poster.deadline.time}</span>
-        </time>
-        <div class="poster-deadline__action">
-          <p>报名链接</p>
-          <a href={conference2026.registration.url} target="_blank" rel="noopener noreferrer">Poster报名</a>
-        </div>
-      </section>
-
-      <PageNextStep
-        titleId="poster-next-step-title"
-        eyebrow={copy.next.eyebrow}
-        title={copy.next.title}
-        description={copy.next.description}
-        href={copy.next.href}
-        label={copy.next.label}
-      />
-      </div>
+      <RisingStars />
     </>
   )}
 
@@ -233,15 +142,6 @@ const copy = currentEditionPageCopy(variant, conference2026, upcomingEdition);
           <li><span>住宿</span><strong>推荐住宿与预订说明</strong><small>待发布</small></li>
         </ul>
       </section>
-
-      <PageNextStep
-        titleId="guide-next-step-title"
-        eyebrow={copy.next.eyebrow}
-        title={copy.next.title}
-        description={copy.next.description}
-        href={copy.next.href}
-        label={copy.next.label}
-      />
       </div>
     </>
   )}

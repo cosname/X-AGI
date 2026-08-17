@@ -1,0 +1,96 @@
+---
+import { conference2026, type TicketBand } from '../../data/conference2026';
+
+const ticketId = conference2026.registration.url.split('/').pop();
+const ticketBands = conference2026.tickets.bands as readonly TicketBand[];
+---
+
+<main class="main-content">
+  <div class="container custom-container">
+    <div class="info-card">
+      <div class="card-header">报名须知</div>
+      <div class="card-body">
+        <p>{conference2026.registration.description}</p>
+        <div class="registration-notes">
+          <ul>
+            <li>会议时间：{conference2026.dates.display}</li>
+            <li>会议地点：{conference2026.venue.scheduleName}</li>
+            {conference2026.registration.notes.map((note) => <li>{note}</li>)}
+          </ul>
+        </div>
+
+        <div class="pricing-section">
+          <h4 class="pricing-title">会议费用（{conference2026.tickets.currency}）:</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered pricing-table legacy-ticket-table">
+              <colgroup>
+                <col class="legacy-ticket-col-type" />
+                <col class="legacy-ticket-col-price" />
+                <col class="legacy-ticket-col-price" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>票种</th>
+                  {conference2026.tickets.columns.map((column) => <th>{column}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {ticketBands.map((band) => (
+                  <>
+                    <tr class="legacy-ticket-band">
+                      <th colspan="3" scope="colgroup">
+                        {band.label}
+                        {band.until ? `（${band.until}）` : ''}
+                      </th>
+                    </tr>
+                    {band.rows.map((row) => (
+                      <tr>
+                        <td>{row.name}</td>
+                        <td>{row.student}</td>
+                        <td>{row.general}</td>
+                      </tr>
+                    ))}
+                  </>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="pricing-details">
+            {conference2026.tickets.notes.map((note) => <p>{note}</p>)}
+            <p class="legacy-register-fallback">
+              <a href={conference2026.registration.url} target="_blank" rel="noopener noreferrer">报名链接</a>
+            </p>
+          </div>
+        </div>
+
+        {ticketId && (
+          <div class="iframe-container">
+            <iframe
+              id="promote_ticket_iframe"
+              title="2026 X-AGI 报名表"
+              loading="lazy"
+              width="100%"
+              src={`https://www.bagevent.com/widget/ticket/${ticketId}?widget=2&iframe=1`}
+              style="border:0;overflow:hidden"
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</main>
+
+<script is:inline>
+  (function (i, s, o, g, r, a, m) {
+    i['BagEventIFrameResize'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    };
+    a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.bagevent.com/resources/js/iframeResizer/iframeResizer.min.js', 'bfr');
+  bfr('iFrameResize', {checkOrigin: false, heightCalculationMethod: 'taggedElement'}, "#promote_ticket_iframe");
+</script>

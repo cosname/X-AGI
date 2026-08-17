@@ -17,7 +17,7 @@ type Rect = { left: number; top: number; right: number; bottom: number };
 export type DensityComponent = readonly [mean: number, sigma: number, amplitude: number];
 
 export type TerrainLayerDefinition = {
-  key: 'haze' | 'mist' | 'lavender' | 'periwinkle' | 'violet' | 'posterior' | 'navy' | 'orange';
+  key: 'haze' | 'mist' | 'lavender' | 'periwinkle' | 'violet' | 'posterior' | 'navy' | 'ridge' | 'orange';
   color: string;
   alpha: number;
   baseline: number;
@@ -64,8 +64,12 @@ export const STATIC_TERRAIN_LAYERS: readonly TerrainLayerDefinition[] = [
     components: [[-0.015, 0.145, 0.195], [0.11, 0.08, 0.035]],
   },
   {
-    key: 'orange', color: '235 142 58', alpha: 0.88, baseline: 1.02,
-    components: [[1.04, 0.15, 0.215], [0.9, 0.08, 0.03]],
+    key: 'ridge', color: '92 84 172', alpha: 0.9, baseline: 1.018,
+    components: [[0.71, 0.08, 0.152], [0.78, 0.07, 0.1]],
+  },
+  {
+    key: 'orange', color: '58 52 138', alpha: 0.92, baseline: 1.02,
+    components: [[1.04, 0.14, 0.188], [0.93, 0.09, 0.062], [0.86, 0.085, 0.072]],
   },
 ] as const;
 
@@ -96,6 +100,7 @@ const TERRAIN_LAYER_DEPTH: Record<TerrainLayerDefinition['key'], number> = {
   violet: 0.9,
   posterior: 1,
   navy: 0.38,
+  ridge: 0.7,
   orange: 0.4,
 };
 
@@ -107,6 +112,7 @@ const TERRAIN_LAYER_PHASE: Record<TerrainLayerDefinition['key'], number> = {
   violet: 2.76,
   posterior: 3.34,
   navy: 3.9,
+  ridge: 4.18,
   orange: 4.46,
 };
 
@@ -330,7 +336,10 @@ export const initializeHeroPixelFields = () => {
       ? Array.from(titleInk.querySelectorAll<HTMLElement>('[data-title-ink-surface]'))
       : [];
     const terrainSurfaces = Array.from(field.querySelectorAll<HTMLElement>('[data-terrain-surface]'));
-    const treeTerrainOcclusion = field.querySelector<HTMLElement>('[data-terrain-occlusion="navy"]');
+    const treeTerrainOcclusions = {
+      navy: field.querySelector<HTMLElement>('[data-terrain-occlusion="navy"]'),
+      orange: field.querySelector<HTMLElement>('[data-terrain-occlusion="orange"]'),
+    };
     const echoSurfaces = Array.from(field.querySelectorAll<HTMLElement>('[data-echo]'));
     const abortController = new AbortController();
     const { signal } = abortController;
@@ -388,7 +397,9 @@ export const initializeHeroPixelFields = () => {
         const components = terrainComponentsForState(definition, snappedMean, snappedAmplitude, restingAmplitude);
         const terrainPath = buildDensityPolygon(width, shapeUnit, definition.baseline, components, index + 1);
         surface.style.setProperty('--terrain-path', terrainPath);
-        if (key === 'navy') treeTerrainOcclusion?.style.setProperty('--terrain-path', terrainPath);
+        if (key === 'navy' || key === 'orange') {
+          treeTerrainOcclusions[key]?.style.setProperty('--terrain-path', terrainPath);
+        }
       });
 
       echoSurfaces.forEach((surface) => {

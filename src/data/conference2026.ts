@@ -1,16 +1,66 @@
+export type Organization = {
+  name: string;
+  url?: string;
+  intro?: readonly string[];
+};
+
+export type ScheduleTalk = {
+  time?: string;
+  title: string;
+  speaker?: string;
+  affiliation?: string;
+  abstract?: string;
+  bio?: string;
+  slides?: string;
+};
+
+export type ScheduleSession = {
+  id: string;
+  period: string;
+  title?: string;
+  venue?: string;
+  chair?: {
+    name: string;
+    bio?: string;
+  };
+  notes?: readonly string[];
+  talks?: readonly ScheduleTalk[];
+};
+
+export type ScheduleDay = {
+  dateTime: string;
+  date: string;
+  weekday: string;
+  sessions: readonly ScheduleSession[];
+};
+
+export type TicketRow = {
+  name: string;
+  student: number;
+  general: number;
+};
+
+export type TicketBand = {
+  id: string;
+  label: string;
+  until?: string;
+  rows: readonly TicketRow[];
+};
+
 export const conference2026 = {
-  sourceDate: '2026-08-15',
+  sourceDate: '2026-08-16',
   sourceDateLabel: '大会公众号推送内容已同步',
   name: '2026 X-AGI 大会',
   nameEn: '2026 X-AGI Conference',
-  tagline: 'AI conference for the neXt Generation',
+  tagline: 'AI Conference for the neXt Generation',
   positioning: '下一代 AI 研究者',
   description:
-    '我们希望搭建一个开放、严谨且富有活力的青年学术交流平台，让具有潜力的年轻研究者不仅能够聆听前沿工作，也能够展示自己的研究、参与讨论并建立真实的学术连接，共同探索人工智能的下一步。',
+    '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台，进一步激发创新活力，推动学术与产业协同发展。',
   introduction: [
-    '2026 X-AGI 大会拟于2026年10月16日至18日在北京友谊宾馆举行。本届大会以 “AI conference for the neXt Generation” 为主题，邀请来自国内外高校、科研机构与产业界的优秀学者和专家，从院士到Kimi、Qwen大模型团队技术负责人，共同探讨下一代人工智能研究的前沿问题与发展方向。大会将以高水平学术报告为主体，并设置Rising Stars\' Poster、青年交流与产业连接等环节，为优秀本科生、硕士生和博士生提供正式展示研究成果、深入参与学术交流的平台，促进青年研究者与学术界、产业界之间的高质量连接。',
-    'X-AGI 源于统计之都长期推动的中国 R 会议及人工智能系列学术活动。中国 R 会议始于2008年，十余年来持续推动统计、数据科学及其交叉领域的开放交流；随着人工智能与大模型技术快速发展，统计之都于2023年进一步发起 X-AGI 项目。其中，“X”代表未知（Unknown）、交叉（Cross-disciplinary）与探索（Exploration），旨在连接统计、数据科学与人工智能等不同研究方向，在学科交叉中探索智能技术的新边界。',
-    '延续中国 R 会议、FAIC 与历届 X-AGI 活动的学术积累，2026 X-AGI 将进一步聚焦 “下一代 AI 研究者”。我们希望搭建一个开放、严谨且富有活力的青年学术交流平台，让具有潜力的年轻研究者不仅能够聆听前沿工作，也能够展示自己的研究、参与讨论并建立真实的学术连接，共同探索人工智能的下一步。',
+    '2026 X-AGI 大会拟于2026年10月16日至18日在北京友谊宾馆举行。本届大会以“AI Conference for the neXt Generation” 为主题，邀请来自国内外高校、科研机构与产业界的优秀学者和专家，共同探讨下一代人工智能研究的前沿问题与发展方向。“X”代表未知、交叉与探索。本次会议设置多个专题论坛，涵盖AI4Math、AI4Science、脑机接口、优化器新进展、AI Infra、Agent、Agentic后训练、LLM评测与基准、大语言模型基础、生成建模新范式与理论基础、扩散模型理论基础与推理算法、机器学习理论、AI+Finance等多个重要方向。',
+    '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台，进一步激发创新活力，推动学术与产业协同发展。Poster投稿条件：2025年1月1日之后在列表内期刊/会议录用中稿，列表包括 ICLR, NeurIPS, ICML, JMLR, T-PAMI, JASA, JRSSB, AoS, Biometrika, COLT, FOCS, STOC, TMLR, COLM, ACL, CVPR等。',
+    'X-AGI 大会起源于统计之都长期推动的中国 R 会议，本届已是第十九届。迄今，统计之都已联合全国20余所高校与科研机构，在全国14个城市成功举办近50次会议，呈现近2000场演讲，吸引线上线下参会者逾50万人次。',
+    '2026 X-AGI 大会由统计之都和FAI（人工智能基础研究）发起，联合清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院、中国商业统计学会人工智能分会共同主办，OScholar、AI Time共同协办，并获得明汯投资、宽德投资、Will、数启寰宇（QuantVerse）和智统数合的大力赞助。',
   ],
   dates: {
     display: '2026年10月16日至18日',
@@ -40,7 +90,7 @@ export const conference2026 = {
   },
   scale: {
     attendees: '600+',
-    posters: '100-150',
+    posters: '50-100',
   },
   mechanisms: [
     {
@@ -50,7 +100,7 @@ export const conference2026 = {
     },
     {
       number: '02',
-      title: "Rising Stars' Poster",
+      title: 'Rising Stars Poster',
       description: '为优秀本科生、硕士生和博士生提供正式展示研究成果、深入参与学术交流的平台。',
     },
     {
@@ -64,15 +114,18 @@ export const conference2026 = {
       description: '促进青年研究者与学术界、产业界之间的高质量连接。',
     },
   ],
+  // 日程是嘉宾、报告与分会场的唯一发布面。确认后的讲者、摘要、简介写进对应 session.talks。
   schedule: [
     {
       dateTime: '2026-10-16',
       date: '2026.10.16',
       weekday: '周五',
-      segments: [
+      sessions: [
         {
-          slot: '下午：报到日',
-          items: ['来场嘉宾报到注册', 'Poster 展会预交流'],
+          id: 'oct16-pm',
+          period: '下午',
+          title: '报到日',
+          notes: ['来场嘉宾报到注册', 'Poster 展会预交流'],
         },
       ],
     },
@@ -80,14 +133,33 @@ export const conference2026 = {
       dateTime: '2026-10-17',
       date: '2026.10.17',
       weekday: '周六',
-      segments: [
+      sessions: [
         {
-          slot: '上午：开幕式',
-          items: ['主持人致辞', '各分会场开展报告'],
+          id: 'oct17-am',
+          period: '上午',
+          title: 'Keynote 会场',
+          notes: ['主持人致辞'],
+          talks: [
+            { time: '', title: '', speaker: '', affiliation: '' },
+            { time: '', title: '', speaker: '', affiliation: '' },
+          ],
         },
         {
-          slot: '下午：',
-          items: ['各分会场开展报告', "Rising Stars' Poster展示"],
+          id: 'oct17-pm-sessions',
+          period: '下午',
+          title: '分会场报告',
+          notes: ['各分会场开展报告'],
+          talks: [
+            { time: '', title: '', speaker: '', affiliation: '' },
+            { time: '', title: '', speaker: '', affiliation: '' },
+            { time: '', title: '', speaker: '', affiliation: '' },
+          ],
+        },
+        {
+          id: 'oct17-pm-poster',
+          period: '下午',
+          title: 'Rising Stars Poster 展示',
+          notes: ['Rising Stars Poster 展示'],
         },
       ],
     },
@@ -95,30 +167,38 @@ export const conference2026 = {
       dateTime: '2026-10-18',
       date: '2026.10.18',
       weekday: '周日',
-      segments: [
+      sessions: [
         {
-          slot: '上午：',
-          items: ['各分会场开展报告'],
-        },
-        {
-          slot: '下午：',
-          items: ['各分会场开展报告'],
+          id: 'oct18-sessions',
+          period: '全天',
+          title: '分会场报告',
+          notes: ['各分会场开展报告'],
+          talks: [
+            { time: '', title: '', speaker: '', affiliation: '' },
+            { time: '', title: '', speaker: '', affiliation: '' },
+            { time: '', title: '', speaker: '', affiliation: '' },
+            { time: '', title: '', speaker: '', affiliation: '' },
+          ],
         },
       ],
     },
   ],
   poster: {
-    title: 'Rising Stars',
-    headline: '本次X-AGI新增 Rising Star 特色活动，鼓励本硕博同学积极交流，共筑AGI!',
+    title: 'Rising Stars Poster',
+    headline: '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台。',
     description:
-      "Rising Stars' Poster 是2026 X-AGI 面向青年研究者设置的成果展示板块。我们欢迎优秀本科生、硕士生与博士生来到 X-AGI，展示研究、交流想法、结识同行。",
+      'Poster投稿条件：2025年1月1日之后在列表内期刊/会议录用中稿，列表包括 ICLR, NeurIPS, ICML, JMLR, T-PAMI, JASA, JRSSB, AoS, Biometrika, COLT, FOCS, STOC, TMLR, COLM, ACL, CVPR等。',
     requirements: [
-      '在读本科生、硕士生、博士生',
-      '近一年内工作被录用到指定会议/期刊',
-      '申请人为第一作者或共同一作',
+      '2025年1月1日之后在列表内期刊/会议录用中稿',
+      '列表包括 ICLR, NeurIPS, ICML, JMLR, T-PAMI, JASA, JRSSB, AoS, Biometrika, COLT, FOCS, STOC, TMLR, COLM, ACL, CVPR等',
     ],
+    ticket: {
+      value: 2400,
+      currency: '人民币',
+      label: '价值 2400 人民币的 X-AGI 会议正式门票（含茶歇、餐食、伴手礼等）',
+    },
     benefits: [
-      '价值 3200￥ X-AGI 会议正式门票（含茶歇、餐食、伴手礼等）',
+      '价值 2400 人民币的 X-AGI 会议正式门票（含茶歇、餐食、伴手礼等）',
       '参加 X-AGI 青年之夜',
       '优秀简历直达合作企业技术负责人',
       '京外本科生机酒支持',
@@ -135,20 +215,132 @@ export const conference2026 = {
     description: '普通参会与 Rising Stars Poster 共用同一报名入口。',
     notes: [
       '完成基础参会信息后，可在报名系统中选择相应报名类型。',
-      'Rising Stars Poster 本科生与硕士生优先，目前不设置硬性学历限制。',
+      '在读本科生、硕士生、博士生优先。',
+      '报名海报展即赠专业票。',
       'Speaker 专属入口由各 Session Chair 定向发送，不在官网公开。',
     ],
   },
+  tickets: {
+    currency: 'RMB',
+    columns: ['学生票', '非学生票'],
+    bands: [
+      {
+        id: 'early-bird',
+        label: '早鸟票',
+        until: '9.26之前',
+        rows: [
+          { name: '游客票', student: 50, general: 150 },
+          { name: '专业票', student: 800, general: 1600 },
+        ],
+      },
+      {
+        id: 'regular',
+        label: '普通票',
+        rows: [
+          { name: '游客票', student: 100, general: 300 },
+          { name: '专业票', student: 1200, general: 2400 },
+        ],
+      },
+    ],
+    notes: [
+      '游客票仅包含胸牌权益，专业票包含胸牌、餐券、会员纪念品等权益。',
+      '报名海报展即赠专业票。',
+    ],
+  },
   audiences: ['在读本科生、硕士生、博士生', '青年研究者', '高校教师', '行业专家', '企业与产业伙伴'],
-  initiators: ['CAPITAL OF STATISTICS', 'FAI 人工智能基础'],
-  organizers: [
-    '清华大学统计与数据科学系',
-    '中国人民大学统计学院',
-    '中国人民大学应用统计科学研究中心',
-    '中国商业统计学会人工智能分会',
+  initiators: [
+    {
+      name: '统计之都',
+      url: 'https://cosx.org',
+      intro: [
+        '统计之都（Capital of Statistics，简称COS，官网：https://cosx.org）成立于2006年，是一个开放的统计学与人工智能社区。创立19年来，统计之都始终致力于推动数据科学与人工智能的知识传播、技术创新与跨领域应用。通过持续贡献开源软件，组织撰写技术文章与专业书籍，举办技术论坛、学术会议、主题沙龙与竞赛活动，累计惠及全球超过百万从业者，成为中国最具影响力的中文数据科学社区之一。',
+        '自2008年起，统计之都发起并主办中国R会议（China R Conference），旨在促进数据科学在各学科与行业中的探索、实践与交流。迄今，统计之都已联合全国20余所高校与科研机构，在北京、上海、广州、杭州、西安等14座城市成功举办近50届会议，呈现近2000场演讲，累计吸引线上线下参会者逾50万人次。',
+        '2023年，统计之都启动全新研究倡议——X-AGI项目。“X”代表未知、交叉与探索，X-AGI以“交叉智能，计算未来”为使命，旨在促进跨学科、开放协作的人工智能前沿研究和交流。未来，统计之都将继续秉持人本、专业、正直的社区精神，深耕技术社区建设，促进科研与产业交融。',
+      ],
+    },
+    {
+      name: 'FAI 人工智能基础',
+      url: 'https://www.fai-seminar.ac.cn/',
+      intro: [
+        '人工智能基础研究（FAI-Seminar）是一个聚焦人工智能基础领域的线上中文研讨班，致力于搭建人工智能基础研究的高质量学术交流平台，帮助相关学习者和研究者降低学术探索成本、促进思想碰撞。',
+        'FAI-Seminar 至今已经成功举办三年。三年间，FAI举办了80余场线上学术讲座，累计获得了超过38万人次观看，微信群已经超过3000人，吸引了一批国内外关注人工智能基础研究的专家学者。',
+      ],
+    },
   ],
-  coOrganizers: ['Oscholar', 'AI TIME'],
-  sponsors: ['明汯投资', '宽德投资', '智猿数合'],
+  organizers: [
+    {
+      name: '清华大学统计与数据科学系',
+      url: 'https://www.stat.tsinghua.edu.cn/',
+      intro: [
+        '清华大学在统计学相关领域具有深厚的积累。我国概率统计学科的奠基人许宝騄1930年转入清华大学改学数学，1933年从算学系毕业，他是中国早期从事概率论和数理统计学研究并达到世界先进水平的一位杰出学者。1979年，清华大学重建数学系，并布局概率统计等方向，培养出以林希虹院士为代表的一批杰出统计学家。自2000年来，数学系教授林元烈、杨瑛始终致力于推动统计学科建设，并于2008年促成以哈佛大学林希虹教授、刘军教授为领衔的“统计讲席教授团”设立，举办统计学讲座、开设统计学课程，极大地促进了统计学科的发展。2011年学校获批统计学一级学科博士学位授权点，2015年统计学研究中心成立仪式举行。经过各方数十年地不懈努力，清华大学统计学在学术研究、学科建设、人才培养、社会服务等方面取得了长足进步，在数理统计、生物健康统计、统计机器学习及应用、经济与金融统计、工业统计与运筹学、交叉数据科学等重点应用方向形成了特色优势。',
+        '2024年7月，我校成立统计与数据科学系，这是清华大学优化学科布局、服务国家战略的重要举措。未来清华大学统计与数据科学系将紧密围绕国家大数据战略、人工智能行动以及《数字中国建设整体布局规划》，立足“四个面向”的战略导向，针对国家重大需求、重大战略、重要部门，培养国际一流的统计学与数据科学领域综合性、创新型高层次人才，以全球视野对标世界一流，努力将统计与数据科学系建设成为国内外知名的产学研一体化学术重镇。',
+      ],
+    },
+    {
+      name: '中国人民大学应用统计科学研究中心',
+      intro: [
+        '中国人民大学应用统计科学研究中心成立于2000年9月，是教育部所属百所人文社会科学重点研究基地之一，旨在面向新时代统计学和数据科学发展的机遇和挑战，实现统计理论、方法和应用研究的突破与创新。中心在全国统计学科顶尖学者指导下，立足中国人民大学统计学科的优势研究力量，聚焦经济与社会统计、风险管理与精算、数理统计、生物统计与流行病学、数据科学与大数据统计五大研究领域，结合数字化时代背景，研究与新型数字技术相适应的统计基础理论、新型方法与统计应用技术，运用新型统计学理论和方法交叉组合研究解决我国经济社会领域发展过程中的重大现实问题，推动中国统计学自主知识体系建构。作为开放型学术平台，中心积极开展国家重大科研项目攻关，主办国际学术会议，主办国际化学术期刊，举办学术讲座，开展统计科普，努力建设成为具有国际影响力的统计和数据科学研究高地和创新策源地，持续推动统计学科发展和服务国家战略需求。',
+      ],
+    },
+    {
+      name: '中国人民大学统计学院',
+      intro: [
+        '中国人民大学统计学科始建于1950年，1952年设立统计学系，2003年成立统计学院。经过几代人的奋斗，我校统计学科取得了令人瞩目的成绩，成为中国统计教育的一面旗帜。',
+        '学院坚持“卓越、厚重、创新、开放、坚定”的人才培养目标，建立了全方位、多层次、顺应时代发展的人才培养模式。统计学科在2007年教育部统计学科评估和2012年教育部统计学一级学科评估中均排名全国第一，在2017年全国第四轮学科评估中获得A+，并于2017、2022年连续入选“双一流”建设学科，是全国拥有理学、经济学、医学三大学科门类统计学专业最齐全的统计学科。统计学、应用统计学和经济统计学、数据科学与大数据技术四个本科专业均入选国家级一流本科专业建设点，2025年入选教育部统计学拔尖学生培养基地。',
+      ],
+    },
+    {
+      name: '中国商业统计学会人工智能分会',
+      intro: [
+        '中国商业统计学会人工智能分会是中国商业统计学会下属的分支机构，旨在汇聚高校、科研机构及人工智能企业等多方力量，推动人工智能与商业统计的深度融合。分会涵盖众多知名高校与企业，拥有完善的组织架构，其主要业务包括组织学术活动、推广知识技术、制定规范标准、开展产学研合作等，致力于促进人工智能在商业领域的应用与发展，为我国人工智能产业的健康进步贡献力量。',
+      ],
+    },
+  ],
+  coOrganizers: [
+    {
+      name: 'OScholar',
+    },
+    {
+      name: 'AI TIME',
+      url: 'https://www.aitime.cn',
+      intro: [
+        'AI TIME成立于2019年，由清华大学人工智能研究院院长张钹院士、唐杰教授和李涓子教授等人联合发起“AI TIME Science Debate”，旨在发扬科学思辨精神，希望用辩论的形式，探讨人工智能和人类未来之间的矛盾，探索人工智能领域的未来。邀请各界人士对人工智能理论、算法、场景、应用的本质问题进行探索，加强思想碰撞，打造AI领域的优质生态圈。六年来，AI TIME已经邀请了2000多位海内外讲者，举办了逾800场活动，超1000万人次观看，汇集了全球逾百位志愿者团队。',
+      ],
+    },
+  ],
+  sponsors: [
+    {
+      name: '明汯投资',
+      intro: [
+        '明汯投资于2014年在上海虹口对冲基金产业园成立，借助强大的数据挖掘、统计分析和技术开发能力，构建了覆盖全周期、多品种、多策略的资产管理平台。自成立以来，明汯一直致力于成为国际一流量化投资机构，作为国内最早一批将人工智能技术成功应用到金融市场的私募机构，公司管理规模位居行业前列。',
+      ],
+    },
+    {
+      name: '宽德投资',
+      intro: [
+        '宽德投资是一家国内领先、业务全面的量化对冲基金。基于先进的高频交易构架，以及完善的资产管理系统，宽德投资在国内期货、股票、期权等主流市场具有出色的盈利能力。',
+      ],
+    },
+    {
+      name: 'Will',
+      intro: [
+        '宽德智能学习实验室(Wizard Intelligence Learning Lab，WILL)是宽德投资独立孵化的创业型实验室，致力于实现超级科技助手(ASI for Sci-Tech)。WILL将汇聚顶尖AI人才，专注于研发通用性超级科技助手，追求技术复利与持续性领先。',
+      ],
+    },
+    {
+      name: 'QuantVerse',
+      intro: [
+        '上海数启寰宇人工智能科技有限公司（简称“数启寰宇”）是一家深耕“AI+金融场景”的前沿科技企业，专注于算法研发及语料智能处理领域。依托于母公司在金融投资垂类模型应用的深厚积累、算力基础设施的持续高投入，借助大数据、自然语言处理、机器学习、深度学习、强化学习等关键技术，将量化交易算法模型、自动化交易执行模块等研发成果运用到量化组合管理中。未来数启寰宇还将从资产管理延展到财富管理领域、孵化出更多金融科技应用成果服务更多类型金融机构，同时筹备拓展至生物科技、实验室数据分析等更多行业垂类模型应用。',
+        '在算力提升受限的大背景下，数启寰宇还着力深化与金融数据供应商战略合作，精准输出语料应用场景需求，通过股权投资完善产业链布局，由此构建高效率的采集、更智能的清洗、更精准的标注、更科学的测试，更个性的应用，极大提升数据处理工作效率与质量，优化模型参数设置并大幅提升模型训练、推理效果。',
+      ],
+    },
+    {
+      name: '智统数合',
+      intro: [
+        '北京智统数合科技有限公司是一家统计与数据科学赋能人工智能的高科技公司，旨在以统计学与人工智能技术赋能千行百业的智能化跃迁。公司立足世界一流的统计学与数据科学根基，自主研发出独树一帜的 “统计 × AI” 技术范式，从统计学视角解构并重组人工智能技术要素，将统计推断基因植入人工智能系统，打通垂直领域AI落地应用最后一公里。',
+      ],
+    },
+  ],
   contact: 'xagi2026@cosx.org',
-  pending: ['完整嘉宾名单', '详细 Session 安排', '交通与住宿说明'],
+  pending: ['详细 Session 安排', '交通与住宿说明'],
 } as const;

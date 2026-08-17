@@ -12,7 +12,7 @@ import {
 } from './edition-status.ts';
 
 describe('current edition destinations', () => {
-  it('exposes schedule, speakers, poster, and register through shipped edition helpers', () => {
+  it('exposes schedule, poster, and register through shipped edition helpers', () => {
     const pages = editionPages(currentEdition);
     const actions = currentEditionActionPaths(currentEdition);
 
@@ -57,7 +57,6 @@ describe('live registration and poster status', () => {
     const actions = currentEditionActionPaths(currentEdition);
 
     assert.equal(currentEditionPageCopy('about').next.href, actions.schedule);
-    assert.equal(currentEditionPageCopy('speakers').next.href, actions.schedule);
     assert.equal(currentEditionPageCopy('schedule').next.href, actions.poster);
     assert.equal(currentEditionPageCopy('register').next.href, actions.schedule);
 

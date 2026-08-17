@@ -1,0 +1,25 @@
+---
+import type { EditionConfig } from '../../config/site';
+
+interface Props {
+  edition: EditionConfig;
+  title: string;
+  status?: string;
+}
+
+const { edition, title, status } = Astro.props;
+---
+
+<header class="page-header">
+  <div class="container custom-container header-content">
+    <div>
+      <h1>{edition.titleZh}</h1>
+      <p class={status ? 'page-subtitle' : undefined}>
+        {title}
+        {status && <span class="status-badge status-open">{status}</span>}
+      </p>
+    </div>
+  </div>
+</header>
+
+<slot />

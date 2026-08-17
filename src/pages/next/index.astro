@@ -1,0 +1,9 @@
+---
+import EditionShell from '../../components/EditionShell.astro';
+import ConferenceHome from '../../components/ConferenceHome.astro';
+import { editionPath, nextDesignEdition } from '../../config/site';
+---
+
+<EditionShell edition={nextDesignEdition} canonicalPath={editionPath(nextDesignEdition)}>
+  <ConferenceHome edition={nextDesignEdition} />
+</EditionShell>

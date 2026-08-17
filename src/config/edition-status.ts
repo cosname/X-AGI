@@ -2,7 +2,7 @@ import { conference2026 } from '../data/conference2026.ts';
 import type { EditionPage } from './navigation';
 import { currentEdition, editionPath, type EditionConfig } from './site.ts';
 
-export const CURRENT_EDITION_ACTION_PAGES = ['schedule', 'speakers', 'poster', 'register'] as const;
+export const CURRENT_EDITION_ACTION_PAGES = ['schedule', 'poster', 'register'] as const;
 
 export type CurrentEditionActionPage = (typeof CURRENT_EDITION_ACTION_PAGES)[number];
 
@@ -32,7 +32,6 @@ const CLOSED_OFFERING_MARKERS = [
 export function currentEditionActionPaths(edition: EditionConfig = currentEdition) {
   return {
     schedule: editionPath(edition, 'schedule'),
-    speakers: editionPath(edition, 'speakers'),
     poster: editionPath(edition, 'poster'),
     register: editionPath(edition, 'register'),
   } as const;
@@ -81,13 +80,13 @@ export function currentEditionPageCopy(
     case 'speakers':
       return {
         page,
-        label: '嘉宾阵容',
-        description: '嘉宾名单将在确认后发布。',
-        status: '嘉宾确认中',
+        label: '日程安排',
+        description: '嘉宾与报告发布在日程安排中。',
+        status: conference.name,
         next: {
           eyebrow: 'PROGRAM',
-          title: '先了解会议结构',
-          description: '在嘉宾信息公布前，可以先查看三天会议的重点安排。',
+          title: '查看会议日程',
+          description: '嘉宾、报告题目与分会场都写在三天日程里。',
           href: actions.schedule,
           label: '查看日程安排',
         },
@@ -96,20 +95,20 @@ export function currentEditionPageCopy(
       return {
         page,
         label: '日程安排',
-        description: '三天会议流程安排。',
-        status: '流程安排',
+        description: '三天会议流程、分会场与嘉宾报告。',
+        status: conference.name,
         next: {
           eyebrow: 'NEXT',
           title: '进一步了解青年研究展示',
           description: '查看 Rising Stars Poster 的申请要求、入选权益与报名截止时间。',
           href: actions.poster,
-          label: '了解 Rising Stars',
+          label: '了解 Rising Stars Poster',
         },
       };
     case 'poster':
       return {
         page,
-        label: 'Rising Stars',
+        label: 'Rising Stars Poster',
         description: 'Rising Stars Poster 申请要求、入选权益与报名信息。',
         status: registrationOpen ? conference.registration.status : '申请通道确认中',
         next: registrationOpen

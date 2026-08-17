@@ -1,0 +1,245 @@
+/* Overlay on the frozen 2025 template. Do not edit public/2025/assets/css/style.css. */
+
+.edition-legacy-2025 .navbar .logo {
+  width: auto;
+  height: 36px;
+}
+
+.edition-legacy-2025 .hero-main-content {
+  transform: none;
+}
+
+.edition-legacy-2025 .hero-horizontal .organizer-row {
+  margin-bottom: 12px;
+}
+
+.edition-legacy-2025 .hero-main-title-text {
+  margin: 0 0 0.4rem;
+  color: #fff;
+  font-size: clamp(2.4rem, 4.6vw, 3.75rem);
+  font-weight: 720;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+}
+
+.edition-legacy-2025 .hero-main-tagline {
+  margin: 0 0 3.5rem;
+  color: rgb(255 255 255 / 0.88);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 500;
+}
+
+.edition-legacy-2025 .hero-vertical-title {
+  max-width: 100%;
+  margin: 2.4rem 0 0.75rem;
+  padding: 0 0.75rem;
+  color: #fff;
+  font-size: clamp(1.55rem, 7vw, 2.4rem);
+  font-weight: 720;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.edition-legacy-2025 .hero-vertical-tagline {
+  margin: 0 0 1.25rem;
+  color: rgb(255 255 255 / 0.88);
+  font-size: 1rem;
+}
+
+.edition-legacy-2025 .hero-vertical-orgs {
+  width: min(36rem, 100%);
+  margin: 1.5rem auto 2rem;
+  color: #fff;
+  text-align: left;
+}
+
+.edition-legacy-2025 .hero-vertical-orgs .organizer-row {
+  margin-bottom: 0.7rem;
+}
+
+@media (max-width: 1099px) {
+  .edition-legacy-2025 .hero-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .edition-legacy-2025 .hero-vertical {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+  }
+
+  .edition-legacy-2025 .hero-vertical .content-wrapper {
+    margin-top: 0.35rem;
+    margin-bottom: 0;
+  }
+
+  .edition-legacy-2025 .hero-vertical-title {
+    margin-top: 1.4rem;
+  }
+
+  .edition-legacy-2025 .hero-actions-vertical {
+    margin-top: 1.2rem;
+  }
+
+  .edition-legacy-2025 .hero-vertical-orgs {
+    margin: 1rem auto 0.5rem;
+  }
+
+  .edition-legacy-2025 .hero-vertical-orgs .organizer-row {
+    margin-bottom: 0.5rem;
+  }
+
+  .edition-legacy-2025 .icp-info {
+    position: static;
+    margin: 0.75rem 0 1rem;
+  }
+}
+
+.edition-legacy-2025 .organizer-name {
+  color: #fff;
+  font-size: 14px;
+  line-height: 30px;
+  white-space: nowrap;
+}
+
+.edition-legacy-2025 .hero-section .organizer-logos img.organizer-tsinghua {
+  filter: brightness(1.65) saturate(0.82) drop-shadow(0 0 4px rgb(255 255 255 / 0.2));
+}
+
+.edition-legacy-2025 .org-item img {
+  max-height: 52px;
+}
+
+.edition-legacy-2025 .status-badge.status-open {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  background: #215cff;
+  color: #fff;
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+.edition-legacy-2025 .org-item--text-only {
+  align-items: flex-start;
+}
+
+.edition-legacy-2025 .legacy-ticket-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.edition-legacy-2025 .legacy-ticket-col-type {
+  width: 40%;
+}
+
+.edition-legacy-2025 .legacy-ticket-col-price {
+  width: 30%;
+}
+
+.edition-legacy-2025 .legacy-ticket-table th,
+.edition-legacy-2025 .legacy-ticket-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.edition-legacy-2025 .legacy-ticket-table th:first-child,
+.edition-legacy-2025 .legacy-ticket-table td:first-child {
+  text-align: left;
+}
+
+.edition-legacy-2025 .legacy-ticket-band th {
+  background: #f4f6fb;
+  color: #1b2b86;
+  font-weight: 650;
+  text-align: left;
+}
+
+.edition-legacy-2025 .legacy-register-fallback {
+  margin: 0.85rem 0 0;
+  color: #6b7280;
+  font-size: 0.88rem;
+}
+
+.edition-legacy-2025 .legacy-register-fallback a {
+  color: #215cff;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.edition-legacy-2025 .legacy-register-fallback a:hover {
+  color: #1848d6;
+}
+
+.edition-legacy-2025 .session-item--reserved .session-title {
+  min-height: 2.4rem;
+  color: #8a93a5;
+}
+
+.edition-legacy-2025 .legacy-fact-table {
+  width: 100%;
+  margin: 1.1rem 0 1.35rem;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.edition-legacy-2025 .legacy-fact-table th,
+.edition-legacy-2025 .legacy-fact-table td {
+  padding: 0.95rem 1rem;
+  border-top: 1px solid #e4e7ee;
+  vertical-align: top;
+  text-align: left;
+}
+
+.edition-legacy-2025 .legacy-fact-table tr:last-child th,
+.edition-legacy-2025 .legacy-fact-table tr:last-child td {
+  border-bottom: 1px solid #e4e7ee;
+}
+
+.edition-legacy-2025 .legacy-fact-table th {
+  width: 6.5rem;
+  padding-right: 1.25rem;
+  color: #1b2b86;
+  font-size: 0.92rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.edition-legacy-2025 .legacy-fact-table td {
+  color: #2c3340;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.edition-legacy-2025 .legacy-fact-table ul,
+.edition-legacy-2025 .legacy-fact-table ol {
+  margin: 0;
+  padding: 0 0 0 1.15rem;
+}
+
+.edition-legacy-2025 .legacy-fact-table li + li {
+  margin-top: 0.35rem;
+}
+
+.edition-legacy-2025 .legacy-apply {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10rem;
+  height: 44px;
+  padding: 0 1.4rem;
+  border-radius: 4px;
+  background: #215cff;
+  color: #fff !important;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.edition-legacy-2025 .legacy-apply:hover {
+  background: #1848d6;
+  color: #fff !important;
+}

@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Legacy2025Layout from '../layouts/Legacy2025Layout.astro';
+import LegacyInnerPage from '../components/legacy/LegacyInnerPage.astro';
+import LegacyAbout from '../components/legacy/LegacyAbout.astro';
+import LegacySchedule from '../components/legacy/LegacySchedule.astro';
+import LegacyPoster from '../components/legacy/LegacyPoster.astro';
+import LegacyGuide from '../components/legacy/LegacyGuide.astro';
+import LegacyRegister from '../components/legacy/LegacyRegister.astro';
+import { currentEditionPageCopy, type CurrentEditionInnerPage } from '../config/edition-status';
+import { currentEdition, editionPath } from '../config/site';
+
+type PublishedPage = Exclude<CurrentEditionInnerPage, 'speakers'>;
+
+export const getStaticPaths = (() =>
+  (['about', 'schedule', 'poster', 'guide', 'register'] as const satisfies readonly PublishedPage[]).map((page) => ({
+    params: { page },
+    props: { page },
+  }))) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: PublishedPage };
+
+const copy = currentEditionPageCopy(page, undefined, currentEdition);
+---
+
+<Legacy2025Layout
+  edition={currentEdition}
+  activePage={page}
+  title={`${copy.label} | ${currentEdition.title}`}
+  description={copy.description}
+  canonicalPath={editionPath(currentEdition, page)}
+>
+  <LegacyInnerPage
+    edition={currentEdition}
+    title={copy.label}
+    status={page === 'register' || page === 'poster' ? copy.status : undefined}
+  >
+    {page === 'about' && <LegacyAbout />}
+    {page === 'schedule' && <LegacySchedule />}
+    {page === 'poster' && <LegacyPoster />}
+    {page === 'guide' && <LegacyGuide />}
+    {page === 'register' && <LegacyRegister />}
+  </LegacyInnerPage>
+</Legacy2025Layout>

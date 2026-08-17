@@ -220,6 +220,11 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
     data-terrain-occlusion="navy"
     style={`--terrain-path:${basePaths.get('navy')}`}
   ></i>
+  <i
+    class="hero-pixel-field__tree-terrain-occlusion"
+    data-terrain-occlusion="orange"
+    style={`--terrain-path:${basePaths.get('orange')}`}
+  ></i>
 
   <div class="hero-pixel-field__terrain" data-probability-terrain>
     {STATIC_TERRAIN_LAYERS.map((layer) => (

@@ -1,0 +1,124 @@
+---
+import { currentEditionActionPaths } from '../../config/edition-status';
+import type { EditionConfig } from '../../config/site';
+import { conference2026 } from '../../data/conference2026';
+import { partnerCompactLogoByName } from '../../data/legacy-partner-assets';
+
+interface Props {
+  edition: EditionConfig;
+}
+
+const { edition } = Astro.props;
+const actions = currentEditionActionPaths(edition);
+
+const partnerRows = [
+  { label: '发起方：', organizations: conference2026.initiators },
+  { label: '主办单位：', organizations: conference2026.organizers },
+  { label: '协办单位：', organizations: conference2026.coOrganizers },
+  { label: '赞助单位：', organizations: conference2026.sponsors },
+].filter((row) => row.organizations.length > 0);
+---
+
+<header class="hero-section">
+  <div class="hero-horizontal">
+    <div class="container custom-container">
+      <div class="hero-main-content">
+        <div class="hero-main-title">
+          <h1 class="hero-main-title-text">{conference2026.name}</h1>
+          <p class="hero-main-tagline" lang="en">{conference2026.tagline}</p>
+        </div>
+        <div class="hero-info">
+          <div class="info-item">
+            <img src="/2025/assets/images/index/time.svg" alt="时间" width="16" height="16" class="info-icon" />
+            <span class="info-text">{conference2026.dates.compact}</span>
+          </div>
+          <div class="info-item">
+            <img src="/2025/assets/images/index/place.svg" alt="地点" width="16" height="16" class="info-icon" />
+            <span class="info-text">{conference2026.venue.name}</span>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a href={conference2026.registration.url} class="btn btn-new-register" target="_blank" rel="noopener noreferrer">
+            立即报名
+          </a>
+          <a href={actions.schedule} class="btn btn-hero-download">大会日程</a>
+        </div>
+      </div>
+
+      <div class="organizers-footer">
+        {partnerRows.map((row) => (
+          <div class="organizer-row">
+            <span class="organizer-label">{row.label}</span>
+            <div class="organizer-logos">
+              {row.organizations.map((organization) => {
+                const logo = partnerCompactLogoByName[organization.name];
+                return logo ? (
+                  <img
+                    src={logo.src}
+                    alt={organization.name}
+                    height="30"
+                    class={logo.className}
+                  />
+                ) : (
+                  <span class="organizer-name">{organization.name}</span>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-vertical">
+    <div class="content-wrapper">
+      <p class="hero-vertical-title">{conference2026.name}</p>
+      <p class="hero-vertical-tagline" lang="en">{conference2026.tagline}</p>
+      <p class="hero-date">
+        {conference2026.dates.compact}&nbsp;&nbsp;{conference2026.venue.name}
+      </p>
+      <div class="hero-actions hero-actions-vertical">
+        <a href={conference2026.registration.url} class="btn btn-hero-register" target="_blank" rel="noopener noreferrer">
+          立即报名
+        </a>
+        <a href={actions.schedule} class="btn btn-hero-download">大会日程</a>
+      </div>
+      <div class="hero-vertical-orgs">
+        {partnerRows.map((row) => (
+          <div class="organizer-row">
+            <span class="organizer-label">{row.label}</span>
+            <div class="organizer-logos">
+              {row.organizations.map((organization) => {
+                const logo = partnerCompactLogoByName[organization.name];
+                return logo ? (
+                  <img
+                    src={logo.src}
+                    alt={organization.name}
+                    height="30"
+                    class={logo.className}
+                  />
+                ) : (
+                  <span class="organizer-name">{organization.name}</span>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <p class="icp-info">
+    <a href="https://beian.miit.gov.cn" rel="noreferrer" target="_blank">京ICP备2024062260号-3</a>
+    <span class="sep">|</span>
+    <a
+      href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502057471"
+      rel="noreferrer"
+      target="_blank"
+      class="beian-police"
+    >
+      <img src="/2025/assets/images/备案图标.png" alt="公安备案图标" class="beian-icon" />
+      京公网安备11010502057471号
+    </a>
+  </p>
+</header>

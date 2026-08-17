@@ -1,0 +1,60 @@
+---
+import { conference2026, type ScheduleDay, type ScheduleSession } from '../../data/conference2026';
+
+const days = conference2026.schedule as readonly ScheduleDay[];
+---
+
+<main class="main-content">
+  <div class="container custom-container">
+    <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
+    <ul class="nav nav-pills schedule-tabs mb-4">
+      <li class="nav-item"><button class="nav-link active" data-target=".schedule-tabs">全部</button></li>
+      {days.map((day) => (
+        <li class="nav-item">
+          <button class="nav-link" data-target={`#session-${day.dateTime}`}>{day.date} {day.weekday}</button>
+        </li>
+      ))}
+    </ul>
+
+    {days.map((day) =>
+      (day.sessions as readonly ScheduleSession[]).map((session) => (
+        <div class="info-card schedule-card" id={session === day.sessions[0] ? `session-${day.dateTime}` : undefined}>
+          <div class="card-header">
+            {day.date} {day.weekday} {session.period}
+            {session.title ? ` | ${session.title}` : ''}
+          </div>
+          {session.chair?.name && <div class="session-chair">主持人 | {session.chair.name}</div>}
+          <div class="card-body">
+            {session.notes && session.notes.length > 0 && (
+              <div class="registration-notes">
+                <ul>
+                  {session.notes.map((note) => <li>{note}</li>)}
+                </ul>
+              </div>
+            )}
+            {session.talks && session.talks.length > 0 && (
+              <div class="session-list">
+                {session.talks.map((talk) => (
+                  <div class:list={['session-item', { 'session-item--reserved': !talk.title }]}>
+                    <div class="session-title">
+                      {talk.time && <span class="session-time">{talk.time}</span>}
+                      <span>{talk.title}</span>
+                    </div>
+                    {(talk.speaker || talk.affiliation) && (
+                      <div class="session-speaker">
+                        <span>
+                          {talk.speaker}
+                          {talk.affiliation ? ` | ${talk.affiliation}` : ''}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+</main>

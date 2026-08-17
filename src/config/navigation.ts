@@ -26,9 +26,8 @@ const navigationByEdition: Record<EditionConfig['year'], readonly NavigationItem
   '2026': [
     { page: '', label: '首页' },
     { page: 'about', label: '会议简介' },
-    { page: 'speakers', label: '嘉宾阵容' },
     { page: 'schedule', label: '日程安排' },
-    { page: 'poster', label: 'Rising Stars' },
+    { page: 'poster', label: 'Rising Stars Poster' },
     { page: 'guide', label: '参会指南' },
   ],
 };

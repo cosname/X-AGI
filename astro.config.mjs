@@ -8,4 +8,14 @@ export default defineConfig({
     assets: '_assets',
     format: 'directory',
   },
+  redirects: {
+    '/2026': '/',
+    '/2026/about': '/about/',
+    '/2026/schedule': '/schedule/',
+    '/2026/poster': '/poster/',
+    '/2026/guide': '/guide/',
+    '/2026/register': '/register/',
+    '/2026/speakers': '/schedule/',
+    '/speakers': '/schedule/',
+  },
 });

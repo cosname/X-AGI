@@ -1,0 +1,72 @@
+---
+import { conference2026 } from '../../data/conference2026';
+import hotelPlan from '../../assets/2026/venue/beijing-friendship-hotel-plan.jpg';
+import palaceFloor from '../../assets/2026/venue/friendship-palace-floor-2.jpg';
+
+const maps = [
+  {
+    ...conference2026.venue.maps[0],
+    image: hotelPlan,
+    width: 1551,
+    height: 1551,
+  },
+  {
+    ...conference2026.venue.maps[1],
+    image: palaceFloor,
+    width: 1846,
+    height: 1304,
+  },
+];
+---
+
+<main class="main-content">
+  <div class="container custom-container">
+    <div class="info-card">
+      <div class="card-header">会议场地</div>
+      <div class="card-body">
+        <div class="venue-details">
+          <p class="venue-address">
+            <span class="guide-icon" aria-hidden="true">⌖</span>
+            <span>{conference2026.venue.scheduleName}｜{conference2026.venue.nameEn}</span>
+          </p>
+          {maps.map((map) => (
+            <figure>
+              <img
+                src={map.image.src}
+                alt={`${map.title}。${map.description}`}
+                class="venue-map"
+                width={map.width}
+                height={map.height}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <strong>{map.title}</strong>
+                {' '}
+                {map.description}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-header">即将补充</div>
+      <div class="card-body">
+        <div class="service-section">
+          <h4>交通</h4>
+          <ul>
+            <li>机场、火车站与公共交通路线待发布</li>
+          </ul>
+        </div>
+        <div class="service-section">
+          <h4>住宿</h4>
+          <ul>
+            <li>推荐住宿与预订说明待发布</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

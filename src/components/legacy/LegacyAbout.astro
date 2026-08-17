@@ -1,0 +1,59 @@
+---
+import { conference2026, type Organization } from '../../data/conference2026';
+import { partnerLogoByName } from '../../data/legacy-partner-assets';
+
+const groups: { label: string; organizations: readonly Organization[] }[] = [
+  { label: '发起方', organizations: conference2026.initiators },
+  { label: '主办单位', organizations: conference2026.organizers },
+  { label: '协办单位', organizations: conference2026.coOrganizers },
+  { label: '赞助伙伴', organizations: conference2026.sponsors },
+].filter((group) => group.organizations.length > 0);
+---
+
+<main class="main-content">
+  <div class="container custom-container">
+    <div class="info-card">
+      <div class="card-header">关于会议</div>
+      <div class="card-body">
+        {conference2026.introduction.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+
+    {groups.map((group) => (
+      <div class="info-card">
+        <div class="card-header">{group.label}</div>
+        <div class="card-body org-list">
+          {group.organizations.map((organization, index) => {
+            const logo = partnerLogoByName[organization.name];
+            return (
+              <>
+                {index > 0 && <hr />}
+                <div class:list={['org-item', { 'org-item--text-only': !logo }]}>
+                  {logo && (
+                    <img
+                      src={logo.src}
+                      alt={organization.name}
+                      class={logo.className}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <p>
+                    {organization.url ? (
+                      <a href={organization.url} target="_blank" rel="noopener noreferrer">
+                        <strong>{organization.name}</strong>
+                      </a>
+                    ) : (
+                      <strong>{organization.name}</strong>
+                    )}
+                  </p>
+                  {organization.intro?.map((paragraph) => <p>{paragraph}</p>)}
+                </div>
+              </>
+            );
+          })}
+        </div>
+      </div>
+    ))}
+  </div>
+</main>

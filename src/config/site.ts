@@ -3,8 +3,9 @@ export type EditionStatus = 'archived' | 'planning' | 'published';
 export interface EditionConfig {
   year: '2025' | '2026';
   status: EditionStatus;
-  path: `/${string}`;
+  path: '' | `/${string}`;
   routeStyle: 'html' | 'directory';
+  skin?: 'legacy-2025' | 'next';
   title: string;
   titleZh: string;
   description: string;
@@ -36,8 +37,9 @@ export const editions: Record<EditionConfig['year'], EditionConfig> = {
   '2026': {
     year: '2026',
     status: 'published',
-    path: '/2026',
+    path: '',
     routeStyle: 'directory',
+    skin: 'legacy-2025',
     title: '2026 X-AGI Conference',
     titleZh: '2026 X-AGI 大会',
     description: '2026 X-AGI 大会将于2026年10月16日至18日在北京友谊宾馆举行，连接统计、数据科学与人工智能的下一代研究者。',
@@ -50,9 +52,17 @@ export const editions: Record<EditionConfig['year'], EditionConfig> = {
 export const currentEdition = editions[site.currentEdition];
 export const upcomingEdition = editions[site.upcomingEdition];
 
+/** Parked cream / pixel 2026 design. Public site stays on the 2025 template. */
+export const nextDesignEdition: EditionConfig = {
+  ...editions['2026'],
+  path: '/next',
+  skin: 'next',
+};
+
 export function editionPath(edition: EditionConfig, page = ''): string {
-  if (!page) return `${edition.path}/`;
+  const base = edition.path;
+  if (!page) return base ? `${base}/` : '/';
   return edition.routeStyle === 'html'
-    ? `${edition.path}/${page}.html`
-    : `${edition.path}/${page}/`;
+    ? `${base}/${page}.html`
+    : `${base}/${page}/`;
 }
