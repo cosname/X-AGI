@@ -299,6 +299,10 @@ export const conference2026 = {
   coOrganizers: [
     {
       name: 'OScholar',
+      url: 'https://oscholar.net/',
+      intro: [
+        'Oscholar 是一个“AI原生”学术交流与科研协作平台，将 AI 贯穿论文写作、同行评审、内容修改与精准推荐等科研全流程，期望突破传统学术出版的效率瓶颈，让优质科研成果更快被发表、传播与验证，构建可追溯、可验证、可复现的新型学术社区。',
+      ],
     },
     {
       name: 'AI TIME',
