@@ -82,28 +82,28 @@ const partnerRows = [
         </a>
         <a href={actions.schedule} class="btn btn-hero-download">大会日程</a>
       </div>
-      <div class="hero-vertical-orgs">
-        {partnerRows.map((row) => (
-          <div class="organizer-row">
-            <span class="organizer-label">{row.label}</span>
-            <div class="organizer-logos">
-              {row.organizations.map((organization) => {
-                const logo = partnerCompactLogoByName[organization.name];
-                return logo ? (
-                  <img
-                    src={logo.src}
-                    alt={organization.name}
-                    height="30"
-                    class={logo.className}
-                  />
-                ) : (
-                  <span class="organizer-name">{organization.name}</span>
-                );
-              })}
-            </div>
+    </div>
+    <div class="hero-vertical-orgs">
+      {partnerRows.map((row) => (
+        <div class="organizer-row">
+          <span class="organizer-label">{row.label}</span>
+          <div class="organizer-logos">
+            {row.organizations.map((organization) => {
+              const logo = partnerCompactLogoByName[organization.name];
+              return logo ? (
+                <img
+                  src={logo.src}
+                  alt={organization.name}
+                  height="30"
+                  class={logo.className}
+                />
+              ) : (
+                <span class="organizer-name">{organization.name}</span>
+              );
+            })}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   </div>
 

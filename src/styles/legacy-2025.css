@@ -66,11 +66,13 @@
   }
 
   .edition-legacy-2025 .hero-vertical {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     justify-content: flex-start;
+    min-height: 0;
   }
 
   .edition-legacy-2025 .hero-vertical .content-wrapper {
+    width: 100%;
     margin-top: 0.35rem;
     margin-bottom: 0;
   }
@@ -84,7 +86,8 @@
   }
 
   .edition-legacy-2025 .hero-vertical-orgs {
-    margin: 1rem auto 0.5rem;
+    margin: auto auto 0.25rem;
+    padding-top: clamp(2rem, 7vh, 4.5rem);
   }
 
   .edition-legacy-2025 .hero-vertical-orgs .organizer-row {
@@ -93,7 +96,45 @@
 
   .edition-legacy-2025 .icp-info {
     position: static;
-    margin: 0.75rem 0 1rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .edition-legacy-2025 .hero-vertical-orgs {
+    width: 100%;
+  }
+
+  .edition-legacy-2025 .hero-vertical-orgs .organizer-row {
+    display: grid;
+    grid-template-columns: 4.25rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.25rem 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .edition-legacy-2025 .hero-vertical-orgs .organizer-label {
+    margin-right: 0;
+    color: rgb(255 255 255 / 0.82);
+    font-size: 12px;
+    line-height: 22px;
+  }
+
+  .edition-legacy-2025 .hero-vertical-orgs .organizer-logos {
+    gap: 6px 10px;
+  }
+
+  .edition-legacy-2025 .hero-vertical-orgs .organizer-logos img {
+    height: 22px;
+  }
+
+  .edition-legacy-2025 .hero-vertical-orgs .organizer-logos img[alt="中国商业统计学会人工智能分会"] {
+    height: 19px;
+  }
+
+  .edition-legacy-2025 .hero-vertical-orgs .organizer-name {
+    font-size: 12px;
+    line-height: 22px;
   }
 }
 
