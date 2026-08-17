@@ -21,6 +21,10 @@ const args = [
   'next/**',
   '--exclude',
   'next/*',
+  '--exclude',
+  '.DS_Store',
+  '--exclude',
+  '**/.DS_Store',
   '--force',
 ];
 
