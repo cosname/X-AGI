@@ -409,6 +409,25 @@ if (!rootIndex.includes('hero-section') && !rootIndex.includes('data-hero-pixel-
   failures.push('index.html: official root must render the current edition homepage');
 }
 
+const rootText = visibleText(rootIndex);
+const homepagePartnerLabels = ['协办单位：', '赞助单位：', '主办单位：'];
+if (rootText.includes('发起方：')) {
+  failures.push('index.html: homepage partner list must not repeat the initiator section');
+}
+
+let previousPartnerLabelIndex = -1;
+for (const label of homepagePartnerLabels) {
+  const labelIndex = rootText.indexOf(label);
+  if (labelIndex < 0) {
+    failures.push(`index.html: missing homepage partner label "${label}"`);
+    continue;
+  }
+  if (labelIndex < previousPartnerLabelIndex) {
+    failures.push(`index.html: homepage partner label "${label}" is out of order`);
+  }
+  previousPartnerLabelIndex = labelIndex;
+}
+
 const redirectTargets = new Map([
   ['2026/index.html', '/'],
   ['2026/about/index.html', '/about/'],
