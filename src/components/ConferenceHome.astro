@@ -13,21 +13,35 @@ interface Props {
 
 const { edition = upcomingEdition, heroOnly = false } = Astro.props;
 const actions = currentEditionActionPaths(edition);
+const badgeHero = edition.skin === 'goal';
 ---
 
 <div class:list={['conference-home', heroOnly && 'conference-home--hero-only']}>
-  <section class="conference-hero" aria-labelledby="conference-title" data-connection-stage>
+  <section
+    class:list={['conference-hero', badgeHero && 'conference-hero--badge']}
+    aria-labelledby="conference-title"
+    data-connection-stage
+  >
     <div class="conference-hero__art" aria-hidden="true">
-      <HeroPixelField interactionMode={edition.skin === 'goal' ? 'wide' : 'direct'} />
+      <HeroPixelField
+        interactionMode={badgeHero ? 'wide' : 'direct'}
+        composition={badgeHero ? 'badge' : 'grove'}
+      />
     </div>
 
     <div class="conference-hero__inner">
       <div class="conference-hero__copy">
         <h1 id="conference-title" data-connection-anchor="title" data-connection-exclusion>
           <span class="conference-hero__year">2026</span>
-          <span class="conference-hero__name" data-title-ink>
-            <span class="conference-hero__wordmark conference-hero__ink" data-title-ink-surface>X-AGI</span>
-            <em class="conference-hero__title-zh conference-hero__ink" data-title-ink-surface>大会</em>
+          <span class="conference-hero__name" data-title-ink={badgeHero ? undefined : ''}>
+            <span
+              class="conference-hero__wordmark conference-hero__ink"
+              data-title-ink-surface={badgeHero ? undefined : ''}
+            >X-AGI</span>
+            <em
+              class="conference-hero__title-zh conference-hero__ink"
+              data-title-ink-surface={badgeHero ? undefined : ''}
+            >大会</em>
           </span>
         </h1>
         <p class="conference-hero__tagline" lang="en" data-connection-exclusion>{conference2026.tagline}</p>

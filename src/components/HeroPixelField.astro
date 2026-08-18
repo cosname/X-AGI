@@ -13,9 +13,10 @@ import {
 
 interface Props {
   interactionMode?: 'direct' | 'wide';
+  composition?: 'grove' | 'badge';
 }
 
-const { interactionMode = 'direct' } = Astro.props;
+const { interactionMode = 'direct', composition = 'grove' } = Astro.props;
 
 type PixelRecord = [x: number, y: number, size: number, colorIndex: number, alphaIndex: number];
 type PixelData = {
@@ -155,42 +156,63 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
 ---
 
 <div
-  class="hero-pixel-field"
+  class:list={['hero-pixel-field', `hero-pixel-field--${composition}`]}
   data-hero-pixel-field
   data-render-mode="dom"
   data-tree-interaction={interactionMode}
-  data-pixel-count={pixelData.stats.blocks}
+  data-terrain-enabled={composition === 'grove' ? 'true' : 'false'}
+  data-pixel-count={composition === 'grove' ? pixelData.stats.blocks : pixelData.right.length}
+  data-visual-composition={composition}
   data-ready="false"
   aria-hidden="true"
 >
+  {composition === 'badge' && (
+    <picture class="hero-pixel-field__paper">
+      <source
+        media="(max-width: 51.25rem)"
+        srcset="/2026/brand/goal-hero-paper-field-mobile.webp"
+      />
+      <img
+        src="/2026/brand/goal-hero-paper-field.webp"
+        alt=""
+        width="1800"
+        height="768"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </picture>
+  )}
+
   <div class="hero-pixel-field__trees">
-    <div class="hero-pixel-field__tree-position hero-pixel-field__tree-position--left" data-tree-position="left">
-      <div class="hero-pixel-field__tree-sway">
-        <div class="hero-pixel-field__tree-artboard hero-pixel-field__tree-artboard--left">
-          {leftBranches.map((branch) => (
-            <span
-              class={`hero-pixel-field__tree-branch hero-pixel-field__tree-branch--left-${branch.key}`}
-              data-tree-branch
-              data-branch-side={branch.side}
-              data-branch-depth={branch.depth}
-              data-branch-left={branch.bounds.left}
-              data-branch-top={branch.bounds.top}
-              data-branch-right={branch.bounds.right}
-              data-branch-bottom={branch.bounds.bottom}
-              data-branch-anchor-x={branch.anchorX}
-              data-branch-anchor-y={branch.anchorY}
-            >
-              {branch.records.map((record) => (
-                <i
-                  class={`hp t${record[3]} a${record[4]} s${record[2]}${scalePixelClass(record, branch)}`}
-                  style={pixelStyle(record, leftWidth)}
-                ></i>
-              ))}
-            </span>
-          ))}
+    {composition === 'grove' && (
+      <div class="hero-pixel-field__tree-position hero-pixel-field__tree-position--left" data-tree-position="left">
+        <div class="hero-pixel-field__tree-sway">
+          <div class="hero-pixel-field__tree-artboard hero-pixel-field__tree-artboard--left">
+            {leftBranches.map((branch) => (
+              <span
+                class={`hero-pixel-field__tree-branch hero-pixel-field__tree-branch--left-${branch.key}`}
+                data-tree-branch
+                data-branch-side={branch.side}
+                data-branch-depth={branch.depth}
+                data-branch-left={branch.bounds.left}
+                data-branch-top={branch.bounds.top}
+                data-branch-right={branch.bounds.right}
+                data-branch-bottom={branch.bounds.bottom}
+                data-branch-anchor-x={branch.anchorX}
+                data-branch-anchor-y={branch.anchorY}
+              >
+                {branch.records.map((record) => (
+                  <i
+                    class={`hp t${record[3]} a${record[4]} s${record[2]}${scalePixelClass(record, branch)}`}
+                    style={pixelStyle(record, leftWidth)}
+                  ></i>
+                ))}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    )}
 
     <div class="hero-pixel-field__tree-position hero-pixel-field__tree-position--right" data-tree-position="right">
       <div class="hero-pixel-field__tree-sway">
@@ -221,39 +243,43 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
     </div>
   </div>
 
-  <i class="hero-pixel-field__sanctuary" data-hero-sanctuary></i>
-  <i
-    class="hero-pixel-field__tree-terrain-occlusion"
-    data-terrain-occlusion="navy"
-    style={`--terrain-path:${basePaths.get('navy')}`}
-  ></i>
-  <i
-    class="hero-pixel-field__tree-terrain-occlusion"
-    data-terrain-occlusion="orange"
-    style={`--terrain-path:${basePaths.get('orange')}`}
-  ></i>
+  {composition === 'grove' && (
+    <>
+      <i class="hero-pixel-field__sanctuary" data-hero-sanctuary></i>
+      <i
+        class="hero-pixel-field__tree-terrain-occlusion"
+        data-terrain-occlusion="navy"
+        style={`--terrain-path:${basePaths.get('navy')}`}
+      ></i>
+      <i
+        class="hero-pixel-field__tree-terrain-occlusion"
+        data-terrain-occlusion="orange"
+        style={`--terrain-path:${basePaths.get('orange')}`}
+      ></i>
 
-  <div class="hero-pixel-field__terrain" data-probability-terrain>
-    {STATIC_TERRAIN_LAYERS.map((layer) => (
-      <div class={`hero-pixel-field__terrain-layer hero-pixel-field__terrain-layer--${layer.key}`} data-layer={layer.key}>
-        <i
-          class="hero-pixel-field__terrain-surface"
-          data-terrain-surface={layer.key}
-          style={`--terrain-rgb:${layer.color};--terrain-alpha:${layer.alpha};--terrain-path:${basePaths.get(layer.key)}`}
-        ></i>
+      <div class="hero-pixel-field__terrain" data-probability-terrain>
+        {STATIC_TERRAIN_LAYERS.map((layer) => (
+          <div class={`hero-pixel-field__terrain-layer hero-pixel-field__terrain-layer--${layer.key}`} data-layer={layer.key}>
+            <i
+              class="hero-pixel-field__terrain-surface"
+              data-terrain-surface={layer.key}
+              style={`--terrain-rgb:${layer.color};--terrain-alpha:${layer.alpha};--terrain-path:${basePaths.get(layer.key)}`}
+            ></i>
+          </div>
+        ))}
+
+        <span class="hero-pixel-field__echo-field">
+          {TERRAIN_ECHOES.map((echo) => (
+            <i
+              class="hero-pixel-field__terrain-surface hero-pixel-field__terrain-echo"
+              data-echo={echo.index}
+              style={`--terrain-rgb:129 118 206;--terrain-alpha:${echo.alpha};--terrain-path:${echoPath(echo)}`}
+            ></i>
+          ))}
+        </span>
       </div>
-    ))}
-
-    <span class="hero-pixel-field__echo-field">
-      {TERRAIN_ECHOES.map((echo) => (
-        <i
-          class="hero-pixel-field__terrain-surface hero-pixel-field__terrain-echo"
-          data-echo={echo.index}
-          style={`--terrain-rgb:129 118 206;--terrain-alpha:${echo.alpha};--terrain-path:${echoPath(echo)}`}
-        ></i>
-      ))}
-    </span>
-  </div>
+    </>
+  )}
 </div>
 
 <style is:inline set:html={tokenCss}></style>

@@ -343,6 +343,7 @@ export const initializeHeroPixelFields = () => {
 
     const stage = field.closest<HTMLElement>('[data-connection-stage]') ?? field;
     const veil = field.querySelector<HTMLElement>('[data-hero-sanctuary]');
+    const terrainEnabled = field.dataset.terrainEnabled !== 'false';
     const treeInteractionMode = field.dataset.treeInteraction === 'wide' ? 'wide' : 'direct';
     const treePositions: Record<TreeSide, HTMLElement | null> = {
       left: field.querySelector<HTMLElement>('[data-tree-position="left"]'),
@@ -575,7 +576,7 @@ export const initializeHeroPixelFields = () => {
     const configureGeometry = () => {
       field.style.setProperty('--terrain-pixel-unit', `${terrainPixelUnit()}px`);
       lastShapeKey = '';
-      commit(mean, amplitude, true);
+      if (terrainEnabled) commit(mean, amplitude, true);
     };
 
     const collectBranchLayouts = (fieldBox: DOMRect) => {
@@ -720,10 +721,12 @@ export const initializeHeroPixelFields = () => {
       pointerFrame = 0;
       if (!active || !visible || document.hidden || !motionEnabled()) return;
       if (pointerDirty) {
-        const next = posteriorForPointer(pointer.x, pointer.y, width, height);
-        meanVelocity = 0;
-        amplitudeVelocity = 0;
-        commit(next.mean, next.amplitude);
+        if (terrainEnabled) {
+          const next = posteriorForPointer(pointer.x, pointer.y, width, height);
+          meanVelocity = 0;
+          amplitudeVelocity = 0;
+          commit(next.mean, next.amplitude);
+        }
         pointerDirty = false;
       }
       const branchMoving = applyBranchMotion(timestamp);
@@ -769,7 +772,7 @@ export const initializeHeroPixelFields = () => {
 
     const startSpring = () => {
       stopSpring();
-      if (!motionEnabled() || !visible || document.hidden) return;
+      if (!terrainEnabled || !motionEnabled() || !visible || document.hidden) return;
       springFrame = window.requestAnimationFrame(springTick);
     };
 
@@ -837,7 +840,7 @@ export const initializeHeroPixelFields = () => {
       meanVelocity = 0;
       amplitudeVelocity = 0;
       clearTitleInk();
-      commit(mean, amplitude, true);
+      if (terrainEnabled) commit(mean, amplitude, true);
       resetBranches();
       field.dataset.animated = motionEnabled() ? 'true' : 'false';
       field.dataset.interaction = 'idle';

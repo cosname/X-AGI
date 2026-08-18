@@ -92,6 +92,79 @@ Previous result: passed.
 
 final result: passed
 
+## Badge-led Goal Homepage
+
+### Comparison target
+
+- Source visual truth: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-96511ef8-27bc-4ed2-9213-3830524aa4be.png`.
+- Rendered desktop implementation: `output/playwright/badge-redesign/09-desktop-final.png`.
+- Rendered mobile implementation: `output/playwright/badge-redesign/07-mobile-final.png`.
+- Expanded mobile navigation: `output/playwright/badge-redesign/08-mobile-menu.png`.
+- Full-view comparison: `output/playwright/badge-redesign/10-reference-final-stacked.png`.
+- Focused comparison: `output/playwright/badge-redesign/11-reference-final-focus.png`.
+- Browser CSS viewport: 1800 x 768 for desktop and 390 x 844 for mobile at device pixel ratio 1.
+- Source screenshot pixels: 1800 x 766.
+- Desktop implementation screenshot pixels: 1800 x 768.
+- Mobile implementation screenshot pixels: 390 x 844.
+- Density normalization: the source was extended by two neutral paper pixels to 1800 x 768 without scaling, then stacked with the implementation.
+- State: the page is at the top with its transparent header and the tree at rest, with separate interaction verification after moving the pointer through the broad tree field.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, or interaction differences remain for the selected badge-led direction.
+
+- Fonts and typography: the source hierarchy of a narrow year, large mosaic conference name, and compact English tagline is preserved while retaining the website's existing type system and live business copy.
+- Spacing and layout rhythm: the desktop composition now uses a measured left editorial column and one dominant right tree, with enough negative space for the fixed navigation and no collision between primary copy and illustration.
+- Colors and visual tokens: warm paper, indigo, lavender, teal, pale peach, and orange follow the supplied badge palette without reintroducing the old blue conference background.
+- Image quality and asset fidelity: the paper texture and organic color fields are responsive raster assets generated for their exact slots, while the connection tree remains the existing sharp DOM mosaic rather than a CSS or SVG approximation.
+- Copy and content: the date, venue, navigation labels, registration destination, and schedule destination remain unchanged.
+- Interaction: the single right tree keeps the wide proximity response and activates 187 scale pixels when the pointer moves through the central browsing area.
+- Navigation behavior: the transparent top state, 50px scroll surface, 3D capsule feedback, keyboard treatment, and compact menu remain shared with the rest of `/goal/`.
+- Responsiveness: at 390 x 844 the title, tagline, date, venue, and actions remain unobstructed, while the tree begins below the conversion controls and the organic color fields anchor the lower viewport.
+- Accessibility: the decorative background has empty alternative text, the pixel field remains hidden from assistive technology, the compact menu exposes correct expanded state, and reduced-motion handling remains intact.
+- Cross-preview isolation: `/goal/` renders the badge composition with one right tree and no probability terrain, while `/next/` still renders two trees, nine terrain layers, eleven echoes, and direct interaction.
+- Inner-page isolation: `/goal/about/` and the other content routes continue to use the existing interactive particle masthead with the shared scroll-header contract.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P1 the first badge composition placed the title too far right and left the single tree too close to the outer edge.
+- Earlier evidence: `output/playwright/badge-redesign/01-desktop-pass1.png`.
+- Fix: the copy origin was moved to the measured 236px position and the tree was enlarged and pulled inward to establish the source's left-copy and right-tree balance.
+- Post-fix evidence: `output/playwright/badge-redesign/02-desktop-pass2.png`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the source title width, tree canopy breadth, and background fields carried more visual weight than the second implementation pass.
+- Earlier evidence: `output/playwright/badge-redesign/02-desktop-pass2.png`.
+- Fix: the display text received controlled horizontal optical scaling, the tree artboard was widened, and the paper field crop was enlarged from the lower edge.
+- Post-fix evidence: `output/playwright/badge-redesign/09-desktop-final.png`.
+
+#### Iteration 3
+
+- Earlier finding: P1 and P2 mobile passes first pushed the tree offscreen, then allowed it to overlap the title and conversion controls.
+- Earlier evidence: `output/playwright/badge-redesign/04-mobile-pass1.png`, `output/playwright/badge-redesign/05-mobile-pass2.png`, and `output/playwright/badge-redesign/06-mobile-pass3.png`.
+- Fix: the compact tree was reduced, moved below the action row, and softened behind a directional mask while preserving the broad pointer response on capable devices.
+- Post-fix evidence: `output/playwright/badge-redesign/07-mobile-final.png` and `output/playwright/badge-redesign/08-mobile-menu.png`.
+
+### Primary interactions tested
+
+- Moved the desktop pointer through the central content area and verified the wide tree field enters the pointer state with 187 active scale pixels.
+- Hovered the desktop navigation and verified the existing capsule feedback remains present without moving adjacent labels.
+- Opened the compact menu at 390 x 844 and verified `aria-expanded="true"`, complete navigation labels, and an unobstructed registration action.
+- Opened `/next/` and verified the legacy grove composition retains two trees, direct interaction, nine terrain layers, and eleven echoes.
+- Opened `/goal/about/` and verified its interactive masthead, ripple mode, transparent initial header, and absence of the homepage field.
+- Checked the browser development log after the final route pass and found no warnings or errors.
+- Ran unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- Static comparison images cannot express the temporal texture of the mosaic ripple or navigation spring.
+- The DOM state checks, interaction counts, responsive screenshots, route isolation checks, build validator, and full test suite cover the implementation risks relevant to this change.
+
+final result: passed
+
 ## Capsule Navigation And Wide Tree Response
 
 ### Comparison target

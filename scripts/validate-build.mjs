@@ -351,35 +351,70 @@ for (const group of buildGroups) {
         failures.push(`${route}: compressed HTML exceeds 75 KB DOM-art budget`);
       }
 
-      const hero = source.match(/<section class="conference-hero"[\s\S]*?<\/section>/)?.[0] ?? '';
+      const hero = source.match(
+        /<section\b[^>]*class="[^"]*\bconference-hero\b[^"]*"[^>]*>[\s\S]*?<\/section>/,
+      )?.[0] ?? '';
       const expectedPixels = Number(hero.match(/data-pixel-count="(\d+)"/)?.[1] ?? 0);
       const renderedPixels = [...hero.matchAll(/class="hp\s/g)].length;
       const terrainLayers = [...hero.matchAll(/\sdata-layer=/g)].length;
       const terrainEchoes = [...hero.matchAll(/\sdata-echo=/g)].length;
+      const leftTrees = [...hero.matchAll(/data-tree-position="left"/g)].length;
+      const rightTrees = [...hero.matchAll(/data-tree-position="right"/g)].length;
 
       if (!hero.includes('data-render-mode="dom"')) {
         failures.push(`${route}: homepage hero is not marked as DOM-rendered`);
       }
-      if (group.edition.skin === 'goal' && !hero.includes('data-tree-interaction="wide"')) {
-        failures.push(`${route}: goal homepage must expose the wide tree proximity field`);
-      }
-      if (group.edition.skin !== 'goal' && !hero.includes('data-tree-interaction="direct"')) {
-        failures.push(`${route}: non-goal homepage must preserve direct tree interaction`);
-      }
       if (expectedPixels <= 0 || expectedPixels > 4_000 || renderedPixels !== expectedPixels) {
         failures.push(`${route}: invalid DOM pixel count (${renderedPixels}/${expectedPixels})`);
       }
-      if (terrainLayers !== 9) {
-        failures.push(`${route}: expected 9 probability terrain layers, found ${terrainLayers}`);
-      }
-      if (terrainEchoes !== 11) {
-        failures.push(`${route}: expected 11 probability echoes, found ${terrainEchoes}`);
-      }
-      if (/<(?:canvas|img|picture|svg)\b/i.test(hero) || source.includes('hero-reference-trees')) {
-        failures.push(`${route}: homepage hero contains a raster, Canvas, or SVG dependency`);
-      }
-      if (await homepageHeroCssUsesImage(file, source, hero)) {
-        failures.push(`${route}: homepage hero CSS contains an image dependency`);
+
+      if (group.edition.skin === 'goal') {
+        if (
+          !hero.includes('data-visual-composition="badge"')
+          || !hero.includes('data-terrain-enabled="false"')
+          || !hero.includes('data-tree-interaction="wide"')
+        ) {
+          failures.push(`${route}: goal homepage must expose the badge composition contract`);
+        }
+        if (leftTrees !== 0 || rightTrees !== 1) {
+          failures.push(`${route}: goal homepage must render one right tree and no left tree`);
+        }
+        if (terrainLayers !== 0 || terrainEchoes !== 0) {
+          failures.push(`${route}: goal homepage must not render probability terrain`);
+        }
+        if (
+          !hero.includes('/2026/brand/goal-hero-paper-field.webp')
+          || !hero.includes('/2026/brand/goal-hero-paper-field-mobile.webp')
+          || !/<picture\b/i.test(hero)
+        ) {
+          failures.push(`${route}: goal homepage is missing the responsive badge paper field`);
+        }
+        if (/<(?:canvas|svg)\b/i.test(hero) || source.includes('hero-reference-trees')) {
+          failures.push(`${route}: goal homepage must keep the connection tree DOM-rendered`);
+        }
+      } else {
+        if (
+          !hero.includes('data-visual-composition="grove"')
+          || !hero.includes('data-terrain-enabled="true"')
+          || !hero.includes('data-tree-interaction="direct"')
+        ) {
+          failures.push(`${route}: non-goal homepage must preserve the grove composition contract`);
+        }
+        if (leftTrees !== 1 || rightTrees !== 1) {
+          failures.push(`${route}: non-goal homepage must preserve both DOM trees`);
+        }
+        if (terrainLayers !== 9) {
+          failures.push(`${route}: expected 9 probability terrain layers, found ${terrainLayers}`);
+        }
+        if (terrainEchoes !== 11) {
+          failures.push(`${route}: expected 11 probability echoes, found ${terrainEchoes}`);
+        }
+        if (/<(?:canvas|img|picture|svg)\b/i.test(hero) || source.includes('hero-reference-trees')) {
+          failures.push(`${route}: homepage hero contains a raster, Canvas, or SVG dependency`);
+        }
+        if (await homepageHeroCssUsesImage(file, source, hero)) {
+          failures.push(`${route}: homepage hero CSS contains an image dependency`);
+        }
       }
     }
 
