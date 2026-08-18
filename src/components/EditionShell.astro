@@ -11,9 +11,19 @@ interface Props {
   pageTitle?: string;
   description?: string;
   canonicalPath: string;
+  showFooter?: boolean;
+  bodyClass?: string;
 }
 
-const { edition, activePage = '', pageTitle, description, canonicalPath } = Astro.props;
+const {
+  edition,
+  activePage = '',
+  pageTitle,
+  description,
+  canonicalPath,
+  showFooter = true,
+  bodyClass,
+} = Astro.props;
 const title = pageTitle ? `${pageTitle} | ${edition.title}` : edition.title;
 ---
 
@@ -22,11 +32,11 @@ const title = pageTitle ? `${pageTitle} | ${edition.title}` : edition.title;
   description={description ?? edition.description}
   canonicalPath={canonicalPath}
   noIndex={edition.status === 'planning' || edition.skin === 'next' || edition.skin === 'goal'}
-  bodyClass={`edition-site edition-${edition.year}`}
+  bodyClass={`edition-site edition-${edition.year}${bodyClass ? ` ${bodyClass}` : ''}`}
 >
   <SiteHeader edition={edition} activePage={activePage} />
   <main id="main-content">
     <slot />
   </main>
-  <SiteFooter edition={edition} />
+  {showFooter && <SiteFooter edition={edition} />}
 </BaseLayout>

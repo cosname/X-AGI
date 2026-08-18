@@ -471,6 +471,16 @@ const goalIndex = await readFile(path.join(root, 'goal/index.html'), 'utf8');
 if (!goalIndex.includes('<meta name="robots" content="noindex, nofollow">')) {
   failures.push('goal/index.html: preview must be noindex');
 }
+if (!goalIndex.includes('conference-home--hero-only')) {
+  failures.push('goal/index.html: homepage must use the hero-only composition');
+}
+if (
+  goalIndex.includes('conference-home__ground')
+  || goalIndex.includes('conference-partners')
+  || goalIndex.includes('<footer class="site-footer">')
+) {
+  failures.push('goal/index.html: homepage must not render unfinished lower-screen content');
+}
 
 const nextIndex = await readFile(path.join(root, 'next/index.html'), 'utf8');
 
@@ -506,7 +516,6 @@ function validatePreviewPartnerSection(route, source) {
 }
 
 validatePreviewPartnerSection('next/index.html', nextIndex);
-validatePreviewPartnerSection('goal/index.html', goalIndex);
 
 const redirectTargets = new Map([
   ['2026/index.html', '/'],

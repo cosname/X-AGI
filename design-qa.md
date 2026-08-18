@@ -1,66 +1,71 @@
-# Design QA: `/goal` animated homepage reuse
+# Design QA: `/goal` single-screen homepage
 
 ## Scope
 
-The `/goal/` homepage now directly reuses the existing `/next/` animated homepage component and its full content flow.
-The `/goal/` inner pages keep the published 2026 content structure and the existing connection masthead skin.
-The public `/` routes and the parked `/next/` routes remain unchanged.
+The `/goal/` homepage keeps the selected animated tree hero and removes the unfinished lower-screen content and homepage footer.
+The `/goal/` inner pages keep their published content structure, connection mastheads, scrolling behavior, and footers.
+The public `/` routes and the complete `/next/` concept remain unchanged.
 
 ## Visual truth
 
-The user-provided homepage screenshot established the selected visual direction.
-The live `/next/` implementation was then captured as the exact executable source of truth because the request was to reuse that implementation directly.
+The pre-change `/goal/` hero is the source visual truth for the retained header, typography, colors, tree field, terrain, and actions.
+The mobile source also records the unfinished lower screen that the user explicitly asked to remove.
 
-- `output/playwright/goal-home-reuse/01-source-next-desktop.png` records `/next/` at a requested 1440 by 900 viewport and a captured image size of 1425 by 891 pixels.
-- `output/playwright/goal-home-reuse/02-source-next-mobile.png` records `/next/` at a requested 390 by 844 viewport and a captured image size of 375 by 812 pixels.
-- `output/playwright/goal-home-reuse/03-implementation-goal-desktop.png` records the implemented `/goal/` desktop state at the same requested viewport and captured size.
-- `output/playwright/goal-home-reuse/04-implementation-goal-mobile.png` records the implemented `/goal/` mobile state at the same requested viewport and captured size.
+- `output/playwright/goal-hero-only/01-source-goal-desktop-before.png` records the pre-change desktop state at a requested 1440 by 900 CSS viewport and a captured size of 1425 by 891 pixels.
+- `output/playwright/goal-hero-only/02-source-goal-mobile-before.png` records the pre-change mobile state at a requested 390 by 844 CSS viewport and a captured size of 375 by 812 pixels.
+- `output/playwright/goal-hero-only/04-implementation-goal-desktop.png` records the final desktop state at 1440 by 900 CSS pixels and 1440 by 900 captured pixels.
+- `output/playwright/goal-hero-only/03-implementation-goal-mobile.png` records the final mobile state at 390 by 844 CSS pixels and 390 by 844 captured pixels.
+- `output/playwright/goal-hero-only/07-implementation-goal-short-phone.png` records the final 375 by 667 short-phone state.
 
-The source and implementation captures use the same browser, viewport override, scroll position, and initial menu state.
+The captures use the same in-app browser, light theme, scroll-top position, closed navigation state, and idle pointer state.
+No density resampling was used.
+The source captures were placed at natural size on same-size cream canvases because the removed scrollbars had reduced their captured pixel area.
 
-## Comparison artifacts
+## Comparison evidence
 
-- `output/playwright/goal-home-reuse/05-comparison-desktop.png` places the desktop `/next/` source and `/goal/` implementation side by side.
-- `output/playwright/goal-home-reuse/06-comparison-mobile.png` places the mobile `/next/` source and `/goal/` implementation side by side.
-- `output/playwright/goal-home-reuse/07-mobile-menu-open.png` records the mobile navigation open state.
-- `output/playwright/goal-home-reuse/08-goal-about-regression.png` records the retained `/goal/about/` inner-page treatment.
+- `output/playwright/goal-hero-only/10-comparison-desktop-normalized.png` places the normalized pre-change desktop source and final desktop implementation side by side at 1440 by 900 pixels per side.
+- `output/playwright/goal-hero-only/12-comparison-mobile-normalized.png` places the normalized pre-change mobile source and final mobile implementation side by side at 390 by 844 pixels per side.
+- `output/playwright/goal-hero-only/08-mobile-menu-open.png` records the mobile navigation interaction state.
 
-The full desktop comparison keeps the header, title treatment, both tree canopies, calls to action, and probability terrain readable at once.
-The full mobile comparison keeps the compact header, hero, terrain transition, and first content section readable at once.
-No additional focused crop was needed because every required fidelity surface is legible in those two comparisons.
+The desktop comparison keeps the header, typography, both tree canopies, actions, and terrain readable at once.
+The mobile comparison keeps the compact header, title stack, actions, terrain, and removed lower-screen boundary readable at once.
+No focused crop was needed because the required typography, spacing, colors, assets, and copy are legible in the full comparisons.
 
-## Required fidelity surfaces
+## Findings
 
-- The connected X-AGI brand header and 2026 year marker.
-- The cream paper field, DOM pixel trees, floating connection marks, and probability terrain.
-- The centered 2026 and X-AGI title treatment, English subtitle, date, venue, and primary actions.
-- The responsive mobile composition and the continuation into the long homepage content.
-- The organization section order of 主办单位, 协办单位, and 赞助单位.
-- The existing connection masthead and published content structure on all `/goal/` inner pages.
+No actionable P0, P1, or P2 differences remain.
 
-## Review results
-
-- Desktop fidelity: passed.
-  The source and implementation screenshots have identical SHA-256 hashes, so the initial desktop visual state is pixel-identical.
-- Mobile fidelity: passed.
-  The layout, typography, responsive tree composition, terrain transition, and content entry match the source comparison.
-  The small terrain shape difference in the paired capture is the expected time-dependent animation state, not a layout difference.
+- Fonts and typography: passed.
+  The connected X-AGI header, 2026 title, dotted wordmark, Chinese title, subtitle, date, venue, and actions retain the selected families, weights, wrapping, and hierarchy.
+- Spacing and layout rhythm: passed.
+  Desktop preserves the original centered composition.
+  Mobile now expands the hero to the viewport bottom and uses the added space between the actions and terrain instead of exposing another section.
+- Colors and visual tokens: passed.
+  The cream field, navy title, lavender trees, teal connection marks, and terrain opacities remain consistent with the source.
+- Image quality and asset fidelity: passed.
+  The existing logo asset and DOM pixel artwork remain sharp, uncropped at their focal regions, and unchanged in rendering method.
+- Copy and content: passed.
+  All first-screen conference copy and actions remain present.
+  The manifesto, subsequent homepage sections, organization strip, update strip, and homepage footer are absent by design.
 - Motion behavior: passed.
-  The hero reports `data-ready="true"`, pointer movement changes its interaction state from `idle` to `pointer`, 45 local pixel scales activate near the pointer, and leaving the hero resets the state to `idle`.
+  Pointer movement changes the hero from `idle` to `pointer`, activates 45 local pixel scales, and returns to `idle` after leaving the hero.
 - Navigation: passed.
-  The homepage navigation and internal calls to action use `/goal/*` destinations, with no `/next/*` links.
-  The mobile menu opens, exposes the goal navigation, and closes with Escape.
-- Responsive layout: passed.
-  The homepage and inner-page document widths stay within the requested 390-pixel mobile viewport without horizontal overflow.
-- Assets and runtime: passed.
-  All lazy-loaded homepage logos resolve after entering the organization section, and the browser reports no warning or error logs.
+  The mobile menu opens within the 375 by 667 viewport, closes with Escape, and all internal homepage destinations stay in `/goal/*` with no `/next/*` links.
+- Single-screen behavior: passed.
+  At 1440 by 900, 390 by 844, and 375 by 667, document height equals viewport height with no vertical or horizontal overflow.
 - Inner-page regression: passed.
-  `/goal/about/` retains the connection masthead, published copy density, card structure, and navigation treatment.
-  Every route from `/goal/` through the five inner pages responds successfully.
-- Publication safety: passed.
-  The preview remains `noindex, nofollow`, excluded from the sitemap, disallowed by `robots.txt`, and excluded from the production sync path.
-- Automated regression: passed.
+  `/goal/about/` retains its connection masthead, footer, full scrolling content, and mobile width containment.
+- Original concept regression: passed.
+  `/next/` still renders its complete lower content, organization section, and footer.
+- Runtime and automated regression: passed.
+  The browser reports no warning or error logs.
   `npm test` completed with 14 passing unit tests, zero Astro diagnostics, a successful static build, and a successful build validator.
+
+## Comparison history
+
+The initial post-implementation desktop and mobile comparisons found no P0, P1, or P2 mismatch in the retained hero.
+The intentional mobile difference is the full-height hero and removal of the unfinished lower screen requested by the user.
+No visual correction iteration was required after the first comparison.
 
 ## Final result
 

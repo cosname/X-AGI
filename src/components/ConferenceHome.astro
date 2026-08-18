@@ -8,13 +8,14 @@ import ScheduleDay from './ScheduleDay.astro';
 
 interface Props {
   edition?: EditionConfig;
+  heroOnly?: boolean;
 }
 
-const { edition = upcomingEdition } = Astro.props;
+const { edition = upcomingEdition, heroOnly = false } = Astro.props;
 const actions = currentEditionActionPaths(edition);
 ---
 
-<div class="conference-home">
+<div class:list={['conference-home', heroOnly && 'conference-home--hero-only']}>
   <section class="conference-hero" aria-labelledby="conference-title" data-connection-stage>
     <div class="conference-hero__art" aria-hidden="true">
       <HeroPixelField />
@@ -51,91 +52,93 @@ const actions = currentEditionActionPaths(edition);
     </div>
   </section>
 
-  <div class="conference-home__ground">
-    <div class="conference-home__horizon" aria-hidden="true"></div>
+  {!heroOnly && (
+    <div class="conference-home__ground">
+      <div class="conference-home__horizon" aria-hidden="true"></div>
 
-    <section class="conference-manifesto" aria-labelledby="manifesto-title">
-      <h2 id="manifesto-title">
-        <span class="conference-manifesto__line">让研究、方法与人</span>
-        <span class="conference-manifesto__line">
-          <span class="conference-manifesto__phrase">在同一个场域里</span>
-          <span class="conference-manifesto__phrase">相遇。</span>
-        </span>
-      </h2>
-      <p>{conference2026.description}</p>
-    </section>
+      <section class="conference-manifesto" aria-labelledby="manifesto-title">
+        <h2 id="manifesto-title">
+          <span class="conference-manifesto__line">让研究、方法与人</span>
+          <span class="conference-manifesto__line">
+            <span class="conference-manifesto__phrase">在同一个场域里</span>
+            <span class="conference-manifesto__phrase">相遇。</span>
+          </span>
+        </h2>
+        <p>{conference2026.description}</p>
+      </section>
 
-    <section class="conference-formats" aria-labelledby="formats-title">
-      <header class="conference-formats__header">
-        <h2 id="formats-title">大会环节</h2>
-      </header>
-      <div class="conference-formats__mosaic">
-        {conference2026.mechanisms.map((mechanism) => (
-          <article>
-            <span aria-hidden="true">{mechanism.number}</span>
-            <div>
-              <h3 lang={mechanism.number === '02' ? 'en' : undefined}>{mechanism.title}</h3>
-              <p>{mechanism.description}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section class="conference-section conference-section--provenance" aria-labelledby="provenance-title">
-      <div class="conference-section__heading">
-        <h2 id="provenance-title">关于 X-AGI</h2>
-        <a href={editionPath(edition, 'about')}>会议简介</a>
-      </div>
-      <div class="conference-provenance__body">
-        <p>{conference2026.introduction[1]}</p>
-        <dl class="conference-provenance__matrix" aria-label="会议学术脉络">
-          <div><dt>学术脉络</dt><dd>中国 R 会议 / FAIC / 历届 X-AGI 活动</dd></div>
-          <div><dt>交叉方向</dt><dd>统计 / 数据科学 / 人工智能</dd></div>
-          <div><dt>聚焦主题</dt><dd>下一代 AI 研究者</dd></div>
-        </dl>
-      </div>
-    </section>
-
-    <section class="conference-section conference-section--schedule" aria-labelledby="home-schedule-title">
-      <header class="conference-section__heading conference-section__heading--split">
-        <div>
-          <h2 id="home-schedule-title">三天会议结构</h2>
-          <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
+      <section class="conference-formats" aria-labelledby="formats-title">
+        <header class="conference-formats__header">
+          <h2 id="formats-title">大会环节</h2>
+        </header>
+        <div class="conference-formats__mosaic">
+          {conference2026.mechanisms.map((mechanism) => (
+            <article>
+              <span aria-hidden="true">{mechanism.number}</span>
+              <div>
+                <h3 lang={mechanism.number === '02' ? 'en' : undefined}>{mechanism.title}</h3>
+                <p>{mechanism.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
-        <a href={actions.schedule}>大会日程</a>
-      </header>
-      <div class="schedule-list">
-        {conference2026.schedule.map((day, index) => (
-          <ScheduleDay day={day as ScheduleDayData} index={index} />
-        ))}
-      </div>
-    </section>
+      </section>
 
-    <section class="conference-poster-callout" aria-labelledby="poster-callout-title">
-      <div class="conference-poster-callout__panel">
-        <div class="conference-poster-callout__title">
-          <p class="conference-kicker">RISING STAR</p>
-          <h2 id="poster-callout-title" lang="en">Rising Stars</h2>
+      <section class="conference-section conference-section--provenance" aria-labelledby="provenance-title">
+        <div class="conference-section__heading">
+          <h2 id="provenance-title">关于 X-AGI</h2>
+          <a href={editionPath(edition, 'about')}>会议简介</a>
         </div>
-        <div class="conference-poster-callout__body">
-          <p>{conference2026.poster.headline}</p>
-          <p class="conference-poster-callout__meta">
-            <time datetime={conference2026.poster.deadline.dateTime}>
-              {conference2026.poster.deadline.date} {conference2026.poster.deadline.time} 截止
-            </time>
-            <span>价值 {conference2026.poster.ticket.value} {conference2026.poster.ticket.currency}正式门票</span>
-          </p>
-          <a class="capsule-action" href={actions.poster}>申请 Rising Stars</a>
+        <div class="conference-provenance__body">
+          <p>{conference2026.introduction[1]}</p>
+          <dl class="conference-provenance__matrix" aria-label="会议学术脉络">
+            <div><dt>学术脉络</dt><dd>中国 R 会议 / FAIC / 历届 X-AGI 活动</dd></div>
+            <div><dt>交叉方向</dt><dd>统计 / 数据科学 / 人工智能</dd></div>
+            <div><dt>聚焦主题</dt><dd>下一代 AI 研究者</dd></div>
+          </dl>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <ConferencePartners titleId="home-partners-title" variant="logos" />
+      <section class="conference-section conference-section--schedule" aria-labelledby="home-schedule-title">
+        <header class="conference-section__heading conference-section__heading--split">
+          <div>
+            <h2 id="home-schedule-title">三天会议结构</h2>
+            <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
+          </div>
+          <a href={actions.schedule}>大会日程</a>
+        </header>
+        <div class="schedule-list">
+          {conference2026.schedule.map((day, index) => (
+            <ScheduleDay day={day as ScheduleDayData} index={index} />
+          ))}
+        </div>
+      </section>
 
-    <section class="conference-update-strip" aria-label="待发布信息">
-      <strong>即将发布</strong>
-      <p>{conference2026.pending.join(' / ')}</p>
-    </section>
-  </div>
+      <section class="conference-poster-callout" aria-labelledby="poster-callout-title">
+        <div class="conference-poster-callout__panel">
+          <div class="conference-poster-callout__title">
+            <p class="conference-kicker">RISING STAR</p>
+            <h2 id="poster-callout-title" lang="en">Rising Stars</h2>
+          </div>
+          <div class="conference-poster-callout__body">
+            <p>{conference2026.poster.headline}</p>
+            <p class="conference-poster-callout__meta">
+              <time datetime={conference2026.poster.deadline.dateTime}>
+                {conference2026.poster.deadline.date} {conference2026.poster.deadline.time} 截止
+              </time>
+              <span>价值 {conference2026.poster.ticket.value} {conference2026.poster.ticket.currency}正式门票</span>
+            </p>
+            <a class="capsule-action" href={actions.poster}>申请 Rising Stars</a>
+          </div>
+        </div>
+      </section>
+
+      <ConferencePartners titleId="home-partners-title" variant="logos" />
+
+      <section class="conference-update-strip" aria-label="待发布信息">
+        <strong>即将发布</strong>
+        <p>{conference2026.pending.join(' / ')}</p>
+      </section>
+    </div>
+  )}
 </div>

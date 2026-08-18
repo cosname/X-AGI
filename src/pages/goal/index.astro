@@ -4,6 +4,11 @@ import ConferenceHome from '../../components/ConferenceHome.astro';
 import { editionPath, goalDesignEdition } from '../../config/site';
 ---
 
-<EditionShell edition={goalDesignEdition} canonicalPath={editionPath(goalDesignEdition)}>
-  <ConferenceHome edition={goalDesignEdition} />
+<EditionShell
+  edition={goalDesignEdition}
+  canonicalPath={editionPath(goalDesignEdition)}
+  showFooter={false}
+  bodyClass="edition-goal-home"
+>
+  <ConferenceHome edition={goalDesignEdition} heroOnly />
 </EditionShell>

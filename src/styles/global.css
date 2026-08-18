@@ -997,6 +997,26 @@
   overflow: clip;
 }
 
+.edition-goal-home {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100svh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.edition-goal-home > main,
+.edition-goal-home .conference-home,
+.edition-goal-home .conference-hero,
+.edition-goal-home .conference-hero__inner {
+  height: 100%;
+  min-height: 0;
+}
+
+.edition-goal-home > main {
+  overflow: hidden;
+}
+
 .edition-2026 .conference-home .conference-hero {
   min-height: max(46rem, calc(100svh - var(--site-header-height)));
   background: #fdf8f1;
