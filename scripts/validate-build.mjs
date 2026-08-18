@@ -415,17 +415,50 @@ if (rootText.includes('发起方：')) {
   failures.push('index.html: homepage partner list must not repeat the initiator section');
 }
 
-let previousPartnerLabelIndex = -1;
-for (const label of homepagePartnerLabels) {
-  const labelIndex = rootText.indexOf(label);
-  if (labelIndex < 0) {
-    failures.push(`index.html: missing homepage partner label "${label}"`);
-    continue;
+function validatePartnerOrder(route, text, labels) {
+  let previousPartnerLabelIndex = -1;
+  for (const label of labels) {
+    const labelIndex = text.indexOf(label);
+    if (labelIndex < 0) {
+      failures.push(`${route}: missing homepage partner label "${label}"`);
+      continue;
+    }
+    if (labelIndex < previousPartnerLabelIndex) {
+      failures.push(`${route}: homepage partner label "${label}" is out of order`);
+    }
+    previousPartnerLabelIndex = labelIndex;
   }
-  if (labelIndex < previousPartnerLabelIndex) {
-    failures.push(`index.html: homepage partner label "${label}" is out of order`);
+}
+
+validatePartnerOrder('index.html', rootText, homepagePartnerLabels);
+
+const nextIndex = await readFile(path.join(root, 'next/index.html'), 'utf8');
+const nextPartnerStart = nextIndex.indexOf('class="conference-partners conference-partners--logos"');
+const nextPartnerEnd = nextIndex.indexOf('class="conference-update-strip"', nextPartnerStart);
+if (nextPartnerStart < 0 || nextPartnerEnd < 0) {
+  failures.push('next/index.html: missing homepage organization logo section');
+} else {
+  const nextPartnerFragment = nextIndex.slice(nextPartnerStart, nextPartnerEnd);
+  const nextPartnerText = visibleText(nextPartnerFragment);
+  const nextPartnerLabels = ['主办单位', '协办单位', '赞助单位'];
+
+  if (nextPartnerText.includes('发起方')) {
+    failures.push('next/index.html: homepage organization section must not repeat the initiators');
   }
-  previousPartnerLabelIndex = labelIndex;
+  validatePartnerOrder('next/index.html', nextPartnerText, nextPartnerLabels);
+
+  for (const organization of [
+    ...conference2026.organizers,
+    ...conference2026.coOrganizers,
+    ...conference2026.sponsors,
+  ]) {
+    if (
+      !nextPartnerFragment.includes(`alt="${organization.name}"`)
+      && !nextPartnerText.includes(organization.name)
+    ) {
+      failures.push(`next/index.html: missing homepage organization "${organization.name}"`);
+    }
+  }
 }
 
 const redirectTargets = new Map([

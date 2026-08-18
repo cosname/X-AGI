@@ -1,18 +1,27 @@
 ---
 import { conference2026, type Organization } from '../data/conference2026';
+import { partnerLogoByName } from '../data/legacy-partner-assets';
 
 interface Props {
   titleId: string;
-  variant?: 'roster' | 'profiles';
+  variant?: 'roster' | 'profiles' | 'logos';
 }
 
 const { titleId, variant = 'roster' } = Astro.props;
-const partnerGroups: { key: string; label: string; organizations: readonly Organization[] }[] = [
+const allPartnerGroups: { key: string; label: string; organizations: readonly Organization[] }[] = [
   { key: 'initiators', label: '发起方', organizations: conference2026.initiators },
   { key: 'organizers', label: '主办单位', organizations: conference2026.organizers },
   { key: 'co-organizers', label: '协办单位', organizations: conference2026.coOrganizers },
   { key: 'sponsors', label: '赞助伙伴', organizations: conference2026.sponsors },
-].filter((group) => group.organizations.length > 0);
+];
+const partnerGroups = allPartnerGroups
+  .filter((group) => variant !== 'logos' || group.key !== 'initiators')
+  .map((group) => (
+    variant === 'logos' && group.key === 'sponsors'
+      ? { ...group, label: '赞助单位' }
+      : group
+  ))
+  .filter((group) => group.organizations.length > 0);
 
 ---
 
@@ -21,7 +30,9 @@ const partnerGroups: { key: string; label: string; organizations: readonly Organ
   aria-labelledby={titleId}
 >
   <header class="conference-partners__heading">
-    <h2 id={titleId}>{variant === 'profiles' ? '组织与合作' : '合作伙伴'}</h2>
+    <h2 id={titleId}>
+      {variant === 'profiles' ? '组织与合作' : variant === 'logos' ? '组织单位' : '合作伙伴'}
+    </h2>
   </header>
 
   <div class="conference-partners__groups">
@@ -53,6 +64,41 @@ const partnerGroups: { key: string; label: string; organizations: readonly Organ
               </article>
             ))}
           </div>
+        ) : variant === 'logos' ? (
+          <ul class="conference-partners__logos">
+            {group.organizations.map((organization) => {
+              const logo = partnerLogoByName[organization.name];
+              const content = logo ? (
+                <img
+                  src={logo.src}
+                  alt={organization.name}
+                  height="36"
+                  loading="lazy"
+                  decoding="async"
+                  class={logo.className}
+                />
+              ) : (
+                <span class="conference-partners__logo-fallback">{organization.name}</span>
+              );
+
+              return (
+                <li
+                  class:list={[
+                    'conference-partners__logo-item',
+                    logo?.className && `conference-partners__logo-item--${logo.className}`,
+                  ]}
+                >
+                  {organization.url ? (
+                    <a href={organization.url} target="_blank" rel="noopener noreferrer">
+                      {content}
+                    </a>
+                  ) : (
+                    content
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         ) : (
           <ul>
             {group.organizations.map((organization) => <li>{organization.name}</li>)}
