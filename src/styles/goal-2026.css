@@ -11,64 +11,6 @@
   color: var(--goal-ink);
 }
 
-.edition-goal-2026 .navbar[data-scroll-header] {
-  border-bottom: 1px solid transparent;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-  transition:
-    border-color 260ms ease,
-    background-color 260ms ease,
-    box-shadow 260ms ease;
-}
-
-.edition-goal-2026 .navbar[data-scroll-state='scrolled'],
-.edition-goal-2026 .navbar.scrolled,
-.edition-goal-2026.nav-open .navbar {
-  border-bottom-color: rgb(17 19 66 / 0.1);
-  background: var(--goal-paper);
-  box-shadow: 0 8px 26px rgb(17 19 66 / 0.055);
-}
-
-.edition-goal-2026 .navbar .logo {
-  width: auto;
-  height: 36px;
-}
-
-.edition-goal-2026 .navbar .nav-link {
-  color: var(--goal-ink);
-}
-
-.edition-goal-2026 .navbar .nav-link:hover,
-.edition-goal-2026 .navbar .nav-link:focus-visible,
-.edition-goal-2026 .navbar .nav-link.active {
-  color: var(--goal-purple-deep);
-}
-
-.edition-goal-2026 .navbar .nav-link.active::after {
-  background: var(--goal-purple);
-}
-
-.edition-goal-2026 .navbar-toggler .hamburger .line {
-  background: var(--goal-ink);
-}
-
-.edition-goal-2026 .btn-register,
-.edition-goal-2026 .btn-register:hover,
-.edition-goal-2026 .btn-register:active,
-.edition-goal-2026 .btn-register:focus,
-.edition-goal-2026 .btn-register:visited {
-  border: 1px solid var(--goal-purple);
-  border-radius: 999px;
-  background: var(--goal-purple);
-  color: #fff !important;
-  box-shadow: 0 7px 18px rgb(79 60 175 / 0.16);
-}
-
-.edition-goal-2026 .btn-register:hover {
-  background: var(--goal-purple-deep);
-}
-
 .edition-goal-2026 .page-header--goal {
   position: relative;
   isolation: isolate;
@@ -153,6 +95,11 @@
   color: #fff !important;
 }
 
+.edition-goal-2026 .schedule-tabs,
+.edition-goal-2026 .schedule-card {
+  scroll-margin-top: calc(var(--site-header-height) + 1.25rem);
+}
+
 .edition-goal-2026 .accordion-button:not(.collapsed) {
   background: #282865;
   color: #fff;
@@ -173,20 +120,6 @@
 }
 
 @media (max-width: 991.98px) {
-  .edition-goal-2026 .navbar-toggler::before {
-    color: var(--goal-ink);
-  }
-
-  .edition-goal-2026 .navbar-collapse {
-    border-top: 1px solid var(--goal-line);
-    background: rgb(253 248 241 / 0.98);
-    box-shadow: 0 24px 40px rgb(17 19 66 / 0.08);
-  }
-
-  .edition-goal-2026 .navbar .nav-link {
-    border-bottom: 1px solid rgb(17 19 66 / 0.07);
-  }
-
   .edition-goal-2026 .page-header--goal {
     height: 270px;
   }
@@ -210,11 +143,5 @@
 
   .edition-goal-2026 .page-header--goal::after {
     background: linear-gradient(90deg, rgb(245 240 234 / 0.94) 0 30%, rgb(245 240 234 / 0.68) 58%, transparent 90%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .edition-goal-2026 .navbar[data-scroll-header] {
-    transition: none;
   }
 }

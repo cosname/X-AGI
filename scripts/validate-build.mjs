@@ -286,10 +286,9 @@ for (const group of buildGroups) {
     }
     if (
       group.edition.skin === 'goal'
-      && page === ''
       && !source.includes('edition-site edition-2026')
     ) {
-      failures.push(`${route}: goal homepage must use the animated 2026 skin`);
+      failures.push(`${route}: goal page must use the shared 2026 shell`);
     }
     if (
       group.edition.skin === 'goal'
@@ -307,6 +306,17 @@ for (const group of buildGroups) {
       )
     ) {
       failures.push(`${route}: goal page must opt into the shared scroll-header state contract`);
+    }
+    if (
+      group.edition.skin === 'goal'
+      && (
+        !source.includes('class="site-header"')
+        || !source.includes('/brand/xagi-connect-logo.png')
+        || source.includes('class="navbar ')
+        || source.includes('/2025/assets/js/script.js')
+      )
+    ) {
+      failures.push(`${route}: goal page must use only the shared 2026 navigation component`);
     }
     if (
       group.edition.skin !== 'goal'

@@ -1,0 +1,25 @@
+<script>
+  const scheduleTabs = document.querySelector<HTMLElement>('.schedule-tabs');
+
+  if (scheduleTabs && !scheduleTabs.hasAttribute('data-goal-tabs-ready')) {
+    scheduleTabs.setAttribute('data-goal-tabs-ready', '');
+    const tabs = scheduleTabs.querySelectorAll<HTMLButtonElement>('.nav-link[data-target]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((candidate) => candidate.classList.remove('active'));
+        tab.classList.add('active');
+
+        const targetSelector = tab.dataset.target;
+        if (!targetSelector) return;
+
+        const target = document.querySelector<HTMLElement>(targetSelector);
+        target?.scrollIntoView({
+          behavior: reducedMotion.matches ? 'auto' : 'smooth',
+          block: 'start',
+        });
+      });
+    });
+  }
+</script>

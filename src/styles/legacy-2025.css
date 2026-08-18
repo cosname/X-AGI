@@ -164,6 +164,10 @@
   vertical-align: middle;
 }
 
+.edition-legacy-2025 .schedule-tabs .nav-item:first-child {
+  display: block !important;
+}
+
 .edition-legacy-2025 .org-item--text-only {
   align-items: flex-start;
 }

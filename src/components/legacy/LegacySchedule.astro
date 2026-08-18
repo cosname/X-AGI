@@ -8,10 +8,14 @@ const days = conference2026.schedule as readonly ScheduleDay[];
   <div class="container custom-container">
     <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
     <ul class="nav nav-pills schedule-tabs mb-4">
-      <li class="nav-item"><button class="nav-link active" data-target=".schedule-tabs">全部</button></li>
-      {days.map((day) => (
+      {days.map((day, index) => (
         <li class="nav-item">
-          <button class="nav-link" data-target={`#session-${day.dateTime}`}>{day.date} {day.weekday}</button>
+          <button
+            class:list={['nav-link', { active: index === 0 }]}
+            data-target={`#session-${day.dateTime}`}
+          >
+            {day.date} {day.weekday}
+          </button>
         </li>
       ))}
     </ul>
