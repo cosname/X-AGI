@@ -1,3 +1,10 @@
+import {
+  liquidGlassGeometry,
+  liquidGlassPointerEnabled,
+  liquidGlassSample,
+  liquidGlassSpring,
+} from './liquid-glass.ts';
+
 export const PROBABILITY_BASELINE = 1.002;
 const MIN_POSTERIOR_AMPLITUDE = 0.12;
 const MAX_POSTERIOR_AMPLITUDE = 0.265;
@@ -319,6 +326,7 @@ export const mosaicRippleSample = (
 export const initializeHeroPixelFields = () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const liquidViewport = window.matchMedia('(min-width: 51.26rem)');
 
   document.querySelectorAll<HTMLElement>('[data-hero-pixel-field]').forEach((field) => {
     if (field.dataset.initialized === 'true') return;
@@ -326,6 +334,7 @@ export const initializeHeroPixelFields = () => {
 
     const stage = field.closest<HTMLElement>('[data-connection-stage]') ?? field;
     const veil = field.querySelector<HTMLElement>('[data-hero-sanctuary]');
+    const liquidLens = field.querySelector<HTMLElement>('[data-hero-liquid-glass]');
     const treePositions: Record<TreeSide, HTMLElement | null> = {
       left: field.querySelector<HTMLElement>('[data-tree-position="left"]'),
       right: field.querySelector<HTMLElement>('[data-tree-position="right"]'),
@@ -352,6 +361,10 @@ export const initializeHeroPixelFields = () => {
     let meanVelocity = 0;
     let amplitudeVelocity = 0;
     let pointer: Point = { x: 0, y: 0 };
+    let lensX = { value: 0, velocity: 0 };
+    let lensY = { value: 0, velocity: 0 };
+    let lensHasPosition = false;
+    let lensTimestamp = 0;
     let pointerDirty = false;
     let branchLayouts: BranchLayout[] = [];
     let titleRect: Rect | null = null;
@@ -368,6 +381,12 @@ export const initializeHeroPixelFields = () => {
     let lastShapeKey = '';
 
     const motionEnabled = () => !prefersReducedMotion.matches && finePointer.matches;
+    const liquidInteractionEnabled = () => liquidGlassPointerEnabled(
+      Boolean(liquidLens),
+      liquidViewport.matches,
+      prefersReducedMotion.matches,
+      finePointer.matches,
+    );
     const baseAmplitude = () => width < 360 ? NARROW_POSTERIOR_AMPLITUDE : BASE_POSTERIOR_AMPLITUDE;
     const terrainPixelUnit = () => width < 720 ? 4 : 5;
     const terrainShapeUnit = () => Math.max(terrainPixelUnit(), width / TERRAIN_COLUMNS);
@@ -461,13 +480,63 @@ export const initializeHeroPixelFields = () => {
       field.dataset.activeScalePixels = '0';
     };
 
+    const resetLiquidLens = () => {
+      lensHasPosition = false;
+      lensTimestamp = 0;
+      lensX = { value: pointer.x, velocity: 0 };
+      lensY = { value: pointer.y, velocity: 0 };
+      liquidLens?.removeAttribute('data-active');
+      field.dataset.liquidGlass = 'idle';
+    };
+
+    const applyLiquidLens = (timestamp: number) => {
+      if (!liquidLens || !active || !liquidInteractionEnabled()) return false;
+      if (!lensHasPosition) {
+        lensHasPosition = true;
+        lensX = { value: pointer.x, velocity: 0 };
+        lensY = { value: pointer.y, velocity: 0 };
+      } else {
+        const delta = lensTimestamp ? (timestamp - lensTimestamp) / 1000 : 1 / 60;
+        lensX = liquidGlassSpring(lensX, pointer.x, delta, 205, 21);
+        lensY = liquidGlassSpring(lensY, pointer.y, delta, 205, 21);
+      }
+      lensTimestamp = timestamp;
+
+      const geometry = liquidGlassGeometry(width);
+      const speed = Math.hypot(lensX.velocity, lensY.velocity);
+      const tilt = clamp(lensX.velocity / 1800, -0.055, 0.055);
+      const stretch = 1 + clamp(speed / 7200, 0, 0.035);
+      liquidLens.style.setProperty('--liquid-x', `${snapDevicePixel(lensX.value)}px`);
+      liquidLens.style.setProperty('--liquid-y', `${snapDevicePixel(lensY.value)}px`);
+      liquidLens.style.setProperty('--liquid-width', `${(geometry.radiusX * 2).toFixed(2)}px`);
+      liquidLens.style.setProperty('--liquid-height', `${(geometry.radiusY * 2).toFixed(2)}px`);
+      liquidLens.style.setProperty('--liquid-tilt', `${tilt.toFixed(4)}rad`);
+      liquidLens.style.setProperty('--liquid-stretch', stretch.toFixed(4));
+      liquidLens.setAttribute('data-active', 'true');
+      field.dataset.liquidGlass = 'active';
+
+      return (
+        Math.abs(lensX.value - pointer.x) >= 0.12
+        || Math.abs(lensY.value - pointer.y) >= 0.12
+        || Math.abs(lensX.velocity) >= 0.6
+        || Math.abs(lensY.velocity) >= 0.6
+      );
+    };
+
     const applyBranchMotion = (timestamp: number) => {
       const branchRadius = clamp(width * 0.105, 72, 156);
-      const scaleRadius = clamp(width * 0.075, 68, 118);
+      const useLiquidGlass = liquidInteractionEnabled();
+      const scaleRadius = useLiquidGlass
+        ? liquidGlassGeometry(width).radiusX * 1.12
+        : clamp(width * 0.075, 68, 118);
+      const interactionPoint = useLiquidGlass && lensHasPosition
+        ? { x: lensX.value, y: lensY.value }
+        : pointer;
       const nextActiveScalePixels = new Set<HTMLElement>();
+      let entryAnimating = false;
       let maximumPixelProximity = 0;
       branchLayouts.forEach((layout) => {
-        const branchProximity = 1 - clamp(distanceToRect(pointer, layout.rect) / branchRadius, 0, 1);
+        const branchProximity = 1 - clamp(distanceToRect(interactionPoint, layout.rect) / branchRadius, 0, 1);
         if (branchProximity < 0.01) {
           layout.element.dataset.nearby = 'false';
           return;
@@ -476,18 +545,28 @@ export const initializeHeroPixelFields = () => {
         let branchActivePixels = 0;
         const sideDirection = layout.side === 'left' ? 1 : -1;
         layout.scalePixels.forEach((scalePixel) => {
-          const deltaX = scalePixel.point.x - pointer.x;
-          const deltaY = scalePixel.point.y - pointer.y;
+          const deltaX = scalePixel.point.x - interactionPoint.x;
+          const deltaY = scalePixel.point.y - interactionPoint.y;
           const distance = Math.hypot(deltaX, deltaY);
           if (distance >= scaleRadius) return;
           const scaleDepth = layout.depth <= 0.15 ? 0.18 : 0.55 + layout.depth * 0.45;
-          const sample = mosaicRippleSample(
-            distance,
-            scaleRadius,
-            timestamp * 0.001,
-            scalePixel.phase,
-            scaleDepth,
-          );
+          let sample: ReturnType<typeof liquidGlassSample>;
+          if (useLiquidGlass) {
+            sample = liquidGlassSample(distance, scaleRadius, scaleDepth);
+          } else {
+            const ripple = mosaicRippleSample(
+              distance,
+              scaleRadius,
+              timestamp * 0.001,
+              scalePixel.phase,
+              scaleDepth,
+            );
+            sample = {
+              proximity: ripple.proximity,
+              scale: ripple.scale,
+              refraction: ripple.lift,
+            };
+          }
           if (sample.proximity < 0.01) return;
 
           if (!activeScalePixels.has(scalePixel.element)) {
@@ -495,10 +574,11 @@ export const initializeHeroPixelFields = () => {
           }
           const entryTime = scalePixelEntryTimes.get(scalePixel.element) ?? timestamp;
           const entryProgress = clamp((timestamp - entryTime) / 110, 0, 1);
+          if (entryProgress < 1) entryAnimating = true;
           const directionX = distance > 1 ? deltaX / distance : sideDirection;
           const directionY = distance > 1 ? deltaY / distance : -0.35;
-          const shiftX = snapDevicePixel(directionX * sample.lift * entryProgress);
-          const shiftY = snapDevicePixel(directionY * sample.lift * entryProgress);
+          const shiftX = snapDevicePixel(directionX * sample.refraction * entryProgress);
+          const shiftY = snapDevicePixel(directionY * sample.refraction * entryProgress);
           const scale = 1 + (sample.scale - 1) * entryProgress;
           if (scalePixel.element.dataset.scaleActive !== 'true') {
             scalePixel.element.dataset.scaleActive = 'true';
@@ -524,7 +604,7 @@ export const initializeHeroPixelFields = () => {
       if (startedSettling) scheduleScaleCleanup();
       activeScalePixels = nextActiveScalePixels;
       field.dataset.activeScalePixels = `${activeScalePixels.size}`;
-      return maximumPixelProximity;
+      return useLiquidGlass ? entryAnimating : maximumPixelProximity >= 0.01;
     };
 
     const titleGlowRadius = () => clamp(width * 0.058, 58, 92);
@@ -709,9 +789,10 @@ export const initializeHeroPixelFields = () => {
         commit(next.mean, next.amplitude);
         pointerDirty = false;
       }
-      const branchProximity = applyBranchMotion(timestamp);
+      const lensMoving = applyLiquidLens(timestamp);
+      const branchMoving = applyBranchMotion(timestamp);
       applyTitleInk();
-      if (active && branchProximity >= 0.01) {
+      if (active && (lensMoving || branchMoving)) {
         pointerFrame = window.requestAnimationFrame(pointerTick);
       }
     };
@@ -763,6 +844,7 @@ export const initializeHeroPixelFields = () => {
       stopPointerFrame();
       field.dataset.interaction = 'idle';
       resetBranches();
+      resetLiquidLens();
       clearTitleInk();
       startSpring();
     };
@@ -822,6 +904,7 @@ export const initializeHeroPixelFields = () => {
       clearTitleInk();
       commit(mean, amplitude, true);
       resetBranches();
+      resetLiquidLens();
       field.dataset.animated = motionEnabled() ? 'true' : 'false';
       field.dataset.interaction = 'idle';
     };
@@ -834,6 +917,7 @@ export const initializeHeroPixelFields = () => {
 
     prefersReducedMotion.addEventListener('change', resetMotion, { signal });
     finePointer.addEventListener('change', resetMotion, { signal });
+    liquidViewport.addEventListener('change', resetMotion, { signal });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) resetMotion();
     }, { signal });
@@ -854,6 +938,7 @@ export const initializeHeroPixelFields = () => {
     field.dataset.renderMode = 'dom';
     field.dataset.animated = motionEnabled() ? 'true' : 'false';
     field.dataset.interaction = 'idle';
+    field.dataset.liquidGlass = 'idle';
     scheduleResize();
   });
 };

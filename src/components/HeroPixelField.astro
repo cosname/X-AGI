@@ -11,6 +11,12 @@ import {
   TERRAIN_ECHOES,
 } from '../scripts/hero-pixel-field';
 
+interface Props {
+  liquidGlass?: boolean;
+}
+
+const { liquidGlass = false } = Astro.props;
+
 type PixelRecord = [x: number, y: number, size: number, colorIndex: number, alphaIndex: number];
 type PixelData = {
   artboard: { width: number; height: number; splitX: number };
@@ -247,6 +253,7 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
       ))}
     </span>
   </div>
+  {liquidGlass && <i class="hero-pixel-field__liquid-glass" data-hero-liquid-glass aria-hidden="true"></i>}
 </div>
 
 <style is:inline set:html={tokenCss}></style>

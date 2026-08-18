@@ -16,6 +16,7 @@ const { edition, activePage = '', behavior = 'surface' } = Astro.props;
 const navigation = editionNavigation(edition);
 const actions = currentEditionActionPaths(edition);
 const scrollHeader = behavior === 'overlay-scroll';
+const liquidGlass = edition.skin === 'goal';
 ---
 
 <header
@@ -24,6 +25,7 @@ const scrollHeader = behavior === 'overlay-scroll';
   data-scroll-header={scrollHeader ? 'true' : undefined}
   data-scroll-state={scrollHeader ? 'top' : undefined}
   data-scroll-threshold={scrollHeader ? '50' : undefined}
+  data-liquid-glass-nav={liquidGlass ? 'true' : undefined}
 >
   <a class="skip-link" href="#main-content">跳到主要内容</a>
   <div class="site-header__inner">
@@ -49,6 +51,7 @@ const scrollHeader = behavior === 'overlay-scroll';
         菜单
       </button>
       <div class="site-navigation__panel" id="conference-navigation">
+        {liquidGlass && <i class="site-navigation__liquid-glass" data-nav-liquid-glass aria-hidden="true"></i>}
         <div class="site-navigation__atmosphere" aria-hidden="true">
           {
             (
@@ -75,6 +78,7 @@ const scrollHeader = behavior === 'overlay-scroll';
                 <a
                   href={editionPath(edition, item.page)}
                   aria-current={activePage === item.page ? 'page' : undefined}
+                  data-nav-liquid-target={liquidGlass ? '' : undefined}
                 >
                   {item.label}
                 </a>
@@ -109,6 +113,8 @@ const scrollHeader = behavior === 'overlay-scroll';
 {scrollHeader && <HeaderScrollState />}
 
 <script>
+  import { initializeLiquidGlassNavigation } from '../scripts/liquid-glass';
+
   const header = document.querySelector<HTMLElement>('.site-header');
   const navigation = header?.querySelector<HTMLElement>('.site-navigation');
   const toggle = navigation?.querySelector<HTMLButtonElement>('.site-navigation__toggle');
@@ -204,4 +210,5 @@ const scrollHeader = behavior === 'overlay-scroll';
   document.fonts?.ready.then(syncNavMode).catch(() => undefined);
   window.addEventListener('pagehide', () => closeNavigation());
   syncNavMode();
+  initializeLiquidGlassNavigation();
 </script>

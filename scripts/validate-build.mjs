@@ -322,6 +322,8 @@ for (const group of buildGroups) {
       && (
         !source.includes('class="site-header"')
         || !source.includes('/brand/xagi-connect-logo.png')
+        || !source.includes('data-liquid-glass-nav="true"')
+        || !source.includes('data-nav-liquid-glass')
         || source.includes('class="navbar ')
         || source.includes('/2025/assets/js/script.js')
       )
@@ -330,9 +332,14 @@ for (const group of buildGroups) {
     }
     if (
       group.edition.skin !== 'goal'
-      && source.includes('data-scroll-header="true"')
+      && (
+        source.includes('data-scroll-header="true"')
+        || source.includes('data-liquid-glass-nav="true"')
+        || source.includes('data-nav-liquid-glass')
+        || source.includes('data-liquid-glass-field')
+      )
     ) {
-      failures.push(`${route}: scroll-header preview behavior leaked outside the goal design`);
+      failures.push(`${route}: goal header interaction leaked outside the goal design`);
     }
 
     if (isDomPixelHomepage) {
@@ -349,6 +356,12 @@ for (const group of buildGroups) {
 
       if (!hero.includes('data-render-mode="dom"')) {
         failures.push(`${route}: homepage hero is not marked as DOM-rendered`);
+      }
+      if (group.edition.skin === 'goal' && !hero.includes('data-hero-liquid-glass')) {
+        failures.push(`${route}: goal homepage must expose the liquid glass tree lens`);
+      }
+      if (group.edition.skin !== 'goal' && hero.includes('data-hero-liquid-glass')) {
+        failures.push(`${route}: liquid glass tree lens leaked outside the goal design`);
       }
       if (expectedPixels <= 0 || expectedPixels > 4_000 || renderedPixels !== expectedPixels) {
         failures.push(`${route}: invalid DOM pixel count (${renderedPixels}/${expectedPixels})`);
@@ -506,6 +519,14 @@ validatePartnerOrder('index.html', rootText, homepagePartnerLabels);
 const goalIndex = await readFile(path.join(root, 'goal/index.html'), 'utf8');
 if (!goalIndex.includes('<meta name="robots" content="noindex, nofollow">')) {
   failures.push('goal/index.html: preview must be noindex');
+}
+
+for (const page of ['about', 'schedule', 'poster', 'guide', 'register']) {
+  const route = `goal/${page}/index.html`;
+  const source = await readFile(path.join(root, route), 'utf8');
+  if (!source.includes('data-liquid-glass-field')) {
+    failures.push(`${route}: goal masthead must expose the liquid glass field`);
+  }
 }
 if (!goalIndex.includes('conference-home--hero-only')) {
   failures.push('goal/index.html: homepage must use the hero-only composition');

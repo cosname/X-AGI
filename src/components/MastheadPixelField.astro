@@ -1,15 +1,17 @@
 ---
 interface Props {
   class?: string;
+  liquidGlass?: boolean;
 }
 
-const { class: className } = Astro.props;
+const { class: className, liquidGlass = false } = Astro.props;
 ---
 
 <div
   class:list={['masthead-pixel-field', className]}
   data-masthead-pixel-field
   data-render-mode="canvas"
+  data-liquid-glass-field={liquidGlass ? '' : undefined}
   aria-hidden="true"
 >
   <canvas class="masthead-pixel-field__canvas"></canvas>

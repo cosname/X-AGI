@@ -15,6 +15,12 @@ import {
   mastheadParticleCount,
   seedMastheadParticles,
 } from './masthead-pixel-field.ts';
+import {
+  liquidGlassGeometry,
+  liquidGlassPointerEnabled,
+  liquidGlassSample,
+  liquidGlassSpring,
+} from './liquid-glass.ts';
 
 test('gaussian density peaks at its mean', () => {
   assert.equal(gaussianDensity(0.675, 0.675, 0.078), 1);
@@ -121,6 +127,52 @@ test('mosaic ripple scale remains bounded throughout its cycle', () => {
   }
 });
 
+test('liquid glass keeps a restrained convex magnification at every viewport size', () => {
+  const narrow = liquidGlassGeometry(320);
+  const desktop = liquidGlassGeometry(1440);
+  const ultrawide = liquidGlassGeometry(3840);
+
+  assert.equal(narrow.radiusX, 48);
+  assert.ok(desktop.radiusX > narrow.radiusX);
+  assert.equal(ultrawide.radiusX, 64);
+  assert.equal(desktop.radiusY, desktop.radiusX * 1.16);
+  assert.equal(desktop.magnification, 1.072);
+});
+
+test('liquid glass magnifies the center and resolves cleanly at its rim', () => {
+  const center = liquidGlassSample(0, 90, 1);
+  const meniscus = liquidGlassSample(45, 90, 1);
+  const edge = liquidGlassSample(90, 90, 1);
+  const root = liquidGlassSample(0, 90, 0.12);
+
+  assert.equal(center.proximity, 1);
+  assert.equal(center.scale, 1.082);
+  assert.ok(meniscus.refraction > center.refraction);
+  assert.deepEqual(edge, { proximity: 0, scale: 1, refraction: 0 });
+  assert.ok(root.scale > 1);
+  assert.ok(root.scale < center.scale);
+});
+
+test('liquid glass spring converges without overshooting into unstable geometry', () => {
+  let spring = { value: 0, velocity: 0 };
+  for (let frame = 0; frame < 180; frame += 1) {
+    spring = liquidGlassSpring(spring, 100, 1 / 60);
+    assert.ok(Number.isFinite(spring.value));
+    assert.ok(Number.isFinite(spring.velocity));
+    assert.ok(spring.value > -1);
+    assert.ok(spring.value < 112);
+  }
+  assert.ok(Math.abs(spring.value - 100) < 0.001);
+});
+
+test('liquid glass pointer interaction disables cleanly at fallback boundaries', () => {
+  assert.equal(liquidGlassPointerEnabled(true, true, false, true), true);
+  assert.equal(liquidGlassPointerEnabled(false, true, false, true), false);
+  assert.equal(liquidGlassPointerEnabled(true, false, false, true), false);
+  assert.equal(liquidGlassPointerEnabled(true, true, true, true), false);
+  assert.equal(liquidGlassPointerEnabled(true, true, false, false), false);
+});
+
 test('masthead particles are deterministic and preserve the text safe zones', () => {
   const first = seedMastheadParticles(1440, 276, 2026);
   const second = seedMastheadParticles(1440, 276, 2026);
@@ -138,4 +190,3 @@ test('masthead particles are deterministic and preserve the text safe zones', ()
   assert.equal(mobile.length, mastheadParticleCount(390));
   assert.equal(mobileTextWellHits.length, 0);
 });
-
