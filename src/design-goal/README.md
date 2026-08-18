@@ -45,7 +45,7 @@ npm run dev
 - `src/components/HeroPixelField.astro` 同时提供 `/goal/` 的 badge 单树构图和 `/next/` 的双树概率地形构图。
 - `src/components/MastheadPixelField.astro` 提供内页连接粒子头图。
 - `src/scripts/hero-pixel-field.ts` 管理两种树木感应模式，并只在 `/next/` 构图中计算概率地形。
-- `public/2026/brand/goal-hero-paper-field.webp` 和 `public/2026/brand/goal-hero-paper-field-mobile.webp` 提供响应式纸面色块背景。
+- `public/2026/brand/goal-hero-paper-field.webp`、`public/2026/brand/goal-hero-paper-field-tall.webp` 和 `public/2026/brand/goal-hero-paper-field-mobile.webp` 提供宽屏、高桌面和移动端纸面色块背景。
 - `src/data/conference2026.ts` 仍是唯一业务内容源。
 
 ## 发布保护

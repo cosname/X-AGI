@@ -4599,7 +4599,7 @@ button:focus-visible {
   object-position: center;
 }
 
-@media (min-width: 51.26rem) {
+@media (min-width: 51.26rem) and (min-aspect-ratio: 2 / 1) {
   .hero-pixel-field--badge .hero-pixel-field__paper img {
     transform: scale(1.27);
     transform-origin: center bottom;
@@ -4617,11 +4617,11 @@ button:focus-visible {
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-  top: -27%;
+  top: calc(50% - min(79%, 36vw));
   right: 15%;
   left: auto !important;
   width: auto;
-  height: 158%;
+  height: min(158%, 72vw);
   opacity: 0.96;
   -webkit-mask-image: none;
   mask-image: none;

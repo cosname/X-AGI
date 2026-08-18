@@ -233,3 +233,56 @@ No actionable P0, P1, or P2 visual or interaction differences remain for the req
 - The browser state contract, before-and-after captures, responsive checks, unit tests, and fresh runtime log cover the implementation risks relevant to this change.
 
 final result: passed
+
+## Tall Desktop Badge Composition
+
+### Comparison target
+
+- User-reported visual evidence: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-91cc85ba-8fdd-42e4-b125-220cf20b7e26.png`.
+- Same-viewport implementation baseline: `output/playwright/badge-crop-fix/01-current-browser-before.png`.
+- Same-viewport revised implementation: `output/playwright/badge-crop-fix/02-current-browser-after.png`.
+- Full-view comparison: `output/playwright/badge-crop-fix/04-before-after-stacked.png`.
+- Focused tree and background comparison: `output/playwright/badge-crop-fix/05-tree-background-focus.png`.
+- Browser CSS viewport: 1280 x 720 at device pixel ratio 2 for the controlled before-and-after comparison.
+- Source and implementation screenshot pixels: 1280 x 720 because the browser capture normalizes the device-density image to CSS pixels.
+- User-reported screenshot pixels: 3358 x 2368, including browser chrome, which corresponds to an approximately 1679 x 1134 CSS content surface on the Retina display.
+- Density normalization: the controlled baseline and revised implementation use identical viewport, capture density, route, and top-of-page state, so no resampling was required.
+- State: `/goal/` is at the top with the transparent navigation, complete hero copy, and the single right tree at rest before a separate wide-pointer interaction check.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for the reported tall-desktop crop.
+
+- Fonts and typography: the year, mosaic conference name, English tagline, metadata, navigation, and actions keep their existing family, scale, weight, line height, spacing, and wrapping.
+- Spacing and layout rhythm: the editorial copy column remains fixed while the right tree is now sized by both viewport height and width and centered vertically, preventing tall windows from magnifying it beyond the visible frame.
+- Colors and visual tokens: the warm paper, indigo, lavender, teal, peach, and orange palette is unchanged, but the complete corner color fields are now visible instead of being cropped to a mostly empty center.
+- Image quality and asset fidelity: a dedicated 1536 x 1024 paper field serves desktop viewports up to a 1.99 aspect ratio, so high desktop windows use an asset matched to their slot rather than stretching the wide background.
+- Copy and content: all conference copy, navigation labels, dates, venue, registration destination, and schedule destination remain unchanged.
+- Responsive behavior: at the reported 1679 x 1134 CSS size, the tree formula resolves to approximately 1209px tall from y -37px to y 1171px, replacing the earlier approximately 1792px tree from y -306px to y 1486px.
+- Interaction: the resized tree retains the wide proximity field and activates 642 scale pixels from the central browsing area.
+- Accessibility: the decorative paper field keeps empty alternative text, the DOM tree remains hidden from assistive technology, and no focus, target-size, motion, or reading-order behavior changed.
+- Cross-preview isolation: the new responsive source and sizing rules remain scoped to the badge composition, while `/next/` preserves its grove composition and probability terrain.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P1 the wide 1800 x 768 paper field used `cover` plus a 1.27 scale at every desktop aspect ratio, while the tree height stayed at 158% of the viewport, so a tall desktop showed only central background texture and a partial oversized tree.
+- Earlier evidence: the user-reported screenshot and `output/playwright/badge-crop-fix/01-current-browser-before.png`.
+- Fix: added a 3:2 high-desktop paper asset, selected it by aspect ratio, limited wide-background enlargement to aspect ratios of 2:1 or wider, and constrained the tree with `min(158%, 72vw)` around the vertical center.
+- Post-fix evidence: `output/playwright/badge-crop-fix/02-current-browser-after.png`, `output/playwright/badge-crop-fix/04-before-after-stacked.png`, and `output/playwright/badge-crop-fix/05-tree-background-focus.png`.
+
+### Primary interactions tested
+
+- Loaded the revised `/goal/` top state and verified the browser selects `goal-hero-paper-field-tall.webp` at a 16:9 desktop viewport.
+- Verified one right tree, no left tree, zero page overflow, and a visible primary registration action.
+- Moved the pointer through the central hero area and verified wide tree interaction enters the pointer state with 642 active scale pixels.
+- Checked browser development logs after the final reload and found no runtime errors or warnings.
+- Ran all unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- The browser surface did not expose an arbitrary viewport override for the exact user screenshot dimensions, so the 1679 x 1134 result was verified from the responsive asset selection and computed geometry rather than a second exact-size capture.
+- The controlled 1280 x 720 before-and-after comparison, tall asset dimensions, computed high-viewport tree bounds, runtime checks, and full build validation cover the regression addressed here.
+
+final result: passed

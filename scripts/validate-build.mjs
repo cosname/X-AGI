@@ -384,6 +384,7 @@ for (const group of buildGroups) {
         }
         if (
           !hero.includes('/2026/brand/goal-hero-paper-field.webp')
+          || !hero.includes('/2026/brand/goal-hero-paper-field-tall.webp')
           || !hero.includes('/2026/brand/goal-hero-paper-field-mobile.webp')
           || !/<picture\b/i.test(hero)
         ) {
