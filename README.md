@@ -9,17 +9,18 @@ X-AGI 大会官网及年度归档的 Astro 静态站。
 
 ## 站点版本
 
-同一次构建会生成正式站、历史归档和一套本地设计预览。
+同一次构建会生成正式站、历史归档和两套本地设计预览。
 
 | 路径 | 用途 | 发布状态 |
 | --- | --- | --- |
 | `/`、`/about/`、`/schedule/` 等 | 2026 正式站，使用 2025 模板皮肤和 2026 官方内容 | 对外发布 |
 | `/2025/` | 2025 X-AGI 与第 18 届中国 R 会议归档 | 冻结发布 |
 | `/next/` | 米色纸面和像素树的新视觉方案 | 仅本地预览 |
+| `/goal/` | 正式站布局与树、连接视觉融合的候选方案 | 仅本地预览 |
 | `/2026/`、`/2026/<page>/` | 旧书签兼容入口 | 跳转至根路径正式页 |
 
-`/next/` 会写入本地 `dist/`，但生产同步脚本会明确排除它。
-`robots.txt` 也会禁止抓取 `/next/`。
+`/next/` 和 `/goal/` 会写入本地 `dist/`，但生产同步脚本会明确排除它们。
+`robots.txt` 也会禁止抓取这两个预览路径。
 
 根目录下的 `about.html`、`schedule.html` 等旧式 URL 会跳转到对应的 2025 归档页。
 这些文件用于兼容 2025 网站上线时产生的旧链接，不是 2026 正式路由。
@@ -51,12 +52,14 @@ src/
     legacy-partner-assets.ts   正式站合作单位 Logo 对照
   layouts/
     Legacy2025Layout.astro     当前正式站布局
+    Goal2026Layout.astro       融合候选预览布局
     BaseLayout.astro           新视觉预览布局
   components/legacy/           当前正式站页面组件
   components/                  停放中的新视觉组件
   pages/                       Astro 路由和文本端点
   styles/
     legacy-2025.css            当前正式站样式补丁
+    goal-2026.css              融合候选预览皮肤
     global.css                 新视觉预览样式
 public/
   2025/                        冻结的 2025 静态归档
@@ -156,7 +159,7 @@ OSS_DRY_RUN=1 npm run oss:sync
 npm run oss:sync
 ```
 
-`npm run oss:sync` 只同步经过校验的 `dist/`，并排除 `next/**`。
+`npm run oss:sync` 只同步经过校验的 `dist/`，并排除 `next/**` 和 `goal/**`。
 同步不会删除桶里只存在于远端的对象。
 不要给全站同步添加 `--delete`，否则可能删除 2025 slides 和访问日志。
 
@@ -177,13 +180,15 @@ npm run oss:sync
 npm run downloads:verify
 ```
 
-## 新视觉预览
+## 设计预览
 
 新视觉的入口位于 `src/pages/next/`，设计说明位于 `src/design-next/README.md`。
+融合候选的入口位于 `src/pages/goal/`，设计说明位于 `src/design-goal/README.md`。
 
 ```bash
 npm run dev
 ```
 
 打开 http://localhost:4321/next/ 查看。
-在没有明确上线决定前，不要把这套页面同步到生产环境。
+打开 http://localhost:4321/goal/ 查看融合候选。
+在没有明确上线决定前，不要把这两套页面同步到生产环境。

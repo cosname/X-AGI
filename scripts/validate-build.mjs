@@ -6,6 +6,7 @@ import { conference2026 } from '../src/data/conference2026.ts';
 import {
   currentEdition,
   editionPath,
+  goalDesignEdition,
   nextDesignEdition,
   site,
 } from '../src/config/site.ts';
@@ -237,6 +238,14 @@ const buildGroups = [
     enforcePayloadBudget: true,
     requireDomHomepage: true,
   },
+  {
+    label: 'goal design',
+    edition: goalDesignEdition,
+    // This preview intentionally inherits the published template's asset graph.
+    enforcePayloadBudget: false,
+    requireDomHomepage: true,
+    allowHeroContentAssets: true,
+  },
 ];
 
 for (const group of buildGroups) {
@@ -267,6 +276,19 @@ for (const group of buildGroups) {
     if (group.edition.skin === 'legacy-2025' && !source.includes('edition-legacy-2025')) {
       failures.push(`${route}: current edition must use the legacy 2025 skin`);
     }
+    if (
+      group.edition.skin === 'legacy-2025'
+      && (
+        source.includes('edition-goal-2026')
+        || source.includes('data-hero-pixel-field')
+        || source.includes('data-masthead-pixel-field')
+      )
+    ) {
+      failures.push(`${route}: current edition must not load goal preview artwork`);
+    }
+    if (group.edition.skin === 'goal' && !source.includes('edition-goal-2026')) {
+      failures.push(`${route}: goal preview must use the hybrid 2026 skin`);
+    }
 
     if (isDomPixelHomepage) {
       const compressedBytes = gzipSync(source).byteLength;
@@ -274,7 +296,9 @@ for (const group of buildGroups) {
         failures.push(`${route}: compressed HTML exceeds 75 KB DOM-art budget`);
       }
 
-      const hero = source.match(/<section class="conference-hero"[\s\S]*?<\/section>/)?.[0] ?? '';
+      const hero = group.edition.skin === 'goal'
+        ? source.match(/<header class="hero-section hero-section--goal"[\s\S]*?<\/header>/)?.[0] ?? ''
+        : source.match(/<section class="conference-hero"[\s\S]*?<\/section>/)?.[0] ?? '';
       const expectedPixels = Number(hero.match(/data-pixel-count="(\d+)"/)?.[1] ?? 0);
       const renderedPixels = [...hero.matchAll(/class="hp\s/g)].length;
       const terrainLayers = [...hero.matchAll(/\sdata-layer=/g)].length;
@@ -292,7 +316,10 @@ for (const group of buildGroups) {
       if (terrainEchoes !== 11) {
         failures.push(`${route}: expected 11 probability echoes, found ${terrainEchoes}`);
       }
-      if (/<(?:canvas|img|picture|svg)\b/i.test(hero) || source.includes('hero-reference-trees')) {
+      if (
+        !group.allowHeroContentAssets
+        && (/<(?:canvas|img|picture|svg)\b/i.test(hero) || source.includes('hero-reference-trees'))
+      ) {
         failures.push(`${route}: homepage hero contains a raster, Canvas, or SVG dependency`);
       }
       if (await homepageHeroCssUsesImage(file, source, hero)) {
@@ -390,13 +417,15 @@ const officialCopyByRoute = new Map([
   ],
 ]);
 
-for (const [route, expectedCopy] of officialCopyByRoute) {
-  const file = path.join(root, route);
-  const text = visibleText(await readFile(file, 'utf8'));
+for (const [officialRoute, expectedCopy] of officialCopyByRoute) {
+  for (const route of [officialRoute, `goal/${officialRoute}`]) {
+    const file = path.join(root, route);
+    const text = visibleText(await readFile(file, 'utf8'));
 
-  for (const expected of expectedCopy) {
-    if (!text.includes(expected)) {
-      failures.push(`${route}: missing official copy "${expected}"`);
+    for (const expected of expectedCopy) {
+      if (!text.includes(expected)) {
+        failures.push(`${route}: missing official copy "${expected}"`);
+      }
     }
   }
 }
@@ -431,6 +460,16 @@ function validatePartnerOrder(route, text, labels) {
 }
 
 validatePartnerOrder('index.html', rootText, homepagePartnerLabels);
+
+const goalIndex = await readFile(path.join(root, 'goal/index.html'), 'utf8');
+const goalText = visibleText(goalIndex);
+if (!goalIndex.includes('<meta name="robots" content="noindex, nofollow">')) {
+  failures.push('goal/index.html: preview must be noindex');
+}
+if (goalText.includes('发起方：')) {
+  failures.push('goal/index.html: homepage partner list must not repeat the initiator section');
+}
+validatePartnerOrder('goal/index.html', goalText, homepagePartnerLabels);
 
 const nextIndex = await readFile(path.join(root, 'next/index.html'), 'utf8');
 const nextPartnerStart = nextIndex.indexOf('class="conference-partners conference-partners--logos"');
@@ -491,6 +530,9 @@ const robots = await readFile(path.join(root, 'robots.txt'), 'utf8');
 if (!robots.includes('Disallow: /next/')) {
   failures.push('robots.txt: parked next design must be disallowed');
 }
+if (!robots.includes('Disallow: /goal/')) {
+  failures.push('robots.txt: goal preview must be disallowed');
+}
 
 const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
 for (const route of ['/', '/about/', '/schedule/', '/poster/', '/guide/', '/register/', '/2025/']) {
@@ -499,9 +541,19 @@ for (const route of ['/', '/about/', '/schedule/', '/poster/', '/guide/', '/regi
     failures.push(`sitemap.xml: missing official URL "${expectedUrl}"`);
   }
 }
-for (const unpublishedPath of ['/next/', '/2026/']) {
+for (const unpublishedPath of ['/next/', '/goal/', '/2026/']) {
   if (sitemap.includes(new URL(unpublishedPath, site.origin).href)) {
     failures.push(`sitemap.xml: must not publish compatibility or preview path "${unpublishedPath}"`);
+  }
+}
+
+const syncScript = await readFile(path.resolve('scripts/sync-oss.mjs'), 'utf8');
+for (const previewDirectory of ['next', 'goal']) {
+  if (
+    !syncScript.includes(`'${previewDirectory}/**'`)
+    || !syncScript.includes(`'${previewDirectory}/*'`)
+  ) {
+    failures.push(`sync-oss.mjs: production sync must exclude "${previewDirectory}/"`);
   }
 }
 

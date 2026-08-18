@@ -5,12 +5,14 @@ interface Props {
   edition: EditionConfig;
   title: string;
   status?: string;
+  visual?: 'legacy' | 'goal';
 }
 
-const { edition, title, status } = Astro.props;
+const { edition, title, status, visual = 'legacy' } = Astro.props;
 ---
 
-<header class="page-header">
+<header class:list={['page-header', visual === 'goal' && 'page-header--goal']}>
+  {visual === 'goal' && <slot name="art" />}
   <div class="container custom-container header-content">
     <div>
       <h1>{edition.titleZh}</h1>

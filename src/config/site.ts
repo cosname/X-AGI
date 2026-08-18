@@ -5,7 +5,7 @@ export interface EditionConfig {
   status: EditionStatus;
   path: '' | `/${string}`;
   routeStyle: 'html' | 'directory';
-  skin?: 'legacy-2025' | 'next';
+  skin?: 'legacy-2025' | 'next' | 'goal';
   title: string;
   titleZh: string;
   description: string;
@@ -57,6 +57,13 @@ export const nextDesignEdition: EditionConfig = {
   ...editions['2026'],
   path: '/next',
   skin: 'next',
+};
+
+/** Hybrid preview: current content and layout with the 2026 tree / connection skin. */
+export const goalDesignEdition: EditionConfig = {
+  ...editions['2026'],
+  path: '/goal',
+  skin: 'goal',
 };
 
 export function editionPath(edition: EditionConfig, page = ''): string {

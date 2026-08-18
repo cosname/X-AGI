@@ -1,0 +1,111 @@
+---
+import type { EditionPage } from '../config/navigation';
+import { editionNavigation } from '../config/navigation';
+import { currentEditionActionPaths } from '../config/edition-status';
+import { editionPath, type EditionConfig } from '../config/site';
+import '../styles/legacy-2025.css';
+import '../styles/goal-2026.css';
+
+interface Props {
+  edition: EditionConfig;
+  activePage?: EditionPage;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  home?: boolean;
+}
+
+const {
+  edition,
+  activePage = '',
+  title,
+  description,
+  canonicalPath,
+  home = false,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, Astro.site);
+const navigation = editionNavigation(edition);
+const actions = currentEditionActionPaths(edition);
+const homeHref = editionPath(edition);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="X-AGI Conference" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#fdf8f1" />
+    <link rel="icon" type="image/png" href="/2026/brand/favicon.png" />
+    <link rel="apple-touch-icon" href="/2026/brand/mark.png" />
+    <link rel="mask-icon" href="/2026/brand/mark.svg" color="#6752c8" />
+    <link href="/2025/assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/2025/assets/css/style.css?v=20251012" />
+  </head>
+  <body class:list={['edition-legacy-2025', 'edition-goal-2026', home && 'goal-home']}>
+    <nav class="navbar navbar-expand-lg fixed-top" aria-label="主导航">
+      <div class="container custom-container">
+        <a class="navbar-brand" href={homeHref}>
+          <img src="/2026/brand/wordmark.svg" alt="X-AGI" class="logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="展开导航"
+        >
+          <span class="hamburger" aria-hidden="true">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            {navigation.map((item) => (
+              <li class="nav-item">
+                <a
+                  class:list={['nav-link', { active: activePage === item.page }]}
+                  href={editionPath(edition, item.page)}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li class="nav-item d-lg-none mt-3">
+              <a href={actions.register} class="btn btn-register w-100">立即报名</a>
+            </li>
+          </ul>
+          <a href={actions.register} class="btn btn-register d-none d-lg-flex">立即报名</a>
+        </div>
+      </div>
+    </nav>
+
+    <slot />
+
+    {!home && (
+      <footer class="site-footer">
+        <div class="container custom-container">
+          <p>版权所有 {edition.titleZh}</p>
+          <p>联系方式: {edition.contact}</p>
+        </div>
+      </footer>
+    )}
+
+    <script is:inline src="/2025/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script is:inline src="/2025/assets/js/script.js"></script>
+  </body>
+</html>

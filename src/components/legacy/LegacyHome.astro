@@ -2,14 +2,19 @@
 import { currentEditionActionPaths } from '../../config/edition-status';
 import type { EditionConfig } from '../../config/site';
 import { conference2026 } from '../../data/conference2026';
-import { partnerCompactLogoByName } from '../../data/legacy-partner-assets';
+import {
+  partnerCompactLogoByName,
+  partnerLogoByName,
+} from '../../data/legacy-partner-assets';
 
 interface Props {
   edition: EditionConfig;
+  visual?: 'legacy' | 'goal';
 }
 
-const { edition } = Astro.props;
+const { edition, visual = 'legacy' } = Astro.props;
 const actions = currentEditionActionPaths(edition);
+const partnerLogos = visual === 'goal' ? partnerLogoByName : partnerCompactLogoByName;
 
 const partnerRows = [
   { label: '主办单位：', organizations: conference2026.organizers },
@@ -18,7 +23,9 @@ const partnerRows = [
 ].filter((row) => row.organizations.length > 0);
 ---
 
-<header class="hero-section">
+<header class:list={['hero-section', visual === 'goal' && 'hero-section--goal']}>
+  {visual === 'goal' && <slot name="art" />}
+
   <div class="hero-horizontal">
     <div class="container custom-container">
       <div class="hero-main-content">
@@ -50,7 +57,7 @@ const partnerRows = [
             <span class="organizer-label">{row.label}</span>
             <div class="organizer-logos">
               {row.organizations.map((organization) => {
-                const logo = partnerCompactLogoByName[organization.name];
+                const logo = partnerLogos[organization.name];
                 return logo ? (
                   <img
                     src={logo.src}
@@ -89,7 +96,7 @@ const partnerRows = [
           <span class="organizer-label">{row.label}</span>
           <div class="organizer-logos">
             {row.organizations.map((organization) => {
-              const logo = partnerCompactLogoByName[organization.name];
+              const logo = partnerLogos[organization.name];
               return logo ? (
                 <img
                   src={logo.src}

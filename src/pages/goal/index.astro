@@ -1,0 +1,20 @@
+---
+import Goal2026Layout from '../../layouts/Goal2026Layout.astro';
+import LegacyHome from '../../components/legacy/LegacyHome.astro';
+import HeroPixelField from '../../components/HeroPixelField.astro';
+import { editionPath, goalDesignEdition } from '../../config/site';
+---
+
+<Goal2026Layout
+  edition={goalDesignEdition}
+  title={`${goalDesignEdition.title} - Goal Preview`}
+  description={goalDesignEdition.description}
+  canonicalPath={editionPath(goalDesignEdition)}
+  home
+>
+  <LegacyHome edition={goalDesignEdition} visual="goal">
+    <div slot="art" class="goal-hero-art">
+      <HeroPixelField />
+    </div>
+  </LegacyHome>
+</Goal2026Layout>
