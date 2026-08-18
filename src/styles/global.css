@@ -148,7 +148,7 @@
 .edition-2026 .site-brand__year {
   color: var(--ink);
   font-family: var(--font-condensed);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   letter-spacing: 0.16em;
 }
 
@@ -156,7 +156,7 @@
   border: 0;
   color: var(--muted);
   font-family: var(--font-condensed);
-  font-size: 0.76rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.04em;
 }
@@ -177,7 +177,7 @@
 
   .edition-2026 .site-nav a {
     min-height: 2.4rem;
-    font-size: 0.72rem;
+    font-size: 0.95rem;
   }
 
   .edition-2026 .site-header__action {
@@ -333,6 +333,11 @@
   padding: 0.62rem 1.2rem;
 }
 
+.edition-2026 .site-header[data-nav-mode='compact'] .site-navigation__toggle,
+.edition-2026 .site-header[data-nav-mode='compact'] .site-nav a {
+  font-size: 1rem;
+}
+
 .edition-2026 .site-header[data-nav-mode='compact'] .site-navigation[data-open] .site-navigation__toggle {
   border-color: var(--blue);
   color: #fff;
@@ -456,8 +461,8 @@
 }
 
 .edition-2026 .site-header__action {
-  padding: 0.55rem 1.15rem;
-  font-size: 0.78rem;
+  padding: 0.65rem 1.35rem;
+  font-size: 1rem;
 }
 
 .edition-2026 .conference-kicker {
@@ -1024,6 +1029,7 @@
 }
 
 .edition-goal-home {
+  --goal-tree-offset-y: calc(var(--site-header-height) - 0.5rem);
   display: block;
   height: 100svh;
   min-height: 0;
@@ -1089,7 +1095,7 @@
 
 .hero-pixel-field__tree-position {
   position: absolute;
-  top: 0;
+  top: var(--goal-tree-offset-y, 0);
   height: 100%;
   contain: layout style;
 }
@@ -1250,7 +1256,7 @@
   }
 
   .hero-pixel-field__tree-position {
-    top: 0.5%;
+    top: var(--goal-tree-offset-y, 0.5%);
     width: 104%;
     height: auto;
   }
@@ -1298,7 +1304,7 @@
   }
 
   .hero-pixel-field__tree-position {
-    top: 2.25%;
+    top: var(--goal-tree-offset-y, 2.25%);
     width: 108%;
   }
 
