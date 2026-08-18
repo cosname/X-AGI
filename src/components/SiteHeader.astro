@@ -16,7 +16,7 @@ const { edition, activePage = '', behavior = 'surface' } = Astro.props;
 const navigation = editionNavigation(edition);
 const actions = currentEditionActionPaths(edition);
 const scrollHeader = behavior === 'overlay-scroll';
-const liquidGlass = edition.skin === 'goal';
+const capsuleNavigation = edition.skin === 'goal';
 ---
 
 <header
@@ -25,7 +25,7 @@ const liquidGlass = edition.skin === 'goal';
   data-scroll-header={scrollHeader ? 'true' : undefined}
   data-scroll-state={scrollHeader ? 'top' : undefined}
   data-scroll-threshold={scrollHeader ? '50' : undefined}
-  data-liquid-glass-nav={liquidGlass ? 'true' : undefined}
+  data-nav-capsule={capsuleNavigation ? 'true' : undefined}
 >
   <a class="skip-link" href="#main-content">跳到主要内容</a>
   <div class="site-header__inner">
@@ -51,7 +51,6 @@ const liquidGlass = edition.skin === 'goal';
         菜单
       </button>
       <div class="site-navigation__panel" id="conference-navigation">
-        {liquidGlass && <i class="site-navigation__liquid-glass" data-nav-liquid-glass aria-hidden="true"></i>}
         <div class="site-navigation__atmosphere" aria-hidden="true">
           {
             (
@@ -78,7 +77,7 @@ const liquidGlass = edition.skin === 'goal';
                 <a
                   href={editionPath(edition, item.page)}
                   aria-current={activePage === item.page ? 'page' : undefined}
-                  data-nav-liquid-target={liquidGlass ? '' : undefined}
+                  data-nav-capsule-target={capsuleNavigation ? '' : undefined}
                 >
                   {item.label}
                 </a>
@@ -113,8 +112,6 @@ const liquidGlass = edition.skin === 'goal';
 {scrollHeader && <HeaderScrollState />}
 
 <script>
-  import { initializeLiquidGlassNavigation } from '../scripts/liquid-glass';
-
   const header = document.querySelector<HTMLElement>('.site-header');
   const navigation = header?.querySelector<HTMLElement>('.site-navigation');
   const toggle = navigation?.querySelector<HTMLButtonElement>('.site-navigation__toggle');
@@ -210,5 +207,4 @@ const liquidGlass = edition.skin === 'goal';
   document.fonts?.ready.then(syncNavMode).catch(() => undefined);
   window.addEventListener('pagehide', () => closeNavigation());
   syncNavMode();
-  initializeLiquidGlassNavigation();
 </script>

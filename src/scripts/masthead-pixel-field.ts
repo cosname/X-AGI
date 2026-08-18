@@ -8,10 +8,6 @@ import {
   terrainComponentsForState,
   type DensityComponent,
 } from './hero-pixel-field.ts';
-import {
-  liquidGlassGeometry,
-  liquidGlassSpring,
-} from './liquid-glass.ts';
 
 const CELL = 5;
 const SQUARE = 4;
@@ -78,60 +74,6 @@ const densityTop = (
   return clamp(baseline - density, -0.12, 1.08) * height;
 };
 
-const traceLiquidGlassPath = (
-  context: CanvasRenderingContext2D,
-  centerX: number,
-  centerY: number,
-  radiusX: number,
-  radiusY: number,
-  tilt: number,
-  scale = 1,
-) => {
-  const cosine = Math.cos(tilt);
-  const sine = Math.sin(tilt);
-  const point = (x: number, y: number) => ({
-    x: centerX + (x * radiusX * cosine - y * radiusY * sine) * scale,
-    y: centerY + (x * radiusX * sine + y * radiusY * cosine) * scale,
-  });
-  const top = point(0, -1);
-  context.beginPath();
-  context.moveTo(top.x, top.y);
-
-  const topRightA = point(0.62, -0.98);
-  const topRightB = point(1.04, -0.52);
-  const right = point(1, 0.06);
-  context.bezierCurveTo(topRightA.x, topRightA.y, topRightB.x, topRightB.y, right.x, right.y);
-
-  const bottomRightA = point(0.98, 0.62);
-  const bottomRightB = point(0.48, 1.04);
-  const bottom = point(-0.08, 1);
-  context.bezierCurveTo(
-    bottomRightA.x,
-    bottomRightA.y,
-    bottomRightB.x,
-    bottomRightB.y,
-    bottom.x,
-    bottom.y,
-  );
-
-  const bottomLeftA = point(-0.68, 0.96);
-  const bottomLeftB = point(-1.04, 0.52);
-  const left = point(-0.98, -0.05);
-  context.bezierCurveTo(
-    bottomLeftA.x,
-    bottomLeftA.y,
-    bottomLeftB.x,
-    bottomLeftB.y,
-    left.x,
-    left.y,
-  );
-
-  const topLeftA = point(-0.92, -0.58);
-  const topLeftB = point(-0.52, -1.02);
-  context.bezierCurveTo(topLeftA.x, topLeftA.y, topLeftB.x, topLeftB.y, top.x, top.y);
-  context.closePath();
-};
-
 export const mastheadParticleCount = (width: number) => (width < 720 ? 148 : 228);
 
 export const isMastheadTextSafeZone = (
@@ -192,17 +134,11 @@ export const initializeMastheadPixelFields = () => {
     field.dataset.initialized = 'true';
 
     const stage = field.closest<HTMLElement>('[data-connection-stage]') ?? field;
-    const liquidGlassEnabled = field.hasAttribute('data-liquid-glass-field');
+    const rippleOnly = field.dataset.pointerEffect === 'ripple';
     const abortController = new AbortController();
     const { signal } = abortController;
     const terrainLayer = document.createElement('canvas');
     const terrainContext = terrainLayer.getContext('2d');
-    const sceneLayer = document.createElement('canvas');
-    const sceneContext = sceneLayer.getContext('2d', { alpha: true });
-    if (!sceneContext) {
-      field.dataset.initialized = 'false';
-      return;
-    }
     const patternLayer = document.createElement('canvas');
     patternLayer.width = CELL;
     patternLayer.height = CELL;
@@ -213,9 +149,6 @@ export const initializeMastheadPixelFields = () => {
     let pixelRatio = 1;
     let particles: Particle[] = [];
     let pointer: Point = { x: 0, y: 0 };
-    let lensX = { value: 0, velocity: 0 };
-    let lensY = { value: 0, velocity: 0 };
-    let lensTimestamp = 0;
     let fieldOrigin: Point = { x: 0, y: 0 };
     let mean = BASE_POSTERIOR_MEAN;
     let amplitude = BASE_POSTERIOR_AMPLITUDE;
@@ -280,9 +213,9 @@ export const initializeMastheadPixelFields = () => {
 
     const drawParticles = (targetContext: CanvasRenderingContext2D, timestamp: number) => {
       const radius = clamp(width * 0.11, 78, 148);
-      const legacyInteraction = !liquidGlassEnabled && active && motionEnabled();
+      const interacting = active && motionEnabled();
 
-      if (legacyInteraction) {
+      if (interacting && !rippleOnly) {
         const glow = targetContext.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, radius);
         glow.addColorStop(0, 'rgba(255, 252, 247, 0.3)');
         glow.addColorStop(0.42, 'rgba(235, 142, 58, 0.1)');
@@ -300,7 +233,7 @@ export const initializeMastheadPixelFields = () => {
         let [red, green, blue] = particle.color;
         let alpha = particle.alpha;
 
-        if (legacyInteraction) {
+        if (interacting) {
           const deltaX = particle.x - pointer.x;
           const deltaY = particle.y - pointer.y;
           const distance = Math.hypot(deltaX, deltaY);
@@ -309,14 +242,20 @@ export const initializeMastheadPixelFields = () => {
             if (sample.proximity > 0.01) {
               const directionX = distance > 1 ? deltaX / distance : 0;
               const directionY = distance > 1 ? deltaY / distance : -0.25;
-              drawX += directionX * sample.lift * 3.2;
-              drawY += directionY * sample.lift * 3.2;
-              size = Math.max(1, particle.size * (1 + (sample.scale - 1) * 1.8));
-              const wash = sample.proximity * 0.78;
-              red = Math.round(red + (253 - red) * wash);
-              green = Math.round(green + (248 - green) * wash);
-              blue = Math.round(blue + (241 - blue) * wash);
-              alpha = clamp(particle.alpha + sample.proximity * 0.38, 0, 1);
+              const movement = rippleOnly ? 2.35 : 3.2;
+              const scaleStrength = rippleOnly ? 1.35 : 1.8;
+              drawX += directionX * sample.lift * movement;
+              drawY += directionY * sample.lift * movement;
+              size = Math.max(1, particle.size * (1 + (sample.scale - 1) * scaleStrength));
+              if (rippleOnly) {
+                alpha = clamp(particle.alpha + sample.proximity * 0.16, 0, 1);
+              } else {
+                const wash = sample.proximity * 0.78;
+                red = Math.round(red + (253 - red) * wash);
+                green = Math.round(green + (248 - green) * wash);
+                blue = Math.round(blue + (241 - blue) * wash);
+                alpha = clamp(particle.alpha + sample.proximity * 0.38, 0, 1);
+              }
             }
           }
         }
@@ -326,112 +265,14 @@ export const initializeMastheadPixelFields = () => {
       });
     };
 
-    const drawLiquidGlass = () => {
-      if (!liquidGlassEnabled || !active || !motionEnabled()) {
-        field.dataset.liquidGlass = liquidGlassEnabled ? 'idle' : 'disabled';
-        return;
-      }
-
-      const geometry = liquidGlassGeometry(width);
-      const speed = Math.hypot(lensX.velocity, lensY.velocity);
-      const stretch = 1 + clamp(speed / 7600, 0, 0.035);
-      const radiusX = geometry.radiusX * stretch;
-      const radiusY = geometry.radiusY / Math.sqrt(stretch);
-      const tilt = clamp(lensX.velocity / 1700, -0.09, 0.09);
-      const centerX = lensX.value;
-      const centerY = lensY.value;
-      const sourceWidth = (radiusX * 2 / geometry.magnification) * pixelRatio;
-      const sourceHeight = (radiusY * 2 / geometry.magnification) * pixelRatio;
-      const sourceCenterX = (centerX - lensX.velocity * 0.0012) * pixelRatio;
-      const sourceCenterY = (centerY - lensY.velocity * 0.0012) * pixelRatio;
-
-      context.save();
-      traceLiquidGlassPath(context, centerX, centerY, radiusX, radiusY, tilt);
-      context.clip();
-      context.drawImage(
-        sceneLayer,
-        sourceCenterX - sourceWidth / 2,
-        sourceCenterY - sourceHeight / 2,
-        sourceWidth,
-        sourceHeight,
-        centerX - radiusX,
-        centerY - radiusY,
-        radiusX * 2,
-        radiusY * 2,
-      );
-      const innerLight = context.createRadialGradient(
-        centerX - radiusX * 0.38,
-        centerY - radiusY * 0.42,
-        0,
-        centerX,
-        centerY,
-        radiusY * 1.08,
-      );
-      innerLight.addColorStop(0, 'rgba(255, 255, 255, 0.28)');
-      innerLight.addColorStop(0.34, 'rgba(255, 255, 255, 0.025)');
-      innerLight.addColorStop(0.74, 'rgba(103, 82, 200, 0.055)');
-      innerLight.addColorStop(1, 'rgba(74, 182, 193, 0.1)');
-      context.fillStyle = innerLight;
-      context.fillRect(centerX - radiusX, centerY - radiusY, radiusX * 2, radiusY * 2);
-      context.restore();
-
-      context.save();
-      context.shadowColor = 'rgba(77, 57, 177, 0.24)';
-      context.shadowBlur = 13;
-      context.shadowOffsetX = 3;
-      context.shadowOffsetY = 5;
-      const rim = context.createLinearGradient(
-        centerX - radiusX,
-        centerY - radiusY,
-        centerX + radiusX,
-        centerY + radiusY,
-      );
-      rim.addColorStop(0, 'rgba(103, 82, 200, 0.66)');
-      rim.addColorStop(0.24, 'rgba(255, 255, 255, 0.92)');
-      rim.addColorStop(0.55, 'rgba(77, 189, 197, 0.55)');
-      rim.addColorStop(0.78, 'rgba(255, 255, 255, 0.76)');
-      rim.addColorStop(1, 'rgba(103, 82, 200, 0.72)');
-      context.strokeStyle = rim;
-      context.lineWidth = 1.4;
-      traceLiquidGlassPath(context, centerX, centerY, radiusX, radiusY, tilt, 0.995);
-      context.stroke();
-      context.restore();
-
-      context.save();
-      context.strokeStyle = 'rgba(255, 255, 255, 0.72)';
-      context.lineWidth = 0.85;
-      traceLiquidGlassPath(context, centerX, centerY, radiusX, radiusY, tilt, 0.94);
-      context.stroke();
-      context.restore();
-      field.dataset.liquidGlass = 'active';
-    };
-
     const draw = (timestamp: number) => {
       paintTerrain();
-      sceneContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      sceneContext.clearRect(0, 0, width, height);
-      sceneContext.drawImage(terrainLayer, 0, 0, width, height);
-      drawParticles(sceneContext, timestamp);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       context.clearRect(0, 0, width, height);
-      context.drawImage(sceneLayer, 0, 0, width, height);
-      let lensMoving = false;
-      if (liquidGlassEnabled && active && motionEnabled()) {
-        const delta = lensTimestamp ? (timestamp - lensTimestamp) / 1000 : 1 / 60;
-        lensTimestamp = timestamp;
-        lensX = liquidGlassSpring(lensX, pointer.x, delta, 205, 21);
-        lensY = liquidGlassSpring(lensY, pointer.y, delta, 205, 21);
-        lensMoving = (
-          Math.abs(lensX.value - pointer.x) >= 0.12
-          || Math.abs(lensY.value - pointer.y) >= 0.12
-          || Math.abs(lensX.velocity) >= 0.6
-          || Math.abs(lensY.velocity) >= 0.6
-        );
-      }
-      drawLiquidGlass();
+      context.drawImage(terrainLayer, 0, 0, width, height);
+      drawParticles(context, timestamp);
       field.dataset.ready = 'true';
       field.dataset.animated = motionEnabled() ? 'true' : 'false';
-      return lensMoving;
     };
 
     const commit = (nextMean: number, nextAmplitude: number) => {
@@ -469,10 +310,8 @@ export const initializeMastheadPixelFields = () => {
         );
         pointerDirty = false;
       }
-      const lensMoving = draw(timestamp);
-      if (!liquidGlassEnabled || lensMoving) {
-        pointerFrame = window.requestAnimationFrame(pointerTick);
-      }
+      draw(timestamp);
+      pointerFrame = window.requestAnimationFrame(pointerTick);
     };
 
     const springTick = (timestamp: number) => {
@@ -518,8 +357,6 @@ export const initializeMastheadPixelFields = () => {
       pointerDirty = false;
       stopPointerFrame();
       field.dataset.interaction = 'idle';
-      field.dataset.liquidGlass = liquidGlassEnabled ? 'idle' : 'disabled';
-      lensTimestamp = 0;
       draw(performance.now());
       startSpring();
     };
@@ -535,8 +372,6 @@ export const initializeMastheadPixelFields = () => {
       canvas.height = Math.round(height * pixelRatio);
       terrainLayer.width = canvas.width;
       terrainLayer.height = canvas.height;
-      sceneLayer.width = canvas.width;
-      sceneLayer.height = canvas.height;
       if (!active) amplitude = baseAmplitude();
       particles = seedMastheadParticles(width, height, 2026 + fieldIndex);
       lastTerrainKey = '';
@@ -560,11 +395,6 @@ export const initializeMastheadPixelFields = () => {
         x: clamp(latest.clientX - fieldOrigin.x, 0, width),
         y: clamp(latest.clientY - fieldOrigin.y, 0, height),
       };
-      if (!active) {
-        lensX = { value: pointer.x, velocity: 0 };
-        lensY = { value: pointer.y, velocity: 0 };
-        lensTimestamp = 0;
-      }
       stopSpring();
       active = true;
       pointerDirty = true;
@@ -626,7 +456,6 @@ export const initializeMastheadPixelFields = () => {
 
     field.dataset.renderMode = 'canvas';
     field.dataset.interaction = 'idle';
-    field.dataset.liquidGlass = liquidGlassEnabled ? 'idle' : 'disabled';
     scheduleResize();
   });
 };

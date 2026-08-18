@@ -18,7 +18,7 @@ const actions = currentEditionActionPaths(edition);
 <div class:list={['conference-home', heroOnly && 'conference-home--hero-only']}>
   <section class="conference-hero" aria-labelledby="conference-title" data-connection-stage>
     <div class="conference-hero__art" aria-hidden="true">
-      <HeroPixelField liquidGlass={edition.skin === 'goal'} />
+      <HeroPixelField interactionMode={edition.skin === 'goal' ? 'wide' : 'direct'} />
     </div>
 
     <div class="conference-hero__inner">

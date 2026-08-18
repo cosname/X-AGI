@@ -271,6 +271,9 @@ for (const group of buildGroups) {
     if (page === '' && group.requireDomHomepage && !isDomPixelHomepage) {
       failures.push(`${route}: ${group.label} homepage must render the DOM pixel field`);
     }
+    if (source.includes('liquid-glass') || source.includes('data-liquid-glass')) {
+      failures.push(`${route}: retired liquid-glass interaction leaked into the build`);
+    }
     if (group.edition.skin === 'legacy-2025' && !source.includes('edition-legacy-2025')) {
       failures.push(`${route}: current edition must use the legacy 2025 skin`);
     }
@@ -322,8 +325,8 @@ for (const group of buildGroups) {
       && (
         !source.includes('class="site-header"')
         || !source.includes('/brand/xagi-connect-logo.png')
-        || !source.includes('data-liquid-glass-nav="true"')
-        || !source.includes('data-nav-liquid-glass')
+        || !source.includes('data-nav-capsule="true"')
+        || !source.includes('data-nav-capsule-target')
         || source.includes('class="navbar ')
         || source.includes('/2025/assets/js/script.js')
       )
@@ -334,9 +337,9 @@ for (const group of buildGroups) {
       group.edition.skin !== 'goal'
       && (
         source.includes('data-scroll-header="true"')
-        || source.includes('data-liquid-glass-nav="true"')
-        || source.includes('data-nav-liquid-glass')
-        || source.includes('data-liquid-glass-field')
+        || source.includes('data-nav-capsule="true"')
+        || source.includes('data-nav-capsule-target')
+        || source.includes('data-pointer-effect="ripple"')
       )
     ) {
       failures.push(`${route}: goal header interaction leaked outside the goal design`);
@@ -357,11 +360,11 @@ for (const group of buildGroups) {
       if (!hero.includes('data-render-mode="dom"')) {
         failures.push(`${route}: homepage hero is not marked as DOM-rendered`);
       }
-      if (group.edition.skin === 'goal' && !hero.includes('data-hero-liquid-glass')) {
-        failures.push(`${route}: goal homepage must expose the liquid glass tree lens`);
+      if (group.edition.skin === 'goal' && !hero.includes('data-tree-interaction="wide"')) {
+        failures.push(`${route}: goal homepage must expose the wide tree proximity field`);
       }
-      if (group.edition.skin !== 'goal' && hero.includes('data-hero-liquid-glass')) {
-        failures.push(`${route}: liquid glass tree lens leaked outside the goal design`);
+      if (group.edition.skin !== 'goal' && !hero.includes('data-tree-interaction="direct"')) {
+        failures.push(`${route}: non-goal homepage must preserve direct tree interaction`);
       }
       if (expectedPixels <= 0 || expectedPixels > 4_000 || renderedPixels !== expectedPixels) {
         failures.push(`${route}: invalid DOM pixel count (${renderedPixels}/${expectedPixels})`);
@@ -524,8 +527,8 @@ if (!goalIndex.includes('<meta name="robots" content="noindex, nofollow">')) {
 for (const page of ['about', 'schedule', 'poster', 'guide', 'register']) {
   const route = `goal/${page}/index.html`;
   const source = await readFile(path.join(root, route), 'utf8');
-  if (!source.includes('data-liquid-glass-field')) {
-    failures.push(`${route}: goal masthead must expose the liquid glass field`);
+  if (!source.includes('data-pointer-effect="ripple"')) {
+    failures.push(`${route}: goal masthead must expose the ripple-only pointer field`);
   }
 }
 if (!goalIndex.includes('conference-home--hero-only')) {

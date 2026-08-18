@@ -91,3 +91,72 @@ Previous result: passed.
 页面运行日志没有出现错误，构建校验、类型检查与单元测试全部通过。
 
 final result: passed
+
+## Capsule Navigation And Wide Tree Response
+
+### Comparison target
+
+- Source visual truth: `output/playwright/capsule-tree-baseline.png`, where the two “立即报名” actions establish the existing light 3D capsule language.
+- Rendered implementation: `output/playwright/capsule-nav-hover-final.png` for the navigation capsule and `output/playwright/capsule-tree-home-wide-response.png` for the enlarged tree response field.
+- Inner-page implementation: `output/playwright/capsule-about-ripple-active.png`.
+- Mobile implementation: `output/playwright/capsule-mobile-menu.png`.
+- Full-view comparison: `output/playwright/capsule-design-qa-full.png`.
+- Focused header comparison: `output/playwright/capsule-design-qa-header.png`.
+- Browser CSS viewport: 1280 x 720 with device pixel ratio 2 for the desktop comparison, and 390 x 844 for the compact navigation check.
+- Source and implementation screenshot pixels: 1280 x 720 because the browser capture normalizes both device-density images to CSS pixels.
+- Density normalization: source and implementation have identical screenshot dimensions and browser density, so no resampling was required.
+- State: the page is at the top with the transparent header, first idle and then with the pointer hovering over “会议简介”.
+
+### Findings
+
+No actionable P0, P1, or P2 visual or interaction differences remain for the requested capsule and tree changes.
+
+- Fonts and typography: navigation size, weight, spacing, hero typography, and all content copy remain unchanged.
+- Spacing and layout rhythm: the capsule expands inside the existing navigation rhythm without shifting neighboring labels or competing with the registration action.
+- Colors and visual tokens: the navigation capsule reuses the same paper-to-lavender fill, purple outline, inset highlight, and restrained shadow as the existing “立即报名” actions.
+- Image quality and asset fidelity: the DOM-rendered mosaic trees and canvas particle field remain unchanged assets, with no replacement illustration or synthetic overlay.
+- Copy and content: all routes, labels, dates, locations, and calls to action remain unchanged.
+- Interaction: all pointer-following glass layers are removed, normal pointer placement over the central title now activates 61 tree scale pixels, and the inner page keeps only a color-preserving particle ripple.
+- Responsiveness: the 390 x 844 compact menu retains its original layout, full-width interaction rows, clear registration action, and zero horizontal overflow.
+- Accessibility: keyboard focus uses one clear purple outline around the capsule, reduced-motion behavior remains intact, and coarse-pointer layouts do not receive desktop hover transforms.
+- Cross-preview isolation: `/goal/` uses the wide tree mode and capsule navigation, while `/next/` preserves direct tree interaction and does not receive the capsule treatment.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P1 the pointer-following liquid lens was visually dominant across the navigation, homepage, and inner pages.
+- Earlier evidence: `output/playwright/liquid-glass-final-natural.png` and `output/playwright/liquid-glass-implementation-about.png`.
+- Fix: all liquid lens markup, styles, spring logic, and canvas refraction were removed, with no liquid nodes remaining in the rendered goal pages.
+- Post-fix evidence: `output/playwright/capsule-tree-home-wide-response.png` and `output/playwright/capsule-about-ripple-active.png`.
+
+#### Iteration 2
+
+- Earlier finding: P1 clicking the central conference title produced zero active tree pixels because the pointer was outside the original direct-response radius.
+- Earlier evidence: the browser contract reported `data-active-scale-pixels="0"` while the title occupied the normal central browsing area.
+- Fix: the goal preview now uses a 180 to 380 pixel ripple radius with a larger branch eligibility field, while the parked next preview retains the original 68 to 118 pixel direct radius.
+- Post-fix evidence: the same central-title interaction reports 61 active scale pixels in `wide` mode.
+
+#### Iteration 3
+
+- Earlier finding: P2 the first keyboard state combined the new capsule with the shared double focus treatment and looked heavier than the registration action.
+- Earlier evidence: `output/playwright/capsule-nav-focus-first.png`.
+- Fix: the goal navigation capsule now uses one restrained purple focus outline while retaining the shared 3D surface.
+- Post-fix evidence: `output/playwright/capsule-nav-focus-final.png` and `output/playwright/capsule-design-qa-header.png`.
+
+### Primary interactions tested
+
+- Hovered a desktop navigation item and verified the capsule scales to 1.055 with the existing registration-action surface tokens.
+- Focused the same item from the keyboard and verified the capsule retains one clear focus outline.
+- Moved the pointer to the central hero title and verified the tree response increases from zero to 61 active scale pixels without rendering a glass layer.
+- Opened the compact mobile menu at 390 x 844 and verified the menu remains fully usable without horizontal overflow.
+- Activated the goal about-page masthead and verified it enters the pointer state with `data-pointer-effect="ripple"`, without orange glow or liquid refraction.
+- Opened `/next/`, moved the pointer to the same central title position, and verified it retains `direct` mode with zero active tree pixels.
+- Opened a fresh browser tab after the final changes and found only the normal development-server connection messages with no runtime errors or warnings.
+
+### Residual test gaps
+
+- Static screenshots cannot show the continuous temporal rhythm of the mosaic ripple.
+- The browser state contract, before-and-after captures, responsive checks, unit tests, and fresh runtime log cover the implementation risks relevant to this change.
+
+final result: passed

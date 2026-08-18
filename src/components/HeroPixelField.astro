@@ -12,10 +12,10 @@ import {
 } from '../scripts/hero-pixel-field';
 
 interface Props {
-  liquidGlass?: boolean;
+  interactionMode?: 'direct' | 'wide';
 }
 
-const { liquidGlass = false } = Astro.props;
+const { interactionMode = 'direct' } = Astro.props;
 
 type PixelRecord = [x: number, y: number, size: number, colorIndex: number, alphaIndex: number];
 type PixelData = {
@@ -158,6 +158,7 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
   class="hero-pixel-field"
   data-hero-pixel-field
   data-render-mode="dom"
+  data-tree-interaction={interactionMode}
   data-pixel-count={pixelData.stats.blocks}
   data-ready="false"
   aria-hidden="true"
@@ -253,7 +254,6 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
       ))}
     </span>
   </div>
-  {liquidGlass && <i class="hero-pixel-field__liquid-glass" data-hero-liquid-glass aria-hidden="true"></i>}
 </div>
 
 <style is:inline set:html={tokenCss}></style>

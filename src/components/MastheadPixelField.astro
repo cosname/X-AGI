@@ -1,17 +1,17 @@
 ---
 interface Props {
   class?: string;
-  liquidGlass?: boolean;
+  pointerEffect?: 'legacy' | 'ripple';
 }
 
-const { class: className, liquidGlass = false } = Astro.props;
+const { class: className, pointerEffect = 'legacy' } = Astro.props;
 ---
 
 <div
   class:list={['masthead-pixel-field', className]}
   data-masthead-pixel-field
   data-render-mode="canvas"
-  data-liquid-glass-field={liquidGlass ? '' : undefined}
+  data-pointer-effect={pointerEffect === 'ripple' ? 'ripple' : undefined}
   aria-hidden="true"
 >
   <canvas class="masthead-pixel-field__canvas"></canvas>
