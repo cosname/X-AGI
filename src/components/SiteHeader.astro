@@ -3,18 +3,28 @@ import type { EditionConfig } from '../config/site';
 import { currentEditionActionPaths } from '../config/edition-status';
 import { editionPath } from '../config/site';
 import { editionNavigation, type EditionPage } from '../config/navigation';
+import type { SiteHeaderBehavior } from '../config/header';
+import HeaderScrollState from './HeaderScrollState.astro';
 
 interface Props {
   edition: EditionConfig;
   activePage?: EditionPage;
+  behavior?: SiteHeaderBehavior;
 }
 
-const { edition, activePage = '' } = Astro.props;
+const { edition, activePage = '', behavior = 'surface' } = Astro.props;
 const navigation = editionNavigation(edition);
 const actions = currentEditionActionPaths(edition);
+const scrollHeader = behavior === 'overlay-scroll';
 ---
 
-<header class="site-header" data-nav-mode="inline">
+<header
+  class="site-header"
+  data-nav-mode="inline"
+  data-scroll-header={scrollHeader ? 'true' : undefined}
+  data-scroll-state={scrollHeader ? 'top' : undefined}
+  data-scroll-threshold={scrollHeader ? '50' : undefined}
+>
   <a class="skip-link" href="#main-content">跳到主要内容</a>
   <div class="site-header__inner">
     <a class="site-brand" href={editionPath(edition)} aria-label={`${edition.titleZh} 首页`}>
@@ -96,6 +106,8 @@ const actions = currentEditionActionPaths(edition);
   </script>
 </header>
 
+{scrollHeader && <HeaderScrollState />}
+
 <script>
   const header = document.querySelector<HTMLElement>('.site-header');
   const navigation = header?.querySelector<HTMLElement>('.site-navigation');
@@ -136,6 +148,7 @@ const actions = currentEditionActionPaths(edition);
   const openNavigation = () => {
     if (!navigation || !toggle || !panel || !isCompact()) return;
     navigation.setAttribute('data-open', '');
+    header?.setAttribute('data-menu-open', '');
     toggle.setAttribute('aria-expanded', 'true');
     toggle.setAttribute('aria-label', '收起会议导航');
     toggle.textContent = '收起';
@@ -144,6 +157,7 @@ const actions = currentEditionActionPaths(edition);
 
   const closeNavigation = ({ restoreFocus = false } = {}) => {
     navigation?.removeAttribute('data-open');
+    header?.removeAttribute('data-menu-open');
     toggle?.setAttribute('aria-expanded', 'false');
     toggle?.setAttribute('aria-label', '打开会议导航');
     if (toggle) toggle.textContent = '菜单';

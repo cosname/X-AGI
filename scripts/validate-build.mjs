@@ -298,6 +298,22 @@ for (const group of buildGroups) {
     ) {
       failures.push(`${route}: goal inner page must use the hybrid 2026 skin`);
     }
+    if (
+      group.edition.skin === 'goal'
+      && (
+        !source.includes('data-scroll-header="true"')
+        || !source.includes('data-scroll-state="top"')
+        || !source.includes('data-scroll-threshold="50"')
+      )
+    ) {
+      failures.push(`${route}: goal page must opt into the shared scroll-header state contract`);
+    }
+    if (
+      group.edition.skin !== 'goal'
+      && source.includes('data-scroll-header="true"')
+    ) {
+      failures.push(`${route}: scroll-header preview behavior leaked outside the goal design`);
+    }
 
     if (isDomPixelHomepage) {
       const compressedBytes = gzipSync(source).byteLength;

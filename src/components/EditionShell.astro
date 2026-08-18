@@ -4,6 +4,7 @@ import SiteFooter from './SiteFooter.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import type { EditionConfig } from '../config/site';
 import type { EditionPage } from '../config/navigation';
+import type { SiteHeaderBehavior } from '../config/header';
 
 interface Props {
   edition: EditionConfig;
@@ -13,6 +14,7 @@ interface Props {
   canonicalPath: string;
   showFooter?: boolean;
   bodyClass?: string;
+  headerBehavior?: SiteHeaderBehavior;
 }
 
 const {
@@ -23,6 +25,7 @@ const {
   canonicalPath,
   showFooter = true,
   bodyClass,
+  headerBehavior = 'surface',
 } = Astro.props;
 const title = pageTitle ? `${pageTitle} | ${edition.title}` : edition.title;
 ---
@@ -34,7 +37,7 @@ const title = pageTitle ? `${pageTitle} | ${edition.title}` : edition.title;
   noIndex={edition.status === 'planning' || edition.skin === 'next' || edition.skin === 'goal'}
   bodyClass={`edition-site edition-${edition.year}${bodyClass ? ` ${bodyClass}` : ''}`}
 >
-  <SiteHeader edition={edition} activePage={activePage} />
+  <SiteHeader edition={edition} activePage={activePage} behavior={headerBehavior} />
   <main id="main-content">
     <slot />
   </main>

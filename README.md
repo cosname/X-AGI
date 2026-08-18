@@ -184,6 +184,7 @@ npm run downloads:verify
 
 新视觉的入口位于 `src/pages/next/`，设计说明位于 `src/design-next/README.md`。
 融合候选的入口位于 `src/pages/goal/`，设计说明位于 `src/design-goal/README.md`。
+融合候选首页与内页共用透明顶部、50px 后纯色承托的导航状态契约，同时不会影响正式站和完整 `/next/` 概念站。
 
 ```bash
 npm run dev

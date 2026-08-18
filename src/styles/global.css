@@ -86,6 +86,32 @@
   backdrop-filter: blur(18px) saturate(1.2);
 }
 
+.edition-2026 .site-header[data-scroll-header] {
+  position: fixed;
+  inset: 0 0 auto;
+  border-bottom-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition:
+    border-color 260ms ease,
+    background-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.edition-2026 .site-header[data-scroll-header][data-scroll-state='scrolled'],
+.edition-2026 .site-header[data-scroll-header][data-menu-open] {
+  border-bottom-color: rgb(103 82 200 / 0.14);
+  background: #fffdfb;
+  box-shadow: 0 8px 26px rgb(17 19 66 / 0.055);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edition-2026 .site-header[data-scroll-header] {
+    transition: none;
+  }
+}
+
 .edition-2026 .site-header__inner {
   min-height: var(--site-header-height);
 }
@@ -998,22 +1024,21 @@
 }
 
 .edition-goal-home {
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  display: block;
   height: 100svh;
   min-height: 0;
   overflow: hidden;
 }
 
-.edition-goal-home > main,
-.edition-goal-home .conference-home,
-.edition-goal-home .conference-hero,
-.edition-goal-home .conference-hero__inner {
+.edition-2026.edition-goal-home > main,
+.edition-2026.edition-goal-home .conference-home,
+.edition-2026.edition-goal-home .conference-home .conference-hero,
+.edition-2026.edition-goal-home .conference-home .conference-hero__inner {
   height: 100%;
   min-height: 0;
 }
 
-.edition-goal-home > main {
+.edition-2026.edition-goal-home > main {
   overflow: hidden;
 }
 

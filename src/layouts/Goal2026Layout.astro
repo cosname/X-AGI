@@ -3,6 +3,7 @@ import type { EditionPage } from '../config/navigation';
 import { editionNavigation } from '../config/navigation';
 import { currentEditionActionPaths } from '../config/edition-status';
 import { editionPath, type EditionConfig } from '../config/site';
+import HeaderScrollState from '../components/HeaderScrollState.astro';
 import '../styles/legacy-2025.css';
 import '../styles/goal-2026.css';
 
@@ -51,7 +52,13 @@ const homeHref = editionPath(edition);
     <link rel="stylesheet" href="/2025/assets/css/style.css?v=20251012" />
   </head>
   <body class="edition-legacy-2025 edition-goal-2026">
-    <nav class="navbar navbar-expand-lg fixed-top" aria-label="主导航">
+    <nav
+      class="navbar navbar-expand-lg fixed-top"
+      aria-label="主导航"
+      data-scroll-header="true"
+      data-scroll-state="top"
+      data-scroll-threshold="50"
+    >
       <div class="container custom-container">
         <a class="navbar-brand" href={homeHref}>
           <img src="/2026/brand/wordmark.svg" alt="X-AGI" class="logo" />
@@ -91,6 +98,8 @@ const homeHref = editionPath(edition);
         </div>
       </div>
     </nav>
+
+    <HeaderScrollState />
 
     <slot />
 
