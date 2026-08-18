@@ -299,6 +299,16 @@ for (const group of buildGroups) {
     }
     if (
       group.edition.skin === 'goal'
+      && page !== ''
+      && (
+        !source.includes('data-masthead-pixel-field')
+        || !source.includes('data-connection-stage')
+      )
+    ) {
+      failures.push(`${route}: goal inner page must expose an interactive masthead field`);
+    }
+    if (
+      group.edition.skin === 'goal'
       && (
         !source.includes('data-scroll-header="true"')
         || !source.includes('data-scroll-state="top"')

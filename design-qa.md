@@ -1,66 +1,62 @@
-# Goal header scale and tree spacing design QA
+# Goal inner-page masthead design QA
 
 ## Comparison target
 
-- Source visual truth: `output/playwright/goal-header-tuning/01-home-before.png` for desktop and `output/playwright/goal-header-tuning/02-home-mobile-before.png` for mobile.
-- Rendered implementation: `output/playwright/goal-header-tuning/06-home-final.png` for desktop and `output/playwright/goal-header-tuning/07-home-mobile-final.png` for mobile.
-- Full desktop comparison: `output/playwright/goal-header-tuning/qa/desktop-before-after.png`.
-- Focused desktop header comparison: `output/playwright/goal-header-tuning/qa/desktop-header-before-after.png`.
-- Full mobile comparison: `output/playwright/goal-header-tuning/qa/mobile-before-after.png`.
-- Inner-page evidence: `output/playwright/goal-header-tuning/05-about-after.png`.
-- Expanded mobile-menu evidence: `output/playwright/goal-header-tuning/08-mobile-menu-final.png`.
-- Browser CSS viewport: 1440 x 1000 at device pixel ratio 1 for desktop, and 390 x 844 at device pixel ratio 1 for mobile.
-- Source pixels and implementation pixels: 1440 x 1000 for desktop, and 390 x 844 for mobile.
-- Density normalization: every comparison uses equal CSS and pixel dimensions at device pixel ratio 1, so no resampling was required.
-- State: page top with the overlay header transparent and the animated trees in their initial position.
+- Source visual truth: `output/playwright/goal-subpage-motion/01-about-before.png` for the original idle masthead and `output/playwright/goal-subpage-motion/02-about-pointer-before.png` for its non-responsive pointer state.
+- Rendered implementation: `output/playwright/goal-subpage-motion/04-about-after-idle.png` for the revised idle masthead and `output/playwright/goal-subpage-motion/05-about-after-pointer.png` for the restored pointer response.
+- Responsive implementation: `output/playwright/goal-subpage-motion/06-about-mobile-after.png`.
+- Full-view comparison: `output/playwright/goal-subpage-motion/qa/desktop-before-after.png`.
+- Focused masthead comparison: `output/playwright/goal-subpage-motion/qa/header-before-after.png`.
+- Focused interaction comparison: `output/playwright/goal-subpage-motion/qa/motion-idle-pointer.png`.
+- Interaction-difference evidence: `output/playwright/goal-subpage-motion/qa/motion-diff.png`.
+- Browser CSS viewport: 1152 x 800 at device pixel ratio 1.25 for desktop, and 390 x 844 at device pixel ratio 1.25 for mobile.
+- Source and implementation screenshot pixels: 1140 x 792 for the desktop browser content surface.
+- Mobile implementation screenshot pixels: 378 x 817 for the mobile browser content surface.
+- Density normalization: the desktop source and implementation captures have identical pixel dimensions and browser density, so no resampling was required.
+- State: the page is at the top with a transparent fixed navigation bar, first at idle and then with the pointer positioned inside the masthead at CSS coordinates 650 x 180.
 
 ## Findings
 
-No actionable P0, P1, or P2 visual differences remain for the requested navigation-scale and tree-spacing changes.
+No actionable P0, P1, or P2 visual or interaction differences remain for the requested masthead changes.
 
-- Fonts and typography: desktop navigation and the registration action now render at 16px, the intermediate inline range renders at 15.2px, and the compact mobile menu renders at 16px.
-- Cross-page consistency: the homepage and inner pages inherit the same shared navigation typography, active-state treatment, brand lockup, registration action, and header height.
-- Header spacing: the desktop header remains 78px tall and the mobile header remains 67.3984px tall, so the larger labels do not change the established page frame.
-- Tree safety area: the first visible desktop tree pixel moved from 23.2364px to 92.2364px, leaving 14.2364px below the header instead of overlapping it.
-- Mobile tree safety area: the first visible mobile tree pixel moved from 29.8594px to 69.2969px, leaving 1.8984px below the header instead of overlapping it.
-- Layout rhythm: the entire tree layer moves together while the hero title, date, actions, and bottom terrain retain their previous positions.
-- Colors and visual tokens: the paper, purple, ink, border, gradient, and active-state tokens remain unchanged.
-- Image quality and asset fidelity: the existing connection logo and pixel-tree assets remain unchanged and render at their intrinsic density.
-- Copy and content: all navigation labels, their order, the 2026 lockup, and the page content remain unchanged.
-- Responsiveness: inline navigation fits without horizontal overflow from 768px through desktop widths, and compact navigation fits without overflow at 390px.
-- Interaction: the navigation remains fixed, changes from transparent to the solid paper surface after the existing scroll threshold, and the compact menu expands with equal side gutters.
+- Fonts and typography: the shared navigation, page title, subtitle, line height, weight, wrapping, and antialiasing remain unchanged.
+- Spacing and layout rhythm: the masthead remains 300px tall on desktop and 245px tall on mobile, while deterministic wells now protect the brand, navigation, registration action, title, and subtitle from particle overlap.
+- Colors and visual tokens: the paper, ink, purple, orange, teal, opacity, gradient, and terrain-layer tokens remain unchanged.
+- Image quality and asset fidelity: the existing canvas-rendered particle field and probability terrain remain sharp at the browser density, and no replacement asset or approximation was introduced.
+- Copy and content: all navigation labels, page titles, status text, and inner-page content remain unchanged.
+- Interaction: the hybrid goal inner-page header now exposes the same connection-stage contract as the earlier next-design masthead, so pointer movement updates the particle ripple and posterior terrain.
+- Responsiveness: at 390 x 844 CSS pixels, the brand and menu retain clean surrounding space, the title remains unobstructed, and the particle field naturally concentrates on the open right side without horizontal overflow.
+- Cross-page consistency: about, schedule, poster, guide, and register all render an initialized 228-particle desktop field inside the same interactive stage.
+- Accessibility: reduced-motion and touch-pointer safeguards remain intact, and the decorative canvas remains hidden from assistive technology.
 
 ## Comparison history
 
 ### Iteration 1
 
-- Earlier finding: P2 navigation labels rendered at 12.16px and the registration action rendered at 12.48px, which looked noticeably smaller than the previously approved inner-page navigation.
-- Fix: the shared desktop navigation and action now use 16px, with a 15.2px intermediate breakpoint and a 16px compact-menu scale.
-- Post-fix evidence: `output/playwright/goal-header-tuning/qa/desktop-header-before-after.png` and `output/playwright/goal-header-tuning/05-about-after.png`.
+- Earlier finding: P2 particle marks appeared directly behind the transparent navigation and could enter the page-title area because the title exclusion was only probabilistic.
+- Earlier evidence: `output/playwright/goal-subpage-motion/01-about-before.png`.
+- Fix: masthead particle seeding now uses deterministic brand, navigation, and title safe zones at desktop and compact widths.
+- Post-fix evidence: `output/playwright/goal-subpage-motion/qa/header-before-after.png` and `output/playwright/goal-subpage-motion/06-about-mobile-after.png`.
 
 ### Iteration 2
 
-- Earlier finding: P2 tree artwork entered the transparent header region on desktop and mobile, reducing navigation clarity and making the two layers feel visually crowded.
-- Fix: the goal homepage now exposes a shared tree offset derived from the current site-header height, and every tree position consumes that offset at desktop and mobile breakpoints.
-- Post-fix evidence: `output/playwright/goal-header-tuning/qa/desktop-before-after.png` and `output/playwright/goal-header-tuning/qa/mobile-before-after.png`.
-
-### Iteration 3
-
-- Earlier risk: the larger text could crowd the inline navigation at intermediate desktop widths or overflow the compact menu.
-- Verification: 1180px, 1024px, 900px, 820px, 768px, and 390px viewports all retain the expected navigation mode without horizontal overflow.
-- Post-fix evidence: `output/playwright/goal-header-tuning/08-mobile-menu-final.png`.
+- Earlier finding: P1 the hybrid inner-page field reported animation support but stayed idle after pointer movement because its legacy header did not expose a connection stage.
+- Earlier evidence: `output/playwright/goal-subpage-motion/02-about-pointer-before.png`, where the field remained in the idle interaction state.
+- Fix: goal-skinned legacy inner headers now expose `data-connection-stage`, matching the working next-design masthead contract.
+- Post-fix evidence: `output/playwright/goal-subpage-motion/05-about-after-pointer.png`, where the field enters the pointer interaction state.
+- Pixel evidence: the idle-to-pointer comparison changes 62,947 pixels in the focused 1140 x 300 masthead crop.
 
 ## Primary interactions tested
 
-- Verified the transparent page-top header and the solid scrolled header.
-- Verified the homepage and the 会议简介 inner page use the same navigation scale.
-- Opened the compact mobile navigation and checked its labels, side gutters, and overflow.
-- Checked the homepage at desktop, intermediate, and mobile breakpoints.
+- Moved the pointer through the desktop masthead and verified the particle field changes from idle to pointer interaction.
+- Verified the field returns toward its resting probability terrain through the existing spring behavior.
+- Navigated about, schedule, poster, guide, and register and verified each route initializes the same interactive masthead field.
+- Checked the compact layout at 390 x 844 CSS pixels and found no horizontal overflow.
 - Checked browser logs and found no warnings or errors from the implementation.
 
 ## Residual test gaps
 
-- Screenshot review cannot establish full assistive-technology compatibility.
-- The automated checks, static build, browser geometry checks, and route-level visual review cover the implementation risks relevant to this change.
+- Static screenshot comparison cannot communicate the full temporal feel of the spring animation.
+- The browser state contract, focused motion diff, reduced-motion preservation, unit tests, and route-level checks cover the implementation risks relevant to this change.
 
 final result: passed

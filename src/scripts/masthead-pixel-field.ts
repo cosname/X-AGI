@@ -76,6 +76,25 @@ const densityTop = (
 
 export const mastheadParticleCount = (width: number) => (width < 720 ? 148 : 228);
 
+export const isMastheadTextSafeZone = (
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+) => {
+  const compact = width < 720;
+  const headerDepth = Math.min(88, height * 0.3);
+  const inBrandWell = y < headerDepth && x < width * (compact ? 0.44 : 0.2);
+  const inNavigationWell = y < headerDepth && x > width * (compact ? 0.58 : 0.49);
+  const inTitleWell = (
+    x < width * (compact ? 0.82 : 0.43)
+    && y > height * 0.34
+    && y < height * 0.92
+  );
+
+  return inBrandWell || inNavigationWell || inTitleWell;
+};
+
 export const seedMastheadParticles = (width: number, height: number, seed: number): Particle[] => {
   const random = randomFrom(seed);
   const target = mastheadParticleCount(width);
@@ -86,8 +105,7 @@ export const seedMastheadParticles = (width: number, height: number, seed: numbe
     attempts += 1;
     const x = (0.12 + (random() ** 0.68) * 0.88) * width;
     const y = (random() ** 1.08) * height * 0.9;
-    const inTitle = x < width * 0.4 && y > height * 0.34;
-    if (inTitle && random() < 0.82) continue;
+    if (isMastheadTextSafeZone(x, y, width, height)) continue;
 
     particles.push({
       x,

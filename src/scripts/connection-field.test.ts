@@ -10,7 +10,11 @@ import {
   STATIC_TERRAIN_LAYERS,
   terrainComponentsForState,
 } from './hero-pixel-field.ts';
-import { mastheadParticleCount, seedMastheadParticles } from './masthead-pixel-field.ts';
+import {
+  isMastheadTextSafeZone,
+  mastheadParticleCount,
+  seedMastheadParticles,
+} from './masthead-pixel-field.ts';
 
 test('gaussian density peaks at its mean', () => {
   assert.equal(gaussianDensity(0.675, 0.675, 0.078), 1);
@@ -117,15 +121,21 @@ test('mosaic ripple scale remains bounded throughout its cycle', () => {
   }
 });
 
-test('masthead particles are deterministic and avoid the title well', () => {
+test('masthead particles are deterministic and preserve the text safe zones', () => {
   const first = seedMastheadParticles(1440, 276, 2026);
   const second = seedMastheadParticles(1440, 276, 2026);
-  const titleHits = first.filter((particle) => particle.x < 1440 * 0.4 && particle.y > 276 * 0.34).length;
+  const textWellHits = first.filter((particle) => (
+    isMastheadTextSafeZone(particle.x, particle.y, 1440, 276)
+  ));
+  const mobile = seedMastheadParticles(390, 246, 2026);
+  const mobileTextWellHits = mobile.filter((particle) => (
+    isMastheadTextSafeZone(particle.x, particle.y, 390, 246)
+  ));
 
   assert.equal(first.length, mastheadParticleCount(1440));
   assert.deepEqual(first, second);
-  assert.ok(titleHits < first.length * 0.18);
-  assert.ok(seedMastheadParticles(390, 246, 2026).length === mastheadParticleCount(390));
+  assert.equal(textWellHits.length, 0);
+  assert.equal(mobile.length, mastheadParticleCount(390));
+  assert.equal(mobileTextWellHits.length, 0);
 });
-
 

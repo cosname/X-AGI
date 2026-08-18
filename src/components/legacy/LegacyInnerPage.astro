@@ -11,7 +11,10 @@ interface Props {
 const { edition, title, status, visual = 'legacy' } = Astro.props;
 ---
 
-<header class:list={['page-header', visual === 'goal' && 'page-header--goal']}>
+<header
+  class:list={['page-header', visual === 'goal' && 'page-header--goal']}
+  data-connection-stage={visual === 'goal' ? '' : undefined}
+>
   {visual === 'goal' && <slot name="art" />}
   <div class="container custom-container header-content">
     <div>
