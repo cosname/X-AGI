@@ -59,7 +59,7 @@ export const nextDesignEdition: EditionConfig = {
   skin: 'next',
 };
 
-/** Hybrid preview: current content and layout with the 2026 tree / connection skin. */
+/** Candidate preview: animated tree homepage with published-content inner pages. */
 export const goalDesignEdition: EditionConfig = {
   ...editions['2026'],
   path: '/goal',

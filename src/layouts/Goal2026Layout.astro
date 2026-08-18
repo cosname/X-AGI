@@ -12,7 +12,6 @@ interface Props {
   title: string;
   description: string;
   canonicalPath: string;
-  home?: boolean;
 }
 
 const {
@@ -21,7 +20,6 @@ const {
   title,
   description,
   canonicalPath,
-  home = false,
 } = Astro.props;
 
 const canonical = new URL(canonicalPath, Astro.site);
@@ -52,7 +50,7 @@ const homeHref = editionPath(edition);
     <link href="/2025/assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/2025/assets/css/style.css?v=20251012" />
   </head>
-  <body class:list={['edition-legacy-2025', 'edition-goal-2026', home && 'goal-home']}>
+  <body class="edition-legacy-2025 edition-goal-2026">
     <nav class="navbar navbar-expand-lg fixed-top" aria-label="主导航">
       <div class="container custom-container">
         <a class="navbar-brand" href={homeHref}>
@@ -96,14 +94,12 @@ const homeHref = editionPath(edition);
 
     <slot />
 
-    {!home && (
-      <footer class="site-footer">
-        <div class="container custom-container">
-          <p>版权所有 {edition.titleZh}</p>
-          <p>联系方式: {edition.contact}</p>
-        </div>
-      </footer>
-    )}
+    <footer class="site-footer">
+      <div class="container custom-container">
+        <p>版权所有 {edition.titleZh}</p>
+        <p>联系方式: {edition.contact}</p>
+      </div>
+    </footer>
 
     <script is:inline src="/2025/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
     <script is:inline src="/2025/assets/js/script.js"></script>

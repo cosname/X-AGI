@@ -229,22 +229,20 @@ const buildGroups = [
   {
     label: 'current edition',
     edition: currentEdition,
-    enforcePayloadBudget: false,
+    payloadBudgetScope: 'none',
     requireDomHomepage: false,
   },
   {
     label: 'next design',
     edition: nextDesignEdition,
-    enforcePayloadBudget: true,
+    payloadBudgetScope: 'all',
     requireDomHomepage: true,
   },
   {
     label: 'goal design',
     edition: goalDesignEdition,
-    // This preview intentionally inherits the published template's asset graph.
-    enforcePayloadBudget: false,
+    payloadBudgetScope: 'homepage',
     requireDomHomepage: true,
-    allowHeroContentAssets: true,
   },
 ];
 
@@ -286,8 +284,19 @@ for (const group of buildGroups) {
     ) {
       failures.push(`${route}: current edition must not load goal preview artwork`);
     }
-    if (group.edition.skin === 'goal' && !source.includes('edition-goal-2026')) {
-      failures.push(`${route}: goal preview must use the hybrid 2026 skin`);
+    if (
+      group.edition.skin === 'goal'
+      && page === ''
+      && !source.includes('edition-site edition-2026')
+    ) {
+      failures.push(`${route}: goal homepage must use the animated 2026 skin`);
+    }
+    if (
+      group.edition.skin === 'goal'
+      && page !== ''
+      && !source.includes('edition-goal-2026')
+    ) {
+      failures.push(`${route}: goal inner page must use the hybrid 2026 skin`);
     }
 
     if (isDomPixelHomepage) {
@@ -296,9 +305,7 @@ for (const group of buildGroups) {
         failures.push(`${route}: compressed HTML exceeds 75 KB DOM-art budget`);
       }
 
-      const hero = group.edition.skin === 'goal'
-        ? source.match(/<header class="hero-section hero-section--goal"[\s\S]*?<\/header>/)?.[0] ?? ''
-        : source.match(/<section class="conference-hero"[\s\S]*?<\/section>/)?.[0] ?? '';
+      const hero = source.match(/<section class="conference-hero"[\s\S]*?<\/section>/)?.[0] ?? '';
       const expectedPixels = Number(hero.match(/data-pixel-count="(\d+)"/)?.[1] ?? 0);
       const renderedPixels = [...hero.matchAll(/class="hp\s/g)].length;
       const terrainLayers = [...hero.matchAll(/\sdata-layer=/g)].length;
@@ -316,10 +323,7 @@ for (const group of buildGroups) {
       if (terrainEchoes !== 11) {
         failures.push(`${route}: expected 11 probability echoes, found ${terrainEchoes}`);
       }
-      if (
-        !group.allowHeroContentAssets
-        && (/<(?:canvas|img|picture|svg)\b/i.test(hero) || source.includes('hero-reference-trees'))
-      ) {
+      if (/<(?:canvas|img|picture|svg)\b/i.test(hero) || source.includes('hero-reference-trees')) {
         failures.push(`${route}: homepage hero contains a raster, Canvas, or SVG dependency`);
       }
       if (await homepageHeroCssUsesImage(file, source, hero)) {
@@ -327,7 +331,9 @@ for (const group of buildGroups) {
       }
     }
 
-    if (group.enforcePayloadBudget) {
+    const shouldEnforcePayloadBudget = group.payloadBudgetScope === 'all'
+      || (group.payloadBudgetScope === 'homepage' && page === '');
+    if (shouldEnforcePayloadBudget) {
       const payloadBytes = await initialLocalPayload(file);
       const budget = page === '' ? 1_000_000 : 1_500_000;
       if (payloadBytes > budget) {
@@ -462,29 +468,28 @@ function validatePartnerOrder(route, text, labels) {
 validatePartnerOrder('index.html', rootText, homepagePartnerLabels);
 
 const goalIndex = await readFile(path.join(root, 'goal/index.html'), 'utf8');
-const goalText = visibleText(goalIndex);
 if (!goalIndex.includes('<meta name="robots" content="noindex, nofollow">')) {
   failures.push('goal/index.html: preview must be noindex');
 }
-if (goalText.includes('发起方：')) {
-  failures.push('goal/index.html: homepage partner list must not repeat the initiator section');
-}
-validatePartnerOrder('goal/index.html', goalText, homepagePartnerLabels);
 
 const nextIndex = await readFile(path.join(root, 'next/index.html'), 'utf8');
-const nextPartnerStart = nextIndex.indexOf('class="conference-partners conference-partners--logos"');
-const nextPartnerEnd = nextIndex.indexOf('class="conference-update-strip"', nextPartnerStart);
-if (nextPartnerStart < 0 || nextPartnerEnd < 0) {
-  failures.push('next/index.html: missing homepage organization logo section');
-} else {
-  const nextPartnerFragment = nextIndex.slice(nextPartnerStart, nextPartnerEnd);
-  const nextPartnerText = visibleText(nextPartnerFragment);
-  const nextPartnerLabels = ['主办单位', '协办单位', '赞助单位'];
 
-  if (nextPartnerText.includes('发起方')) {
-    failures.push('next/index.html: homepage organization section must not repeat the initiators');
+function validatePreviewPartnerSection(route, source) {
+  const partnerStart = source.indexOf('class="conference-partners conference-partners--logos"');
+  const partnerEnd = source.indexOf('class="conference-update-strip"', partnerStart);
+  if (partnerStart < 0 || partnerEnd < 0) {
+    failures.push(`${route}: missing homepage organization logo section`);
+    return;
   }
-  validatePartnerOrder('next/index.html', nextPartnerText, nextPartnerLabels);
+
+  const partnerFragment = source.slice(partnerStart, partnerEnd);
+  const partnerText = visibleText(partnerFragment);
+  const partnerLabels = ['主办单位', '协办单位', '赞助单位'];
+
+  if (partnerText.includes('发起方')) {
+    failures.push(`${route}: homepage organization section must not repeat the initiators`);
+  }
+  validatePartnerOrder(route, partnerText, partnerLabels);
 
   for (const organization of [
     ...conference2026.organizers,
@@ -492,13 +497,16 @@ if (nextPartnerStart < 0 || nextPartnerEnd < 0) {
     ...conference2026.sponsors,
   ]) {
     if (
-      !nextPartnerFragment.includes(`alt="${organization.name}"`)
-      && !nextPartnerText.includes(organization.name)
+      !partnerFragment.includes(`alt="${organization.name}"`)
+      && !partnerText.includes(organization.name)
     ) {
-      failures.push(`next/index.html: missing homepage organization "${organization.name}"`);
+      failures.push(`${route}: missing homepage organization "${organization.name}"`);
     }
   }
 }
+
+validatePreviewPartnerSection('next/index.html', nextIndex);
+validatePreviewPartnerSection('goal/index.html', goalIndex);
 
 const redirectTargets = new Map([
   ['2026/index.html', '/'],
