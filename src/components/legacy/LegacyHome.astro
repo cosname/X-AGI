@@ -12,9 +12,9 @@ const { edition } = Astro.props;
 const actions = currentEditionActionPaths(edition);
 
 const partnerRows = [
+  { label: '主办单位：', organizations: conference2026.organizers },
   { label: '协办单位：', organizations: conference2026.coOrganizers },
   { label: '赞助单位：', organizations: conference2026.sponsors },
-  { label: '主办单位：', organizations: conference2026.organizers },
 ].filter((row) => row.organizations.length > 0);
 ---
 

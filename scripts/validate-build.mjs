@@ -410,7 +410,7 @@ if (!rootIndex.includes('hero-section') && !rootIndex.includes('data-hero-pixel-
 }
 
 const rootText = visibleText(rootIndex);
-const homepagePartnerLabels = ['协办单位：', '赞助单位：', '主办单位：'];
+const homepagePartnerLabels = ['主办单位：', '协办单位：', '赞助单位：'];
 if (rootText.includes('发起方：')) {
   failures.push('index.html: homepage partner list must not repeat the initiator section');
 }
