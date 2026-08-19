@@ -4600,9 +4600,8 @@ button:focus-visible {
 }
 
 .hero-pixel-field--badge {
-  --badge-tree-anchor-x: 88%;
-  --badge-tree-anchor-y: calc(58% + max(0px, 42svh - 34.6vw + 1rem));
-  --badge-tree-height: min(118%, 78vw);
+  --badge-tree-ceiling: max(1rem, calc((var(--site-header-height) - 2.3rem) / 2));
+  --badge-tree-height: 118svh;
   --badge-terrain-height: min(126%, 66vw);
   background: #f7f1ea;
 }
@@ -4610,23 +4609,33 @@ button:focus-visible {
 .hero-pixel-field--badge .hero-pixel-field__trees {
   z-index: 1;
   -webkit-mask-image:
-    linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.12) 7%, #000 14%),
+    linear-gradient(
+      to bottom,
+      transparent 0 calc(var(--badge-tree-ceiling) - 0.25rem),
+      rgb(0 0 0 / 0.2) var(--badge-tree-ceiling),
+      #000 calc(var(--badge-tree-ceiling) + 2.25rem)
+    ),
     linear-gradient(to right, transparent 0 54%, rgb(0 0 0 / 0.1) 59%, #000 66%);
   mask-image:
-    linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.12) 7%, #000 14%),
+    linear-gradient(
+      to bottom,
+      transparent 0 calc(var(--badge-tree-ceiling) - 0.25rem),
+      rgb(0 0 0 / 0.2) var(--badge-tree-ceiling),
+      #000 calc(var(--badge-tree-ceiling) + 2.25rem)
+    ),
     linear-gradient(to right, transparent 0 54%, rgb(0 0 0 / 0.1) 59%, #000 66%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-  top: var(--badge-tree-anchor-y);
-  right: auto;
-  left: var(--badge-tree-anchor-x) !important;
+  top: var(--badge-tree-ceiling);
+  right: -3.5vw;
+  left: auto !important;
   width: auto;
   height: var(--badge-tree-height);
   opacity: 0.9;
-  transform: translate(-73.5%, -50%);
+  transform: none;
   -webkit-mask-image: linear-gradient(to right, transparent 0 2%, rgb(0 0 0 / 0.34) 8%, #000 18%);
   mask-image: linear-gradient(to right, transparent 0 2%, rgb(0 0 0 / 0.34) 8%, #000 18%);
 }
@@ -4656,6 +4665,7 @@ button:focus-visible {
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge {
+  --badge-title-size: clamp(6.5rem, 7.8vw, 8.8rem);
   background: #f7f1ea;
 }
 
@@ -4691,7 +4701,7 @@ button:focus-visible {
   bottom: calc(50% + 1.5rem);
   left: 0;
   margin: 0;
-  font-size: clamp(6.5rem, 7.8vw, 8.8rem);
+  font-size: var(--badge-title-size);
   line-height: 0.86;
   text-align: left;
 }
@@ -4777,6 +4787,10 @@ button:focus-visible {
 }
 
 @media (max-width: 64rem) {
+  .edition-2026.edition-goal-home .conference-hero--badge {
+    --badge-title-size: clamp(5.6rem, 9.6vw, 7rem);
+  }
+
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__copy {
     left: clamp(4rem, 8.5vw, 6rem);
     width: min(42rem, 62vw);
@@ -4784,6 +4798,49 @@ button:focus-visible {
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
     font-size: clamp(5.6rem, 9.6vw, 7rem);
+  }
+}
+
+@media (min-width: 51.26rem) and (max-height: 40rem) {
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
+    font-size: min(var(--badge-title-size), 20svh);
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline {
+    font-size: clamp(1.05rem, min(1.75vw, 5.2svh), 2rem);
+  }
+}
+
+@media (min-width: 51.26rem) and (max-height: 28rem) {
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__copy {
+    top: var(--site-header-height);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-block: clamp(0.5rem, 2svh, 0.85rem);
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
+    position: static;
+    margin: 0 0 clamp(0.45rem, 2svh, 0.75rem);
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
+    position: static;
+    width: max-content;
+    max-width: min(48rem, 60vw);
+    margin-bottom: clamp(0.5rem, 2.2svh, 0.85rem);
+    transform: none;
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__details {
+    position: static;
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__meta {
+    margin-bottom: clamp(0.45rem, 2svh, 0.75rem);
   }
 }
 
@@ -4906,12 +4963,6 @@ button:focus-visible {
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__actions {
     justify-content: center;
-  }
-}
-
-@media (min-width: 51.26rem) and (max-width: 64rem) and (max-aspect-ratio: 1 / 1) {
-  .hero-pixel-field--badge .hero-pixel-field__trees {
-    display: none;
   }
 }
 

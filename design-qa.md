@@ -752,3 +752,76 @@ No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for
 - Live layout measurements, responsive screenshots, interaction-state checks, navigation testing, and the complete repository test suite cover the implementation risks relevant to this refinement.
 
 final result: passed
+
+## Height-Driven Goal Tree And Short-Viewport Safety
+
+### Comparison target
+
+- Source visual truth: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-5939a27f-a35b-4379-a244-d0faa87c9fb2.png` and `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-6d025858-2708-4844-bf1a-e91f2613b2d2.png`, together with the approved height-driven tree and short-viewport safe-layout proposal.
+- Normalized local baselines: `output/playwright/goal-tree-sizing-proposal/01-square-current.png` at 1200 x 1100 and `output/playwright/goal-tree-sizing-proposal/03-very-short-current.png` at 1200 x 350.
+- Rendered implementation: `output/playwright/goal-tree-sizing-proposal/10-square-final.png`, `output/playwright/goal-tree-sizing-proposal/05-standard-pass1.png`, `output/playwright/goal-tree-sizing-proposal/06-short-pass1.png`, `output/playwright/goal-tree-sizing-proposal/07-very-short-pass1.png`, `output/playwright/goal-tree-sizing-proposal/08-square-narrow-pass1.png`, `output/playwright/goal-tree-sizing-proposal/09-mobile-regression-pass1.png`, and `output/playwright/goal-tree-sizing-proposal/16-current-final.png`.
+- Browser CSS viewports: 1200 x 1100, 1440 x 900, 1200 x 500, 1200 x 350, 927 x 1000, 927 x 881, and 390 x 844.
+- Source and implementation pixels match their paired CSS viewports after Browser capture normalization at device pixel ratio 1.
+- State: `/goal/` at scroll position 0 with the transparent navigation, no pointer interaction, and the compact navigation closed unless otherwise noted.
+- Full-view comparison evidence: `output/playwright/goal-tree-sizing-proposal/11-square-comparison.png` and `output/playwright/goal-tree-sizing-proposal/12-short-comparison.png`.
+- Focused comparison evidence: `output/playwright/goal-tree-sizing-proposal/13-tree-ceiling-comparison.png` and `output/playwright/goal-tree-sizing-proposal/14-short-copy-comparison.png`.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility issues remain for the approved refinement.
+
+- Spacing and layout rhythm: the desktop tree now uses a constant `118svh` height, so its scale is driven only by viewport height while its intrinsic aspect ratio determines width.
+- At 1200 x 1100, the tree height increases from 924.30px to 1298px and its top moves from 243.26px to 20.09px, producing the requested full-height right-side composition.
+- The navigation registration control starts at 20.10px in the same viewport, so the tree ceiling and control top align within 0.01px.
+- At the user's restored 927 x 881 viewport, the tree and navigation action both start at 17.59px, and the tree height is 1039.58px.
+- At 1440 x 900 and 1200 x 500, the tree remains 118% of viewport height, preserving the previously accepted wide-screen scale while removing width-dependent shrinkage.
+- At 1200 x 350, the tree top moves from -3.49px to 20.09px and no longer extends above the registration control.
+- The square-desktop rule that hid the tree between 51.26rem and 64rem has been removed, and the tree remains visible at 927 x 1000 without colliding with the main copy.
+- Extreme-height safety: at 1200 x 350, the title top moves from -20.59px to 101.70px, placing the complete content group below the 78px header with no clipping or horizontal overflow.
+- The 1200 x 500 state retains the established left composition while applying only the height-aware title cap needed to preserve clearance.
+- The probability terrain keeps its independent height, animation model, palette, and layer order; no tree-size variable influences terrain geometry.
+- Fonts and typography: the accepted wordmark proportions, Chinese title correction, tagline typography, metadata, and button text remain unchanged outside the approved short-height scaling behavior.
+- Colors and visual tokens: no palette, texture, opacity, or mosaic token changed.
+- Image quality and asset fidelity: the existing live mosaic tree, paper texture, and probability terrain remain intact, with no raster replacement, stretching, or newly approximated asset.
+- Copy and content: no conference copy, date, venue, navigation label, registration destination, or schedule destination changed.
+- Mobile regression: the 390 x 844 centered composition, mobile tree placement, terrain relationship, and zero horizontal overflow remain unchanged.
+- Runtime: browser logs contain no errors or warnings, only expected Vite connection and hot-update debug entries.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the tree height used `min(118%, 78vw)`, so square desktop viewports were constrained by width and made the tree visibly smaller than the accepted right-side composition.
+- Earlier evidence: the left side of `output/playwright/goal-tree-sizing-proposal/11-square-comparison.png`.
+- Fix: removed the width-based height cap and made the desktop tree height a constant `118svh` with intrinsic-width scaling.
+- Post-fix evidence: the right side of `output/playwright/goal-tree-sizing-proposal/11-square-comparison.png`, plus `output/playwright/goal-tree-sizing-proposal/08-square-narrow-pass1.png`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the tree used a center anchor, allowing its top to move above the viewport and behind the navigation action as viewport height decreased.
+- Earlier evidence: the left side of `output/playwright/goal-tree-sizing-proposal/13-tree-ceiling-comparison.png` and the -3.49px tree top recorded at 1200 x 350.
+- Fix: replaced center anchoring with a header-derived top ceiling equal to the navigation action's top edge, while allowing the lower tree to bleed beneath the viewport.
+- Post-fix evidence: the right side of the focused comparison and the 20.09px tree/action alignment in live measurements.
+
+#### Iteration 3
+
+- Earlier finding: P2 independently positioned hero rows placed the title at -20.59px in a 350px-tall desktop viewport, clipping `2026` above the page.
+- Earlier evidence: the left side of `output/playwright/goal-tree-sizing-proposal/12-short-comparison.png` and `output/playwright/goal-tree-sizing-proposal/14-short-copy-comparison.png`.
+- Fix: added height-aware title sizing below 40rem and converted the complete copy to one vertically centered safe group below the header below 28rem.
+- Post-fix evidence: the right sides of both comparisons, where the complete title starts at 101.70px and all actions remain visible.
+
+### Primary interactions tested
+
+- Loaded `/goal/` at all seven target viewports and verified tree height, tree ceiling, content clearance, terrain independence, and horizontal overflow.
+- Opened the compact navigation at 390 x 844 and verified all five page links plus registration remain available with zero horizontal overflow.
+- Closed the compact navigation and returned the user's preview to 927 x 881.
+- Verified the registration and schedule destinations remain unchanged.
+- Checked browser runtime logs and found no errors or warnings.
+- Ran 19 unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- Static comparison sheets cannot show the continuous probability-terrain motion.
+- Live geometry measurements, same-viewport comparisons, responsive captures, navigation testing, runtime logs, and the complete repository test suite cover the implementation risks relevant to this refinement.
+
+final result: passed
