@@ -44,23 +44,27 @@ const badgeHero = edition.skin === 'goal';
             >大会</em>
           </span>
         </h1>
-        <p class="conference-hero__tagline" lang="en" data-connection-exclusion>{conference2026.tagline}</p>
-        <p class="conference-hero__meta" data-connection-exclusion>
-          <time datetime={conference2026.dates.start}>{conference2026.dates.display}</time>
-          <span>{conference2026.venue.name}</span>
-        </p>
-        <div class="conference-hero__actions" data-connection-exclusion>
-          <a
-            class="conference-hero__register capsule-action"
-            href={conference2026.registration.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            立即报名
-          </a>
-          <a class="conference-hero__schedule" href={actions.schedule}>
-            大会日程
-          </a>
+        <div class="conference-hero__tagline-axis" data-connection-exclusion>
+          <p class="conference-hero__tagline" lang="en">{conference2026.tagline}</p>
+        </div>
+        <div class="conference-hero__details">
+          <p class="conference-hero__meta" data-connection-exclusion>
+            <time datetime={conference2026.dates.start}>{conference2026.dates.display}</time>
+            <span>{conference2026.venue.name}</span>
+          </p>
+          <div class="conference-hero__actions" data-connection-exclusion>
+            <a
+              class="conference-hero__register capsule-action"
+              href={conference2026.registration.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              立即报名
+            </a>
+            <a class="conference-hero__schedule" href={actions.schedule}>
+              大会日程
+            </a>
+          </div>
         </div>
       </div>
     </div>

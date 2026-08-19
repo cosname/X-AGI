@@ -338,3 +338,75 @@ No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for
 - The three responsive source captures, full-view contact sheet, computed fixed-anchor geometry, live interaction rectangle check, and production validation cover the reported regression.
 
 final result: passed
+
+## Responsive Midline Field Composition
+
+### Comparison target
+
+- Source visual truth: `/Users/audiofool/.codex/generated_images/01a00e2a-2710-7b83-9dab-aa8c3672fbe7/exec-ecb427cf-64bf-4656-abb2-03a3ec834732.png`.
+- Rendered implementation: `output/playwright/goal-html-field/08-reference-size.png`.
+- Full-view comparison: `output/playwright/goal-html-field/09-reference-comparison.png`.
+- Desktop implementation: `output/playwright/goal-html-field/06-desktop-final.jpg`.
+- Tall-desktop implementation: `output/playwright/goal-html-field/07-tall-desktop.jpg`.
+- Compact implementation: `output/playwright/goal-html-field/04-mobile-pass2.jpg`.
+- Compact navigation state: `output/playwright/goal-html-field/05-mobile-menu.jpg`.
+- Browser CSS viewport: 1774 x 886 at device pixel ratio 1 for the normalized source comparison, 1280 x 720 for standard desktop, 1679 x 1134 for tall desktop, and 390 x 844 for compact layout.
+- Source and normalized implementation screenshot pixels: 1774 x 886.
+- Density normalization: the selected source and implementation use identical pixel dimensions, and the browser screenshot matches the CSS viewport at device pixel ratio 1, so no resampling was required.
+- State: `/goal/` is at the top with the transparent navigation and the pointer at rest, followed by separate pointer-response and open-menu checks.
+- Focused comparison: a separate crop was not needed because the title, horizontal axis, right tree, and bottom terrain are the four largest readable regions in the full-view comparison.
+- Geometry checks supplement the full view with exact DOM measurements for the title axis, tree rectangle, root pixels, terrain layers, and document overflow.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for the requested responsive field composition.
+
+- Fonts and typography: the existing 2026 display treatment, English tagline, metadata, navigation, and calls to action retain their established families and weights.
+- The English tagline now sits on the exact hero midpoint, measuring center y 442.5px in an 886px hero and center y 359.5px in a 720px hero.
+- Spacing and layout rhythm: the conference name remains entirely left of the tree on desktop, while its tagline extends the midpoint as a restrained horizontal rule.
+- The right tree is anchored to the far edge, and its root passes into the foreground terrain instead of ending in open paper.
+- Colors and visual tokens: the warm paper texture comes from the selected visual source, while navy, lavender, teal, peach, and orange are mapped into the existing conference palette and probability-field tokens.
+- The selected source's upper-right teal field is intentionally replaced by the live right tree because the user requested the vertical tree as a separate responsive element.
+- Image quality and asset fidelity: the full-bleed fixed background is removed.
+- A small 512 x 512 paper tile preserves authentic source texture without imposing a fixed crop, while the existing DOM mosaic tree and existing probability model generate the responsive visible composition.
+- Copy and content: all conference text, date, venue, navigation labels, registration destination, and schedule destination remain unchanged.
+- Responsiveness: desktop, tall desktop, reference-size desktop, and compact layouts show no horizontal document overflow.
+- On compact screens the broad crown and inner branch are hidden, leaving only the right-edge trunk and root so tree pixels do not cross the conference name.
+- Interaction: moving the pointer near the right tree activates 1054 mosaic pixels and updates the probability posterior while the tree rectangle remains exactly stable.
+- Compact navigation opens above the field, keeps every link readable, and preserves the primary registration action.
+- Accessibility: the decorative field remains hidden from assistive technology, existing reduced-motion behavior is preserved, and navigation controls retain semantic labels and practical target sizes.
+- Runtime: browser logs contain only normal Vite connection and hot-update messages with no errors or warnings.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P1 the full hero depended on one fixed raster field, so tall and wide screens exposed different partial crops and the tree could not form a reliable relationship with the bottom graphic.
+- Earlier evidence: `output/playwright/goal-html-field/01-before.jpg` and the user-reported tall captures recorded in the preceding QA sections.
+- Fix: replaced the full-bleed field image with a tiled source-paper surface, restored the existing nine-layer probability terrain as live DOM output, and anchored the single right tree behind that terrain.
+- Post-fix evidence: `output/playwright/goal-html-field/06-desktop-final.jpg`, `output/playwright/goal-html-field/07-tall-desktop.jpg`, and `output/playwright/goal-html-field/08-reference-size.png`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the first compact anchor adjustment brought the tree root into view but allowed the crown to pass through the conference name.
+- Earlier evidence: `output/playwright/goal-html-field/03-mobile-pass1.jpg`.
+- Fix: preserved the right-edge trunk and root while removing only the crown and inner branch below the compact breakpoint.
+- Post-fix evidence: `output/playwright/goal-html-field/04-mobile-pass2.jpg` and `output/playwright/goal-html-field/05-mobile-menu.jpg`.
+
+### Primary interactions tested
+
+- Loaded `/goal/` at 1774 x 886 and verified the tagline axis is centered at 50% of the hero height.
+- Loaded standard and tall desktop viewports and verified the tree stays at the right edge while its root enters the orange terrain.
+- Loaded 390 x 844 and verified the conference name does not overlap visible tree pixels and the page has no horizontal overflow.
+- Opened the compact navigation and verified all five page links and the registration action remain usable.
+- Moved the pointer near the tree and verified active pixels increase from 0 to 1054 while the tree rectangle remains unchanged.
+- Moved the pointer away and verified the active tree pixels return to 0 while the probability posterior continues its bounded response.
+- Checked browser logs and found no runtime errors or warnings.
+- Ran unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- Static comparison images cannot show the continuous tree ripple and probability-field motion.
+- The live interaction counters, stable rectangle measurement, responsive screenshots, menu state, browser logs, and complete build suite cover the implementation risks relevant to this change.
+
+final result: passed

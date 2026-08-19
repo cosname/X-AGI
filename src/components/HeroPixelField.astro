@@ -153,6 +153,22 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
   definition.baseline,
   echoComponentForState(definition, BASE_POSTERIOR_MEAN, BASE_POSTERIOR_AMPLITUDE),
 );
+
+const badgeTerrainTokens: Record<(typeof STATIC_TERRAIN_LAYERS)[number]['key'], { color: string; alpha: number }> = {
+  haze: { color: '245 215 198', alpha: 0.54 },
+  mist: { color: '218 202 231', alpha: 0.64 },
+  lavender: { color: '181 169 225', alpha: 0.72 },
+  periwinkle: { color: '143 132 211', alpha: 0.78 },
+  violet: { color: '112 101 197', alpha: 0.84 },
+  posterior: { color: '101 91 194', alpha: 0.9 },
+  navy: { color: '15 31 105', alpha: 0.94 },
+  ridge: { color: '126 111 202', alpha: 0.86 },
+  orange: { color: '238 111 48', alpha: 0.9 },
+};
+
+const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
+  composition === 'badge' ? badgeTerrainTokens[layer.key] : { color: layer.color, alpha: layer.alpha }
+);
 ---
 
 <div
@@ -160,31 +176,14 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
   data-hero-pixel-field
   data-render-mode="dom"
   data-tree-interaction={interactionMode}
-  data-terrain-enabled={composition === 'grove' ? 'true' : 'false'}
+  data-terrain-enabled="true"
   data-pixel-count={composition === 'grove' ? pixelData.stats.blocks : pixelData.right.length}
   data-visual-composition={composition}
   data-ready="false"
   aria-hidden="true"
 >
   {composition === 'badge' && (
-    <picture class="hero-pixel-field__paper">
-      <source
-        media="(max-width: 51.25rem)"
-        srcset="/2026/brand/goal-hero-paper-field-mobile.webp"
-      />
-      <source
-        media="(min-width: 51.26rem) and (max-aspect-ratio: 199 / 100)"
-        srcset="/2026/brand/goal-hero-paper-field-tall.webp"
-      />
-      <img
-        src="/2026/brand/goal-hero-paper-field.webp"
-        alt=""
-        width="1800"
-        height="768"
-        decoding="async"
-        fetchpriority="high"
-      />
-    </picture>
+    <i class="hero-pixel-field__paper"></i>
   )}
 
   <div class="hero-pixel-field__trees">
@@ -260,30 +259,33 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
         data-terrain-occlusion="orange"
         style={`--terrain-path:${basePaths.get('orange')}`}
       ></i>
-
-      <div class="hero-pixel-field__terrain" data-probability-terrain>
-        {STATIC_TERRAIN_LAYERS.map((layer) => (
-          <div class={`hero-pixel-field__terrain-layer hero-pixel-field__terrain-layer--${layer.key}`} data-layer={layer.key}>
-            <i
-              class="hero-pixel-field__terrain-surface"
-              data-terrain-surface={layer.key}
-              style={`--terrain-rgb:${layer.color};--terrain-alpha:${layer.alpha};--terrain-path:${basePaths.get(layer.key)}`}
-            ></i>
-          </div>
-        ))}
-
-        <span class="hero-pixel-field__echo-field">
-          {TERRAIN_ECHOES.map((echo) => (
-            <i
-              class="hero-pixel-field__terrain-surface hero-pixel-field__terrain-echo"
-              data-echo={echo.index}
-              style={`--terrain-rgb:129 118 206;--terrain-alpha:${echo.alpha};--terrain-path:${echoPath(echo)}`}
-            ></i>
-          ))}
-        </span>
-      </div>
     </>
   )}
+
+  <div class="hero-pixel-field__terrain" data-probability-terrain>
+    {STATIC_TERRAIN_LAYERS.map((layer) => {
+      const token = terrainTokenFor(layer);
+      return (
+        <div class={`hero-pixel-field__terrain-layer hero-pixel-field__terrain-layer--${layer.key}`} data-layer={layer.key}>
+          <i
+            class="hero-pixel-field__terrain-surface"
+            data-terrain-surface={layer.key}
+            style={`--terrain-rgb:${token.color};--terrain-alpha:${token.alpha};--terrain-path:${basePaths.get(layer.key)}`}
+          ></i>
+        </div>
+      );
+    })}
+
+    <span class="hero-pixel-field__echo-field">
+      {TERRAIN_ECHOES.map((echo) => (
+        <i
+          class="hero-pixel-field__terrain-surface hero-pixel-field__terrain-echo"
+          data-echo={echo.index}
+          style={`--terrain-rgb:${composition === 'badge' ? '118 105 198' : '129 118 206'};--terrain-alpha:${echo.alpha};--terrain-path:${echoPath(echo)}`}
+        ></i>
+      ))}
+    </span>
+  </div>
 </div>
 
 <style is:inline set:html={tokenCss}></style>

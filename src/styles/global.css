@@ -1426,6 +1426,11 @@
   overflow: visible;
 }
 
+.conference-hero__tagline-axis,
+.conference-hero__details {
+  display: contents;
+}
+
 .edition-2026 .conference-home .conference-hero__year {
   display: block;
   margin: 0;
@@ -4587,29 +4592,18 @@ button:focus-visible {
   z-index: 0;
   inset: 0;
   display: block;
-  overflow: hidden;
+  background-color: #f7f1ea;
+  background-image: url('/2026/brand/goal-paper-texture.webp');
+  background-repeat: repeat;
+  background-size: 32rem 32rem;
   pointer-events: none;
 }
 
-.hero-pixel-field__paper img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-}
-
-@media (min-width: 51.26rem) and (min-aspect-ratio: 2 / 1) {
-  .hero-pixel-field--badge .hero-pixel-field__paper img {
-    transform: scale(1.27);
-    transform-origin: center bottom;
-  }
-}
-
 .hero-pixel-field--badge {
-  --badge-tree-anchor-x: clamp(70.5%, calc(19.8vw + 38rem), 94%);
+  --badge-tree-anchor-x: 98%;
   --badge-tree-anchor-y: 50%;
-  --badge-tree-height: clamp(116%, 72vw, 132%);
+  --badge-tree-height: min(110%, 80vw);
+  --badge-terrain-scale: 1.26;
   background: #f7f1ea;
 }
 
@@ -4625,19 +4619,30 @@ button:focus-visible {
   left: var(--badge-tree-anchor-x) !important;
   width: auto;
   height: var(--badge-tree-height);
-  opacity: 0.96;
+  opacity: 0.9;
   transform: translate(-73.5%, -50%);
-  -webkit-mask-image: none;
-  mask-image: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0 16%, rgb(0 0 0 / 0.16) 25%, #000 40%);
+  mask-image: linear-gradient(to right, transparent 0 16%, rgb(0 0 0 / 0.16) 25%, #000 40%);
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-position--right .hero-pixel-field__tree-artboard {
-  transform: scaleX(1.2);
+  transform: scaleX(1.14);
   transform-origin: 73% 50%;
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-sway {
   filter: saturate(1.05) contrast(1.02);
+}
+
+.hero-pixel-field--badge .hero-pixel-field__terrain {
+  z-index: 2;
+  transform: scaleY(var(--badge-terrain-scale));
+  transform-origin: center bottom;
+}
+
+.hero-pixel-field--badge .hero-pixel-field__echo-field {
+  -webkit-mask-image: linear-gradient(to right, transparent 0 42%, #000 55% 100%);
+  mask-image: linear-gradient(to right, transparent 0 42%, #000 55% 100%);
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge {
@@ -4649,22 +4654,32 @@ button:focus-visible {
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner {
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: clamp(9rem, 24.5vh, 11.75rem) clamp(3.5rem, 5vw, 6rem) 3.5rem clamp(5.5rem, 10.3vw, 11.6rem);
+  position: relative;
+  justify-content: initial;
+  align-items: initial;
+  padding: 0;
   text-align: left;
   transform: none;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__copy {
-  width: min(46.5rem, 48vw);
-  align-items: flex-start;
-  align-self: flex-start;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(5rem, 10.2vw, 11.5rem);
+  width: min(50rem, 62vw);
+  height: auto;
+  display: block;
+  align-self: auto;
+  padding: 0;
   text-align: left;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
-  margin: 0 0 0.95rem;
+  position: absolute;
+  bottom: calc(50% + 1.5rem);
+  left: 0;
+  margin: 0;
   font-size: clamp(6.5rem, 7.8vw, 8.8rem);
   line-height: 0.86;
   text-align: left;
@@ -4696,9 +4711,29 @@ button:focus-visible {
   line-height: 0.95;
 }
 
+.edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: min(48rem, 60vw);
+  display: flex;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+.edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis::after {
+  min-width: 2.5rem;
+  height: 1px;
+  flex: 1 1 auto;
+  margin-left: 1rem;
+  background: rgb(103 82 200 / 0.34);
+  content: '';
+}
+
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline {
   max-width: none;
-  margin: 0 0 1rem;
+  flex: 0 0 auto;
+  margin: 0;
   padding: 0;
   font-size: clamp(1.45rem, 1.75vw, 2rem);
   line-height: 1.25;
@@ -4706,6 +4741,15 @@ button:focus-visible {
   text-align: left;
   transform: scaleX(1.18);
   transform-origin: left center;
+}
+
+.edition-2026.edition-goal-home .conference-hero--badge .conference-hero__details {
+  position: absolute;
+  top: calc(50% + 2.6rem);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__meta {
@@ -4720,12 +4764,14 @@ button:focus-visible {
 }
 
 @media (max-width: 64rem) {
-  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner {
-    padding-left: clamp(4.5rem, 10vw, 7rem);
+  .hero-pixel-field--badge {
+    --badge-tree-anchor-x: 99%;
+    --badge-tree-height: min(106%, 76vw);
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__copy {
-    width: min(41rem, 55vw);
+    left: clamp(4rem, 8.5vw, 6rem);
+    width: min(42rem, 62vw);
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
@@ -4735,8 +4781,10 @@ button:focus-visible {
 
 @media (max-width: 51.25rem) {
   .hero-pixel-field--badge {
-    --badge-tree-anchor-y: 58%;
-    --badge-tree-height: 98%;
+    --badge-tree-anchor-x: 97%;
+    --badge-tree-anchor-y: 56%;
+    --badge-tree-height: 82%;
+    --badge-terrain-scale: 1.18;
   }
 
   .hero-pixel-field--badge .hero-pixel-field__trees {
@@ -4746,9 +4794,9 @@ button:focus-visible {
 
   .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
     width: auto;
-    opacity: 0.62;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.18) 18%, #000 42%);
-    mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.18) 18%, #000 42%);
+    opacity: 0.66;
+    -webkit-mask-image: linear-gradient(to right, transparent 0 48%, rgb(0 0 0 / 0.12) 62%, #000 75%);
+    mask-image: linear-gradient(to right, transparent 0 48%, rgb(0 0 0 / 0.12) 62%, #000 75%);
   }
 
   .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-root,
@@ -4760,16 +4808,23 @@ button:focus-visible {
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner {
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 7.35rem 1.5rem 9.5rem;
+    padding: 7.35rem 1.5rem 11rem;
     text-align: left;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__copy {
+    position: relative;
+    inset: auto;
     width: min(100%, 34rem);
+    height: auto;
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
+    padding: 0;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
+    position: static;
     margin-bottom: 0.9rem;
     font-size: clamp(4.6rem, 15vw, 6rem);
     line-height: 0.87;
@@ -4779,11 +4834,30 @@ button:focus-visible {
     font-size: 0.94em;
   }
 
-  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline {
-    max-width: 28rem;
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
+    position: static;
+    width: 100%;
     margin-bottom: 0.9rem;
+    transform: none;
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis::after {
+    min-width: 1.25rem;
+    margin-left: 0.65rem;
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline {
+    max-width: calc(100% - 2rem);
+    margin: 0;
     font-size: clamp(1.05rem, 3.6vw, 1.35rem);
     transform: none;
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__details {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__meta {
@@ -4800,7 +4874,12 @@ button:focus-visible {
 
 @media (max-width: 31rem) {
   .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-    opacity: 0.58;
+    opacity: 0.6;
+  }
+
+  .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-crown,
+  .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-inner {
+    display: none;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner {

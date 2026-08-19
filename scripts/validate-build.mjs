@@ -182,7 +182,19 @@ async function homepageHeroCssUsesImage(htmlFile, source, hero) {
       || rule.includes('.conference-hero')
     ));
 
-  return heroRules.some((rule) => /(?:url|image-set)\s*\(/i.test(rule));
+  const heroClasses = new Set(
+    [...hero.matchAll(/\sclass=["']([^"']+)["']/gi)]
+      .flatMap((match) => match[1].split(/\s+/))
+      .filter(Boolean),
+  );
+
+  return heroRules.some((rule) => {
+    if (!/(?:url|image-set)\s*\(/i.test(rule)) return false;
+    const selector = rule.split('{', 1)[0] ?? '';
+    const selectorClasses = [...selector.matchAll(/\.([a-z0-9_-]+)/gi)]
+      .map((match) => match[1]);
+    return selectorClasses.some((className) => heroClasses.has(className));
+  });
 }
 
 const outputFiles = await walk(root);
@@ -371,7 +383,7 @@ for (const group of buildGroups) {
       if (group.edition.skin === 'goal') {
         if (
           !hero.includes('data-visual-composition="badge"')
-          || !hero.includes('data-terrain-enabled="false"')
+          || !hero.includes('data-terrain-enabled="true"')
           || !hero.includes('data-tree-interaction="wide"')
         ) {
           failures.push(`${route}: goal homepage must expose the badge composition contract`);
@@ -379,19 +391,22 @@ for (const group of buildGroups) {
         if (leftTrees !== 0 || rightTrees !== 1) {
           failures.push(`${route}: goal homepage must render one right tree and no left tree`);
         }
-        if (terrainLayers !== 0 || terrainEchoes !== 0) {
-          failures.push(`${route}: goal homepage must not render probability terrain`);
+        if (terrainLayers !== 9 || terrainEchoes !== 11) {
+          failures.push(`${route}: goal homepage must render the responsive probability terrain`);
         }
         if (
-          !hero.includes('/2026/brand/goal-hero-paper-field.webp')
-          || !hero.includes('/2026/brand/goal-hero-paper-field-tall.webp')
-          || !hero.includes('/2026/brand/goal-hero-paper-field-mobile.webp')
-          || !/<picture\b/i.test(hero)
+          !hero.includes('class="hero-pixel-field__paper"')
+          || /<(?:img|picture)\b/i.test(hero)
+          || !(await resolvesToOutput(file, '/2026/brand/goal-paper-texture.webp'))
         ) {
-          failures.push(`${route}: goal homepage is missing the responsive badge paper field`);
+          failures.push(`${route}: goal homepage is missing the tiled paper surface`);
         }
-        if (/<(?:canvas|svg)\b/i.test(hero) || source.includes('hero-reference-trees')) {
-          failures.push(`${route}: goal homepage must keep the connection tree DOM-rendered`);
+        if (
+          !hero.includes('conference-hero__tagline-axis')
+          || /<(?:canvas|img|picture|svg)\b/i.test(hero)
+          || source.includes('hero-reference-trees')
+        ) {
+          failures.push(`${route}: goal homepage must keep the title, tree, and terrain DOM-rendered`);
         }
       } else {
         if (
