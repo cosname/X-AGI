@@ -4600,17 +4600,23 @@ button:focus-visible {
 }
 
 .hero-pixel-field--badge {
-  --badge-tree-anchor-x: 98%;
-  --badge-tree-anchor-y: 50%;
-  --badge-tree-height: min(110%, 80vw);
-  --badge-terrain-scale: 1.26;
+  --badge-tree-anchor-x: 88%;
+  --badge-tree-anchor-y: clamp(50%, calc(66% - 1vw), 58%);
+  --badge-tree-height: min(118%, 78vw);
+  --badge-terrain-height: min(126%, 66vw);
   background: #f7f1ea;
 }
 
 .hero-pixel-field--badge .hero-pixel-field__trees {
   z-index: 1;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.12) 7%, #000 14%);
-  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.12) 7%, #000 14%);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.12) 7%, #000 14%),
+    linear-gradient(to right, transparent 0 54%, rgb(0 0 0 / 0.1) 59%, #000 66%);
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.12) 7%, #000 14%),
+    linear-gradient(to right, transparent 0 54%, rgb(0 0 0 / 0.1) 59%, #000 66%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
@@ -4621,8 +4627,8 @@ button:focus-visible {
   height: var(--badge-tree-height);
   opacity: 0.9;
   transform: translate(-73.5%, -50%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0 16%, rgb(0 0 0 / 0.16) 25%, #000 40%);
-  mask-image: linear-gradient(to right, transparent 0 16%, rgb(0 0 0 / 0.16) 25%, #000 40%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0 2%, rgb(0 0 0 / 0.34) 8%, #000 18%);
+  mask-image: linear-gradient(to right, transparent 0 2%, rgb(0 0 0 / 0.34) 8%, #000 18%);
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-position--right .hero-pixel-field__tree-artboard {
@@ -4636,8 +4642,8 @@ button:focus-visible {
 
 .hero-pixel-field--badge .hero-pixel-field__terrain {
   z-index: 2;
-  transform: scaleY(var(--badge-terrain-scale));
-  transform-origin: center bottom;
+  top: auto;
+  height: var(--badge-terrain-height);
 }
 
 .hero-pixel-field--badge .hero-pixel-field__echo-field {
@@ -4670,6 +4676,7 @@ button:focus-visible {
   width: min(50rem, 62vw);
   height: auto;
   display: block;
+  z-index: 3;
   align-self: auto;
   padding: 0;
   text-align: left;
@@ -4764,11 +4771,6 @@ button:focus-visible {
 }
 
 @media (max-width: 64rem) {
-  .hero-pixel-field--badge {
-    --badge-tree-anchor-x: 99%;
-    --badge-tree-height: min(106%, 76vw);
-  }
-
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__copy {
     left: clamp(4rem, 8.5vw, 6rem);
     width: min(42rem, 62vw);
@@ -4780,29 +4782,8 @@ button:focus-visible {
 }
 
 @media (max-width: 51.25rem) {
-  .hero-pixel-field--badge {
-    --badge-tree-anchor-x: 97%;
-    --badge-tree-anchor-y: 56%;
-    --badge-tree-height: 82%;
-    --badge-terrain-scale: 1.18;
-  }
-
   .hero-pixel-field--badge .hero-pixel-field__trees {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-    width: auto;
-    opacity: 0.66;
-    -webkit-mask-image: linear-gradient(to right, transparent 0 48%, rgb(0 0 0 / 0.12) 62%, #000 75%);
-    mask-image: linear-gradient(to right, transparent 0 48%, rgb(0 0 0 / 0.12) 62%, #000 75%);
-  }
-
-  .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-root,
-  .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-trunk,
-  .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-mid-outer {
-    display: block;
+    display: none;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner {
@@ -4873,15 +4854,6 @@ button:focus-visible {
 }
 
 @media (max-width: 31rem) {
-  .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-    opacity: 0.6;
-  }
-
-  .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-crown,
-  .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-inner {
-    display: none;
-  }
-
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner {
     padding: 6.9rem 1.25rem 8.75rem;
   }

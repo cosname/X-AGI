@@ -92,6 +92,76 @@ Previous result: passed.
 
 final result: passed
 
+## Responsive Terrain And Right-Third Tree
+
+### Comparison target
+
+- Source visual truth: the existing composition captured before this refinement in `output/playwright/goal-terrain-tree/01-narrow-before.jpg`, `output/playwright/goal-terrain-tree/02-wide-before.jpg`, and `output/playwright/goal-html-field/04-mobile-pass2.jpg`, together with the user's instruction to preserve the hill curvature while reducing its relative height and to enlarge the tree into the right third.
+- Rendered implementation: `output/playwright/goal-terrain-tree/05-narrow-final.jpg`, `output/playwright/goal-terrain-tree/06-wide-final.jpg`, `output/playwright/goal-terrain-tree/07-medium-final.jpg`, `output/playwright/goal-terrain-tree/08-mobile-final.jpg`, and `output/playwright/goal-terrain-tree/09-narrow-desktop-final.jpg`.
+- Full-view comparison evidence: `output/playwright/goal-terrain-tree/10-narrow-comparison.jpg`, `output/playwright/goal-terrain-tree/11-wide-comparison.jpg`, and `output/playwright/goal-terrain-tree/12-mobile-comparison.jpg`.
+- Browser CSS viewports: 1774 x 886 for wide desktop, 1024 x 720 for intermediate desktop, 927 x 881 for narrow desktop, 768 x 900 for compact tablet, and 390 x 844 for mobile.
+- Source and implementation screenshot pixels match their recorded CSS viewports at device pixel ratio 1.
+- Density normalization: every before-and-after contact sheet uses captures with identical CSS and pixel dimensions, so no resampling was required.
+- State: `/goal/` is at the top with the transparent navigation and the tree at rest, followed by separate wide-pointer and open-mobile-menu checks.
+- Focused comparison: separate crops were not needed because the bottom terrain, right tree, title boundary, and root connection remain large and readable in the full-view contact sheets.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for the requested terrain and tree proportions.
+
+- Fonts and typography: the year, mosaic conference name, midpoint tagline, metadata, navigation, and calls to action retain their existing families, weights, sizes, line heights, letter spacing, and wrapping.
+- Spacing and layout rhythm: the terrain height now follows `min(126%, 66vw)`, preserving the same curve family while lowering the visible hills as the viewport narrows instead of squeezing them into steep peaks.
+- The visible mobile terrain falls from the earlier tall mass to an approximately 7.3% bottom strip at 390 x 844, while the 927 x 881 narrow-desktop view keeps a restrained approximately 17% hill region.
+- The wide tree now occupies the visual right third with its trunk anchored near 88% of the hero width, and its root remains buried in the orange terrain.
+- A two-axis mask keeps the tree transparent through the title region, while the title layer remains above both tree and terrain whenever their geometric bounds meet.
+- Colors and visual tokens: the warm paper, indigo, lavender, teal, peach, and orange palette remains unchanged.
+- Image quality and asset fidelity: the existing DOM mosaic tree and probability terrain are preserved, so responsive scaling introduces no raster blur, crop dependency, placeholder imagery, or replacement illustration.
+- Copy and content: all conference copy, navigation labels, date, venue, registration destination, and schedule destination remain unchanged.
+- Responsive behavior: the tree is fully hidden at widths of 820px and below, restores at wider desktop widths, and all tested viewports have zero horizontal document overflow.
+- Interaction: after resizing from mobile to 1774 x 886, the tree restores correctly and a pointer move inside its broad response field activates 624 mosaic pixels.
+- The tree rectangle remains exactly stable before and after pointer activation, so the scales respond without moving the tree anchor.
+- Accessibility: decorative layers remain hidden from assistive technology, the compact navigation retains semantic labels and full-width targets, and reduced-motion behavior is unchanged.
+- Runtime: browser logs contain only normal Vite connection and hot-update messages with no errors or warnings.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the terrain used a hero-height scale transform, so narrower screens compressed it horizontally while leaving its vertical mass unchanged and made the hills look unnaturally steep.
+- Earlier evidence: `output/playwright/goal-terrain-tree/01-narrow-before.jpg` and the left side of `output/playwright/goal-terrain-tree/10-narrow-comparison.jpg`.
+- Fix: replaced the vertical scale with a width-bound terrain height of `min(126%, 66vw)` and kept the original probability curves anchored to the bottom.
+- Post-fix evidence: `output/playwright/goal-terrain-tree/05-narrow-final.jpg`, `output/playwright/goal-terrain-tree/08-mobile-final.jpg`, `output/playwright/goal-terrain-tree/09-narrow-desktop-final.jpg`, `output/playwright/goal-terrain-tree/10-narrow-comparison.jpg`, and `output/playwright/goal-terrain-tree/12-mobile-comparison.jpg`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the tree appeared as a thin far-right fragment on a wide desktop and did not carry enough visual weight against the left title.
+- Earlier evidence: `output/playwright/goal-terrain-tree/02-wide-before.jpg` and the left side of `output/playwright/goal-terrain-tree/11-wide-comparison.jpg`.
+- Fix: moved the trunk anchor to 88%, enlarged the responsive tree field, relaxed the tree's internal reveal mask, and added a title-priority mask and layer order.
+- Post-fix evidence: `output/playwright/goal-terrain-tree/06-wide-final.jpg`, `output/playwright/goal-terrain-tree/07-medium-final.jpg`, and the right side of `output/playwright/goal-terrain-tree/11-wide-comparison.jpg`.
+
+#### Iteration 3
+
+- Earlier finding: P2 retaining a partial tree below the desktop breakpoint left a disconnected root fragment in compact layouts.
+- Earlier evidence: the intermediate compact browser check before the final breakpoint rule.
+- Fix: hide the complete tree field at 820px and below while allowing the width-bound terrain to remain continuous.
+- Post-fix evidence: `output/playwright/goal-terrain-tree/05-narrow-final.jpg`, `output/playwright/goal-terrain-tree/08-mobile-final.jpg`, and the right side of `output/playwright/goal-terrain-tree/12-mobile-comparison.jpg`.
+
+### Primary interactions tested
+
+- Resized the live page from 390 x 844 to 1774 x 886 and verified the tree changes from `display: none` to a visible 791.7px-wide right-third composition.
+- Moved the pointer through the enlarged tree response field and verified active pixels increase from 0 to 624 while the tree rectangle remains unchanged.
+- Checked 820px and 821px breakpoint states and verified the tree hides and restores without horizontal overflow.
+- Opened the compact navigation at 390 x 844 and verified all five page links and the registration action remain available with zero horizontal overflow.
+- Checked wide, intermediate, narrow-desktop, compact-tablet, and mobile geometry for title priority, hill height, tree visibility, and root-to-terrain connection.
+- Checked browser runtime logs and found no errors or warnings.
+
+### Residual test gaps
+
+- Static screenshots cannot show the continuous temporal rhythm of the mosaic scales or probability terrain.
+- Live interaction counters, stable geometry measurements, same-viewport comparisons, responsive screenshots, menu checks, browser logs, and the complete test suite cover the implementation risks relevant to this refinement.
+
+final result: passed
+
 ## Badge-led Goal Homepage
 
 ### Comparison target
@@ -408,5 +478,17 @@ No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for
 
 - Static comparison images cannot show the continuous tree ripple and probability-field motion.
 - The live interaction counters, stable rectangle measurement, responsive screenshots, menu state, browser logs, and complete build suite cover the implementation risks relevant to this change.
+
+final result: passed
+
+## Responsive Terrain And Tree Final Verification
+
+- Detailed visual comparison and iteration history: `## Responsive Terrain And Right-Third Tree` in this report.
+- Final browser evidence: `output/playwright/goal-terrain-tree/06-wide-final.jpg`, `output/playwright/goal-terrain-tree/07-medium-final.jpg`, `output/playwright/goal-terrain-tree/08-mobile-final.jpg`, and `output/playwright/goal-terrain-tree/09-narrow-desktop-final.jpg`.
+- Same-viewport comparison evidence: `output/playwright/goal-terrain-tree/10-narrow-comparison.jpg`, `output/playwright/goal-terrain-tree/11-wide-comparison.jpg`, and `output/playwright/goal-terrain-tree/12-mobile-comparison.jpg`.
+- Final responsive checks cover 1774 x 886, 1024 x 720, 927 x 881, 820 x 900, 821 x 900, 768 x 900, and 390 x 844.
+- The full `npm test` suite passed with 18 unit tests, zero Astro diagnostics, a successful production build, and successful route validation.
+- Browser runtime logs contain no errors or warnings.
+- No actionable P0, P1, or P2 findings remain.
 
 final result: passed
