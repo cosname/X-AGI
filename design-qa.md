@@ -634,3 +634,56 @@ No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for
 - Live state counters, stable tree geometry, same-viewport comparisons, responsive screenshots, cross-preview isolation, browser logs, and the complete test suite cover the implementation risks relevant to this refinement.
 
 final result: passed
+
+## Goal Title Optical Alignment
+
+### Comparison target
+
+- Source visual truth: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-d6137f17-5b49-409e-aedf-e8ca52985e20.png`, together with the user's instruction to preserve the existing `X-AGI` size and align `大会` with the Latin letterforms.
+- Rendered implementation: `output/playwright/goal-title-alignment/goal-title-after.png`, `output/playwright/goal-title-alignment/goal-title-wide-after.png`, and `output/playwright/goal-title-alignment/goal-title-mobile-after.png`.
+- Browser CSS viewports: 927 x 881 for the reported narrow-desktop state, 1440 x 900 for wide desktop, and 390 x 844 for mobile.
+- Source screenshot pixels: 974 x 450.
+- Implementation screenshot pixels match the recorded CSS viewports.
+- The reported 927 x 881 browser state had device pixel ratio 2, while the Browser capture normalized output to one image pixel per CSS pixel.
+- The wide and mobile verification states had device pixel ratio 1.
+- State: `/goal/` at scroll position 0 with the transparent navigation and no pointer interaction.
+- Full-view evidence: `output/playwright/goal-title-alignment/goal-title-after.png`, `output/playwright/goal-title-alignment/goal-title-wide-after.png`, and `output/playwright/goal-title-alignment/goal-title-mobile-after.png`.
+- Focused comparison evidence: `output/playwright/goal-title-alignment/goal-title-before-after-comparison.png`.
+
+### Findings
+
+No actionable P0, P1, or P2 visual or responsive issues remain for the requested title alignment correction.
+
+- Fonts and typography: before the correction, the visible `大会` ink occupied y = 356 through 415 while the unchanged `X-AGI` ink occupied y = 346 through 404 at the reported viewport.
+- The two title parts had equal visible ink heights, so resizing the full title would have been the wrong correction.
+- The implementation adds a `0.15em` optical bottom offset only to `大会`, placing its visible ink at y = 346 through 405.
+- The `X-AGI` font size remains 84.224px, and its width, height, x position, y position, line height, and horizontal transform are exactly unchanged before and after the correction.
+- At 1440 x 900 and 390 x 844, the two visible ink boxes remain aligned within one rendered pixel.
+- Spacing and layout rhythm: the title's left anchor, year, tagline, metadata, actions, navigation, tree, and terrain positions remain unchanged.
+- Colors and visual tokens: no color, texture, opacity, contrast, or mosaic-dot token changed.
+- Image quality and asset fidelity: no raster, tree, terrain, logo, or decorative asset changed, and the title remains live text with the existing mosaic ink treatment.
+- Copy and content: the year, conference name, English tagline, date, venue, and actions remain unchanged.
+- Responsive behavior: the corrected title has no horizontal overflow at the three tested viewports, and the compact mobile title remains fully visible.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the layout aligned the two element boxes at their bottom edges, but the Chinese serif font's internal metrics placed the visible `大会` glyphs about 10px below the visible Latin letterforms.
+- Earlier evidence: the user report and the left side of `output/playwright/goal-title-alignment/goal-title-before-after-comparison.png`.
+- Fix: preserved the existing `X-AGI` rule and applied a proportional optical offset only to `大会`.
+- Post-fix evidence: the right side of the focused comparison and all three final responsive captures.
+
+### Primary interactions tested
+
+- Loaded `/goal/` at the reported viewport and verified the title remains in the same top-of-page state.
+- Resized the same in-app Browser tab to wide desktop and mobile viewports and verified the title remains fully visible with no horizontal overflow.
+- Returned the preview to the user's 927 x 881 viewport after responsive verification.
+- Ran unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- Browser antialiasing can shift a thresholded ink edge by one pixel across device densities.
+- The same-font responsive captures and exact unchanged `X-AGI` geometry cover the implementation risk relevant to this optical correction.
+
+final result: passed

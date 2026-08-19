@@ -4718,7 +4718,7 @@ button:focus-visible {
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__title-zh {
-  margin-bottom: 0;
+  margin-bottom: 0.15em;
   font-size: 0.82em;
   line-height: 0.92;
 }
