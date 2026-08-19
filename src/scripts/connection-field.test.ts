@@ -8,6 +8,7 @@ import {
   mosaicRippleSample,
   posteriorForPointer,
   STATIC_TERRAIN_LAYERS,
+  terrainLayerForProfile,
   terrainComponentsForState,
   treeInteractionGeometry,
 } from './hero-pixel-field.ts';
@@ -100,6 +101,17 @@ test('terrain layers preserve their intrinsic resting distribution', () => {
       assert.deepEqual(resting[index], component);
     });
   });
+});
+
+test('tree foundation profile centers the right terrain beneath the root', () => {
+  const foundation = STATIC_TERRAIN_LAYERS.find(({ key }) => key === 'foundation');
+  assert.ok(foundation);
+
+  const profiled = terrainLayerForProfile(foundation, 'tree-foundation');
+
+  assert.notDeepEqual(profiled.components, foundation.components);
+  assert.equal(profiled.components[0][0], 0.89);
+  assert.ok(profiled.components[0][2] > foundation.components[1][2]);
 });
 
 test('mosaic ripple stays local and preserves a stable root', () => {

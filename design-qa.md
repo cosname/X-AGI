@@ -492,3 +492,73 @@ final result: passed
 - No actionable P0, P1, or P2 findings remain.
 
 final result: passed
+
+## Monochrome Tree Foundation And Static Tree
+
+### Comparison target
+
+- Source visual truth: the accepted pre-change composition in `output/playwright/goal-terrain-tree/06-wide-final.jpg`, `output/playwright/goal-terrain-tree/09-narrow-desktop-final.jpg`, and `output/playwright/goal-terrain-tree/08-mobile-final.jpg`, together with the user's instruction to turn the orange right hill into the tree foundation, remove orange and near-black terrain colors, and disable the tree's pointer ripple.
+- Rendered implementation: `output/playwright/goal-foundation/01-wide-final.png`, `output/playwright/goal-foundation/02-narrow-final.png`, and `output/playwright/goal-foundation/03-mobile-final.png`.
+- Full-view comparison evidence: `output/playwright/goal-foundation/04-wide-comparison.jpg`, `output/playwright/goal-foundation/05-narrow-comparison.jpg`, and `output/playwright/goal-foundation/06-mobile-comparison.jpg`.
+- Browser CSS viewports: 1774 x 886 for wide desktop, 927 x 881 for narrow desktop, and 390 x 844 for mobile.
+- Source and implementation screenshot pixels match their recorded CSS viewports at device pixel ratio 1.
+- Density normalization: every before-and-after contact sheet uses captures with identical CSS and pixel dimensions, so no resampling was required.
+- State: `/goal/` is at the top with the transparent navigation, first at rest and then with the pointer placed directly inside the right tree.
+- Focused comparison: separate crops were not needed because the tree root, right foundation, left terrain edge, title, and navigation remain clearly readable in all three full-view contact sheets.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for the requested tree foundation and palette consolidation.
+
+- Fonts and typography: the year, mosaic title, midpoint tagline, metadata, navigation, and actions retain their existing families, weights, sizes, line heights, letter spacing, and wrapping.
+- Spacing and layout rhythm: the title and tree positions are unchanged, while the root branch extends farther downward and the right terrain peak is centered beneath it at 89% of the field width.
+- The root now passes into the front terrain layer instead of ending against a separate colored mound, so the tree and its base read as one continuous structure.
+- Colors and visual tokens: every badge terrain layer now uses a blue-purple value sampled from the tree palette.
+- The former orange right layer is now a deep indigo foundation, and the former near-black left edge is now a saturated medium blue.
+- Image quality and asset fidelity: the existing DOM mosaic tree and probability terrain remain intact, with no raster replacement, scaling blur, placeholder imagery, or new approximation.
+- Copy and content: all conference copy, navigation labels, date, venue, registration destination, and schedule destination remain unchanged.
+- Responsive behavior: the tree foundation aligns with the root at wide and narrow desktop sizes, the tree remains hidden on mobile, and all tested viewports have zero horizontal overflow.
+- Interaction: placing the pointer inside the goal tree keeps `data-active-scale-pixels` at 0 and leaves the tree rectangle unchanged.
+- The probability terrain still responds gently, with its posterior mean changing from 0.6750 to 0.6970, so only the rejected tree ripple was removed.
+- Cross-preview isolation: `/next/` retains `data-tree-interaction="direct"`, its original foundation color, and 290 active scale pixels when the pointer enters its right tree.
+- Accessibility: decorative layers remain hidden from assistive technology, reduced-motion behavior is preserved, and the compact navigation retains semantic labels and practical target sizes.
+- Runtime: browser logs contain no errors or warnings.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the orange right hill and near-black left edge introduced two competing color accents outside the tree's blue-purple language, making the base feel visually separate and busier than the accepted composition.
+- Earlier evidence: the left sides of `output/playwright/goal-foundation/04-wide-comparison.jpg`, `output/playwright/goal-foundation/05-narrow-comparison.jpg`, and `output/playwright/goal-foundation/06-mobile-comparison.jpg`.
+- Fix: remapped all nine badge terrain layers to values sampled from the existing tree palette and renamed the structural right layer from `orange` to `foundation` throughout the component, animation model, CSS, and build contract.
+- Post-fix evidence: the right sides of all three comparison sheets.
+
+#### Iteration 2
+
+- Earlier finding: P2 the right terrain peak did not clearly follow the trunk geometry, so the root appeared to sit against a generic hill rather than grow into its own base.
+- Earlier evidence: `output/playwright/goal-terrain-tree/06-wide-final.jpg` and `output/playwright/goal-terrain-tree/09-narrow-desktop-final.jpg`.
+- Fix: added a badge-only tree-foundation terrain profile centered beneath the root and extended the existing root branch into the foreground layer.
+- Post-fix evidence: `output/playwright/goal-foundation/01-wide-final.png` and `output/playwright/goal-foundation/02-narrow-final.png`.
+
+#### Iteration 3
+
+- Earlier finding: P2 the broad pointer field still activated hundreds of tree pixels even when the pointer was outside individual branches, and the user requested that effect be disabled.
+- Earlier evidence: the preceding QA section recorded 624 active tree pixels in the wide response field.
+- Fix: introduced an explicit `none` tree-interaction mode for the goal composition, skipped branch layout and ripple work in that mode, and added a CSS backstop that prevents scale-pixel transforms.
+- Post-fix evidence: the live browser contract reports 0 active tree pixels before and after placing the pointer inside the tree, while `/next/` still reports 290 active pixels in direct mode.
+
+### Primary interactions tested
+
+- Placed the pointer inside the right tree at 927 x 881 and verified the tree stays completely static with 0 active scale pixels and an unchanged rectangle.
+- Verified the probability terrain still updates independently when the pointer moves.
+- Opened the compact navigation at 390 x 844 and verified all five page links remain present with zero horizontal overflow.
+- Opened `/next/` in a separate in-app Browser tab and verified its direct tree interaction and original terrain token remain isolated from the goal changes.
+- Checked browser runtime logs and found no errors or warnings.
+- Ran 19 unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- Static screenshots cannot show the continuous probability-terrain response.
+- Live state counters, stable tree geometry, same-viewport comparisons, responsive screenshots, cross-preview isolation, browser logs, and the complete test suite cover the implementation risks relevant to this refinement.
+
+final result: passed

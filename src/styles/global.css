@@ -1346,7 +1346,7 @@
   z-index: 2;
 }
 
-.hero-pixel-field__terrain-layer--orange {
+.hero-pixel-field__terrain-layer--foundation {
   z-index: 3;
 }
 
@@ -4634,6 +4634,16 @@ button:focus-visible {
 .hero-pixel-field--badge .hero-pixel-field__tree-position--right .hero-pixel-field__tree-artboard {
   transform: scaleX(1.14);
   transform-origin: 73% 50%;
+}
+
+.hero-pixel-field--badge .hero-pixel-field__tree-branch--right-root {
+  transform: scaleY(1.08);
+  transform-origin: 50% 64.3%;
+}
+
+.hero-pixel-field--badge .hp--scale {
+  transform: none !important;
+  transition: none !important;
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-sway {

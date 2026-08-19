@@ -384,7 +384,8 @@ for (const group of buildGroups) {
         if (
           !hero.includes('data-visual-composition="badge"')
           || !hero.includes('data-terrain-enabled="true"')
-          || !hero.includes('data-tree-interaction="wide"')
+          || !hero.includes('data-tree-interaction="none"')
+          || !hero.includes('data-terrain-profile="tree-foundation"')
         ) {
           failures.push(`${route}: goal homepage must expose the badge composition contract`);
         }

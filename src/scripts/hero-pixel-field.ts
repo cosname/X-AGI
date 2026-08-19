@@ -17,12 +17,14 @@ type Rect = { left: number; top: number; right: number; bottom: number };
 export type DensityComponent = readonly [mean: number, sigma: number, amplitude: number];
 
 export type TerrainLayerDefinition = {
-  key: 'haze' | 'mist' | 'lavender' | 'periwinkle' | 'violet' | 'posterior' | 'navy' | 'ridge' | 'orange';
+  key: 'haze' | 'mist' | 'lavender' | 'periwinkle' | 'violet' | 'posterior' | 'navy' | 'ridge' | 'foundation';
   color: string;
   alpha: number;
   baseline: number;
   components: readonly DensityComponent[];
 };
+
+export type TerrainProfile = 'default' | 'tree-foundation';
 
 type TreeSide = 'left' | 'right';
 type BranchLayout = {
@@ -68,10 +70,24 @@ export const STATIC_TERRAIN_LAYERS: readonly TerrainLayerDefinition[] = [
     components: [[0.71, 0.08, 0.152], [0.78, 0.07, 0.1]],
   },
   {
-    key: 'orange', color: '58 52 138', alpha: 0.92, baseline: 1.02,
+    key: 'foundation', color: '58 52 138', alpha: 0.92, baseline: 1.02,
     components: [[1.04, 0.14, 0.188], [0.93, 0.09, 0.062], [0.86, 0.085, 0.072]],
   },
 ] as const;
+
+const TREE_FOUNDATION_COMPONENTS: readonly DensityComponent[] = [
+  [0.89, 0.095, 0.19],
+  [1.04, 0.16, 0.13],
+  [0.78, 0.09, 0.055],
+];
+
+export const terrainLayerForProfile = (
+  layer: TerrainLayerDefinition,
+  profile: TerrainProfile = 'default',
+): TerrainLayerDefinition => {
+  if (profile !== 'tree-foundation' || layer.key !== 'foundation') return layer;
+  return { ...layer, components: TREE_FOUNDATION_COMPONENTS };
+};
 
 export const DYNAMIC_GAUSSIANS = [
   { key: 'lavender', sigma: 0.145, amplitudeFactor: 0.22, baseline: 1.015 },
@@ -101,7 +117,7 @@ const TERRAIN_LAYER_DEPTH: Record<TerrainLayerDefinition['key'], number> = {
   posterior: 1,
   navy: 0.38,
   ridge: 0.7,
-  orange: 0.4,
+  foundation: 0.4,
 };
 
 const TERRAIN_LAYER_PHASE: Record<TerrainLayerDefinition['key'], number> = {
@@ -113,7 +129,7 @@ const TERRAIN_LAYER_PHASE: Record<TerrainLayerDefinition['key'], number> = {
   posterior: 3.34,
   navy: 3.9,
   ridge: 4.18,
-  orange: 4.46,
+  foundation: 4.46,
 };
 
 const clamp = (value: number, minimum: number, maximum: number) => Math.min(maximum, Math.max(minimum, value));
@@ -344,6 +360,10 @@ export const initializeHeroPixelFields = () => {
     const stage = field.closest<HTMLElement>('[data-connection-stage]') ?? field;
     const veil = field.querySelector<HTMLElement>('[data-hero-sanctuary]');
     const terrainEnabled = field.dataset.terrainEnabled !== 'false';
+    const terrainProfile: TerrainProfile = field.dataset.terrainProfile === 'tree-foundation'
+      ? 'tree-foundation'
+      : 'default';
+    const treeMotionEnabled = field.dataset.treeInteraction !== 'none';
     const treeInteractionMode = field.dataset.treeInteraction === 'wide' ? 'wide' : 'direct';
     const treePositions: Record<TreeSide, HTMLElement | null> = {
       left: field.querySelector<HTMLElement>('[data-tree-position="left"]'),
@@ -357,7 +377,7 @@ export const initializeHeroPixelFields = () => {
     const terrainSurfaces = Array.from(field.querySelectorAll<HTMLElement>('[data-terrain-surface]'));
     const treeTerrainOcclusions = {
       navy: field.querySelector<HTMLElement>('[data-terrain-occlusion="navy"]'),
-      orange: field.querySelector<HTMLElement>('[data-terrain-occlusion="orange"]'),
+      foundation: field.querySelector<HTMLElement>('[data-terrain-occlusion="foundation"]'),
     };
     const echoSurfaces = Array.from(field.querySelectorAll<HTMLElement>('[data-echo]'));
     const abortController = new AbortController();
@@ -411,12 +431,13 @@ export const initializeHeroPixelFields = () => {
       const shapeUnit = terrainShapeUnit();
       terrainSurfaces.forEach((surface, index) => {
         const key = surface.dataset.terrainSurface as TerrainLayerDefinition['key'];
-        const definition = STATIC_TERRAIN_LAYERS.find((layer) => layer.key === key);
-        if (!definition) return;
+        const sourceDefinition = STATIC_TERRAIN_LAYERS.find((layer) => layer.key === key);
+        if (!sourceDefinition) return;
+        const definition = terrainLayerForProfile(sourceDefinition, terrainProfile);
         const components = terrainComponentsForState(definition, snappedMean, snappedAmplitude, restingAmplitude);
         const terrainPath = buildDensityPolygon(width, shapeUnit, definition.baseline, components, index + 1);
         surface.style.setProperty('--terrain-path', terrainPath);
-        if (key === 'navy' || key === 'orange') {
+        if (key === 'navy' || key === 'foundation') {
           treeTerrainOcclusions[key]?.style.setProperty('--terrain-path', terrainPath);
         }
       });
@@ -580,6 +601,10 @@ export const initializeHeroPixelFields = () => {
     };
 
     const collectBranchLayouts = (fieldBox: DOMRect) => {
+      if (!treeMotionEnabled) {
+        branchLayouts = [];
+        return;
+      }
       const positionBoxes: Record<TreeSide, DOMRect | null> = {
         left: treePositions.left?.getBoundingClientRect() ?? null,
         right: treePositions.right?.getBoundingClientRect() ?? null,
@@ -729,7 +754,7 @@ export const initializeHeroPixelFields = () => {
         }
         pointerDirty = false;
       }
-      const branchMoving = applyBranchMotion(timestamp);
+      const branchMoving = treeMotionEnabled ? applyBranchMotion(timestamp) : false;
       applyTitleInk();
       if (active && branchMoving) {
         pointerFrame = window.requestAnimationFrame(pointerTick);

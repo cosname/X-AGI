@@ -7,12 +7,13 @@ import {
   buildDensityPolygon,
   echoComponentForState,
   STATIC_TERRAIN_LAYERS,
+  terrainLayerForProfile,
   terrainComponentsForState,
   TERRAIN_ECHOES,
 } from '../scripts/hero-pixel-field';
 
 interface Props {
-  interactionMode?: 'direct' | 'wide';
+  interactionMode?: 'none' | 'direct' | 'wide';
   composition?: 'grove' | 'badge';
 }
 
@@ -46,6 +47,7 @@ const leftWidth = pixelData.artboard.splitX;
 const rightWidth = pixelData.artboard.width - pixelData.artboard.splitX;
 const artboardHeight = pixelData.artboard.height;
 const shapeUnit = pixelData.artboard.width / 128;
+const terrainProfile = composition === 'badge' ? 'tree-foundation' : 'default';
 
 const percentage = (value: number, basis: number) => `${((value / basis) * 100).toFixed(4)}%`;
 const isScalePixel = ([, , size, , alphaIndex]: PixelRecord) => size >= 3 && alphaIndex >= 10;
@@ -142,7 +144,11 @@ const basePaths = new Map(STATIC_TERRAIN_LAYERS.map((layer, index) => [
     pixelData.artboard.width,
     shapeUnit,
     layer.baseline,
-    terrainComponentsForState(layer, BASE_POSTERIOR_MEAN, BASE_POSTERIOR_AMPLITUDE),
+    terrainComponentsForState(
+      terrainLayerForProfile(layer, terrainProfile),
+      BASE_POSTERIOR_MEAN,
+      BASE_POSTERIOR_AMPLITUDE,
+    ),
     index + 1,
   ),
 ]));
@@ -155,15 +161,15 @@ const echoPath = (definition: (typeof TERRAIN_ECHOES)[number]) => buildDensityBa
 );
 
 const badgeTerrainTokens: Record<(typeof STATIC_TERRAIN_LAYERS)[number]['key'], { color: string; alpha: number }> = {
-  haze: { color: '245 215 198', alpha: 0.54 },
-  mist: { color: '218 202 231', alpha: 0.64 },
-  lavender: { color: '181 169 225', alpha: 0.72 },
-  periwinkle: { color: '143 132 211', alpha: 0.78 },
-  violet: { color: '112 101 197', alpha: 0.84 },
-  posterior: { color: '101 91 194', alpha: 0.9 },
-  navy: { color: '15 31 105', alpha: 0.94 },
-  ridge: { color: '126 111 202', alpha: 0.86 },
-  orange: { color: '238 111 48', alpha: 0.9 },
+  haze: { color: '220 216 233', alpha: 0.54 },
+  mist: { color: '207 202 228', alpha: 0.64 },
+  lavender: { color: '191 186 225', alpha: 0.72 },
+  periwinkle: { color: '161 158 207', alpha: 0.78 },
+  violet: { color: '143 145 198', alpha: 0.84 },
+  posterior: { color: '122 130 186', alpha: 0.9 },
+  navy: { color: '60 97 182', alpha: 0.92 },
+  ridge: { color: '92 103 168', alpha: 0.86 },
+  foundation: { color: '56 70 157', alpha: 0.92 },
 };
 
 const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
@@ -176,6 +182,7 @@ const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
   data-hero-pixel-field
   data-render-mode="dom"
   data-tree-interaction={interactionMode}
+  data-terrain-profile={terrainProfile}
   data-terrain-enabled="true"
   data-pixel-count={composition === 'grove' ? pixelData.stats.blocks : pixelData.right.length}
   data-visual-composition={composition}
@@ -256,8 +263,8 @@ const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
       ></i>
       <i
         class="hero-pixel-field__tree-terrain-occlusion"
-        data-terrain-occlusion="orange"
-        style={`--terrain-path:${basePaths.get('orange')}`}
+        data-terrain-occlusion="foundation"
+        style={`--terrain-path:${basePaths.get('foundation')}`}
       ></i>
     </>
   )}
