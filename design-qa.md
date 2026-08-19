@@ -687,3 +687,68 @@ No actionable P0, P1, or P2 visual or responsive issues remain for the requested
 - The same-font responsive captures and exact unchanged `X-AGI` geometry cover the implementation risk relevant to this optical correction.
 
 final result: passed
+
+## Final Title Proportion And Mobile Hero Centering
+
+### Comparison target
+
+- Source visual truth: `output/playwright/goal-final-polish/01-desktop-before.png` and `output/playwright/goal-final-polish/02-mobile-before.png`, together with the user's instruction to make the title more square and center the complete mobile hero composition.
+- Rendered implementation: `output/playwright/goal-final-polish/05-desktop-pass2.png`, `output/playwright/goal-final-polish/07-mobile-final.png`, `output/playwright/goal-final-polish/09-narrow-desktop-final.png`, and the final responsive captures at 430 x 932, 390 x 844, and 320 x 700.
+- Browser CSS viewports: 1440 x 900, 927 x 881, 430 x 932, 390 x 844, and 320 x 700.
+- Implementation screenshot pixels match the recorded CSS viewports after Browser capture normalization.
+- State: `/goal/` at scroll position 0 with the compact navigation closed, plus `output/playwright/goal-final-polish/08-mobile-menu.png` for the open-menu state.
+- Full-view comparison evidence: `output/playwright/goal-final-polish/10-mobile-comparison.png` and `output/playwright/goal-final-polish/11-desktop-comparison.png`.
+- Focused title comparison evidence: `output/playwright/goal-final-polish/12-title-comparison.png`.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for the requested final refinements.
+
+- Fonts and typography: the visible `X-AGI` ink is approximately 6.7% taller and the visible `大会` ink approximately 13.3% taller at 1440 x 900, while each title part retains its prior horizontal width to within one antialiased edge pixel.
+- The stronger vertical correction on `大会` makes the Chinese glyphs read closer to square while preserving the established size and visual weight of `X-AGI`.
+- Mobile composition: the complete copy group is centered to within the browser's subpixel tolerance on both axes at 430 x 932, 390 x 844, and 320 x 700.
+- The tagline sits on the visual centerline between the title and the metadata/action group, with the two measured vertical gaps differing by only 1.6px.
+- Responsive tree treatment: the right tree is visible on mobile, starts behind and below the centered content, and meets the probability terrain without competing with the title.
+- The mobile tree remains decorative and static, with `pointer-events: none`, tree interaction mode `none`, and zero active tree pixels.
+- Responsive safety: the title, tagline, metadata, and actions remain fully visible at all tested widths, and no horizontal page overflow is visible or measurable.
+- Navigation: the mobile menu opens and closes correctly, and all page links remain present in the open state.
+- Copy and destinations: no conference copy, date, venue, registration destination, or schedule destination changed.
+- Desktop preservation: the navigation, hero anchors, tree, terrain, metadata, and actions retain their existing layout, with only the requested title proportion adjustment.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the mobile page inherited a three-row desktop hero grid, so the copy appeared centered inside only the first row rather than centered in the viewport.
+- Earlier evidence: `output/playwright/goal-final-polish/02-mobile-before.png` and `output/playwright/goal-final-polish/03-mobile-pass1.png`.
+- Fix: replaced the inherited mobile grid with one explicit `copy` area and centered that area on both axes.
+- Post-fix evidence: `output/playwright/goal-final-polish/07-mobile-final.png` and the right side of `output/playwright/goal-final-polish/10-mobile-comparison.png`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the mobile tree was completely hidden, leaving the compact composition without the requested connection/tree visual anchor.
+- Earlier evidence: `output/playwright/goal-final-polish/02-mobile-before.png`.
+- Fix: restored only the right tree at a mobile-specific scale, anchored its root into the terrain, and masked its upper-left edge so the centered copy remains primary.
+- Post-fix evidence: the final 430 x 932, 390 x 844, and 320 x 700 captures.
+
+#### Iteration 3
+
+- Earlier finding: P3 the first restored mobile tree inherited opacity from both its group and its own wrapper, making it too faint to read as part of the composition.
+- Earlier evidence: `output/playwright/goal-final-polish/03-mobile-pass1.png`.
+- Fix: normalized the tree group's opacity and set the final visual strength on the tree wrapper only.
+- Post-fix evidence: `output/playwright/goal-final-polish/07-mobile-final.png`.
+
+### Primary interactions tested
+
+- Loaded `/goal/` at all five target viewports and verified the title, centered mobile composition, tree/terrain connection, and action destinations.
+- Opened and closed the compact navigation at 390 x 844 and verified all navigation links remain available.
+- Verified the tree remains non-interactive and reports zero active scale pixels.
+- Returned the user's in-app Browser preview to 927 x 881 after responsive verification.
+- Ran unit tests, Astro diagnostics, the production build, and route-level validation successfully.
+
+### Residual test gaps
+
+- Static comparison sheets cannot show the continuous terrain motion.
+- Live layout measurements, responsive screenshots, interaction-state checks, navigation testing, and the complete repository test suite cover the implementation risks relevant to this refinement.
+
+final result: passed
