@@ -4607,6 +4607,9 @@ button:focus-visible {
 }
 
 .hero-pixel-field--badge {
+  --badge-tree-anchor-x: clamp(70.5%, calc(19.8vw + 38rem), 94%);
+  --badge-tree-anchor-y: 50%;
+  --badge-tree-height: clamp(116%, 72vw, 132%);
   background: #f7f1ea;
 }
 
@@ -4617,12 +4620,13 @@ button:focus-visible {
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-  top: calc(50% - min(79%, 36vw));
-  right: 15%;
-  left: auto !important;
+  top: var(--badge-tree-anchor-y);
+  right: auto;
+  left: var(--badge-tree-anchor-x) !important;
   width: auto;
-  height: min(158%, 72vw);
+  height: var(--badge-tree-height);
   opacity: 0.96;
+  transform: translate(-73.5%, -50%);
   -webkit-mask-image: none;
   mask-image: none;
 }
@@ -4716,12 +4720,6 @@ button:focus-visible {
 }
 
 @media (max-width: 64rem) {
-  .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-    top: -8%;
-    right: -2%;
-    height: 128%;
-  }
-
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner {
     padding-left: clamp(4.5rem, 10vw, 7rem);
   }
@@ -4736,16 +4734,18 @@ button:focus-visible {
 }
 
 @media (max-width: 51.25rem) {
+  .hero-pixel-field--badge {
+    --badge-tree-anchor-y: 58%;
+    --badge-tree-height: 98%;
+  }
+
   .hero-pixel-field--badge .hero-pixel-field__trees {
     -webkit-mask-image: none;
     mask-image: none;
   }
 
   .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-    top: 9%;
-    right: -33%;
     width: auto;
-    height: 98%;
     opacity: 0.62;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.18) 18%, #000 42%);
     mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.18) 18%, #000 42%);
@@ -4800,9 +4800,6 @@ button:focus-visible {
 
 @media (max-width: 31rem) {
   .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-    top: 42%;
-    right: -37%;
-    height: 72%;
     opacity: 0.58;
   }
 
@@ -4831,11 +4828,5 @@ button:focus-visible {
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__meta span::before {
     margin-right: 0.75rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-pixel-field--badge .hero-pixel-field__tree-position--right {
-    transform: none !important;
   }
 }

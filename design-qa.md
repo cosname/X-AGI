@@ -286,3 +286,55 @@ No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for
 - The controlled 1280 x 720 before-and-after comparison, tall asset dimensions, computed high-viewport tree bounds, runtime checks, and full build validation cover the regression addressed here.
 
 final result: passed
+
+## Stable Badge Tree Anchor
+
+### Comparison target
+
+- Source visual truth: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-8b06d0cd-5e83-4006-9b5a-0d26b0c37c1c.png`, `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-9d53bd66-039c-45c1-9cb2-37ee5815323b.png`, and `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-2baa0f8f-46db-43a1-9469-c84507e1d079.png`.
+- Rendered implementation: `output/playwright/tree-anchor-fix/01-implementation-final.png`.
+- Full-view comparison: `output/playwright/tree-anchor-fix/02-reported-and-fixed-contact-sheet.png`.
+- Browser CSS viewport: 1038 x 1093 at device pixel ratio 2, with a 1023 x 1092 hero field after the scrollbar gutter.
+- Source screenshot pixels: 3840 x 2378, 2682 x 2382, and 1204 x 2380.
+- Implementation screenshot pixels: 1038 x 1093.
+- Density normalization: the three user captures are Retina-density responsive references, while the browser screenshot is normalized to CSS pixels by the browser surface.
+- State: `/goal/` is at the top with the transparent header, one right tree, and the pointer first at rest and then inside the broad tree response field.
+- Focused comparison: a separate crop was not needed because the reported defect concerned the full tree's scale and anchor across the complete viewport rather than a small typographic or control detail.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, or interaction issues remain for the reported tree drift.
+
+- Fonts and typography: the navigation, year, mosaic title, English tagline, metadata, and actions retain their existing family, size, weight, line height, and wrapping.
+- Spacing and layout rhythm: the tree now uses a stable trunk anchor and a height floor tied to the hero, so tall desktop windows no longer shrink the tree between otherwise adjacent responsive widths.
+- Colors and visual tokens: paper, indigo, lavender, teal, peach, orange, masks, and opacity are unchanged.
+- Image quality and asset fidelity: the existing DOM mosaic tree and responsive paper assets are preserved without a replacement illustration, scaling blur, or new approximation.
+- Copy and content: all conference text, navigation labels, date, venue, registration destination, and schedule destination are unchanged.
+- Responsive behavior: the earlier 1024px and narrow-phone position jumps are removed, desktop tree height now resolves between 116% and 132% of the hero, and compact layouts retain a consistent 98% height and 58% vertical anchor.
+- Interaction: moving the pointer into the tree field increased active scale pixels from 0 to 713 while the tree rectangle stayed exactly 960.375 x 1266.719 CSS pixels at x 104.671 and y -87.359.
+- Accessibility: the positioning transform is static rather than animated, reduced-motion still disables individual pixel movement, and the decorative field remains hidden from assistive technology.
+- Runtime: the page initializes one tree, produces no horizontal document overflow, and reports no browser runtime errors.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the desktop tree height was driven directly by `72vw`, then changed to unrelated top, right, and height values at 1024px and 496px, so resizing made the same tree visibly shrink, jump, and grow again.
+- Earlier evidence: the three user-provided wide, tall-desktop, and compact captures in the comparison target.
+- Fix: introduced shared tree anchor variables, anchored the trunk with one static transform, constrained desktop height by the hero as well as viewport width, and removed both breakpoint-specific geometry jumps.
+- Post-fix evidence: `output/playwright/tree-anchor-fix/01-implementation-final.png` and `output/playwright/tree-anchor-fix/02-reported-and-fixed-contact-sheet.png`.
+
+### Primary interactions tested
+
+- Loaded the revised `/goal/` top state and verified one initialized right tree with no horizontal document overflow.
+- Moved the pointer through the broad tree field and verified 713 mosaic pixels respond while the complete tree rectangle and anchor remain unchanged.
+- Waited through the active ripple cycle and verified the full tree rectangle remains unchanged over time.
+- Checked browser logs and found only normal development-server connection and hot-update messages.
+- Ran all unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- The browser surface does not expose an arbitrary viewport override for the three exact user capture sizes.
+- The three responsive source captures, full-view contact sheet, computed fixed-anchor geometry, live interaction rectangle check, and production validation cover the reported regression.
+
+final result: passed
