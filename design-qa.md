@@ -92,6 +92,78 @@ Previous result: passed.
 
 final result: passed
 
+## Hero Seam And Typographic Balance
+
+### Comparison target
+
+- Source visual truth: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-ca8da8b0-8a04-46fd-a92b-1626838dc3bd.png`, together with the user's five requested corrections for terrain lines, the tree foundation seam, the tagline axis, the Chinese title, and the English tagline width.
+- Source pixels: 3276 x 2364 at double density.
+- Normalized source: `output/playwright/goal-detail-polish/01-user-reference-normalized.png` at 1638 x 1182.
+- Rendered implementation: `output/playwright/goal-detail-polish/02-reference-size-final.png` at 1638 x 1182.
+- Browser CSS viewport: 1638 x 1182 at device pixel ratio 1.
+- Density normalization: the double-density source was downsampled exactly to the implementation's CSS viewport before comparison.
+- State: `/goal/` is at the top with the transparent navigation and the pointer placed on the left side of the hero so the probability terrain is responding.
+- Full-view comparison evidence: `output/playwright/goal-detail-polish/06-full-comparison.png`.
+- Focused title comparison evidence: `output/playwright/goal-detail-polish/09-title-comparison.png`.
+- Focused root comparison evidence: `output/playwright/goal-detail-polish/12-root-comparison.png`.
+- Narrow-desktop seam comparison evidence: `output/playwright/goal-detail-polish/14-narrow-seam-comparison.png`.
+- Responsive evidence: `output/playwright/goal-detail-polish/03-narrow-final.png`, `output/playwright/goal-detail-polish/04-mobile-final.png`, and `output/playwright/goal-detail-polish/05-mobile-menu-final.png`.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility issues remain for the requested hero refinements.
+
+- Fonts and typography: the `X-AGI` wordmark retains its established display treatment, while `大会` now measures 82% of the wordmark height and shares an exact bottom edge with it.
+- The Chinese title baseline delta is 0 pixels at the reference viewport.
+- The English tagline keeps its existing font, weight, size, line height, and copy, while its rendered width is reduced from approximately 563 pixels to 501 pixels.
+- Spacing and layout rhythm: the tagline retains the intended midpoint placement without the former 275-pixel decorative continuation line.
+- The date, venue, primary action, and schedule action retain their existing positions and spacing.
+- Colors and visual tokens: no new colors were introduced, and the tree foundation remains within the accepted blue-purple terrain palette.
+- Image quality and asset fidelity: the existing DOM mosaic tree and terrain remain sharp and responsive, with no raster replacement, scaling blur, or placeholder asset.
+- Copy and content: all conference copy, capitalization, date, venue, navigation labels, and destinations remain unchanged.
+- Interaction: moving the pointer to the left still changes the probability posterior from 0.6750 to 0.6511, while the hidden echo field no longer draws a stray contour through the terrain.
+- The goal tree remains static with 0 active scale pixels.
+- Tree foundation: the root now enters the foreground terrain by approximately 65 pixels at 1638 x 1182 and 18 pixels at 927 x 881.
+- This controlled burial removes the former 260-pixel overlap while preserving a continuous root-to-ground connection.
+- Responsive behavior: the root is connected at wide and narrow landscape desktop sizes, and the tree is hidden at the compact and narrow-portrait breakpoints where a reliable connection cannot fit.
+- The tested 1638 x 1182, 927 x 881, 821 x 900, and 390 x 844 viewports have no horizontal scroll.
+- The mobile navigation opens successfully, reports `aria-expanded="true"`, and preserves all five page links plus the registration action.
+- Accessibility: decorative hero layers remain hidden from assistive technology, the navigation semantics and labels are unchanged, and the existing reduced-motion behavior remains intact.
+- Runtime: browser logs contain only normal Vite connection and hot-update entries, with no errors or warnings.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the moving terrain exposed a thin echo contour, the tagline axis drew an unrelated horizontal rule, the tree foundation covered too much of the root, and the two title systems had visibly mismatched proportions.
+- Earlier evidence: the left side of `output/playwright/goal-detail-polish/06-full-comparison.png`, plus the focused source sides of `output/playwright/goal-detail-polish/09-title-comparison.png` and `output/playwright/goal-detail-polish/12-root-comparison.png`.
+- Fix: hid the goal-only terrain echo field, removed the tagline-axis pseudo-element, reduced the tree-foundation density, removed the root stretch, aligned and enlarged `大会`, and reduced the English tagline's horizontal scale.
+- Post-fix evidence: the right side of all three comparison sheets.
+
+#### Iteration 2
+
+- Earlier finding: P2 after reducing the foundation height, a tall 927 x 881 viewport left a visible gap between the fixed tree anchor and the terrain.
+- Earlier evidence: the left side of `output/playwright/goal-detail-polish/14-narrow-seam-comparison.png`.
+- Fix: made the tree's vertical anchor respond to viewport aspect ratio and hid the tree at the narrow portrait boundary.
+- Post-fix evidence: the right side of `output/playwright/goal-detail-polish/14-narrow-seam-comparison.png`, plus `output/playwright/goal-detail-polish/04-mobile-final.png`.
+
+### Primary interactions tested
+
+- Moved the pointer to the left side of the 1638 x 1182 hero and verified that the terrain still responds while no echo contour appears.
+- Verified that the title bottoms differ by 0 pixels and that the former tagline-axis rule has `display: none` and no generated content.
+- Verified the tree-to-foundation connection at 1638 x 1182 and 927 x 881.
+- Verified that the tree is hidden at 821 x 900 and 390 x 844.
+- Opened the mobile navigation at 390 x 844 and verified all links, the registration action, and the expanded state.
+- Checked browser runtime logs and found no errors or warnings.
+- Ran 19 unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- Static comparisons cannot show the continuous terrain movement.
+- Live posterior measurements, same-state screenshots, focused crops, responsive captures, navigation interaction checks, browser logs, and the complete build suite cover the implementation risks relevant to this refinement.
+
+final result: passed
+
 ## Responsive Terrain And Right-Third Tree
 
 ### Comparison target

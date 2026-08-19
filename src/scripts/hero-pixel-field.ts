@@ -76,9 +76,9 @@ export const STATIC_TERRAIN_LAYERS: readonly TerrainLayerDefinition[] = [
 ] as const;
 
 const TREE_FOUNDATION_COMPONENTS: readonly DensityComponent[] = [
-  [0.89, 0.095, 0.19],
-  [1.04, 0.16, 0.13],
-  [0.78, 0.09, 0.055],
+  [0.89, 0.095, 0.09],
+  [1.04, 0.16, 0.055],
+  [0.78, 0.09, 0.018],
 ];
 
 export const terrainLayerForProfile = (

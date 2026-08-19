@@ -4601,7 +4601,7 @@ button:focus-visible {
 
 .hero-pixel-field--badge {
   --badge-tree-anchor-x: 88%;
-  --badge-tree-anchor-y: clamp(50%, calc(66% - 1vw), 58%);
+  --badge-tree-anchor-y: calc(58% + max(0px, 42svh - 34.6vw + 1rem));
   --badge-tree-height: min(118%, 78vw);
   --badge-terrain-height: min(126%, 66vw);
   background: #f7f1ea;
@@ -4636,11 +4636,6 @@ button:focus-visible {
   transform-origin: 73% 50%;
 }
 
-.hero-pixel-field--badge .hero-pixel-field__tree-branch--right-root {
-  transform: scaleY(1.08);
-  transform-origin: 50% 64.3%;
-}
-
 .hero-pixel-field--badge .hp--scale {
   transform: none !important;
   transition: none !important;
@@ -4657,8 +4652,7 @@ button:focus-visible {
 }
 
 .hero-pixel-field--badge .hero-pixel-field__echo-field {
-  -webkit-mask-image: linear-gradient(to right, transparent 0 42%, #000 55% 100%);
-  mask-image: linear-gradient(to right, transparent 0 42%, #000 55% 100%);
+  display: none;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge {
@@ -4724,27 +4718,25 @@ button:focus-visible {
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__title-zh {
-  margin-bottom: 0.12em;
-  line-height: 0.95;
+  margin-bottom: 0;
+  font-size: 0.82em;
+  line-height: 0.92;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
   position: absolute;
   top: 50%;
   left: 0;
-  width: min(48rem, 60vw);
+  width: max-content;
+  max-width: min(48rem, 60vw);
   display: flex;
   align-items: center;
   transform: translateY(-50%);
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis::after {
-  min-width: 2.5rem;
-  height: 1px;
-  flex: 1 1 auto;
-  margin-left: 1rem;
-  background: rgb(103 82 200 / 0.34);
-  content: '';
+  display: none;
+  content: none;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline {
@@ -4756,7 +4748,7 @@ button:focus-visible {
   line-height: 1.25;
   letter-spacing: -0.025em;
   text-align: left;
-  transform: scaleX(1.18);
+  transform: scaleX(1.05);
   transform-origin: left center;
 }
 
@@ -4860,6 +4852,12 @@ button:focus-visible {
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__actions {
     justify-content: flex-start;
+  }
+}
+
+@media (min-width: 51.26rem) and (max-width: 64rem) and (max-aspect-ratio: 1 / 1) {
+  .hero-pixel-field--badge .hero-pixel-field__trees {
+    display: none;
   }
 }
 

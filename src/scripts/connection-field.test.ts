@@ -108,10 +108,16 @@ test('tree foundation profile centers the right terrain beneath the root', () =>
   assert.ok(foundation);
 
   const profiled = terrainLayerForProfile(foundation, 'tree-foundation');
+  const densityAtRoot = profiled.components.reduce(
+    (density, [mean, sigma, peak]) => density + gaussianDensity(0.903, mean, sigma) * peak,
+    0,
+  );
 
   assert.notDeepEqual(profiled.components, foundation.components);
   assert.equal(profiled.components[0][0], 0.89);
   assert.ok(profiled.components[0][2] > foundation.components[1][2]);
+  assert.ok(densityAtRoot > 0.12);
+  assert.ok(densityAtRoot < 0.14);
 });
 
 test('mosaic ripple stays local and preserves a stable root', () => {
