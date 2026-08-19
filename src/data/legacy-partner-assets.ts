@@ -57,6 +57,11 @@ const logos = {
     compactSrc: '/2025/assets/images/logos_t/optimized/logo_QuantVerse.webp',
     className: 'sponsor-quantverse',
   },
+  智统数合: {
+    src: '/2026/logos/zhitong-shuhe.webp',
+    compactSrc: '/2026/logos/zhitong-shuhe.webp',
+    className: 'sponsor-zhitong-shuhe',
+  },
 } as const satisfies Record<string, PartnerLogo>;
 
 export const partnerLogoByName: Record<string, PartnerLogo> = logos;

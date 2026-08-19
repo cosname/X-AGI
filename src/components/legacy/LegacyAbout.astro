@@ -3,10 +3,9 @@ import { conference2026, type Organization } from '../../data/conference2026';
 import { partnerLogoByName } from '../../data/legacy-partner-assets';
 
 const groups: { label: string; organizations: readonly Organization[] }[] = [
-  { label: '发起方', organizations: conference2026.initiators },
   { label: '主办单位', organizations: conference2026.organizers },
   { label: '协办单位', organizations: conference2026.coOrganizers },
-  { label: '赞助伙伴', organizations: conference2026.sponsors },
+  { label: '赞助单位', organizations: conference2026.sponsors },
 ].filter((group) => group.organizations.length > 0);
 ---
 

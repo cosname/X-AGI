@@ -1,5 +1,6 @@
 ---
 import pixelDataSource from '../data/hero-pixel-field.generated.json';
+import PortraitConnectionField from './PortraitConnectionField.astro';
 import {
   BASE_POSTERIOR_AMPLITUDE,
   BASE_POSTERIOR_MEAN,
@@ -190,7 +191,10 @@ const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
   aria-hidden="true"
 >
   {composition === 'badge' && (
-    <i class="hero-pixel-field__paper"></i>
+    <>
+      <i class="hero-pixel-field__paper"></i>
+      <PortraitConnectionField />
+    </>
   )}
 
   <div class="hero-pixel-field__trees">

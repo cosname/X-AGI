@@ -13,10 +13,10 @@ X-AGI 大会官网及年度归档的 Astro 静态站。
 
 | 路径 | 用途 | 发布状态 |
 | --- | --- | --- |
-| `/`、`/about/`、`/schedule/` 等 | 2026 正式站，使用 2025 模板皮肤和 2026 官方内容 | 对外发布 |
+| `/`、`/about/`、`/schedule/` 等 | 2026 正式站，使用“连接与树”视觉和 2026 官方内容 | 对外发布 |
 | `/2025/` | 2025 X-AGI 与第 18 届中国 R 会议归档 | 冻结发布 |
 | `/next/` | 米色纸面和像素树的新视觉方案 | 仅本地预览 |
-| `/goal/` | badge 单树首页与正式站内容内页融合的候选方案 | 仅本地预览 |
+| `/goal/` | 正式视觉的单屏首页验收镜像，不含首页正式内容区 | 仅本地预览 |
 | `/2026/`、`/2026/<page>/` | 旧书签兼容入口 | 跳转至根路径正式页 |
 
 `/next/` 和 `/goal/` 会写入本地 `dist/`，但生产同步脚本会明确排除它们。
@@ -44,23 +44,23 @@ X-AGI 大会官网及年度归档的 Astro 静态站。
 ```text
 src/
   config/
-    site.ts                    届次、路径、状态和皮肤
+    site.ts                    届次、路径、状态和正式视觉皮肤
     navigation.ts              导航和页面集合
     edition-status.ts          页面标题、状态和下一步操作
   data/
     conference2026.ts          2026 官方内容的唯一数据源
     legacy-partner-assets.ts   正式站合作单位 Logo 对照
   layouts/
-    Legacy2025Layout.astro     当前正式站布局
-    Goal2026Layout.astro       融合候选预览布局
+    Legacy2025Layout.astro     旧模板回退布局
+    Goal2026Layout.astro       当前正式站内页布局
     BaseLayout.astro           新视觉预览布局
-  components/legacy/           当前正式站页面组件
-  components/                  停放中的新视觉组件
+  components/legacy/           正式站沿用的成熟内容结构
+  components/                  正式视觉、导航和首页组件
   pages/                       Astro 路由和文本端点
   styles/
-    legacy-2025.css            当前正式站样式补丁
-    goal-2026.css              融合候选预览皮肤
-    global.css                 新视觉预览样式
+    legacy-2025.css            成熟内容结构的兼容样式
+    goal-2026.css              正式内页的连接视觉皮肤
+    global.css                 正式首页与共享组件样式
 public/
   2025/                        冻结的 2025 静态归档
   2026/brand/                  2026 X-AGI 品牌资源
@@ -71,7 +71,7 @@ scripts/
   sync-oss.mjs                 生产同步
 ```
 
-2026 文案、票价、组织单位、日程和报名状态只在 `src/data/conference2026.ts` 中维护。
+2026 文案、票价、组织单位、专题嘉宾、日程和报名状态只在 `src/data/conference2026.ts` 中维护。
 页面组件负责表现，不应复制一份独立业务数据。
 
 当前日程中的空报告位是尚未公布的占位数据。
@@ -128,7 +128,7 @@ npm run build
 - 2026 页面是否误用 2025 的旧 `R` 标志
 - 新视觉页面的 HTML 和初始资源体积预算
 
-正式站沿用了 2025 的大尺寸背景素材，因此带 `edition-legacy-2025` 标记的页面暂不执行新视觉的初始资源预算。
+正式首页和 `/goal/` 验收镜像都执行 DOM 视觉结构与初始资源预算校验。
 
 ## 生产发布
 
@@ -183,8 +183,8 @@ npm run downloads:verify
 ## 设计预览
 
 新视觉的入口位于 `src/pages/next/`，设计说明位于 `src/design-next/README.md`。
-融合候选的入口位于 `src/pages/goal/`，设计说明位于 `src/design-goal/README.md`。
-融合候选首页与内页共用透明顶部、50px 后纯色承托的导航状态契约，同时不会影响正式站和完整 `/next/` 概念站。
+正式视觉的验收镜像位于 `src/pages/goal/`，设计说明位于 `src/design-goal/README.md`。
+正式站与验收镜像共用透明顶部、50px 后纯色承托的导航状态契约，同时不会影响完整 `/next/` 概念站。
 
 ```bash
 npm run dev

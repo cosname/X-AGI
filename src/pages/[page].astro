@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import Legacy2025Layout from '../layouts/Legacy2025Layout.astro';
+import Goal2026Layout from '../layouts/Goal2026Layout.astro';
+import MastheadPixelField from '../components/MastheadPixelField.astro';
 import LegacyInnerPage from '../components/legacy/LegacyInnerPage.astro';
 import LegacyAbout from '../components/legacy/LegacyAbout.astro';
 import LegacySchedule from '../components/legacy/LegacySchedule.astro';
@@ -23,7 +24,7 @@ const { page } = Astro.props as { page: PublishedPage };
 const copy = currentEditionPageCopy(page, undefined, currentEdition);
 ---
 
-<Legacy2025Layout
+<Goal2026Layout
   edition={currentEdition}
   activePage={page}
   title={`${copy.label} | ${currentEdition.title}`}
@@ -34,11 +35,15 @@ const copy = currentEditionPageCopy(page, undefined, currentEdition);
     edition={currentEdition}
     title={copy.label}
     status={page === 'register' || page === 'poster' ? copy.status : undefined}
+    visual="goal"
   >
+    <figure slot="art" class="goal-page-header-art" aria-hidden="true">
+      <MastheadPixelField pointerEffect="ripple" />
+    </figure>
     {page === 'about' && <LegacyAbout />}
     {page === 'schedule' && <LegacySchedule />}
     {page === 'poster' && <LegacyPoster />}
     {page === 'guide' && <LegacyGuide />}
     {page === 'register' && <LegacyRegister />}
   </LegacyInnerPage>
-</Legacy2025Layout>
+</Goal2026Layout>

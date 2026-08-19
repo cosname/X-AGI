@@ -1,0 +1,106 @@
+---
+import { currentEditionActionPaths } from '../config/edition-status';
+import type { EditionConfig } from '../config/site';
+import { conference2026 } from '../data/conference2026';
+import ConferencePartners from './ConferencePartners.astro';
+
+interface Props {
+  edition: EditionConfig;
+}
+
+const { edition } = Astro.props;
+const actions = currentEditionActionPaths(edition);
+const program = conference2026.programPreview;
+---
+
+<div class="conference-published-home">
+  <section class="conference-program-preview" aria-labelledby="conference-program-title">
+    <header class="conference-program-preview__heading">
+      <div>
+        <p class="conference-program-preview__eyebrow">PROGRAM PREVIEW</p>
+        <h2 id="conference-program-title">大会专题与嘉宾</h2>
+      </div>
+      <div class="conference-program-preview__status">
+        <strong>{program.status}</strong>
+        <p>{program.note}</p>
+      </div>
+    </header>
+
+    <ol class="conference-program-preview__list">
+      {program.sessions.map((session, index) => (
+        <li class="conference-program-preview__session">
+          <span class="conference-program-preview__index" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <div class="conference-program-preview__session-copy">
+            <h3>{session.title}</h3>
+            <dl>
+              <div>
+                <dt>Session Chair</dt>
+                <dd>
+                  <strong>{session.chair.name}</strong>
+                  {session.chair.affiliation && <span>{session.chair.affiliation}</span>}
+                </dd>
+              </div>
+              <div>
+                <dt>已确认嘉宾</dt>
+                <dd>
+                  {session.speakers.length > 0 ? (
+                    <ul>
+                      {session.speakers.map((speaker) => (
+                        <li>
+                          <strong>{speaker.name}</strong>
+                          {speaker.affiliation && <span>{speaker.affiliation}</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <span class="conference-program-preview__pending">持续确认中</span>
+                  )}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <footer class="conference-program-preview__footer">
+      <p>具体日期、时段与报告题目以最终发布为准。</p>
+      <a href={actions.schedule}>查看日程安排</a>
+    </footer>
+  </section>
+
+  <section class="conference-published-home__partners" aria-label="组织单位与报名入口">
+    <ConferencePartners titleId="published-home-partners-title" variant="logos" />
+    <div class="conference-registration-note">
+      <div>
+        <p class="conference-program-preview__eyebrow">REGISTRATION</p>
+        <h2>统一报名入口</h2>
+      </div>
+      <div class="conference-registration-note__action">
+        <p>{conference2026.registration.description}</p>
+        <a
+          class="capsule-action"
+          href={conference2026.registration.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          立即报名
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+  {
+    const syncPublishedViewportHeight = () => {
+      document.documentElement.style.setProperty('--published-viewport-height', `${window.innerHeight}px`);
+    };
+
+    syncPublishedViewportHeight();
+    window.addEventListener('resize', syncPublishedViewportHeight, { passive: true });
+    window.visualViewport?.addEventListener('resize', syncPublishedViewportHeight, { passive: true });
+  }
+</script>

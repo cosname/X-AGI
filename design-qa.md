@@ -92,6 +92,75 @@ Previous result: passed.
 
 final result: passed
 
+## Portrait Connection Network And Elastic Pointer Response
+
+### Comparison target
+
+- Source visual truth: `/Users/audiofool/.codex/generated_images/01a00e2a-2710-7b83-9dab-aa8c3672fbe7/exec-39c1b710-674e-40a7-8c31-879bf426c46b.png`.
+- Rendered implementation: `output/playwright/goal-portrait-connections/12-dom-reference-size.png`.
+- Full-view comparison: `output/playwright/goal-portrait-connections/15-dom-reference-final-comparison.png`.
+- Mobile menu evidence: `output/playwright/goal-portrait-connections/14-mobile-menu.png`.
+- Browser CSS viewport: 503 x 783 for the source comparison and 390 x 844 for the compact mobile regression.
+- Source screenshot pixels: 1005 x 1566.
+- Density normalization: the source was reduced exactly to 503 x 783, matching its intended two-density CSS size and aspect ratio before the side-by-side comparison.
+- State: `/goal/` at scroll position 0 with the compact navigation closed and the connection network at rest, followed by a separate pointer-motion measurement.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility issues remain for the selected portrait connection direction.
+
+- Composition: portrait mobile now replaces the partial right tree with three restrained connection constellations at the upper right, lower left, and lower right.
+- Density: the implementation renders 43 mosaic nodes and 30 curved connections, including small unlinked accents that preserve the approved distribution while reducing empty areas.
+- Visual language: every node is built from a four-pixel DOM mosaic, and every connection is sampled into square DOM points, so the field remains crisp and consistent with the conference wordmark, tree, and probability terrain.
+- Layering: the network remains behind the primary copy and below the probability terrain, while its lower constellation stops above the terrain crest instead of colliding with it.
+- Interaction: any primary pointer movement across the hero produces a velocity-driven local pull plus a faint global response, followed by spring damping and a complete return to rest.
+- Motion measurement: the controlled pointer sweep produced 3.08px of maximum displacement, decayed to 0.27px after 1.1 seconds, and returned to the idle state at 0.04px.
+- Performance: the portrait field uses no Canvas, raster, or SVG dependency, does not run a continuous idle animation, and only schedules frames while pointer energy or node displacement remains.
+- Responsiveness: the DOM network is visible only at the portrait mobile breakpoint, while 740 x 430 landscape and 1200 x 900 desktop retain the complete existing tree.
+- Navigation: the 390 x 844 compact menu opens with all five navigation links and the registration action available, and the decorative field remains behind the menu surface.
+- Accessibility: the field is hidden from assistive technology, does not accept pointer events, and becomes a static composition when reduced motion is requested.
+- Runtime: the final page reports 43 nodes, 248 connection dots, zero hero Canvas elements, zero horizontal overflow, and no browser warnings or errors.
+- Build integrity: the DOM-only homepage contract, HTML payload budget, Astro diagnostics, route generation, and repository build validator all pass.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P1 the first implementation used a full-viewport Canvas, which violated the repository's DOM-only hero contract and made the responsive artwork less structurally inspectable.
+- Earlier evidence: `output/playwright/goal-portrait-connections/10-reference-size-final.png` and the initial build-validator failure.
+- Fix: replaced the Canvas scene with a dedicated DOM component containing mosaic node groups and sampled curved connection points.
+- Post-fix evidence: `output/playwright/goal-portrait-connections/12-dom-reference-size.png`, where the hero contains zero Canvas elements and exposes `data-render-mode="dom"`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the first network pass used 22 nodes and long angular branches, leaving the selected mobile composition less connected than the approved visual direction.
+- Earlier evidence: `output/playwright/goal-portrait-connections/01-idle.png`.
+- Fix: increased the field to 43 nodes and 30 curved links, added small accent nodes, and moved the left and lower constellations into the approved negative-space regions.
+- Post-fix evidence: the right side of `output/playwright/goal-portrait-connections/15-dom-reference-final-comparison.png`.
+
+#### Iteration 3
+
+- Earlier finding: P2 the first lower-right network extended into the taller live probability terrain at the reference viewport.
+- Earlier evidence: `output/playwright/goal-portrait-connections/09-reference-implementation.png`.
+- Fix: lifted the complete lower constellation by five percentage points while retaining its visual relationship to the terrain.
+- Post-fix evidence: `output/playwright/goal-portrait-connections/12-dom-reference-size.png`.
+
+### Primary interactions tested
+
+- Swept the pointer across the portrait hero and verified the network enters the drag state, updates both node and connection transforms, and returns to idle without changing layout geometry.
+- Opened and closed the compact navigation at 390 x 844 and verified every navigation destination remains present.
+- Checked 503 x 783 and 390 x 844 portrait viewports and verified the tree is hidden, the DOM network is visible, and horizontal overflow remains zero.
+- Checked 740 x 430 landscape and 1200 x 900 desktop viewports and verified the DOM network is hidden and the existing tree remains visible.
+- Checked browser runtime logs after the final interaction and found no warnings or errors.
+- Ran 20 unit tests, Astro diagnostics, the production build, and route-level build validation successfully.
+
+### Residual test gaps
+
+- Static comparison images cannot show the spring timing or the staggered response of individual nodes.
+- Live displacement measurements, responsive state checks, menu testing, browser logs, the DOM render contract, and the complete repository test suite cover the implementation risks relevant to this refinement.
+
+final result: passed
+
 ## Hero Seam And Typographic Balance
 
 ### Comparison target

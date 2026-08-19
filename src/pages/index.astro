@@ -1,15 +1,15 @@
 ---
-import Legacy2025Layout from '../layouts/Legacy2025Layout.astro';
-import LegacyHome from '../components/legacy/LegacyHome.astro';
-import { currentEdition } from '../config/site';
+import EditionShell from '../components/EditionShell.astro';
+import ConferenceHome from '../components/ConferenceHome.astro';
+import { currentEdition, editionPath } from '../config/site';
 ---
 
-<Legacy2025Layout
+<EditionShell
   edition={currentEdition}
-  title={currentEdition.title}
+  canonicalPath={editionPath(currentEdition)}
   description={currentEdition.description}
-  canonicalPath="/"
-  home
+  bodyClass="edition-goal-home edition-goal-home--published"
+  headerBehavior="overlay-scroll"
 >
-  <LegacyHome edition={currentEdition} />
-</Legacy2025Layout>
+  <ConferenceHome edition={currentEdition} contentMode="published" />
+</EditionShell>

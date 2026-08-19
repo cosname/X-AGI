@@ -149,6 +149,254 @@
   filter: brightness(1.65) saturate(0.82) drop-shadow(0 0 4px rgb(255 255 255 / 0.2));
 }
 
+.edition-legacy-2025 .hero-section .organizer-logos img.sponsor-zhitong-shuhe {
+  height: 32px;
+  filter: invert(1) grayscale(1) brightness(3) contrast(3);
+  mix-blend-mode: screen;
+}
+
+.edition-legacy-2025 .legacy-home-content {
+  --legacy-home-ink: #182154;
+  --legacy-home-blue: #215dff;
+  --legacy-home-line: #dfe4f0;
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(4rem, 8vw, 7.5rem) 0 6rem;
+  color: var(--legacy-home-ink);
+}
+
+.edition-legacy-2025 .legacy-home-eyebrow {
+  margin: 0 0 0.7rem;
+  color: var(--legacy-home-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.edition-legacy-2025 .legacy-home-registration {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: center;
+  margin-bottom: clamp(5rem, 9vw, 8rem);
+  padding: clamp(1.8rem, 4vw, 3.25rem);
+  border-top: 3px solid var(--legacy-home-blue);
+  background: #fff;
+  box-shadow: 0 12px 36px rgb(26 39 96 / 0.07);
+}
+
+.edition-legacy-2025 .legacy-home-registration h2,
+.edition-legacy-2025 .legacy-home-program h2 {
+  margin: 0;
+  color: var(--legacy-home-ink);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.edition-legacy-2025 .legacy-home-registration__copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.edition-legacy-2025 .legacy-home-registration__copy p {
+  margin: 0;
+  color: #3e4665;
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.edition-legacy-2025 .legacy-home-registration__copy a,
+.edition-legacy-2025 .legacy-home-program__footer a {
+  flex: 0 0 auto;
+  color: var(--legacy-home-blue);
+  font-weight: 650;
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+}
+
+.edition-legacy-2025 .legacy-home-registration__copy a:hover,
+.edition-legacy-2025 .legacy-home-program__footer a:hover {
+  text-decoration: underline;
+}
+
+.edition-legacy-2025 .legacy-home-program__heading {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: end;
+  margin-bottom: 2.5rem;
+}
+
+.edition-legacy-2025 .legacy-home-program__status {
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--legacy-home-blue);
+}
+
+.edition-legacy-2025 .legacy-home-program__status strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--legacy-home-blue);
+  font-size: 1.05rem;
+}
+
+.edition-legacy-2025 .legacy-home-program__status p {
+  margin: 0;
+  color: #66708f;
+  line-height: 1.65;
+}
+
+.edition-legacy-2025 .legacy-home-program__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--legacy-home-line);
+  border-left: 1px solid var(--legacy-home-line);
+}
+
+.edition-legacy-2025 .legacy-home-session {
+  position: relative;
+  min-height: 19rem;
+  padding: 1.6rem 1.6rem 1.8rem;
+  border-right: 1px solid var(--legacy-home-line);
+  border-bottom: 1px solid var(--legacy-home-line);
+  background: rgb(255 255 255 / 0.72);
+  transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.edition-legacy-2025 .legacy-home-session:hover {
+  z-index: 1;
+  background: #fff;
+  box-shadow: 0 16px 40px rgb(27 43 134 / 0.1);
+  transform: translateY(-3px);
+}
+
+.edition-legacy-2025 .legacy-home-session__index {
+  display: block;
+  margin-bottom: 1.1rem;
+  color: var(--legacy-home-blue);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.edition-legacy-2025 .legacy-home-session h3 {
+  min-height: 3.5rem;
+  margin: 0 0 1.5rem;
+  color: var(--legacy-home-ink);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.edition-legacy-2025 .legacy-home-session dl,
+.edition-legacy-2025 .legacy-home-session dd,
+.edition-legacy-2025 .legacy-home-session ul {
+  margin: 0;
+}
+
+.edition-legacy-2025 .legacy-home-session dl > div + div {
+  margin-top: 1.25rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--legacy-home-line);
+}
+
+.edition-legacy-2025 .legacy-home-session dt {
+  margin-bottom: 0.45rem;
+  color: #8b93aa;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.edition-legacy-2025 .legacy-home-session dd > strong,
+.edition-legacy-2025 .legacy-home-session li strong {
+  color: #242c51;
+  font-weight: 650;
+}
+
+.edition-legacy-2025 .legacy-home-session dd > span,
+.edition-legacy-2025 .legacy-home-session li span {
+  margin-left: 0.5rem;
+  color: #727b98;
+  font-size: 0.86rem;
+}
+
+.edition-legacy-2025 .legacy-home-session ul {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0;
+  list-style: none;
+}
+
+.edition-legacy-2025 .legacy-home-session__pending {
+  margin-left: 0 !important;
+  color: #8b93aa !important;
+}
+
+.edition-legacy-2025 .legacy-home-program__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  color: #737c98;
+}
+
+.edition-legacy-2025 .legacy-home-program__footer p {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .edition-legacy-2025 .legacy-home-program__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .edition-legacy-2025 .legacy-home-registration,
+  .edition-legacy-2025 .legacy-home-program__heading {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .edition-legacy-2025 .legacy-home-registration__copy {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .edition-legacy-2025 .hero-section .organizer-logos img.sponsor-zhitong-shuhe {
+    height: 24px;
+  }
+
+  .edition-legacy-2025 .legacy-home-content {
+    width: min(100% - 28px, 1180px);
+    padding: 3.25rem 0 4.5rem;
+  }
+
+  .edition-legacy-2025 .legacy-home-registration {
+    margin-bottom: 4.5rem;
+    padding: 1.5rem;
+  }
+
+  .edition-legacy-2025 .legacy-home-registration__copy,
+  .edition-legacy-2025 .legacy-home-program__footer {
+    flex-direction: column;
+  }
+
+  .edition-legacy-2025 .legacy-home-program__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edition-legacy-2025 .legacy-home-session {
+    min-height: 0;
+  }
+
+  .edition-legacy-2025 .legacy-home-session h3 {
+    min-height: 0;
+  }
+}
+
 .edition-legacy-2025 .org-item img {
   max-height: 52px;
 }

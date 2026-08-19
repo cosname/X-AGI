@@ -241,8 +241,8 @@ const buildGroups = [
   {
     label: 'current edition',
     edition: currentEdition,
-    payloadBudgetScope: 'none',
-    requireDomHomepage: false,
+    payloadBudgetScope: 'homepage',
+    requireDomHomepage: true,
   },
   {
     label: 'next design',
@@ -459,7 +459,6 @@ const officialCopyByRoute = new Map([
     'about/index.html',
     [
       ...conference2026.introduction,
-      ...organizationCopy(conference2026.initiators),
       ...organizationCopy(conference2026.organizers),
       ...organizationCopy(conference2026.coOrganizers),
       ...organizationCopy(conference2026.sponsors),
@@ -549,8 +548,8 @@ if (!rootIndex.includes('hero-section') && !rootIndex.includes('data-hero-pixel-
 }
 
 const rootText = visibleText(rootIndex);
-const homepagePartnerLabels = ['主办单位：', '协办单位：', '赞助单位：'];
-if (rootText.includes('发起方：')) {
+const homepagePartnerLabels = ['主办单位', '协办单位', '赞助单位'];
+if (rootText.includes('发起方')) {
   failures.push('index.html: homepage partner list must not repeat the initiator section');
 }
 
@@ -570,6 +569,32 @@ function validatePartnerOrder(route, text, labels) {
 }
 
 validatePartnerOrder('index.html', rootText, homepagePartnerLabels);
+
+for (const route of ['about/index.html', 'goal/about/index.html']) {
+  const source = await readFile(path.join(root, route), 'utf8');
+  if (/<(?:h[1-6]|div)[^>]*>\s*发起方\s*<\//u.test(source)) {
+    failures.push(`${route}: organization sections must not repeat the initiator group`);
+  }
+}
+
+for (const expectedCopy of [
+  conference2026.programPreview.status,
+  conference2026.programPreview.note,
+  conference2026.registration.description,
+  ...conference2026.programPreview.sessions.flatMap((session) => [
+    session.title,
+    session.chair.name,
+    ...session.speakers.map((speaker) => speaker.name),
+  ]),
+]) {
+  if (!rootText.includes(expectedCopy)) {
+    failures.push(`index.html: missing latest program copy "${expectedCopy}"`);
+  }
+}
+
+if (rootText.includes('青年之夜')) {
+  failures.push('index.html: retired Youth Night copy must not be published');
+}
 
 const goalIndex = await readFile(path.join(root, 'goal/index.html'), 'utf8');
 if (!goalIndex.includes('<meta name="robots" content="noindex, nofollow">')) {

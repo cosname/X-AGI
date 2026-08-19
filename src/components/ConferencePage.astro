@@ -10,10 +10,9 @@ import RisingStars from './RisingStars.astro';
 import VenueMaps from './VenueMaps.astro';
 
 const aboutPartnerNav = [
-  { id: 'about-initiators', label: '发起方', organizations: conference2026.initiators },
   { id: 'about-organizers', label: '主办单位', organizations: conference2026.organizers },
   { id: 'about-co-organizers', label: '协办单位', organizations: conference2026.coOrganizers },
-  { id: 'about-sponsors', label: '赞助伙伴', organizations: conference2026.sponsors },
+  { id: 'about-sponsors', label: '赞助单位', organizations: conference2026.sponsors },
 ].filter((group) => group.organizations.length > 0);
 
 const aboutOutline = [
