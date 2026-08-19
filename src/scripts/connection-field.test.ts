@@ -2,6 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
+  connectionDragWeight,
+} from './portrait-connection-field.ts';
+import {
   BASE_POSTERIOR_AMPLITUDE,
   BASE_POSTERIOR_MEAN,
   gaussianDensity,
@@ -17,6 +20,14 @@ import {
   mastheadParticleCount,
   seedMastheadParticles,
 } from './masthead-pixel-field.ts';
+
+test('connection drag weight is smooth, local, and bounded', () => {
+  assert.equal(connectionDragWeight(0, 160), 1);
+  assert.equal(connectionDragWeight(160, 160), 0);
+  assert.equal(connectionDragWeight(320, 160), 0);
+  assert.ok(connectionDragWeight(40, 160) > connectionDragWeight(100, 160));
+  assert.ok(connectionDragWeight(100, 160) > 0);
+});
 
 test('gaussian density peaks at its mean', () => {
   assert.equal(gaussianDensity(0.675, 0.675, 0.078), 1);

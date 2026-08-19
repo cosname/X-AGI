@@ -10,6 +10,7 @@ interface Props {
 
 const { edition } = Astro.props;
 const actions = currentEditionActionPaths(edition);
+const programPreview = conference2026.programPreview;
 
 const partnerRows = [
   { label: '主办单位：', organizations: conference2026.organizers },
@@ -121,3 +122,73 @@ const partnerRows = [
     </a>
   </p>
 </header>
+
+<main class="legacy-home-content">
+  <section class="legacy-home-registration" aria-labelledby="home-registration-title">
+    <div>
+      <p class="legacy-home-eyebrow">REGISTRATION</p>
+      <h2 id="home-registration-title">报名须知</h2>
+    </div>
+    <div class="legacy-home-registration__copy">
+      <p>{conference2026.registration.description}</p>
+      <a href={conference2026.registration.url} target="_blank" rel="noopener noreferrer">
+        前往统一报名入口
+      </a>
+    </div>
+  </section>
+
+  <section class="legacy-home-program" aria-labelledby="home-program-title">
+    <header class="legacy-home-program__heading">
+      <div>
+        <p class="legacy-home-eyebrow">PROGRAM PREVIEW</p>
+        <h2 id="home-program-title">大会专题与嘉宾</h2>
+      </div>
+      <div class="legacy-home-program__status">
+        <strong>{programPreview.status}</strong>
+        <p>{programPreview.note}</p>
+      </div>
+    </header>
+
+    <div class="legacy-home-program__grid">
+      {programPreview.sessions.map((session, index) => (
+        <article class="legacy-home-session">
+          <span class="legacy-home-session__index" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <h3>{session.title}</h3>
+          <dl>
+            <div>
+              <dt>Session Chair</dt>
+              <dd>
+                <strong>{session.chair.name}</strong>
+                {session.chair.affiliation && <span>{session.chair.affiliation}</span>}
+              </dd>
+            </div>
+            <div>
+              <dt>已确认嘉宾</dt>
+              <dd>
+                {session.speakers.length > 0 ? (
+                  <ul>
+                    {session.speakers.map((speaker) => (
+                      <li>
+                        <strong>{speaker.name}</strong>
+                        {speaker.affiliation && <span>{speaker.affiliation}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span class="legacy-home-session__pending">持续确认中</span>
+                )}
+              </dd>
+            </div>
+          </dl>
+        </article>
+      ))}
+    </div>
+
+    <footer class="legacy-home-program__footer">
+      <p>具体日期、时段与报告题目以最终发布为准。</p>
+      <a href={actions.schedule}>查看日程安排</a>
+    </footer>
+  </section>
+</main>

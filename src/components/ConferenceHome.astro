@@ -3,15 +3,17 @@ import { currentEditionActionPaths } from '../config/edition-status';
 import { editionPath, upcomingEdition, type EditionConfig } from '../config/site';
 import { conference2026, type ScheduleDay as ScheduleDayData } from '../data/conference2026';
 import ConferencePartners from './ConferencePartners.astro';
+import ConferencePublishedHome from './ConferencePublishedHome.astro';
 import HeroPixelField from './HeroPixelField.astro';
 import ScheduleDay from './ScheduleDay.astro';
 
 interface Props {
   edition?: EditionConfig;
   heroOnly?: boolean;
+  contentMode?: 'concept' | 'published';
 }
 
-const { edition = upcomingEdition, heroOnly = false } = Astro.props;
+const { edition = upcomingEdition, heroOnly = false, contentMode = 'concept' } = Astro.props;
 const actions = currentEditionActionPaths(edition);
 const badgeHero = edition.skin === 'goal';
 ---
@@ -70,7 +72,11 @@ const badgeHero = edition.skin === 'goal';
     </div>
   </section>
 
-  {!heroOnly && (
+  {!heroOnly && contentMode === 'published' && (
+    <ConferencePublishedHome edition={edition} />
+  )}
+
+  {!heroOnly && contentMode === 'concept' && (
     <div class="conference-home__ground">
       <div class="conference-home__horizon" aria-hidden="true"></div>
 

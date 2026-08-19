@@ -34,6 +34,17 @@ export type ScheduleDay = {
   sessions: readonly ScheduleSession[];
 };
 
+export type ProgramPerson = {
+  name: string;
+  affiliation?: string;
+};
+
+export type ProgramPreviewSession = {
+  title: string;
+  chair: ProgramPerson;
+  speakers: readonly ProgramPerson[];
+};
+
 export type TicketRow = {
   name: string;
   student: number;
@@ -48,8 +59,8 @@ export type TicketBand = {
 };
 
 export const conference2026 = {
-  sourceDate: '2026-08-16',
-  sourceDateLabel: '大会公众号推送内容已同步',
+  sourceDate: '2026-08-18',
+  sourceDateLabel: '大会专题与嘉宾信息已同步',
   name: '2026 X-AGI 大会',
   nameEn: '2026 X-AGI Conference',
   tagline: 'AI Conference for the neXt Generation',
@@ -114,6 +125,98 @@ export const conference2026 = {
       description: '促进青年研究者与学术界、产业界之间的高质量连接。',
     },
   ],
+  programPreview: {
+    status: '持续更新中…',
+    note: '专题与嘉宾名单将随确认持续更新，具体日期与时段以最终日程为准。',
+    sessions: [
+      {
+        title: 'AI + Math & Theory',
+        chair: { name: '刘方辉', affiliation: '上海交通大学' },
+        speakers: [
+          { name: '罗涛', affiliation: '上海交通大学' },
+          { name: '邹荻凡', affiliation: '香港大学' },
+          { name: '陆一平', affiliation: '北京大学' },
+          { name: '刘方辉', affiliation: '上海交通大学' },
+        ],
+      },
+      {
+        title: 'ML Theory',
+        chair: { name: '马梓业', affiliation: '香港城市大学' },
+        speakers: [
+          { name: '马鉴昊', affiliation: '清华大学' },
+          { name: '赵鹏', affiliation: '南京大学' },
+        ],
+      },
+      {
+        title: '生成建模的新范式与理论基础',
+        chair: { name: '周峰', affiliation: '中国人民大学' },
+        speakers: [
+          { name: '马俊杰', affiliation: '中国科学院数学与系统科学研究院' },
+          { name: '许洪腾', affiliation: '中国人民大学' },
+          { name: '毛小介', affiliation: '清华大学' },
+          { name: '周帆', affiliation: '上海财经大学' },
+        ],
+      },
+      {
+        title: '优化器的新进展',
+        chair: { name: '校一皓', affiliation: '上海财经大学' },
+        speakers: [{ name: '谢天', affiliation: 'Qwen' }],
+      },
+      {
+        title: 'Agentic 后训练',
+        chair: { name: '杨新宇', affiliation: 'Kimi' },
+        speakers: [],
+      },
+      {
+        title: 'AI + 教育',
+        chair: { name: '陈思明', affiliation: '复旦大学' },
+        speakers: [],
+      },
+      {
+        title: 'Agent',
+        chair: { name: '从鑫', affiliation: '清华大学' },
+        speakers: [
+          { name: '王宏宁', affiliation: '清华大学' },
+          { name: '李鹏', affiliation: '清华大学' },
+        ],
+      },
+      {
+        title: 'LLM 评测 & Benchmark',
+        chair: { name: '张辉帅', affiliation: '北京大学' },
+        speakers: [],
+      },
+      {
+        title: 'AI + Finance',
+        chair: { name: '祝武', affiliation: '清华大学' },
+        speakers: [],
+      },
+      {
+        title: '语言模型基础',
+        chair: { name: '胡天阳', affiliation: '香港中文大学（深圳）' },
+        speakers: [{ name: '刘威杨', affiliation: '香港中文大学' }],
+      },
+      {
+        title: '扩散模型的理论基础与推理算法',
+        chair: { name: '陆一平', affiliation: '北京大学' },
+        speakers: [
+          { name: '焦雨领', affiliation: '武汉大学' },
+          { name: '周沛劼', affiliation: '北京大学' },
+          { name: '史作强', affiliation: '清华大学' },
+          { name: '陆一平', affiliation: '北京大学' },
+        ],
+      },
+      {
+        title: 'AI Infra',
+        chair: { name: '杨朋昆', affiliation: '清华大学' },
+        speakers: [{ name: '陆元伟', affiliation: '阶跃星辰' }],
+      },
+      {
+        title: 'AI4Science',
+        chair: { name: '待确认', affiliation: '' },
+        speakers: [{ name: '许慧楠', affiliation: '之江实验室' }],
+      },
+    ],
+  },
   // 日程是嘉宾、报告与分会场的唯一发布面。确认后的讲者、摘要、简介写进对应 session.talks。
   schedule: [
     {
@@ -199,7 +302,6 @@ export const conference2026 = {
     },
     benefits: [
       '价值 2400 人民币的 X-AGI 会议正式门票（含茶歇、餐食、伴手礼等）',
-      '参加 X-AGI 青年之夜',
       '优秀简历直达合作企业技术负责人',
       '京外本科生机酒支持',
     ],
@@ -217,7 +319,6 @@ export const conference2026 = {
       '完成基础参会信息后，可在报名系统中选择相应报名类型。',
       '在读本科生、硕士生、博士生优先。',
       '报名海报展即赠专业票。',
-      'Speaker 专属入口由各 Session Chair 定向发送，不在官网公开。',
     ],
   },
   tickets: {

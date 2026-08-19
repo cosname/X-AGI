@@ -9,18 +9,11 @@ interface Props {
 
 const { titleId, variant = 'roster' } = Astro.props;
 const allPartnerGroups: { key: string; label: string; organizations: readonly Organization[] }[] = [
-  { key: 'initiators', label: '发起方', organizations: conference2026.initiators },
   { key: 'organizers', label: '主办单位', organizations: conference2026.organizers },
   { key: 'co-organizers', label: '协办单位', organizations: conference2026.coOrganizers },
-  { key: 'sponsors', label: '赞助伙伴', organizations: conference2026.sponsors },
+  { key: 'sponsors', label: '赞助单位', organizations: conference2026.sponsors },
 ];
 const partnerGroups = allPartnerGroups
-  .filter((group) => variant !== 'logos' || group.key !== 'initiators')
-  .map((group) => (
-    variant === 'logos' && group.key === 'sponsors'
-      ? { ...group, label: '赞助单位' }
-      : group
-  ))
   .filter((group) => group.organizations.length > 0);
 
 ---

@@ -1,0 +1,147 @@
+---
+import {
+  PORTRAIT_CONNECTION_LINKS,
+  PORTRAIT_CONNECTION_NODES,
+  portraitConnectionDots,
+} from '../scripts/portrait-connection-field';
+
+const colors = {
+  lavender: '154 145 223',
+  violet: '101 84 194',
+  teal: '74 170 179',
+  periwinkle: '102 123 196',
+} as const;
+
+const linkDots = PORTRAIT_CONNECTION_LINKS.flatMap((link, linkIndex) => (
+  portraitConnectionDots(link).map((dot, dotIndex) => ({
+    ...dot,
+    ...link,
+    key: `${linkIndex}-${dotIndex}`,
+  }))
+));
+---
+
+<div
+  class="portrait-connection-field"
+  data-portrait-connection-field
+  data-render-mode="dom"
+  data-network-nodes={PORTRAIT_CONNECTION_NODES.length}
+  data-network-links={PORTRAIT_CONNECTION_LINKS.length}
+  data-ready="false"
+  data-interaction="idle"
+  aria-hidden="true"
+>
+  <span class="portrait-connection-field__links">
+    {linkDots.map((dot) => (
+      <i
+        class:list={['portrait-connection-field__link-dot', dot.color === 'teal' && 'is-teal']}
+        data-portrait-link-dot
+        data-link-from={dot.from}
+        data-link-to={dot.to}
+        data-link-progress={dot.progress}
+        style={`--connection-left:${(dot.x * 100).toFixed(4)}%;--connection-top:${(dot.y * 100).toFixed(4)}%`}
+      ></i>
+    ))}
+  </span>
+  <span class="portrait-connection-field__nodes">
+    {PORTRAIT_CONNECTION_NODES.map((node) => (
+      <span
+        class="portrait-connection-field__node"
+        data-portrait-connection-node
+        data-node-x={node.x}
+        data-node-y={node.y}
+        data-node-depth={node.depth}
+        style={`--connection-left:${node.x * 100}%;--connection-top:${node.y * 100}%;--connection-node-size:${(node.size * 0.118).toFixed(3)}rem;--connection-node-rgb:${colors[node.color]}`}
+      >
+        <i></i><i></i><i></i><i></i>
+      </span>
+    ))}
+  </span>
+</div>
+
+<script>
+  import { initializePortraitConnectionFields } from '../scripts/portrait-connection-field';
+
+  initializePortraitConnectionFields();
+</script>
+
+<style>
+  .portrait-connection-field {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    display: none;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .portrait-connection-field__links,
+  .portrait-connection-field__nodes {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .portrait-connection-field__link-dot,
+  .portrait-connection-field__node {
+    position: absolute;
+    left: var(--connection-left);
+    top: var(--connection-top);
+    will-change: transform;
+  }
+
+  .portrait-connection-field__link-dot {
+    width: clamp(1px, 0.28vw, 1.6px);
+    aspect-ratio: 1;
+    display: block;
+    background: rgb(121 105 206 / 0.56);
+    transform: translate(-50%, -50%) translate3d(
+      var(--connection-drag-x, 0),
+      var(--connection-drag-y, 0),
+      0
+    );
+  }
+
+  .portrait-connection-field__link-dot.is-teal {
+    background: rgb(74 170 179 / 0.58);
+  }
+
+  .portrait-connection-field__node {
+    width: var(--connection-node-size);
+    aspect-ratio: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    transform: translate(-50%, -50%) translate3d(
+      var(--connection-drag-x, 0),
+      var(--connection-drag-y, 0),
+      0
+    );
+  }
+
+  .portrait-connection-field__node > i {
+    display: block;
+    background: rgb(var(--connection-node-rgb) / 0.78);
+  }
+
+  .portrait-connection-field__node > i:nth-child(2) {
+    opacity: 0.66;
+  }
+
+  .portrait-connection-field__node > i:nth-child(3) {
+    opacity: 0.54;
+  }
+
+  @media (max-width: 51.25rem) and (orientation: portrait) {
+    .portrait-connection-field {
+      display: block;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .portrait-connection-field__link-dot,
+    .portrait-connection-field__node {
+      will-change: auto;
+    }
+  }
+</style>
