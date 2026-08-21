@@ -1,79 +1,36 @@
 ---
-import { conference2026, type Organization } from '../data/conference2026';
-import { partnerLogoForName } from '../data/legacy-partner-assets';
+import { conference2026PartnerDisplayGroups } from '../data/conference2026';
 import '../styles/goal-partner-footer.css';
 import ConferenceOrganizationMark from './ConferenceOrganizationMark.astro';
-
-type GoalPartnerGroup = {
-  key: 'initiators' | 'organizers' | 'co-organizers' | 'sponsors';
-  label: string;
-  note: string;
-  organizations: readonly Organization[];
-};
-
-const partnerGroups: readonly GoalPartnerGroup[] = [
-  {
-    key: 'initiators',
-    label: '发起单位',
-    note: '学术社区与基础研究网络共同发起',
-    organizations: conference2026.initiators,
-  },
-  {
-    key: 'organizers',
-    label: '主办单位',
-    note: '高校与学术机构联合主办',
-    organizations: conference2026.organizers,
-  },
-  {
-    key: 'co-organizers',
-    label: '协办单位',
-    note: '学术传播与科研协作支持',
-    organizations: conference2026.coOrganizers,
-  },
-  {
-    key: 'sponsors',
-    label: '赞助单位',
-    note: '感谢产业伙伴对会议的支持',
-    organizations: conference2026.sponsors,
-  },
-];
 ---
 
-<section class="goal-partners" aria-labelledby="goal-partners-title">
+<section
+  class="goal-partners"
+  id="goal-organization"
+  aria-labelledby="goal-partners-title"
+>
   <div class="goal-partners__inner">
     <header class="goal-partners__heading">
-      <div>
-        <p>ORGANIZERS & PARTNERS</p>
-        <h2 id="goal-partners-title">共同连接这场大会</h2>
-      </div>
-      <p>感谢每一个共同发起、协作与支持 X-AGI 2026 的组织。</p>
+      <h2 id="goal-partners-title">组织单位</h2>
     </header>
 
     <div class="goal-partners__groups">
-      {partnerGroups.map((group) => (
+      {conference2026PartnerDisplayGroups.map((group) => (
         <section
           class:list={['goal-partners__group', `goal-partners__group--${group.key}`]}
           aria-labelledby={`goal-partners-group-${group.key}`}
         >
-          <header>
-            <h3 id={`goal-partners-group-${group.key}`}>{group.label}</h3>
-            <p>{group.note}</p>
-          </header>
-
-          <ul class:list={['goal-partners__row', `goal-partners__row--${group.key}`]}>
-            {group.organizations.map((organization) => {
-              const logoClassName = partnerLogoForName(organization.name, 'goal')?.className;
-
-              return (
-                <li class:list={[logoClassName && `goal-partners__item--${logoClassName}`]}>
-                  <ConferenceOrganizationMark
-                    organization={organization}
-                    presentation="card"
-                    surface="goal"
-                  />
-                </li>
-              );
-            })}
+          <h3 id={`goal-partners-group-${group.key}`}>{group.label}</h3>
+          <ul class:list={['goal-partners__logos', `goal-partners__logos--${group.key}`]}>
+            {group.organizations.map((organization) => (
+              <li>
+                <ConferenceOrganizationMark
+                  organization={organization}
+                  presentation="logo"
+                  surface="goal"
+                />
+              </li>
+            ))}
           </ul>
         </section>
       ))}

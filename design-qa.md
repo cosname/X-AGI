@@ -60,6 +60,88 @@ No actionable P0, P1, or P2 visual, interaction, responsive, lifecycle, or acces
 
 final result: passed
 
+## Compact Mobile Navigation Shared-Origin Prototype
+
+### Findings
+
+No actionable P0, P1, or P2 visual, interaction, responsive, or accessibility issues remain for this mobile navigation prototype.
+
+- Fonts and typography: the existing Goal condensed navigation type, weights, letter spacing, labels, and active-page hierarchy remain unchanged.
+- Spacing and layout rhythm: the closed trigger and open shell share the same measured top and right coordinates, every navigation row measures 44px high, and the 390px and 320px browser widths have no horizontal overflow.
+- Colors and visual tokens: the prototype preserves the existing paper, navy, purple, teal, orange, border, and shadow tokens instead of importing the reference site's monochrome treatment.
+- Image quality and asset fidelity: the existing X-AGI mark, hero art, and menu atmosphere remain intact, and the prototype introduces no replacement assets or code-drawn approximations.
+- Copy and content: 首页, 会议简介, 日程安排, 海报展示, 参会指南, and 立即报名 remain unchanged and preserve their existing destinations and active-page semantics.
+- Motion choreography: the shell begins at the compact trigger, height settles over 428ms, width settles over 590ms, and the five labels reveal from 120ms through 220ms with a 25ms stagger.
+- Closing behavior: second-trigger activation and Escape reverse the shell state, while Escape restores focus to the trigger.
+- Accessibility: the closed panel is `aria-hidden` and inert, the open panel removes both restrictions, the trigger keeps `aria-expanded` and `aria-controls`, and the global reduced-motion rule reduces the new transitions to 0.01ms.
+- Desktop regression: the 1440 x 900 browser state remains inline, keeps the Liquid Glass capsule ready, and exposes neither compact-menu inertness nor compact positioning.
+
+### Open Questions
+
+- None for this prototype.
+- The upper-right anchor and the larger X-AGI content shell are intentional product adaptations of the reference motion rather than literal copies of its bottom thumb-zone placement and portfolio-sized card.
+
+### Comparison Target
+
+- Source visual truth: `output/reference-study/charlie-deets-2026-08-21/motion-video/storyboard-mobile-menu.jpg` at 1224 x 946 pixels.
+- Closed implementation: `output/design-qa/mobile-navigation-prototype/final-closed.png` at 375 x 812 pixels.
+- Open implementation: `output/design-qa/mobile-navigation-prototype/final-open.png` at 375 x 812 pixels.
+- Full-view comparison: `output/design-qa/mobile-navigation-prototype/reference-vs-prototype-final.png` at 1000 x 1856 pixels.
+- Desktop regression: `output/design-qa/mobile-navigation-prototype/desktop-regression.png`.
+- Narrow-screen evidence: `output/design-qa/mobile-navigation-prototype/narrow-final-closed.png` and `output/design-qa/mobile-navigation-prototype/narrow-final-open.png`.
+- Browser viewport override: 390 x 844 CSS pixels at device pixel ratio 1, with a 375px document client width after the site's stable scrollbar gutter.
+- Narrow browser viewport override: 320 x 700 CSS pixels at device pixel ratio 1, with a 305px document client width after the stable scrollbar gutter.
+- State: `/goal/` at scroll position 0, first closed and then fully open.
+- Density normalization: the source storyboard was resized to 1000px wide, and the two implementation screenshots were appended and resized together to the same comparison width.
+- Full-view evidence is sufficient because the source storyboard and both implementation states keep the complete navigation shell and all labels readable at the comparison size.
+- A separate focused crop was not needed because the component is the only comparison subject and no icon, asset, or small typographic detail falls below readable scale.
+
+### Comparison History
+
+#### Iteration 1
+
+- Earlier finding: P2 the compact panel changed from `display:none` to `display:flex` and opened below a separate trigger with a 7.2px gap, so it read as a summoned layer instead of one transforming control.
+- Earlier evidence: `output/design-qa/mobile-navigation-prototype/before-closed.png` and `output/design-qa/mobile-navigation-prototype/before-open.png`.
+- Fix: the panel now remains measurable, clips to the trigger geometry while closed, expands from the same upper-right origin, and hides interaction with visibility, pointer, ARIA, and inert states.
+- Post-fix evidence: `output/design-qa/mobile-navigation-prototype/final-closed.png`, `output/design-qa/mobile-navigation-prototype/final-open.png`, and `output/design-qa/mobile-navigation-prototype/reference-vs-prototype-final.png`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the first narrow-screen pass inherited a 3.5rem trigger-width override while the Chinese label still rendered at approximately 65.36px, which made the closed clip geometry narrower than the visible trigger.
+- Earlier evidence: the first 320px browser measurement reported a 56px shell origin against a 65.36px rendered trigger, with `output/design-qa/mobile-navigation-prototype/narrow-open.png` showing the affected breakpoint.
+- Fix: the trigger width and shell clip now share one 4.1rem custom property at every compact breakpoint.
+- Post-fix evidence: the 320px browser measurement reports a 65.59px trigger and `calc(100% - 65.6px)` closed clip, while `narrow-final-closed.png` and `narrow-final-open.png` remain overflow-free.
+
+### Primary Interactions Tested
+
+- Opened the menu at 390 x 844 and verified the shell, content, label delays, active state, registration action, and exact shared top-right origin.
+- Closed the menu with a second trigger activation.
+- Closed the menu with Escape and verified focus returned to the trigger.
+- Verified every compact navigation row remains at least 44px high.
+- Verified closed and open ARIA, inert, visibility, and pointer-event states.
+- Repeated the open and closed states at 320 x 700 and verified zero horizontal overflow.
+- Reloaded the desktop page at 1440 x 900 and verified the inline Liquid Glass navigation remains unchanged.
+
+### Automated Verification
+
+- `npm run check` passed for 74 Astro files with zero errors, warnings, or hints.
+- `npm run test:unit` passed all 47 unit tests.
+- `npm run build` generated all 20 static pages and passed the repository build validator.
+- `git diff --check -- src/components/SiteHeader.astro src/styles/global.css` completed without whitespace errors.
+
+### Implementation Checklist
+
+- Keep the compact shell motion limited to `data-nav-mode='compact'`.
+- Preserve the shared trigger-width and trigger-height variables if the button copy changes.
+- Preserve the 44px row floor and the existing reduced-motion fallback.
+- Keep the desktop Liquid Glass capsule selectors scoped to inline navigation.
+
+### Follow-up Polish
+
+- P3: a physical-phone pass can tune the final spring feel against real 60Hz touch input, although the measured durations, state choreography, responsive geometry, and desktop regression currently meet the prototype brief.
+
+final result: passed
+
 ## Goal Inner-page Masthead
 
 ### Comparison target
@@ -1599,5 +1681,235 @@ No actionable P0, P1, or P2 visual, interaction, responsive, route-isolation, li
 - The Friendship Hotel mini-program code still needs one physical-phone WeChat scan before publication.
 - The final browser pass used the installed headless Chrome binary and a local HTML-injection proxy because the repository does not yet contain a committed Playwright harness.
 - Static screenshots cannot fully communicate the temporal feel of the hero, capsule, or smooth gallery transition.
+
+final result: passed
+
+## Compact Mobile Navigation Charlie-Inspired Rework
+
+### Comparison target
+
+- User issue capture for the collapse arc: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-514a2f1c-a835-44c1-9cb8-4eabbd0c9d27.png`.
+- User issue capture for the unexpected white header: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-a5d19496-19a5-45a5-bcef-e7225c04b77b.png`.
+- Charlie closed-state reference: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-1d8c32e8-8a8a-4688-aed5-d8bf78bf3ff8.png`.
+- Charlie open-state reference: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-53ed43a8-4b9e-42c2-8969-59dcdf06dd33.png`.
+- Final closed capture: `output/design-qa/mobile-navigation-rework/final-closed-390.png`.
+- Final open capture: `output/design-qa/mobile-navigation-rework/final-open-390.png`.
+- First frame after closing: `output/design-qa/mobile-navigation-rework/final-close-0ms-390.png`.
+- Narrow-screen capture: `output/design-qa/mobile-navigation-rework/final-open-320.png`.
+- Desktop regression capture: `output/design-qa/mobile-navigation-rework/final-desktop-1440.png`.
+- Combined reference and implementation comparison: `output/design-qa/mobile-navigation-rework/source-vs-final.png`.
+- Browser viewport overrides were 390 x 844, 320 x 700, and 1440 x 900 CSS pixels, with effective content widths of 375, 305, and 1425 pixels respectively.
+- State: `/goal/`, with the compact navigation closed, open, closing, pointer-scrubbed, and keyboard-dismissed.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, interaction, responsive, or accessibility issues remain for this rework.
+
+- P1 fixed: opening the menu no longer paints a second white status bar because the top header remains transparent while the compact panel owns the glass material.
+- P1 fixed: the compact panel is now a 244 x 384 right-side menu with right-aligned labels instead of a nearly full-width left-aligned navigation card.
+- P2 fixed: the panel keeps a fixed 28-pixel shell radius and fades its material during closing, so the old large circular arc is absent even in the first captured closing frame.
+- P2 fixed: the 82 x 48 Menu trigger now expands from the same top-right origin, while the toggle travels to the panel footer and becomes Close without introducing a second control.
+- P2 fixed: the shared Liquid Glass lens follows stacked targets continuously during pointer drag and activates the item beneath the pointer on release.
+- Visual hierarchy: the current page receives the glass lens and right-side square marker, secondary destinations remain quiet, registration has stronger text weight, and Close is separated by a light divider.
+- Responsive behavior: the same composition remains intact at the effective 305-pixel content width, where the brand fades while the menu is open to prevent overlap.
+- Desktop isolation: the 1425-pixel content width keeps the existing inline navigation, hides the compact toggle and compact lens, and reports no horizontal overflow.
+- Accessibility: the compact trigger exposes the correct expanded state, the closed panel is inert, Escape restores focus to the Menu trigger, and keyboard focus keeps a visible outline.
+- Browser health: the inspected desktop and mobile states report no console errors or warnings.
+
+### Primary interactions tested
+
+- Opened and closed the compact menu at the 390 x 844 override and captured the closed, open, immediate closing, 80-millisecond closing, and 240-millisecond closing frames.
+- Dragged from the Home row through the stacked options to Poster and released, which navigated to `/goal/poster/` and confirmed the press-and-hold scrub path.
+- Opened the menu on `/goal/poster/`, pressed Escape, and verified `aria-expanded="false"`, panel inertness, and focus restoration to the Menu trigger.
+- Loaded the 320 x 700 override and verified a transparent header, hidden brand while open, a 244-pixel panel, and zero horizontal overflow.
+- Loaded the 1440 x 900 override and verified inline mode, hidden compact controls, a ready desktop capsule, and zero horizontal overflow.
+- Compared all four supplied screenshots with the final implementation in one combined QA artifact.
+
+### Automated verification
+
+- `npm run test:unit` passed all 49 unit tests, including vertical Liquid Glass interpolation and boundary clamping.
+- `npm run check` completed with zero errors, warnings, or hints across 74 Astro files.
+- `npm run build` generated 20 pages and passed the complete build validator.
+- `git diff --check` completed without whitespace errors for the scoped navigation and Liquid Glass files.
+
+### Residual test gaps
+
+- Mouse drag and pointer-event navigation were verified in the browser, while final tactile tuning on a physical touch screen remains a subjective acceptance check rather than a functional blocker.
+
+final result: passed
+
+## Compact Mobile Navigation Centered-Axis Refinement
+
+### Comparison target
+
+- User implementation critique: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-862350db-584a-4b79-a6d7-18b4e1a38833.png` at 566 x 834 pixels.
+- Final implementation capture: `output/design-qa/mobile-navigation-center/final-open-390.png` at 375 x 812 pixels.
+- Narrow implementation capture: `output/design-qa/mobile-navigation-center/final-open-320.png` at 305 x 667 pixels.
+- Combined focused comparison: `output/design-qa/mobile-navigation-center/source-vs-centered-final.png` at 1068 x 870 pixels.
+- Browser viewport overrides were 390 x 844 and 320 x 700 CSS pixels, with effective content widths of 375 and 305 pixels.
+- State: `/goal/` with the compact navigation open and Home selected.
+
+### Findings and comparison history
+
+No actionable P0, P1, or P2 visual, interaction, responsive, or accessibility issues remain for this refinement.
+
+- P1 fixed: the earlier right-aligned 140-pixel target column created a large non-interactive area on the left side of the panel.
+- Post-fix evidence: the panel, all navigation targets, the Liquid Glass lens, registration action, divider, and Close control now share the exact same horizontal center at 233 pixels in the 390-pixel override.
+- P2 fixed: the earlier Home state showed both the Liquid Glass lens and a square pseudo-element as duplicate selection indicators.
+- Post-fix evidence: the active pseudo-element now reports `content: none`, leaving the Liquid Glass lens as the only selected-state affordance.
+- Fonts and typography: the existing X-AGI navigation family, size, weight, line height, and copy remain unchanged, while text alignment is consistently centered.
+- Spacing and layout rhythm: each interactive row now occupies the full 218-pixel inner width of the 244-pixel panel, leaving balanced 13-pixel side margins instead of an unused left region.
+- Colors and visual tokens: the warm paper, violet glass outline, navy registration emphasis, and translucent divider remain unchanged.
+- Image quality and asset fidelity: no imagery or brand assets changed, and the existing logo and hero artwork remain sharp and unobstructed.
+- Copy and content: 首页, 会议简介, 日程安排, 海报展示, 参会指南, 立即报名, and 收起 remain unchanged.
+- Responsive behavior: at the 320 x 700 override, the panel, lens, targets, registration action, and Close control all share the 163-pixel center and report zero horizontal overflow.
+- Interaction behavior: a pointer drag along the centered axis from Home to Poster still activates `/goal/poster/` on release.
+- Browser health: the final pointer-drag flow reports no console errors or warnings.
+
+### Automated verification
+
+- `node --test src/scripts/glass-action-group.test.ts` passed all 7 focused Liquid Glass tests.
+- `npm run check` completed with zero errors, warnings, or hints across 74 Astro files.
+- `npm run build` generated 20 pages and passed the complete build validator.
+- `git diff --check` completed without whitespace errors for the scoped files.
+
+### Residual test gaps
+
+- Final tactile pacing on a physical touch screen remains a subjective acceptance check rather than a functional blocker.
+
+final result: passed
+
+## Compact Mobile Navigation Liquid Shell Refinement
+
+### Comparison target
+
+- User implementation critique: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-89527eaf-402b-440c-ac83-6b1362489ed5.png` at 552 x 812 pixels.
+- Final closed implementation: `output/design-qa/mobile-navigation-liquid-shell/final-closed-390.png` at 375 x 812 pixels.
+- Final open implementation: `output/design-qa/mobile-navigation-liquid-shell/final-open-390.png` at 375 x 812 pixels.
+- Final narrow implementation: `output/design-qa/mobile-navigation-liquid-shell/final-open-320.png` at 305 x 667 pixels.
+- Combined focused comparison: `output/design-qa/mobile-navigation-liquid-shell/source-vs-liquid-final.png` at 1068 x 870 pixels.
+- Browser viewport overrides were 390 x 844 and 320 x 700 CSS pixels, with effective content widths of 375 and 305 pixels.
+- State: `/goal/` with the compact navigation closed, open with Home selected, and pointer-scrubbed to Poster.
+
+### Findings and comparison history
+
+No actionable P0, P1, or P2 visual, interaction, responsive, or accessibility issues remain for this refinement.
+
+- P1 fixed: the previous Menu button and expanded shell used uniform translucent paper surfaces that read as ordinary blur cards rather than the existing Liquid Glass system.
+- Post-fix evidence: the trigger and shell now share the GlassActionGroup material grammar with a three-stop refractive surface, violet depth edge, top highlight, background blur, saturation, contrast, inset light, and layered drop shadows.
+- P1 fixed: the previous 244-pixel panel was visibly wider than its centered Chinese labels required.
+- Post-fix evidence: the panel is 188 pixels wide at both tested mobile breakpoints, while the inner Liquid Glass target is 166 pixels wide and all controls retain one shared center axis.
+- Fonts and typography: the existing condensed X-AGI font, 1rem menu size, weights, centered alignment, and app copy remain unchanged.
+- Spacing and layout rhythm: the narrower shell retains balanced 10-pixel inner side padding, 44-pixel target rows, the registration gap, divider, and bottom Close control without clipping.
+- Colors and visual tokens: the shell reuses the existing white, warm paper, violet depth, navy text, and glass highlight values already present in GlassActionGroup.
+- Image quality and asset fidelity: no image assets changed, and the transparent shell preserves the legibility and sharpness of the existing hero artwork behind it.
+- Copy and content: 菜单, 首页, 会议简介, 日程安排, 海报展示, 参会指南, 立即报名, and 收起 remain unchanged.
+- Responsive behavior: the 320 x 700 override keeps the 188-pixel panel, 166-pixel lens, 82-pixel Close control, one 191-pixel center axis, and zero horizontal overflow.
+- Interaction behavior: dragging from Home to Poster through the narrowed shell still activates `/goal/poster/` on release.
+- Browser health: the final 320-pixel drag flow reports no console errors or warnings.
+
+### Automated verification
+
+- `node --test src/scripts/glass-action-group.test.ts` passed all 7 focused Liquid Glass tests.
+- `npm run check` completed with zero errors, warnings, or hints across 74 Astro files.
+- `npm run build` generated 20 pages and passed the complete build validator.
+- `git diff --check` completed without whitespace errors for the scoped files.
+
+### Residual test gaps
+
+- Final optical refraction and tactile pacing should still receive subjective acceptance on a physical touch screen.
+
+final result: passed
+
+## Compact Mobile Navigation Vertical Reveal And Glass Close
+
+### Comparison target
+
+- User implementation critique: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-41333257-2a70-4c40-a570-4a9df5404f97.png` at 456 x 790 pixels.
+- Final closed implementation: `output/design-qa/mobile-navigation-vertical-liquid/final-closed-390.png` at 375 x 812 pixels.
+- Final open implementation: `output/design-qa/mobile-navigation-vertical-liquid/final-open-390.png` at 375 x 812 pixels.
+- Final Close-hover implementation: `output/design-qa/mobile-navigation-vertical-liquid/final-close-hover-390.png` at 375 x 812 pixels.
+- Final narrow implementation: `output/design-qa/mobile-navigation-vertical-liquid/final-open-320.png` at 305 x 667 pixels.
+- Desktop regression capture: `output/design-qa/mobile-navigation-vertical-liquid/desktop-regression.png`.
+- Combined source, final, and interaction comparison: `output/design-qa/mobile-navigation-vertical-liquid/source-vs-vertical-final.png` at 1288 x 810 pixels.
+- Browser viewport overrides were 390 x 844, 320 x 700, and 1440 x 900 CSS pixels, with effective content widths of 375, 305, and 1425 pixels.
+- State: `/goal/` with the compact navigation closed, open with Home selected, pointer-hovered on Close, and scrubbed from Home to Close.
+
+### Findings and comparison history
+
+No actionable P0, P1, or P2 visual, interaction, responsive, or accessibility issues remain for this refinement.
+
+- P1 fixed: the previous reveal animated both the left inset and bottom inset, which made the menu visibly wipe from right to left before settling.
+- Post-fix evidence: the final shell keeps its 180-pixel width and center axis constant, animates only the bottom inset over 520 milliseconds, and therefore reveals from top to bottom without horizontal travel.
+- P1 fixed: the previous Close control retained a permanent independent glass pill that duplicated the shared Liquid Glass lens.
+- Post-fix evidence: Close is now a plain text target inside GlassActionGroup, with a real divider above it, and the one shared lens settles within 0.4 pixels of the Close row when the pointer reaches it.
+- P2 fixed: the previous 188-pixel shell remained slightly wider than the centered Chinese labels required.
+- Post-fix evidence: the panel is 180 pixels wide, its interactive rows are 158 pixels wide, and the Menu trigger is centered over the final shell before opening.
+- Fonts and typography: the existing X-AGI condensed font, menu sizing, weights, and centered hierarchy remain unchanged.
+- Spacing and layout rhythm: the 44-pixel Close row sits below a full-width real divider with a 10-pixel top margin and 4-pixel bottom margin, leaving enough space for the Liquid Glass lens to pass without touching the line.
+- Colors and visual tokens: the warm paper, violet glass depth, translucent divider, navy registration emphasis, and white highlight remain unchanged.
+- Image quality and asset fidelity: no visual assets changed, and the narrower translucent shell preserves the existing hero artwork behind it.
+- Copy and content: 菜单, 首页, 会议简介, 日程安排, 海报展示, 参会指南, 立即报名, and 收起 remain unchanged.
+- Responsive behavior: the 320 x 700 override keeps a 180-pixel shell, 158-pixel targets, one 195-pixel center axis, hidden brand while open, and zero horizontal overflow.
+- Interaction behavior: dragging from Home through every stacked option to Close moves the lens continuously and then closes the panel, restores focus to Menu, sets `aria-expanded="false"`, and makes the panel inert.
+- Desktop isolation: the desktop layout hides the compact toggle, Close target, divider, and compact lens while preserving inline navigation and zero horizontal overflow.
+- Browser health: the mobile interaction pass reports no console errors or warnings.
+
+### Automated verification
+
+- `node --test src/scripts/glass-action-group.test.ts` passed all 7 focused Liquid Glass tests.
+- `npm run check` completed with zero errors, warnings, or hints across 76 Astro files.
+- `npm run build` generated 20 pages and passed the complete build validator.
+- `git diff --check` completed without whitespace errors for the scoped files.
+
+### Residual test gaps
+
+- Final tactile pacing on a physical touch screen remains a subjective acceptance check rather than a functional blocker.
+
+final result: passed
+
+## Compact Mobile Navigation Top-Right Anchored Reveal
+
+### Comparison target
+
+- Source visual truth: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-41333257-2a70-4c40-a570-4a9df5404f97.png` at 456 x 790 pixels, together with the user's written requirements for the original trigger position, exact shared top-right anchor, 70 percent text-edge compression, and downward-first reveal.
+- Final closed implementation: `output/design-qa/mobile-navigation-top-right/final-closed-390.png` at 375 x 812 pixels.
+- Final open implementation: `output/design-qa/mobile-navigation-top-right/final-open-390.png` at 375 x 812 pixels.
+- Final narrow implementation: `output/design-qa/mobile-navigation-top-right/open-320.png` at 305 x 804 pixels.
+- Desktop regression capture: `output/design-qa/mobile-navigation-top-right/desktop-1280.png` at 1265 x 889 pixels.
+- Full-view source and implementation comparison: `output/design-qa/mobile-navigation-top-right/source-vs-final.png` at 1008 x 860 pixels.
+- Focused motion comparison: `output/design-qa/mobile-navigation-top-right/motion-contact-sheet.png` at 816 x 422 pixels.
+- Browser viewport overrides were 390 x 844, 320 x 844, and 1280 x 900 CSS pixels at device pixel ratio 1. The mobile document client widths were 375 and 305 pixels because of the stable scrollbar gutter.
+- State: `/goal/` with the compact navigation closed, opening through four sequential captures, fully open with Home selected, and closed again through the text Close target.
+
+### Findings and comparison history
+
+No actionable P0, P1, or P2 visual, interaction, responsive, or accessibility issues remain for this refinement.
+
+- P1 fixed: the previous closed trigger was shifted 49 pixels left to share the panel center, so it no longer occupied the original upper-right position and did not share the panel's right edge.
+- Post-fix evidence: the 82-pixel trigger is back at x 273 with right edge 355, while the 101-pixel panel is at x 254 with the same right edge 355. Their top edges also match at y 9.2 pixels, and the trigger now scales from its top-right origin so the anchor remains exact during activation.
+- P1 fixed: the prior reveal either centered the trigger over the panel or visually introduced horizontal growth before the requested downward motion.
+- Post-fix evidence: the closed clip exposes exactly the trigger-sized 82 x 48 pixel top-right region. The bottom inset begins its 520-millisecond transition immediately, while the left inset covers only 19 pixels and waits 150 milliseconds before its 220-millisecond transition. The focused motion sheet visibly shows the right-side vertical rail extending downward before the panel widens to the left.
+- P2 fixed: the previous 180-pixel shell left 56.7 pixels between each four-character label and either panel edge.
+- Post-fix evidence: the shell is 101 pixels wide, the interactive rows are 93 pixels wide, and the four-character labels sit 17.2 pixels from either panel edge. This is a 69.6 percent reduction and matches the requested 70 percent compression within subpixel rendering tolerance.
+- Fonts and typography: the existing X-AGI condensed family, 1rem mobile size, weights, centered alignment, line height, letter spacing, and Chinese copy remain unchanged and readable without wrapping.
+- Spacing and layout rhythm: all navigation labels, registration, divider, and Close remain centered on one compact axis. The panel is only 19 pixels wider than the closed trigger, so horizontal growth is secondary to the vertical reveal.
+- Colors and visual tokens: the warm paper, translucent white and violet Liquid Glass surface, navy text, violet outline, divider, saturation, blur, inset highlight, and depth shadows remain unchanged.
+- Image quality and asset fidelity: no image or brand assets changed. The compact translucent panel leaves the existing logo and hero artwork sharp and recognizable behind it.
+- Copy and content: 菜单, 首页, 会议简介, 日程安排, 海报展示, 参会指南, 立即报名, and 收起 remain unchanged.
+- Responsive behavior: the 320-pixel override keeps the 101-pixel panel at the upper-right, reports zero horizontal overflow, and closes back to `aria-expanded="false"` with the trigger no longer hidden or inert.
+- Desktop isolation: the 1280-pixel override remains inline, hides the compact trigger and Close target, preserves the desktop navigation, and reports zero horizontal overflow.
+- Browser health: the final mobile and desktop passes report zero console errors.
+
+### Automated verification
+
+- `node --test src/scripts/glass-action-group.test.ts` passed all 7 focused Liquid Glass tests.
+- `npm run check` completed with zero errors, warnings, or hints across 74 Astro files.
+- `npm run build` generated 20 pages and passed the complete build validator after the validator was updated to recognize the compact header and the three-item quick navigation as the only two permitted glass groups on `/goal/`.
+- `git diff --check` completed without whitespace errors.
+
+### Residual test gaps
+
+- Final tactile pacing on a physical touch screen remains a subjective acceptance check rather than a functional blocker.
 
 final result: passed

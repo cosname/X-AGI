@@ -2,7 +2,10 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { editionPages } from '../src/config/navigation.ts';
-import { conference2026 } from '../src/data/conference2026.ts';
+import {
+  conference2026,
+  conference2026PartnerDisplayGroups,
+} from '../src/data/conference2026.ts';
 import {
   currentEdition,
   editionPath,
@@ -537,7 +540,7 @@ const officialCopyByRoute = new Map([
       conference2026.venue.nameEn,
       ...conference2026.venue.maps.flatMap((map) => [map.title, map.description]),
       '交通与住宿',
-      '友谊宾馆 X-AGI 大会专属优惠',
+      '北京友谊宾馆为 X-AGI 大会提供专属优惠',
       '5328460',
       '2026.10.16',
       '2026.10.19',
@@ -680,92 +683,278 @@ for (const page of goalPages) {
 }
 
 if (!goalIndex.includes('edition-goal-home--with-lower')) {
-  failures.push('goal/index.html: full preview must enable the long-form homepage shell');
+  failures.push('goal/index.html: history-first preview must enable the long-form homepage shell');
 }
 
 const goalHomeMarkers = [
-  'data-goal-home-contract="full-preview"',
+  'data-goal-home-contract="history-first"',
   'id="goal-history"',
-  'data-history-gallery',
-  'id="goal-agenda"',
-  'data-compact-schedule',
-  'id="goal-participation"',
-  'class="goal-partners"',
+  'data-history-deferred',
+  'id="goal-organization"',
   'class="goal-partners__legal"',
 ];
 let previousGoalMarkerIndex = -1;
 for (const marker of goalHomeMarkers) {
   const markerIndex = goalIndex.indexOf(marker);
   if (markerIndex < 0) {
-    failures.push(`goal/index.html: missing full-preview marker "${marker}"`);
+    failures.push(`goal/index.html: missing history-first marker "${marker}"`);
     continue;
   }
   if (markerIndex < previousGoalMarkerIndex) {
-    failures.push(`goal/index.html: full-preview marker "${marker}" is out of order`);
+    failures.push(`goal/index.html: history-first marker "${marker}" is out of order`);
   }
   previousGoalMarkerIndex = markerIndex;
 }
 
+const goalText = visibleText(goalIndex);
 const expectedGoalHomeCopy = [
-  conference2026.history.title,
-  conference2026.history.summary,
-  ...conference2026.history.stats.flatMap((item) => [item.value, item.label]),
-  ...conference2026.history.gallery.flatMap((item) => [
-    item.year,
-    item.location,
-    item.title,
-    item.caption,
-  ]),
-  conference2026.poster.title,
-  conference2026.poster.headline,
-  conference2026.poster.ticket.label,
-  conference2026.registration.status,
-  conference2026.registration.description,
-  '发起单位',
+  '从 R 会到 X-AGI 大会',
   '主办单位',
   '协办单位',
   '赞助单位',
   '京ICP备2024062260号-3',
   '京公网安备11010502057471号',
 ];
-const goalText = visibleText(goalIndex);
 for (const expected of expectedGoalHomeCopy) {
   if (!goalText.includes(expected)) {
-    failures.push(`goal/index.html: missing full-preview copy "${expected}"`);
+    failures.push(`goal/index.html: missing history-first copy "${expected}"`);
+  }
+}
+
+for (const retiredCopy of [
+  '一条持续生长的学术连接',
+  '沿着现场，回看连接如何发生',
+  '先找到属于你的那一天',
+  '选择你进入现场的方式',
+  '来北京，和下一代 AI 研究者见面',
+  '共同连接这场大会',
+  '会议概况',
+  '历届现场',
+  '横向滚动或使用方向键浏览',
+  '上一场',
+  '下一场',
+]) {
+  if (goalText.includes(retiredCopy)) {
+    failures.push(`goal/index.html: retired lower-page copy must stay removed "${retiredCopy}"`);
+  }
+}
+
+for (const retiredMarker of [
+  'class="goal-home-lower__quick-nav"',
+  'id="goal-overview"',
+  'href="#goal-overview"',
+]) {
+  if (goalIndex.includes(retiredMarker)) {
+    failures.push(`goal/index.html: retired overview navigation must stay removed "${retiredMarker}"`);
+  }
+}
+if ((goalIndex.match(/data-glass-group/g) ?? []).length !== 1) {
+  failures.push('goal/index.html: only the compact header may use a glass group');
+}
+
+const goalHistoryStart = goalIndex.indexOf('id="goal-history"');
+const goalHistoryEnd = goalIndex.indexOf('id="goal-organization"', goalHistoryStart);
+const goalHistoryFragment = goalHistoryStart >= 0 && goalHistoryEnd > goalHistoryStart
+  ? goalIndex.slice(goalHistoryStart, goalHistoryEnd)
+  : '';
+const historyEvents = [...goalHistoryFragment.matchAll(/data-history-event(?:\s|>)/g)];
+const historyImages = [...goalHistoryFragment.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+if (historyEvents.length !== 17) {
+  failures.push(`goal/index.html: expected 17 history events, found ${historyEvents.length}`);
+}
+if (historyImages.length !== 51) {
+  failures.push(`goal/index.html: expected 51 history images, found ${historyImages.length}`);
+}
+
+let previousEditionIndex = -1;
+for (const edition of [18, 17, 16]) {
+  const editionIndex = goalHistoryFragment.indexOf(`data-history-edition="${edition}"`);
+  if (editionIndex < 0) {
+    failures.push(`goal/index.html: missing rendered history edition ${edition}`);
+  } else if (editionIndex < previousEditionIndex) {
+    failures.push(`goal/index.html: history edition ${edition} is out of descending order`);
+  }
+  previousEditionIndex = Math.max(previousEditionIndex, editionIndex);
+}
+
+const historyProgressBars = [
+  ...goalHistoryFragment.matchAll(/\sdata-history-progress-bar(?:\s|>)/g),
+];
+if (historyProgressBars.length !== historyEvents.length) {
+  failures.push(
+    `goal/index.html: expected one waveform bar per history event, found ${historyProgressBars.length}`,
+  );
+}
+
+const historyProgressTargets = [
+  ...goalHistoryFragment.matchAll(/<button\b[^>]*\sdata-history-progress-target(?:\s|>)[^>]*>/g),
+].map((match) => match[0]);
+if (historyProgressTargets.length !== historyEvents.length) {
+  failures.push(
+    `goal/index.html: expected one directory button per history event, found ${historyProgressTargets.length}`,
+  );
+}
+for (const [index, target] of historyProgressTargets.entries()) {
+  if (!/\stype="button"(?:\s|>)/.test(target)) {
+    failures.push(`goal/index.html: history directory button ${index + 1} must use type="button"`);
+  }
+  if (!/\saria-controls="goal-history-viewport"(?:\s|>)/.test(target)) {
+    failures.push(`goal/index.html: history directory button ${index + 1} must control the gallery viewport`);
+  }
+  if (!/\saria-label="[^"]+"(?:\s|>)/.test(target)) {
+    failures.push(`goal/index.html: history directory button ${index + 1} must have an accessible label`);
+  }
+}
+if (historyProgressTargets.filter((target) => target.includes('aria-current="location"')).length !== 1) {
+  failures.push('goal/index.html: history directory must expose exactly one initial current location');
+}
+
+const historyProgressElements = [
+  ...goalHistoryFragment.matchAll(/<[^>]+\sdata-history-progress(?:\s|>)[^>]*>/g),
+].map((match) => match[0]);
+if (historyProgressElements.length !== 1) {
+  failures.push('goal/index.html: history gallery must contain one heading waveform directory');
+} else {
+  const progressElement = historyProgressElements[0];
+  if (!/\srole="toolbar"(?:\s|>)/.test(progressElement)) {
+    failures.push('goal/index.html: history directory must use toolbar semantics');
+  }
+  if (!progressElement.includes('aria-label="历届会议目录"')) {
+    failures.push('goal/index.html: history directory must expose its accessible label');
+  }
+  if (/\saria-hidden(?:=|\s|>)/.test(progressElement)) {
+    failures.push('goal/index.html: interactive history directory must not be aria-hidden');
+  }
+}
+
+const historyHeadingIndex = goalHistoryFragment.indexOf('data-history-heading');
+const historyHeadingEnd = goalHistoryFragment.indexOf('</header>', historyHeadingIndex);
+const historyProgressIndex = goalHistoryFragment.indexOf('data-history-progress');
+const historyViewportIndex = goalHistoryFragment.indexOf('data-history-viewport');
+if (
+  historyHeadingIndex < 0
+  || historyProgressIndex < historyHeadingIndex
+  || historyHeadingEnd < historyProgressIndex
+  || historyViewportIndex < historyHeadingEnd
+) {
+  failures.push('goal/index.html: history directory must stay inside the heading before the viewport');
+}
+for (const retiredMarker of [
+  'data-history-progress-thumb',
+  'data-history-controls',
+  'data-history-previous',
+  'data-history-next',
+  'data-history-status',
+  'goal-history-instructions',
+]) {
+  if (goalHistoryFragment.includes(retiredMarker)) {
+    failures.push(`goal/index.html: retired history control must stay removed "${retiredMarker}"`);
+  }
+}
+
+for (const [index, image] of historyImages.entries()) {
+  if (!image.includes('loading="lazy"') || !image.includes('decoding="async"')) {
+    failures.push(`goal/index.html: history image ${index + 1} must use lazy async loading`);
+  }
+  if (!image.includes('srcset=') || !image.includes('sizes=')) {
+    failures.push(`goal/index.html: history image ${index + 1} must expose responsive candidates`);
+  }
+  if (!image.includes('/_assets/goal-history-')) {
+    failures.push(`goal/index.html: history image ${index + 1} must use a local goal-history asset`);
+  }
+}
+if (goalHistoryFragment.includes('mmbiz.qpic.cn') || goalHistoryFragment.includes('/2026/history/')) {
+  failures.push('goal/index.html: history gallery must not hotlink Qpic or reuse the archived five-image set');
+}
+if (!goalHistoryFragment.includes('content-visibility: visible !important')) {
+  failures.push('goal/index.html: deferred history images must retain a no-JavaScript visibility fallback');
+}
+
+const goalHistoryStyles = await readFile(path.resolve('src/styles/goal-history.css'), 'utf8');
+for (const expectedStyle of [
+  'scroll-snap-type: inline proximity',
+  '.goal-history__progress-bar',
+  'transform: scaleY(var(--history-wave-scale))',
+]) {
+  if (!goalHistoryStyles.includes(expectedStyle)) {
+    failures.push(`goal-history.css: missing waveform gallery style "${expectedStyle}"`);
+  }
+}
+for (const retiredStyle of [
+  'scroll-snap-type: inline mandatory',
+  '.goal-history__progress-thumb',
+  '.goal-history__event-header::before',
+]) {
+  if (goalHistoryStyles.includes(retiredStyle)) {
+    failures.push(`goal-history.css: retired gallery style must stay removed "${retiredStyle}"`);
+  }
+}
+
+const goalHistoryController = await readFile(
+  path.resolve('src/scripts/goal-history-gallery.ts'),
+  'utf8',
+);
+for (const expectedControllerSource of [
+  'viewport.scrollTo({',
+  'galleryScrollTarget(',
+  'galleryToolbarTargetIndex(',
+  "[data-history-heading]",
+]) {
+  if (!goalHistoryController.includes(expectedControllerSource)) {
+    failures.push(
+      `goal-history-gallery.ts: missing bidirectional directory behavior "${expectedControllerSource}"`,
+    );
+  }
+}
+if (goalHistoryController.includes('scrollIntoView')) {
+  failures.push('goal-history-gallery.ts: directory navigation must not move the document vertically');
+}
+
+for (const retiredMarker of [
+  'id="goal-agenda"',
+  'data-compact-schedule',
+  'data-filter-group=',
+  'id="goal-registration"',
+]) {
+  if (goalIndex.includes(retiredMarker)) {
+    failures.push(`goal/index.html: retired lower-page marker must stay removed "${retiredMarker}"`);
   }
 }
 
 const goalPartnerStart = goalIndex.indexOf('class="goal-partners"');
 const goalPartnerFragment = goalPartnerStart >= 0 ? goalIndex.slice(goalPartnerStart) : '';
 const goalPartnerText = visibleText(goalPartnerFragment);
-const goalPartnerGroups = [
-  ['initiators', '发起单位', conference2026.initiators],
-  ['organizers', '主办单位', conference2026.organizers],
-  ['co-organizers', '协办单位', conference2026.coOrganizers],
-  ['sponsors', '赞助单位', conference2026.sponsors],
-];
+if (goalPartnerText.includes('发起单位')) {
+  failures.push('goal/index.html: compact organization footer must merge initiators into organizers');
+}
 let previousGoalPartnerIndex = -1;
-for (const [key, label, organizations] of goalPartnerGroups) {
-  const groupMarker = `goal-partners__group--${key}`;
+for (const group of conference2026PartnerDisplayGroups) {
+  const groupMarker = `goal-partners__group--${group.key}`;
   const groupIndex = goalPartnerFragment.indexOf(groupMarker);
   if (groupIndex < 0) {
-    failures.push(`goal/index.html: missing semantic partner group "${label}"`);
+    failures.push(`goal/index.html: missing semantic partner group "${group.label}"`);
   } else if (groupIndex < previousGoalPartnerIndex) {
-    failures.push(`goal/index.html: partner group "${label}" is out of order`);
+    failures.push(`goal/index.html: partner group "${group.label}" is out of order`);
   }
   previousGoalPartnerIndex = Math.max(previousGoalPartnerIndex, groupIndex);
 
-  for (const organization of organizations) {
-    if (!goalPartnerText.includes(organization.name)) {
-      failures.push(`goal/index.html: missing ${label} organization "${organization.name}"`);
+  let previousOrganizationIndex = -1;
+  for (const organization of group.organizations) {
+    const organizationIndex = goalPartnerFragment.indexOf(organization.name);
+    if (organizationIndex < 0) {
+      failures.push(`goal/index.html: missing ${group.label} organization "${organization.name}"`);
+    } else if (organizationIndex < previousOrganizationIndex) {
+      failures.push(`goal/index.html: ${group.label} organization "${organization.name}" is out of order`);
     }
+    previousOrganizationIndex = Math.max(previousOrganizationIndex, organizationIndex);
   }
 }
 
 for (const [marker, description] of [
-  ['data-goal-home-contract=', 'full-preview contract'],
+  ['data-goal-home-contract=', 'history-first preview contract'],
   ['data-goal-home-lower', 'goal lower-page composition'],
   ['data-history-gallery', 'history gallery'],
+  ['/_assets/goal-history-', 'history gallery assets'],
   ['data-compact-schedule', 'compact schedule'],
   ['goal-partners__legal', 'goal legal footer'],
   ['conference-program-outline', 'goal schedule outline'],
@@ -921,6 +1110,9 @@ for (const previewDirectory of ['next', 'goal']) {
   ) {
     failures.push(`sync-oss.mjs: production sync must exclude "${previewDirectory}/"`);
   }
+}
+if (!syncScript.includes("'_assets/goal-history-*'")) {
+  failures.push('sync-oss.mjs: production sync must exclude generated Goal history assets');
 }
 
 const forbidden2026Copy = [

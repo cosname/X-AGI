@@ -460,97 +460,37 @@
   white-space: nowrap;
 }
 
-.edition-legacy-2025 .hotel-offer-card {
+.edition-legacy-2025 .hotel-offer {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(190px, 220px);
-  align-items: center;
-  gap: clamp(1.5rem, 4vw, 3.25rem);
-  margin-top: 0.75rem;
-  padding: clamp(1.35rem, 3vw, 2.25rem);
-  border: 1px solid rgb(103 82 200 / 0.18);
-  border-left: 4px solid #6752c8;
-  border-radius: 8px;
-  background: #f8f6fc;
+  grid-template-columns: minmax(0, 1fr) 156px;
+  align-items: start;
+  gap: clamp(1.25rem, 4vw, 3rem);
 }
 
-.edition-legacy-2025 .hotel-offer-card__eyebrow {
-  margin: 0 0 0.45rem;
-  color: #6752c8;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.edition-legacy-2025 .hotel-offer-card h5 {
-  margin: 0;
-  color: #111342;
-  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.edition-legacy-2025 .hotel-offer-card__description {
-  margin: 0.8rem 0 1.15rem;
-  color: #50536b;
-  font-size: 0.94rem;
-  line-height: 1.75;
-}
-
-.edition-legacy-2025 .hotel-offer-card__details {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem 1.75rem;
+.edition-legacy-2025 .hotel-offer__summary {
   margin: 0;
 }
 
-.edition-legacy-2025 .hotel-offer-card__details div {
-  min-width: 8rem;
-}
-
-.edition-legacy-2025 .hotel-offer-card__details dt {
-  margin-bottom: 0.2rem;
-  color: #7a7d91;
-  font-size: 0.72rem;
-  font-weight: 600;
-}
-
-.edition-legacy-2025 .hotel-offer-card__details dd {
-  margin: 0;
-  color: #24265f;
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.edition-legacy-2025 .hotel-offer-card__details dd span {
-  padding-inline: 0.2rem;
-  color: #8a8da0;
-}
-
-.edition-legacy-2025 .hotel-offer-card__code {
+.edition-legacy-2025 .hotel-offer__code {
   width: 100%;
-  max-width: 220px;
-  margin: 0 auto;
+  margin: 0;
   text-align: center;
 }
 
-.edition-legacy-2025 .hotel-offer-card__code-frame {
-  padding: 0.65rem;
-  border: 1px solid rgb(17 19 66 / 0.1);
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 12px 28px rgb(17 19 66 / 0.1);
+.edition-legacy-2025 .hotel-offer__code-image {
+  position: relative;
 }
 
-.edition-legacy-2025 .hotel-offer-card__code img {
+.edition-legacy-2025 .hotel-offer__code-graphic {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.edition-legacy-2025 .hotel-offer-card__code figcaption {
-  margin-top: 0.65rem;
+.edition-legacy-2025 .hotel-offer__code figcaption {
+  margin-top: 0.45rem;
   color: #6d7083;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
 }
 
 .edition-legacy-2025 .legacy-ticket-table {
@@ -674,13 +614,14 @@
     gap: 0.1rem;
   }
 
-  .edition-legacy-2025 .hotel-offer-card {
+  .edition-legacy-2025 .hotel-offer {
     grid-template-columns: 1fr;
+    gap: 0.9rem;
   }
 
-  .edition-legacy-2025 .hotel-offer-card__code {
-    width: min(76vw, 240px);
-    max-width: none;
+  .edition-legacy-2025 .hotel-offer__code {
+    width: 156px;
+    margin-left: 15px;
   }
 
   .edition-legacy-2025 .schedule-intro {

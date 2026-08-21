@@ -1,30 +1,13 @@
 ---
-import { conference2026, type Organization } from '../../data/conference2026';
+import {
+  conference2026,
+  conference2026PartnerDisplayGroups,
+} from '../../data/conference2026';
 import { partnerLogoByName } from '../../data/legacy-partner-assets';
 
-const aboutOrganizerOrder = [
-  '清华大学统计与数据科学系',
-  '中国人民大学应用统计科学研究中心',
-  '中国人民大学统计学院',
-  '统计之都',
-  'FAI 人工智能基础',
-  '中国商业统计学会人工智能分会',
-] as const;
-const aboutOrganizerRank = new Map(aboutOrganizerOrder.map((name, index) => [name, index]));
-const aboutOrganizers = [...conference2026.organizers, ...conference2026.initiators].sort(
-  (left, right) =>
-    (aboutOrganizerRank.get(left.name) ?? Number.MAX_SAFE_INTEGER) -
-    (aboutOrganizerRank.get(right.name) ?? Number.MAX_SAFE_INTEGER),
+const groups = conference2026PartnerDisplayGroups.filter(
+  (group) => group.organizations.length > 0,
 );
-
-const groups: { label: string; organizations: readonly Organization[] }[] = [
-  {
-    label: '主办单位',
-    organizations: aboutOrganizers,
-  },
-  { label: '协办单位', organizations: conference2026.coOrganizers },
-  { label: '赞助单位', organizations: conference2026.sponsors },
-].filter((group) => group.organizations.length > 0);
 ---
 
 <main class="main-content">

@@ -1,0 +1,168 @@
+.glass-action-group {
+  --glass-group-neck: 0;
+  position: relative;
+  isolation: isolate;
+}
+
+.glass-action-group[data-glass-scrub] {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.glass-action-group__lens {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 0;
+  height: 2.75rem;
+  overflow: visible;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, width, height, opacity;
+}
+
+.glass-action-group__material {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / calc(0.38 + var(--glass-group-neck) * 0.03)) 0%,
+      rgb(255 250 244 / 0.24) 48%,
+      rgb(99 81 200 / 0.07) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.92),
+    inset 0 -1px 0 rgb(77 69 184 / 0.12),
+    0 5px 9px rgb(40 29 105 / 0.08),
+    0 0 1px rgb(255 255 255 / 0.5);
+  -webkit-backdrop-filter:
+    blur(calc(8px + var(--glass-group-neck) * 1px))
+    saturate(calc(1.08 + var(--glass-group-neck) * 0.06))
+    contrast(1.02);
+  backdrop-filter:
+    blur(calc(8px + var(--glass-group-neck) * 1px))
+    saturate(calc(1.08 + var(--glass-group-neck) * 0.06))
+    contrast(1.02);
+  pointer-events: none;
+  will-change: clip-path;
+}
+
+.glass-action-group__outline {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.glass-action-group__outline path {
+  vector-effect: non-scaling-stroke;
+}
+
+.glass-action-group__surface {
+  fill: rgb(255 255 255 / calc(0.045 + var(--glass-group-neck) * 0.01));
+  stroke: none;
+}
+
+.glass-action-group__depth {
+  fill: none;
+  stroke: rgb(52 41 121 / 0.15);
+  stroke-width: 0.8;
+  transform: translateY(0.55px);
+}
+
+.glass-action-group__rim {
+  fill: none;
+  stroke: rgb(99 81 200 / calc(0.32 + var(--glass-group-neck) * 0.08));
+  stroke-width: 1.05;
+  filter: drop-shadow(0 4px 6px rgb(40 29 105 / 0.07));
+}
+
+.glass-action-group__highlight {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.82);
+  stroke-width: 0.62;
+  transform: translateY(-0.48px);
+  mix-blend-mode: screen;
+}
+
+.glass-action-group [data-glass-target] {
+  position: relative;
+  z-index: 1;
+  min-height: 2.75rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: inherit;
+  background: transparent;
+  transition: color 170ms ease, transform 140ms ease;
+}
+
+.glass-action-group [data-glass-target][aria-current],
+.glass-action-group [data-glass-target][aria-pressed='true'],
+.glass-action-group [data-glass-target][data-glass-selected='true'],
+.glass-action-group [data-glass-target][data-glass-preview] {
+  border-color: rgb(99 81 200 / 0.28);
+  color: #2f3199;
+  background: rgb(255 250 244 / 0.7);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    inset 0 -1px 0 rgb(77 69 184 / 0.1),
+    0 4px 12px rgb(40 29 105 / 0.065);
+  -webkit-backdrop-filter: blur(8px) saturate(1.05) contrast(1.015);
+  backdrop-filter: blur(8px) saturate(1.05) contrast(1.015);
+}
+
+.glass-action-group[data-glass-ready='true'] [data-glass-target],
+.glass-action-group[data-glass-ready='true'] [data-glass-target][aria-current],
+.glass-action-group[data-glass-ready='true'] [data-glass-target][aria-pressed='true'],
+.glass-action-group[data-glass-ready='true'] [data-glass-target][data-glass-selected='true'],
+.glass-action-group[data-glass-ready='true'] [data-glass-target][data-glass-preview] {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.glass-action-group [data-glass-target]:focus-visible {
+  outline: 2px solid rgb(77 69 184 / 0.72);
+  outline-offset: 3px;
+}
+
+.glass-action-group [data-glass-target]:active {
+  transform: scale(0.985);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .glass-action-group [data-glass-target]:hover {
+    color: #2f3199;
+    text-shadow: 0 1px 0 rgb(255 255 255 / 0.9);
+  }
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glass-action-group__material,
+  .glass-action-group [data-glass-target][aria-current],
+  .glass-action-group [data-glass-target][aria-pressed='true'],
+  .glass-action-group [data-glass-target][data-glass-selected='true'],
+  .glass-action-group [data-glass-target][data-glass-preview] {
+    background: rgb(255 250 244 / 0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-action-group [data-glass-target] {
+    transition: none;
+  }
+}

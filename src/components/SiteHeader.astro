@@ -4,6 +4,7 @@ import { currentEditionActionPaths } from '../config/edition-status';
 import { editionPath } from '../config/site';
 import { editionNavigation, type EditionPage } from '../config/navigation';
 import type { SiteHeaderBehavior } from '../config/header';
+import GlassActionGroup from './GlassActionGroup.astro';
 import HeaderScrollState from './HeaderScrollState.astro';
 
 interface Props {
@@ -17,6 +18,7 @@ const navigation = editionNavigation(edition);
 const actions = currentEditionActionPaths(edition);
 const scrollHeader = behavior === 'overlay-scroll';
 const capsuleNavigation = edition.skin === 'goal';
+const compactGlassDefault = activePage || navigation[0]?.page || '';
 ---
 
 <header
@@ -80,30 +82,49 @@ const capsuleNavigation = edition.skin === 'goal';
             </svg>
           </span>
         )}
-        <nav aria-label={`${edition.year} 会议导航`}>
-          <ul class="site-nav">
-            {navigation.map((item) => (
-              <li>
-                <a
-                  href={editionPath(edition, item.page)}
-                  aria-current={activePage === item.page ? 'page' : undefined}
-                  data-nav-capsule-target={capsuleNavigation ? '' : undefined}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <a
-          class="site-header__action capsule-action"
-          href={actions.register}
-          aria-current={activePage === 'register' ? 'page' : undefined}
-          data-nav-capsule-target={capsuleNavigation ? '' : undefined}
-          data-nav-capsule-default={capsuleNavigation ? '' : undefined}
+        <GlassActionGroup
+          class="site-navigation__compact-glass"
+          defaultTarget={compactGlassDefault}
+          axis="vertical"
+          scrub
+          activateOnRelease
         >
-          立即报名
-        </a>
+          <nav aria-label={`${edition.year} 会议导航`}>
+            <ul class="site-nav">
+              {navigation.map((item, index) => (
+                <li style={`--compact-nav-index:${index}`}>
+                  <a
+                    href={editionPath(edition, item.page)}
+                    aria-current={activePage === item.page ? 'page' : undefined}
+                    data-glass-target={item.page}
+                    data-nav-capsule-target={capsuleNavigation ? '' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <a
+            class="site-header__action capsule-action"
+            href={actions.register}
+            aria-current={activePage === 'register' ? 'page' : undefined}
+            data-glass-target="register"
+            data-nav-capsule-target={capsuleNavigation ? '' : undefined}
+            data-nav-capsule-default={capsuleNavigation ? '' : undefined}
+          >
+            立即报名
+          </a>
+          <span class="site-navigation__divider" aria-hidden="true"></span>
+          <button
+            class="site-navigation__close"
+            type="button"
+            aria-label="收起会议导航"
+            data-glass-target="close"
+          >
+            收起
+          </button>
+        </GlassActionGroup>
       </div>
     </div>
   </div>
@@ -129,6 +150,7 @@ const capsuleNavigation = edition.skin === 'goal';
   const header = document.querySelector<HTMLElement>('.site-header');
   const navigation = header?.querySelector<HTMLElement>('.site-navigation');
   const toggle = navigation?.querySelector<HTMLButtonElement>('.site-navigation__toggle');
+  const closeControl = navigation?.querySelector<HTMLButtonElement>('.site-navigation__close');
   const panel = navigation?.querySelector<HTMLElement>('.site-navigation__panel');
   const inner = header?.querySelector<HTMLElement>('.site-header__inner');
   const navCapsule = panel?.querySelector<HTMLElement>('[data-nav-fluid-capsule]');
@@ -182,6 +204,7 @@ const capsuleNavigation = edition.skin === 'goal';
   let capsuleIdleTimer = 0;
   let capsulePointerFrame = 0;
   let capsuleLayoutFrame = 0;
+  let glassCloseTimer = 0;
 
   const setLinkScale = (pointerX: number | null) => {
     navTargets.forEach((target) => {
@@ -449,8 +472,10 @@ const capsuleNavigation = edition.skin === 'goal';
     if (!panel) return;
     if (isCompact() && !navigation?.hasAttribute('data-open')) {
       panel.setAttribute('aria-hidden', 'true');
+      panel.setAttribute('inert', '');
     } else {
       panel.removeAttribute('aria-hidden');
+      panel.removeAttribute('inert');
     }
   };
 
@@ -473,30 +498,65 @@ const capsuleNavigation = edition.skin === 'goal';
       header.dataset.navMode = 'inline';
       if (!inlineNavigationFits()) header.dataset.navMode = 'compact';
     }
-    if (previous !== header.dataset.navMode) closeNavigation();
+    if (previous !== header.dataset.navMode) finishCloseNavigation({ force: true });
     if (isCompact()) disableFluidCapsule();
     else capsuleLayout = null;
     syncPanelAccessibility();
   };
 
-  const openNavigation = () => {
-    if (!navigation || !toggle || !panel || !isCompact()) return;
-    navigation.setAttribute('data-open', '');
-    header?.setAttribute('data-menu-open', '');
-    toggle.setAttribute('aria-expanded', 'true');
-    toggle.setAttribute('aria-label', '收起会议导航');
-    toggle.textContent = '收起';
-    panel.removeAttribute('aria-hidden');
-  };
-
-  const closeNavigation = ({ restoreFocus = false } = {}) => {
+  const finishCloseNavigation = ({ restoreFocus = false, force = false } = {}) => {
+    if (!force && navigation?.hasAttribute('data-closing')) return;
+    if (glassCloseTimer) window.clearTimeout(glassCloseTimer);
+    glassCloseTimer = 0;
+    navigation?.removeAttribute('data-closing');
     navigation?.removeAttribute('data-open');
     header?.removeAttribute('data-menu-open');
     toggle?.setAttribute('aria-expanded', 'false');
     toggle?.setAttribute('aria-label', '打开会议导航');
-    if (toggle) toggle.textContent = '菜单';
+    toggle?.removeAttribute('aria-hidden');
+    toggle?.removeAttribute('inert');
+    if (toggle) toggle.tabIndex = 0;
     syncPanelAccessibility();
-    if (restoreFocus) toggle?.focus();
+    if (restoreFocus) toggle?.focus({ preventScroll: true });
+  };
+
+  const openNavigation = () => {
+    if (!navigation || !toggle || !panel || !isCompact()) return;
+    if (glassCloseTimer) window.clearTimeout(glassCloseTimer);
+    glassCloseTimer = 0;
+    navigation.removeAttribute('data-closing');
+    const openedWithPointer = toggle.dataset.pointerFocus === 'true';
+    navigation.setAttribute('data-open', '');
+    header?.setAttribute('data-menu-open', '');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '收起会议导航');
+    toggle.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('inert', '');
+    toggle.tabIndex = -1;
+    toggle.blur();
+    panel.removeAttribute('aria-hidden');
+    panel.removeAttribute('inert');
+    if (!openedWithPointer) {
+      window.requestAnimationFrame(() => {
+        panel.querySelector<HTMLElement>('[data-glass-target]')?.focus();
+      });
+    }
+  };
+
+  const closeNavigation = ({ restoreFocus = false } = {}) => {
+    if (!navigation?.hasAttribute('data-open')) {
+      finishCloseNavigation({ restoreFocus, force: true });
+      return;
+    }
+    if (navigation.hasAttribute('data-closing')) return;
+
+    navigation.setAttribute('data-closing', '');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', '打开会议导航');
+    const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 520;
+    glassCloseTimer = window.setTimeout(() => {
+      finishCloseNavigation({ restoreFocus, force: true });
+    }, delay);
   };
 
   const scheduleHeaderLayoutSync = () => {
@@ -525,9 +585,21 @@ const capsuleNavigation = edition.skin === 'goal';
     });
   };
 
-  toggle?.addEventListener('click', () => {
-    if (navigation?.hasAttribute('data-open')) closeNavigation();
-    else openNavigation();
+  toggle?.addEventListener('click', openNavigation);
+  toggle?.addEventListener('pointerdown', () => {
+    toggle.dataset.pointerFocus = 'true';
+  }, { passive: true });
+  toggle?.addEventListener('keydown', () => {
+    delete toggle.dataset.pointerFocus;
+  });
+  toggle?.addEventListener('blur', () => {
+    delete toggle.dataset.pointerFocus;
+  });
+  closeControl?.addEventListener('pointerdown', () => {
+    if (toggle) toggle.dataset.pointerFocus = 'true';
+  }, { passive: true });
+  closeControl?.addEventListener('click', () => {
+    closeNavigation({ restoreFocus: true });
   });
 
   document.addEventListener('keydown', (event) => {
@@ -597,7 +669,7 @@ const capsuleNavigation = edition.skin === 'goal';
     resizeObserver.observe(inner);
   }
   phoneNavigation.addEventListener('change', () => {
-    closeNavigation();
+    finishCloseNavigation({ force: true });
     scheduleHeaderLayoutSync();
   });
   finePointerNavigation.addEventListener('change', scheduleHeaderLayoutSync);
@@ -605,7 +677,7 @@ const capsuleNavigation = edition.skin === 'goal';
   document.fonts?.ready.then(scheduleHeaderLayoutSync).catch(() => undefined);
   document.fonts?.addEventListener('loadingdone', scheduleHeaderLayoutSync);
   window.addEventListener('pagehide', () => {
-    closeNavigation();
+    finishCloseNavigation({ force: true });
     latestPointerX = null;
     cancelCapsuleReturn();
     if (capsulePointerFrame) window.cancelAnimationFrame(capsulePointerFrame);

@@ -26,6 +26,8 @@ const args = [
   '--exclude',
   'goal/*',
   '--exclude',
+  '_assets/goal-history-*',
+  '--exclude',
   '.DS_Store',
   '--exclude',
   '**/.DS_Store',

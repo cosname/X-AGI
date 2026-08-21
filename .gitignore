@@ -6,6 +6,7 @@ node_modules/
 .astro/
 dist/
 output/
+.playwright-cli/
 npm-debug.log*
 
 # Local archive downloads

@@ -22,7 +22,7 @@
     "oss:sync": "node scripts/sync-oss.mjs",
     "downloads:manifest": "node scripts/generate-archive-download-manifest.mjs",
     "downloads:verify": "node scripts/verify-archive-downloads.mjs",
-    "test:unit": "node --test src/config/edition-status.test.ts src/data/conference2026.test.ts src/scripts/connection-field.test.ts src/scripts/goal-home-lower.test.ts src/scripts/header-scroll-state.test.ts src/scripts/hero-pixel-field.test.ts src/scripts/navigation-capsule.test.ts",
+    "test:unit": "node --test src/config/edition-status.test.ts src/data/conference2026.test.ts src/data/goal-history.test.ts src/scripts/connection-field.test.ts src/scripts/glass-action-group.test.ts src/scripts/goal-history-gallery.test.ts src/scripts/header-scroll-state.test.ts src/scripts/hero-pixel-field.test.ts src/scripts/navigation-capsule.test.ts",
     "test": "npm run test:unit && npm run check && npm run build"
   },
   "devDependencies": {

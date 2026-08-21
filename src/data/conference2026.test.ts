@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { conference2026 } from './conference2026.ts';
+import {
+  conference2026,
+  conference2026OrganizerDisplayOrder,
+  conference2026PartnerDisplayGroups,
+} from './conference2026.ts';
 
 const scheduleCategories = new Set(['arrival', 'keynote', 'parallel', 'poster']);
 
@@ -81,6 +85,22 @@ describe('goal preview content contracts', () => {
     const names = organizations.map((organization) => organization.name);
 
     assert.equal(new Set(names).size, names.length, 'an organization appears in multiple roles');
+  });
+
+  it('publishes the approved compact organization display order', () => {
+    assert.deepEqual(
+      conference2026PartnerDisplayGroups.map((group) => group.organizations.length),
+      [6, 2, 5],
+    );
+    assert.deepEqual(
+      conference2026PartnerDisplayGroups[0].organizations.map((organization) => organization.name),
+      conference2026OrganizerDisplayOrder,
+    );
+
+    const displayNames = conference2026PartnerDisplayGroups.flatMap((group) => (
+      group.organizations.map((organization) => organization.name)
+    ));
+    assert.equal(new Set(displayNames).size, displayNames.length);
   });
 
   it('retains the audited Rising Stars Poster ticket wording', () => {

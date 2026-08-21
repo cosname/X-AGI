@@ -36,10 +36,12 @@ const logos = {
   OScholar: {
     src: '/2026/logos/oscholar.png',
     compactSrc: '/2026/logos/oscholar-on-dark.webp',
+    className: 'co-organizer-oscholar',
   },
   'AI TIME': {
     src: '/2026/logos/ai-time.png',
     compactSrc: '/2026/logos/ai-time-on-dark.webp',
+    className: 'co-organizer-ai-time',
   },
   明汯投资: {
     src: '/2026/logos/minghong.png',
@@ -51,7 +53,7 @@ const logos = {
     className: 'sponsor-kuande',
   },
   Will: {
-    src: '/2025/assets/images/logo_will.png',
+    src: '/2026/logos/will.svg',
     compactSrc: '/2025/assets/images/logos_t/optimized/logo_will.webp',
     goalSrc: '/2026/logos/will.svg',
     className: 'sponsor-will',
@@ -63,7 +65,7 @@ const logos = {
     className: 'sponsor-quantverse',
   },
   智统数合: {
-    src: '/2026/logos/zhitong-shuhe.webp',
+    src: '/2026/logos/zhitong-shuhe-2026.png',
     compactSrc: '/2026/logos/zhitong-shuhe.webp',
     goalSrc: '/2026/logos/zhitong-shuhe-2026.png',
     className: 'sponsor-zhitong-shuhe',

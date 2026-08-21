@@ -1,0 +1,49 @@
+---
+import '../styles/glass-action-group.css';
+
+interface Props {
+  class?: string;
+  defaultTarget?: string;
+  filterGroup?: 'date' | 'category';
+  axis?: 'auto' | 'vertical';
+  scrub?: boolean;
+  activateOnRelease?: boolean;
+}
+
+const {
+  class: className,
+  defaultTarget,
+  filterGroup,
+  axis = 'auto',
+  scrub = false,
+  activateOnRelease = false,
+} = Astro.props;
+---
+
+<div
+  class:list={['glass-action-group', className]}
+  data-glass-group
+  data-glass-default={defaultTarget}
+  data-glass-axis={axis === 'auto' ? undefined : axis}
+  data-glass-scrub={scrub ? '' : undefined}
+  data-glass-activate-on-release={activateOnRelease ? '' : undefined}
+  data-filter-group={filterGroup}
+>
+  <span class="glass-action-group__lens" aria-hidden="true" data-glass-lens>
+    <span class="glass-action-group__material" data-glass-material></span>
+    <svg
+      class="glass-action-group__outline"
+      aria-hidden="true"
+      preserveAspectRatio="none"
+      data-glass-outline
+    >
+      <path class="glass-action-group__surface" data-glass-outline-path></path>
+      <path class="glass-action-group__depth" data-glass-outline-path></path>
+      <path class="glass-action-group__rim" data-glass-outline-path></path>
+      <path class="glass-action-group__highlight" data-glass-outline-path></path>
+    </svg>
+  </span>
+  <slot />
+</div>
+
+<script src="../scripts/glass-action-group.ts"></script>

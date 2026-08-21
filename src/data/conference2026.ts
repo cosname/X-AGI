@@ -566,3 +566,47 @@ export const conference2026 = {
   contact: 'xagi2026@cosx.org',
   pending: ['详细 Session 安排', '交通与住宿说明'],
 } as const;
+
+export const conference2026OrganizerDisplayOrder = [
+  '清华大学统计与数据科学系',
+  '中国人民大学应用统计科学研究中心',
+  '中国人民大学统计学院',
+  '统计之都',
+  'FAI 人工智能基础',
+  '中国商业统计学会人工智能分会',
+] as const;
+
+const conference2026Organizations = [
+  ...conference2026.initiators,
+  ...conference2026.organizers,
+  ...conference2026.coOrganizers,
+  ...conference2026.sponsors,
+];
+
+function organizationForDisplay(name: string): Organization {
+  const organization = conference2026Organizations.find((candidate) => candidate.name === name);
+  if (!organization) throw new Error(`Unknown 2026 organization: ${name}`);
+  return organization;
+}
+
+export const conference2026PartnerDisplayGroups: readonly {
+  key: 'organizers' | 'co-organizers' | 'sponsors';
+  label: string;
+  organizations: readonly Organization[];
+}[] = [
+  {
+    key: 'organizers',
+    label: '主办单位',
+    organizations: conference2026OrganizerDisplayOrder.map(organizationForDisplay),
+  },
+  {
+    key: 'co-organizers',
+    label: '协办单位',
+    organizations: conference2026.coOrganizers,
+  },
+  {
+    key: 'sponsors',
+    label: '赞助单位',
+    organizations: conference2026.sponsors,
+  },
+];

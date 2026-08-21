@@ -63,31 +63,20 @@ const maps = [
         </div>
         <div class="service-section">
           <h4>住宿</h4>
-          <div class="hotel-offer-card">
-            <div class="hotel-offer-card__copy">
-              <p class="hotel-offer-card__eyebrow">BEIJING FRIENDSHIP HOTEL</p>
-              <h5>友谊宾馆 X-AGI 大会专属优惠</h5>
-              <p class="hotel-offer-card__description">
-                微信扫码进入友谊宾馆小程序，查看大会期间专属预订信息。
-              </p>
-              <dl class="hotel-offer-card__details">
-                <div>
-                  <dt>专属编号</dt>
-                  <dd>5328460</dd>
-                </div>
-                <div>
-                  <dt>适用日期</dt>
-                  <dd>
-                    <time datetime="2026-10-16">2026.10.16</time>
-                    <span aria-hidden="true">-</span>
-                    <time datetime="2026-10-19">2026.10.19</time>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-            <figure class="hotel-offer-card__code">
-              <div class="hotel-offer-card__code-frame">
+          <div class="hotel-offer">
+            <ul class="hotel-offer__summary">
+              <li>
+                北京友谊宾馆为 X-AGI 大会提供专属优惠，微信扫码进入酒店小程序，使用专属编号 5328460 查看
+                <time datetime="2026-10-16">2026.10.16</time>
+                至
+                <time datetime="2026-10-19">2026.10.19</time>
+                期间的预订信息。
+              </li>
+            </ul>
+            <figure class="hotel-offer__code">
+              <div class="hotel-offer__code-image">
                 <img
+                  class="hotel-offer__code-graphic"
                   src={hotelOfferCode.src}
                   alt="友谊宾馆 X-AGI 大会专属优惠微信小程序码"
                   width="370"

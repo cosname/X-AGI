@@ -1,39 +1,15 @@
 ---
-import { currentEditionActionPaths } from '../config/edition-status';
-import type { EditionConfig } from '../config/site';
 import '../styles/goal-home-lower.css';
 import GoalPartnerFooter from './GoalPartnerFooter.astro';
-import GoalCompactSchedule from './goal/GoalCompactSchedule.astro';
-import GoalHistorySection from './goal/GoalHistorySection.astro';
-import GoalParticipationRoutes from './goal/GoalParticipationRoutes.astro';
-
-interface Props {
-  edition: EditionConfig;
-}
-
-const { edition } = Astro.props;
-const actions = currentEditionActionPaths(edition);
+import GoalHistoryGallery from './goal/GoalHistoryGallery.astro';
 ---
 
 <section
   class="goal-home-lower"
-  aria-label="大会概览与参与方式"
+  aria-label="历届影像与组织信息"
   data-goal-home-lower
-  data-goal-home-contract="full-preview"
+  data-goal-home-contract="history-first"
 >
-  <nav class="goal-home-lower__journey" aria-label="从认识大会到进入现场">
-    <p>从认识大会到进入现场</p>
-    <ol>
-      <li><a href="#goal-history"><span>01</span><strong>了解大会</strong></a></li>
-      <li><a href="#goal-agenda"><span>02</span><strong>查看日程</strong></a></li>
-      <li><a href="#goal-participation"><span>03</span><strong>选择参与方式</strong></a></li>
-    </ol>
-  </nav>
-
-  <GoalHistorySection edition={edition} />
-  <GoalCompactSchedule scheduleHref={actions.schedule} />
-  <GoalParticipationRoutes edition={edition} posterHref={actions.poster} />
+  <GoalHistoryGallery />
   <GoalPartnerFooter />
 </section>
-
-<script src="../scripts/goal-home-lower.ts"></script>
