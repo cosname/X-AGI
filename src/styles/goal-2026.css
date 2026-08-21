@@ -62,6 +62,29 @@
   background: var(--goal-paper-muted);
 }
 
+.edition-goal-2026 .main-content--schedule {
+  padding-bottom: 0;
+  background-color: var(--goal-paper-muted);
+  background-image: url('/2026/brand/goal-paper-texture.webp');
+  background-repeat: repeat;
+  background-size: 32rem 32rem;
+}
+
+.edition-goal-2026 .goal-schedule-preview .custom-container {
+  padding-top: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(4.5rem, 8vw, 7rem);
+}
+
+.edition-goal-2026 .schedule-tabs {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 40rem;
+}
+
+.edition-goal-2026 .conference-program-preview--schedule {
+  padding-top: clamp(4.5rem, 8vw, 7rem);
+  border-top: 1px solid var(--goal-line);
+}
+
 .edition-goal-2026 .info-card {
   border: 1px solid rgb(17 19 66 / 0.075);
   border-radius: 8px;
@@ -143,5 +166,10 @@
 
   .edition-goal-2026 .page-header--goal::after {
     background: linear-gradient(90deg, rgb(245 240 234 / 0.94) 0 30%, rgb(245 240 234 / 0.68) 58%, transparent 90%);
+  }
+
+  .edition-goal-2026 .schedule-tabs {
+    grid-template-columns: 1fr;
+    max-width: none;
   }
 }

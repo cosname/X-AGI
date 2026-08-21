@@ -152,6 +152,62 @@ Previous result: passed.
 
 final result: passed
 
+## Goal Homepage Organizer And Partner Footer
+
+### Comparison target
+
+- Source visual truth for Will: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-9ae4f79b-7e84-4fdc-98fd-16b0fd26875e.jpg`, 2222 x 960 pixels.
+- Official Will source: `https://wq-will.com/`, with the transparent purple logo captured from the site header.
+- Source visual truth for the first organizer row: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-38b2e1ae-3530-4aee-9211-e33fab99b220.png`, 1752 x 138 pixels.
+- Source visual truth for 智统数合: `/Users/audiofool/Desktop/CDR/智统数合.eps`, with a 842 x 3531 point EPS board containing the supplied horizontal, mark, stacked, and inverse lockups.
+- Selected 智统数合 lockup: the first blue horizontal EPS lockup, rendered with transparency and normalized to 1600 x 362 pixels at `public/2026/logos/zhitong-shuhe-2026.png`.
+- Desktop implementation evidence: `output/partner-logo-qa/01-partners-desktop.png` and `output/partner-logo-qa/02-partners-sponsors-desktop.png`.
+- Mobile implementation evidence: `output/partner-logo-qa/03-partners-mobile.png` and `output/partner-logo-qa/04-partners-sponsors-mobile.png`.
+- Combined source and implementation evidence: `output/partner-logo-qa/05-reference-vs-implementation.png`.
+- Desktop CSS viewport: 1280 x 720 at device pixel ratio 1, with 1265 x 712 pixel browser captures after scrollbar and browser-surface normalization.
+- Mobile CSS viewport: 390 x 844 at device pixel ratio 1, with 375 x 812 pixel browser captures after scrollbar and browser-surface normalization.
+- State: `/goal/`, with the organizer footer aligned to the top of the viewport and the sponsor group separately centered for focused inspection.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, content, asset, interaction, or accessibility issues remain for this footer update.
+
+- Fonts and typography: the new heading, metadata, group labels, and visible organization names use the existing Goal font system and preserve the established condensed-label and display-heading hierarchy.
+- Spacing and layout rhythm: the light organization surface follows the dark Recall without overlap, the main organizer group is exactly two desktop rows of three, and the supporting groups retain consistent card height and gutters.
+- Colors and visual tokens: the paper surface, navy text, violet labels, cyan-violet top rule, and low-contrast borders reuse the current Goal palette without changing the hero or Recall color system.
+- Image quality and asset fidelity: the first three organizer marks match the supplied strip, the official Will mark is transparent and uses the website's exact purple vector artwork, and the supplied 智统数合 EPS produces a sharp transparent blue horizontal lockup.
+- Copy and content: the organizer order is 清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院, followed by 统计之都、FAI 人工智能基础、中国商业统计学会人工智能分会.
+- Partner completeness: two co-organizers and five sponsors render with visible logos and visible organization names.
+- Responsive behavior: desktop shows the requested 3 + 3 organizer structure, mobile converts the long institutional marks to single-column cards for legibility, and the sponsor grid remains balanced without horizontal overflow.
+- Accessibility: organization names remain visible text, linked organizations retain descriptive link text, decorative logo images use empty alternatives to avoid duplicate announcements, and focus styling remains visible.
+- Resource integrity: every partner image reports a nonzero natural width, the Will link resolves to `https://wq-will.com/`, and the browser log contains no warnings or errors.
+
+### Comparison history
+
+#### First implementation pass
+
+- Earlier finding: P2 the fifth sponsor occupied only the left mobile grid column, leaving an unintended empty card-width gap at the visual endpoint.
+- Fix: the final odd sponsor card now spans both mobile columns while desktop retains five equal sponsor columns.
+- Pre-fix evidence: `output/partner-logo-qa/00-mobile-sponsor-before.png`.
+- Post-fix evidence: `output/partner-logo-qa/04-partners-sponsors-mobile.png`.
+
+### Primary interactions tested
+
+- Loaded `/goal/` at the top and verified the hero and lower-screen boundary still meet at one viewport height.
+- Scrolled to the organizer footer and verified both organizer rows contain exactly three cards.
+- Verified the organizer order and all visible labels against the user-specified order.
+- Opened the sponsor region at desktop and mobile widths and verified Will, QuantVerse, and 智统数合 have no opaque white rectangles or abnormal source padding.
+- Verified the Will logo links to the supplied official website.
+- Verified `scrollWidth` equals `clientWidth` at the 390 x 844 mobile viewport and the default desktop viewport.
+- Checked browser logs and found no warnings or errors.
+
+### Residual test gaps
+
+- The supplied organizer strip is an asset reference rather than a complete footer mockup, so page-level spacing was judged against the existing Goal visual system and the explicit 3 + 3 layout instruction.
+- The exact partner roster remains data-driven and will reflow if future organizers or sponsors are added.
+
+final result: passed
+
 ## Tree Growth Pulse and Registration-Default Navigation
 
 ### Comparison target
@@ -1470,5 +1526,78 @@ No actionable P0, P1, or P2 content, layout, responsive, accessibility, or image
 ### Residual test gaps
 
 - Mini-program code recognition cannot be completed inside the desktop browser and should receive one manual WeChat scan check on a physical phone before publication.
+
+final result: passed
+
+## Complete Goal Preview Acceptance
+
+### Comparison target
+
+- Product decision: `/goal/` is the complete local acceptance preview, while `/` remains the published homepage and must not inherit Goal-only lower-page content.
+- Required order: the one-viewport pixel-tree hero, conference journey, history and statistics, five-image archive gallery, compact agenda, Poster and registration paths, four organization roles, and Goal-specific legal footer.
+- Desktop hero evidence: `output/design-qa/goal-full-preview/xagi-wide-1032.png`, `xagi-standard-fix-1024.png`, `xagi-tall-1032.png`, and `xagi-short-1032.png`.
+- Responsive hero evidence: `output/design-qa/goal-full-preview/xagi-tablet-1032.png`, `xagi-landscape-1032.png`, `xagi-frame-large-mobile-1040.png`, `xagi-frame-mobile-1040.png`, and `xagi-frame-narrow-1040.png`.
+- Lower-page evidence: `output/design-qa/goal-full-preview/xagi-desktop-frame-history-1052.png`, `xagi-desktop-frame-gallery-1052.png`, `xagi-desktop-frame-agenda-1052.png`, `xagi-desktop-frame-participation-1052.png`, and `xagi-desktop-frame-partners-1052.png`.
+- Mobile lower-page evidence: `output/design-qa/goal-full-preview/xagi-mobile-gallery-1045.png`, `xagi-mobile-agenda-1045.png`, `xagi-mobile-participation-1045.png`, and `xagi-mobile-partners-1045.png`.
+- Navigation evidence: `output/design-qa/goal-full-preview/xagi-mobile-menu-1057.png`.
+- Schedule isolation evidence: `output/design-qa/goal-full-preview/xagi-public-schedule-1102.png`, `xagi-goal-schedule-1102.png`, and `xagi-goal-schedule-mobile-1102.png`.
+- Homepage isolation evidence: `output/design-qa/goal-full-preview/xagi-public-root-1102.png`.
+- Machine-readable interaction evidence: `output/design-qa/goal-full-preview/xagi-final-qa-smooth-gallery-live-1145.json` and `xagi-final-qa-reduced-1029.json`.
+- Post-review browser evidence: `output/design-qa/goal-full-preview/xagi-review-fix-desktop-hero-1200.json` and `xagi-review-fix-portrait-pointer-1200.json`.
+- Browser CSS viewports: 1920 x 993, 1440 x 813, 1280 x 1013, 1280 x 563, 768 x 937, 844 x 393, 430 x 932, 390 x 844, and 320 x 568 at device pixel ratio 1.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, interaction, responsive, route-isolation, lifecycle, or accessibility issues remain for the complete Goal preview.
+
+- Route contract: the built `/goal/` page exposes `data-goal-home-contract="full-preview"` and keeps the required section markers in their approved visual order.
+- Hero geometry: every tested viewport reported a zero-pixel hero-height delta and a zero-pixel seam between the hero and lower-page composition.
+- Responsive integrity: all nine exact browser viewports reported no document-level horizontal overflow.
+- Gallery wrapping: normal motion moved directly from slide 1 to slide 5 at scroll position 4184 and back to slide 1 at position 0, with matching live status and active-source-link tab state.
+- Gallery forward movement: the Next control settled on slide 2 at position 1106, and Arrow Right settled on slide 3 at position 2212.
+- Gallery stability: every recorded control, keyboard, wrap, and manual-scroll state preserved a zero-pixel vertical page drift.
+- Reduced motion: wrap movement completed immediately, announced the correct current slide, and preserved exactly one tabbable source link.
+- Tree wind: a browser pointer sweep activated the coherent wind runtime with zero local ripple pixels, moved the crown more than 25 times farther than the anchored root, and cleared every wind transform after settling.
+- Hero action resilience: a forced two-row action layout kept the capsule's vertical coordinate exactly aligned with the schedule target, and a simulated BFCache return restored ResizeObserver-driven geometry.
+- Portrait pointer coordinates: after a 280px page scroll, touch avoidance reached full strength at the visible node under the pointer instead of using the field's stale pre-scroll position.
+- Portrait pointer cleanup: pointerup changed the field from avoidance back to ambient wander and reduced the recorded avoidance value from 1 to 0.
+- Registration fallback: both register routes preserve a visible direct BagEvent link alongside the embedded form.
+- Manual gallery synchronization: an instant manual scroll to the end selected slide 5 and updated the polite live status to `第 5 张，共 5 张`.
+- Schedule filtering: the compact agenda starts with five items, combines date and category filters with AND semantics, announces both one-match and empty results, and restores all five items when filters reset.
+- Schedule disclosures: the tested disclosure changed state without layout overflow or browser errors.
+- Mobile navigation: 430px, 390px, and 320px frames used compact navigation, while the menu toggle exposed and then closed the Goal navigation through its accessible expanded state.
+- Historical media: all five archive images loaded at their declared natural dimensions, retained descriptive alternative text, used explicit width and height attributes, and remained lazy-loaded below the fold.
+- External actions: both registration links open the audited Bagevent destination in a new window with `noopener noreferrer`.
+- Internal routing: `/goal/`, `/goal/about/`, `/goal/schedule/`, `/goal/poster/`, `/goal/guide/`, and `/goal/register/` all returned HTTP 200 from the rendered preview.
+- Organization semantics: initiators, organizers, co-organizers, and sponsors remain distinct groups with 2, 4, 2, and 5 unique organizations respectively.
+- Publication isolation: `/goal/` and every Goal inner page retain `noindex, nofollow`, while `/` and `/schedule/` expose neither Goal lower-page markers nor Goal schedule-outline markers.
+- Schedule isolation: `/schedule/` retains the published schedule structure and shared program preview, while `/goal/schedule/` adds the Goal outline without rendering the public schedule wrapper.
+- Browser health: the final homepage, interaction, schedule, and route-isolation audits reported no window errors, console errors, or failed resources.
+
+### Primary interactions tested
+
+- Loaded the complete preview at nine exact desktop, tablet, landscape, and mobile viewport sizes and measured overflow, hero height, and the hero-to-content seam.
+- Used previous, next, Arrow Right, manual horizontal scrolling, and first-to-last wrap navigation in both normal and reduced-motion states.
+- Verified that gallery navigation never changed the document's vertical scroll position and that active source-link focusability followed the announced slide.
+- Combined date and category filters to produce empty and matching agenda states, restored the full agenda, and toggled a schedule disclosure.
+- Opened and closed compact mobile navigation and inspected the rendered 390 x 844 menu state.
+- Loaded the public homepage, public schedule, Goal schedule, and mobile Goal schedule to verify structural isolation.
+- Requested every internal Goal route, inspected registration-link security attributes, and checked all history-image natural dimensions.
+- Reviewed desktop and mobile captures of history, gallery, agenda, participation, organization, legal, and schedule sections for spacing, crop, hierarchy, and visual continuity.
+
+### Automated verification
+
+- `npm test` passed 47 unit tests, Astro diagnostics for 75 files with zero errors, warnings, or hints, production generation of 20 pages, and the complete build validator.
+- Build validation passed the full-preview order, HTML budgets, schedule structures, organization data, publication exclusions, robots policy, sitemap policy, redirects, and OSS synchronization exclusions.
+- Independent follow-up review verified the registration fallback, calm tree wind, portrait scroll and touch behavior, wrapped action geometry, and BFCache restoration with no concrete remaining defects.
+- `git diff --check` completed without whitespace errors.
+
+### Residual test gaps
+
+- Historical-photo usage rights still require confirmation before publication.
+- The Will 未来人机交互实验室 destination remains intentionally omitted because no verified URL is available.
+- The Friendship Hotel mini-program code still needs one physical-phone WeChat scan before publication.
+- The final browser pass used the installed headless Chrome binary and a local HTML-injection proxy because the repository does not yet contain a committed Playwright harness.
+- Static screenshots cannot fully communicate the temporal feel of the hero, capsule, or smooth gallery transition.
 
 final result: passed

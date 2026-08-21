@@ -359,14 +359,19 @@ for (const group of buildGroups) {
     }
 
     if (isDomPixelHomepage) {
-      const compressedBytes = gzipSync(source).byteLength;
-      if (compressedBytes > 75_000) {
-        failures.push(`${route}: compressed HTML exceeds 75 KB DOM-art budget`);
+      const compressedPageBytes = gzipSync(source).byteLength;
+      if (compressedPageBytes > 75_000) {
+        failures.push(`${route}: compressed homepage HTML exceeds 75 KB budget`);
       }
 
       const hero = source.match(
         /<section\b[^>]*class="[^"]*\bconference-hero\b[^"]*"[^>]*>[\s\S]*?<\/section>/,
       )?.[0] ?? '';
+      const compressedHeroBytes = gzipSync(hero).byteLength;
+      if (compressedHeroBytes > 55_000) {
+        failures.push(`${route}: compressed hero HTML exceeds 55 KB budget`);
+      }
+
       const expectedPixels = Number(hero.match(/data-pixel-count="(\d+)"/)?.[1] ?? 0);
       const renderedPixels = [...hero.matchAll(/class="hp\s/g)].length;
       const terrainLayers = [...hero.matchAll(/\sdata-layer=/g)].length;
@@ -606,6 +611,38 @@ for (const route of ['about/index.html', 'goal/about/index.html']) {
   if (/<(?:h[1-6]|div)[^>]*>\s*发起方\s*<\//u.test(source)) {
     failures.push(`${route}: organization sections must not repeat the initiator group`);
   }
+
+  const organizerStart = source.indexOf('<div class="card-header">主办单位</div>');
+  const organizerEnd = source.indexOf('<div class="card-header">协办单位</div>', organizerStart);
+  const organizerText = organizerStart >= 0 && organizerEnd > organizerStart
+    ? visibleText(source.slice(organizerStart, organizerEnd))
+    : '';
+  if (!organizerText) failures.push(`${route}: missing approved organizer section`);
+
+  let previousOrganizerIndex = -1;
+  for (const organizer of [
+    '清华大学统计与数据科学系',
+    '中国人民大学应用统计科学研究中心',
+    '中国人民大学统计学院',
+    '统计之都',
+    'FAI 人工智能基础',
+    '中国商业统计学会人工智能分会',
+  ]) {
+    const organizerIndex = organizerText.indexOf(organizer);
+    if (organizerIndex < 0) {
+      failures.push(`${route}: missing approved organizer "${organizer}"`);
+    } else if (organizerIndex < previousOrganizerIndex) {
+      failures.push(`${route}: organizer "${organizer}" is out of the approved order`);
+    }
+    previousOrganizerIndex = Math.max(previousOrganizerIndex, organizerIndex);
+  }
+}
+
+for (const route of ['register/index.html', 'goal/register/index.html']) {
+  const source = await readFile(path.join(root, route), 'utf8');
+  if (visibleText(source).includes('报名链接')) {
+    failures.push(`${route}: redundant registration link must stay removed`);
+  }
 }
 
 for (const expectedCopy of [
@@ -628,26 +665,170 @@ if (rootText.includes('青年之夜')) {
 }
 
 const goalIndex = await readFile(path.join(root, 'goal/index.html'), 'utf8');
-if (!goalIndex.includes('<meta name="robots" content="noindex, nofollow">')) {
-  failures.push('goal/index.html: preview must be noindex');
-}
+const goalPages = ['', 'about', 'schedule', 'poster', 'guide', 'register'];
 
-for (const page of ['about', 'schedule', 'poster', 'guide', 'register']) {
-  const route = `goal/${page}/index.html`;
-  const source = await readFile(path.join(root, route), 'utf8');
-  if (!source.includes('data-pointer-effect="ripple"')) {
+for (const page of goalPages) {
+  const route = page ? `goal/${page}/index.html` : 'goal/index.html';
+  const source = page ? await readFile(path.join(root, route), 'utf8') : goalIndex;
+
+  if (!source.includes('<meta name="robots" content="noindex, nofollow">')) {
+    failures.push(`${route}: goal preview must be noindex and nofollow`);
+  }
+  if (page && !source.includes('data-pointer-effect="ripple"')) {
     failures.push(`${route}: goal masthead must expose the ripple-only pointer field`);
   }
 }
-if (!goalIndex.includes('conference-home--hero-only')) {
-  failures.push('goal/index.html: homepage must use the hero-only composition');
+
+if (!goalIndex.includes('edition-goal-home--with-lower')) {
+  failures.push('goal/index.html: full preview must enable the long-form homepage shell');
 }
+
+const goalHomeMarkers = [
+  'data-goal-home-contract="full-preview"',
+  'id="goal-history"',
+  'data-history-gallery',
+  'id="goal-agenda"',
+  'data-compact-schedule',
+  'id="goal-participation"',
+  'class="goal-partners"',
+  'class="goal-partners__legal"',
+];
+let previousGoalMarkerIndex = -1;
+for (const marker of goalHomeMarkers) {
+  const markerIndex = goalIndex.indexOf(marker);
+  if (markerIndex < 0) {
+    failures.push(`goal/index.html: missing full-preview marker "${marker}"`);
+    continue;
+  }
+  if (markerIndex < previousGoalMarkerIndex) {
+    failures.push(`goal/index.html: full-preview marker "${marker}" is out of order`);
+  }
+  previousGoalMarkerIndex = markerIndex;
+}
+
+const expectedGoalHomeCopy = [
+  conference2026.history.title,
+  conference2026.history.summary,
+  ...conference2026.history.stats.flatMap((item) => [item.value, item.label]),
+  ...conference2026.history.gallery.flatMap((item) => [
+    item.year,
+    item.location,
+    item.title,
+    item.caption,
+  ]),
+  conference2026.poster.title,
+  conference2026.poster.headline,
+  conference2026.poster.ticket.label,
+  conference2026.registration.status,
+  conference2026.registration.description,
+  '发起单位',
+  '主办单位',
+  '协办单位',
+  '赞助单位',
+  '京ICP备2024062260号-3',
+  '京公网安备11010502057471号',
+];
+const goalText = visibleText(goalIndex);
+for (const expected of expectedGoalHomeCopy) {
+  if (!goalText.includes(expected)) {
+    failures.push(`goal/index.html: missing full-preview copy "${expected}"`);
+  }
+}
+
+const goalPartnerStart = goalIndex.indexOf('class="goal-partners"');
+const goalPartnerFragment = goalPartnerStart >= 0 ? goalIndex.slice(goalPartnerStart) : '';
+const goalPartnerText = visibleText(goalPartnerFragment);
+const goalPartnerGroups = [
+  ['initiators', '发起单位', conference2026.initiators],
+  ['organizers', '主办单位', conference2026.organizers],
+  ['co-organizers', '协办单位', conference2026.coOrganizers],
+  ['sponsors', '赞助单位', conference2026.sponsors],
+];
+let previousGoalPartnerIndex = -1;
+for (const [key, label, organizations] of goalPartnerGroups) {
+  const groupMarker = `goal-partners__group--${key}`;
+  const groupIndex = goalPartnerFragment.indexOf(groupMarker);
+  if (groupIndex < 0) {
+    failures.push(`goal/index.html: missing semantic partner group "${label}"`);
+  } else if (groupIndex < previousGoalPartnerIndex) {
+    failures.push(`goal/index.html: partner group "${label}" is out of order`);
+  }
+  previousGoalPartnerIndex = Math.max(previousGoalPartnerIndex, groupIndex);
+
+  for (const organization of organizations) {
+    if (!goalPartnerText.includes(organization.name)) {
+      failures.push(`goal/index.html: missing ${label} organization "${organization.name}"`);
+    }
+  }
+}
+
+for (const [marker, description] of [
+  ['data-goal-home-contract=', 'full-preview contract'],
+  ['data-goal-home-lower', 'goal lower-page composition'],
+  ['data-history-gallery', 'history gallery'],
+  ['data-compact-schedule', 'compact schedule'],
+  ['goal-partners__legal', 'goal legal footer'],
+  ['conference-program-outline', 'goal schedule outline'],
+]) {
+  if (rootIndex.includes(marker)) {
+    failures.push(`index.html: ${description} must not leak into the public homepage`);
+  }
+}
+
+const scheduleIndex = await readFile(path.join(root, 'schedule/index.html'), 'utf8');
+const goalScheduleIndex = await readFile(path.join(root, 'goal/schedule/index.html'), 'utf8');
+const scheduleSessionCount = conference2026.schedule.reduce(
+  (count, day) => count + day.sessions.length,
+  0,
+);
+const expectedScheduleCardCount = scheduleSessionCount + conference2026.programPreview.sessions.length;
+const schedulePlaceholders = [
+  'Full schedule TBD. Current sessions and speakers are listed below.',
+  'SESSIONS & SPEAKERS',
+  'Exact dates, times, rooms, and talk titles are TBD.',
+  'Time TBD',
+  'Talk title TBD',
+  'Speaker TBD',
+];
+
+for (const [route, source] of [
+  ['schedule/index.html', scheduleIndex],
+  ['goal/schedule/index.html', goalScheduleIndex],
+]) {
+  const text = visibleText(source);
+  if (!source.includes('class="schedule-intro"') || !source.includes('class="nav nav-pills schedule-tabs')) {
+    failures.push(`${route}: speaker-capable schedule must preserve its date navigation`);
+  }
+  if (source.includes('goal-schedule-preview') || source.includes('conference-program-outline')) {
+    failures.push(`${route}: alternate schedule-preview layout must not replace the approved template`);
+  }
+
+  const scheduleCards = [...source.matchAll(/class="[^"]*\bschedule-card\b[^"]*"/g)].length;
+  const topicCards = [...source.matchAll(/class="[^"]*\bschedule-topic-card\b[^"]*"/g)].length;
+  if (scheduleCards !== expectedScheduleCardCount) {
+    failures.push(`${route}: expected ${expectedScheduleCardCount} schedule cards, found ${scheduleCards}`);
+  }
+  if (topicCards !== conference2026.programPreview.sessions.length) {
+    failures.push(`${route}: expected ${conference2026.programPreview.sessions.length} topic cards, found ${topicCards}`);
+  }
+
+  for (const placeholder of schedulePlaceholders) {
+    if (!text.includes(placeholder)) {
+      failures.push(`${route}: missing approved placeholder copy "${placeholder}"`);
+    }
+  }
+}
+
+const aiInfra = conference2026.programPreview.sessions.find((session) => session.title === 'AI Infra');
+if (!aiInfra || aiInfra.speakers.length !== 0) {
+  failures.push('conference2026: AI Infra must not publish unconfirmed speakers');
+}
+const posterTicketCopy = '报名参加 Rising Stars Poster 即赠专业票。';
 if (
-  goalIndex.includes('conference-home__ground')
-  || goalIndex.includes('conference-partners')
-  || goalIndex.includes('<footer class="site-footer">')
+  !conference2026.registration.notes.includes(posterTicketCopy)
+  || !conference2026.tickets.notes.includes(posterTicketCopy)
 ) {
-  failures.push('goal/index.html: homepage must not render unfinished lower-screen content');
+  failures.push('conference2026: registration paths must preserve the audited Rising Stars Poster wording');
 }
 
 const nextIndex = await readFile(path.join(root, 'next/index.html'), 'utf8');

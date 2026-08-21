@@ -13,6 +13,7 @@ import {
   mosaicRippleSample,
   advanceTreeWind,
   treeWindImpulse,
+  treeWindLayerMotion,
   posteriorForPointer,
   STATIC_TERRAIN_LAYERS,
   terrainLayerForProfile,
@@ -208,6 +209,19 @@ test('tree wind follows pointer direction and becomes stronger near the tree', (
   assert.ok(nearLeft < 0);
   assert.ok(Math.abs(nearRight) > Math.abs(distantRight));
   assert.ok(Math.abs(nearRight) <= 1);
+});
+
+test('tree wind gives the crown more travel than the anchored root', () => {
+  const root = treeWindLayerMotion(0.12, 1);
+  const crown = treeWindLayerMotion(1, 1);
+  const reverseCrown = treeWindLayerMotion(1, -1);
+
+  assert.ok(root.x > 0);
+  assert.ok(root.x < 0.4);
+  assert.ok(crown.x > 8);
+  assert.ok(crown.x > root.x * 20);
+  assert.equal(reverseCrown.x, -crown.x);
+  assert.equal(reverseCrown.angle, -crown.angle);
 });
 
 test('tree wind layers retain inertia and settle back to rest', () => {

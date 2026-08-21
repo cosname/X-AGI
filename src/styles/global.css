@@ -1573,7 +1573,7 @@
 .edition-2026.edition-goal-home .conference-hero__action-capsule {
   position: absolute;
   z-index: 0;
-  top: var(--hero-action-capsule-y, 0);
+  top: 0;
   left: 0;
   width: var(--hero-action-capsule-width, 0);
   height: var(--hero-action-capsule-height, 2.65rem);
@@ -1588,7 +1588,11 @@
   backdrop-filter: blur(8px) saturate(1.05) contrast(1.015);
   opacity: 0;
   pointer-events: none;
-  transform: translate3d(var(--hero-action-capsule-x, 0), 0, 0);
+  transform: translate3d(
+    var(--hero-action-capsule-x, 0),
+    var(--hero-action-capsule-y, 0),
+    0
+  );
   transition:
     transform 460ms cubic-bezier(0.22, 1, 0.36, 1),
     opacity 160ms ease-out;
@@ -4898,20 +4902,8 @@ button:focus-visible {
   object-position: left center;
 }
 
-.edition-2026 .conference-partners--logos .conference-partners__logo-item--sponsor-quantverse {
-  position: relative;
-  width: 7.2rem;
-  height: 1.3rem;
-  overflow: hidden;
-}
-
 .edition-2026 .conference-partners--logos .conference-partners__logos img.sponsor-quantverse {
-  position: absolute;
-  top: -1.37rem;
-  left: -1.23rem;
-  width: 9.65rem;
-  max-width: none;
-  max-height: none;
+  width: 8.5rem;
 }
 
 .edition-2026 .conference-partners--logos .conference-partners__logo-fallback {
@@ -5083,13 +5075,29 @@ button:focus-visible {
 
 .hero-pixel-field--badge .hero-pixel-field__tree-sway {
   filter: saturate(1.05) contrast(1.02);
+  transform: translate3d(var(--tree-wind-sway-x, 0), 0, 0);
+  transform-origin: 73.5% 72%;
+}
+
+.hero-pixel-field--badge [data-tree-branch][data-branch-side='right'] {
+  transform:
+    translate3d(var(--tree-wind-x, 0), 0, 0)
+    rotate(var(--tree-wind-angle, 0deg));
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-root,
 .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-trunk {
   filter: saturate(1.08) contrast(1.08);
-  transform: scaleX(1.07);
+  transform:
+    translate3d(var(--tree-wind-x, 0), 0, 0)
+    rotate(var(--tree-wind-angle, 0deg))
+    scaleX(1.07);
   transform-origin: 73.5% 72%;
+}
+
+.hero-pixel-field--badge[data-tree-wind-active='true'] .hero-pixel-field__tree-sway,
+.hero-pixel-field--badge[data-tree-wind-active='true'] [data-tree-branch][data-branch-side='right'] {
+  will-change: transform;
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-root .hp,

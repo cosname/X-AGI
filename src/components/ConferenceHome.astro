@@ -204,7 +204,7 @@ const badgeHero = edition.skin === 'goal';
       switcher.style.setProperty('--hero-action-capsule-x', `${capsuleX}px`);
       switcher.style.setProperty(
         '--hero-action-capsule-y',
-        `${registerBounds.top - switcherBounds.top}px`,
+        `${targetBounds.top - switcherBounds.top}px`,
       );
       switcher.style.setProperty('--hero-action-capsule-width', `${registerBounds.width}px`);
       switcher.style.setProperty('--hero-action-capsule-height', `${registerBounds.height}px`);
@@ -232,14 +232,22 @@ const badgeHero = edition.skin === 'goal';
     });
 
     const resizeObserver = new ResizeObserver(syncCapsule);
-    resizeObserver.observe(switcher);
-    targets.forEach((target) => resizeObserver.observe(target));
+    const observeTargets = () => {
+      resizeObserver.observe(switcher);
+      targets.forEach((target) => resizeObserver.observe(target));
+    };
+    observeTargets();
 
     window.requestAnimationFrame(() => {
       activate(register);
       switcher.dataset.actionCapsuleReady = 'true';
     });
 
-    window.addEventListener('pagehide', () => resizeObserver.disconnect(), { once: true });
+    window.addEventListener('pagehide', () => resizeObserver.disconnect());
+    window.addEventListener('pageshow', (event) => {
+      if (!event.persisted) return;
+      observeTargets();
+      syncCapsule();
+    });
   });
 </script>

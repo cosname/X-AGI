@@ -14,8 +14,11 @@ export type ScheduleTalk = {
   slides?: string;
 };
 
+export type ScheduleCategory = 'arrival' | 'keynote' | 'parallel' | 'poster';
+
 export type ScheduleSession = {
   id: string;
+  category: ScheduleCategory;
   period: string;
   title?: string;
   venue?: string;
@@ -112,6 +115,75 @@ export const conference2026 = {
       members: ['邓欣怡', '黄涵碧', '李芷汀', '田润泽', '王胤博'],
       orderNote: '按姓名拼音排序',
     },
+  },
+  history: {
+    eyebrow: 'FROM CHINA-R TO X-AGI',
+    title: '一条持续生长的学术连接',
+    summary:
+      'X-AGI 延续中国 R 会议自 2008 年开始的开放交流传统，让统计、数据科学与人工智能研究者在真实现场中交换方法、问题与新的合作可能。',
+    stats: [
+      { value: '19', label: '届学术传承' },
+      { value: '14', label: '座城市' },
+      { value: '近 50', label: '场会议' },
+      { value: '50万+', label: '线上线下参与' },
+    ],
+    gallery: [
+      {
+        year: '2011',
+        location: '北京 · 中国人民大学',
+        title: '从一场会议开始连接',
+        caption: '第四届中国 R 语言会议，与会者在会场外合影。',
+        image: '/2026/history/china-r-2011-beijing-group.webp',
+        width: 1600,
+        height: 864,
+        alt: '2011 年第四届中国 R 语言会议北京会场与会者合影',
+        sourceUrl: 'https://cosx.org/2011/05/4th-china-r-beijing-summary/',
+      },
+      {
+        year: '2014',
+        location: '北京 · 中国人民大学',
+        title: '讨论发生在同一个现场',
+        caption: '第七届中国 R 语言会议圆桌讨论，观点在台上与台下持续交换。',
+        image: '/2026/history/china-r-2014-beijing-discussion.webp',
+        width: 1024,
+        height: 680,
+        alt: '2014 年第七届中国 R 语言会议圆桌讨论现场',
+        sourceUrl: 'https://cosx.org/2014/06/7th-china-r-beijing-summary/',
+      },
+      {
+        year: '2017',
+        location: '合肥 · 中国科学技术大学',
+        title: '把问题带到会场',
+        caption: '第十届中国 R 会议，参会者在会场阅读会议手册。',
+        image: '/2026/history/china-r-2017-hefei-audience.webp',
+        width: 918,
+        height: 574,
+        alt: '2017 年第十届中国 R 会议参会者阅读会议手册',
+        sourceUrl: 'https://cosx.org/2017/07/10th-china-r-hefei-summary/',
+      },
+      {
+        year: '2017',
+        location: '合肥 · 中国科学技术大学',
+        title: '让交流继续发生',
+        caption: '报告间隙的面对面交流，构成会议最重要的连接之一。',
+        image: '/2026/history/china-r-2017-hefei-exchange.webp',
+        width: 938,
+        height: 610,
+        alt: '2017 年第十届中国 R 会议参会老师在会场交流',
+        sourceUrl: 'https://cosx.org/2017/07/10th-china-r-hefei-summary/',
+      },
+      {
+        year: '2020',
+        location: '北京 · 中国人民大学',
+        title: '线上线下保持联结',
+        caption: '第十三届中国 R 会议采用线上与线下结合的方式继续相聚。',
+        image: '/2026/history/china-r-2020-beijing-hybrid.webp',
+        width: 1080,
+        height: 756,
+        alt: '2020 年第十三届中国 R 会议北京线下会场合影',
+        sourceUrl: 'https://cosx.org/2020/12/13th-china-r-beijing-summary/',
+      },
+    ],
   },
   dates: {
     display: '2026年10月16日至18日',
@@ -266,6 +338,7 @@ export const conference2026 = {
       sessions: [
         {
           id: 'oct16-pm',
+          category: 'arrival',
           period: '下午',
           title: '报到日',
           notes: ['来场嘉宾报到注册', 'Poster 展会预交流'],
@@ -279,6 +352,7 @@ export const conference2026 = {
       sessions: [
         {
           id: 'oct17-am',
+          category: 'keynote',
           period: '上午',
           title: 'Keynote 会场',
           notes: ['主持人致辞'],
@@ -289,6 +363,7 @@ export const conference2026 = {
         },
         {
           id: 'oct17-pm-sessions',
+          category: 'parallel',
           period: '下午',
           title: '分会场报告',
           notes: ['各分会场开展报告'],
@@ -300,6 +375,7 @@ export const conference2026 = {
         },
         {
           id: 'oct17-pm-poster',
+          category: 'poster',
           period: '下午',
           title: 'Rising Stars Poster 展示',
           notes: ['Rising Stars Poster 展示'],
@@ -313,6 +389,7 @@ export const conference2026 = {
       sessions: [
         {
           id: 'oct18-sessions',
+          category: 'parallel',
           period: '全天',
           title: '分会场报告',
           notes: ['各分会场开展报告'],

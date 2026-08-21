@@ -1,8 +1,11 @@
 export type PartnerLogo = {
   src: string;
   compactSrc?: string;
+  goalSrc?: string;
   className?: string;
 };
+
+export type PartnerLogoSurface = 'published' | 'compact' | 'goal';
 
 const logos = {
   清华大学统计与数据科学系: {
@@ -50,21 +53,40 @@ const logos = {
   Will: {
     src: '/2025/assets/images/logo_will.png',
     compactSrc: '/2025/assets/images/logos_t/optimized/logo_will.webp',
+    goalSrc: '/2026/logos/will.svg',
     className: 'sponsor-will',
   },
   QuantVerse: {
     src: '/2025/assets/images/logo_QuantVerse.png',
     compactSrc: '/2025/assets/images/logos_t/optimized/logo_QuantVerse.webp',
+    goalSrc: '/2026/logos/quantverse.png',
     className: 'sponsor-quantverse',
   },
   智统数合: {
     src: '/2026/logos/zhitong-shuhe.webp',
     compactSrc: '/2026/logos/zhitong-shuhe.webp',
+    goalSrc: '/2026/logos/zhitong-shuhe-2026.png',
     className: 'sponsor-zhitong-shuhe',
   },
 } as const satisfies Record<string, PartnerLogo>;
 
 export const partnerLogoByName: Record<string, PartnerLogo> = logos;
+
+export function partnerLogoForName(
+  name: string,
+  surface: PartnerLogoSurface = 'published',
+): PartnerLogo | undefined {
+  const logo = partnerLogoByName[name];
+  if (!logo) return undefined;
+
+  const src = surface === 'compact'
+    ? logo.compactSrc ?? logo.src
+    : surface === 'goal'
+      ? logo.goalSrc ?? logo.src
+      : logo.src;
+
+  return { ...logo, src };
+}
 
 export const partnerCompactLogoByName: Record<string, PartnerLogo> = Object.fromEntries(
   (Object.entries(logos) as [string, PartnerLogo][]).map(([name, logo]) => [

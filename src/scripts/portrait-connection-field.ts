@@ -361,15 +361,21 @@ export const initializePortraitConnectionFields = () => {
 
     const onPointerMove = (event: PointerEvent) => {
       if (!event.isPrimary || reducedMotion.matches || !portraitMedia.matches || !visible) return;
-      pointer.x = event.clientX - fieldRect.left;
-      pointer.y = event.clientY - fieldRect.top;
+      const currentRect = field.getBoundingClientRect();
+      pointer.x = event.clientX - currentRect.left;
+      pointer.y = event.clientY - currentRect.top;
       pointer.active = (
         pointer.x >= 0
-        && pointer.x <= fieldRect.width
+        && pointer.x <= currentRect.width
         && pointer.y >= 0
-        && pointer.y <= fieldRect.height
+        && pointer.y <= currentRect.height
       );
       start();
+    };
+
+    const clearPointer = (event: PointerEvent) => {
+      if (!event.isPrimary) return;
+      pointer.active = false;
     };
 
     const scheduleResize = () => {
@@ -398,6 +404,8 @@ export const initializePortraitConnectionFields = () => {
     intersectionObserver.observe(field);
 
     window.addEventListener('pointermove', onPointerMove, { passive: true, signal });
+    window.addEventListener('pointerup', clearPointer, { passive: true, signal });
+    window.addEventListener('pointercancel', clearPointer, { passive: true, signal });
     window.addEventListener('blur', () => {
       pointer.active = false;
     }, { signal });
