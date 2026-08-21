@@ -1,4 +1,4 @@
-.edition-goal-home--with-lower {
+.edition-goal-home.edition-goal-home--with-lower {
   height: auto;
   min-height: 100svh;
   overflow-x: clip;
@@ -6,18 +6,18 @@
   background: #f5efe7;
 }
 
-.edition-2026.edition-goal-home--with-lower > main {
+.edition-2026.edition-goal-home.edition-goal-home--with-lower > main {
   height: auto;
   overflow: visible;
 }
 
-.edition-2026.edition-goal-home--with-lower .conference-home {
+.edition-2026.edition-goal-home.edition-goal-home--with-lower .conference-home {
   height: auto;
   overflow: clip;
 }
 
-.edition-2026.edition-goal-home--with-lower .conference-home .conference-hero,
-.edition-2026.edition-goal-home--with-lower .conference-home .conference-hero__inner {
+.edition-2026.edition-goal-home.edition-goal-home--with-lower .conference-home .conference-hero,
+.edition-2026.edition-goal-home.edition-goal-home--with-lower .conference-home .conference-hero__inner {
   height: 100svh;
   min-height: 0;
 }

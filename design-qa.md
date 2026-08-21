@@ -1801,12 +1801,15 @@ No actionable P0, P1, or P2 visual, interaction, responsive, accessibility, or p
 - Interaction behavior: selecting the 2018 Shanghai waveform target moved the gallery from x 0 to x 2471, updated `aria-current` to the selected meeting, and preserved the document y position at 860 pixels.
 - Browser health: desktop and mobile passes reported zero console errors and zero warnings.
 - Publication integrity: the OSS script continues to exclude `/goal/` and `/next/` routes but now includes the generated `goal-history-*` assets required by the public root page.
+- Production CSS integrity: the first live build exposed a bundle-order conflict where the later global fixed-hero rules overrode equal-specificity long-page rules and locked the document to one viewport; the long-page selectors now include both homepage state classes so they outrank the fixed shell regardless of stylesheet order.
+- Static-build interaction: the actual `dist/` preview reported a 2326-pixel desktop scroll height and reached y 869, while the mobile preview reported a 2414-pixel scroll height and reached y 860 with no broken images or console errors.
 
 ### Automated verification
 
 - `npm test` passed all 62 unit tests, Astro diagnostics with zero errors, warnings, or hints, generation of 20 pages, and the complete build validator.
 - The build validator confirmed byte-identical history-first lower-page output between `/` and `/goal/`.
 - The build validator confirmed 17 events, 51 images, descending chronology, responsive local assets, lazy loading, waveform controls, organization order, legal information, and OSS asset publication.
+- The build validator now requires the higher-specificity long-page selectors that preserve scrolling in production CSS bundles.
 - `git diff --check` completed without whitespace errors.
 
 final result: passed

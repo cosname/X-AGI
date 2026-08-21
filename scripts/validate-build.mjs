@@ -903,6 +903,22 @@ for (const retiredStyle of [
   }
 }
 
+const goalHomeLowerStyles = await readFile(
+  path.resolve('src/styles/goal-home-lower.css'),
+  'utf8',
+);
+for (const expectedSelector of [
+  '.edition-goal-home.edition-goal-home--with-lower',
+  '.edition-2026.edition-goal-home.edition-goal-home--with-lower > main',
+  '.edition-2026.edition-goal-home.edition-goal-home--with-lower .conference-home',
+]) {
+  if (!goalHomeLowerStyles.includes(expectedSelector)) {
+    failures.push(
+      `goal-home-lower.css: long-page override must outrank the fixed hero shell "${expectedSelector}"`,
+    );
+  }
+}
+
 const goalHistoryController = await readFile(
   path.resolve('src/scripts/goal-history-gallery.ts'),
   'utf8',
