@@ -14,7 +14,6 @@ const TERRAIN_COLUMNS = 128;
 
 export type Point = { x: number; y: number };
 export type Rect = { left: number; top: number; right: number; bottom: number };
-export type TreeWindState = { value: number; velocity: number };
 export type DensityComponent = readonly [mean: number, sigma: number, amplitude: number];
 
 export type TerrainLayerDefinition = {
@@ -424,43 +423,6 @@ export const treeInteractionGeometry = (
   };
 };
 
-export const treeWindImpulse = (
-  deltaX: number,
-  deltaY: number,
-  elapsedMilliseconds: number,
-  proximity: number,
-) => {
-  const elapsed = clamp(elapsedMilliseconds, 12, 80);
-  const signedTravel = deltaX + deltaY * -0.18;
-  const pointerVelocity = signedTravel / elapsed;
-  return clamp(pointerVelocity * 0.72 * clamp(proximity, 0, 1), -1, 1);
-};
-
-export const advanceTreeWind = (
-  state: TreeWindState,
-  target: number,
-  deltaSeconds: number,
-  stiffness: number,
-  damping: number,
-): TreeWindState => dampedSpring(
-  state.value,
-  state.velocity,
-  clamp(target, -1, 1),
-  clamp(deltaSeconds, 1 / 240, 0.05),
-  stiffness,
-  damping,
-);
-
-export const treeWindLayerMotion = (depth: number, wind: number) => {
-  const normalizedDepth = clamp(depth, 0, 1);
-  const normalizedWind = clamp(wind, -1, 1);
-  const depthCurve = normalizedDepth * normalizedDepth;
-  return {
-    x: normalizedWind * (0.2 + depthCurve * 8.15),
-    angle: normalizedWind * (0.04 + depthCurve * 0.32),
-  };
-};
-
 export const initializeHeroPixelFields = () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -485,7 +447,6 @@ export const initializeHeroPixelFields = () => {
       left: field.querySelector<HTMLElement>('[data-tree-position="left"]'),
       right: field.querySelector<HTMLElement>('[data-tree-position="right"]'),
     };
-    const rightTreeSway = treePositions.right?.querySelector<HTMLElement>('.hero-pixel-field__tree-sway') ?? null;
     const branchElements = Array.from(field.querySelectorAll<HTMLElement>('[data-tree-branch]'));
     const titleInk = stage.querySelector<HTMLElement>('[data-title-ink]');
     const titleInkSurfaces = titleInk
@@ -525,12 +486,6 @@ export const initializeHeroPixelFields = () => {
     let treePauseRequested = false;
     let treePulsePaused = false;
     let activeTreeFlipPixels = new Set<HTMLElement>();
-    let treeWindState: TreeWindState = { value: 0, velocity: 0 };
-    let treeWindBranchStates = new Map<HTMLElement, TreeWindState>();
-    let treeWindTarget = 0;
-    let treeWindFrameTimestamp = 0;
-    let treeWindPointerTimestamp = 0;
-    let treeWindPointer: Point | null = null;
     let springFrame = 0;
     let resizeFrame = 0;
     let originFrame = 0;
@@ -622,73 +577,7 @@ export const initializeHeroPixelFields = () => {
       element.style.transform = 'translate3d(0,0,0) scale(1)';
     };
 
-    const clearTreeWind = ({ preservePointer = false } = {}) => {
-      rightTreeSway?.style.removeProperty('--tree-wind-sway-x');
-      branchLayouts.forEach(({ element, side }) => {
-        if (side !== 'right') return;
-        element.style.removeProperty('--tree-wind-x');
-        element.style.removeProperty('--tree-wind-angle');
-      });
-      treeWindState = { value: 0, velocity: 0 };
-      treeWindBranchStates = new Map();
-      treeWindTarget = 0;
-      treeWindFrameTimestamp = 0;
-      if (!preservePointer) {
-        treeWindPointerTimestamp = 0;
-        treeWindPointer = null;
-      }
-      field.dataset.treeWind = '0';
-      field.dataset.treeWindActive = 'false';
-    };
-
-    const advanceTreeWindMotion = (timestamp: number) => {
-      const delta = treeWindFrameTimestamp
-        ? Math.min((timestamp - treeWindFrameTimestamp) / 1000, 0.05)
-        : 1 / 60;
-      treeWindFrameTimestamp = timestamp;
-      treeWindTarget *= Math.exp(-delta * 5.4);
-      treeWindState = advanceTreeWind(treeWindState, treeWindTarget * 0.35, delta, 42, 9.2);
-      rightTreeSway?.style.setProperty(
-        '--tree-wind-sway-x',
-        `${(treeWindState.value * 0.15).toFixed(3)}px`,
-      );
-
-      let maximumWind = Math.abs(treeWindState.value);
-      let maximumVelocity = Math.abs(treeWindState.velocity);
-      branchLayouts.forEach(({ element, side, depth }) => {
-        if (side !== 'right') return;
-        const previous = treeWindBranchStates.get(element) ?? { value: 0, velocity: 0 };
-        const next = advanceTreeWind(
-          previous,
-          treeWindTarget,
-          delta,
-          40 - depth * 20,
-          8.8 - depth * 3.9,
-        );
-        treeWindBranchStates.set(element, next);
-        const motion = treeWindLayerMotion(depth, next.value);
-        element.style.setProperty('--tree-wind-x', `${motion.x.toFixed(3)}px`);
-        element.style.setProperty('--tree-wind-angle', `${motion.angle.toFixed(3)}deg`);
-        maximumWind = Math.max(maximumWind, Math.abs(next.value));
-        maximumVelocity = Math.max(maximumVelocity, Math.abs(next.velocity));
-      });
-
-      field.dataset.treeWind = maximumWind.toFixed(3);
-      const settled = (
-        Math.abs(treeWindTarget) < 0.0005
-        && maximumWind < 0.0005
-        && maximumVelocity < 0.003
-      );
-      if (settled) {
-        clearTreeWind({ preservePointer: active });
-        return false;
-      }
-      field.dataset.treeWindActive = 'true';
-      return true;
-    };
-
     const resetBranches = () => {
-      clearTreeWind();
       branchLayouts.forEach(({ element }) => {
         element.style.removeProperty('transform');
         element.dataset.nearby = 'false';
@@ -832,27 +721,6 @@ export const initializeHeroPixelFields = () => {
         field.dataset.treePulsePaused = 'false';
         scheduleTreePulse();
       }
-    };
-
-    const updateTreeWindForPointer = (timestamp: number) => {
-      if (treeInteractionMode !== 'calm' || !rightTreeRect) return;
-      const { branchReach } = treeInteractionGeometry(width, treeInteractionMode);
-      const proximity = 1 - clamp(
-        distanceToRect(pointer, rightTreeRect) / Math.max(branchReach * 1.65, 1),
-        0,
-        1,
-      );
-      if (treeWindPointer && treeWindPointerTimestamp > 0) {
-        const impulse = treeWindImpulse(
-          pointer.x - treeWindPointer.x,
-          pointer.y - treeWindPointer.y,
-          timestamp - treeWindPointerTimestamp,
-          proximity,
-        );
-        treeWindTarget = clamp(treeWindTarget * 0.25 + impulse, -1, 1);
-      }
-      treeWindPointer = pointer;
-      treeWindPointerTimestamp = timestamp;
     };
 
     const applyBranchMotion = (timestamp: number) => {
@@ -1137,11 +1005,8 @@ export const initializeHeroPixelFields = () => {
 
     const pointerTick = (timestamp: number) => {
       pointerFrame = 0;
-      if (!visible || document.hidden || !motionEnabled()) {
-        if (treeInteractionMode === 'calm') clearTreeWind();
-        return;
-      }
-      if (active && pointerDirty) {
+      if (!active || !visible || document.hidden || !motionEnabled()) return;
+      if (pointerDirty) {
         if (terrainEnabled) {
           const next = posteriorForPointer(pointer.x, pointer.y, width, height);
           meanVelocity = 0;
@@ -1150,14 +1015,11 @@ export const initializeHeroPixelFields = () => {
         }
         pointerDirty = false;
       }
-      const branchMoving = treeMotionEnabled
-        ? treeInteractionMode === 'calm'
-          ? advanceTreeWindMotion(timestamp)
-          : active && applyBranchMotion(timestamp)
+      const branchMoving = treeMotionEnabled && treeInteractionMode !== 'calm'
+        ? applyBranchMotion(timestamp)
         : false;
-      if (active) applyTitleInk();
-      else clearTitleInk();
-      if (branchMoving) {
+      applyTitleInk();
+      if (active && branchMoving) {
         pointerFrame = window.requestAnimationFrame(pointerTick);
       }
     };
@@ -1207,14 +1069,9 @@ export const initializeHeroPixelFields = () => {
       active = false;
       pointerDirty = false;
       syncTreePulseForPointer();
+      stopPointerFrame();
       field.dataset.interaction = 'idle';
-      if (treeInteractionMode === 'calm') {
-        treeWindTarget = 0;
-        treeWindPointer = null;
-        treeWindPointerTimestamp = 0;
-        schedulePointerFrame();
-      } else {
-        stopPointerFrame();
+      if (treeInteractionMode !== 'calm') {
         resetBranches();
       }
       clearTitleInk();
@@ -1231,7 +1088,6 @@ export const initializeHeroPixelFields = () => {
       };
       field.dataset.pointerX = pointer.x.toFixed(1);
       field.dataset.pointerY = pointer.y.toFixed(1);
-      updateTreeWindForPointer(latest.timeStamp);
       stopSpring();
       active = true;
       pointerDirty = true;

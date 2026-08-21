@@ -5075,29 +5075,13 @@ button:focus-visible {
 
 .hero-pixel-field--badge .hero-pixel-field__tree-sway {
   filter: saturate(1.05) contrast(1.02);
-  transform: translate3d(var(--tree-wind-sway-x, 0), 0, 0);
-  transform-origin: 73.5% 72%;
-}
-
-.hero-pixel-field--badge [data-tree-branch][data-branch-side='right'] {
-  transform:
-    translate3d(var(--tree-wind-x, 0), 0, 0)
-    rotate(var(--tree-wind-angle, 0deg));
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-root,
 .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-trunk {
   filter: saturate(1.08) contrast(1.08);
-  transform:
-    translate3d(var(--tree-wind-x, 0), 0, 0)
-    rotate(var(--tree-wind-angle, 0deg))
-    scaleX(1.07);
+  transform: scaleX(1.07);
   transform-origin: 73.5% 72%;
-}
-
-.hero-pixel-field--badge[data-tree-wind-active='true'] .hero-pixel-field__tree-sway,
-.hero-pixel-field--badge[data-tree-wind-active='true'] [data-tree-branch][data-branch-side='right'] {
-  will-change: transform;
 }
 
 .hero-pixel-field--badge .hero-pixel-field__tree-branch--right-root .hp,

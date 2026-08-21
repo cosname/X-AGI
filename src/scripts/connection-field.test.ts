@@ -11,9 +11,6 @@ import {
   BASE_POSTERIOR_MEAN,
   gaussianDensity,
   mosaicRippleSample,
-  advanceTreeWind,
-  treeWindImpulse,
-  treeWindLayerMotion,
   posteriorForPointer,
   STATIC_TERRAIN_LAYERS,
   terrainLayerForProfile,
@@ -198,51 +195,6 @@ test('tree ripple uses a broad proximity field around both mosaics', () => {
 
   const normalBrowsingDistance = mosaicRippleSample(240, desktop.rippleRadius, 0.5, 0.7, 1);
   assert.ok(normalBrowsingDistance.proximity > 0);
-});
-
-test('tree wind follows pointer direction and becomes stronger near the tree', () => {
-  const nearRight = treeWindImpulse(18, 0, 16, 1);
-  const nearLeft = treeWindImpulse(-18, 0, 16, 1);
-  const distantRight = treeWindImpulse(18, 0, 16, 0.2);
-
-  assert.ok(nearRight > 0);
-  assert.ok(nearLeft < 0);
-  assert.ok(Math.abs(nearRight) > Math.abs(distantRight));
-  assert.ok(Math.abs(nearRight) <= 1);
-});
-
-test('tree wind gives the crown more travel than the anchored root', () => {
-  const root = treeWindLayerMotion(0.12, 1);
-  const crown = treeWindLayerMotion(1, 1);
-  const reverseCrown = treeWindLayerMotion(1, -1);
-
-  assert.ok(root.x > 0);
-  assert.ok(root.x < 0.4);
-  assert.ok(crown.x > 8);
-  assert.ok(crown.x > root.x * 20);
-  assert.equal(reverseCrown.x, -crown.x);
-  assert.equal(reverseCrown.angle, -crown.angle);
-});
-
-test('tree wind layers retain inertia and settle back to rest', () => {
-  let trunk = { value: 0, velocity: 0 };
-  let crown = { value: 0, velocity: 0 };
-  for (let frame = 0; frame < 14; frame += 1) {
-    trunk = advanceTreeWind(trunk, 0.3, 1 / 60, 38, 8.4);
-    crown = advanceTreeWind(crown, 1, 1 / 60, 20, 4.9);
-  }
-
-  assert.ok(crown.value > trunk.value);
-  assert.ok(crown.velocity > 0);
-
-  for (let frame = 0; frame < 240; frame += 1) {
-    trunk = advanceTreeWind(trunk, 0, 1 / 60, 38, 8.4);
-    crown = advanceTreeWind(crown, 0, 1 / 60, 20, 4.9);
-  }
-
-  assert.ok(Math.abs(trunk.value) < 0.001);
-  assert.ok(Math.abs(crown.value) < 0.001);
-  assert.ok(Math.abs(crown.velocity) < 0.005);
 });
 
 test('masthead particles are deterministic and preserve the text safe zones', () => {
