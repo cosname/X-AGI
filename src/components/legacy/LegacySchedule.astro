@@ -2,11 +2,19 @@
 import { conference2026, type ScheduleDay, type ScheduleSession } from '../../data/conference2026';
 
 const days = conference2026.schedule as readonly ScheduleDay[];
+const program = conference2026.programPreview;
+
+function isPendingChair(name: string) {
+  return name === '待确认';
+}
 ---
 
 <main class="main-content">
   <div class="container custom-container">
-    <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
+    <header class="schedule-intro">
+      <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
+      <p>Full schedule TBD. Current sessions and speakers are listed below.</p>
+    </header>
     <ul class="nav nav-pills schedule-tabs mb-4">
       {days.map((day, index) => (
         <li class="nav-item">
@@ -41,17 +49,17 @@ const days = conference2026.schedule as readonly ScheduleDay[];
                 {session.talks.map((talk) => (
                   <div class:list={['session-item', { 'session-item--reserved': !talk.title }]}>
                     <div class="session-title">
-                      {talk.time && <span class="session-time">{talk.time}</span>}
-                      <span>{talk.title}</span>
+                      <span class:list={['session-time', { 'session-time--pending': !talk.time }]}>
+                        {talk.time || 'Time TBD'}
+                      </span>
+                      <span>{talk.title || 'Talk title TBD'}</span>
                     </div>
-                    {(talk.speaker || talk.affiliation) && (
-                      <div class="session-speaker">
-                        <span>
-                          {talk.speaker}
-                          {talk.affiliation ? ` | ${talk.affiliation}` : ''}
-                        </span>
-                      </div>
-                    )}
+                    <div class:list={['session-speaker', { 'session-speaker--pending': !talk.speaker }]}>
+                      <span>
+                        {talk.speaker || 'Speaker TBD'}
+                        {talk.affiliation ? ` | ${talk.affiliation}` : ''}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -60,5 +68,55 @@ const days = conference2026.schedule as readonly ScheduleDay[];
         </div>
       ))
     )}
+
+    <section class="schedule-confirmed" aria-labelledby="schedule-confirmed-title">
+      <header class="schedule-confirmed__header">
+        <p>SESSIONS &amp; SPEAKERS</p>
+        <h2 id="schedule-confirmed-title">大会专题与嘉宾</h2>
+        <p>Exact dates, times, rooms, and talk titles are TBD.</p>
+      </header>
+
+      {program.sessions.map((session, index) => (
+        <article class="info-card schedule-card schedule-topic-card">
+          <div class="card-header">
+            Session {String(index + 1).padStart(2, '0')} | {session.title}
+          </div>
+          <div class:list={['session-chair', { 'session-chair--pending': isPendingChair(session.chair.name) }]}>
+            {isPendingChair(session.chair.name) ? (
+              'Session Chair TBD'
+            ) : (
+              <>
+                Session Chair | {session.chair.name}
+                {session.chair.affiliation ? ` | ${session.chair.affiliation}` : ''}
+              </>
+            )}
+          </div>
+          <div class="card-body">
+            <div class="session-list">
+              {session.speakers.length > 0 ? (
+                session.speakers.map((speaker) => (
+                  <div class="session-item session-item--reserved">
+                    <div class="session-title">
+                      <span class="session-time session-time--pending">Time TBD</span>
+                      <span>Talk title TBD</span>
+                    </div>
+                    <div class="session-speaker">
+                      <span>
+                        {speaker.name}
+                        {speaker.affiliation ? ` | ${speaker.affiliation}` : ''}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div class="session-item session-item--reserved schedule-topic-card__empty">
+                  <div class="session-title">Speakers TBD</div>
+                </div>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </section>
   </div>
 </main>

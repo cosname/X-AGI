@@ -73,6 +73,46 @@ export const conference2026 = {
     'X-AGI 大会起源于统计之都长期推动的中国 R 会议，本届已是第十九届。迄今，统计之都已联合全国20余所高校与科研机构，在全国14个城市成功举办近50次会议，呈现近2000场演讲，吸引线上线下参会者逾50万人次。',
     '2026 X-AGI 大会由统计之都和FAI（人工智能基础研究）发起，联合清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院、中国商业统计学会人工智能分会共同主办，OScholar、AI Time共同协办，并获得明汯投资、宽德投资、Will、数启寰宇（QuantVerse）和智统数合的大力赞助。',
   ],
+  conferenceOrganization: {
+    committee: {
+      title: '组织委员会',
+      chair: '钟轶伦',
+      members: [
+        '常象宇',
+        '陈思明',
+        '从鑫',
+        '邓柯',
+        '冯凌秉',
+        '胡天阳',
+        '刘军',
+        '刘方辉',
+        '陆一平',
+        '吕晓玲',
+        '马梓业',
+        '邱怡轩',
+        '滕佳烨',
+        '王健桥',
+        '王小宁',
+        '魏太云',
+        '校一皓',
+        '杨朋昆',
+        '杨新宇',
+        '谢天',
+        '许成玮',
+        '张辉帅',
+        '张桐瑞轩',
+        '周峰',
+        '祝武',
+      ],
+      orderNote: '按姓名拼音排序',
+    },
+    secretariat: {
+      title: '大会秘书处',
+      secretaryGeneral: '邱潇锐',
+      members: ['邓欣怡', '黄涵碧', '李芷汀', '田润泽', '王胤博'],
+      orderNote: '按姓名拼音排序',
+    },
+  },
   dates: {
     display: '2026年10月16日至18日',
     compact: '2026.10.16-18',
@@ -126,8 +166,8 @@ export const conference2026 = {
     },
   ],
   programPreview: {
-    status: '持续更新中…',
-    note: '专题与嘉宾名单将随确认持续更新，具体日期与时段以最终日程为准。',
+    status: '持续更新中...',
+    note: '专题与嘉宾名单将持续更新，具体日期与时段以最终日程为准。',
     sessions: [
       {
         title: 'AI + Math & Theory',
@@ -208,7 +248,7 @@ export const conference2026 = {
       {
         title: 'AI Infra',
         chair: { name: '杨朋昆', affiliation: '清华大学' },
-        speakers: [{ name: '陆元伟', affiliation: '阶跃星辰' }],
+        speakers: [],
       },
       {
         title: 'AI4Science',
@@ -318,7 +358,7 @@ export const conference2026 = {
     notes: [
       '完成基础参会信息后，可在报名系统中选择相应报名类型。',
       '在读本科生、硕士生、博士生优先。',
-      '报名海报展即赠专业票。',
+      '报名参加 Rising Stars Poster 即赠专业票。',
     ],
   },
   tickets: {
@@ -345,7 +385,7 @@ export const conference2026 = {
     ],
     notes: [
       '游客票仅包含胸牌权益，专业票包含胸牌、餐券、会员纪念品等权益。',
-      '报名海报展即赠专业票。',
+      '报名参加 Rising Stars Poster 即赠专业票。',
     ],
   },
   audiences: ['在读本科生、硕士生、博士生', '青年研究者', '高校教师', '行业专家', '企业与产业伙伴'],

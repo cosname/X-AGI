@@ -1,5 +1,65 @@
 # Design QA Log
 
+## Vertical Purple Pulse, Hero Sheen, And Header Spacing
+
+### Comparison target
+
+- User motion brief: eligible right-tree tiles should read as vertical scales, pulse from the root toward the crown using only dark-to-light purple fills, and finish the current pulse before restoring when a fine pointer approaches the tree.
+- User title brief: the early pointer-following sheen should return across both `X-AGI` and `大会` with continuous proximity falloff.
+- User navigation brief: the top-right `立即报名` action should sit optically closer to `参会指南`, while the shared fluid capsule must preserve native CTA styling whenever it cannot paint safely.
+- Desktop evidence: `output/design-qa/interaction-refinements/desktop-initial.png`, `desktop-pulse.png`, `desktop-title-sheen.png`, `desktop-tree-paused.png`, and `desktop-full-page.png`.
+- Responsive evidence: `output/design-qa/interaction-refinements/tablet-fine.png`, `tablet-1020x700.png`, `mobile-menu-open.png`, and `mobile-register-route.png`.
+- Capability evidence: `output/design-qa/interaction-refinements/coarse-pointer.png`, `reduced-motion.png`, and `next-isolation.png`.
+- Machine-readable browser evidence: `output/design-qa/interaction-refinements/report.json` records 33 passed assertions with no failures and no browser warnings or errors.
+- Browser CSS viewports: 1440 x 900, 1024 x 800, 1020 x 700, and 390 x 844 at device pixel ratio 1.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, interaction, responsive, lifecycle, or accessibility issues remain for these refinements.
+
+- Tree geometry: the right badge tree exposes 1,326 eligible growth tiles with an emitted source height-to-width ratio of 1.6, while the accepted rendered ratios remain approximately 1.31 after the existing tree transforms.
+- Growth direction: the visible pulse band's median source position moved from 36.99% to 19.90% to 15.82% in the first three browser samples, matching the unit-tested bottom-to-top wave model.
+- Purple-only color: every active browser sample resolved to exactly `rgb(55, 47, 142)`, `rgb(103, 82, 200)`, or `rgb(172, 158, 230)` with no orange, green, or source-pixel color contribution.
+- Tree approach behavior: when the pointer entered the right-tree region, no new tiles joined, every active tile completed its current flip, the active count returned to zero, and the tree remained restored until the pointer left.
+- Tree restart behavior: moving the pointer away cleared the paused state and restarted a fresh pulse with 399 active tiles in the first resumed sample.
+- Title sheen: pointer sweeps across the Latin wordmark, the inter-title gap, and the Chinese title kept both ink surfaces active while their local gradient coordinates advanced continuously with the pointer.
+- Title cleanup: moving outside the title proximity field restored both sheen strengths and radii to zero.
+- Header spacing: at 1440px the visible guide-to-capsule gap measured 30.25px against a 40px neighboring text gap, and at 1024px it measured 14.27px against a 23.96px neighboring text gap.
+- Breakpoint spacing: the capsule retained positive clearance on both sides of the 74rem breakpoint, measuring 14.23px at 1183px and 25.07px at 1185px while preserving the same optical pull relative to the regular navigation gap.
+- Header alignment: repeated inline resizes kept the capsule center within 0.08px of its intended registration target.
+- Input arbitration: keyboard focus retained capsule ownership after the pointer return delay elapsed.
+- Capability fallback: the emulated coarse-pointer desktop hid the fluid capsule, omitted the ready state, and preserved a visible native CTA background and border.
+- Lifecycle: compact-first widening initialized nonzero capsule geometry, and a persisted BFCache return restored a ready capsule with less than 0.01px center error.
+- Accessibility: reduced motion kept the title sheen and tree pulse inactive, while the compact menu exposed every navigation item and the registration action.
+- Isolation: `/next/` retained its grove composition with zero badge growth tiles and zero badge pulse state.
+- Cross-route consistency: the shared header remained initialized on desktop and compact on mobile across about, schedule, poster, guide, and register.
+- Full-page integrity: the published homepage rendered its hero, program preview, organization, registration, and footer sections without horizontal overflow or visible collateral regressions.
+
+### Primary interactions tested
+
+- Sampled multiple pulse phases and verified upward travel, vertical tile geometry, exact computed fill colors, approach-to-rest behavior, held rest, and restart after pointer exit.
+- Swept the pointer across `X`, the hyphen and `AGI` region, the gap, and `大会`, then verified continuous local sheen coordinates and complete cleanup away from the title.
+- Moved the pointer across navigation targets, transferred ownership to keyboard focus before the 880ms return delay, and verified the focused capsule remained centered.
+- Resized repeatedly through 1020px, 1024px, 1183px, 1185px, and 1300px widths and verified current target geometry after every layout change.
+- Loaded compact navigation first at 390 x 844, opened the menu, widened to 1440 x 900, and verified the fluid capsule initialized only after valid geometry existed.
+- Emulated a coarse pointer at 1024 x 800 and reduced motion at 1440 x 900.
+- Navigated away and returned through BFCache, then verified the capsule frame loop and geometry remained responsive.
+- Swept the production routes and the `/next/` isolation route, captured the full published homepage, and checked browser diagnostics.
+
+### Automated verification
+
+- `node --test src/scripts/hero-pixel-field.test.ts src/scripts/navigation-capsule.test.ts src/scripts/header-scroll-state.test.ts` passed 13 focused tests.
+- `npm test` passed 34 unit tests, Astro diagnostics with zero errors or warnings, the production build, all static route generation, and build validation.
+- `git diff --check` completed without whitespace errors before the documentation update.
+
+### Residual test gaps
+
+- Static screenshots cannot fully communicate the temporal feel of the flip, sheen, or capsule spring.
+- Coarse-pointer behavior was verified through Chrome DevTools emulation rather than physical touch hardware.
+- Live state measurements, motion-specific unit tests, responsive screenshots, BFCache restoration, browser diagnostics, and the complete repository gate cover the implementation risks relevant to this handoff.
+
+final result: passed
+
 ## Goal Inner-page Masthead
 
 ### Comparison target
@@ -89,6 +149,117 @@ Previous result: passed.
 首页概率地形的持续移动、页面文字、原有布局和业务链接均保持不变。
 子页橙色光晕只在 `/goal/` 视觉中被液态透镜替代，停放中的 `/next/` 行为没有被改写。
 页面运行日志没有出现错误，构建校验、类型检查与单元测试全部通过。
+
+final result: passed
+
+## Tree Growth Pulse and Registration-Default Navigation
+
+### Comparison target
+
+- User motion brief: the right tree must remain structurally still while colored mosaic scales flip in persistent bottom-to-top growth pulses, and the pointer must locally hold nearby scales in place.
+- User navigation reference: the capsule shown around `首页` must be centered on the label, the same capsule must include the top-right `立即报名`, and inactivity must return it to registration.
+- Default browser evidence: `output/design-qa/tree-growth-nav-cta/default-registration.png`.
+- Local tree-hold evidence: `output/design-qa/tree-growth-nav-cta/tree-pulse-held.png`.
+- State: `/goal/` at scroll position 0 in the local in-app browser.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, interaction, or accessibility issues remain in this focused pass.
+
+- Tree stability: no right-side branch or sway wrapper receives an inline transform, so the complete tree no longer bends or drifts.
+- Growth direction: two staggered pulse fronts travel from the root toward the crown with deterministic per-scale timing variation.
+- Flip character: active scales rotate individually and temporarily blend purple, blue, teal, and restrained orange accents into the existing palette.
+- Persistent motion: the pulse continues while the hero is visible and the document is active, independent of pointer movement.
+- Local hold: the fine pointer freezes only the scales inside a 48px to 78px local radius while the rest of the growth pulse continues.
+- Reduced motion: `prefers-reduced-motion` clears the flip state and preserves the approved static tree.
+- Navigation ownership: one shared liquid-glass capsule now spans every desktop navigation label and the registration action.
+- Default priority: inactivity or pointer exit returns the capsule to `立即报名` after a short pause.
+- Centering: the shared surface uses each target's exact geometric center without edge clamping, removing the previous `首页` offset.
+- Material balance: the shared surface uses a middle-opacity glass treatment between the former navigation outline and the more opaque registration button.
+- Default geometry: the registration capsule width matches the action width exactly and its measured center differs by less than 0.01px.
+
+### Primary interactions tested
+
+- Loaded the local homepage and confirmed the registration capsule is visible by default.
+- Confirmed the right tree has zero whole-branch inline transforms during active scale pulses.
+- Clicked a live trunk scale and measured 57 locally held scales while the remaining pulse continued.
+- Reloaded the page and confirmed the capsule returns to registration.
+- Inspected the browser console and found no runtime errors.
+- Ran Astro diagnostics and whitespace validation successfully.
+
+### Residual test gaps
+
+- Per the requested fast feedback loop, this pass intentionally skips the complete unit, build, and multi-viewport regression suites.
+- Final subjective calibration of pulse density, flip color intensity, and the 880ms return delay is left open for direct user feedback in the local browser.
+
+final result: passed
+
+## Shared Navigation, Schooling Connections, And Calm Tree Motion
+
+### Comparison target
+
+- Source visual truth: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-8ac2554b-0a18-4aea-b6e9-7cd83a025426.png` and the current live navigation captured in `output/design-qa/nav-live-hover-1024x800.png`.
+- Rendered implementation: `output/design-qa/nav-local-hover-1024x800.png`, `output/design-qa/desktop-local-1020x700.png`, `output/design-qa/portrait-wander-390x844.png`, and `output/design-qa/portrait-avoid-390x844.png`.
+- Full-view comparison evidence: `output/design-qa/nav-live-vs-local-hover-comparison.png`.
+- Focused comparison evidence: `output/design-qa/nav-focused-comparison.png`.
+- Browser CSS viewports: 1024 x 800 for the live and local navigation comparison, 1020 x 700 for the desktop composition, and 390 x 844 for the portrait connection field.
+- The live capture contains a persistent scrollbar and therefore records a 1009 x 788 content surface, while the local capture records 1024 x 800.
+- Both navigation states were captured from the same 1024 x 800 CSS viewport at device pixel ratio 1, and the comparison sheet preserves their native pixels without stretching.
+- State: scroll position 0 with the pointer over the `参会指南` navigation item for the live/local comparison, plus separate portrait idle-wander and pointer-avoidance states.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility issues remain for this refinement.
+
+- Navigation geometry: one shared capsule now interpolates continuously across the complete navigation rail and remains clamped inside the rail at narrower desktop widths.
+- At 1024 x 800, the hovered `参会指南` capsule retains a measured 17.9966px gap from the registration action instead of touching it.
+- Navigation motion: hovered labels scale around their centers with no upward translation, and adjacent labels blend their scale while the pointer crosses the space between them.
+- Navigation material: the shared capsule has a transparent background and uses the same radius, border highlights, and shadow language as the registration control.
+- Fonts and typography: navigation labels, conference copy, wordmark typography, metadata, and actions keep their accepted type scale and content.
+- Colors and assets: the established blue-violet palette, paper texture, DOM mosaic tree, and probability terrain remain intact without raster replacement or additional color families.
+- Portrait motion: three deterministic connection flocks drift through the upper, lower-left, and lower-right negative space and locally repel from the pointer.
+- At 390 x 844, idle wander reached a measured 24.18px maximum node displacement, while pointer avoidance reached 38.44px with a 0.985 avoidance response.
+- Desktop tree: the right tree retains its fixed composition while the trunk is more legible and a calm local pixel response plus subtle whole-tree breathing restores motion without returning the earlier broad ripple.
+- In the desktop interaction check, 60 nearby tree pixels responded with a maximum scale delta of 0.041 and no large positional displacement.
+- Responsive behavior: the 1024px inline navigation remains collision-free, and the 390px portrait state keeps the tree hidden while the connected flocks occupy the intentionally open space around the centered copy.
+- Accessibility: the navigation capsule is decorative and hidden from assistive technology, keyboard focus drives the same shared indicator, and all new motion is disabled under `prefers-reduced-motion`.
+- Runtime: browser logs contain no errors or warnings beyond expected Vite connection messages.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the live navigation used separate filled hover capsules that visually touched the registration control at narrower desktop widths and switched discretely between items.
+- Earlier evidence: the left side of `output/design-qa/nav-focused-comparison.png`.
+- Fix: replaced per-link capsules with one transparent shared indicator that interpolates its center and width continuously and clamps to the navigation rail.
+- Post-fix evidence: the right side of `output/design-qa/nav-focused-comparison.png`, where the navigation indicator and registration control have clear separation.
+
+#### Iteration 2
+
+- Earlier finding: P2 the portrait connection motion behaved like isolated grass stems and did not communicate a living network or respond naturally to nearby input.
+- Fix: replaced direct drag transforms with bounded flock motion, slow seeded wander, local pointer avoidance, and spring return behavior.
+- Post-fix evidence: `output/design-qa/portrait-wander-390x844.png` and `output/design-qa/portrait-avoid-390x844.png`, together with the measured wander and avoidance displacements.
+
+#### Iteration 3
+
+- Earlier finding: the stable desktop tree no longer communicated growth through its trunk and had become completely static after the earlier broad ripple was disabled.
+- Fix: strengthened the existing root-to-branch trunk path and restored a restrained local response plus slow whole-tree breathing.
+- Post-fix evidence: `output/design-qa/desktop-local-1020x700.png` and the measured 4.1% maximum local scale change.
+
+### Primary interactions tested
+
+- Moved the pointer across navigation labels and the spaces between them to verify continuous capsule interpolation, label scaling, edge clamping, and CTA clearance.
+- Used keyboard focus on navigation items and verified the shared indicator follows focus without affecting document flow.
+- Loaded the portrait layout at 390 x 844, observed deterministic idle wander, approached the upper flock with the pointer, and verified avoidance plus bounded recovery.
+- Approached the desktop tree and verified the calm response stays local while the trunk, terrain, copy, and navigation remain stationary.
+- Verified all navigation, registration, and schedule destinations remain unchanged.
+- Checked browser runtime logs and found no errors or warnings.
+- Ran 22 unit tests, Astro diagnostics, the production build, route-level build validation, and whitespace validation successfully.
+
+### Residual test gaps
+
+- Static comparison sheets cannot represent the temporal smoothness of navigation interpolation, schooling motion, or tree breathing.
+- Live geometry measurements, state-specific screenshots, interaction metrics, reduced-motion checks, runtime logs, and the complete repository test suite cover the implementation risks relevant to this refinement.
 
 final result: passed
 
@@ -892,5 +1063,412 @@ No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility is
 
 - Static comparison sheets cannot show the continuous probability-terrain motion.
 - Live geometry measurements, same-viewport comparisons, responsive captures, navigation testing, runtime logs, and the complete repository test suite cover the implementation risks relevant to this refinement.
+
+final result: passed
+
+## Vertical-Waist Liquid Navigation Transition
+
+### Comparison target
+
+- Source visual truth: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-3111e014-02c2-4496-a456-27000f3e5727.png` for the reported gap state and `output/design-qa/liquid-capsule/01-gap-baseline.png` for the normalized pre-change implementation.
+- Rejected horizontal-contraction iteration: `output/design-qa/liquid-capsule/02-gap-neck-final.png`.
+- Rendered implementation: `output/design-qa/liquid-capsule/03-gap-vertical-waist.png`.
+- Full-view comparison evidence: `output/design-qa/liquid-capsule/05-full-comparison.png`.
+- Focused comparison evidence: `output/design-qa/liquid-capsule/04-gap-focused-comparison.png`.
+- Browser CSS viewport: 1024 x 800 at device pixel ratio 1.
+- Source and implementation captures both contain 1024 x 800 pixels and use the same route, viewport, scroll position, pointer location, and density.
+- State: `/goal/` at scroll position 0 with the pointer centered in the physical gap between `首页` and `会议简介`.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility issues remain for this refinement.
+
+- Geometry: the indicator preserves its horizontally interpolated width while the top and bottom contours move inward symmetrically through the empty gap.
+- At the gap midpoint, the vertical waist reaches a 0.9991 measured morph weight while the outer lobes retain the complete 35.62px capsule height.
+- Motion continuity: the indicator center tracks the pointer within 0.01px across all five measured gap positions, so the new waist introduces no horizontal snapping.
+- Horizontal sizing remains continuous between the neighboring label sizes rather than collapsing into a narrow bead.
+- The focused comparison shows the original plain capsule on the left and the corrected horizontal dumbbell silhouette on the right.
+- Material: the indicator remains fill-free and uses only its translucent violet edge plus a restrained shadow, preserving the approved transparent glass treatment.
+- Typography: navigation font family, weight, scale, letter spacing, color changes, and centered label scaling remain unchanged.
+- Spacing and layout rhythm: navigation gaps, label padding, header height, registration-action clearance, and breakpoint behavior remain unchanged.
+- Colors and visual tokens: the established violet edge, white highlight balance, and conference palette remain unchanged.
+- Image quality and asset fidelity: no image, logo, texture, tree, or terrain asset changed, and the dynamic outline remains crisp at device pixel ratio 1.
+- Copy and content: all navigation labels, conference copy, destinations, and action text remain unchanged.
+- Accessibility: the shared indicator remains decorative and hidden from assistive technology, keyboard focus still activates it, and reduced-motion users receive the settled geometry without animated interpolation.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the baseline capsule moved continuously but kept a plain rounded outline through empty space, so it read as a sliding pill rather than liquid glass.
+- Earlier evidence: `output/design-qa/liquid-capsule/01-gap-baseline.png` and the left side of the focused comparison.
+- Initial fix: contracted both width and height into a small bead at the gap center.
+- User correction: horizontal contraction changed the wrong axis and risked visible lateral jumping.
+- Rejected evidence: `output/design-qa/liquid-capsule/02-gap-neck-final.png`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the initial correction did not preserve horizontal continuity and did not create the requested top-and-bottom dumbbell waist.
+- Fix: restored the original horizontal interpolation and replaced the rectangular capsule edge with a continuously generated symmetric outline whose upper and lower contours pinch only inside real inter-item gaps.
+- Post-fix evidence: `output/design-qa/liquid-capsule/03-gap-vertical-waist.png` and the right side of `output/design-qa/liquid-capsule/04-gap-focused-comparison.png`.
+
+### Primary interactions tested
+
+- Moved the pointer through 0%, 25%, 50%, 75%, and 100% of the real gap between the first two navigation items.
+- Verified the neck weight evolves smoothly from 0 through the midpoint maximum and returns to 0 at the next label.
+- Verified the indicator center follows the pointer without an observable horizontal jump.
+- Verified the ordinary full capsule returns when the pointer is over either navigation label.
+- Verified the page retains its navigation destinations, registration action, tree, terrain, and responsive layout.
+- Ran 25 unit tests, Astro diagnostics, the production build, route-level validation, and whitespace validation successfully.
+
+### Residual test gaps
+
+- Static comparison sheets cannot fully represent the temporal smoothness of the contour interpolation.
+- Same-viewport captures, five-position geometry sampling, unit coverage for edge and midpoint states, and complete repository checks cover the implementation risks relevant to this refinement.
+
+final result: passed
+
+## Layered Glass Material Restoration
+
+### Comparison target
+
+- Material target: `output/design-qa/liquid-capsule/01-gap-baseline.png`, which records the previously approved transparent glass treatment.
+- Geometry source: `output/design-qa/liquid-capsule/03-gap-vertical-waist.png`, which records the approved vertical-waist outline before material restoration.
+- Rendered implementation: `output/design-qa/liquid-capsule/08-gap-glass-final.png`.
+- Full-view comparison evidence: `output/design-qa/liquid-capsule/10-material-full-comparison.png`.
+- Focused comparison evidence: `output/design-qa/liquid-capsule/09-material-final-comparison.png`.
+- Browser CSS viewport: 1024 x 800 at device pixel ratio 1.
+- All three captures contain 1024 x 800 pixels and use the same route, scroll position, pointer location, and density.
+- State: `/goal/` at scroll position 0 with the pointer centered between `首页` and `会议简介`.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility issues remain for this material restoration.
+
+- Material layering: the final indicator combines a clipped transparent film, 8px backdrop blur, 1.14 saturation, a white upper highlight, a blue-violet lower refraction edge, and two restrained exterior depth shadows.
+- Transparency: the center remains visibly translucent and does not return to the earlier solid button-like fill.
+- Geometry: the approved vertical-waist outline remains unchanged at 70.94 x 34.40px in the measured gap state with a 1.0000 neck weight.
+- Motion: no positioning, width interpolation, waist interpolation, label scaling, or easing value changed during the material restoration.
+- Typography: navigation font family, weight, scale, antialiasing, color transition, and label spacing remain unchanged.
+- Spacing and layout rhythm: header height, navigation gaps, capsule geometry, registration-action clearance, and responsive breakpoints remain unchanged.
+- Colors and visual tokens: the restored film uses the existing white, paper, violet, and deep-violet tokens without adding a new palette.
+- Image quality and asset fidelity: logos, texture, tree, terrain, and all conference imagery remain untouched.
+- Copy and content: navigation labels, links, registration text, and conference content remain unchanged.
+- Accessibility: the indicator remains decorative, keyboard focus continues to activate the same geometry, and reduced-motion behavior remains intact.
+
+### Comparison history
+
+#### Iteration 1
+
+- Earlier finding: P2 the approved dumbbell geometry had only a single translucent outline and therefore read as a line drawing instead of liquid glass.
+- Earlier evidence: `output/design-qa/liquid-capsule/03-gap-vertical-waist.png` and the middle panel of the focused comparison.
+- First fix: restored a lightly clipped backdrop film and layered rim paths.
+- Review result: the 5% film remained too subtle against the nearly uniform paper background.
+- Intermediate evidence: `output/design-qa/liquid-capsule/06-gap-glass-material.png`.
+
+#### Iteration 2
+
+- Earlier finding: P2 the first material pass still lacked enough luminance separation and exterior depth to match the approved glass treatment.
+- Fix: increased the transparent upper film, restored the white and violet inset balance, strengthened backdrop blur, and added clipped exterior depth shadows while keeping the interior transparent.
+- Post-fix evidence: `output/design-qa/liquid-capsule/08-gap-glass-final.png` and the right panel of `output/design-qa/liquid-capsule/09-material-final-comparison.png`.
+
+### Primary interactions tested
+
+- Hovered the gap between the first two navigation items and verified all material layers follow the complete dynamic waist outline.
+- Verified the final computed state contains the layered material marker, 8px backdrop blur, 1.14 saturation, translucent gradient film, and two depth shadows.
+- Verified the capsule geometry, pointer tracking, and neck weight remain identical to the approved motion pass.
+- Verified navigation links, registration action, tree, terrain, and responsive behavior remain unchanged.
+- Ran 25 unit tests, Astro diagnostics, the production build, route-level validation, and whitespace validation successfully.
+
+### Residual test gaps
+
+- Static screenshots cannot fully represent moving backdrop refraction as the capsule crosses textured regions.
+- Focused material comparisons, computed-style inspection, interaction-state checks, and complete repository tests cover the implementation risks relevant to this refinement.
+
+final result: passed
+
+## Shallow Liquid Waist Final Polish
+
+### Comparison target
+
+- User reference: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-cb3128ca-3e94-4a25-a7a4-9687788b484f.png`.
+- Normalized pre-change implementation: `output/design-qa/liquid-capsule/11-waist-depth-before.png`.
+- Rendered implementation: `output/design-qa/liquid-capsule/12-waist-depth-final.png`.
+- Focused before-and-after evidence: `output/design-qa/liquid-capsule/13-waist-depth-focused-comparison.png`.
+- Full-view before-and-after evidence: `output/design-qa/liquid-capsule/14-waist-depth-full-comparison.png`.
+- Browser CSS viewport: 1024 x 800 at device pixel ratio 1.
+- Both captures use `/goal/`, scroll position 0, the same pointer position centered between `首页` and `会议简介`, and the same settled hover duration.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility issues remain for this final polish.
+
+- Geometry: the midpoint indentation changed from 6.53px to 3.09px, reducing the waist depth by 52.6% while preserving the same symmetric liquid contour.
+- Motion: capsule width, position tracking, label scaling, interpolation, spring timing, and pointer behavior remain unchanged.
+- Material: transparent film, refraction rim, backdrop blur, saturation, highlights, shadows, and depth layers remain unchanged.
+- Typography: navigation font family, weight, scale, spacing, and color transitions remain unchanged.
+- Layout: header height, navigation spacing, registration-action clearance, and responsive breakpoints remain unchanged.
+- Color and assets: no palette, logo, texture, tree, terrain, or conference asset changed.
+- Copy and accessibility: all labels, destinations, focus behavior, reduced-motion behavior, and assistive-technology semantics remain unchanged.
+
+### Comparison history
+
+#### Final iteration
+
+- Earlier finding: P2 the upper and lower contours contracted too deeply at the gap midpoint, making the capsule feel sharply pinched instead of gently liquid.
+- Fix: reduced only the maximum vertical waist amplitude while retaining every approved material and motion parameter.
+- Post-fix evidence: `output/design-qa/liquid-capsule/12-waist-depth-final.png` and the right side of `output/design-qa/liquid-capsule/13-waist-depth-focused-comparison.png`.
+
+### Primary interactions tested
+
+- Reproduced the exact midpoint state in the in-app browser before editing.
+- Repeated the same pointer placement after editing and verified the final path at a 3.09px vertical indentation.
+- Visually compared both states at identical viewport, route, density, scroll position, pointer position, and settled duration.
+- Ran 25 unit tests, Astro diagnostics, the production build, route-level validation, and whitespace validation successfully.
+
+### Residual test gaps
+
+- Static evidence cannot represent the complete temporal contour change while crossing the gap.
+- Identical-state browser captures, measured SVG geometry, existing motion tests, and complete repository validation cover the risks introduced by this one-parameter refinement.
+
+final result: passed
+
+## Shared Home Action Capsule
+
+### Comparison target
+
+- User reference: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-add08a4e-4192-4084-b32c-53f851ea66f1.png`.
+- Normalized pre-change implementation: `output/design-qa/home-actions/01-before.png`.
+- Rendered default state: `output/design-qa/home-actions/02-default-final.png`.
+- Rendered schedule-hover state: `output/design-qa/home-actions/03-schedule-hover.png`.
+- Rendered portrait default state: `output/design-qa/home-actions/04-mobile-default.png`.
+- Source-to-default focused comparison: `output/design-qa/home-actions/05-default-source-comparison.png`.
+- Default-to-hover focused comparison: `output/design-qa/home-actions/06-default-hover-focused.png`.
+- Full-view default-to-hover comparison: `output/design-qa/home-actions/07-default-hover-full.png`.
+- Desktop browser CSS viewport: 1024 x 800 at device pixel ratio 1.
+- Portrait browser CSS viewport: 390 x 844 at device pixel ratio 1.
+- The 714 x 276 source was compared with a 714 x 276 normalized implementation crop derived from the 1024 x 800 browser capture.
+- State: `/goal/` at scroll position 0, first with the pointer outside the action row and then with the pointer centered over `大会日程`.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, or accessibility issues remain for this feature.
+
+- Default hierarchy: the capsule rests on `立即报名` after page load and after the pointer leaves the complete action row.
+- Hover interaction: entering `大会日程` moves the same capsule 117.84px to the schedule label, and entering `立即报名` moves it back without creating a second button.
+- Geometry: the desktop capsule keeps its approved 122.10 x 42.40px dimensions in both positions and remains centered on the active label.
+- Motion: the capsule uses one continuous 460ms eased translation and does not alter label layout, font metrics, or click destinations.
+- Material: border, paper transparency, inset highlights, violet depth, shadow, blur, saturation, contrast, and radius match the established registration control.
+- Typography: both action labels retain their accepted font family, weight, size, line height, letter spacing, and color.
+- Spacing and layout rhythm: metadata spacing, action-row gap, text centers, hero copy position, and surrounding negative space remain unchanged.
+- Colors and visual tokens: only the existing paper, violet, and deep-blue tokens are used.
+- Image quality and asset fidelity: the logo, paper texture, mosaic tree, connection field, and probability terrain are untouched.
+- Copy and content: both labels, registration URL, and schedule route remain unchanged.
+- Responsive behavior: at 390 x 844 the capsule remains centered on the 108.88 x 42.40px registration target with no horizontal overflow.
+- Accessibility: the schedule target now has the same 42.40px minimum hit height as registration, focus activates the same shared capsule logic, and reduced-motion users receive an immediate state change.
+- Progressive enhancement: the original registration capsule remains available until the shared capsule is initialized, so the primary action retains its emphasis if scripting is unavailable.
+
+### Comparison history
+
+#### First implementation pass
+
+- The first same-state comparison found no actionable P0, P1, or P2 differences from the supplied default-state reference.
+- The interaction comparison confirmed that one material surface travels between the two existing labels while the default registration hierarchy remains intact.
+- Post-implementation evidence: `output/design-qa/home-actions/02-default-final.png`, `output/design-qa/home-actions/03-schedule-hover.png`, and `output/design-qa/home-actions/06-default-hover-focused.png`.
+
+### Primary interactions tested
+
+- Loaded `/goal/` with the pointer outside the action row and verified the capsule begins on `立即报名`.
+- Moved the pointer onto `大会日程` and verified the capsule settles around the schedule label.
+- Moved the pointer back onto `立即报名` and verified the capsule returns to the primary action.
+- Moved the pointer outside the complete action row and verified the capsule resets to `立即报名`.
+- Resized to 390 x 844 and verified the default action remains centered and the page does not gain horizontal overflow.
+- Verified both original link destinations remain unchanged.
+- Ran 25 unit tests, Astro diagnostics, the production build, route-level validation, and whitespace validation successfully.
+
+### Residual test gaps
+
+- Static images cannot show the complete temporal easing between the two action targets.
+- Matched browser captures, settled-state geometry measurements, pointer round-trip checks, responsive measurements, reduced-motion coverage, and full repository validation cover the risks introduced by this interaction.
+
+final result: passed
+
+## Coherent Wind-Driven Tree Motion
+
+### Comparison target
+
+- User motion brief: the complete right-side tree should bend together like a tree in wind, retain a soft seaweed-like inertia, and return to stillness after pointer movement stops.
+- Normalized pre-change idle state: `output/design-qa/tree-wind/01-before-idle.png`.
+- Normalized pre-change active state: `output/design-qa/tree-wind/02-before-active.png`.
+- Rendered gust state: `output/design-qa/tree-wind/03-after-gust.png`.
+- Rendered settled state: `output/design-qa/tree-wind/04-after-settled.png`.
+- Idle before-and-after evidence: `output/design-qa/tree-wind/05-idle-before-after.png`.
+- Active before-and-after evidence: `output/design-qa/tree-wind/06-active-before-after.png`.
+- Browser CSS viewport: 1024 x 800 at device pixel ratio 1.
+- State: `/goal/` at scroll position 0, with a left-to-right pointer pass across the hero followed by 2.8 seconds without pointer movement.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, responsive, interaction, performance, or accessibility issues remain for this motion refinement.
+
+- Motion model: pointer velocity and direction now create one shared gust instead of a radial point-centered ripple.
+- Structural linkage: the tree root, trunk, inner branches, outer branches, and crown all follow the same directional field with depth-based lag and amplitude.
+- Root stability: during the representative gust the root moved 0.5px while the crown moved 8.5px, preserving the tree-foundation connection.
+- Branch hierarchy: the trunk moved 1px, the middle branch moved 5px, and the crown moved 8.5px in the same direction.
+- Directionality: reversing the pointer pass reversed the crown displacement to -10px while the root remained visually locked.
+- Settling behavior: after pointer movement stops, the crown crosses gently through rest and decays to an exact zero transform within 2.8 seconds.
+- Local ripple removal: active scale-pixel count remains zero throughout the complete wind cycle, so no isolated mosaic blocks pulse independently.
+- Idle behavior: the previous perpetual breathing animation is removed and all inline wind transforms are cleared after settling.
+- Layout and asset fidelity: the approved tree silhouette, main trunk, foundation overlap, terrain, paper texture, logo, typography, header, and action controls remain unchanged.
+- Performance: each animation frame updates one sway wrapper and six branch groups instead of up to hundreds of individual pixel elements.
+- Accessibility: fine-pointer detection and `prefers-reduced-motion` continue to gate the interaction, and reduced-motion users retain the static approved tree.
+
+### Comparison history
+
+#### First implementation pass
+
+- Earlier finding: P1 the response was visually fragmented because nearby mosaic pixels scaled and lifted around the pointer while the complete tree barely moved.
+- Fix: replaced the homepage `calm` ripple path with a three-layer damped wind system for trunk, middle branches, and crown.
+- Calibration: increased the representative crown displacement from 6.5px to 8.5px while keeping the root below 0.5px and the maximum crown travel bounded.
+- Post-fix evidence: `output/design-qa/tree-wind/03-after-gust.png`, `output/design-qa/tree-wind/04-after-settled.png`, and `output/design-qa/tree-wind/06-active-before-after.png`.
+
+### Primary interactions tested
+
+- Reproduced the previous local pixel response before editing and measured the sway wrapper plus every branch group.
+- Moved the pointer left to right near the tree and verified every branch responds in the same direction with increasing amplitude toward the crown.
+- Reversed the pointer direction and verified the tree bends in the opposite direction.
+- Stopped pointer movement and sampled the wind state through the overshoot and full return to rest.
+- Verified no `hp--scale` pixel enters the active state during the wind cycle.
+- Verified the tree returns to the identical static transform state after settling.
+- Verified the 1440 x 900 desktop layout preserves the approved copy-tree separation while the crown moves.
+- Ran 27 unit tests, Astro diagnostics, the production build, route-level validation, and whitespace validation successfully.
+
+### Residual test gaps
+
+- Static screenshots cannot show the complete temporal character of the damped sway.
+- Directional transform measurements, timed decay samples, identical-state browser captures, wide-screen checks, reduced-motion gating, and complete repository validation cover the implementation risks relevant to this interaction.
+
+final result: passed
+
+## Schedule Content Alignment
+
+### Comparison target
+
+- Published homepage source at `https://www.x-agi.cc/`: `output/design-qa/schedule-alignment/03-live-below-fold-1.png` and `output/design-qa/schedule-alignment/04-live-below-fold-2.png`.
+- Published formal schedule before migration: `output/design-qa/schedule-alignment/05-live-schedule-top.png`.
+- Local formal schedule before migration: `output/design-qa/schedule-alignment/02-local-schedule-top.png`.
+- Local formal schedule after migration: `output/design-qa/schedule-alignment/06-local-schedule-aligned-top.jpg` and `output/design-qa/schedule-alignment/07-local-schedule-program.jpg`.
+- Browser CSS viewport: 1440 x 900 at device pixel ratio 1.
+- State: `/goal/schedule/`, first at the schedule overview and then at the start of the topic and guest list.
+
+### Findings
+
+No actionable P0, P1, or P2 content, layout, interaction, or accessibility issues remain for this migration.
+
+- Content ownership: the 13 published topics, Session Chairs, confirmed guests, affiliations, update status, and final-schedule note now appear on the formal schedule route.
+- Information hierarchy: the existing three-day meeting structure remains first, followed by the detailed topic and guest publication surface.
+- Placeholder cleanup: empty report slots no longer create blank rows or tall empty cards before report details have been confirmed.
+- Source consistency: the homepage and schedule route render the same shared program component backed by `conference2026.programPreview`.
+- Route consistency: both `/schedule/` and `/goal/schedule/` use the shared formal schedule implementation.
+- Responsive behavior: the program list collapses to one column at the existing breakpoint, the schedule heading stacks on narrow screens, and the three date tabs become full-width rows on portrait screens.
+- Accessibility: both content groups are labelled regions with unique headings, dates remain buttons, and the guest list retains ordered-list and definition-list semantics.
+
+### Primary interactions tested
+
+- Loaded the published homepage and identified the complete program source below the hero.
+- Loaded the published and local schedule routes and reproduced the missing-program state.
+- Loaded `/goal/schedule/` after implementation and verified all 13 topics and every currently confirmed name are visible.
+- Verified that five schedule cards remain and zero reserved blank talk rows are rendered.
+- Verified the three date tabs still target their corresponding day sections.
+- Ran 27 unit tests, Astro diagnostics, the production build, route-level content validation, and whitespace validation successfully.
+
+### Residual test gaps
+
+- Exact report times, report titles, and room assignments are still intentionally pending in the source data.
+- The formal schedule will populate those fields automatically when confirmed details are added to the corresponding schedule sessions.
+
+final result: passed
+
+## About Page Initiator Recovery
+
+### Comparison target
+
+- Source visual supplied by the client: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-a9f9ad82-cd7b-4dc5-beb6-04fb15414138.png`.
+- Focused implementation capture: `output/design-qa/about-initiators/05-implementation-focused.png`.
+- Combined source and implementation comparison: `output/design-qa/about-initiators/06-reference-vs-focused-implementation.png`.
+- Full implementation context: `output/design-qa/about-initiators/04-implementation-initiators-context.png`.
+- Source image size: 1088 x 1455.
+- Implementation viewport: 1265 x 720.
+- The comparison normalizes both images to 700 pixels wide while preserving aspect ratio and without cropping the source.
+- State: `/goal/about/`, scrolled to the end of the main organizer card where the restored entries appear.
+
+### Findings
+
+No actionable P0, P1, or P2 content, layout, interaction, or accessibility issues remain for this recovery.
+
+- Content placement: 统计之都 and FAI 人工智能基础 now appear at the end of the existing 主办单位 card.
+- Information architecture: the page retains four cards and does not restore a separate 发起方 card.
+- Typography: the recovered content uses the current conference site's established organization-card typography.
+- Spacing and rhythm: the existing organization-item separators, image spacing, and paragraph rhythm are preserved.
+- Colors and tokens: the current 2026 card and logo treatment remains unchanged.
+- Image fidelity: the implementation uses the real `/2026/logos/cos.png` and `/2026/logos/fai.png` assets.
+- Copy fidelity: the complete existing organization descriptions and official links are rendered without placeholders.
+- Intentional adaptation: the standalone 发起方 heading visible in the source screenshot is omitted because the confirmed requirement is to merge these entries into 主办单位.
+
+### Primary interactions tested
+
+- Loaded `/goal/about/` and verified the card order remains 关于会议, 主办单位, 协办单位, and 赞助单位.
+- Verified 统计之都 and FAI 人工智能基础 are the final two organizations in 主办单位.
+- Verified both organization logos load successfully.
+- Verified the 统计之都 and FAI organization links point to their official sites.
+- Verified the page has no horizontal overflow at the captured desktop viewport.
+- Verified the browser console reports no errors or warnings.
+
+### Residual test gaps
+
+- No interaction behavior changed in this recovery.
+
+final result: passed
+
+## Attendee Guide Hotel Offer
+
+### Comparison target
+
+- Source visual supplied by the client: `/var/folders/jt/tl_hrhm575n65jcy0sk0fnr40000gn/T/codex-clipboard-d3a3588e-b6ca-4d24-8a9c-d8a731ef9fc7.png`.
+- Desktop implementation capture: `output/design-qa/guide-hotel-offer/04-desktop-offer.png`.
+- Mobile implementation capture: `output/design-qa/guide-hotel-offer/03-mobile-offer.png`.
+- Combined source and focused implementation comparison: `output/design-qa/guide-hotel-offer/05-source-vs-implementation.png`.
+- Source image dimensions: 552 x 405 pixels.
+- Desktop screenshot dimensions: 1265 x 712 pixels.
+- Desktop browser viewport: 1280 x 720 CSS pixels at device pixel ratio 2.
+- Mobile browser override: 390 x 844 CSS pixels with an effective 375-pixel content width.
+- The combined comparison keeps the source at its native 405-pixel height and scales the focused implementation crop to the same height.
+- State: `/goal/guide/`, scrolled to the 交通与住宿 card and the 住宿 offer section.
+
+### Findings
+
+No actionable P0, P1, or P2 content, layout, responsive, accessibility, or image-fidelity issues remain for this addition.
+
+- Information architecture: the former 即将补充 card is now 交通与住宿, while the accommodation placeholder is replaced by the Friendship Hotel offer.
+- Typography: the offer reuses the current guide page's typography and optical weights, with a compact English eyebrow and a clear Chinese offer title.
+- Spacing and layout rhythm: the desktop card uses a balanced copy and code grid, while the mobile card stacks the code below the booking details without crowding.
+- Colors and tokens: the card uses the existing paper, ink, purple accent, border, and shadow language of the Goal inner pages.
+- Image quality and asset fidelity: the QR-style mini-program code is a lossless 370 x 370 crop of the supplied source with an absolute pixel error of zero.
+- Copy and content: the title, dedicated number 5328460, and valid dates 2026.10.16 through 2026.10.19 are preserved from the supplied source.
+- Accessibility: the code image has descriptive alternative text, the dates use semantic time elements, and the information remains readable without relying on color.
+- Responsive behavior: the 390-pixel mobile override reports equal document and client widths at 375 pixels, with no horizontal overflow.
+- Browser health: the code image loads at its full 370 x 370 natural dimensions and the browser reports no warnings or errors.
+
+### Primary interactions tested
+
+- Loaded `/goal/guide/` before implementation and verified the accommodation area contained only a pending notice.
+- Loaded the updated route and verified the offer title, dedicated number, dates, code image, and scan guidance are present.
+- Verified the old accommodation placeholder is absent.
+- Verified the supplied code remains square, uncropped, and fully visible at desktop and mobile sizes.
+- Verified desktop and mobile responsive states and returned the browser to its default viewport.
+
+### Residual test gaps
+
+- Mini-program code recognition cannot be completed inside the desktop browser and should receive one manual WeChat scan check on a physical phone before publication.
 
 final result: passed

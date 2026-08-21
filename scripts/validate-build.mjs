@@ -272,6 +272,7 @@ for (const group of buildGroups) {
 
     const htmlBytes = (await stat(file)).size;
     const source = await readFile(file, 'utf8');
+    const staticMarkup = source.replace(/<script\b[\s\S]*?<\/script>/gi, '');
     const isDomPixelHomepage = page === ''
       && source.includes('data-hero-pixel-field');
     const htmlBudget = isDomPixelHomepage ? 700_000 : 50_000;
@@ -335,12 +336,12 @@ for (const group of buildGroups) {
     if (
       group.edition.skin === 'goal'
       && (
-        !source.includes('class="site-header"')
-        || !source.includes('/brand/xagi-connect-logo.png')
-        || !source.includes('data-nav-capsule="true"')
-        || !source.includes('data-nav-capsule-target')
-        || source.includes('class="navbar ')
-        || source.includes('/2025/assets/js/script.js')
+        !staticMarkup.includes('class="site-header"')
+        || !staticMarkup.includes('/brand/xagi-connect-logo.png')
+        || !staticMarkup.includes('data-nav-capsule="true"')
+        || !staticMarkup.includes('data-nav-capsule-target')
+        || staticMarkup.includes('class="navbar ')
+        || staticMarkup.includes('/2025/assets/js/script.js')
       )
     ) {
       failures.push(`${route}: goal page must use only the shared 2026 navigation component`);
@@ -348,10 +349,10 @@ for (const group of buildGroups) {
     if (
       group.edition.skin !== 'goal'
       && (
-        source.includes('data-scroll-header="true"')
-        || source.includes('data-nav-capsule="true"')
-        || source.includes('data-nav-capsule-target')
-        || source.includes('data-pointer-effect="ripple"')
+        staticMarkup.includes('data-scroll-header="true"')
+        || staticMarkup.includes('data-nav-capsule="true"')
+        || staticMarkup.includes('data-nav-capsule-target')
+        || staticMarkup.includes('data-pointer-effect="ripple"')
       )
     ) {
       failures.push(`${route}: goal header interaction leaked outside the goal design`);
@@ -384,7 +385,7 @@ for (const group of buildGroups) {
         if (
           !hero.includes('data-visual-composition="badge"')
           || !hero.includes('data-terrain-enabled="true"')
-          || !hero.includes('data-tree-interaction="none"')
+          || !hero.includes('data-tree-interaction="calm"')
           || !hero.includes('data-terrain-profile="tree-foundation"')
         ) {
           failures.push(`${route}: goal homepage must expose the badge composition contract`);
@@ -459,6 +460,12 @@ const officialCopyByRoute = new Map([
     'about/index.html',
     [
       ...conference2026.introduction,
+      conference2026.conferenceOrganization.committee.title,
+      conference2026.conferenceOrganization.committee.chair,
+      ...conference2026.conferenceOrganization.committee.members,
+      conference2026.conferenceOrganization.secretariat.title,
+      conference2026.conferenceOrganization.secretariat.secretaryGeneral,
+      ...conference2026.conferenceOrganization.secretariat.members,
       ...organizationCopy(conference2026.organizers),
       ...organizationCopy(conference2026.coOrganizers),
       ...organizationCopy(conference2026.sponsors),
@@ -489,6 +496,17 @@ const officialCopyByRoute = new Map([
           ]),
         ]),
       ]).filter(Boolean),
+      'Full schedule TBD. Current sessions and speakers are listed below.',
+      'SESSIONS & SPEAKERS',
+      'Exact dates, times, rooms, and talk titles are TBD.',
+      'Time TBD',
+      'Talk title TBD',
+      'Speaker TBD',
+      ...conference2026.programPreview.sessions.flatMap((session) => [
+        session.title,
+        session.chair.name === '待确认' ? 'Session Chair TBD' : session.chair.name,
+        ...session.speakers.map((speaker) => speaker.name),
+      ]),
     ],
   ],
   [
@@ -505,6 +523,19 @@ const officialCopyByRoute = new Map([
       conference2026.poster.deadline.time,
       conference2026.scale.posters,
       conference2026.contact,
+    ],
+  ],
+  [
+    'guide/index.html',
+    [
+      conference2026.venue.scheduleName,
+      conference2026.venue.nameEn,
+      ...conference2026.venue.maps.flatMap((map) => [map.title, map.description]),
+      '交通与住宿',
+      '友谊宾馆 X-AGI 大会专属优惠',
+      '5328460',
+      '2026.10.16',
+      '2026.10.19',
     ],
   ],
   [

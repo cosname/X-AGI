@@ -2,13 +2,17 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
-  connectionDragWeight,
+  connectionAvoidanceWeight,
+  portraitConnectionFlockForNode,
+  schoolingWanderTarget,
 } from './portrait-connection-field.ts';
 import {
   BASE_POSTERIOR_AMPLITUDE,
   BASE_POSTERIOR_MEAN,
   gaussianDensity,
   mosaicRippleSample,
+  advanceTreeWind,
+  treeWindImpulse,
   posteriorForPointer,
   STATIC_TERRAIN_LAYERS,
   terrainLayerForProfile,
@@ -21,12 +25,35 @@ import {
   seedMastheadParticles,
 } from './masthead-pixel-field.ts';
 
-test('connection drag weight is smooth, local, and bounded', () => {
-  assert.equal(connectionDragWeight(0, 160), 1);
-  assert.equal(connectionDragWeight(160, 160), 0);
-  assert.equal(connectionDragWeight(320, 160), 0);
-  assert.ok(connectionDragWeight(40, 160) > connectionDragWeight(100, 160));
-  assert.ok(connectionDragWeight(100, 160) > 0);
+test('connection avoidance is smooth, local, and bounded', () => {
+  assert.equal(connectionAvoidanceWeight(0, 160), 1);
+  assert.equal(connectionAvoidanceWeight(160, 160), 0);
+  assert.equal(connectionAvoidanceWeight(320, 160), 0);
+  assert.ok(connectionAvoidanceWeight(40, 160) > connectionAvoidanceWeight(100, 160));
+  assert.ok(connectionAvoidanceWeight(100, 160) > 0);
+});
+
+test('portrait connection groups preserve the three intended school regions', () => {
+  assert.equal(portraitConnectionFlockForNode(0), 'upper');
+  assert.equal(portraitConnectionFlockForNode(20), 'upper');
+  assert.equal(portraitConnectionFlockForNode(21), 'lower-left');
+  assert.equal(portraitConnectionFlockForNode(27), 'lower-left');
+  assert.equal(portraitConnectionFlockForNode(28), 'lower-right');
+});
+
+test('schooling wander targets are deterministic, bounded, and non-uniform', () => {
+  const first = schoolingWanderTarget('upper', 4);
+  const repeated = schoolingWanderTarget('upper', 4);
+  const next = schoolingWanderTarget('upper', 5);
+  const lower = schoolingWanderTarget('lower-right', 4);
+
+  assert.deepEqual(first, repeated);
+  assert.notDeepEqual(first, next);
+  assert.notDeepEqual(first, lower);
+  [first, next, lower].forEach(({ x, y }) => {
+    assert.ok(x >= -1 && x <= 1);
+    assert.ok(y >= -1 && y <= 1);
+  });
 });
 
 test('gaussian density peaks at its mean', () => {
@@ -153,12 +180,15 @@ test('mosaic ripple scale remains bounded throughout its cycle', () => {
 
 test('tree ripple uses a broad proximity field around both mosaics', () => {
   const direct = treeInteractionGeometry(1280, 'direct');
+  const calm = treeInteractionGeometry(1280, 'calm');
   const narrow = treeInteractionGeometry(320);
   const desktop = treeInteractionGeometry(1280);
   const ultrawide = treeInteractionGeometry(3840);
 
   assert.equal(direct.rippleRadius, 96);
   assert.equal(direct.branchReach, 134.4);
+  assert.ok(calm.rippleRadius < direct.rippleRadius);
+  assert.ok(calm.branchReach < direct.branchReach);
   assert.equal(narrow.rippleRadius, 180);
   assert.ok(desktop.rippleRadius > 350);
   assert.equal(ultrawide.rippleRadius, 380);
@@ -167,6 +197,38 @@ test('tree ripple uses a broad proximity field around both mosaics', () => {
 
   const normalBrowsingDistance = mosaicRippleSample(240, desktop.rippleRadius, 0.5, 0.7, 1);
   assert.ok(normalBrowsingDistance.proximity > 0);
+});
+
+test('tree wind follows pointer direction and becomes stronger near the tree', () => {
+  const nearRight = treeWindImpulse(18, 0, 16, 1);
+  const nearLeft = treeWindImpulse(-18, 0, 16, 1);
+  const distantRight = treeWindImpulse(18, 0, 16, 0.2);
+
+  assert.ok(nearRight > 0);
+  assert.ok(nearLeft < 0);
+  assert.ok(Math.abs(nearRight) > Math.abs(distantRight));
+  assert.ok(Math.abs(nearRight) <= 1);
+});
+
+test('tree wind layers retain inertia and settle back to rest', () => {
+  let trunk = { value: 0, velocity: 0 };
+  let crown = { value: 0, velocity: 0 };
+  for (let frame = 0; frame < 14; frame += 1) {
+    trunk = advanceTreeWind(trunk, 0.3, 1 / 60, 38, 8.4);
+    crown = advanceTreeWind(crown, 1, 1 / 60, 20, 4.9);
+  }
+
+  assert.ok(crown.value > trunk.value);
+  assert.ok(crown.velocity > 0);
+
+  for (let frame = 0; frame < 240; frame += 1) {
+    trunk = advanceTreeWind(trunk, 0, 1 / 60, 38, 8.4);
+    crown = advanceTreeWind(crown, 0, 1 / 60, 20, 4.9);
+  }
+
+  assert.ok(Math.abs(trunk.value) < 0.001);
+  assert.ok(Math.abs(crown.value) < 0.001);
+  assert.ok(Math.abs(crown.velocity) < 0.005);
 });
 
 test('masthead particles are deterministic and preserve the text safe zones', () => {

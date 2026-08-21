@@ -70,6 +70,16 @@ const capsuleNavigation = edition.skin === 'goal';
             ))
           }
         </div>
+        {capsuleNavigation && (
+          <span class="site-nav__fluid-capsule" data-nav-fluid-capsule aria-hidden="true">
+            <svg class="site-nav__fluid-outline" data-nav-fluid-outline focusable="false">
+              <path class="site-nav__fluid-surface"></path>
+              <path class="site-nav__fluid-depth"></path>
+              <path class="site-nav__fluid-rim"></path>
+              <path class="site-nav__fluid-highlight"></path>
+            </svg>
+          </span>
+        )}
         <nav aria-label={`${edition.year} 会议导航`}>
           <ul class="site-nav">
             {navigation.map((item) => (
@@ -89,6 +99,8 @@ const capsuleNavigation = edition.skin === 'goal';
           class="site-header__action capsule-action"
           href={actions.register}
           aria-current={activePage === 'register' ? 'page' : undefined}
+          data-nav-capsule-target={capsuleNavigation ? '' : undefined}
+          data-nav-capsule-default={capsuleNavigation ? '' : undefined}
         >
           立即报名
         </a>
@@ -112,14 +124,326 @@ const capsuleNavigation = edition.skin === 'goal';
 {scrollHeader && <HeaderScrollState />}
 
 <script>
+  import { capsuleGapMorph } from '../scripts/navigation-capsule';
+
   const header = document.querySelector<HTMLElement>('.site-header');
   const navigation = header?.querySelector<HTMLElement>('.site-navigation');
   const toggle = navigation?.querySelector<HTMLButtonElement>('.site-navigation__toggle');
   const panel = navigation?.querySelector<HTMLElement>('.site-navigation__panel');
   const inner = header?.querySelector<HTMLElement>('.site-header__inner');
+  const navCapsule = panel?.querySelector<HTMLElement>('[data-nav-fluid-capsule]');
+  const navCapsuleSvg = navCapsule?.querySelector<SVGSVGElement>('[data-nav-fluid-outline]');
+  const navCapsuleOutlines = navCapsuleSvg
+    ? [...navCapsuleSvg.querySelectorAll<SVGPathElement>('path')]
+    : [];
+  const navTargets = panel
+    ? [...panel.querySelectorAll<HTMLElement>('[data-nav-capsule-target]')]
+    : [];
+  const navDefaultTarget = panel?.querySelector<HTMLElement>('[data-nav-capsule-default]') ?? null;
   const phoneNavigation = window.matchMedia('(max-width: 47.99rem)');
+  const finePointerNavigation = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const reducedNavigationMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  type CapsuleGeometry = {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    opacity: number;
+    neck: number;
+  };
+  type CapsuleTargetGeometry = {
+    element: HTMLElement;
+    center: number;
+    left: number;
+    right: number;
+    settleInset: number;
+    y: number;
+    width: number;
+    height: number;
+  };
+  type CapsuleLayout = {
+    railLeft: number;
+    targets: CapsuleTargetGeometry[];
+  };
+  const capsuleState: CapsuleGeometry & { frame: number } = {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    opacity: 0,
+    neck: 0,
+    frame: 0,
+  };
+  const capsuleTarget: CapsuleGeometry = { ...capsuleState };
+  let capsuleLayout: CapsuleLayout | null = null;
+  let focusedTarget: HTMLElement | null = null;
+  let latestPointerX: number | null = null;
+  let capsuleIdleTimer = 0;
+  let capsulePointerFrame = 0;
+  let capsuleLayoutFrame = 0;
+
+  const setLinkScale = (pointerX: number | null) => {
+    navTargets.forEach((target) => {
+      const geometry = capsuleLayout?.targets.find((candidate) => candidate.element === target);
+      if (pointerX === null || !geometry) {
+        target.style.removeProperty('--nav-capsule-link-scale');
+        return;
+      }
+      const distance = Math.abs(pointerX - geometry.center);
+      const influence = Math.max(0, 1 - distance / Math.max(74, geometry.width * 1.2));
+      const eased = influence * influence * (3 - 2 * influence);
+      target.style.setProperty('--nav-capsule-link-scale', (1 + eased * 0.052).toFixed(4));
+    });
+  };
+
+  const capsuleOutlinePath = (
+    width: number,
+    height: number,
+    neck: number,
+    inset = 1.1,
+  ) => {
+    const left = inset;
+    const right = Math.max(left + 1, width - inset);
+    const top = inset;
+    const bottom = Math.max(top + 1, height - inset);
+    const radius = Math.max(1, (bottom - top) / 2);
+    const middle = (left + right) / 2;
+    const lobeEnd = Math.min(middle - 1, Math.max(left + radius, width * 0.27));
+    const lobeStart = Math.max(middle + 1, Math.min(right - radius, width * 0.73));
+    const bridge = Math.max(2, lobeStart - lobeEnd);
+    const waist = Math.min(height * 0.09, 3.4) * neck;
+    const control = bridge * 0.22;
+    const curve = radius * 0.5522848;
+
+    return [
+      `M ${left + radius} ${top}`,
+      `H ${lobeEnd}`,
+      `C ${lobeEnd + control} ${top} ${middle - control} ${top + waist} ${middle} ${top + waist}`,
+      `C ${middle + control} ${top + waist} ${lobeStart - control} ${top} ${lobeStart} ${top}`,
+      `H ${right - radius}`,
+      `C ${right - radius + curve} ${top} ${right} ${top + radius - curve} ${right} ${top + radius}`,
+      `C ${right} ${bottom - radius + curve} ${right - radius + curve} ${bottom} ${right - radius} ${bottom}`,
+      `H ${lobeStart}`,
+      `C ${lobeStart - control} ${bottom} ${middle + control} ${bottom - waist} ${middle} ${bottom - waist}`,
+      `C ${middle - control} ${bottom - waist} ${lobeEnd + control} ${bottom} ${lobeEnd} ${bottom}`,
+      `H ${left + radius}`,
+      `C ${left + radius - curve} ${bottom} ${left} ${bottom - radius + curve} ${left} ${bottom - radius}`,
+      `C ${left} ${top + radius - curve} ${left + radius - curve} ${top} ${left + radius} ${top}`,
+      'Z',
+    ].join(' ');
+  };
+
+  const renderCapsule = () => {
+    if (!navCapsule) return;
+    navCapsule.style.width = `${capsuleState.width.toFixed(2)}px`;
+    navCapsule.style.height = `${capsuleState.height.toFixed(2)}px`;
+    navCapsule.style.opacity = capsuleState.opacity.toFixed(3);
+    navCapsule.style.setProperty('--nav-capsule-neck', capsuleState.neck.toFixed(4));
+    navCapsule.style.transform = `translate3d(${(capsuleState.x - capsuleState.width / 2).toFixed(2)}px, ${(capsuleState.y - capsuleState.height / 2).toFixed(2)}px, 0)`;
+    if (navCapsuleSvg && navCapsuleOutlines.length > 0) {
+      const outlinePath = capsuleOutlinePath(
+        capsuleState.width,
+        capsuleState.height,
+        capsuleState.neck,
+      );
+      const glassPath = capsuleOutlinePath(
+        capsuleState.width,
+        capsuleState.height,
+        capsuleState.neck,
+        0.08,
+      );
+
+      navCapsuleSvg.setAttribute('viewBox', `0 0 ${capsuleState.width.toFixed(2)} ${capsuleState.height.toFixed(2)}`);
+      navCapsuleOutlines.forEach((outline) => outline.setAttribute('d', outlinePath));
+      navCapsule.style.clipPath = `path("${glassPath}")`;
+      navCapsule.style.setProperty('-webkit-clip-path', `path("${glassPath}")`);
+      navCapsule.dataset.glassMaterial = 'layered';
+    }
+  };
+
+  const animateCapsule = () => {
+    capsuleState.frame = 0;
+    const response = reducedNavigationMotion.matches ? 1 : 0.24;
+    capsuleState.x += (capsuleTarget.x - capsuleState.x) * response;
+    capsuleState.y += (capsuleTarget.y - capsuleState.y) * response;
+    capsuleState.width += (capsuleTarget.width - capsuleState.width) * response;
+    capsuleState.height += (capsuleTarget.height - capsuleState.height) * response;
+    capsuleState.opacity += (capsuleTarget.opacity - capsuleState.opacity) * (reducedNavigationMotion.matches ? 1 : 0.32);
+    capsuleState.neck += (capsuleTarget.neck - capsuleState.neck) * response;
+    renderCapsule();
+
+    const difference = Math.max(
+      Math.abs(capsuleTarget.x - capsuleState.x),
+      Math.abs(capsuleTarget.y - capsuleState.y),
+      Math.abs(capsuleTarget.width - capsuleState.width),
+      Math.abs(capsuleTarget.height - capsuleState.height),
+      Math.abs(capsuleTarget.opacity - capsuleState.opacity) * 100,
+      Math.abs(capsuleTarget.neck - capsuleState.neck) * 100,
+    );
+    if (difference > 0.08) capsuleState.frame = window.requestAnimationFrame(animateCapsule);
+  };
+
+  const scheduleCapsule = () => {
+    if (!capsuleState.frame) capsuleState.frame = window.requestAnimationFrame(animateCapsule);
+  };
 
   const isCompact = () => header?.dataset.navMode === 'compact';
+  const canUseFluidCapsule = () => Boolean(
+    header
+    && panel
+    && navCapsule
+    && navDefaultTarget
+    && navTargets.length > 0
+    && !isCompact()
+    && finePointerNavigation.matches,
+  );
+
+  const measureCapsuleLayout = () => {
+    if (!panel || navTargets.length === 0 || isCompact()) {
+      capsuleLayout = null;
+      return false;
+    }
+    setLinkScale(null);
+    const railBounds = panel.getBoundingClientRect();
+    const targets = navTargets.map((target) => {
+      const bounds = target.getBoundingClientRect();
+      const isAction = target.hasAttribute('data-nav-capsule-default');
+      const settleInset = Math.min(17, Math.max(9, bounds.width * 0.21));
+      return {
+        element: target,
+        center: bounds.left + bounds.width / 2,
+        left: bounds.left,
+        right: bounds.right,
+        settleInset,
+        y: bounds.top + bounds.height / 2 - railBounds.top,
+        width: bounds.width + (isAction ? 0 : 14),
+        height: isAction ? bounds.height : Math.min(bounds.height - 4, 42),
+      };
+    });
+    if (
+      railBounds.width <= 0
+      || targets.some((target) => target.width <= 0 || target.height <= 0)
+    ) {
+      capsuleLayout = null;
+      return false;
+    }
+    capsuleLayout = { railLeft: railBounds.left, targets };
+    return true;
+  };
+
+  const setCapsuleTarget = (pointerX: number, preferredTarget?: HTMLElement) => {
+    if (!navCapsule || !canUseFluidCapsule()) return false;
+    if (!capsuleLayout && !measureCapsuleLayout()) return false;
+    const layout = capsuleLayout;
+    if (!layout) return false;
+    const { railLeft, targets } = layout;
+
+    let left = targets[0];
+    let right = targets[targets.length - 1];
+    for (let index = 0; index < targets.length - 1; index += 1) {
+      if (pointerX <= targets[index + 1].center) {
+        left = targets[index];
+        right = targets[index + 1];
+        break;
+      }
+    }
+    const centerSpan = Math.max(1, right.center - left.center);
+    const centerProgress = Math.max(0, Math.min(1, (pointerX - left.center) / centerSpan));
+    const mix = (start: number, end: number, progress = centerProgress) => (
+      start + (end - start) * progress
+    );
+    const hoveredTarget = preferredTarget
+      ? targets.find((target) => target.element === preferredTarget)
+      : targets.find((target) => (
+        pointerX >= target.left + target.settleInset
+        && pointerX <= target.right - target.settleInset
+      ));
+    const gapSpan = Math.max(1, right.left - left.right);
+    const gapProgress = Math.max(0, Math.min(1, (pointerX - left.right) / gapSpan));
+    const isInGap = !hoveredTarget && pointerX > left.right && pointerX < right.left;
+    const gapMorph = isInGap
+      ? capsuleGapMorph(left, right, gapProgress)
+      : null;
+    const width = gapMorph?.width ?? hoveredTarget?.width ?? mix(left.width, right.width);
+    const height = gapMorph?.height ?? hoveredTarget?.height ?? mix(left.height, right.height);
+    const intendedCenter = hoveredTarget?.center ?? mix(left.center, right.center);
+    const unclampedX = intendedCenter - railLeft;
+
+    capsuleTarget.width = width;
+    capsuleTarget.height = height;
+    capsuleTarget.x = unclampedX;
+    capsuleTarget.y = hoveredTarget?.y ?? mix(left.y, right.y);
+    capsuleTarget.opacity = 1;
+    capsuleTarget.neck = gapMorph?.neck ?? 0;
+    navCapsule.dataset.morphState = isInGap ? 'neck' : 'label';
+    navCapsule.dataset.morphWeight = capsuleTarget.neck.toFixed(3);
+
+    if (capsuleState.opacity < 0.01) {
+      Object.assign(capsuleState, capsuleTarget);
+      renderCapsule();
+    }
+    setLinkScale(intendedCenter);
+    scheduleCapsule();
+    return true;
+  };
+
+  const cancelCapsuleReturn = () => {
+    if (!capsuleIdleTimer) return;
+    window.clearTimeout(capsuleIdleTimer);
+    capsuleIdleTimer = 0;
+  };
+
+  const disableFluidCapsule = () => {
+    header?.removeAttribute('data-nav-capsule-ready');
+    capsuleLayout = null;
+    setLinkScale(null);
+    if (capsuleState.frame) window.cancelAnimationFrame(capsuleState.frame);
+    capsuleState.frame = 0;
+    capsuleState.opacity = 0;
+    capsuleState.neck = 0;
+    capsuleTarget.opacity = 0;
+    capsuleTarget.neck = 0;
+    renderCapsule();
+  };
+
+  const targetCenter = (target: HTMLElement | null) => (
+    capsuleLayout?.targets.find((candidate) => candidate.element === target)?.center ?? null
+  );
+
+  const reconcileCapsule = (preferredTarget = focusedTarget ?? navDefaultTarget) => {
+    if (!canUseFluidCapsule() || !preferredTarget || !measureCapsuleLayout()) {
+      disableFluidCapsule();
+      return false;
+    }
+    const center = targetCenter(preferredTarget);
+    if (center === null || !setCapsuleTarget(center, preferredTarget)) {
+      disableFluidCapsule();
+      return false;
+    }
+    if (header) header.dataset.navCapsuleReady = 'true';
+    return true;
+  };
+
+  const returnCapsuleToDefault = () => {
+    const keyboardTarget = focusedTarget && panel?.contains(document.activeElement)
+      ? focusedTarget
+      : null;
+    const target = keyboardTarget ?? navDefaultTarget;
+    const center = targetCenter(target);
+    setLinkScale(null);
+    if (!target || center === null || !setCapsuleTarget(center, target)) {
+      reconcileCapsule(target);
+    }
+  };
+
+  const scheduleCapsuleReturn = () => {
+    cancelCapsuleReturn();
+    capsuleIdleTimer = window.setTimeout(() => {
+      capsuleIdleTimer = 0;
+      returnCapsuleToDefault();
+    }, 880);
+  };
 
   const syncPanelAccessibility = () => {
     if (!panel) return;
@@ -130,6 +454,16 @@ const capsuleNavigation = edition.skin === 'goal';
     }
   };
 
+  const inlineNavigationFits = () => {
+    if (!inner) return false;
+    setLinkScale(null);
+    const previousDisplay = navCapsule?.style.display ?? '';
+    if (navCapsule) navCapsule.style.display = 'none';
+    const fits = inner.scrollWidth <= inner.clientWidth + 1;
+    if (navCapsule) navCapsule.style.display = previousDisplay;
+    return fits;
+  };
+
   const syncNavMode = () => {
     if (!header || !inner) return;
     const previous = header.dataset.navMode;
@@ -137,14 +471,11 @@ const capsuleNavigation = edition.skin === 'goal';
       header.dataset.navMode = 'compact';
     } else {
       header.dataset.navMode = 'inline';
-      if (inner.scrollWidth > inner.clientWidth + 1) {
-        header.dataset.navMode = 'compact';
-      }
+      if (!inlineNavigationFits()) header.dataset.navMode = 'compact';
     }
-    if (previous === 'compact' && header.dataset.navMode !== 'compact') {
-      closeNavigation();
-      return;
-    }
+    if (previous !== header.dataset.navMode) closeNavigation();
+    if (isCompact()) disableFluidCapsule();
+    else capsuleLayout = null;
     syncPanelAccessibility();
   };
 
@@ -168,14 +499,35 @@ const capsuleNavigation = edition.skin === 'goal';
     if (restoreFocus) toggle?.focus();
   };
 
+  const scheduleHeaderLayoutSync = () => {
+    if (capsuleLayoutFrame) return;
+    capsuleLayoutFrame = window.requestAnimationFrame(() => {
+      capsuleLayoutFrame = 0;
+      syncNavMode();
+      if (canUseFluidCapsule()) reconcileCapsule();
+      else disableFluidCapsule();
+    });
+  };
+
+  const schedulePointerProcessing = () => {
+    if (capsulePointerFrame) return;
+    capsulePointerFrame = window.requestAnimationFrame(() => {
+      capsulePointerFrame = 0;
+      if (latestPointerX === null || focusedTarget || !canUseFluidCapsule()) return;
+      if (!capsuleLayout && !measureCapsuleLayout()) {
+        disableFluidCapsule();
+        return;
+      }
+      if (setCapsuleTarget(latestPointerX)) {
+        if (header) header.dataset.navCapsuleReady = 'true';
+        scheduleCapsuleReturn();
+      }
+    });
+  };
+
   toggle?.addEventListener('click', () => {
     if (navigation?.hasAttribute('data-open')) closeNavigation();
     else openNavigation();
-  });
-
-  phoneNavigation.addEventListener('change', () => {
-    closeNavigation();
-    syncNavMode();
   });
 
   document.addEventListener('keydown', (event) => {
@@ -200,11 +552,73 @@ const capsuleNavigation = edition.skin === 'goal';
     }
   });
 
+  panel?.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'touch' || !finePointerNavigation.matches) return;
+    latestPointerX = event.clientX;
+    schedulePointerProcessing();
+  }, { passive: true });
+  panel?.addEventListener('pointerleave', () => {
+    latestPointerX = null;
+    if (capsulePointerFrame) window.cancelAnimationFrame(capsulePointerFrame);
+    capsulePointerFrame = 0;
+    cancelCapsuleReturn();
+    returnCapsuleToDefault();
+  }, { passive: true });
+  navTargets.forEach((target) => {
+    target.addEventListener('focus', () => {
+      focusedTarget = target;
+      latestPointerX = null;
+      cancelCapsuleReturn();
+      if (capsulePointerFrame) window.cancelAnimationFrame(capsulePointerFrame);
+      capsulePointerFrame = 0;
+      const center = targetCenter(target);
+      if (center === null || !setCapsuleTarget(center, target)) {
+        reconcileCapsule(target);
+      }
+    });
+    target.addEventListener('blur', () => {
+      window.queueMicrotask(() => {
+        const nextFocusedTarget = navTargets.find((candidate) => candidate === document.activeElement) ?? null;
+        focusedTarget = nextFocusedTarget;
+        if (nextFocusedTarget) {
+          const center = targetCenter(nextFocusedTarget);
+          if (center === null || !setCapsuleTarget(center, nextFocusedTarget)) {
+            reconcileCapsule(nextFocusedTarget);
+          }
+          return;
+        }
+        returnCapsuleToDefault();
+      });
+    });
+  });
+
   if (inner) {
-    const resizeObserver = new ResizeObserver(() => syncNavMode());
+    const resizeObserver = new ResizeObserver(scheduleHeaderLayoutSync);
     resizeObserver.observe(inner);
   }
-  document.fonts?.ready.then(syncNavMode).catch(() => undefined);
-  window.addEventListener('pagehide', () => closeNavigation());
-  syncNavMode();
+  phoneNavigation.addEventListener('change', () => {
+    closeNavigation();
+    scheduleHeaderLayoutSync();
+  });
+  finePointerNavigation.addEventListener('change', scheduleHeaderLayoutSync);
+  reducedNavigationMotion.addEventListener('change', scheduleHeaderLayoutSync);
+  document.fonts?.ready.then(scheduleHeaderLayoutSync).catch(() => undefined);
+  document.fonts?.addEventListener('loadingdone', scheduleHeaderLayoutSync);
+  window.addEventListener('pagehide', () => {
+    closeNavigation();
+    latestPointerX = null;
+    cancelCapsuleReturn();
+    if (capsulePointerFrame) window.cancelAnimationFrame(capsulePointerFrame);
+    capsulePointerFrame = 0;
+    if (capsuleLayoutFrame) window.cancelAnimationFrame(capsuleLayoutFrame);
+    capsuleLayoutFrame = 0;
+    disableFluidCapsule();
+  });
+  window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return;
+    focusedTarget = navTargets.find((candidate) => candidate === document.activeElement) ?? null;
+    capsuleLayout = null;
+    scheduleHeaderLayoutSync();
+  });
+  scheduleHeaderLayoutSync();
 </script>

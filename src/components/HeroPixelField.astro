@@ -14,7 +14,7 @@ import {
 } from '../scripts/hero-pixel-field';
 
 interface Props {
-  interactionMode?: 'none' | 'direct' | 'wide';
+  interactionMode?: 'none' | 'direct' | 'wide' | 'calm';
   composition?: 'grove' | 'badge';
 }
 
@@ -50,11 +50,25 @@ const artboardHeight = pixelData.artboard.height;
 const shapeUnit = pixelData.artboard.width / 128;
 const terrainProfile = composition === 'badge' ? 'tree-foundation' : 'default';
 
+const GROWTH_PIXEL_ASPECT_RATIO = 1.6;
+
 const percentage = (value: number, basis: number) => `${((value / basis) * 100).toFixed(4)}%`;
 const isScalePixel = ([, , size, , alphaIndex]: PixelRecord) => size >= 3 && alphaIndex >= 10;
-const pixelStyle = ([x, y]: PixelRecord, width: number) => (
-  `left:${percentage(x, width)};top:${percentage(y, artboardHeight)}`
+const isGrowthPixel = (record: PixelRecord, branch: TreeBranch) => (
+  composition === 'badge' && branch.side === 'right' && isScalePixel(record)
 );
+const pixelHeight = (record: PixelRecord, branch: TreeBranch) => (
+  record[2] * (isGrowthPixel(record, branch) ? GROWTH_PIXEL_ASPECT_RATIO : 1)
+);
+const pixelStyle = (record: PixelRecord, width: number, branch: TreeBranch) => {
+  const [x, y, size] = record;
+  const height = pixelHeight(record, branch);
+  const top = y - (height - size) / 2;
+  const heightToken = isGrowthPixel(record, branch)
+    ? `;--pixel-h:${percentage(height, artboardHeight)}`
+    : '';
+  return `left:${percentage(x, width)};top:${percentage(top, artboardHeight)}${heightToken}`;
+};
 const scalePixelClass = (record: PixelRecord, branch: TreeBranch) => {
   if (!isScalePixel(record)) return '';
   const [x, y, size] = record;
@@ -62,7 +76,8 @@ const scalePixelClass = (record: PixelRecord, branch: TreeBranch) => {
   const centerY = y + size / 2;
   const originX = centerX >= branch.anchorX ? 0 : 1;
   const originY = centerY >= branch.anchorY ? 0 : 1;
-  return ` hp--scale hp--origin-${originX}${originY}`;
+  const growthClass = isGrowthPixel(record, branch) ? ' hp--growth-scale' : '';
+  return ` hp--scale hp--origin-${originX}${originY}${growthClass}`;
 };
 const blockSizes = Array.from(new Set([
   ...pixelData.left.map((record) => record[2]),
@@ -218,7 +233,7 @@ const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
                 {branch.records.map((record) => (
                   <i
                     class={`hp t${record[3]} a${record[4]} s${record[2]}${scalePixelClass(record, branch)}`}
-                    style={pixelStyle(record, leftWidth)}
+                    style={pixelStyle(record, leftWidth, branch)}
                   ></i>
                 ))}
               </span>
@@ -247,7 +262,8 @@ const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
               {branch.records.map((record) => (
                 <i
                   class={`hp t${record[3]} a${record[4]} s${record[2]}${scalePixelClass(record, branch)}`}
-                  style={pixelStyle(record, rightWidth)}
+                  style={pixelStyle(record, rightWidth, branch)}
+                  data-pixel-source-height={isGrowthPixel(record, branch) ? pixelHeight(record, branch) : undefined}
                 ></i>
               ))}
             </span>

@@ -2,6 +2,7 @@
 import { conference2026 } from '../../data/conference2026';
 import hotelPlan from '../../assets/2026/venue/beijing-friendship-hotel-plan.jpg';
 import palaceFloor from '../../assets/2026/venue/friendship-palace-floor-2.jpg';
+import hotelOfferCode from '../../assets/2026/venue/friendship-hotel-xagi-offer-code.png';
 
 const maps = [
   {
@@ -52,7 +53,7 @@ const maps = [
     </div>
 
     <div class="info-card">
-      <div class="card-header">即将补充</div>
+      <div class="card-header">交通与住宿</div>
       <div class="card-body">
         <div class="service-section">
           <h4>交通</h4>
@@ -62,9 +63,42 @@ const maps = [
         </div>
         <div class="service-section">
           <h4>住宿</h4>
-          <ul>
-            <li>推荐住宿与预订说明待发布</li>
-          </ul>
+          <div class="hotel-offer-card">
+            <div class="hotel-offer-card__copy">
+              <p class="hotel-offer-card__eyebrow">BEIJING FRIENDSHIP HOTEL</p>
+              <h5>友谊宾馆 X-AGI 大会专属优惠</h5>
+              <p class="hotel-offer-card__description">
+                微信扫码进入友谊宾馆小程序，查看大会期间专属预订信息。
+              </p>
+              <dl class="hotel-offer-card__details">
+                <div>
+                  <dt>专属编号</dt>
+                  <dd>5328460</dd>
+                </div>
+                <div>
+                  <dt>适用日期</dt>
+                  <dd>
+                    <time datetime="2026-10-16">2026.10.16</time>
+                    <span aria-hidden="true">-</span>
+                    <time datetime="2026-10-19">2026.10.19</time>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <figure class="hotel-offer-card__code">
+              <div class="hotel-offer-card__code-frame">
+                <img
+                  src={hotelOfferCode.src}
+                  alt="友谊宾馆 X-AGI 大会专属优惠微信小程序码"
+                  width="370"
+                  height="370"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <figcaption>微信扫码查看专属优惠</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
     </div>

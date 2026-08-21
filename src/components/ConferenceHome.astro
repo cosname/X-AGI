@@ -26,7 +26,7 @@ const badgeHero = edition.skin === 'goal';
   >
     <div class="conference-hero__art" aria-hidden="true">
       <HeroPixelField
-        interactionMode={badgeHero ? 'none' : 'direct'}
+        interactionMode={badgeHero ? 'calm' : 'direct'}
         composition={badgeHero ? 'badge' : 'grove'}
       />
     </div>
@@ -35,14 +35,14 @@ const badgeHero = edition.skin === 'goal';
       <div class="conference-hero__copy">
         <h1 id="conference-title" data-connection-anchor="title" data-connection-exclusion>
           <span class="conference-hero__year">2026</span>
-          <span class="conference-hero__name" data-title-ink={badgeHero ? undefined : ''}>
+          <span class="conference-hero__name" data-title-ink>
             <span
               class="conference-hero__wordmark conference-hero__ink"
-              data-title-ink-surface={badgeHero ? undefined : ''}
+              data-title-ink-surface
             >X-AGI</span>
             <em
               class="conference-hero__title-zh conference-hero__ink"
-              data-title-ink-surface={badgeHero ? undefined : ''}
+              data-title-ink-surface
             >大会</em>
           </span>
         </h1>
@@ -54,16 +54,28 @@ const badgeHero = edition.skin === 'goal';
             <time datetime={conference2026.dates.start}>{conference2026.dates.display}</time>
             <span>{conference2026.venue.name}</span>
           </p>
-          <div class="conference-hero__actions" data-connection-exclusion>
+          <div
+            class="conference-hero__actions"
+            data-connection-exclusion
+            data-hero-action-switcher={badgeHero ? '' : undefined}
+          >
+            {badgeHero && (
+              <span class="conference-hero__action-capsule" aria-hidden="true"></span>
+            )}
             <a
               class="conference-hero__register capsule-action"
               href={conference2026.registration.url}
               target="_blank"
               rel="noopener noreferrer"
+              data-hero-action-target={badgeHero ? 'register' : undefined}
             >
               立即报名
             </a>
-            <a class="conference-hero__schedule" href={actions.schedule}>
+            <a
+              class="conference-hero__schedule"
+              href={actions.schedule}
+              data-hero-action-target={badgeHero ? 'schedule' : undefined}
+            >
               大会日程
             </a>
           </div>
@@ -166,3 +178,68 @@ const badgeHero = edition.skin === 'goal';
     </div>
   )}
 </div>
+
+<script>
+  const actionSwitchers = document.querySelectorAll<HTMLElement>('[data-hero-action-switcher]');
+
+  actionSwitchers.forEach((switcher) => {
+    if (switcher.dataset.actionCapsuleInitialized === 'true') return;
+    switcher.dataset.actionCapsuleInitialized = 'true';
+
+    const register = switcher.querySelector<HTMLElement>('[data-hero-action-target="register"]');
+    const targets = Array.from(
+      switcher.querySelectorAll<HTMLElement>('[data-hero-action-target]'),
+    );
+    if (!register || targets.length < 2) return;
+
+    let activeTarget = register;
+
+    const syncCapsule = () => {
+      const switcherBounds = switcher.getBoundingClientRect();
+      const registerBounds = register.getBoundingClientRect();
+      const targetBounds = activeTarget.getBoundingClientRect();
+      const capsuleX = targetBounds.left - switcherBounds.left
+        + (targetBounds.width - registerBounds.width) / 2;
+
+      switcher.style.setProperty('--hero-action-capsule-x', `${capsuleX}px`);
+      switcher.style.setProperty(
+        '--hero-action-capsule-y',
+        `${registerBounds.top - switcherBounds.top}px`,
+      );
+      switcher.style.setProperty('--hero-action-capsule-width', `${registerBounds.width}px`);
+      switcher.style.setProperty('--hero-action-capsule-height', `${registerBounds.height}px`);
+    };
+
+    const activate = (target: HTMLElement) => {
+      activeTarget = target;
+      switcher.dataset.heroActionActive = target.dataset.heroActionTarget ?? 'register';
+      syncCapsule();
+    };
+
+    targets.forEach((target) => {
+      target.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'touch') return;
+        activate(target);
+      });
+      target.addEventListener('focus', () => activate(target));
+    });
+
+    switcher.addEventListener('pointerleave', () => activate(register));
+    switcher.addEventListener('focusout', () => {
+      window.requestAnimationFrame(() => {
+        if (!switcher.contains(document.activeElement)) activate(register);
+      });
+    });
+
+    const resizeObserver = new ResizeObserver(syncCapsule);
+    resizeObserver.observe(switcher);
+    targets.forEach((target) => resizeObserver.observe(target));
+
+    window.requestAnimationFrame(() => {
+      activate(register);
+      switcher.dataset.actionCapsuleReady = 'true';
+    });
+
+    window.addEventListener('pagehide', () => resizeObserver.disconnect(), { once: true });
+  });
+</script>
