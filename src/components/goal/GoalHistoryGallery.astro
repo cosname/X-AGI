@@ -1,0 +1,73 @@
+---
+import { conference2026 } from '../../data/conference2026';
+import '../../styles/goal-history.css';
+
+interface Props {
+  history: typeof conference2026.history;
+}
+
+const { history } = Astro.props;
+---
+
+<div class="goal-gallery" data-history-gallery>
+  <div class="goal-gallery__header">
+    <div>
+      <p>ARCHIVE / {history.gallery.length} MOMENTS</p>
+      <strong>沿着现场，回看连接如何发生</strong>
+    </div>
+    <div class="goal-gallery__controls">
+      <span aria-live="polite" aria-atomic="true" data-gallery-status>
+        第 1 张，共 {history.gallery.length} 张
+      </span>
+      <button type="button" aria-label="查看上一张历史照片" data-gallery-previous>上一张</button>
+      <button type="button" aria-label="查看下一张历史照片" data-gallery-next>下一张</button>
+    </div>
+  </div>
+
+  <div
+    class="goal-gallery__viewport"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="历届大会现场"
+    tabindex="0"
+    data-gallery-viewport
+  >
+    <div class="goal-gallery__track">
+      {history.gallery.map((item, index) => (
+        <figure
+          class="goal-gallery__slide"
+          aria-label={`第 ${index + 1} 张，共 ${history.gallery.length} 张`}
+          data-gallery-slide
+          data-gallery-active={index === 0 ? '' : undefined}
+        >
+          <div class="goal-gallery__image">
+            <img
+              src={item.image}
+              alt={item.alt}
+              width={item.width}
+              height={item.height}
+              loading="lazy"
+              decoding="async"
+            />
+            <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          </div>
+          <figcaption>
+            <p><time>{item.year}</time><span>{item.location}</span></p>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.caption}</p>
+            </div>
+            <a
+              href={item.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${item.title}的资料来源（新窗口）`}
+              tabindex={index === 0 ? 0 : -1}
+              data-gallery-source
+            >资料来源</a>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</div>

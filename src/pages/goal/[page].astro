@@ -4,7 +4,7 @@ import Goal2026Layout from '../../layouts/Goal2026Layout.astro';
 import MastheadPixelField from '../../components/MastheadPixelField.astro';
 import LegacyInnerPage from '../../components/legacy/LegacyInnerPage.astro';
 import LegacyAbout from '../../components/legacy/LegacyAbout.astro';
-import LegacySchedule from '../../components/legacy/LegacySchedule.astro';
+import GoalSchedulePreview from '../../components/goal/GoalSchedulePreview.astro';
 import LegacyPoster from '../../components/legacy/LegacyPoster.astro';
 import LegacyGuide from '../../components/legacy/LegacyGuide.astro';
 import LegacyRegister from '../../components/legacy/LegacyRegister.astro';
@@ -39,8 +39,8 @@ const copy = currentEditionPageCopy(page, undefined, goalDesignEdition);
     <figure slot="art" class="goal-page-header-art" aria-hidden="true">
       <MastheadPixelField pointerEffect="ripple" />
     </figure>
-    {page === 'about' && <LegacyAbout />}
-    {page === 'schedule' && <LegacySchedule />}
+    {page === 'about' && <LegacyAbout logoSurface="goal" />}
+    {page === 'schedule' && <GoalSchedulePreview />}
     {page === 'poster' && <LegacyPoster />}
     {page === 'guide' && <LegacyGuide />}
     {page === 'register' && <LegacyRegister />}

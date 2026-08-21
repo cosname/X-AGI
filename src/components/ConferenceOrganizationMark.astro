@@ -1,0 +1,86 @@
+---
+import type { Organization } from '../data/conference2026';
+import {
+  partnerLogoForName,
+  type PartnerLogoSurface,
+} from '../data/legacy-partner-assets';
+
+interface Props {
+  organization: Organization;
+  presentation?: 'logo' | 'card';
+  surface?: PartnerLogoSurface;
+}
+
+const {
+  organization,
+  presentation = 'logo',
+  surface = 'published',
+} = Astro.props;
+const logo = partnerLogoForName(organization.name, surface);
+---
+
+{presentation === 'card' ? (
+  organization.url ? (
+    <a href={organization.url} target="_blank" rel="noopener noreferrer">
+      <span class="goal-partners__logo" aria-hidden="true">
+        {logo ? (
+          <img
+            src={logo.src}
+            alt=""
+            height="44"
+            loading="lazy"
+            decoding="async"
+            class={logo.className}
+          />
+        ) : (
+          <span>{organization.name}</span>
+        )}
+      </span>
+      <span class="goal-partners__name">{organization.name}</span>
+    </a>
+  ) : (
+    <div>
+      <span class="goal-partners__logo" aria-hidden="true">
+        {logo ? (
+          <img
+            src={logo.src}
+            alt=""
+            height="44"
+            loading="lazy"
+            decoding="async"
+            class={logo.className}
+          />
+        ) : (
+          <span>{organization.name}</span>
+        )}
+      </span>
+      <span class="goal-partners__name">{organization.name}</span>
+    </div>
+  )
+) : organization.url ? (
+  <a href={organization.url} target="_blank" rel="noopener noreferrer">
+    {logo ? (
+      <img
+        src={logo.src}
+        alt={organization.name}
+        height="36"
+        loading="lazy"
+        decoding="async"
+        class={logo.className}
+      />
+    ) : (
+      <span class="conference-partners__logo-fallback">{organization.name}</span>
+    )}
+  </a>
+) : logo ? (
+  <img
+    src={logo.src}
+    alt={organization.name}
+    height="36"
+    loading="lazy"
+    decoding="async"
+    class={logo.className}
+  />
+) : (
+  <span class="conference-partners__logo-fallback">{organization.name}</span>
+)}

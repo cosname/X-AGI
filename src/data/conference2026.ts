@@ -14,8 +14,11 @@ export type ScheduleTalk = {
   slides?: string;
 };
 
+export type ScheduleCategory = 'arrival' | 'keynote' | 'parallel' | 'poster';
+
 export type ScheduleSession = {
   id: string;
+  category: ScheduleCategory;
   period: string;
   title?: string;
   venue?: string;
@@ -73,6 +76,75 @@ export const conference2026 = {
     'X-AGI 大会起源于统计之都长期推动的中国 R 会议，本届已是第十九届。迄今，统计之都已联合全国20余所高校与科研机构，在全国14个城市成功举办近50次会议，呈现近2000场演讲，吸引线上线下参会者逾50万人次。',
     '2026 X-AGI 大会由统计之都和FAI（人工智能基础研究）发起，联合清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院、中国商业统计学会人工智能分会共同主办，OScholar、AI Time共同协办，并获得明汯投资、宽德投资、Will、数启寰宇（QuantVerse）和智统数合的大力赞助。',
   ],
+  history: {
+    eyebrow: 'FROM CHINA-R TO X-AGI',
+    title: '一条持续生长的学术连接',
+    summary:
+      'X-AGI 延续中国 R 会议自 2008 年开始的开放交流传统，让统计、数据科学与人工智能研究者在真实现场中交换方法、问题与新的合作可能。',
+    stats: [
+      { value: '19', label: '届学术传承' },
+      { value: '14', label: '座城市' },
+      { value: '近 50', label: '场会议' },
+      { value: '50万+', label: '线上线下参与' },
+    ],
+    gallery: [
+      {
+        year: '2011',
+        location: '北京 · 中国人民大学',
+        title: '从一场会议开始连接',
+        caption: '第四届中国 R 语言会议，与会者在会场外合影。',
+        image: '/2026/history/china-r-2011-beijing-group.webp',
+        width: 1600,
+        height: 864,
+        alt: '2011 年第四届中国 R 语言会议北京会场与会者合影',
+        sourceUrl: 'https://cosx.org/2011/05/4th-china-r-beijing-summary/',
+      },
+      {
+        year: '2014',
+        location: '北京 · 中国人民大学',
+        title: '讨论发生在同一个现场',
+        caption: '第七届中国 R 语言会议圆桌讨论，观点在台上与台下持续交换。',
+        image: '/2026/history/china-r-2014-beijing-discussion.webp',
+        width: 1024,
+        height: 680,
+        alt: '2014 年第七届中国 R 语言会议圆桌讨论现场',
+        sourceUrl: 'https://cosx.org/2014/06/7th-china-r-beijing-summary/',
+      },
+      {
+        year: '2017',
+        location: '合肥 · 中国科学技术大学',
+        title: '把问题带到会场',
+        caption: '第十届中国 R 会议，参会者在会场阅读会议手册。',
+        image: '/2026/history/china-r-2017-hefei-audience.webp',
+        width: 918,
+        height: 574,
+        alt: '2017 年第十届中国 R 会议参会者阅读会议手册',
+        sourceUrl: 'https://cosx.org/2017/07/10th-china-r-hefei-summary/',
+      },
+      {
+        year: '2017',
+        location: '合肥 · 中国科学技术大学',
+        title: '让交流继续发生',
+        caption: '报告间隙的面对面交流，构成会议最重要的连接之一。',
+        image: '/2026/history/china-r-2017-hefei-exchange.webp',
+        width: 938,
+        height: 610,
+        alt: '2017 年第十届中国 R 会议参会老师在会场交流',
+        sourceUrl: 'https://cosx.org/2017/07/10th-china-r-hefei-summary/',
+      },
+      {
+        year: '2020',
+        location: '北京 · 中国人民大学',
+        title: '线上线下保持联结',
+        caption: '第十三届中国 R 会议采用线上与线下结合的方式继续相聚。',
+        image: '/2026/history/china-r-2020-beijing-hybrid.webp',
+        width: 1080,
+        height: 756,
+        alt: '2020 年第十三届中国 R 会议北京线下会场合影',
+        sourceUrl: 'https://cosx.org/2020/12/13th-china-r-beijing-summary/',
+      },
+    ],
+  },
   dates: {
     display: '2026年10月16日至18日',
     compact: '2026.10.16-18',
@@ -126,8 +198,8 @@ export const conference2026 = {
     },
   ],
   programPreview: {
-    status: '持续更新中…',
-    note: '专题与嘉宾名单将随确认持续更新，具体日期与时段以最终日程为准。',
+    status: '持续更新中...',
+    note: '专题与嘉宾名单将持续更新，具体日期与时段以最终日程为准。',
     sessions: [
       {
         title: 'AI + Math & Theory',
@@ -208,7 +280,7 @@ export const conference2026 = {
       {
         title: 'AI Infra',
         chair: { name: '杨朋昆', affiliation: '清华大学' },
-        speakers: [{ name: '陆元伟', affiliation: '阶跃星辰' }],
+        speakers: [],
       },
       {
         title: 'AI4Science',
@@ -217,7 +289,7 @@ export const conference2026 = {
       },
     ],
   },
-  // 日程是嘉宾、报告与分会场的唯一发布面。确认后的讲者、摘要、简介写进对应 session.talks。
+  // schedule 提供日期与场次框架，并承载未来确认的定时报告；programPreview 发布专题与嘉宾池。
   schedule: [
     {
       dateTime: '2026-10-16',
@@ -226,6 +298,7 @@ export const conference2026 = {
       sessions: [
         {
           id: 'oct16-pm',
+          category: 'arrival',
           period: '下午',
           title: '报到日',
           notes: ['来场嘉宾报到注册', 'Poster 展会预交流'],
@@ -239,27 +312,21 @@ export const conference2026 = {
       sessions: [
         {
           id: 'oct17-am',
+          category: 'keynote',
           period: '上午',
           title: 'Keynote 会场',
           notes: ['主持人致辞'],
-          talks: [
-            { time: '', title: '', speaker: '', affiliation: '' },
-            { time: '', title: '', speaker: '', affiliation: '' },
-          ],
         },
         {
           id: 'oct17-pm-sessions',
+          category: 'parallel',
           period: '下午',
           title: '分会场报告',
           notes: ['各分会场开展报告'],
-          talks: [
-            { time: '', title: '', speaker: '', affiliation: '' },
-            { time: '', title: '', speaker: '', affiliation: '' },
-            { time: '', title: '', speaker: '', affiliation: '' },
-          ],
         },
         {
           id: 'oct17-pm-poster',
+          category: 'poster',
           period: '下午',
           title: 'Rising Stars Poster 展示',
           notes: ['Rising Stars Poster 展示'],
@@ -273,15 +340,10 @@ export const conference2026 = {
       sessions: [
         {
           id: 'oct18-sessions',
+          category: 'parallel',
           period: '全天',
           title: '分会场报告',
           notes: ['各分会场开展报告'],
-          talks: [
-            { time: '', title: '', speaker: '', affiliation: '' },
-            { time: '', title: '', speaker: '', affiliation: '' },
-            { time: '', title: '', speaker: '', affiliation: '' },
-            { time: '', title: '', speaker: '', affiliation: '' },
-          ],
         },
       ],
     },
@@ -318,7 +380,7 @@ export const conference2026 = {
     notes: [
       '完成基础参会信息后，可在报名系统中选择相应报名类型。',
       '在读本科生、硕士生、博士生优先。',
-      '报名海报展即赠专业票。',
+      '报名参加 Rising Stars Poster 即赠专业票。',
     ],
   },
   tickets: {
@@ -345,7 +407,7 @@ export const conference2026 = {
     ],
     notes: [
       '游客票仅包含胸牌权益，专业票包含胸牌、餐券、会员纪念品等权益。',
-      '报名海报展即赠专业票。',
+      '报名参加 Rising Stars Poster 即赠专业票。',
     ],
   },
   audiences: ['在读本科生、硕士生、博士生', '青年研究者', '高校教师', '行业专家', '企业与产业伙伴'],

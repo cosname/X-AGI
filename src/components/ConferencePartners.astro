@@ -1,6 +1,7 @@
 ---
 import { conference2026, type Organization } from '../data/conference2026';
-import { partnerLogoByName } from '../data/legacy-partner-assets';
+import { partnerLogoForName } from '../data/legacy-partner-assets';
+import ConferenceOrganizationMark from './ConferenceOrganizationMark.astro';
 
 interface Props {
   titleId: string;
@@ -60,34 +61,16 @@ const partnerGroups = allPartnerGroups
         ) : variant === 'logos' ? (
           <ul class="conference-partners__logos">
             {group.organizations.map((organization) => {
-              const logo = partnerLogoByName[organization.name];
-              const content = logo ? (
-                <img
-                  src={logo.src}
-                  alt={organization.name}
-                  height="36"
-                  loading="lazy"
-                  decoding="async"
-                  class={logo.className}
-                />
-              ) : (
-                <span class="conference-partners__logo-fallback">{organization.name}</span>
-              );
+              const logoClassName = partnerLogoForName(organization.name)?.className;
 
               return (
                 <li
                   class:list={[
                     'conference-partners__logo-item',
-                    logo?.className && `conference-partners__logo-item--${logo.className}`,
+                    logoClassName && `conference-partners__logo-item--${logoClassName}`,
                   ]}
                 >
-                  {organization.url ? (
-                    <a href={organization.url} target="_blank" rel="noopener noreferrer">
-                      {content}
-                    </a>
-                  ) : (
-                    content
-                  )}
+                  <ConferenceOrganizationMark organization={organization} />
                 </li>
               );
             })}

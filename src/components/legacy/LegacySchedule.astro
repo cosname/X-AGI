@@ -1,17 +1,51 @@
 ---
-import { conference2026, type ScheduleDay, type ScheduleSession } from '../../data/conference2026';
+import ConferenceProgramPreview from '../ConferenceProgramPreview.astro';
+import {
+  conference2026,
+  type ScheduleDay,
+  type ScheduleSession,
+  type ScheduleTalk,
+} from '../../data/conference2026';
 
-const days = conference2026.schedule as readonly ScheduleDay[];
+function hasPublishedTalk(talk: ScheduleTalk) {
+  return Boolean(
+    talk.time
+    || talk.title
+    || talk.speaker
+    || talk.affiliation
+    || talk.abstract
+    || talk.bio
+    || talk.slides
+  );
+}
+
+function visibleNotes(session: ScheduleSession) {
+  return session.notes?.filter((note) => note !== session.title) ?? [];
+}
+
+const days = (conference2026.schedule as readonly ScheduleDay[]).map((day) => ({
+  ...day,
+  sessions: day.sessions.map((session) => ({
+    ...session,
+    publishedTalks: session.talks?.filter(hasPublishedTalk) ?? [],
+    visibleNotes: visibleNotes(session),
+  })),
+}));
 ---
 
 <main class="main-content">
   <div class="container custom-container">
-    <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
-    <ul class="nav nav-pills schedule-tabs mb-4">
+    <header class="schedule-intro">
+      <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
+      <p>日期框架已经公布，具体时段、报告与会场信息将持续更新。</p>
+    </header>
+
+    <ul class="nav nav-pills schedule-tabs mb-4" aria-label="按日期查看日程">
       {days.map((day, index) => (
         <li class="nav-item">
           <button
             class:list={['nav-link', { active: index === 0 }]}
+            type="button"
             data-target={`#session-${day.dateTime}`}
           >
             {day.date} {day.weekday}
@@ -21,44 +55,81 @@ const days = conference2026.schedule as readonly ScheduleDay[];
     </ul>
 
     {days.map((day) =>
-      (day.sessions as readonly ScheduleSession[]).map((session) => (
-        <div class="info-card schedule-card" id={session === day.sessions[0] ? `session-${day.dateTime}` : undefined}>
-          <div class="card-header">
+      day.sessions.map((session, sessionIndex) => (
+        <article
+          class="info-card schedule-card"
+          id={sessionIndex === 0 ? `session-${day.dateTime}` : undefined}
+        >
+          <h2 class="card-header">
             {day.date} {day.weekday} {session.period}
             {session.title ? ` | ${session.title}` : ''}
-          </div>
-          {session.chair?.name && <div class="session-chair">主持人 | {session.chair.name}</div>}
+          </h2>
+          {(session.venue || session.chair?.name) && (
+            <div class="session-chair">
+              {session.venue && <span>会场 | {session.venue}</span>}
+              {session.venue && session.chair?.name && <span aria-hidden="true"> · </span>}
+              {session.chair?.name && <span>主持人 | {session.chair.name}</span>}
+            </div>
+          )}
           <div class="card-body">
-            {session.notes && session.notes.length > 0 && (
+            {session.visibleNotes.length > 0 && (
               <div class="registration-notes">
                 <ul>
-                  {session.notes.map((note) => <li>{note}</li>)}
+                  {session.visibleNotes.map((note) => <li>{note}</li>)}
                 </ul>
               </div>
             )}
-            {session.talks && session.talks.length > 0 && (
+
+            {session.publishedTalks.length > 0 && (
               <div class="session-list">
-                {session.talks.map((talk) => (
-                  <div class:list={['session-item', { 'session-item--reserved': !talk.title }]}>
-                    <div class="session-title">
-                      {talk.time && <span class="session-time">{talk.time}</span>}
-                      <span>{talk.title}</span>
-                    </div>
+                {session.publishedTalks.map((talk) => (
+                  <article class="session-item schedule-talk">
+                    {(talk.time || talk.title) && (
+                      <h3 class="session-title">
+                        {talk.time && <time class="session-time">{talk.time}</time>}
+                        {talk.title && <span>{talk.title}</span>}
+                      </h3>
+                    )}
                     {(talk.speaker || talk.affiliation) && (
-                      <div class="session-speaker">
-                        <span>
-                          {talk.speaker}
-                          {talk.affiliation ? ` | ${talk.affiliation}` : ''}
-                        </span>
+                      <p class="session-speaker">
+                        {talk.speaker && <strong>{talk.speaker}</strong>}
+                        {talk.affiliation && <span>{talk.affiliation}</span>}
+                      </p>
+                    )}
+                    {talk.abstract && (
+                      <div class="schedule-talk__detail">
+                        <h4>报告摘要</h4>
+                        <p>{talk.abstract}</p>
                       </div>
                     )}
-                  </div>
+                    {talk.bio && (
+                      <div class="schedule-talk__detail">
+                        <h4>嘉宾简介</h4>
+                        <p>{talk.bio}</p>
+                      </div>
+                    )}
+                    {talk.slides && (
+                      <a
+                        class="schedule-talk__slides"
+                        href={talk.slides}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        查看演示文稿
+                      </a>
+                    )}
+                  </article>
                 ))}
               </div>
             )}
           </div>
-        </div>
+        </article>
       ))
     )}
+
+    <ConferenceProgramPreview
+      titleId="schedule-program-title"
+      className="conference-program-preview--schedule"
+    />
   </div>
 </main>

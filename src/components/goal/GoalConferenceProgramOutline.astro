@@ -1,0 +1,117 @@
+---
+import {
+  conference2026,
+  type ScheduleDay,
+  type ScheduleSession,
+  type ScheduleTalk,
+} from '../../data/conference2026';
+import '../../styles/conference-program-outline.css';
+
+interface Props {
+  titleId?: string;
+}
+
+const { titleId = 'goal-schedule-outline-title' } = Astro.props;
+const days = conference2026.schedule as readonly ScheduleDay[];
+
+function hasPublishedTalk(talk: ScheduleTalk) {
+  return Boolean(
+    talk.time
+    || talk.title
+    || talk.speaker
+    || talk.affiliation
+    || talk.abstract
+    || talk.bio
+    || talk.slides
+  );
+}
+
+function visibleNotes(session: ScheduleSession) {
+  return session.notes?.filter((note) => note !== session.title) ?? [];
+}
+---
+
+<section class="conference-program-outline" aria-labelledby={titleId}>
+  <header class="conference-program-outline__heading">
+    <div>
+      <p>PROGRAM FRAME</p>
+      <h2 id={titleId}>三天日程框架</h2>
+    </div>
+    <p>
+      <strong>{conference2026.dates.compact}</strong>
+      <span>{conference2026.venue.scheduleName}</span>
+    </p>
+  </header>
+
+  <ol class="conference-program-outline__days">
+    {days.map((day) => (
+      <li class="conference-program-outline__day">
+        <header>
+          <time datetime={day.dateTime}>{day.date}</time>
+          <span>{day.weekday}</span>
+        </header>
+        <ol>
+          {day.sessions.map((session) => {
+            const notes = visibleNotes(session);
+            const talks = session.talks?.filter(hasPublishedTalk) ?? [];
+
+            return (
+              <li>
+                <span class="conference-program-outline__period">{session.period}</span>
+                <div>
+                  <h3>{session.title}</h3>
+                  {(session.venue || session.chair?.name) && (
+                    <p class="conference-program-outline__meta">
+                      {session.venue && <span>{session.venue}</span>}
+                      {session.chair?.name && <span>主持人 {session.chair.name}</span>}
+                    </p>
+                  )}
+                  {notes.length > 0 && (
+                    <ul class="conference-program-outline__notes">
+                      {notes.map((note) => <li>{note}</li>)}
+                    </ul>
+                  )}
+                  {talks.length > 0 && (
+                    <ol class="conference-program-outline__talks">
+                      {talks.map((talk) => (
+                        <li>
+                          {talk.time && <time>{talk.time}</time>}
+                          <div>
+                            {talk.title && <strong>{talk.title}</strong>}
+                            {(talk.speaker || talk.affiliation) && (
+                              <span>
+                                {talk.speaker}
+                                {talk.speaker && talk.affiliation ? ' · ' : ''}
+                                {talk.affiliation}
+                              </span>
+                            )}
+                            {(talk.abstract || talk.bio || talk.slides) && (
+                              <details class="conference-program-outline__talk-detail">
+                                <summary>报告详情</summary>
+                                {talk.abstract && <p><strong>报告摘要</strong>{talk.abstract}</p>}
+                                {talk.bio && <p><strong>嘉宾简介</strong>{talk.bio}</p>}
+                                {talk.slides && (
+                                  <a href={talk.slides} target="_blank" rel="noopener noreferrer">
+                                    查看演示文稿
+                                  </a>
+                                )}
+                              </details>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </li>
+    ))}
+  </ol>
+
+  <p class="conference-program-outline__note">
+    日程框架以当前公开信息为准。专题与嘉宾见下方，具体日期、时段与报告题目以最终发布为准。
+  </p>
+</section>

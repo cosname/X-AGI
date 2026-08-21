@@ -1,0 +1,265 @@
+.edition-goal-2026 .conference-program-outline {
+  margin-bottom: clamp(3.5rem, 7vw, 6rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0 clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--goal-line, rgb(17 19 66 / 0.16));
+  border-bottom: 1px solid var(--goal-line, rgb(17 19 66 / 0.16));
+}
+
+.edition-goal-2026 .conference-program-outline__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.edition-goal-2026 .conference-program-outline__heading p,
+.edition-goal-2026 .conference-program-outline__heading h2,
+.edition-goal-2026 .conference-program-outline__days,
+.edition-goal-2026 .conference-program-outline__day > ol,
+.edition-goal-2026 .conference-program-outline__day h3,
+.edition-goal-2026 .conference-program-outline__day ul,
+.edition-goal-2026 .conference-program-outline__day ol,
+.edition-goal-2026 .conference-program-outline__note {
+  margin: 0;
+}
+
+.edition-goal-2026 .conference-program-outline__heading > div > p {
+  margin-bottom: 0.55rem;
+  color: #5840b7;
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.edition-goal-2026 .conference-program-outline__heading h2 {
+  color: var(--goal-ink, #111342);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 720;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+.edition-goal-2026 .conference-program-outline__heading > p {
+  display: grid;
+  gap: 0.25rem;
+  justify-items: end;
+  color: #52536f;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.edition-goal-2026 .conference-program-outline__heading > p strong {
+  color: var(--goal-ink, #111342);
+  font-family: var(--font-condensed);
+  font-size: 0.94rem;
+  letter-spacing: 0.06em;
+}
+
+.edition-goal-2026 .conference-program-outline__days {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--goal-line, rgb(17 19 66 / 0.14));
+  border-bottom: 1px solid var(--goal-line, rgb(17 19 66 / 0.14));
+}
+
+.edition-goal-2026 .conference-program-outline__day {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.8rem);
+}
+
+.edition-goal-2026 .conference-program-outline__day + .conference-program-outline__day {
+  border-left: 1px solid var(--goal-line, rgb(17 19 66 / 0.14));
+}
+
+.edition-goal-2026 .conference-program-outline__day > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgb(103 82 200 / 0.28);
+}
+
+.edition-goal-2026 .conference-program-outline__day > header time {
+  color: var(--goal-ink, #111342);
+  font-family: var(--font-condensed);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 720;
+  letter-spacing: -0.015em;
+}
+
+.edition-goal-2026 .conference-program-outline__day > header span {
+  color: #5840b7;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.edition-goal-2026 .conference-program-outline__day > ol {
+  display: grid;
+  padding: 0;
+  list-style: none;
+}
+
+.edition-goal-2026 .conference-program-outline__day > ol > li {
+  display: grid;
+  grid-template-columns: 3.1rem minmax(0, 1fr);
+  gap: 0.9rem;
+  padding: 1.1rem 0;
+}
+
+.edition-goal-2026 .conference-program-outline__day > ol > li + li {
+  border-top: 1px solid rgb(17 19 66 / 0.1);
+}
+
+.edition-goal-2026 .conference-program-outline__period {
+  padding-top: 0.15rem;
+  color: #545570;
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.edition-goal-2026 .conference-program-outline__day h3 {
+  color: var(--goal-ink, #111342);
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.edition-goal-2026 .conference-program-outline__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.8rem;
+  margin: 0.45rem 0 0;
+  color: #555671;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.edition-goal-2026 .conference-program-outline__notes {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.5rem 0 0;
+  color: #555671;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.edition-goal-2026 .conference-program-outline__notes li::before {
+  content: '/';
+  margin-right: 0.45rem;
+  color: #5840b7;
+}
+
+.edition-goal-2026 .conference-program-outline__talks {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.75rem !important;
+  padding: 0.75rem 0 0;
+  border-top: 1px solid rgb(17 19 66 / 0.1);
+  list-style: none;
+}
+
+.edition-goal-2026 .conference-program-outline__talks > li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: start;
+}
+
+.edition-goal-2026 .conference-program-outline__talks time {
+  color: #5840b7;
+  font-family: var(--font-condensed);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.edition-goal-2026 .conference-program-outline__talks div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.edition-goal-2026 .conference-program-outline__talks strong,
+.edition-goal-2026 .conference-program-outline__talks span {
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.edition-goal-2026 .conference-program-outline__talks strong {
+  color: var(--goal-ink, #111342);
+}
+
+.edition-goal-2026 .conference-program-outline__talks span {
+  color: #555671;
+}
+
+.edition-goal-2026 .conference-program-outline__talk-detail {
+  margin-top: 0.45rem;
+  color: #50516d;
+  font-size: 0.78rem;
+}
+
+.edition-goal-2026 .conference-program-outline__talk-detail summary {
+  width: fit-content;
+  color: #5840b7;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.edition-goal-2026 .conference-program-outline__talk-detail p {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0.65rem 0 0;
+  line-height: 1.6;
+}
+
+.edition-goal-2026 .conference-program-outline__talk-detail p strong {
+  font-size: 0.72rem;
+}
+
+.edition-goal-2026 .conference-program-outline__talk-detail a {
+  display: inline-flex;
+  margin-top: 0.65rem;
+  color: #5840b7;
+  font-weight: 700;
+  text-underline-offset: 0.22em;
+}
+
+.edition-goal-2026 .conference-program-outline__note {
+  padding-top: 1.25rem;
+  color: #50516d;
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 51.25rem) {
+  .edition-goal-2026 .conference-program-outline__days {
+    grid-template-columns: 1fr;
+  }
+
+  .edition-goal-2026 .conference-program-outline__day + .conference-program-outline__day {
+    border-top: 1px solid var(--goal-line, rgb(17 19 66 / 0.14));
+    border-left: 0;
+  }
+}
+
+@media (max-width: 39rem) {
+  .edition-goal-2026 .conference-program-outline__heading {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .edition-goal-2026 .conference-program-outline__heading > p {
+    justify-items: start;
+  }
+
+  .edition-goal-2026 .conference-program-outline__day {
+    padding-inline: 0;
+  }
+}

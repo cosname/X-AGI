@@ -1,5 +1,5 @@
 const PORTRAIT_MEDIA = '(max-width: 51.25rem) and (orientation: portrait)';
-const FRAME_INTERVAL = 1000 / 36;
+const FRAME_INTERVAL = 1000 / 24;
 
 type Point = { x: number; y: number };
 
@@ -15,6 +15,8 @@ export type PortraitConnectionLink = {
   bend: number;
   color?: 'violet' | 'teal';
 };
+
+export type PortraitConnectionFlock = 'upper' | 'lower-left' | 'lower-right';
 
 export const PORTRAIT_CONNECTION_NODES: readonly PortraitConnectionNode[] = [
   // Upper-right constellation.
@@ -86,9 +88,30 @@ export const PORTRAIT_CONNECTION_LINKS: readonly PortraitConnectionLink[] = [
 
 const clamp = (value: number, minimum: number, maximum: number) => Math.min(maximum, Math.max(minimum, value));
 
-export const connectionDragWeight = (distance: number, radius: number) => {
+export const connectionAvoidanceWeight = (distance: number, radius: number) => {
   const normalized = 1 - clamp(distance / Math.max(radius, 1), 0, 1);
   return normalized * normalized * (3 - 2 * normalized);
+};
+
+export const connectionDragWeight = connectionAvoidanceWeight;
+
+export const portraitConnectionFlockForNode = (index: number): PortraitConnectionFlock => {
+  if (index <= 20) return 'upper';
+  if (index <= 27) return 'lower-left';
+  return 'lower-right';
+};
+
+const seededUnit = (seed: number) => {
+  const value = Math.sin(seed * 12.9898 + 78.233) * 43758.5453;
+  return (value - Math.floor(value)) * 2 - 1;
+};
+
+export const schoolingWanderTarget = (flock: PortraitConnectionFlock, step: number) => {
+  const seed = flock === 'upper' ? 11 : flock === 'lower-left' ? 37 : 71;
+  return {
+    x: seededUnit(seed + step * 2),
+    y: seededUnit(seed + step * 2 + 1),
+  };
 };
 
 const cubicPoint = (progress: number, start: Point, controlA: Point, controlB: Point, end: Point): Point => {
@@ -136,8 +159,10 @@ export const initializePortraitConnectionFields = () => {
     const stage = field.closest<HTMLElement>('[data-connection-stage]') ?? field;
     const abortController = new AbortController();
     const { signal } = abortController;
-    const nodeStates = [...field.querySelectorAll<HTMLElement>('[data-portrait-connection-node]')].map((element) => ({
+    const nodeStates = [...field.querySelectorAll<HTMLElement>('[data-portrait-connection-node]')].map((element, index) => ({
       element,
+      index,
+      flock: portraitConnectionFlockForNode(index),
       homeX: 0,
       homeY: 0,
       x: 0,
@@ -145,6 +170,18 @@ export const initializePortraitConnectionFields = () => {
       vx: 0,
       vy: 0,
       depth: Number(element.dataset.nodeDepth ?? 1),
+    }));
+    const flockStates = (['upper', 'lower-left', 'lower-right'] as const).map((flock, index) => ({
+      flock,
+      seed: index * 41 + 17,
+      step: 0,
+      nextTargetAt: 0,
+      x: 0,
+      y: 0,
+      vx: 0,
+      vy: 0,
+      targetX: 0,
+      targetY: 0,
     }));
     const linkDots = [...field.querySelectorAll<HTMLElement>('[data-portrait-link-dot]')].map((element) => ({
       element,
@@ -156,11 +193,7 @@ export const initializePortraitConnectionFields = () => {
     const pointer = {
       x: 0,
       y: 0,
-      lastX: 0,
-      lastY: 0,
-      velocityX: 0,
-      velocityY: 0,
-      initialized: false,
+      active: false,
     };
 
     let fieldRect = field.getBoundingClientRect();
@@ -169,10 +202,25 @@ export const initializePortraitConnectionFields = () => {
     let lastTimestamp = 0;
     let visible = true;
 
+    const stop = () => {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      lastTimestamp = 0;
+    };
+
     const reset = () => {
-      pointer.velocityX = 0;
-      pointer.velocityY = 0;
-      pointer.initialized = false;
+      stop();
+      pointer.active = false;
+      flockStates.forEach((flock) => {
+        flock.step = 0;
+        flock.nextTargetAt = 0;
+        flock.x = 0;
+        flock.y = 0;
+        flock.vx = 0;
+        flock.vy = 0;
+        flock.targetX = 0;
+        flock.targetY = 0;
+      });
       nodeStates.forEach((node) => {
         node.x = 0;
         node.y = 0;
@@ -214,6 +262,35 @@ export const initializePortraitConnectionFields = () => {
       });
     };
 
+    const flockAmplitude = (flock: PortraitConnectionFlock) => {
+      if (flock === 'upper') {
+        return { x: Math.min(24, fieldRect.width * 0.055), y: Math.min(16, fieldRect.height * 0.016) };
+      }
+      if (flock === 'lower-left') {
+        return { x: Math.min(18, fieldRect.width * 0.045), y: Math.min(13, fieldRect.height * 0.013) };
+      }
+      return { x: Math.min(22, fieldRect.width * 0.052), y: Math.min(14, fieldRect.height * 0.014) };
+    };
+
+    const updateFlocks = (timestamp: number, timeScale: number) => {
+      flockStates.forEach((flock) => {
+        if (timestamp >= flock.nextTargetAt) {
+          const target = schoolingWanderTarget(flock.flock, flock.step);
+          const amplitude = flockAmplitude(flock.flock);
+          flock.targetX = target.x * amplitude.x;
+          flock.targetY = target.y * amplitude.y;
+          flock.step += 1;
+          const pauseUnit = (seededUnit(flock.seed + flock.step * 3) + 1) / 2;
+          flock.nextTargetAt = timestamp + 2600 + pauseUnit * 2800;
+        }
+        const damping = Math.pow(0.91, timeScale);
+        flock.vx = (flock.vx + (flock.targetX - flock.x) * 0.026 * timeScale) * damping;
+        flock.vy = (flock.vy + (flock.targetY - flock.y) * 0.026 * timeScale) * damping;
+        flock.x += flock.vx * timeScale;
+        flock.y += flock.vy * timeScale;
+      });
+    };
+
     const tick = (timestamp: number) => {
       if (!visible || !portraitMedia.matches || document.hidden) {
         animationFrame = 0;
@@ -228,39 +305,53 @@ export const initializePortraitConnectionFields = () => {
       }
       const timeScale = clamp(elapsed / FRAME_INTERVAL, 0.7, 2.2);
       lastTimestamp = timestamp - (elapsed % FRAME_INTERVAL);
-      const influenceRadius = Math.max(150, fieldRect.width * 0.58);
+      updateFlocks(timestamp, timeScale);
+      const timeSeconds = timestamp * 0.001;
+      const influenceRadius = Math.max(88, fieldRect.width * 0.27);
+      const avoidanceDistance = Math.min(48, fieldRect.width * 0.125);
       let maximumDisplacement = 0;
-      let maximumVelocity = 0;
+      let maximumAvoidance = 0;
 
       nodeStates.forEach((node) => {
-        const distance = Math.hypot(pointer.x - node.homeX, pointer.y - node.homeY);
-        const localWeight = pointer.initialized ? connectionDragWeight(distance, influenceRadius) : 0;
-        const dragWeight = localWeight * node.depth + (pointer.initialized ? 0.09 * node.depth : 0);
-        const targetX = pointer.velocityX * dragWeight * 0.82;
-        const targetY = pointer.velocityY * dragWeight * 0.82;
-        const damping = Math.pow(0.82, timeScale);
-        node.vx = (node.vx + (targetX - node.x) * 0.075 * timeScale) * damping;
-        node.vy = (node.vy + (targetY - node.y) * 0.075 * timeScale) * damping;
+        const flock = flockStates.find((candidate) => candidate.flock === node.flock)!;
+        const individualX = (
+          Math.sin(timeSeconds * (0.31 + node.depth * 0.045) + node.index * 1.37) * 4.2
+          + Math.sin(timeSeconds * 0.17 + node.index * 0.63) * 2.1
+        ) * node.depth;
+        const individualY = (
+          Math.cos(timeSeconds * (0.26 + node.depth * 0.036) + node.index * 1.09) * 3.2
+          + Math.sin(timeSeconds * 0.14 + node.index * 0.47) * 1.6
+        ) * node.depth;
+
+        const projectedX = node.homeX + flock.x + individualX;
+        const projectedY = node.homeY + flock.y + individualY;
+        const deltaX = projectedX - pointer.x;
+        const deltaY = projectedY - pointer.y;
+        const distance = Math.max(0.001, Math.hypot(deltaX, deltaY));
+        const avoidance = pointer.active
+          ? connectionAvoidanceWeight(distance, influenceRadius)
+          : 0;
+        maximumAvoidance = Math.max(maximumAvoidance, avoidance);
+        const escapeX = deltaX / distance * avoidanceDistance * avoidance * node.depth;
+        const escapeY = deltaY / distance * avoidanceDistance * avoidance * node.depth;
+        const unclampedX = flock.x + individualX + escapeX;
+        const unclampedY = flock.y + individualY + escapeY;
+        const targetX = clamp(unclampedX, 8 - node.homeX, fieldRect.width - 8 - node.homeX);
+        const targetY = clamp(unclampedY, 8 - node.homeY, fieldRect.height - 8 - node.homeY);
+        const damping = Math.pow(0.78, timeScale);
+        node.vx = (node.vx + (targetX - node.x) * 0.084 * timeScale) * damping;
+        node.vy = (node.vy + (targetY - node.y) * 0.084 * timeScale) * damping;
         node.x += node.vx * timeScale;
         node.y += node.vy * timeScale;
         maximumDisplacement = Math.max(maximumDisplacement, Math.hypot(node.x, node.y));
-        maximumVelocity = Math.max(maximumVelocity, Math.hypot(node.vx, node.vy));
       });
 
       apply();
-      const pointerSpeed = Math.hypot(pointer.velocityX, pointer.velocityY);
-      field.dataset.pointerSpeed = pointerSpeed.toFixed(2);
+      field.dataset.pointerSpeed = '0.00';
       field.dataset.maximumDisplacement = maximumDisplacement.toFixed(2);
-      pointer.velocityX *= Math.pow(0.86, timeScale);
-      pointer.velocityY *= Math.pow(0.86, timeScale);
-
-      if (pointerSpeed > 0.04 || maximumDisplacement > 0.04 || maximumVelocity > 0.02) {
-        animationFrame = window.requestAnimationFrame(tick);
-      } else {
-        animationFrame = 0;
-        lastTimestamp = 0;
-        field.dataset.interaction = 'idle';
-      }
+      field.dataset.interaction = maximumAvoidance > 0.02 ? 'avoid' : 'wander';
+      field.dataset.avoidance = maximumAvoidance.toFixed(3);
+      animationFrame = window.requestAnimationFrame(tick);
     };
 
     const start = () => {
@@ -270,21 +361,21 @@ export const initializePortraitConnectionFields = () => {
 
     const onPointerMove = (event: PointerEvent) => {
       if (!event.isPrimary || reducedMotion.matches || !portraitMedia.matches || !visible) return;
-      const nextX = event.clientX - fieldRect.left;
-      const nextY = event.clientY - fieldRect.top;
-      if (!pointer.initialized) {
-        pointer.lastX = fieldRect.width * 0.5;
-        pointer.lastY = fieldRect.height * 0.5;
-        pointer.initialized = true;
-      }
-      pointer.velocityX = clamp(pointer.velocityX * 0.32 + (nextX - pointer.lastX) * 0.68, -30, 30);
-      pointer.velocityY = clamp(pointer.velocityY * 0.32 + (nextY - pointer.lastY) * 0.68, -30, 30);
-      pointer.x = nextX;
-      pointer.y = nextY;
-      pointer.lastX = nextX;
-      pointer.lastY = nextY;
-      field.dataset.interaction = 'drag';
+      const currentRect = field.getBoundingClientRect();
+      pointer.x = event.clientX - currentRect.left;
+      pointer.y = event.clientY - currentRect.top;
+      pointer.active = (
+        pointer.x >= 0
+        && pointer.x <= currentRect.width
+        && pointer.y >= 0
+        && pointer.y <= currentRect.height
+      );
       start();
+    };
+
+    const clearPointer = (event: PointerEvent) => {
+      if (!event.isPrimary) return;
+      pointer.active = false;
     };
 
     const scheduleResize = () => {
@@ -292,12 +383,14 @@ export const initializePortraitConnectionFields = () => {
       resizeFrame = window.requestAnimationFrame(() => {
         resizeFrame = 0;
         refreshGeometry();
+        start();
       });
     };
 
     const handleMotionPreference = () => {
       field.dataset.animated = reducedMotion.matches ? 'false' : 'true';
       reset();
+      start();
     };
 
     const resizeObserver = new ResizeObserver(scheduleResize);
@@ -305,19 +398,26 @@ export const initializePortraitConnectionFields = () => {
     resizeObserver.observe(stage);
     const intersectionObserver = new IntersectionObserver((entries) => {
       visible = entries[0]?.isIntersecting ?? false;
-      if (!visible && animationFrame) {
-        window.cancelAnimationFrame(animationFrame);
-        animationFrame = 0;
-      }
+      if (!visible) stop();
+      else start();
     }, { rootMargin: '80px' });
     intersectionObserver.observe(field);
 
     window.addEventListener('pointermove', onPointerMove, { passive: true, signal });
-    window.addEventListener('blur', reset, { signal });
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) reset();
+    window.addEventListener('pointerup', clearPointer, { passive: true, signal });
+    window.addEventListener('pointercancel', clearPointer, { passive: true, signal });
+    window.addEventListener('blur', () => {
+      pointer.active = false;
     }, { signal });
-    portraitMedia.addEventListener('change', reset, { signal });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else start();
+    }, { signal });
+    portraitMedia.addEventListener('change', () => {
+      reset();
+      refreshGeometry();
+      start();
+    }, { signal });
     reducedMotion.addEventListener('change', handleMotionPreference, { signal });
 
     const destroy = () => {
@@ -332,5 +432,6 @@ export const initializePortraitConnectionFields = () => {
 
     refreshGeometry();
     field.dataset.animated = reducedMotion.matches ? 'false' : 'true';
+    start();
   });
 };

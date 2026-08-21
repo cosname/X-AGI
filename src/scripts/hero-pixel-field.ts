@@ -12,8 +12,9 @@ const HERO_TREE_RIGHT_WIDTH = 743;
 const CANOPY_MAX_WIDTH = 820;
 const TERRAIN_COLUMNS = 128;
 
-type Point = { x: number; y: number };
-type Rect = { left: number; top: number; right: number; bottom: number };
+export type Point = { x: number; y: number };
+export type Rect = { left: number; top: number; right: number; bottom: number };
+export type TreeWindState = { value: number; velocity: number };
 export type DensityComponent = readonly [mean: number, sigma: number, amplitude: number];
 
 export type TerrainLayerDefinition = {
@@ -27,6 +28,7 @@ export type TerrainLayerDefinition = {
 export type TerrainProfile = 'default' | 'tree-foundation';
 
 type TreeSide = 'left' | 'right';
+type TitleInkLayout = { element: HTMLElement; rect: Rect };
 type BranchLayout = {
   element: HTMLElement;
   side: TreeSide;
@@ -36,6 +38,8 @@ type BranchLayout = {
     element: HTMLElement;
     point: Point;
     phase: number;
+    normalizedY: number;
+    seed: number;
   }>;
 };
 
@@ -133,6 +137,61 @@ const TERRAIN_LAYER_PHASE: Record<TerrainLayerDefinition['key'], number> = {
 };
 
 const clamp = (value: number, minimum: number, maximum: number) => Math.min(maximum, Math.max(minimum, value));
+
+export const TREE_FLIP_PALETTE = [
+  'rgb(55 47 142)',
+  'rgb(103 82 200)',
+  'rgb(172 158 230)',
+] as const;
+
+export const TREE_FLIP_TRAVEL_DURATION = 9_200;
+const TREE_FLIP_SECONDARY_PHASE = 0.53;
+const TREE_FLIP_TRAVEL_RANGE = 1.2;
+const TREE_FLIP_START_Y = 1.08;
+const TREE_FLIP_JITTER = 0.07;
+const TREE_FLIP_WAVE_RADIUS = 0.115;
+
+export type TreeFlipSample = {
+  cycleIndex: number;
+  primaryWave: number;
+  secondaryWave: number;
+  jitteredY: number;
+  flip: number;
+  accent: (typeof TREE_FLIP_PALETTE)[number];
+};
+
+export const treeFlipSample = (
+  normalizedY: number,
+  seed: number,
+  timestamp: number,
+): TreeFlipSample => {
+  const normalizedSeed = clamp(seed, 0, 1);
+  const cycle = Math.max(0, timestamp) / TREE_FLIP_TRAVEL_DURATION;
+  const cycleIndex = Math.floor(cycle);
+  const primaryWave = TREE_FLIP_START_Y - (cycle % 1) * TREE_FLIP_TRAVEL_RANGE;
+  const secondaryCycle = cycle + TREE_FLIP_SECONDARY_PHASE;
+  const secondaryWave = TREE_FLIP_START_Y - (secondaryCycle % 1) * TREE_FLIP_TRAVEL_RANGE;
+  const jitteredY = clamp(normalizedY, 0, 1) + (normalizedSeed - 0.5) * TREE_FLIP_JITTER;
+  const waveDistance = Math.min(
+    Math.abs(jitteredY - primaryWave),
+    Math.abs(jitteredY - secondaryWave),
+  );
+  const wave = clamp(1 - waveDistance / TREE_FLIP_WAVE_RADIUS, 0, 1);
+  const easedWave = wave * wave * (3 - 2 * wave);
+  const randomGate = Math.abs(Math.sin(normalizedSeed * 91.73));
+  const randomWeight = randomGate > 0.28 ? 0.76 + randomGate * 0.24 : 0.18;
+
+  return {
+    cycleIndex,
+    primaryWave,
+    secondaryWave,
+    jitteredY,
+    flip: clamp(easedWave * randomWeight, 0, 1),
+    accent: TREE_FLIP_PALETTE[
+      Math.floor(normalizedSeed * TREE_FLIP_PALETTE.length) % TREE_FLIP_PALETTE.length
+    ],
+  };
+};
 
 export const gaussianDensity = (x: number, mean: number, sigma: number) => {
   const normalized = (x - mean) / Math.max(sigma, 0.0001);
@@ -309,6 +368,15 @@ const distanceToRect = (point: Point, rect: Rect) => {
   return Math.hypot(deltaX, deltaY);
 };
 
+export const treePointerNear = (point: Point, rect: Rect, viewportWidth: number) => (
+  distanceToRect(point, rect) <= clamp(viewportWidth * 0.04, 36, 72)
+);
+
+export const titleSheenStrength = (distance: number, radius: number) => {
+  const proximity = clamp(1 - distance / Math.max(radius * 0.72, 1), 0, 1);
+  return proximity * proximity * (3 - 2 * proximity);
+};
+
 export const mosaicRippleSample = (
   distance: number,
   radius: number,
@@ -334,8 +402,15 @@ export const mosaicRippleSample = (
 
 export const treeInteractionGeometry = (
   viewportWidth: number,
-  mode: 'direct' | 'wide' = 'wide',
+  mode: 'direct' | 'wide' | 'calm' = 'wide',
 ) => {
+  if (mode === 'calm') {
+    const rippleRadius = clamp(viewportWidth * 0.052, 54, 94);
+    return {
+      rippleRadius,
+      branchReach: clamp(rippleRadius + 42, 96, 142),
+    };
+  }
   if (mode === 'direct') {
     return {
       rippleRadius: clamp(viewportWidth * 0.075, 68, 118),
@@ -346,6 +421,43 @@ export const treeInteractionGeometry = (
   return {
     rippleRadius,
     branchReach: clamp(rippleRadius + 84, 244, 480),
+  };
+};
+
+export const treeWindImpulse = (
+  deltaX: number,
+  deltaY: number,
+  elapsedMilliseconds: number,
+  proximity: number,
+) => {
+  const elapsed = clamp(elapsedMilliseconds, 12, 80);
+  const signedTravel = deltaX + deltaY * -0.18;
+  const pointerVelocity = signedTravel / elapsed;
+  return clamp(pointerVelocity * 0.72 * clamp(proximity, 0, 1), -1, 1);
+};
+
+export const advanceTreeWind = (
+  state: TreeWindState,
+  target: number,
+  deltaSeconds: number,
+  stiffness: number,
+  damping: number,
+): TreeWindState => dampedSpring(
+  state.value,
+  state.velocity,
+  clamp(target, -1, 1),
+  clamp(deltaSeconds, 1 / 240, 0.05),
+  stiffness,
+  damping,
+);
+
+export const treeWindLayerMotion = (depth: number, wind: number) => {
+  const normalizedDepth = clamp(depth, 0, 1);
+  const normalizedWind = clamp(wind, -1, 1);
+  const depthCurve = normalizedDepth * normalizedDepth;
+  return {
+    x: normalizedWind * (0.2 + depthCurve * 8.15),
+    angle: normalizedWind * (0.04 + depthCurve * 0.32),
   };
 };
 
@@ -364,11 +476,16 @@ export const initializeHeroPixelFields = () => {
       ? 'tree-foundation'
       : 'default';
     const treeMotionEnabled = field.dataset.treeInteraction !== 'none';
-    const treeInteractionMode = field.dataset.treeInteraction === 'wide' ? 'wide' : 'direct';
+    const treeInteractionMode = field.dataset.treeInteraction === 'wide'
+      ? 'wide'
+      : field.dataset.treeInteraction === 'calm'
+        ? 'calm'
+        : 'direct';
     const treePositions: Record<TreeSide, HTMLElement | null> = {
       left: field.querySelector<HTMLElement>('[data-tree-position="left"]'),
       right: field.querySelector<HTMLElement>('[data-tree-position="right"]'),
     };
+    const rightTreeSway = treePositions.right?.querySelector<HTMLElement>('.hero-pixel-field__tree-sway') ?? null;
     const branchElements = Array.from(field.querySelectorAll<HTMLElement>('[data-tree-branch]'));
     const titleInk = stage.querySelector<HTMLElement>('[data-title-ink]');
     const titleInkSurfaces = titleInk
@@ -393,20 +510,35 @@ export const initializeHeroPixelFields = () => {
     let pointer: Point = { x: 0, y: 0 };
     let pointerDirty = false;
     let branchLayouts: BranchLayout[] = [];
+    let rightTreeRect: Rect | null = null;
     let titleRect: Rect | null = null;
+    let titleInkLayouts: TitleInkLayout[] = [];
+    let titleInkStrength = 0;
     let activeScalePixels = new Set<HTMLElement>();
     const scalePixelEntryTimes = new WeakMap<HTMLElement, number>();
     let active = false;
     let visible = true;
     let pointerFrame = 0;
+    let treePulseFrame = 0;
+    let treePulsePaintTimestamp = 0;
+    let treePulseStartTimestamp = 0;
+    let treePauseRequested = false;
+    let treePulsePaused = false;
+    let activeTreeFlipPixels = new Set<HTMLElement>();
+    let treeWindState: TreeWindState = { value: 0, velocity: 0 };
+    let treeWindBranchStates = new Map<HTMLElement, TreeWindState>();
+    let treeWindTarget = 0;
+    let treeWindFrameTimestamp = 0;
+    let treeWindPointerTimestamp = 0;
+    let treeWindPointer: Point | null = null;
     let springFrame = 0;
     let resizeFrame = 0;
     let originFrame = 0;
     let scaleCleanupTimer = 0;
     let lastTimestamp = 0;
     let lastShapeKey = '';
-
     const motionEnabled = () => !prefersReducedMotion.matches && finePointer.matches;
+    const growthMotionEnabled = () => !prefersReducedMotion.matches;
     const baseAmplitude = () => width < 360 ? NARROW_POSTERIOR_AMPLITUDE : BASE_POSTERIOR_AMPLITUDE;
     const terrainPixelUnit = () => width < 720 ? 4 : 5;
     const terrainShapeUnit = () => Math.max(terrainPixelUnit(), width / TERRAIN_COLUMNS);
@@ -490,7 +622,73 @@ export const initializeHeroPixelFields = () => {
       element.style.transform = 'translate3d(0,0,0) scale(1)';
     };
 
+    const clearTreeWind = ({ preservePointer = false } = {}) => {
+      rightTreeSway?.style.removeProperty('--tree-wind-sway-x');
+      branchLayouts.forEach(({ element, side }) => {
+        if (side !== 'right') return;
+        element.style.removeProperty('--tree-wind-x');
+        element.style.removeProperty('--tree-wind-angle');
+      });
+      treeWindState = { value: 0, velocity: 0 };
+      treeWindBranchStates = new Map();
+      treeWindTarget = 0;
+      treeWindFrameTimestamp = 0;
+      if (!preservePointer) {
+        treeWindPointerTimestamp = 0;
+        treeWindPointer = null;
+      }
+      field.dataset.treeWind = '0';
+      field.dataset.treeWindActive = 'false';
+    };
+
+    const advanceTreeWindMotion = (timestamp: number) => {
+      const delta = treeWindFrameTimestamp
+        ? Math.min((timestamp - treeWindFrameTimestamp) / 1000, 0.05)
+        : 1 / 60;
+      treeWindFrameTimestamp = timestamp;
+      treeWindTarget *= Math.exp(-delta * 5.4);
+      treeWindState = advanceTreeWind(treeWindState, treeWindTarget * 0.35, delta, 42, 9.2);
+      rightTreeSway?.style.setProperty(
+        '--tree-wind-sway-x',
+        `${(treeWindState.value * 0.15).toFixed(3)}px`,
+      );
+
+      let maximumWind = Math.abs(treeWindState.value);
+      let maximumVelocity = Math.abs(treeWindState.velocity);
+      branchLayouts.forEach(({ element, side, depth }) => {
+        if (side !== 'right') return;
+        const previous = treeWindBranchStates.get(element) ?? { value: 0, velocity: 0 };
+        const next = advanceTreeWind(
+          previous,
+          treeWindTarget,
+          delta,
+          40 - depth * 20,
+          8.8 - depth * 3.9,
+        );
+        treeWindBranchStates.set(element, next);
+        const motion = treeWindLayerMotion(depth, next.value);
+        element.style.setProperty('--tree-wind-x', `${motion.x.toFixed(3)}px`);
+        element.style.setProperty('--tree-wind-angle', `${motion.angle.toFixed(3)}deg`);
+        maximumWind = Math.max(maximumWind, Math.abs(next.value));
+        maximumVelocity = Math.max(maximumVelocity, Math.abs(next.velocity));
+      });
+
+      field.dataset.treeWind = maximumWind.toFixed(3);
+      const settled = (
+        Math.abs(treeWindTarget) < 0.0005
+        && maximumWind < 0.0005
+        && maximumVelocity < 0.003
+      );
+      if (settled) {
+        clearTreeWind({ preservePointer: active });
+        return false;
+      }
+      field.dataset.treeWindActive = 'true';
+      return true;
+    };
+
     const resetBranches = () => {
+      clearTreeWind();
       branchLayouts.forEach(({ element }) => {
         element.style.removeProperty('transform');
         element.dataset.nearby = 'false';
@@ -499,6 +697,162 @@ export const initializeHeroPixelFields = () => {
       if (activeScalePixels.size > 0) scheduleScaleCleanup();
       activeScalePixels = new Set();
       field.dataset.activeScalePixels = '0';
+    };
+
+    const clearTreePulseStyles = () => {
+      branchLayouts.forEach(({ side, scalePixels }) => {
+        if (side !== 'right') return;
+        scalePixels.forEach(({ element }) => {
+          if (!element.classList.contains('hp--growth-scale')) return;
+          element.style.removeProperty('--tree-flip');
+          element.style.removeProperty('--tree-flip-angle');
+          element.style.removeProperty('--tree-flip-accent');
+          element.removeAttribute('data-tree-flip-active');
+        });
+      });
+      activeTreeFlipPixels = new Set();
+      field.dataset.treePulse = '0';
+      field.dataset.treeActiveFlips = '0';
+    };
+
+    const stopTreePulse = ({ clear = false } = {}) => {
+      if (treePulseFrame) window.cancelAnimationFrame(treePulseFrame);
+      treePulseFrame = 0;
+      treePulsePaintTimestamp = 0;
+      treePulseStartTimestamp = 0;
+      if (clear) clearTreePulseStyles();
+    };
+
+    const treePulseTick = (timestamp: number) => {
+      treePulseFrame = 0;
+      if (
+        treeInteractionMode !== 'calm'
+        || !growthMotionEnabled()
+        || !visible
+        || document.hidden
+      ) {
+        treePauseRequested = false;
+        treePulsePaused = false;
+        field.dataset.treePulsePaused = 'false';
+        stopTreePulse({ clear: true });
+        return;
+      }
+
+      if (!treePulseStartTimestamp) treePulseStartTimestamp = timestamp;
+      const elapsed = timestamp - treePulseStartTimestamp;
+
+      if (!treePulsePaintTimestamp || timestamp - treePulsePaintTimestamp >= 42) {
+        treePulsePaintTimestamp = timestamp;
+        let maximumFlip = 0;
+        const nextActiveTreeFlipPixels = new Set<HTMLElement>();
+
+        branchLayouts.forEach(({ side, scalePixels }) => {
+          if (side !== 'right') return;
+          scalePixels.forEach(({ element, normalizedY, seed }) => {
+            if (!element.classList.contains('hp--growth-scale')) return;
+            const wasActive = activeTreeFlipPixels.has(element);
+            if (treePauseRequested && !wasActive) return;
+
+            const sample = treeFlipSample(normalizedY, seed, elapsed);
+            const { flip } = sample;
+
+            if (flip < 0.025) {
+              if (wasActive) {
+                element.removeAttribute('data-tree-flip-active');
+                element.style.removeProperty('--tree-flip');
+                element.style.removeProperty('--tree-flip-angle');
+              }
+              return;
+            }
+
+            const flipToken = flip.toFixed(3);
+            const angleToken = `${(-flip * 168).toFixed(2)}deg`;
+            if (element.dataset.treeFlipActive !== 'true') {
+              element.dataset.treeFlipActive = 'true';
+            }
+            if (element.style.getPropertyValue('--tree-flip') !== flipToken) {
+              element.style.setProperty('--tree-flip', flipToken);
+            }
+            if (element.style.getPropertyValue('--tree-flip-angle') !== angleToken) {
+              element.style.setProperty('--tree-flip-angle', angleToken);
+            }
+            if (!element.style.getPropertyValue('--tree-flip-accent')) {
+              element.style.setProperty('--tree-flip-accent', sample.accent);
+            }
+            nextActiveTreeFlipPixels.add(element);
+            maximumFlip = Math.max(maximumFlip, flip);
+          });
+        });
+
+        activeTreeFlipPixels.forEach((element) => {
+          if (nextActiveTreeFlipPixels.has(element)) return;
+          element.removeAttribute('data-tree-flip-active');
+          element.style.removeProperty('--tree-flip');
+          element.style.removeProperty('--tree-flip-angle');
+        });
+        activeTreeFlipPixels = nextActiveTreeFlipPixels;
+
+        field.dataset.treePulse = maximumFlip.toFixed(3);
+        field.dataset.treeActiveFlips = `${activeTreeFlipPixels.size}`;
+        if (treePauseRequested && activeTreeFlipPixels.size === 0) {
+          treePulsePaused = true;
+          field.dataset.treePulsePaused = 'true';
+          stopTreePulse({ clear: true });
+          return;
+        }
+      }
+      treePulseFrame = window.requestAnimationFrame(treePulseTick);
+    };
+
+    const scheduleTreePulse = () => {
+      if (
+        treePulseFrame
+        || treePulsePaused
+        || treeInteractionMode !== 'calm'
+        || !growthMotionEnabled()
+        || !visible
+        || document.hidden
+      ) return;
+      field.dataset.treePulsePaused = 'false';
+      treePulseFrame = window.requestAnimationFrame(treePulseTick);
+    };
+
+    const syncTreePulseForPointer = () => {
+      const shouldPause = Boolean(
+        active
+        && finePointer.matches
+        && rightTreeRect
+        && treePointerNear(pointer, rightTreeRect, width),
+      );
+      field.dataset.treePointerNearby = shouldPause ? 'true' : 'false';
+      if (shouldPause === treePauseRequested) return;
+      treePauseRequested = shouldPause;
+      if (!shouldPause && treePulsePaused) {
+        treePulsePaused = false;
+        field.dataset.treePulsePaused = 'false';
+        scheduleTreePulse();
+      }
+    };
+
+    const updateTreeWindForPointer = (timestamp: number) => {
+      if (treeInteractionMode !== 'calm' || !rightTreeRect) return;
+      const { branchReach } = treeInteractionGeometry(width, treeInteractionMode);
+      const proximity = 1 - clamp(
+        distanceToRect(pointer, rightTreeRect) / Math.max(branchReach * 1.65, 1),
+        0,
+        1,
+      );
+      if (treeWindPointer && treeWindPointerTimestamp > 0) {
+        const impulse = treeWindImpulse(
+          pointer.x - treeWindPointer.x,
+          pointer.y - treeWindPointer.y,
+          timestamp - treeWindPointerTimestamp,
+          proximity,
+        );
+        treeWindTarget = clamp(treeWindTarget * 0.25 + impulse, -1, 1);
+      }
+      treeWindPointer = pointer;
+      treeWindPointerTimestamp = timestamp;
     };
 
     const applyBranchMotion = (timestamp: number) => {
@@ -519,11 +873,12 @@ export const initializeHeroPixelFields = () => {
           const deltaY = scalePixel.point.y - pointer.y;
           const distance = Math.hypot(deltaX, deltaY);
           if (distance >= rippleRadius) return;
-          const scaleDepth = layout.depth <= 0.15 ? 0.18 : 0.55 + layout.depth * 0.45;
+          const rawScaleDepth = layout.depth <= 0.15 ? 0.18 : 0.55 + layout.depth * 0.45;
+          const scaleDepth = treeInteractionMode === 'calm' ? rawScaleDepth * 0.42 : rawScaleDepth;
           const sample = mosaicRippleSample(
             distance,
             rippleRadius,
-            timestamp * 0.001,
+            timestamp * (treeInteractionMode === 'calm' ? 0.00072 : 0.001),
             scalePixel.phase,
             scaleDepth,
           );
@@ -569,29 +924,33 @@ export const initializeHeroPixelFields = () => {
     const titleGlowRadius = () => clamp(width * 0.058, 58, 92);
 
     const clearTitleInk = () => {
-      titleInkSurfaces.forEach((surface) => {
-        surface.style.setProperty('--title-glow-r', '0px');
+      if (titleInkStrength === 0) return;
+      titleInkLayouts.forEach(({ element }) => {
+        element.style.setProperty('--title-glow-r', '0px');
+        element.style.setProperty('--title-glow-strength', '0');
       });
+      titleInkStrength = 0;
     };
 
     const applyTitleInk = () => {
-      if (!titleInk || titleInkSurfaces.length === 0 || !titleRect || !motionEnabled() || !active) {
+      if (!titleInk || titleInkLayouts.length === 0 || !titleRect || !motionEnabled() || !active) {
         clearTitleInk();
         return;
       }
       const radius = titleGlowRadius();
-      if (distanceToRect(pointer, titleRect) > radius * 0.45) {
+      const strength = titleSheenStrength(distanceToRect(pointer, titleRect), radius);
+      if (strength <= 0) {
         clearTitleInk();
         return;
       }
-      const clientX = fieldOrigin.x + pointer.x;
-      const clientY = fieldOrigin.y + pointer.y;
-      titleInkSurfaces.forEach((surface) => {
-        const box = surface.getBoundingClientRect();
-        surface.style.setProperty('--title-mx', `${snapDevicePixel(clientX - box.left)}px`);
-        surface.style.setProperty('--title-my', `${snapDevicePixel(clientY - box.top)}px`);
-        surface.style.setProperty('--title-glow-r', `${radius}px`);
+      const strengthToken = (strength * 0.92).toFixed(3);
+      titleInkLayouts.forEach(({ element, rect }) => {
+        element.style.setProperty('--title-mx', `${snapDevicePixel(pointer.x - rect.left)}px`);
+        element.style.setProperty('--title-my', `${snapDevicePixel(pointer.y - rect.top)}px`);
+        element.style.setProperty('--title-glow-r', `${radius}px`);
+        element.style.setProperty('--title-glow-strength', strengthToken);
       });
+      titleInkStrength = strength;
     };
 
     const configureGeometry = () => {
@@ -603,12 +962,24 @@ export const initializeHeroPixelFields = () => {
     const collectBranchLayouts = (fieldBox: DOMRect) => {
       if (!treeMotionEnabled) {
         branchLayouts = [];
+        rightTreeRect = null;
         return;
       }
       const positionBoxes: Record<TreeSide, DOMRect | null> = {
         left: treePositions.left?.getBoundingClientRect() ?? null,
         right: treePositions.right?.getBoundingClientRect() ?? null,
       };
+      const rightTreeBox = treePositions.right
+        ?.querySelector<HTMLElement>('.hero-pixel-field__tree-artboard')
+        ?.getBoundingClientRect() ?? positionBoxes.right;
+      rightTreeRect = rightTreeBox
+        ? {
+            left: rightTreeBox.left - fieldBox.left,
+            top: rightTreeBox.top - fieldBox.top,
+            right: rightTreeBox.right - fieldBox.left,
+            bottom: rightTreeBox.bottom - fieldBox.top,
+          }
+        : null;
       branchLayouts = branchElements.flatMap((element) => {
         const side = element.dataset.branchSide as TreeSide;
         const positionBox = positionBoxes[side];
@@ -622,6 +993,7 @@ export const initializeHeroPixelFields = () => {
         const sourceBottom = Number(element.dataset.branchBottom);
         const anchorX = Number(element.dataset.branchAnchorX);
         const anchorY = Number(element.dataset.branchAnchorY);
+        element.style.transformOrigin = `${(anchorX / sourceWidth * 100).toFixed(3)}% ${(anchorY / HERO_TREE_HEIGHT * 100).toFixed(3)}%`;
         return [{
           element,
           side,
@@ -635,16 +1007,20 @@ export const initializeHeroPixelFields = () => {
           scalePixels: Array.from(element.querySelectorAll<HTMLElement>('.hp--scale')).map((scalePixel) => {
             const sizeClass = Array.from(scalePixel.classList).find((className) => /^s\d+$/.test(className));
             const sourceSize = Number(sizeClass?.slice(1) ?? 0);
+            const sourceHeight = Number(scalePixel.dataset.pixelSourceHeight ?? sourceSize);
             const sourceX = parseFloat(scalePixel.style.left) / 100 * sourceWidth + sourceSize / 2;
-            const sourceY = parseFloat(scalePixel.style.top) / 100 * HERO_TREE_HEIGHT + sourceSize / 2;
+            const sourceY = parseFloat(scalePixel.style.top) / 100 * HERO_TREE_HEIGHT + sourceHeight / 2;
+            const pixelBox = scalePixel.getBoundingClientRect();
             return {
               element: scalePixel,
               point: {
-                x: positionBox.left - fieldBox.left + sourceX * scaleX,
-                y: positionBox.top - fieldBox.top + sourceY * scaleY,
+                x: pixelBox.left - fieldBox.left + pixelBox.width / 2,
+                y: pixelBox.top - fieldBox.top + pixelBox.height / 2,
               },
               phase: Math.hypot(sourceX - anchorX, sourceY - anchorY) * 0.065
                 + (side === 'left' ? 0.35 : 1.05),
+              normalizedY: clamp(sourceY / HERO_TREE_HEIGHT, 0, 1),
+              seed: Math.abs(Math.sin(sourceX * 12.9898 + sourceY * 78.233)) % 1,
             };
           }),
         }];
@@ -654,6 +1030,8 @@ export const initializeHeroPixelFields = () => {
     const collectTitleRect = (fieldBox: DOMRect) => {
       if (!titleInk) {
         titleRect = null;
+        titleInkLayouts = [];
+        titleInkStrength = 0;
         return;
       }
       const box = titleInk.getBoundingClientRect();
@@ -663,9 +1041,22 @@ export const initializeHeroPixelFields = () => {
         right: box.right - fieldBox.left,
         bottom: box.bottom - fieldBox.top,
       };
+      titleInkLayouts = titleInkSurfaces.map((element) => {
+        const surfaceBox = element.getBoundingClientRect();
+        return {
+          element,
+          rect: {
+            left: surfaceBox.left - fieldBox.left,
+            top: surfaceBox.top - fieldBox.top,
+            right: surfaceBox.right - fieldBox.left,
+            bottom: surfaceBox.bottom - fieldBox.top,
+          },
+        };
+      });
     };
 
     const collectLayout = () => {
+      if (treeInteractionMode === 'calm') stopTreePulse({ clear: true });
       const fieldBox = field.getBoundingClientRect();
       const previousRestingAmplitude = baseAmplitude();
       width = Math.max(1, fieldBox.width);
@@ -726,9 +1117,11 @@ export const initializeHeroPixelFields = () => {
       );
       configureGeometry();
       collectBranchLayouts(fieldBox);
+      syncTreePulseForPointer();
       collectTitleRect(fieldBox);
       resetBranches();
       field.dataset.ready = 'true';
+      scheduleTreePulse();
     };
 
     const stopPointerFrame = () => {
@@ -744,8 +1137,11 @@ export const initializeHeroPixelFields = () => {
 
     const pointerTick = (timestamp: number) => {
       pointerFrame = 0;
-      if (!active || !visible || document.hidden || !motionEnabled()) return;
-      if (pointerDirty) {
+      if (!visible || document.hidden || !motionEnabled()) {
+        if (treeInteractionMode === 'calm') clearTreeWind();
+        return;
+      }
+      if (active && pointerDirty) {
         if (terrainEnabled) {
           const next = posteriorForPointer(pointer.x, pointer.y, width, height);
           meanVelocity = 0;
@@ -754,9 +1150,14 @@ export const initializeHeroPixelFields = () => {
         }
         pointerDirty = false;
       }
-      const branchMoving = treeMotionEnabled ? applyBranchMotion(timestamp) : false;
-      applyTitleInk();
-      if (active && branchMoving) {
+      const branchMoving = treeMotionEnabled
+        ? treeInteractionMode === 'calm'
+          ? advanceTreeWindMotion(timestamp)
+          : active && applyBranchMotion(timestamp)
+        : false;
+      if (active) applyTitleInk();
+      else clearTitleInk();
+      if (branchMoving) {
         pointerFrame = window.requestAnimationFrame(pointerTick);
       }
     };
@@ -805,9 +1206,17 @@ export const initializeHeroPixelFields = () => {
       if (!active) return;
       active = false;
       pointerDirty = false;
-      stopPointerFrame();
+      syncTreePulseForPointer();
       field.dataset.interaction = 'idle';
-      resetBranches();
+      if (treeInteractionMode === 'calm') {
+        treeWindTarget = 0;
+        treeWindPointer = null;
+        treeWindPointerTimestamp = 0;
+        schedulePointerFrame();
+      } else {
+        stopPointerFrame();
+        resetBranches();
+      }
       clearTitleInk();
       startSpring();
     };
@@ -820,9 +1229,13 @@ export const initializeHeroPixelFields = () => {
         x: clamp(latest.clientX - fieldOrigin.x, 0, width),
         y: clamp(latest.clientY - fieldOrigin.y, 0, height),
       };
+      field.dataset.pointerX = pointer.x.toFixed(1);
+      field.dataset.pointerY = pointer.y.toFixed(1);
+      updateTreeWindForPointer(latest.timeStamp);
       stopSpring();
       active = true;
       pointerDirty = true;
+      syncTreePulseForPointer();
       field.dataset.interaction = 'pointer';
       schedulePointerFrame();
     };
@@ -867,6 +1280,12 @@ export const initializeHeroPixelFields = () => {
       clearTitleInk();
       if (terrainEnabled) commit(mean, amplitude, true);
       resetBranches();
+      treePauseRequested = false;
+      treePulsePaused = false;
+      field.dataset.treePointerNearby = 'false';
+      field.dataset.treePulsePaused = 'false';
+      stopTreePulse({ clear: true });
+      scheduleTreePulse();
       field.dataset.animated = motionEnabled() ? 'true' : 'false';
       field.dataset.interaction = 'idle';
     };
@@ -874,6 +1293,7 @@ export const initializeHeroPixelFields = () => {
     const intersectionObserver = new IntersectionObserver((entries) => {
       visible = entries[0]?.isIntersecting ?? false;
       if (!visible) resetMotion();
+      else scheduleTreePulse();
     }, { rootMargin: '180px' });
     intersectionObserver.observe(field);
 
@@ -881,6 +1301,7 @@ export const initializeHeroPixelFields = () => {
     finePointer.addEventListener('change', resetMotion, { signal });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) resetMotion();
+      else scheduleTreePulse();
     }, { signal });
 
     const destroy = () => {
@@ -889,6 +1310,7 @@ export const initializeHeroPixelFields = () => {
       if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
       if (originFrame) window.cancelAnimationFrame(originFrame);
       if (scaleCleanupTimer) window.clearTimeout(scaleCleanupTimer);
+      stopTreePulse({ clear: true });
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       abortController.abort();

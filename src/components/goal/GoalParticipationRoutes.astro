@@ -1,0 +1,62 @@
+---
+import { editionPath, type EditionConfig } from '../../config/site';
+import { conference2026 } from '../../data/conference2026';
+import '../../styles/goal-participation.css';
+
+interface Props {
+  edition: EditionConfig;
+  posterHref: string;
+}
+
+const { edition, posterHref } = Astro.props;
+---
+
+<section class="goal-recall" id="goal-participation" aria-labelledby="goal-recall-title">
+  <div class="goal-recall__heading">
+    <div class="goal-home-lower__section-mark" aria-hidden="true">03</div>
+    <div>
+      <p class="goal-home-lower__eyebrow">JOIN THE FIELD</p>
+      <h2 id="goal-recall-title">选择你进入现场的方式</h2>
+    </div>
+  </div>
+
+  <div class="goal-recall__routes">
+    <article class="goal-recall__poster">
+      <p>专业参与入口</p>
+      <h3>{conference2026.poster.title}</h3>
+      <p>{conference2026.poster.headline}</p>
+      <dl>
+        <div>
+          <dt>投稿截止</dt>
+          <dd><time datetime={conference2026.poster.deadline.dateTime}>{conference2026.poster.deadline.date} {conference2026.poster.deadline.time}</time></dd>
+        </div>
+        <div>
+          <dt>入选权益</dt>
+          <dd>{conference2026.poster.ticket.label}</dd>
+        </div>
+      </dl>
+      <a href={posterHref}>查看海报报名</a>
+    </article>
+
+    <article class="goal-recall__registration">
+      <p>大会报名 · 主入口</p>
+      <h3>来北京，和下一代 AI 研究者见面</h3>
+      <div class="goal-recall__registration-meta">
+        <span>{conference2026.dates.display}</span>
+        <span>{conference2026.venue.name}</span>
+        <span>{conference2026.registration.status}</span>
+      </div>
+      <p>{conference2026.registration.description}</p>
+      <a
+        href={conference2026.registration.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >立即报名大会</a>
+    </article>
+  </div>
+
+  <footer class="goal-recall__footer">
+    <p>X-AGI 2026 · AI Conference for the neXt Generation</p>
+    <a href={editionPath(edition, 'guide')}>查看参会指南</a>
+  </footer>
+</section>

@@ -1,6 +1,7 @@
 ---
 import EditionShell from '../../components/EditionShell.astro';
 import ConferenceHome from '../../components/ConferenceHome.astro';
+import GoalHomeLower from '../../components/GoalHomeLower.astro';
 import { editionPath, goalDesignEdition } from '../../config/site';
 ---
 
@@ -8,8 +9,9 @@ import { editionPath, goalDesignEdition } from '../../config/site';
   edition={goalDesignEdition}
   canonicalPath={editionPath(goalDesignEdition)}
   showFooter={false}
-  bodyClass="edition-goal-home"
+  bodyClass="edition-goal-home edition-goal-home--with-lower"
   headerBehavior="overlay-scroll"
 >
   <ConferenceHome edition={goalDesignEdition} heroOnly />
+  <GoalHomeLower edition={goalDesignEdition} />
 </EditionShell>

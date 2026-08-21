@@ -1,15 +1,42 @@
 ---
 import { conference2026, type Organization } from '../../data/conference2026';
-import { partnerLogoByName } from '../../data/legacy-partner-assets';
+import {
+  partnerLogoForName,
+  type PartnerLogoSurface,
+} from '../../data/legacy-partner-assets';
+
+interface Props {
+  logoSurface?: PartnerLogoSurface;
+}
+
+const { logoSurface = 'published' } = Astro.props;
+
+const aboutOrganizerOrder = [
+  '清华大学统计与数据科学系',
+  '中国人民大学应用统计科学研究中心',
+  '中国人民大学统计学院',
+  '统计之都',
+  'FAI 人工智能基础',
+  '中国商业统计学会人工智能分会',
+] as const;
+const aboutOrganizerRank = new Map(aboutOrganizerOrder.map((name, index) => [name, index]));
+const aboutOrganizers = [...conference2026.organizers, ...conference2026.initiators].sort(
+  (left, right) =>
+    (aboutOrganizerRank.get(left.name) ?? Number.MAX_SAFE_INTEGER) -
+    (aboutOrganizerRank.get(right.name) ?? Number.MAX_SAFE_INTEGER),
+);
 
 const groups: { label: string; organizations: readonly Organization[] }[] = [
-  { label: '主办单位', organizations: conference2026.organizers },
+  {
+    label: '主办单位',
+    organizations: aboutOrganizers,
+  },
   { label: '协办单位', organizations: conference2026.coOrganizers },
   { label: '赞助单位', organizations: conference2026.sponsors },
 ].filter((group) => group.organizations.length > 0);
 ---
 
-<main class="main-content">
+<main class:list={['main-content', { 'legacy-about--goal-logos': logoSurface === 'goal' }]}>
   <div class="container custom-container">
     <div class="info-card">
       <div class="card-header">关于会议</div>
@@ -23,7 +50,7 @@ const groups: { label: string; organizations: readonly Organization[] }[] = [
         <div class="card-header">{group.label}</div>
         <div class="card-body org-list">
           {group.organizations.map((organization, index) => {
-            const logo = partnerLogoByName[organization.name];
+            const logo = partnerLogoForName(organization.name, logoSurface);
             return (
               <>
                 {index > 0 && <hr />}

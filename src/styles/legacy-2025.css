@@ -401,6 +401,15 @@
   max-height: 52px;
 }
 
+.edition-legacy-2025 .legacy-about--goal-logos .org-item img.sponsor-will {
+  width: 7.6rem;
+  max-height: none;
+}
+
+.edition-legacy-2025 .legacy-about--goal-logos .org-item img.sponsor-quantverse {
+  max-height: 42px;
+}
+
 .edition-legacy-2025 .status-badge.status-open {
   display: inline-block;
   margin-left: 0.5rem;
@@ -418,6 +427,99 @@
 
 .edition-legacy-2025 .org-item--text-only {
   align-items: flex-start;
+}
+
+.edition-legacy-2025 .hotel-offer-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 220px);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.25rem);
+  margin-top: 0.75rem;
+  padding: clamp(1.35rem, 3vw, 2.25rem);
+  border: 1px solid rgb(103 82 200 / 0.18);
+  border-left: 4px solid #6752c8;
+  border-radius: 8px;
+  background: #f8f6fc;
+}
+
+.edition-legacy-2025 .hotel-offer-card__eyebrow {
+  margin: 0 0 0.45rem;
+  color: #6752c8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.edition-legacy-2025 .hotel-offer-card h5 {
+  margin: 0;
+  color: #111342;
+  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.edition-legacy-2025 .hotel-offer-card__description {
+  margin: 0.8rem 0 1.15rem;
+  color: #50536b;
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+.edition-legacy-2025 .hotel-offer-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.75rem;
+  margin: 0;
+}
+
+.edition-legacy-2025 .hotel-offer-card__details div {
+  min-width: 8rem;
+}
+
+.edition-legacy-2025 .hotel-offer-card__details dt {
+  margin-bottom: 0.2rem;
+  color: #7a7d91;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.edition-legacy-2025 .hotel-offer-card__details dd {
+  margin: 0;
+  color: #24265f;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.edition-legacy-2025 .hotel-offer-card__details dd span {
+  padding-inline: 0.2rem;
+  color: #8a8da0;
+}
+
+.edition-legacy-2025 .hotel-offer-card__code {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.edition-legacy-2025 .hotel-offer-card__code-frame {
+  padding: 0.65rem;
+  border: 1px solid rgb(17 19 66 / 0.1);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgb(17 19 66 / 0.1);
+}
+
+.edition-legacy-2025 .hotel-offer-card__code img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.edition-legacy-2025 .hotel-offer-card__code figcaption {
+  margin-top: 0.65rem;
+  color: #6d7083;
+  font-size: 0.78rem;
 }
 
 .edition-legacy-2025 .legacy-ticket-table {
@@ -467,9 +569,119 @@
   color: #1848d6;
 }
 
-.edition-legacy-2025 .session-item--reserved .session-title {
-  min-height: 2.4rem;
-  color: #8a93a5;
+.edition-legacy-2025 .schedule-intro {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.edition-legacy-2025 .schedule-intro p {
+  margin: 0;
+}
+
+.edition-legacy-2025 .schedule-intro p:last-child {
+  color: #5f6575;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.edition-legacy-2025 .schedule-card .card-header {
+  margin: 0;
+}
+
+.edition-legacy-2025 .schedule-talk {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.edition-legacy-2025 .schedule-talk .session-title,
+.edition-legacy-2025 .schedule-talk .session-speaker,
+.edition-legacy-2025 .schedule-talk__detail h4,
+.edition-legacy-2025 .schedule-talk__detail p {
+  margin: 0;
+}
+
+.edition-legacy-2025 .schedule-talk .session-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  min-height: 0;
+}
+
+.edition-legacy-2025 .schedule-talk .session-title span {
+  color: #24265f;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.edition-legacy-2025 .schedule-talk .session-speaker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.65rem;
+  color: #53586a;
+  cursor: default;
+}
+
+.edition-legacy-2025 .schedule-talk .session-speaker strong {
+  color: #24265f;
+}
+
+.edition-legacy-2025 .schedule-talk__detail {
+  padding-top: 0.75rem;
+  border-top: 1px solid #e4e7ee;
+}
+
+.edition-legacy-2025 .schedule-talk__detail h4 {
+  margin-bottom: 0.3rem;
+  color: #24265f;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.edition-legacy-2025 .schedule-talk__detail p {
+  color: #53586a;
+  line-height: 1.7;
+}
+
+.edition-legacy-2025 .schedule-talk__slides {
+  justify-self: start;
+  color: #4f3caf;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+@media (max-width: 767.98px) {
+  .edition-legacy-2025 .hotel-offer-card {
+    grid-template-columns: 1fr;
+  }
+
+  .edition-legacy-2025 .hotel-offer-card__code {
+    width: min(76vw, 240px);
+    max-width: none;
+  }
+
+  .edition-legacy-2025 .schedule-intro {
+    display: block;
+  }
+
+  .edition-legacy-2025 .schedule-intro p:last-child {
+    margin-top: 0.45rem;
+    text-align: left;
+  }
+
+  .edition-legacy-2025 .session-title,
+  .edition-legacy-2025 .schedule-talk .session-title {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .edition-legacy-2025 .session-time {
+    margin-right: 0;
+  }
 }
 
 .edition-legacy-2025 .legacy-fact-table {

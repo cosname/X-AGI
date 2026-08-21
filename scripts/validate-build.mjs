@@ -272,6 +272,7 @@ for (const group of buildGroups) {
 
     const htmlBytes = (await stat(file)).size;
     const source = await readFile(file, 'utf8');
+    const staticMarkup = source.replace(/<script\b[\s\S]*?<\/script>/gi, '');
     const isDomPixelHomepage = page === ''
       && source.includes('data-hero-pixel-field');
     const htmlBudget = isDomPixelHomepage ? 700_000 : 50_000;
@@ -335,12 +336,12 @@ for (const group of buildGroups) {
     if (
       group.edition.skin === 'goal'
       && (
-        !source.includes('class="site-header"')
-        || !source.includes('/brand/xagi-connect-logo.png')
-        || !source.includes('data-nav-capsule="true"')
-        || !source.includes('data-nav-capsule-target')
-        || source.includes('class="navbar ')
-        || source.includes('/2025/assets/js/script.js')
+        !staticMarkup.includes('class="site-header"')
+        || !staticMarkup.includes('/brand/xagi-connect-logo.png')
+        || !staticMarkup.includes('data-nav-capsule="true"')
+        || !staticMarkup.includes('data-nav-capsule-target')
+        || staticMarkup.includes('class="navbar ')
+        || staticMarkup.includes('/2025/assets/js/script.js')
       )
     ) {
       failures.push(`${route}: goal page must use only the shared 2026 navigation component`);
@@ -348,24 +349,29 @@ for (const group of buildGroups) {
     if (
       group.edition.skin !== 'goal'
       && (
-        source.includes('data-scroll-header="true"')
-        || source.includes('data-nav-capsule="true"')
-        || source.includes('data-nav-capsule-target')
-        || source.includes('data-pointer-effect="ripple"')
+        staticMarkup.includes('data-scroll-header="true"')
+        || staticMarkup.includes('data-nav-capsule="true"')
+        || staticMarkup.includes('data-nav-capsule-target')
+        || staticMarkup.includes('data-pointer-effect="ripple"')
       )
     ) {
       failures.push(`${route}: goal header interaction leaked outside the goal design`);
     }
 
     if (isDomPixelHomepage) {
-      const compressedBytes = gzipSync(source).byteLength;
-      if (compressedBytes > 75_000) {
-        failures.push(`${route}: compressed HTML exceeds 75 KB DOM-art budget`);
+      const compressedPageBytes = gzipSync(source).byteLength;
+      if (compressedPageBytes > 75_000) {
+        failures.push(`${route}: compressed homepage HTML exceeds 75 KB budget`);
       }
 
       const hero = source.match(
         /<section\b[^>]*class="[^"]*\bconference-hero\b[^"]*"[^>]*>[\s\S]*?<\/section>/,
       )?.[0] ?? '';
+      const compressedHeroBytes = gzipSync(hero).byteLength;
+      if (compressedHeroBytes > 55_000) {
+        failures.push(`${route}: compressed hero HTML exceeds 55 KB budget`);
+      }
+
       const expectedPixels = Number(hero.match(/data-pixel-count="(\d+)"/)?.[1] ?? 0);
       const renderedPixels = [...hero.matchAll(/class="hp\s/g)].length;
       const terrainLayers = [...hero.matchAll(/\sdata-layer=/g)].length;
@@ -384,7 +390,7 @@ for (const group of buildGroups) {
         if (
           !hero.includes('data-visual-composition="badge"')
           || !hero.includes('data-terrain-enabled="true"')
-          || !hero.includes('data-tree-interaction="none"')
+          || !hero.includes('data-tree-interaction="calm"')
           || !hero.includes('data-terrain-profile="tree-foundation"')
         ) {
           failures.push(`${route}: goal homepage must expose the badge composition contract`);
@@ -489,6 +495,13 @@ const officialCopyByRoute = new Map([
           ]),
         ]),
       ]).filter(Boolean),
+      conference2026.programPreview.status,
+      conference2026.programPreview.note,
+      ...conference2026.programPreview.sessions.flatMap((session) => [
+        session.title,
+        session.chair.name,
+        ...session.speakers.map((speaker) => speaker.name),
+      ]),
     ],
   ],
   [
@@ -508,6 +521,19 @@ const officialCopyByRoute = new Map([
     ],
   ],
   [
+    'guide/index.html',
+    [
+      conference2026.venue.scheduleName,
+      conference2026.venue.nameEn,
+      ...conference2026.venue.maps.flatMap((map) => [map.title, map.description]),
+      '交通与住宿',
+      '友谊宾馆 X-AGI 大会专属优惠',
+      '5328460',
+      '2026.10.16',
+      '2026.10.19',
+    ],
+  ],
+  [
     'register/index.html',
     [
       conference2026.registration.description,
@@ -522,6 +548,7 @@ const officialCopyByRoute = new Map([
         ]),
       ]),
       conference2026.venue.scheduleName,
+      '报名链接',
     ],
   ],
 ]);
@@ -597,26 +624,226 @@ if (rootText.includes('青年之夜')) {
 }
 
 const goalIndex = await readFile(path.join(root, 'goal/index.html'), 'utf8');
-if (!goalIndex.includes('<meta name="robots" content="noindex, nofollow">')) {
-  failures.push('goal/index.html: preview must be noindex');
-}
+const goalPages = ['', 'about', 'schedule', 'poster', 'guide', 'register'];
 
-for (const page of ['about', 'schedule', 'poster', 'guide', 'register']) {
-  const route = `goal/${page}/index.html`;
-  const source = await readFile(path.join(root, route), 'utf8');
-  if (!source.includes('data-pointer-effect="ripple"')) {
+for (const page of goalPages) {
+  const route = page ? `goal/${page}/index.html` : 'goal/index.html';
+  const source = page ? await readFile(path.join(root, route), 'utf8') : goalIndex;
+
+  if (!source.includes('<meta name="robots" content="noindex, nofollow">')) {
+    failures.push(`${route}: goal preview must be noindex and nofollow`);
+  }
+  if (page && !source.includes('data-pointer-effect="ripple"')) {
     failures.push(`${route}: goal masthead must expose the ripple-only pointer field`);
   }
 }
-if (!goalIndex.includes('conference-home--hero-only')) {
-  failures.push('goal/index.html: homepage must use the hero-only composition');
+
+if (!goalIndex.includes('edition-goal-home--with-lower')) {
+  failures.push('goal/index.html: full preview must enable the long-form homepage shell');
 }
+
+const goalHomeMarkers = [
+  'data-goal-home-contract="full-preview"',
+  'id="goal-history"',
+  'data-history-gallery',
+  'id="goal-agenda"',
+  'data-compact-schedule',
+  'id="goal-participation"',
+  'class="goal-partners"',
+  'class="goal-partners__legal"',
+];
+let previousGoalMarkerIndex = -1;
+for (const marker of goalHomeMarkers) {
+  const markerIndex = goalIndex.indexOf(marker);
+  if (markerIndex < 0) {
+    failures.push(`goal/index.html: missing full-preview marker "${marker}"`);
+    continue;
+  }
+  if (markerIndex < previousGoalMarkerIndex) {
+    failures.push(`goal/index.html: full-preview marker "${marker}" is out of order`);
+  }
+  previousGoalMarkerIndex = markerIndex;
+}
+
+const expectedGoalHomeCopy = [
+  conference2026.history.title,
+  conference2026.history.summary,
+  ...conference2026.history.stats.flatMap((item) => [item.value, item.label]),
+  ...conference2026.history.gallery.flatMap((item) => [
+    item.year,
+    item.location,
+    item.title,
+    item.caption,
+  ]),
+  conference2026.poster.title,
+  conference2026.poster.headline,
+  conference2026.poster.ticket.label,
+  conference2026.registration.status,
+  conference2026.registration.description,
+  '发起单位',
+  '主办单位',
+  '协办单位',
+  '赞助单位',
+  '京ICP备2024062260号-3',
+  '京公网安备11010502057471号',
+];
+const goalText = visibleText(goalIndex);
+for (const expected of expectedGoalHomeCopy) {
+  if (!goalText.includes(expected)) {
+    failures.push(`goal/index.html: missing full-preview copy "${expected}"`);
+  }
+}
+
+const goalPartnerStart = goalIndex.indexOf('class="goal-partners"');
+const goalPartnerFragment = goalPartnerStart >= 0 ? goalIndex.slice(goalPartnerStart) : '';
+const goalPartnerText = visibleText(goalPartnerFragment);
+const goalPartnerGroups = [
+  ['initiators', '发起单位', conference2026.initiators],
+  ['organizers', '主办单位', conference2026.organizers],
+  ['co-organizers', '协办单位', conference2026.coOrganizers],
+  ['sponsors', '赞助单位', conference2026.sponsors],
+];
+let previousGoalPartnerIndex = -1;
+for (const [key, label, organizations] of goalPartnerGroups) {
+  const groupMarker = `goal-partners__group--${key}`;
+  const groupIndex = goalPartnerFragment.indexOf(groupMarker);
+  if (groupIndex < 0) {
+    failures.push(`goal/index.html: missing semantic partner group "${label}"`);
+  } else if (groupIndex < previousGoalPartnerIndex) {
+    failures.push(`goal/index.html: partner group "${label}" is out of order`);
+  }
+  previousGoalPartnerIndex = Math.max(previousGoalPartnerIndex, groupIndex);
+
+  for (const organization of organizations) {
+    if (!goalPartnerText.includes(organization.name)) {
+      failures.push(`goal/index.html: missing ${label} organization "${organization.name}"`);
+    }
+  }
+}
+
+for (const [marker, description] of [
+  ['data-goal-home-contract=', 'full-preview contract'],
+  ['data-goal-home-lower', 'goal lower-page composition'],
+  ['data-history-gallery', 'history gallery'],
+  ['data-compact-schedule', 'compact schedule'],
+  ['goal-partners__legal', 'goal legal footer'],
+  ['conference-program-outline', 'goal schedule outline'],
+]) {
+  if (rootIndex.includes(marker)) {
+    failures.push(`index.html: ${description} must not leak into the public homepage`);
+  }
+}
+
+const scheduleIndex = await readFile(path.join(root, 'schedule/index.html'), 'utf8');
+const goalScheduleIndex = await readFile(path.join(root, 'goal/schedule/index.html'), 'utf8');
+const scheduleSessionCount = conference2026.schedule.reduce(
+  (count, day) => count + day.sessions.length,
+  0,
+);
+const publishedTalks = conference2026.schedule.flatMap((day) =>
+  day.sessions.flatMap((session) => (session.talks ?? []).filter((talk) =>
+    Boolean(
+      talk.time
+      || talk.title
+      || talk.speaker
+      || talk.affiliation
+      || talk.abstract
+      || talk.bio
+      || talk.slides
+    )
+  ))
+);
+const publicScheduleCards = [
+  ...scheduleIndex.matchAll(/class="[^"]*\bschedule-card\b[^"]*"/g),
+].length;
+const publicScheduleTalks = [
+  ...scheduleIndex.matchAll(/class="[^"]*\bschedule-talk\b[^"]*"/g),
+].length;
+const goalScheduleDays = [
+  ...goalScheduleIndex.matchAll(/class="conference-program-outline__day"/g),
+].length;
+const goalSchedulePeriods = [
+  ...goalScheduleIndex.matchAll(/class="conference-program-outline__period"/g),
+].length;
+const goalScheduleTalkGroups = [
+  ...goalScheduleIndex.matchAll(/class="conference-program-outline__talks"/g),
+].length;
+const publishedTalkGroups = conference2026.schedule.reduce(
+  (count, day) => count + day.sessions.filter((session) =>
+    (session.talks ?? []).some((talk) => publishedTalks.includes(talk))
+  ).length,
+  0,
+);
+
+if (!scheduleIndex.includes('class="conference-program-preview conference-program-preview--schedule"')) {
+  failures.push('schedule/index.html: public schedule must render the shared program preview');
+}
+if (!scheduleIndex.includes('class="schedule-intro"') || !scheduleIndex.includes('class="nav nav-pills schedule-tabs')) {
+  failures.push('schedule/index.html: public schedule must preserve its date-navigation structure');
+}
+if (scheduleIndex.includes('conference-program-outline')) {
+  failures.push('schedule/index.html: goal schedule outline must not leak into the public schedule');
+}
+if (publicScheduleCards !== scheduleSessionCount) {
+  failures.push(`schedule/index.html: expected ${scheduleSessionCount} schedule cards, found ${publicScheduleCards}`);
+}
+if (publicScheduleTalks !== publishedTalks.length) {
+  failures.push(`schedule/index.html: expected ${publishedTalks.length} published talks, found ${publicScheduleTalks}`);
+}
+
 if (
-  goalIndex.includes('conference-home__ground')
-  || goalIndex.includes('conference-partners')
-  || goalIndex.includes('<footer class="site-footer">')
+  !goalScheduleIndex.includes('goal-schedule-preview')
+  || !goalScheduleIndex.includes('class="conference-program-outline"')
+  || !goalScheduleIndex.includes('class="conference-program-preview conference-program-preview--schedule"')
 ) {
-  failures.push('goal/index.html: homepage must not render unfinished lower-screen content');
+  failures.push('goal/schedule/index.html: preview must compose the schedule outline and shared program preview');
+}
+if (goalScheduleDays !== conference2026.schedule.length) {
+  failures.push(`goal/schedule/index.html: expected ${conference2026.schedule.length} schedule days, found ${goalScheduleDays}`);
+}
+if (goalSchedulePeriods !== scheduleSessionCount) {
+  failures.push(`goal/schedule/index.html: expected ${scheduleSessionCount} schedule sessions, found ${goalSchedulePeriods}`);
+}
+if (goalScheduleTalkGroups !== publishedTalkGroups) {
+  failures.push(`goal/schedule/index.html: expected ${publishedTalkGroups} published-talk groups, found ${goalScheduleTalkGroups}`);
+}
+
+for (const placeholder of [
+  'Full schedule TBD. Current sessions and speakers are listed below.',
+  'SESSIONS & SPEAKERS',
+  'Exact dates, times, rooms, and talk titles are TBD.',
+  'Time TBD',
+  'Talk title TBD',
+  'Speaker TBD',
+]) {
+  if (scheduleIndex.includes(placeholder) || goalScheduleIndex.includes(placeholder)) {
+    failures.push(`schedule routes: retired placeholder copy must not be published ("${placeholder}")`);
+  }
+}
+
+for (const talk of publishedTalks) {
+  if (talk.slides) {
+    for (const [route, source] of [
+      ['schedule/index.html', scheduleIndex],
+      ['goal/schedule/index.html', goalScheduleIndex],
+    ]) {
+      if (!source.includes(`href="${talk.slides}"`)) {
+        failures.push(`${route}: missing published slide link "${talk.slides}"`);
+      }
+    }
+  }
+}
+
+const aiInfra = conference2026.programPreview.sessions.find((session) => session.title === 'AI Infra');
+if (!aiInfra || aiInfra.speakers.length !== 0) {
+  failures.push('conference2026: AI Infra must not publish unconfirmed speakers');
+}
+const posterTicketCopy = '报名参加 Rising Stars Poster 即赠专业票。';
+if (
+  !conference2026.registration.notes.includes(posterTicketCopy)
+  || !conference2026.tickets.notes.includes(posterTicketCopy)
+) {
+  failures.push('conference2026: registration paths must preserve the audited Rising Stars Poster wording');
 }
 
 const nextIndex = await readFile(path.join(root, 'next/index.html'), 'utf8');
