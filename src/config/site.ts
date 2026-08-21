@@ -59,7 +59,7 @@ export const nextDesignEdition: EditionConfig = {
   skin: 'next',
 };
 
-/** Local acceptance preview: animated hero, long-form homepage, and published-content inner pages. */
+/** Local acceptance mirror: animated hero, history-first homepage, and published-content inner pages. */
 export const goalDesignEdition: EditionConfig = {
   ...editions['2026'],
   path: '/goal',

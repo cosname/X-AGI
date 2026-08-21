@@ -1779,6 +1779,38 @@ No actionable P0, P1, or P2 visual, interaction, responsive, or accessibility is
 
 final result: passed
 
+## Official Homepage History Lower Page Publication
+
+### Comparison target
+
+- Previous production homepage: `output/playwright/history-publish-fix/before-live-root-desktop.png`.
+- Approved history source: `output/playwright/history-publish-fix/source-goal-history-desktop.png`.
+- Updated desktop homepage: `output/playwright/history-publish-fix/after-local-root-history-desktop.png` at a 1440 x 900 CSS pixel viewport.
+- Updated mobile homepage: `output/playwright/history-publish-fix/after-local-root-history-mobile.png` at a 390 x 844 CSS pixel viewport.
+
+### Findings
+
+No actionable P0, P1, or P2 visual, interaction, responsive, accessibility, or publication issues remain for this correction.
+
+- Root cause: the public `/` homepage still rendered `ConferencePublishedHome`, while the approved 17-event and 51-photo history-first lower page only rendered on `/goal/` and its generated image assets were excluded from OSS synchronization.
+- Route correction: the public `/` homepage now renders the same `GoalHomeLower` composition as the `/goal/` acceptance mirror, while retaining public root links and canonical metadata.
+- Content integrity: both homepage paths contain 17 history events, 51 responsive images, the waveform directory, the three organization groups, and the legal footer in the approved order.
+- Visual integrity: desktop and mobile browser captures show the history heading, waveform directory, first two event mosaics, captions, organization transition, and fixed navigation without visible overlap or broken imagery.
+- Responsive behavior: the 390 x 844 mobile viewport reported a 390-pixel client width and a 375-pixel document scroll width, so the page has no document-level horizontal overflow while the gallery retains intentional horizontal scrolling.
+- Deferred loading: entering the history section initialized the gallery and loaded the visible image candidates while leaving later images lazy.
+- Interaction behavior: selecting the 2018 Shanghai waveform target moved the gallery from x 0 to x 2471, updated `aria-current` to the selected meeting, and preserved the document y position at 860 pixels.
+- Browser health: desktop and mobile passes reported zero console errors and zero warnings.
+- Publication integrity: the OSS script continues to exclude `/goal/` and `/next/` routes but now includes the generated `goal-history-*` assets required by the public root page.
+
+### Automated verification
+
+- `npm test` passed all 62 unit tests, Astro diagnostics with zero errors, warnings, or hints, generation of 20 pages, and the complete build validator.
+- The build validator confirmed byte-identical history-first lower-page output between `/` and `/goal/`.
+- The build validator confirmed 17 events, 51 images, descending chronology, responsive local assets, lazy loading, waveform controls, organization order, legal information, and OSS asset publication.
+- `git diff --check` completed without whitespace errors.
+
+final result: passed
+
 ## Compact Mobile Navigation Liquid Shell Refinement
 
 ### Comparison target

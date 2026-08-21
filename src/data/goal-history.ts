@@ -11,7 +11,7 @@ export const goalHistoryPhotoRoles = [
 
 export type GoalHistoryPhotoRole = (typeof goalHistoryPhotoRoles)[number];
 export type GoalHistoryMode = 'onsite' | 'hybrid' | 'online';
-export type GoalHistoryRightsStatus = 'official-recap-review-before-publication';
+export type GoalHistoryRightsStatus = 'official-recap-approved-for-publication';
 
 export type GoalHistoryPhoto = {
   id: string;
@@ -58,7 +58,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 1,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz/dMFkbmlFTgetGyFKClJcRib85JLyG4N1DXO555hHviceeWtdMNfpZef4SHFTY08h4Xbdymp6k2kBy8kGGSDUAaww/0?wx_fmt=jpeg#imgIndex=1',
         focalPoint: { x: 38, y: 48 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e08-2015-beijing-p2',
@@ -69,7 +69,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 12,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz/dMFkbmlFTgetGyFKClJcRib85JLyG4N1DDXLR51wbvBD9sDibpREoN1iam8dMMPdAOz5librWNUgKaju680cRR4Uag/0?wx_fmt=jpeg#imgIndex=12',
         focalPoint: { x: 52, y: 52 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e08-2015-beijing-p3',
@@ -80,7 +80,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 15,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz/dMFkbmlFTgetGyFKClJcRib85JLyG4N1DLuGibr0MKJIxn03IbjTIy3qZfICEUVVLFLGboJnIGmsngVDSygHQlIA/0?wx_fmt=jpeg#imgIndex=15',
         focalPoint: { x: 50, y: 48 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -103,7 +103,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 2,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz/dMFkbmlFTgc0qqOrpTzp6axr8g6F2iazqbaibNzyOaNcoaCzPvNcZIpntelMEiaQcnLxCRa5Y8gKDHbj2eNydcp3g/0?wx_fmt=jpeg#imgIndex=2',
         focalPoint: { x: 35, y: 56 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e09-2016-beijing-p2',
@@ -114,7 +114,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 12,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz/dMFkbmlFTgc0qqOrpTzp6axr8g6F2iazq31vqIWPpxMjnzRyazicrT7uDRUCjvaP0dx7tQ5ZogaFRHNZC2sbMQibA/0?wx_fmt=jpeg#imgIndex=12',
         focalPoint: { x: 58, y: 54 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e09-2016-beijing-p3',
@@ -125,7 +125,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 21,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz/dMFkbmlFTgc0qqOrpTzp6axr8g6F2iazqI8ONaW2jLQrXR1IV4PbohnzZ19RNp87zX0Kb50QWQS3ZCqH7Wcr9pA/0?wx_fmt=jpeg#imgIndex=21',
         focalPoint: { x: 50, y: 48 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -148,7 +148,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 2,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgezZjee0JRellKibUjLXHFxuCheT7UbDgvIpqgjGLRBDt3LGQwP3ZqOibVicjzOGXPnvRG2ia6kfd95kw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=2',
         focalPoint: { x: 29, y: 53 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e09-2016-guangzhou-p2',
@@ -159,7 +159,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 24,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgezZjee0JRellKibUjLXHFxu5IVlDFK5ribkMgujg8296wO2RHs7bVjtmS0GQE1C0DeDy4ZoLBIRkqw/0?wx_fmt=jpeg#imgIndex=24',
         focalPoint: { x: 50, y: 55 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e09-2016-guangzhou-p3',
@@ -170,7 +170,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 25,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgezZjee0JRellKibUjLXHFxunZMJJRZYqBC4VwsAH1sbyiaLfBOQTdISB4cqVCR4Ovu7NffgPx1ibMvQ/0?wx_fmt=jpeg#imgIndex=25',
         focalPoint: { x: 55, y: 58 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -193,7 +193,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 2,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfrrsVozMA8WxcapNwVflCIwqjElTmmqjJKuycSxRibjclHl9QABvTRpwjRwZyn7XPKGcib6vxMP1OA/0?wx_fmt=jpeg#imgIndex=2',
         focalPoint: { x: 35, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e10-2017-beijing-p2',
@@ -204,7 +204,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 4,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfrrsVozMA8WxcapNwVflCI2QzeSEUrre8QCviaybt9tpibZNgibhicESuwSxTsFTNOJeX1ouUr2qHib8A/0?wx_fmt=jpeg#imgIndex=4',
         focalPoint: { x: 50, y: 48 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e10-2017-beijing-p3',
@@ -215,7 +215,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 6,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfrrsVozMA8WxcapNwVflCIT772CqqmY9z8uLjQvAcY7JYdicbw7BbWO8C5s5mha6IemZ4Chfxkegg/0?wx_fmt=jpeg#imgIndex=6',
         focalPoint: { x: 53, y: 64 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -238,7 +238,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 1,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgc30mj9pM0BMTrFKqgPWwnENKiaLewtib3639QJDP7nk7R5CtmqsqjohXvtC5QMzZIIQoQWjq6EW1WA/0?wx_fmt=jpeg#imgIndex=1',
         focalPoint: { x: 42, y: 48 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e10-2017-hefei-p2',
@@ -249,7 +249,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 12,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgc30mj9pM0BMTrFKqgPWwnEtPwA6pZUwrPwYoDelDurlvrDibibx3nakZFkb5zyRrGZO0mcT6bX3F0w/0?wx_fmt=jpeg#imgIndex=12',
         focalPoint: { x: 54, y: 53 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e10-2017-hefei-p3',
@@ -260,7 +260,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 23,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgc30mj9pM0BMTrFKqgPWwnEoLdWj9eTQrSTxWCHmicouuwhA4KN0m2CZx3ehJIZTLibYH1eUVuN9Lzg/0?wx_fmt=jpeg#imgIndex=23',
         focalPoint: { x: 50, y: 51 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -283,7 +283,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 3,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgeZOuRG7LB3WmB02QQOhlFU6ODLaWakWOkh0XfUQwn7qPicZPDxazpKBKzaH9mzDy9lV5RibFJURPiaQ/0?wx_fmt=jpeg#imgIndex=3',
         focalPoint: { x: 50, y: 58 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e10-2017-lanzhou-p2',
@@ -294,7 +294,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 4,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgeZOuRG7LB3WmB02QQOhlFUAFjKGsS75jrqAXnyEN9GF7zf0b5ChUkfGKVAicFA52ZYQ7xkPE6UBdA/0?wx_fmt=jpeg#imgIndex=4',
         focalPoint: { x: 52, y: 57 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e10-2017-lanzhou-p3',
@@ -305,7 +305,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 12,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgeZOuRG7LB3WmB02QQOhlFUY7QWHUOpCXEByg8MvD7nKtibsMCxCOE2bHn4ibcvg6U28j4h97ibzOZicQ/0?wx_fmt=jpeg#imgIndex=12',
         focalPoint: { x: 53, y: 55 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -328,7 +328,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 2,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_png/dMFkbmlFTgcP0DmFRQrz4c4bvzR5u7gMsLnqhxVORnWLObjUXmTyNgvqZ4XstE9fg0GHfO8p57CgzBGHS9EX7g/?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=2',
         focalPoint: { x: 50, y: 61 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e10-2017-shanghai-p2',
@@ -339,7 +339,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 14,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_png/dMFkbmlFTgcP0DmFRQrz4c4bvzR5u7gMrIribegickyKP7T6EJOqvQRkpJjKiaJn6iagbtfhDic0TViar7QoWFnWlkPA/?wx_fmt=png#imgIndex=14',
         focalPoint: { x: 56, y: 57 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e10-2017-shanghai-p3',
@@ -350,7 +350,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 27,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_png/dMFkbmlFTgcP0DmFRQrz4c4bvzR5u7gMpQLm4AUFmebB1HicN1oSOdgTFfQXkybn9Aic8YnAqIjzDICQNAZibGnEw/?wx_fmt=png#imgIndex=27',
         focalPoint: { x: 46, y: 54 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -373,7 +373,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 3,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfYuDZibBbeTHoicZ0CgcMnARU57PD4DJAVCSGovSpBuerib0aukSscIUTTicD2oaEjHia5hwfst6N5nuA/640?wx_fmt=jpeg#imgIndex=3',
         focalPoint: { x: 42, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e11-2018-beijing-p2',
@@ -384,7 +384,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 6,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfYuDZibBbeTHoicZ0CgcMnARXUicoopNffvT9IuoK3J4ib5NqYjFkiaEC0DkEsC2gy6qaJvAECAZlicYibA/640?wx_fmt=jpeg#imgIndex=6',
         focalPoint: { x: 56, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e11-2018-beijing-p3',
@@ -395,7 +395,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 24,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfYuDZibBbeTHoicZ0CgcMnARoJQhaaKFhvm8pGAyWa5c6AWtEVrvxCgiahGgZsZrqp4nLjPFPDBr2dw/640?wx_fmt=jpeg#imgIndex=24',
         focalPoint: { x: 50, y: 52 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -418,7 +418,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 1,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdQRhA7GxtHdCfY95nI0faJG0a0q8DF3dLvHUNw8y1tkiaS83F6Apk3RrSYsgricSkWNlqgfxmFwQyw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=1',
         focalPoint: { x: 48, y: 58 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e11-2018-guangzhou-p2',
@@ -429,7 +429,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 3,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdQRhA7GxtHdCfY95nI0faJf3gF8v63k9tzoV0d3IgUkMxOIl8xcYW9O21qicGwuuUI9pibiaz0r57kQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=3',
         focalPoint: { x: 50, y: 56 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e11-2018-guangzhou-p3',
@@ -440,7 +440,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 23,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdQRhA7GxtHdCfY95nI0faJO7L1sTpsxmUEQzrRHxnZwPEibb4AQSee3TmetrLPCAbQBqtNQibvqryg/640?wx_fmt=jpeg#imgIndex=23',
         focalPoint: { x: 50, y: 58 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -463,7 +463,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 1,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfwv03rjiaMY4H3lqIln1jO9XhhmhvUo9z1CJ1vxFnSExCeaIeic7SNuZyOHb2Lia6d0EZ71VHR7QMQA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=1',
         focalPoint: { x: 50, y: 62 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e11-2018-shanghai-p2',
@@ -474,7 +474,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 41,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfwv03rjiaMY4H3lqIln1jO99SRK7xOpUD3p1FkTUbkfpSNdn69A1gLdqQtmibKHaGWkFJejpDOdoWw/640?wx_fmt=jpeg#imgIndex=41',
         focalPoint: { x: 50, y: 52 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
         depictedYear: 2009,
       },
       {
@@ -486,7 +486,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 42,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfwv03rjiaMY4H3lqIln1jO9qwp8hlQERbEXYMNXPBJicYIdvsFlvQxSS7MwoMic5yk8FtQLmSSj0jLQ/640?wx_fmt=jpeg#imgIndex=42',
         focalPoint: { x: 50, y: 55 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -509,7 +509,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 5,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdHjxASYpNszTEEHXweUDQURicNPRIFxjbhuRoib9iciaygYjc75hibibeS94zYY3Bs0NbESD9XQRVQY9QQ/640?wx_fmt=jpeg#imgIndex=5',
         focalPoint: { x: 40, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e12-2019-beijing-p2',
@@ -520,7 +520,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 7,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdHjxASYpNszTEEHXweUDQUyzcsptkrqaR6epX5aTJIfY2rYzKXo5MzJOBLzwUl2ibjzJ5uo0hxgJQ/640?wx_fmt=jpeg#imgIndex=7',
         focalPoint: { x: 52, y: 49 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e12-2019-beijing-p3',
@@ -531,7 +531,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 29,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdHjxASYpNszTEEHXweUDQUQH6PFxYFVBqAznMy0fDvc9gbbqhOtzzwI3VzIOoheGyeibRRwicToqzQ/640?wx_fmt=jpeg#imgIndex=29',
         focalPoint: { x: 54, y: 57 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -554,7 +554,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 3,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgc7icGRT2gZn2BR4MN7rhFgrEJldnefpf7b9lSukOBaDcjn8CoG3VWfmNvz6nxKUKB6nujFEAYfLEA/640?wx_fmt=jpeg#imgIndex=3',
         focalPoint: { x: 48, y: 47 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e13-2020-beijing-p2',
@@ -565,7 +565,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 7,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgc7icGRT2gZn2BR4MN7rhFgrXUqd2ia1JHzMLkicksj77193D7qDmEravLdRgx7kxfuJ53NIpscf3W1g/640?wx_fmt=jpeg#imgIndex=7',
         focalPoint: { x: 50, y: 51 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e13-2020-beijing-p3',
@@ -576,7 +576,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 41,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgc7icGRT2gZn2BR4MN7rhFgrOZBibQvKw9Yib07faloxSftNFa0iaGibtcV6QfJwe91zR4M0RP9jDIx65Q/640?wx_fmt=jpeg#imgIndex=41',
         focalPoint: { x: 50, y: 49 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -599,7 +599,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 3,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgcquW10p0ibRsydXoAO5hNubxIvDQflQjPoeIiaA2jTX4vdKDoLnsggo1b4RbTCAoJEG0lvwecmuiafw/640?wx_fmt=jpeg#imgIndex=3',
         focalPoint: { x: 40, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e14-2021-beijing-p2',
@@ -610,7 +610,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 6,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfjy1lCb23fVjZ5VbY53ejIgCNH28rGOmDxwiaNTYgibO2XRPzNX0eIN5H8R11gdS366bpUZC3cLCSw/640?wx_fmt=jpeg#imgIndex=6',
         focalPoint: { x: 48, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e14-2021-beijing-p3',
@@ -621,7 +621,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 15,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgevdOpDVLS4I1ibHFp50HvVe7fDibhzSAroNNFzpHGBeUhQD8ialttbG4XX7xlRoArYYbYD8arBuSpGA/640?wx_fmt=jpeg#imgIndex=15',
         focalPoint: { x: 58, y: 48 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -644,7 +644,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 4,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_png/dMFkbmlFTgcMKduZYicl2Riaboia4CicM3mibGk0dZYhDrUKdB8GJk75laBouxWbg2TXIWgS1j1sgU1lVC3pqzElzcQ/640?wx_fmt=png#imgIndex=4',
         focalPoint: { x: 38, y: 49 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e15-2022-beijing-p2',
@@ -655,7 +655,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 8,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_png/dMFkbmlFTgcMKduZYicl2Riaboia4CicM3mibMMhBibvV1s6PHVOS7ia3THPBNzX0LtAJnnT5AIcJMAa7sqiaUibheVKlTw/640?wx_fmt=png#imgIndex=8',
         focalPoint: { x: 62, y: 52 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e15-2022-beijing-p3',
@@ -666,7 +666,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 14,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_png/dMFkbmlFTgcMKduZYicl2Riaboia4CicM3mibUzFq80unDBK5CiaibGas0bn9Idsz90yLO0zSjUblic0Osnic1bcibutfG9g/640?wx_fmt=png#imgIndex=14',
         focalPoint: { x: 48, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -689,7 +689,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 1,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdLv0qUErH501DnXiakDlUIMH0dEMwTTLayFpHqYnkrdR8l2iazd44ib6nibrS7hTtHzF8v2A1FWjgs9A/640?wx_fmt=jpeg&from=appmsg#imgIndex=1',
         focalPoint: { x: 42, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e16-2023-beijing-xagi-p2',
@@ -700,7 +700,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 2,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdLv0qUErH501DnXiakDlUIMaICcyiacKlzugNibDRuaOBmZiclnrDYicibdsNJDzNMfVGTplCIic2N68xIg/640?wx_fmt=jpeg&from=appmsg#imgIndex=2',
         focalPoint: { x: 36, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e16-2023-beijing-xagi-p3',
@@ -711,7 +711,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 3,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgdLv0qUErH501DnXiakDlUIMVe5BYeictGPjgMeiaG1Cnnm6doNPZopFw2yxD7BczexPSJ2hfThuJljw/640?wx_fmt=jpeg&from=appmsg#imgIndex=3',
         focalPoint: { x: 45, y: 52 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -734,7 +734,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 79,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfZJkelKBMCGEtlYgJYDhtHC9qEH7SXJLYAXVFqOPgloKjj4YnKDuRsCfsGaQHn4ib1fhsia0ib731QA/640?wx_fmt=jpeg&from=appmsg#imgIndex=79',
         focalPoint: { x: 55, y: 54 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e17-2024-beijing-xagi-ifods-p2',
@@ -745,7 +745,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 5,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgezw8kiaYy5zulcW3L8BNiaADMyuGvddz1ohrJibIeZEJo2Hlrh6CPe9Sr3Y1Jx5YGGpoH6GwAgYb54g/640?wx_fmt=jpeg&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=5',
         focalPoint: { x: 55, y: 48 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e17-2024-beijing-xagi-ifods-p3',
@@ -756,7 +756,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 85,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfZJkelKBMCGEtlYgJYDhtHwd3iaH5yZBmxrZWC2xQAnEU5Ms4twn6hgLfAicFkRc2eoMhWIXLWRLEA/640?wx_fmt=jpeg&from=appmsg#imgIndex=85',
         focalPoint: { x: 56, y: 55 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },
@@ -779,7 +779,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 11,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfhGOzsIb9ukpMz2j9DM2SL8rutD2D3TkJw2yTWG2skPRibicQKodbk156AlIR5z3eOPEiapja1ia434Q/640?wx_fmt=jpeg&from=appmsg#imgIndex=11',
         focalPoint: { x: 52, y: 55 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e18-2025-beijing-xagi-p2',
@@ -790,7 +790,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 25,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfhGOzsIb9ukpMz2j9DM2SLRJp93ZB56drIevjLp03ppMTf5vTBTmxjs6dko0XmeNwYu798xYUpxA/640?wx_fmt=jpeg&from=appmsg#imgIndex=25',
         focalPoint: { x: 46, y: 47 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
       {
         id: 'e18-2025-beijing-xagi-p3',
@@ -801,7 +801,7 @@ export const goalHistoryEvents = [
         sourceImageIndex: 3,
         sourceUrl: 'https://mmbiz.qpic.cn/mmbiz_jpg/dMFkbmlFTgfhGOzsIb9ukpMz2j9DM2SLc4DZDloEpicYPeVTErOzUIrqSNHwiaa99cBphrvbwyAYVjTsRbswjujA/640?wx_fmt=jpeg&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=3',
         focalPoint: { x: 57, y: 50 },
-        rightsStatus: 'official-recap-review-before-publication',
+        rightsStatus: 'official-recap-approved-for-publication',
       },
     ],
   },

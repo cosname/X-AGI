@@ -648,21 +648,6 @@ for (const route of ['register/index.html', 'goal/register/index.html']) {
   }
 }
 
-for (const expectedCopy of [
-  conference2026.programPreview.status,
-  conference2026.programPreview.note,
-  conference2026.registration.description,
-  ...conference2026.programPreview.sessions.flatMap((session) => [
-    session.title,
-    session.chair.name,
-    ...session.speakers.map((speaker) => speaker.name),
-  ]),
-]) {
-  if (!rootText.includes(expectedCopy)) {
-    failures.push(`index.html: missing latest program copy "${expectedCopy}"`);
-  }
-}
-
 if (rootText.includes('青年之夜')) {
   failures.push('index.html: retired Youth Night copy must not be published');
 }
@@ -682,8 +667,15 @@ for (const page of goalPages) {
   }
 }
 
-if (!goalIndex.includes('edition-goal-home--with-lower')) {
-  failures.push('goal/index.html: history-first preview must enable the long-form homepage shell');
+const historyHomePages = [
+  ['index.html', rootIndex],
+  ['goal/index.html', goalIndex],
+];
+
+for (const [route, source] of historyHomePages) {
+  if (!source.includes('edition-goal-home--with-lower')) {
+    failures.push(`${route}: history-first homepage must enable the long-form shell`);
+  }
 }
 
 const goalHomeMarkers = [
@@ -693,17 +685,19 @@ const goalHomeMarkers = [
   'id="goal-organization"',
   'class="goal-partners__legal"',
 ];
-let previousGoalMarkerIndex = -1;
-for (const marker of goalHomeMarkers) {
-  const markerIndex = goalIndex.indexOf(marker);
-  if (markerIndex < 0) {
-    failures.push(`goal/index.html: missing history-first marker "${marker}"`);
-    continue;
+for (const [route, source] of historyHomePages) {
+  let previousGoalMarkerIndex = -1;
+  for (const marker of goalHomeMarkers) {
+    const markerIndex = source.indexOf(marker);
+    if (markerIndex < 0) {
+      failures.push(`${route}: missing history-first marker "${marker}"`);
+      continue;
+    }
+    if (markerIndex < previousGoalMarkerIndex) {
+      failures.push(`${route}: history-first marker "${marker}" is out of order`);
+    }
+    previousGoalMarkerIndex = markerIndex;
   }
-  if (markerIndex < previousGoalMarkerIndex) {
-    failures.push(`goal/index.html: history-first marker "${marker}" is out of order`);
-  }
-  previousGoalMarkerIndex = markerIndex;
 }
 
 const goalText = visibleText(goalIndex);
@@ -715,10 +709,29 @@ const expectedGoalHomeCopy = [
   '京ICP备2024062260号-3',
   '京公网安备11010502057471号',
 ];
-for (const expected of expectedGoalHomeCopy) {
-  if (!goalText.includes(expected)) {
-    failures.push(`goal/index.html: missing history-first copy "${expected}"`);
+for (const [route, text] of [
+  ['index.html', rootText],
+  ['goal/index.html', goalText],
+]) {
+  for (const expected of expectedGoalHomeCopy) {
+    if (!text.includes(expected)) {
+      failures.push(`${route}: missing history-first copy "${expected}"`);
+    }
   }
+}
+
+function historyLowerFragment(source) {
+  const start = source.indexOf('<section class="goal-home-lower"');
+  const end = source.indexOf('</main>', start);
+  return start >= 0 && end > start ? source.slice(start, end) : '';
+}
+
+const rootHistoryLower = historyLowerFragment(rootIndex);
+const goalHistoryLower = historyLowerFragment(goalIndex);
+if (!rootHistoryLower || !goalHistoryLower) {
+  failures.push('index.html and goal/index.html must both render the history-first lower page');
+} else if (rootHistoryLower !== goalHistoryLower) {
+  failures.push('index.html: published history-first lower page must match the Goal acceptance mirror');
 }
 
 for (const retiredCopy of [
@@ -951,16 +964,11 @@ for (const group of conference2026PartnerDisplayGroups) {
 }
 
 for (const [marker, description] of [
-  ['data-goal-home-contract=', 'history-first preview contract'],
-  ['data-goal-home-lower', 'goal lower-page composition'],
-  ['data-history-gallery', 'history gallery'],
-  ['/_assets/goal-history-', 'history gallery assets'],
   ['data-compact-schedule', 'compact schedule'],
-  ['goal-partners__legal', 'goal legal footer'],
   ['conference-program-outline', 'goal schedule outline'],
 ]) {
   if (rootIndex.includes(marker)) {
-    failures.push(`index.html: ${description} must not leak into the public homepage`);
+    failures.push(`index.html: retired ${description} must not return to the history-first homepage`);
   }
 }
 
@@ -1111,8 +1119,8 @@ for (const previewDirectory of ['next', 'goal']) {
     failures.push(`sync-oss.mjs: production sync must exclude "${previewDirectory}/"`);
   }
 }
-if (!syncScript.includes("'_assets/goal-history-*'")) {
-  failures.push('sync-oss.mjs: production sync must exclude generated Goal history assets');
+if (syncScript.includes("'_assets/goal-history-*'")) {
+  failures.push('sync-oss.mjs: production sync must publish history assets used by the official homepage');
 }
 
 const forbidden2026Copy = [

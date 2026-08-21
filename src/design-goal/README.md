@@ -1,23 +1,23 @@
-# 2026 正式视觉与历届影像负一页
+# 2026 正式首页与历届影像 lower page
 
 “连接与树”方案已经用于 2026 正式站。
-`/goal/` 保留为负一页验收预览，用于在不改变公开 `/` 首页的前提下检查首屏之后的历届影像、组织单位和响应式表现。
-预览以正式站的一视口首屏开场，随后只呈现历届影像和组织单位两个实质部分，备案信息负责收束长页。
+公开 `/` 首页已经采用 history-first lower page，`/goal/` 保留为相同内容的本地验收镜像。
+两条路径都以正式站的一视口首屏开场，随后只呈现历届影像和组织单位两个实质部分，备案信息负责收束长页。
 
 ## 路由契约
 
 | 路径 | 内容 | 状态 |
 | --- | --- | --- |
-| `/` | 正式首屏、专题嘉宾、组织单位和报名内容 | 对外发布 |
-| `/goal/` | 正式首屏加 history-first 负一页 | 仅本地验收 |
+| `/` | 正式首屏加 history-first lower page | 对外发布 |
+| `/goal/` | 正式首页的 history-first 验收镜像 | 仅本地验收 |
 | `/goal/about/` | Goal 视觉下的会议简介 | 仅本地验收 |
 | `/goal/schedule/` | Goal 视觉下的独立日程页面 | 仅本地验收 |
 | `/goal/poster/` | Goal 视觉下的 Rising Stars Poster 页面 | 仅本地验收 |
 | `/goal/guide/` | Goal 视觉下的参会指南 | 仅本地验收 |
 | `/goal/register/` | Goal 视觉下的报名与票价页面 | 仅本地验收 |
 
-公开 `/` 首页不得渲染 `data-goal-home-lower`、历届画廊或 Goal 组织单位页脚。
-`/goal/` 根节点通过 `data-goal-home-contract="history-first"` 声明负一页契约。
+公开 `/` 与 `/goal/` 根节点都通过 `data-goal-home-contract="history-first"` 声明 lower page 契约。
+两条路径的 `GoalHomeLower` 产物必须保持一致。
 所有 Goal 页面继续保持 `noindex, nofollow`。
 
 ## 负一页顺序
@@ -108,7 +108,7 @@ JavaScript 成功初始化后才隐藏原生横向滚动条并显示可交互目
 
 ## 实现结构
 
-- `src/pages/goal/index.astro` 组合正式首屏和 `GoalHomeLower.astro`，并关闭通用页脚。
+- `src/pages/index.astro` 与 `src/pages/goal/index.astro` 都组合正式首屏和 `GoalHomeLower.astro`，并关闭通用页脚。
 - `src/components/GoalHomeLower.astro` 只组合历届影像与组织单位，并声明 history-first 契约。
 - `src/components/goal/GoalHistoryGallery.astro` 负责 17 场活动的语义结构、响应式图片和标题波峰目录。
 - `src/components/GoalPartnerFooter.astro` 负责三类组织单位和 Goal 专用备案信息。
@@ -125,8 +125,9 @@ JavaScript 成功初始化后才隐藏原生横向滚动条并显示可交互目
 npm run dev
 ```
 
-打开 http://localhost:4321/goal/ 检查完整负一页。
-至少同时回归 http://localhost:4321/、http://localhost:4321/about/、http://localhost:4321/schedule/、http://localhost:4321/register/ 和 http://localhost:4321/goal/schedule/。
+打开 http://localhost:4321/ 检查正式 history-first 首页。
+打开 http://localhost:4321/goal/ 检查相同内容的验收镜像。
+至少同时回归 http://localhost:4321/about/、http://localhost:4321/schedule/、http://localhost:4321/register/ 和 http://localhost:4321/goal/schedule/。
 
 完成页面修改后运行：
 
@@ -148,10 +149,9 @@ npm run validate
 
 所有 `/goal/` 页面都带有 `noindex, nofollow`。
 `robots.txt` 禁止抓取 `/goal/`，sitemap 不包含 Goal 路径，生产同步脚本排除 `goal/**` 和 `goal/*`。
-Astro 生成的历届影像位于共享 `dist/_assets/`，因此生产同步还必须排除 `_assets/goal-history-*`。
-构建校验会拒绝移除这项共享资源保护。
+Astro 生成的历届影像位于共享 `dist/_assets/`，并由正式 `/` 首页引用和发布。
+构建校验会拒绝重新排除 `_assets/goal-history-*`，避免正式首页出现缺图。
 
-全部照片当前标记为 `official-recap-review-before-publication`。
-在确认照片使用权并获得明确公开上线决定之前，不得提交、推送、同步或发布这些影像。
-正式根路径继续由 `scripts/sync-oss.mjs` 同步到生产环境，但不得引用 Goal 历届影像。
-只有在独立发布步骤中完成权利确认和页面提升后，才可以调整生产排除策略。
+全部照片当前标记为 `official-recap-approved-for-publication`。
+正式根路径由 `scripts/sync-oss.mjs` 同步到生产环境，并公开引用历届影像。
+`/goal/` 路由本身继续保持本地验收状态，不进入生产桶。

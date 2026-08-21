@@ -94,7 +94,7 @@ test('every event has three complete and traceable photographs', () => {
       assert.match(photo.sourceUrl, /^https:\/\/mmbiz\.qpic\.cn\//);
       assert.ok(photo.focalPoint.x >= 0 && photo.focalPoint.x <= 100);
       assert.ok(photo.focalPoint.y >= 0 && photo.focalPoint.y <= 100);
-      assert.equal(photo.rightsStatus, 'official-recap-review-before-publication');
+      assert.equal(photo.rightsStatus, 'official-recap-approved-for-publication');
 
       const assetUrl = new URL(`../assets/2026/goal-history/${photo.basename}`, import.meta.url);
       assert.equal(existsSync(assetUrl), true, `missing local asset: ${photo.basename}`);

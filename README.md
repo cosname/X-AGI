@@ -13,14 +13,14 @@ X-AGI 大会官网及年度归档的 Astro 静态站。
 
 | 路径 | 用途 | 发布状态 |
 | --- | --- | --- |
-| `/`、`/about/`、`/schedule/` 等 | 2026 正式站，使用“连接与树”视觉和 2026 官方内容 | 对外发布 |
+| `/`、`/about/`、`/schedule/` 等 | 2026 正式站，首页包含正式首屏、17 场历届影像、组织单位与备案信息 | 对外发布 |
 | `/2025/` | 2025 X-AGI 与第 18 届中国 R 会议归档 | 冻结发布 |
 | `/next/` | 米色纸面和像素树的新视觉方案 | 仅本地预览 |
-| `/goal/` | 正式视觉的 history-first 负一页验收预览，包含首屏、17 场历届影像、组织单位与备案信息 | 仅本地预览 |
+| `/goal/` | 正式首页 history-first 版本的本地验收镜像 | 仅本地预览 |
 | `/2026/`、`/2026/<page>/` | 旧书签兼容入口 | 跳转至根路径正式页 |
 
 `/next/` 和 `/goal/` 会写入本地 `dist/`，但生产同步脚本会明确排除它们。
-Goal 历届影像由 Astro 写入共享的 `dist/_assets/`，生产同步还会单独排除 `_assets/goal-history-*`。
+历届影像由 Astro 写入共享的 `dist/_assets/`，并随正式首页发布。
 `robots.txt` 也会禁止抓取这两个预览路径。
 
 根目录下的 `about.html`、`schedule.html` 等旧式 URL 会跳转到对应的 2025 归档页。
@@ -58,13 +58,13 @@ src/
     Goal2026Layout.astro       当前正式站内页布局
     BaseLayout.astro           新视觉预览布局
   components/legacy/           正式站沿用的成熟内容结构
-  components/goal/             `/goal/` 历届影像和其他 Goal 分区组件
+  components/goal/             正式首页与 `/goal/` 共用的历届影像组件
   components/                  正式视觉、导航、首页和共享组织单位组件
   pages/                       Astro 路由和文本端点
   styles/
     legacy-2025.css            成熟内容结构的兼容样式
     goal-2026.css              正式内页的连接视觉皮肤
-    goal-home-lower.css        `/goal/` 长页外壳与共享纸面样式
+    goal-home-lower.css        正式首页与 `/goal/` 共用的长页外壳和纸面样式
     goal-history.css           历届影像带、波峰目录和响应式编排
     global.css                 正式首页与共享组件样式
 public/
@@ -78,12 +78,12 @@ scripts/
 ```
 
 2026 文案、票价、组织单位、专题嘉宾、日程和报名状态只在 `src/data/conference2026.ts` 中维护。
-Goal 历届影像的 17 场活动、51 张照片、说明、焦点和内部来源记录集中维护在 `src/data/goal-history.ts`。
+历届影像的 17 场活动、51 张照片、说明、焦点和内部来源记录集中维护在 `src/data/goal-history.ts`。
 页面组件负责表现，不应复制一份独立业务数据。
 
 历届照片来自官方会议纪要导出，已下载到本地并按二进制去重，不允许在页面中直接引用 Qpic。
 画廊在接近可视区域前使用渐进增强门槛暂缓图片发现，正式首屏不会请求历届照片，禁用 JavaScript 时仍有完整静态回退。
-照片目前标记为 `official-recap-review-before-publication`，在确认使用权并作出明确上线决定前不得提交到公开发布流程。
+照片目前标记为 `official-recap-approved-for-publication`，并随正式首页公开发布。
 
 日程数据只保留已经确认的日期、场次和报告字段，尚未公布的报告不以空对象或虚构占位文案呈现。
 不要自行补写讲者、报告、赞助商或数字。
@@ -140,15 +140,15 @@ npm run build
 - 根首页是否为真实页面而不是跳转页
 - 2026 页面是否误用 2025 的旧 `R` 标志
 - `/goal/*` 是否全部保持 `noindex, nofollow`，并继续从 sitemap 和生产同步中排除
-- `/goal/` 是否按历届影像、组织单位和备案顺序渲染两区 history-first 契约，且该结构没有泄漏到正式 `/`
+- 正式 `/` 与 `/goal/` 是否按历届影像、组织单位和备案顺序渲染相同的 history-first lower page
 - 历届影像是否保持 17 场、51 张、从第 18 届开始倒序、本地响应式资源、原生懒加载和无 Qpic 热链
 - 画廊是否使用 proximity 吸附与一场一线的标题波峰目录，并移除顶部时间线与前后按钮
 - 负一页是否没有重新引入紧凑日程、日程筛选或重复报名区
 - 正式日程与 Goal 独立日程路由是否继续保留现有结构，并共用当前专题嘉宾数据
 - DOM 首屏、完整首页 HTML 和初始本地资源是否保持在独立体积预算内
 
-正式首页和 `/goal/` 验收预览都会执行 DOM 首屏结构与初始资源预算校验。
-`/goal/` 还会额外校验历届影像数量与倒序、可点击波峰目录、组织单位展示顺序、备案信息、生产资源排除和正式首页隔离。
+正式首页和 `/goal/` 验收镜像都会执行 DOM 首屏结构、初始资源预算和 history-first 内容校验。
+构建还会校验历届影像数量与倒序、可点击波峰目录、组织单位展示顺序、备案信息及两条首页路径的 lower page 一致性。
 
 ## 生产发布
 
@@ -179,8 +179,8 @@ OSS_DRY_RUN=1 npm run oss:sync
 npm run oss:sync
 ```
 
-`npm run oss:sync` 只同步经过校验的 `dist/`，并排除 `next/**`、`goal/**` 和 `_assets/goal-history-*`。
-共享资源排除用于阻止本地 Goal 影像绕过路由排除进入生产桶。
+`npm run oss:sync` 只同步经过校验的 `dist/`，并排除 `next/**` 和 `goal/**`。
+正式首页引用的 `_assets/goal-history-*` 历届影像会正常同步。
 同步不会删除桶里只存在于远端的对象。
 不要给全站同步添加 `--delete`，否则可能删除 2025 slides 和访问日志。
 
@@ -204,13 +204,13 @@ npm run downloads:verify
 ## 设计预览
 
 新视觉的入口位于 `src/pages/next/`，设计说明位于 `src/design-next/README.md`。
-正式视觉的 history-first 负一页验收预览位于 `src/pages/goal/`，设计说明位于 `src/design-goal/README.md`。
-`/goal/` 保留正式首屏，并在其后只编排 2015 至 2025 年的 17 场历届影像、三类组织单位与独立备案信息。
+正式首页与 `/goal/` 验收镜像共用 history-first lower page，设计说明位于 `src/design-goal/README.md`。
+两条首页路径都保留正式首屏，并在其后只编排 2015 至 2025 年的 17 场历届影像、三类组织单位与独立备案信息。
 历届影像从第 18 届开始倒序，使用原生横向滚动、柔和 proximity 吸附和随滚动或鼠标位置移动的波峰目录。
 目录在桌面位于标题右侧，在移动端位于标题下方，每场会议都是可点击按钮，点击只移动画廊的水平位置。
 当前会议通过 `aria-current="location"` 暴露，Toolbar 支持方向键、Home 和 End 移动焦点，Enter 或 Space 使用原生按钮行为跳转。
 禁用 JavaScript 时目录隐藏，画廊恢复原生横向滚动条。
-正式站与验收预览仍共用透明顶部与 50px 后纯色承托的导航状态契约。
+正式站与验收镜像仍共用透明顶部与 50px 后纯色承托的导航状态契约。
 完整 `/next/` 概念站不受影响。
 
 ```bash
@@ -218,5 +218,6 @@ npm run dev
 ```
 
 打开 http://localhost:4321/next/ 查看。
-打开 http://localhost:4321/goal/ 查看融合候选。
-在没有明确上线决定前，不要把这两套页面同步到生产环境。
+打开 http://localhost:4321/ 查看正式 history-first 首页。
+打开 http://localhost:4321/goal/ 查看本地验收镜像。
+`/next/` 与 `/goal/` 路由本身仍不得同步到生产环境。
