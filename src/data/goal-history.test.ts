@@ -106,10 +106,10 @@ test('the 2018 Shanghai event preserves the 2009 and 2018 comparison', () => {
   const event = goalHistoryEvents.find((candidate) => candidate.id === 'e11-2018-shanghai');
   assert.ok(event);
   assert.deepEqual(event.photos.map((photo) => photo.role), [
+    'historical-comparison',
     'venue',
     'historical-comparison',
-    'historical-comparison',
   ]);
-  assert.equal(event.photos[1].depictedYear, 2009);
-  assert.equal(event.photos[2].depictedYear, undefined);
+  assert.equal(event.photos[0].depictedYear, undefined);
+  assert.equal(event.photos[2].depictedYear, 2009);
 });
