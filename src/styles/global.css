@@ -274,6 +274,13 @@
       rgb(255 253 251 / 0.24) 44%,
       rgb(103 82 200 / 0.075) 100%
     );
+  --compact-nav-panel-surface:
+    linear-gradient(
+      150deg,
+      rgb(255 255 255 / 0.128) 0%,
+      rgb(255 253 251 / 0.056) 44%,
+      rgb(103 82 200 / 0.028) 100%
+    );
   --compact-nav-glass-sheen: inset 0 1px 0 rgb(255 255 255 / 0.72);
   --compact-nav-glass-lift:
     drop-shadow(0 0 5px rgb(40 29 105 / 0.1))
@@ -355,10 +362,10 @@
   border-radius: 1.55rem;
   visibility: hidden;
   opacity: 0;
-  background: var(--compact-nav-glass-surface);
+  background: var(--compact-nav-panel-surface);
   box-shadow: var(--compact-nav-glass-sheen);
-  -webkit-backdrop-filter: blur(18px) saturate(1.24) contrast(1.03);
-  backdrop-filter: blur(18px) saturate(1.24) contrast(1.03);
+  -webkit-backdrop-filter: blur(8px) saturate(1.06) contrast(1.01);
+  backdrop-filter: blur(8px) saturate(1.06) contrast(1.01);
   filter: var(--compact-nav-glass-lift);
   clip-path: inset(
     0

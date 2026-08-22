@@ -28,10 +28,12 @@ const {
   headerBehavior = 'surface',
 } = Astro.props;
 const title = pageTitle ? `${pageTitle} | ${edition.title}` : edition.title;
+const shareTitle = pageTitle ? `${pageTitle} | ${edition.titleZh}` : edition.titleZh;
 ---
 
 <BaseLayout
   title={title}
+  shareTitle={shareTitle}
   description={description ?? edition.description}
   canonicalPath={canonicalPath}
   noIndex={edition.status === 'planning' || edition.path === '/next' || edition.path === '/goal'}

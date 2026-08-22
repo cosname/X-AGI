@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: URL;
+  imagePath?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  imagePath = '/brand/share-2026.png',
+  imageWidth = 1200,
+  imageHeight = 1200,
+} = Astro.props;
+
+const imageUrl = new URL(imagePath, Astro.site);
+---
+
+<meta name="description" content={description} />
+<meta itemprop="name" content={title} />
+<meta itemprop="description" content={description} />
+<meta itemprop="image" content={imageUrl} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content="X-AGI Conference" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:secure_url" content={imageUrl} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content={String(imageWidth)} />
+<meta property="og:image:height" content={String(imageHeight)} />
+<meta property="og:image:alt" content={title} />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />

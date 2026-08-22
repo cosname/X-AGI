@@ -3,6 +3,7 @@ import type { EditionPage } from '../config/navigation';
 import { editionNavigation } from '../config/navigation';
 import { currentEditionActionPaths } from '../config/edition-status';
 import { editionPath, type EditionConfig } from '../config/site';
+import ShareMeta from '../components/ShareMeta.astro';
 import '../styles/legacy-2025.css';
 
 interface Props {
@@ -35,14 +36,12 @@ const homeHref = editionPath(edition);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="X-AGI Conference" />
-    <meta name="twitter:card" content="summary" />
+    <ShareMeta
+      title={title.includes(edition.title) ? title.replace(edition.title, edition.titleZh) : title}
+      description={description}
+      canonical={canonical}
+    />
     <meta name="theme-color" content="#1B2B86" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/brand/xagi-connect-logo.png" />

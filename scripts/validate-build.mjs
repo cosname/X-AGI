@@ -563,6 +563,21 @@ if (rootIndex.includes('redirect-page')) {
 if (!rootIndex.includes('hero-section') && !rootIndex.includes('data-hero-pixel-field')) {
   failures.push('index.html: official root must render the current edition homepage');
 }
+if (!rootIndex.includes('property="og:image"') || !rootIndex.includes('/brand/share-2026.png')) {
+  failures.push('index.html: homepage must publish a share image for chat previews');
+}
+if (!rootIndex.includes('property="og:title"') || !rootIndex.includes(conference2026.name)) {
+  failures.push('index.html: homepage share title must use the Chinese conference name');
+}
+if (!rootIndex.includes('property="og:description"') || !rootIndex.includes(conference2026.venue.name)) {
+  failures.push('index.html: homepage must publish an Open Graph description');
+}
+
+try {
+  await stat(path.join(root, 'brand/share-2026.png'));
+} catch {
+  failures.push('brand/share-2026.png: share preview image is missing from the build');
+}
 
 const rootText = visibleText(rootIndex);
 const homepagePartnerLabels = ['主办单位', '协办单位', '赞助单位'];

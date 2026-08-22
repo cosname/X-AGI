@@ -2,6 +2,7 @@
 import type { EditionPage } from '../config/navigation';
 import type { EditionConfig } from '../config/site';
 import GoalInnerPageInteractions from '../components/GoalInnerPageInteractions.astro';
+import ShareMeta from '../components/ShareMeta.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import '../styles/global.css';
 import '../styles/legacy-2025.css';
@@ -24,6 +25,9 @@ const {
 } = Astro.props;
 
 const canonical = new URL(canonicalPath, Astro.site);
+const shareTitle = title.includes(edition.title)
+  ? title.replace(edition.title, edition.titleZh)
+  : title;
 const noIndex = edition.status === 'planning' || edition.path === '/goal';
 ---
 
@@ -33,15 +37,9 @@ const noIndex = edition.status === 'planning' || edition.path === '/goal';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta name="description" content={description} />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="X-AGI Conference" />
-    <meta name="twitter:card" content="summary" />
+    <ShareMeta title={shareTitle} description={description} canonical={canonical} />
     <meta name="theme-color" content="#fdf8f1" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/brand/xagi-connect-logo.png" />
