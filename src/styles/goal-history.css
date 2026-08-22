@@ -27,6 +27,7 @@
 .goal-history__viewport {
   overflow-x: auto;
   overflow-y: hidden;
+  overflow-anchor: none;
   overscroll-behavior-inline: contain;
   scroll-padding-inline-start: var(--history-edge);
   scroll-snap-type: inline proximity;

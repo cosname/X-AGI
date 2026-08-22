@@ -45,6 +45,9 @@ function initializeHistoryGallery(root: HTMLElement) {
   let hasRendered = false;
   let activeIndex = 0;
   let rovingIndex = 0;
+  let pinToFirstEdition = true;
+  let programmaticScroll = false;
+  let pinTimer = 0;
 
   const syncDirectoryState = () => {
     const nextActiveIndex = Math.max(
@@ -103,7 +106,33 @@ function initializeHistoryGallery(root: HTMLElement) {
     waveformFrame = window.requestAnimationFrame(animateWaveform);
   };
 
+  const firstEditionLeft = () => eventStops[0] ?? 0;
+
+  const scrollToFirstEdition = () => {
+    if (!pinToFirstEdition) return;
+    const start = firstEditionLeft();
+    if (Math.abs(viewport.scrollLeft - start) < 1) return;
+    programmaticScroll = true;
+    viewport.style.scrollSnapType = 'none';
+    viewport.scrollLeft = start;
+    programmaticScroll = false;
+    window.requestAnimationFrame(() => {
+      viewport.style.removeProperty('scroll-snap-type');
+    });
+  };
+
+  const releaseFirstEditionPin = () => {
+    pinToFirstEdition = false;
+    if (pinTimer) {
+      window.clearTimeout(pinTimer);
+      pinTimer = 0;
+    }
+  };
+
   const updateScrollFocus = () => {
+    if (pinToFirstEdition && !programmaticScroll && viewport.scrollLeft > 1) {
+      scrollToFirstEdition();
+    }
     scrollFocus = continuousIndexAtPosition(viewport.scrollLeft, eventStops);
     syncDirectoryState();
     if (pointerFocus === null) scheduleWaveform();
@@ -121,6 +150,7 @@ function initializeHistoryGallery(root: HTMLElement) {
     });
 
     pointerFocus = null;
+    scrollToFirstEdition();
     updateScrollFocus();
     if (!hasRendered) {
       renderedFocus = scrollFocus;
@@ -155,6 +185,10 @@ function initializeHistoryGallery(root: HTMLElement) {
     return index >= 0 ? { target, index } : null;
   };
 
+  viewport.addEventListener('pointerdown', releaseFirstEditionPin, { passive: true, signal });
+  viewport.addEventListener('touchstart', releaseFirstEditionPin, { passive: true, signal });
+  viewport.addEventListener('wheel', releaseFirstEditionPin, { passive: true, signal });
+
   viewport.addEventListener('scroll', () => {
     if (scrollFrame) return;
     scrollFrame = window.requestAnimationFrame(() => {
@@ -178,6 +212,7 @@ function initializeHistoryGallery(root: HTMLElement) {
       scheduleWaveform();
     }
 
+    releaseFirstEditionPin();
     viewport.scrollTo({
       left: Math.min(movement.left, maximumLeft),
       behavior: movement.behavior,
@@ -238,6 +273,8 @@ function initializeHistoryGallery(root: HTMLElement) {
   resizeObserver.observe(progress);
 
   measureLayout();
+  scrollToFirstEdition();
+  pinTimer = window.setTimeout(releaseFirstEditionPin, 1200);
   root.dataset.historyReady = 'true';
 
   const cleanup = () => {
@@ -246,6 +283,7 @@ function initializeHistoryGallery(root: HTMLElement) {
     window.cancelAnimationFrame(scrollFrame);
     window.cancelAnimationFrame(layoutFrame);
     window.cancelAnimationFrame(waveformFrame);
+    if (pinTimer) window.clearTimeout(pinTimer);
     bars.forEach((bar) => bar.style.removeProperty('--history-wave-scale'));
     delete root.dataset.historyGalleryInitialized;
     delete root.dataset.historyReady;
