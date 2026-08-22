@@ -29,10 +29,10 @@ function isPendingChair(name: string) {
           </div>
           <div class:list={['session-chair', { 'session-chair--pending': isPendingChair(session.chair.name) }]}>
             {isPendingChair(session.chair.name) ? (
-              '主持人待确认'
+              '主席待确认'
             ) : (
               <>
-                主持人 | {session.chair.name}
+                主席 | {session.chair.name}
                 {session.chair.affiliation ? ` | ${session.chair.affiliation}` : ''}
               </>
             )}

@@ -490,7 +490,7 @@ const officialCopyByRoute = new Map([
       `大会专题与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
       ...conference2026.programPreview.sessions.flatMap((session) => [
         session.title,
-        session.chair.name === '待确认' ? '主持人待确认' : session.chair.name,
+        session.chair.name === '待确认' ? '主席待确认' : session.chair.name,
         ...session.speakers.map((speaker) => speaker.name),
       ]),
     ],
