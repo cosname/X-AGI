@@ -24,6 +24,25 @@ export type GlassCapsuleGeometry = {
   neck: number;
 };
 
+export function glassGroupAllowsScrub(
+  scrubEnabled: boolean,
+  navMode?: string,
+) {
+  if (!scrubEnabled) return false;
+  if (navMode == null || navMode === '') return true;
+  return navMode === 'compact';
+}
+
+export function glassActivationShouldDismiss(
+  tagName: string,
+  href: string | null | undefined,
+  glassTarget?: string,
+) {
+  if (glassTarget === 'close') return true;
+  if (tagName !== 'A' || !href) return false;
+  return !href.startsWith('#');
+}
+
 const targetGeometry = (rect: GlassTargetRect, row: number): GlassTargetGeometry => ({
   ...rect,
   right: rect.left + rect.width,
@@ -112,6 +131,29 @@ export function capsuleForGlassPointer(
   return capsuleForGlassTarget(ordered.at(-1)!);
 }
 
+// Light hold on each stacked control, then mostly follow the pointer through the gap.
+const VERTICAL_GLASS_HOLD = 0.14;
+const VERTICAL_GLASS_HOLD_MAX = 0.14;
+
+const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
+
+export function adsorbVerticalGlassProgress(
+  progress: number,
+  fromHeight: number,
+  toHeight: number,
+  travel: number,
+) {
+  const normalized = clamp01(progress);
+  if (travel <= 0) return normalized;
+  const hold = Math.min(fromHeight, toHeight) * VERTICAL_GLASS_HOLD;
+  const stick = Math.min(VERTICAL_GLASS_HOLD_MAX, hold / travel);
+  if (normalized <= stick) return 0;
+  if (normalized >= 1 - stick) return 1;
+  const inner = (normalized - stick) / (1 - 2 * stick);
+  const smooth = inner * inner * (3 - 2 * inner);
+  return inner * 0.72 + smooth * 0.28;
+}
+
 export function capsuleForVerticalGlassPointer(
   targets: readonly GlassTargetGeometry[],
   pointerY: number,
@@ -127,11 +169,19 @@ export function capsuleForVerticalGlassPointer(
     const bottom = ordered[index + 1];
     if (pointerY > bottom.centerY) continue;
 
-    const progress = (pointerY - top.centerY) / (bottom.centerY - top.centerY);
+    const travel = bottom.centerY - top.centerY;
+    const progress = adsorbVerticalGlassProgress(
+      (pointerY - top.centerY) / travel,
+      top.height,
+      bottom.height,
+      travel,
+    );
+    if (progress <= 0) return capsuleForGlassTarget(top);
+    if (progress >= 1) return capsuleForGlassTarget(bottom);
+
     const bridge = Math.sin(Math.PI * progress);
     const mix = (start: number, end: number) => start + (end - start) * progress;
     const restingHeight = mix(top.height, bottom.height);
-    const travel = bottom.centerY - top.centerY;
 
     return {
       x: mix(top.centerX, bottom.centerX),

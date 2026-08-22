@@ -20,6 +20,11 @@ describe('conference schedule contracts', () => {
     }
   });
 
+  it('announces that the detailed schedule is still being arranged', () => {
+    assert.equal(conference2026.scheduleNotice, '具体日程正在安排');
+    assert.doesNotMatch(conference2026.scheduleNotice, /TBD/i);
+  });
+
   it('keeps reserved talk slots fully blank until details are confirmed', () => {
     let reservedTalkCount = 0;
 

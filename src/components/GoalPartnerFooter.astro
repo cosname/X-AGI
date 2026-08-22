@@ -1,5 +1,5 @@
 ---
-import { conference2026PartnerDisplayGroups } from '../data/conference2026';
+import { conference2026, conference2026PartnerDisplayGroups } from '../data/conference2026';
 import '../styles/goal-partner-footer.css';
 import ConferenceOrganizationMark from './ConferenceOrganizationMark.astro';
 ---
@@ -36,7 +36,12 @@ import ConferenceOrganizationMark from './ConferenceOrganizationMark.astro';
       ))}
     </div>
 
-    <footer class="goal-partners__legal" aria-label="网站备案信息">
+    <footer class="goal-partners__legal" aria-label="联系与备案信息">
+      {conference2026.contact && (
+        <p>
+          <a href={`mailto:${conference2026.contact}`}>{conference2026.contact}</a>
+        </p>
+      )}
       <p>
         <a href="https://beian.miit.gov.cn" rel="noopener noreferrer" target="_blank">
           京ICP备2024062260号-3

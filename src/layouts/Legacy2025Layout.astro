@@ -95,10 +95,9 @@ const homeHref = editionPath(edition);
 
     {!home && (
       <footer class="site-footer">
-        <div class="container custom-container">
-          <p>版权所有 {edition.titleZh}</p>
-          <p>联系方式: {edition.contact}</p>
-        </div>
+        {edition.contact && (
+          <a href={`mailto:${edition.contact}`}>{edition.contact}</a>
+        )}
       </footer>
     )}
 

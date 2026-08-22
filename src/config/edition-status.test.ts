@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { conference2026 } from '../data/conference2026.ts';
-import { editionPages } from './navigation.ts';
+import { editionNavigation, editionPages } from './navigation.ts';
 import { currentEdition, editionPath } from './site.ts';
 import {
   CURRENT_EDITION_ACTION_PAGES,
@@ -21,6 +21,13 @@ describe('current edition destinations', () => {
       assert.equal(actions[page], editionPath(currentEdition, page));
       assert.match(editionPath(currentEdition, page), new RegExp(`/${page}/$`));
     }
+  });
+
+  it('treats 2026 register as a peer of the other header destinations', () => {
+    const items = editionNavigation(currentEdition);
+    assert.deepEqual(items.at(-1), { page: 'register', label: '立即报名' });
+    assert.equal(items.filter((item) => item.page === 'register').length, 1);
+    assert.equal(editionPages(currentEdition).filter((page) => page === 'register').length, 1);
   });
 });
 

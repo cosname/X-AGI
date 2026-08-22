@@ -7,7 +7,28 @@
   --goal-purple: #6752c8;
   --goal-purple-deep: #4f3caf;
   --goal-line: rgb(17 19 66 / 0.14);
-  background: var(--goal-paper-muted);
+  --goal-glass-fill:
+    linear-gradient(
+      180deg,
+      rgb(255 252 248 / 0.24) 0%,
+      rgb(247 242 236 / 0.16) 44%,
+      rgb(103 82 200 / 0.1) 100%
+    );
+  --goal-glass-header:
+    linear-gradient(
+      100deg,
+      rgb(36 38 95 / 0.86) 0%,
+      rgb(68 54 143 / 0.82) 58%,
+      rgb(103 82 200 / 0.78) 100%
+    );
+  --goal-glass-border: rgb(103 82 200 / 0.16);
+  --goal-glass-blur: blur(14px) saturate(1.16) contrast(1.02);
+  --goal-card-radius: 1.15rem;
+  --goal-card-header-inset: 0.24rem;
+  background-color: var(--goal-paper-muted);
+  background-image: url('/2026/brand/goal-paper-texture.webp');
+  background-repeat: repeat;
+  background-size: 32rem 32rem;
   color: var(--goal-ink);
 }
 
@@ -59,15 +80,16 @@
 }
 
 .edition-goal-2026 .main-content {
-  background: var(--goal-paper-muted);
+  background: transparent;
+  padding-bottom: 0.35rem;
+}
+
+.edition-goal-2026 .main-content .info-card:last-child {
+  margin-bottom: 0;
 }
 
 .edition-goal-2026 .main-content--schedule {
   padding-bottom: 0;
-  background-color: var(--goal-paper-muted);
-  background-image: url('/2026/brand/goal-paper-texture.webp');
-  background-repeat: repeat;
-  background-size: 32rem 32rem;
 }
 
 .edition-goal-2026 .goal-schedule-preview .custom-container {
@@ -86,21 +108,60 @@
 }
 
 .edition-goal-2026 .info-card {
-  border: 1px solid rgb(17 19 66 / 0.075);
-  border-radius: 8px;
-  background: rgb(255 253 250 / 0.96);
-  box-shadow: 0 12px 34px rgb(17 19 66 / 0.055);
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--goal-glass-border);
+  border-radius: var(--goal-card-radius);
+  background: var(--goal-glass-fill);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.72),
+    inset 0 -1px 0 rgb(103 82 200 / 0.08),
+    0 10px 28px rgb(40 29 105 / 0.08);
+  backdrop-filter: var(--goal-glass-blur);
+  -webkit-backdrop-filter: var(--goal-glass-blur);
 }
 
 .edition-goal-2026 .info-card .card-header,
 .edition-goal-2026 .notice-card .card-header {
-  background: linear-gradient(100deg, #24265f 0%, #44368f 68%, #6752c8 100%);
+  height: auto;
+  min-height: 2.75rem;
+  margin: var(--goal-card-header-inset) var(--goal-card-header-inset) 0;
+  padding: 0.55rem 1.25rem;
+  border-radius: calc(var(--goal-card-radius) - var(--goal-card-header-inset));
+  background: var(--goal-glass-header);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.3),
+    0 6px 16px rgb(40 29 105 / 0.1);
   color: #fff;
 }
 
 .edition-goal-2026 .info-card .card-body,
 .edition-goal-2026 .legacy-fact-table td {
   color: #313451;
+}
+
+.edition-goal-2026 .legacy-fact-table,
+.edition-goal-2026 .pricing-table,
+.edition-goal-2026 .session-chair,
+.edition-goal-2026 .table {
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: rgb(103 82 200 / 0.05);
+  --bs-border-color: var(--goal-line);
+  background: transparent;
+}
+
+.edition-goal-2026 .legacy-fact-table th,
+.edition-goal-2026 .legacy-fact-table td,
+.edition-goal-2026 .legacy-fact-table tr:last-child th,
+.edition-goal-2026 .legacy-fact-table tr:last-child td,
+.edition-goal-2026 .pricing-table,
+.edition-goal-2026 .pricing-table th,
+.edition-goal-2026 .pricing-table td,
+.edition-goal-2026 .session-item,
+.edition-goal-2026 .org-list hr,
+.edition-goal-2026 .conference-organization-card section + section {
+  border-color: var(--goal-line);
 }
 
 .edition-goal-2026 .info-card a,
@@ -110,11 +171,20 @@
   color: var(--goal-purple-deep);
 }
 
-.edition-goal-2026 .schedule-tabs .nav-link.active,
 .edition-goal-2026 .legacy-apply,
 .edition-goal-2026 .legacy-apply:hover {
-  border-color: var(--goal-purple);
-  background: var(--goal-purple);
+  border: 1px solid rgb(255 255 255 / 0.24);
+  background:
+    linear-gradient(
+      180deg,
+      rgb(124 104 214 / 0.78) 0%,
+      rgb(79 60 175 / 0.72) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.3),
+    0 8px 18px rgb(40 29 105 / 0.14);
+  backdrop-filter: blur(10px) saturate(1.18);
+  -webkit-backdrop-filter: blur(10px) saturate(1.18);
   color: #fff !important;
 }
 
@@ -124,22 +194,62 @@
 }
 
 .edition-goal-2026 .accordion-button:not(.collapsed) {
-  background: #282865;
+  background: rgb(40 38 101 / 0.72);
   color: #fff;
 }
 
 .edition-goal-2026 .legacy-ticket-band th,
-.edition-goal-2026 .legacy-fact-table th {
+.edition-goal-2026 .legacy-fact-table th,
+.edition-goal-2026 .pricing-table thead th {
+  color: var(--goal-ink);
+  background: rgb(103 82 200 / 0.1);
+}
+
+.edition-goal-2026 .pricing-table td {
+  background: transparent;
+}
+
+.edition-goal-2026 .pricing-table tbody tr:hover,
+.edition-goal-2026 .pricing-table tbody tr:hover td {
+  background: rgb(103 82 200 / 0.05);
+}
+
+.edition-goal-2026 .session-chair {
   color: var(--goal-ink);
 }
 
-.edition-goal-2026 .legacy-ticket-band th {
-  background: rgb(103 82 200 / 0.08);
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .edition-goal-2026 .info-card {
+    background: rgb(247 242 236 / 0.94);
+  }
+
+  .edition-goal-2026 .info-card .card-header,
+  .edition-goal-2026 .notice-card .card-header {
+    background: rgb(68 54 143 / 0.88);
+  }
 }
 
 .edition-goal-2026 .site-footer {
-  border-top: 4px solid var(--goal-purple);
-  background: #171842;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  padding: 1.1rem 1.5rem 1.6rem;
+  border: 0;
+  color: rgb(17 19 66 / 0.5);
+  background: transparent;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.edition-goal-2026 .site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.edition-goal-2026 .site-footer a:hover,
+.edition-goal-2026 .site-footer a:focus-visible {
+  color: var(--goal-purple-deep);
 }
 
 @media (max-width: 991.98px) {

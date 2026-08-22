@@ -3,6 +3,8 @@ import {
   capsuleForGlassPointer,
   capsuleForGlassTarget,
   capsuleForVerticalGlassPointer,
+  glassActivationShouldDismiss,
+  glassGroupAllowsScrub,
   type GlassCapsuleGeometry,
   type GlassTargetGeometry,
 } from './glass-action-group-state';
@@ -28,6 +30,8 @@ function initializeGlassActionGroup(root: HTMLElement) {
   const vertical = root.dataset.glassAxis === 'vertical';
   const scrubEnabled = root.hasAttribute('data-glass-scrub');
   const activateOnRelease = root.hasAttribute('data-glass-activate-on-release');
+  const header = root.closest<HTMLElement>('.site-header');
+  const canScrub = () => glassGroupAllowsScrub(scrubEnabled, header?.dataset.navMode);
   const resizeObserver = new ResizeObserver(() => {
     measureTargets();
     syncToCurrentState(true);
@@ -42,6 +46,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   let scrubPointerId: number | null = null;
   let scrubTarget: HTMLElement | null = null;
   let suppressTrustedClick = false;
+  let lensDismissed = false;
 
   const capsuleState: GlassCapsuleGeometry & { opacity: number } = {
     x: 0,
@@ -96,7 +101,14 @@ function initializeGlassActionGroup(root: HTMLElement) {
 
   const animateLens = () => {
     animationFrame = 0;
-    const response = reducedMotion.matches ? 1 : 0.24;
+    const travel = Math.hypot(
+      capsuleTarget.x - capsuleState.x,
+      capsuleTarget.y - capsuleState.y,
+    );
+    const settle = vertical
+      ? 0.36 + 0.06 * (1 - Math.min(1, travel / 32))
+      : 0.24;
+    const response = reducedMotion.matches ? 1 : settle;
     capsuleState.x += (capsuleTarget.x - capsuleState.x) * response;
     capsuleState.y += (capsuleTarget.y - capsuleState.y) * response;
     capsuleState.width += (capsuleTarget.width - capsuleState.width) * response;
@@ -121,8 +133,14 @@ function initializeGlassActionGroup(root: HTMLElement) {
     if (!animationFrame) animationFrame = window.requestAnimationFrame(animateLens);
   };
 
+  const dismissLens = () => {
+    lensDismissed = true;
+    capsuleTarget.opacity = 0;
+    scheduleLens();
+  };
+
   const setCapsuleTarget = (geometry: GlassCapsuleGeometry | null, immediate = false) => {
-    if (!geometry) return;
+    if (!geometry || lensDismissed) return;
     Object.assign(capsuleTarget, geometry, { opacity: 1 });
     if (immediate || capsuleState.opacity === 0 || reducedMotion.matches) {
       Object.assign(capsuleState, capsuleTarget);
@@ -139,14 +157,17 @@ function initializeGlassActionGroup(root: HTMLElement) {
   );
 
   const targetForPointer = (pointerX: number, pointerY: number) => {
+    const capsule = capsuleForPointer(pointerX, pointerY);
+    const probeX = capsule?.x ?? pointerX;
+    const probeY = capsule?.y ?? pointerY;
     const closest = geometries.reduce<GlassTargetGeometry | null>((current, geometry) => {
       if (!current) return geometry;
       const geometryDistance = vertical
-        ? Math.abs(geometry.centerY - pointerY)
-        : Math.hypot(geometry.centerX - pointerX, geometry.centerY - pointerY);
+        ? Math.abs(geometry.centerY - probeY)
+        : Math.hypot(geometry.centerX - probeX, geometry.centerY - probeY);
       const currentDistance = vertical
-        ? Math.abs(current.centerY - pointerY)
-        : Math.hypot(current.centerX - pointerX, current.centerY - pointerY);
+        ? Math.abs(current.centerY - probeY)
+        : Math.hypot(current.centerX - probeX, current.centerY - probeY);
       return geometryDistance < currentDistance ? geometry : current;
     }, null);
     return closest
@@ -175,7 +196,17 @@ function initializeGlassActionGroup(root: HTMLElement) {
     if (pointerId !== null && root.hasPointerCapture(pointerId)) {
       root.releasePointerCapture(pointerId);
     }
-    if (activate && target && activateOnRelease) {
+    if (activate && target && activateOnRelease && canScrub()) {
+      if (
+        header
+        || glassActivationShouldDismiss(
+          target.tagName,
+          target instanceof HTMLAnchorElement ? target.getAttribute('href') : null,
+          target.dataset.glassTarget,
+        )
+      ) {
+        dismissLens();
+      }
       suppressTrustedClick = true;
       target.click();
       window.setTimeout(() => {
@@ -183,7 +214,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
       }, 0);
       return;
     }
-    syncToCurrentState();
+    if (!lensDismissed) syncToCurrentState();
   };
 
   const resolvePersistentTarget = () => {
@@ -198,6 +229,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   };
 
   const syncToCurrentState = (immediate = false) => {
+    if (lensDismissed) return;
     resolvePersistentTarget();
     const activeTarget = focusedTarget ?? persistentTarget;
     const geometry = geometryFor(activeTarget);
@@ -226,7 +258,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   };
 
   root.addEventListener('pointerdown', (event) => {
-    if (!scrubEnabled || !event.isPrimary || event.button !== 0) return;
+    if (!canScrub() || !event.isPrimary || event.button !== 0) return;
     const directTarget = event.target instanceof Element
       ? event.target.closest<HTMLElement>('[data-glass-target]')
       : null;
@@ -274,13 +306,14 @@ function initializeGlassActionGroup(root: HTMLElement) {
   }, { passive: true, signal });
 
   root.addEventListener('pointerleave', () => {
-    if (focusedTarget || scrubPointerId !== null) return;
+    if (lensDismissed || focusedTarget || scrubPointerId !== null) return;
     syncToCurrentState();
   }, { signal });
 
   targets.forEach((target) => {
     target.addEventListener('focus', () => {
       focusedTarget = target;
+      if (lensDismissed) return;
       const geometry = geometryFor(target);
       if (geometry) setCapsuleTarget(capsuleForGlassTarget(geometry));
     }, { signal });
@@ -289,6 +322,14 @@ function initializeGlassActionGroup(root: HTMLElement) {
       if (target.hasAttribute('data-glass-select-on-click')) {
         targets.forEach((candidate) => candidate.removeAttribute('aria-current'));
         target.setAttribute('aria-current', 'location');
+      }
+      if (glassActivationShouldDismiss(
+        target.tagName,
+        target instanceof HTMLAnchorElement ? target.getAttribute('href') : null,
+        target.dataset.glassTarget,
+      )) {
+        dismissLens();
+        return;
       }
       window.requestAnimationFrame(() => syncToCurrentState());
     }, { signal });

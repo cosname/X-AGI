@@ -2,10 +2,13 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
+  adsorbVerticalGlassProgress,
   assignGlassTargetRows,
   capsuleForGlassPointer,
   capsuleForGlassTarget,
   capsuleForVerticalGlassPointer,
+  glassActivationShouldDismiss,
+  glassGroupAllowsScrub,
 } from './glass-action-group-state.ts';
 import { capsuleOutlinePath } from './navigation-capsule.ts';
 
@@ -65,6 +68,39 @@ test('vertical glass pointer stretches smoothly between stacked targets', () => 
   assert.ok(middle.height > 44);
 });
 
+test('vertical glass progress holds near each stacked target', () => {
+  const travel = 56;
+
+  assert.equal(adsorbVerticalGlassProgress(0, 44, 44, travel), 0);
+  assert.equal(adsorbVerticalGlassProgress(1, 44, 44, travel), 1);
+  assert.equal(adsorbVerticalGlassProgress(0.5, 44, 44, travel), 0.5);
+  assert.equal(adsorbVerticalGlassProgress(0.1, 44, 44, travel), 0);
+  assert.equal(adsorbVerticalGlassProgress(0.9, 44, 44, travel), 1);
+  assert.ok(adsorbVerticalGlassProgress(0.22, 44, 44, travel) < 0.22);
+  assert.ok(adsorbVerticalGlassProgress(0.78, 44, 44, travel) > 0.78);
+});
+
+test('vertical glass pointer adsorbs onto the nearest stacked target', () => {
+  const verticalTargets = assignGlassTargetRows([
+    { key: 'home', left: 40, top: 0, width: 104, height: 44 },
+    { key: 'about', left: 20, top: 56, width: 124, height: 44 },
+  ]);
+
+  assert.deepEqual(
+    capsuleForVerticalGlassPointer(verticalTargets, 28),
+    capsuleForGlassTarget(verticalTargets[0]),
+  );
+  assert.deepEqual(
+    capsuleForVerticalGlassPointer(verticalTargets, 72),
+    capsuleForGlassTarget(verticalTargets[1]),
+  );
+
+  const leaving = capsuleForVerticalGlassPointer(verticalTargets, 40);
+  assert.ok(leaving);
+  assert.ok(leaving.y > verticalTargets[0].centerY);
+  assert.ok(leaving.y < 50);
+});
+
 test('vertical glass pointer clamps above and below a stack', () => {
   const verticalTargets = assignGlassTargetRows([
     { key: 'home', left: 40, top: 0, width: 104, height: 44 },
@@ -79,6 +115,21 @@ test('vertical glass pointer clamps above and below a stack', () => {
     capsuleForVerticalGlassPointer(verticalTargets, 500),
     capsuleForGlassTarget(verticalTargets[1]),
   );
+});
+
+test('glass scrub stays off for inline header navigation', () => {
+  assert.equal(glassGroupAllowsScrub(false, 'compact'), false);
+  assert.equal(glassGroupAllowsScrub(true, 'inline'), false);
+  assert.equal(glassGroupAllowsScrub(true, 'compact'), true);
+  assert.equal(glassGroupAllowsScrub(true, undefined), true);
+});
+
+test('glass activation dismisses the lens instead of returning to rest', () => {
+  assert.equal(glassActivationShouldDismiss('A', '/goal/about/', 'about'), true);
+  assert.equal(glassActivationShouldDismiss('A', '/goal/register/', 'register'), true);
+  assert.equal(glassActivationShouldDismiss('BUTTON', null, 'close'), true);
+  assert.equal(glassActivationShouldDismiss('BUTTON', null, 'filter'), false);
+  assert.equal(glassActivationShouldDismiss('A', '#section', 'about'), false);
 });
 
 test('glass outline path remains closed and neck-aware', () => {

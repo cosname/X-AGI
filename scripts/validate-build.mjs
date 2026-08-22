@@ -485,34 +485,12 @@ const officialCopyByRoute = new Map([
     [
       conference2026.dates.compact,
       conference2026.venue.scheduleName,
-      ...conference2026.schedule.flatMap((day) => [
-        day.date,
-        ...day.sessions.flatMap((session) => [
-          session.period,
-          session.title,
-          session.venue,
-          session.chair?.name,
-          session.chair?.bio,
-          ...(session.notes ?? []),
-          ...(session.talks ?? []).flatMap((talk) => [
-            talk.time,
-            talk.title,
-            talk.speaker,
-            talk.affiliation,
-            talk.abstract,
-            talk.bio,
-          ]),
-        ]),
-      ]).filter(Boolean),
-      'Full schedule TBD. Current sessions and speakers are listed below.',
+      conference2026.scheduleNotice,
       'SESSIONS & SPEAKERS',
-      'Exact dates, times, rooms, and talk titles are TBD.',
-      'Time TBD',
-      'Talk title TBD',
-      'Speaker TBD',
+      `大会专题与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
       ...conference2026.programPreview.sessions.flatMap((session) => [
         session.title,
-        session.chair.name === '待确认' ? 'Session Chair TBD' : session.chair.name,
+        session.chair.name === '待确认' ? '主持人待确认' : session.chair.name,
         ...session.speakers.map((speaker) => speaker.name),
       ]),
     ],
@@ -990,18 +968,22 @@ for (const [marker, description] of [
 
 const scheduleIndex = await readFile(path.join(root, 'schedule/index.html'), 'utf8');
 const goalScheduleIndex = await readFile(path.join(root, 'goal/schedule/index.html'), 'utf8');
-const scheduleSessionCount = conference2026.schedule.reduce(
-  (count, day) => count + day.sessions.length,
-  0,
-);
-const expectedScheduleCardCount = scheduleSessionCount + conference2026.programPreview.sessions.length;
+const expectedScheduleCardCount = conference2026.programPreview.sessions.length;
 const schedulePlaceholders = [
-  'Full schedule TBD. Current sessions and speakers are listed below.',
+  conference2026.scheduleNotice,
   'SESSIONS & SPEAKERS',
+  `大会专题与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
+];
+const retiredScheduleCopy = [
+  'Full schedule TBD. Current sessions and speakers are listed below.',
   'Exact dates, times, rooms, and talk titles are TBD.',
   'Time TBD',
   'Talk title TBD',
   'Speaker TBD',
+  'Session Chair TBD',
+  'Speakers TBD',
+  '文字日程正在发布',
+  conference2026.programPreview.note,
 ];
 
 for (const [route, source] of [
@@ -1009,8 +991,11 @@ for (const [route, source] of [
   ['goal/schedule/index.html', goalScheduleIndex],
 ]) {
   const text = visibleText(source);
-  if (!source.includes('class="schedule-intro"') || !source.includes('class="nav nav-pills schedule-tabs')) {
-    failures.push(`${route}: speaker-capable schedule must preserve its date navigation`);
+  if (!source.includes('class="schedule-intro"') || !source.includes('class="schedule-confirmed"')) {
+    failures.push(`${route}: schedule page must keep the intro and published topics`);
+  }
+  if (source.includes('class="nav nav-pills schedule-tabs') || source.includes('报到日')) {
+    failures.push(`${route}: unpublished day-by-day schedule must stay off the page`);
   }
   if (source.includes('goal-schedule-preview') || source.includes('conference-program-outline')) {
     failures.push(`${route}: alternate schedule-preview layout must not replace the approved template`);
@@ -1027,7 +1012,12 @@ for (const [route, source] of [
 
   for (const placeholder of schedulePlaceholders) {
     if (!text.includes(placeholder)) {
-      failures.push(`${route}: missing approved placeholder copy "${placeholder}"`);
+      failures.push(`${route}: missing approved schedule copy "${placeholder}"`);
+    }
+  }
+  for (const copy of retiredScheduleCopy) {
+    if (text.includes(copy)) {
+      failures.push(`${route}: retired placeholder copy "${copy}" must not remain`);
     }
   }
 }

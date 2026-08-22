@@ -29,6 +29,7 @@ const navigationByEdition: Record<EditionConfig['year'], readonly NavigationItem
     { page: 'schedule', label: '日程安排' },
     { page: 'poster', label: '海报展示' },
     { page: 'guide', label: '参会指南' },
+    { page: 'register', label: '立即报名' },
   ],
 };
 
@@ -37,5 +38,6 @@ export function editionNavigation(edition: EditionConfig): readonly NavigationIt
 }
 
 export function editionPages(edition: EditionConfig): readonly EditionPage[] {
-  return [...navigationByEdition[edition.year].map(({ page }) => page), 'register'];
+  const pages = navigationByEdition[edition.year].map(({ page }) => page);
+  return pages.includes('register') ? pages : [...pages, 'register'];
 }
