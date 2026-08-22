@@ -356,6 +356,13 @@
     gap: 0.28rem;
   }
 
+  .edition-goal-2026 .info-card .iframe-container.goal-ticket-embed {
+    width: auto;
+    max-width: none;
+    margin-left: -22.5px;
+    margin-right: -22.5px;
+  }
+
   .edition-goal-2026 .main-content .custom-container {
     width: calc(100% - 4vw);
   }

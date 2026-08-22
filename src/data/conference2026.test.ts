@@ -20,8 +20,8 @@ describe('conference schedule contracts', () => {
     }
   });
 
-  it('announces that the detailed schedule is still being arranged', () => {
-    assert.equal(conference2026.scheduleNotice, '具体日程正在安排');
+  it('announces that the detailed schedule will be published soon', () => {
+    assert.equal(conference2026.scheduleNotice, '具体日程即将发布');
     assert.doesNotMatch(conference2026.scheduleNotice, /TBD/i);
   });
 
