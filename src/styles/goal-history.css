@@ -171,11 +171,18 @@
   right: 0.55rem;
   bottom: 0.55rem;
   padding: 0.28rem 0.46rem;
-  border: 1px solid rgb(255 255 255 / 0.48);
+  border: 1px solid var(--glass-lens-rim, rgb(103 82 200 / 0.28));
   border-radius: 999px;
   color: #111342;
-  background: rgb(255 253 251 / 0.74);
-  backdrop-filter: blur(7px) saturate(1.04);
+  background: var(--glass-micro-fill, rgb(255 253 251 / 0.78));
+  box-shadow: var(
+    --glass-micro-shadow,
+    inset 0 1px 0 rgb(255 255 255 / 0.86),
+    inset 0 -1px 0 rgb(58 45 145 / 0.1),
+    0 4px 11px rgb(40 29 105 / 0.085)
+  );
+  -webkit-backdrop-filter: var(--glass-micro-backdrop, blur(7px) saturate(1.06));
+  backdrop-filter: var(--glass-micro-backdrop, blur(7px) saturate(1.06));
   content: attr(data-depicted-year-label);
   font-family: var(--font-condensed);
   font-size: 0.65rem;
@@ -229,6 +236,23 @@
   transform-origin: center;
   pointer-events: none;
   will-change: opacity, transform;
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .goal-history__photo[data-history-depicted-year] .goal-history__photo-surface::after {
+    background: linear-gradient(150deg, #fffefd, #eee8f6);
+  }
+}
+
+@media (forced-colors: active) {
+  .goal-history__photo[data-history-depicted-year] .goal-history__photo-surface::after {
+    border-color: CanvasText;
+    color: CanvasText;
+    background: Canvas;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 @media (max-width: 68rem) {

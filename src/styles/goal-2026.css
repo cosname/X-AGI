@@ -7,22 +7,21 @@
   --goal-purple: #6752c8;
   --goal-purple-deep: #4f3caf;
   --goal-line: rgb(17 19 66 / 0.14);
-  --goal-glass-fill:
-    linear-gradient(
-      180deg,
-      rgb(255 252 248 / 0.24) 0%,
-      rgb(247 242 236 / 0.16) 44%,
-      rgb(103 82 200 / 0.1) 100%
-    );
+  --goal-glass-fill: var(
+    --glass-panel-fill,
+    linear-gradient(153deg, rgb(255 253 250 / 0.62), rgb(247 241 235 / 0.42) 54%, rgb(103 82 200 / 0.15))
+  );
   --goal-glass-header:
+    linear-gradient(180deg, rgb(255 255 255 / 0.1), transparent 44%),
+    radial-gradient(ellipse 68% 160% at 16% -72%, rgb(255 255 255 / 0.13), transparent 74%),
     linear-gradient(
-      100deg,
-      rgb(36 38 95 / 0.86) 0%,
-      rgb(68 54 143 / 0.82) 58%,
-      rgb(103 82 200 / 0.78) 100%
+      108deg,
+      rgb(24 27 82 / 0.94) 0%,
+      rgb(64 50 139 / 0.9) 58%,
+      rgb(103 82 200 / 0.86) 100%
     );
-  --goal-glass-border: rgb(103 82 200 / 0.16);
-  --goal-glass-blur: blur(14px) saturate(1.16) contrast(1.02);
+  --goal-glass-border: rgb(93 70 202 / 0.2);
+  --goal-glass-blur: var(--glass-panel-backdrop, blur(18px) saturate(1.18) contrast(1.04));
   --goal-card-radius: 1.15rem;
   --goal-card-header-inset: 0.24rem;
   background-color: var(--goal-paper-muted);
@@ -74,8 +73,11 @@
 }
 
 .edition-goal-2026 .status-badge.status-open {
-  border-color: rgb(103 82 200 / 0.28);
-  background: rgb(103 82 200 / 0.12);
+  border-color: rgb(93 70 202 / 0.32);
+  background: var(--glass-micro-fill, rgb(103 82 200 / 0.12));
+  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.78));
+  -webkit-backdrop-filter: var(--glass-micro-backdrop, blur(8px) saturate(1.08));
+  backdrop-filter: var(--glass-micro-backdrop, blur(8px) saturate(1.08));
   color: var(--goal-purple-deep);
 }
 
@@ -113,26 +115,50 @@
   border: 1px solid var(--goal-glass-border);
   border-radius: var(--goal-card-radius);
   background: var(--goal-glass-fill);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.72),
-    inset 0 -1px 0 rgb(103 82 200 / 0.08),
-    0 10px 28px rgb(40 29 105 / 0.08);
-  backdrop-filter: var(--goal-glass-blur);
+  box-shadow: var(
+    --glass-panel-shadow,
+    inset 0 1px 0 rgb(255 255 255 / 0.78),
+    inset 0 -1px 0 rgb(103 82 200 / 0.09),
+    0 12px 30px rgb(40 29 105 / 0.075)
+  );
   -webkit-backdrop-filter: var(--goal-glass-blur);
+  backdrop-filter: var(--goal-glass-blur);
 }
 
 .edition-goal-2026 .info-card .card-header,
 .edition-goal-2026 .notice-card .card-header {
+  position: relative;
+  z-index: 0;
   height: auto;
   min-height: 2.75rem;
+  justify-content: center;
   margin: var(--goal-card-header-inset) var(--goal-card-header-inset) 0;
   padding: 0.55rem 1.25rem;
+  text-align: center;
   border-radius: calc(var(--goal-card-radius) - var(--goal-card-header-inset));
+  border: 0;
   background: var(--goal-glass-header);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.3),
-    0 6px 16px rgb(40 29 105 / 0.1);
+    inset 0 1px 1.5px rgb(255 255 255 / 0.29),
+    inset -1px 0 1.5px rgb(255 255 255 / 0.18),
+    inset 0 0 18px rgb(255 255 255 / 0.05);
   color: #fff;
+  text-shadow: 0 1px 1px rgb(17 19 66 / 0.28);
+}
+
+.edition-goal-2026 .info-card .card-header::after,
+.edition-goal-2026 .notice-card .card-header::after {
+  position: absolute;
+  z-index: -1;
+  right: 3%;
+  bottom: -0.35rem;
+  left: 3%;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: rgb(40 29 105 / 0.085);
+  filter: blur(7px);
+  content: '';
+  pointer-events: none;
 }
 
 .edition-goal-2026 .info-card .card-body,
@@ -237,16 +263,38 @@
 .edition-goal-2026 .legacy-apply,
 .edition-goal-2026 .legacy-apply:hover {
   min-height: 2.75rem;
-  border: 1px solid rgb(103 82 200 / 0.26);
+  border: 1px solid var(--glass-lens-rim, rgb(103 82 200 / 0.28));
   border-radius: 999px;
-  background: rgb(255 253 251 / 0.46);
-  box-shadow:
+  background: var(--glass-lens-fill, rgb(255 253 251 / 0.5));
+  box-shadow: var(
+    --glass-lens-shadow,
     inset 0 1px 0 rgb(255 255 255 / 0.88),
     inset 0 -1px 0 rgb(103 82 200 / 0.1),
-    0 4px 12px rgb(40 29 105 / 0.065);
-  backdrop-filter: blur(8px) saturate(1.05) contrast(1.015);
-  -webkit-backdrop-filter: blur(8px) saturate(1.05) contrast(1.015);
+    0 4px 12px rgb(40 29 105 / 0.065)
+  );
+  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(8px) saturate(1.05) contrast(1.015));
+  backdrop-filter: var(--glass-lens-backdrop, blur(8px) saturate(1.05) contrast(1.015));
   color: #111b68 !important;
+}
+
+.edition-goal-2026 .schedule-tabs .nav-link {
+  border-color: rgb(103 82 200 / 0.22);
+  border-radius: 999px;
+  color: var(--goal-ink);
+  background: var(--glass-micro-fill, rgb(255 253 251 / 0.68));
+  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.86));
+  -webkit-backdrop-filter: var(--glass-micro-backdrop, blur(8px) saturate(1.08));
+  backdrop-filter: var(--glass-micro-backdrop, blur(8px) saturate(1.08));
+}
+
+.edition-goal-2026 .schedule-tabs .nav-link:hover,
+.edition-goal-2026 .schedule-tabs .nav-link.active {
+  border-color: rgb(103 82 200 / 0.46);
+  color: var(--goal-purple-deep);
+  background: var(--glass-micro-fill, rgb(235 230 247 / 0.78));
+  box-shadow:
+    var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.9)),
+    0 0 0 1px rgb(103 82 200 / 0.08);
 }
 
 .edition-goal-2026 .schedule-tabs,
@@ -255,8 +303,14 @@
 }
 
 .edition-goal-2026 .accordion-button:not(.collapsed) {
-  background: rgb(40 38 101 / 0.72);
+  border-color: rgb(255 255 255 / 0.1);
   color: #fff;
+  background: var(--goal-glass-header);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.18),
+    inset 0 -1px 1.5px rgb(17 19 66 / 0.14),
+    0 5px 14px rgb(40 29 105 / 0.055);
+  text-shadow: 0 1px 1px rgb(17 19 66 / 0.28);
 }
 
 .edition-goal-2026 .legacy-ticket-band th,
@@ -306,12 +360,44 @@
 
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .edition-goal-2026 .info-card {
-    background: rgb(247 242 236 / 0.94);
+    background: #f7f2ec;
   }
 
   .edition-goal-2026 .info-card .card-header,
-  .edition-goal-2026 .notice-card .card-header {
-    background: rgb(68 54 143 / 0.88);
+  .edition-goal-2026 .notice-card .card-header,
+  .edition-goal-2026 .accordion-button:not(.collapsed) {
+    background: linear-gradient(108deg, #24265f, #4f3caf 62%, #6752c8);
+  }
+
+  .edition-goal-2026 .status-badge.status-open,
+  .edition-goal-2026 .legacy-apply,
+  .edition-goal-2026 .legacy-apply:hover,
+  .edition-goal-2026 .schedule-tabs .nav-link {
+    background: linear-gradient(150deg, #fffefd, #eee8f6);
+  }
+}
+
+@media (forced-colors: active) {
+  .edition-goal-2026 .info-card .card-header,
+  .edition-goal-2026 .notice-card .card-header,
+  .edition-goal-2026 .accordion-button:not(.collapsed),
+  .edition-goal-2026 .legacy-apply,
+  .edition-goal-2026 .schedule-tabs .nav-link {
+    border-color: CanvasText;
+    color: CanvasText !important;
+    background: Canvas;
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+  .edition-goal-2026 .schedule-tabs .nav-link.active {
+    border: 2px solid Highlight;
+    color: LinkText !important;
+  }
+
+  .edition-goal-2026 .info-card .card-header::after,
+  .edition-goal-2026 .notice-card .card-header::after {
+    display: none;
   }
 }
 

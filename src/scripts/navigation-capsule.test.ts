@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { capsuleGapMorph } from './navigation-capsule.ts';
+import { capsuleGapMorph, capsuleOutlinePath } from './navigation-capsule.ts';
 
 test('navigation capsule keeps each label size at the gap edges', () => {
   const left = { width: 56, height: 36 };
@@ -32,4 +32,15 @@ test('navigation capsule neck is symmetric and continuous around the gap center'
   assert.ok(before.neck < capsuleGapMorph(size, size, 0.5).neck);
   assert.equal(before.width, size.width);
   assert.equal(after.height, size.height);
+});
+
+test('navigation capsule shares one closed path generator for rendered lenses', () => {
+  const resting = capsuleOutlinePath(96, 38, 0);
+  const pinched = capsuleOutlinePath(96, 38, 1);
+  const clipped = capsuleOutlinePath(96, 38, 1, 0.08);
+
+  assert.match(resting, /^M /);
+  assert.match(resting, /Z$/);
+  assert.notEqual(resting, pinched);
+  assert.notEqual(pinched, clipped);
 });

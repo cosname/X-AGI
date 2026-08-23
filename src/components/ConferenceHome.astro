@@ -180,6 +180,8 @@ const badgeHero = edition.skin === 'goal';
 </div>
 
 <script>
+  import { heroActionCapsuleGeometry } from '../scripts/hero-action-capsule';
+
   const actionSwitchers = document.querySelectorAll<HTMLElement>('[data-hero-action-switcher]');
 
   actionSwitchers.forEach((switcher) => {
@@ -195,19 +197,15 @@ const badgeHero = edition.skin === 'goal';
     let activeTarget = register;
 
     const syncCapsule = () => {
-      const switcherBounds = switcher.getBoundingClientRect();
-      const registerBounds = register.getBoundingClientRect();
-      const targetBounds = activeTarget.getBoundingClientRect();
-      const capsuleX = targetBounds.left - switcherBounds.left
-        + (targetBounds.width - registerBounds.width) / 2;
-
-      switcher.style.setProperty('--hero-action-capsule-x', `${capsuleX}px`);
-      switcher.style.setProperty(
-        '--hero-action-capsule-y',
-        `${targetBounds.top - switcherBounds.top}px`,
+      const geometry = heroActionCapsuleGeometry(
+        switcher.getBoundingClientRect(),
+        activeTarget.getBoundingClientRect(),
       );
-      switcher.style.setProperty('--hero-action-capsule-width', `${registerBounds.width}px`);
-      switcher.style.setProperty('--hero-action-capsule-height', `${registerBounds.height}px`);
+
+      switcher.style.setProperty('--hero-action-capsule-x', `${geometry.x}px`);
+      switcher.style.setProperty('--hero-action-capsule-y', `${geometry.y}px`);
+      switcher.style.setProperty('--hero-action-capsule-width', `${geometry.width}px`);
+      switcher.style.setProperty('--hero-action-capsule-height', `${geometry.height}px`);
     };
 
     const activate = (target: HTMLElement) => {
