@@ -1,3 +1,5 @@
+import { conference2026ProgramSessions } from './conference2026-program.generated.ts';
+
 export type Organization = {
   name: string;
   url?: string;
@@ -172,94 +174,7 @@ export const conference2026 = {
   programPreview: {
     status: '持续更新中...',
     note: '专题与嘉宾名单持续更新，具体时段将随文字日程一并公布。',
-    sessions: [
-      {
-        title: 'AI + Math & Theory',
-        chair: { name: '刘方辉', affiliation: '上海交通大学' },
-        speakers: [
-          { name: '罗涛', affiliation: '上海交通大学' },
-          { name: '邹荻凡', affiliation: '香港大学' },
-          { name: '陆一平', affiliation: '北京大学' },
-          { name: '刘方辉', affiliation: '上海交通大学' },
-        ],
-      },
-      {
-        title: 'ML Theory',
-        chair: { name: '马梓业', affiliation: '香港城市大学' },
-        speakers: [
-          { name: '马鉴昊', affiliation: '清华大学' },
-          { name: '赵鹏', affiliation: '南京大学' },
-        ],
-      },
-      {
-        title: '生成建模的新范式与理论基础',
-        chair: { name: '周峰', affiliation: '中国人民大学' },
-        speakers: [
-          { name: '马俊杰', affiliation: '中国科学院数学与系统科学研究院' },
-          { name: '许洪腾', affiliation: '中国人民大学' },
-          { name: '毛小介', affiliation: '清华大学' },
-          { name: '周帆', affiliation: '上海财经大学' },
-        ],
-      },
-      {
-        title: '预训练算法的新进展',
-        chair: { name: '校一皓', affiliation: '上海财经大学' },
-        speakers: [{ name: '谢天', affiliation: 'Qwen' }],
-      },
-      {
-        title: 'Agentic 后训练',
-        chair: { name: '杨新宇', affiliation: 'Kimi' },
-        speakers: [],
-      },
-      {
-        title: 'AI + 教育',
-        chair: { name: '陈思明', affiliation: '复旦大学' },
-        speakers: [],
-      },
-      {
-        title: 'Agent',
-        chair: { name: '从鑫', affiliation: '清华大学' },
-        speakers: [
-          { name: '王宏宁', affiliation: '清华大学' },
-          { name: '李鹏', affiliation: '清华大学' },
-        ],
-      },
-      {
-        title: 'LLM 评测 & Benchmark',
-        chair: { name: '张辉帅', affiliation: '北京大学' },
-        speakers: [],
-      },
-      {
-        title: 'AI + Finance',
-        chair: { name: '祝武', affiliation: '清华大学' },
-        speakers: [],
-      },
-      {
-        title: '语言模型基础',
-        chair: { name: '胡天阳', affiliation: '香港中文大学（深圳）' },
-        speakers: [{ name: '刘威杨', affiliation: '香港中文大学' }],
-      },
-      {
-        title: '扩散模型的理论基础与推理算法',
-        chair: { name: '陆一平', affiliation: '北京大学' },
-        speakers: [
-          { name: '焦雨领', affiliation: '武汉大学' },
-          { name: '周沛劼', affiliation: '北京大学' },
-          { name: '史作强', affiliation: '清华大学' },
-          { name: '陆一平', affiliation: '北京大学' },
-        ],
-      },
-      {
-        title: 'AI Infra',
-        chair: { name: '杨朋昆', affiliation: '清华大学' },
-        speakers: [],
-      },
-      {
-        title: 'AI4Science',
-        chair: { name: '待确认', affiliation: '' },
-        speakers: [{ name: '许慧楠', affiliation: '之江实验室' }],
-      },
-    ],
+    sessions: conference2026ProgramSessions,
   },
   // 日程是嘉宾、报告与分会场的唯一发布面。确认后的讲者、摘要、简介写进对应 session.talks。
   schedule: [

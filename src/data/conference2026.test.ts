@@ -6,6 +6,7 @@ import {
   conference2026OrganizerDisplayOrder,
   conference2026PartnerDisplayGroups,
 } from './conference2026.ts';
+import { conference2026ProgramSource } from './conference2026-program.generated.ts';
 import { partnerLogoByName } from './partner-logo-assets-2026.ts';
 
 const scheduleCategories = new Set(['arrival', 'keynote', 'parallel', 'poster']);
@@ -51,13 +52,36 @@ describe('conference schedule contracts', () => {
     assert.ok(reservedTalkCount > 0, 'the fill-ready schedule must retain reserved talk slots');
   });
 
-  it('keeps unconfirmed AI Infra speakers unpublished', () => {
-    const session = conference2026.programPreview.sessions.find(
-      (candidate) => candidate.title === 'AI Infra',
+  it('publishes a valid, normalized program snapshot', () => {
+    assert.equal(
+      conference2026ProgramSource.url,
+      'https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2',
     );
+    assert.equal(conference2026ProgramSource.tabId, 'BB08J2');
+    assert.equal(conference2026ProgramSource.sheetName, '工作表1');
+    assert.match(conference2026ProgramSource.sourceHash, /^[a-f0-9]{64}$/u);
+    assert.equal(conference2026.programPreview.sessions, conference2026ProgramSource.sessions);
+    assert.ok(conference2026ProgramSource.sessions.length > 0);
 
-    assert.ok(session, 'AI Infra is missing from the program preview');
-    assert.deepEqual(session.speakers, []);
+    const titles = new Set<string>();
+    for (const session of conference2026ProgramSource.sessions) {
+      assert.ok(session.title.trim(), 'a program topic is empty');
+      assert.equal(titles.has(session.title), false, `duplicate program topic: ${session.title}`);
+      titles.add(session.title);
+
+      assert.ok(session.chair.name.trim(), `${session.title} has an empty chair`);
+      const speakerKeys = session.speakers.map(
+        (speaker) => `${speaker.name}\u0000${speaker.affiliation ?? ''}`,
+      );
+      assert.equal(
+        new Set(speakerKeys).size,
+        speakerKeys.length,
+        `${session.title} contains duplicate speakers`,
+      );
+      for (const speaker of session.speakers) {
+        assert.ok(speaker.name.trim(), `${session.title} has an empty speaker`);
+      }
+    }
   });
 });
 
