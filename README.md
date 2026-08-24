@@ -5,32 +5,28 @@ X-AGI 大会官网及年度归档的 Astro 静态站。
 - 正式网站：https://www.x-agi.cc
 - 代码仓库：https://github.com/cosname/X-AGI
 - 生产托管：阿里云 OSS `x-agi` 桶，地域 `cn-beijing`
-- 运行环境：Node.js 24、Astro 7、npm
+- 运行环境：Node.js 24、Astro 7、npm 11
 
 ## 站点版本
 
-同一次构建会生成正式站、历史归档和两套本地设计预览。
+仓库明确区分当前 2026 正式站、冻结的 2025 静态归档和兼容跳转。
 
-| 路径 | 用途 | 发布状态 |
+| 路径 | 用途 | 状态 |
 | --- | --- | --- |
-| `/`、`/about/`、`/schedule/` 等 | 2026 正式站，首页包含正式首屏、17 场历届影像、组织单位与备案信息 | 对外发布 |
-| `/2025/` | 2025 X-AGI 与第 18 届中国 R 会议归档 | 冻结发布 |
-| `/next/` | 米色纸面和像素树的新视觉方案 | 仅本地预览 |
-| `/goal/` | 正式首页 history-first 版本的本地验收镜像 | 仅本地预览 |
-| `/2026/`、`/2026/<page>/` | 旧书签兼容入口 | 跳转至根路径正式页 |
+| `/`、`/about/`、`/schedule/` 等 | 2026 X-AGI 正式站 | 对外发布 |
+| `/2025/` 及其静态文件 | 2025 X-AGI 与第 18 届中国 R 会议归档 | 冻结发布 |
+| `/2026/`、`/2026/<page>/` | 旧书签兼容入口 | 跳转至当前正式路由 |
+| 根目录 `about.html`、`schedule.html` 等 | 2025 上线时期的旧链接 | 跳转至对应 2025 归档页 |
 
-`/next/` 和 `/goal/` 会写入本地 `dist/`，但生产同步脚本会明确排除它们。
-历届影像由 Astro 写入共享的 `dist/_assets/`，并随正式首页发布。
-`robots.txt` 也会禁止抓取这两个预览路径。
+`/goal/**` 和 `/next/**` 已从源码与本地构建中删除。
+`robots.txt` 暂时继续禁止抓取这两个路径，避免远端遗留对象被索引。
+移除远端遗留对象需要单独授权，不能通过全站同步的删除选项处理。
 
-根目录下的 `about.html`、`schedule.html` 等旧式 URL 会跳转到对应的 2025 归档页。
-这些文件用于兼容 2025 网站上线时产生的旧链接，不是 2026 正式路由。
-
-## 正式路由
+## 2026 正式路由
 
 | 路径 | 页面 |
 | --- | --- |
-| `/` | 首页 |
+| `/` | 首页、17 场历届影像、组织单位和备案信息 |
 | `/about/` | 会议简介 |
 | `/schedule/` | 日程安排 |
 | `/poster/` | Rising Stars Poster |
@@ -40,57 +36,74 @@ X-AGI 大会官网及年度归档的 Astro 静态站。
 
 兼容跳转集中配置在 `astro.config.mjs`。
 
-## 内容与代码结构
+## 目录结构
 
 ```text
-src/
-  config/
-    site.ts                    届次、路径、状态和正式视觉皮肤
-    navigation.ts              导航和页面集合
-    edition-status.ts          页面标题、状态和下一步操作
-  assets/2026/goal-history/    Goal 历届影像的 51 张本地原图
-  data/
-    conference2026.ts          2026 官方内容的唯一数据源
-    goal-history.ts            17 场历届影像、说明和内部来源记录
-    legacy-partner-assets.ts   正式站合作单位 Logo 对照
-  layouts/
-    Legacy2025Layout.astro     旧模板回退布局
-    Goal2026Layout.astro       当前正式站内页布局
-    BaseLayout.astro           新视觉预览布局
-  components/legacy/           正式站沿用的成熟内容结构
-  components/goal/             正式首页与 `/goal/` 共用的历届影像组件
-  components/                  正式视觉、导航、首页和共享组织单位组件
-  pages/                       Astro 路由和文本端点
-  styles/
-    legacy-2025.css            成熟内容结构的兼容样式
-    goal-2026.css              正式内页的连接视觉皮肤
-    goal-home-lower.css        正式首页与 `/goal/` 共用的长页外壳和纸面样式
-    goal-history.css           历届影像带、波峰目录和响应式编排
-    global.css                 正式首页与共享组件样式
+assets/
+  brand-kit/2026/               不发布的 2026 品牌矢量母版
 public/
-  2025/                        冻结的 2025 静态归档
-  2026/brand/                  2026 X-AGI 品牌资源
-  2026/logos/                  2026 合作单位 Logo
+  2025/                         冻结的 2025 静态归档
+  2026/
+    brand/                      站点实际使用的品牌图片和纸面纹理
+    legal/                      2026 自有备案图标
+    logos/                      每个组织单位唯一选定的正式 Logo
+src/
+  assets/2026/
+    goal-history/               17 场历届影像的 51 张本地源图
+    venue/                      2026 会场平面图和酒店预订素材
+  components/
+    2026/home/                  2026 正式首页组合与内容区
+    2026/inner/                 2026 五个正式内页的内容与外壳
+    *.astro                     跨页面共享的导航、Meta 和像素场组件
+  config/
+    site.ts                     届次、路径、状态和正式视觉皮肤
+    navigation.ts               导航和正式页面集合
+    edition-status.ts           页面标题、状态和下一步操作
+  data/
+    conference2026.ts           2026 官方业务内容的唯一数据源
+    goal-history.ts             17 场历届影像、说明和内部来源记录
+    partner-logo-assets-2026.ts 2026 正式组织单位 Logo 对照
+  layouts/
+    PublishedHome2026Layout.astro  2026 正式首页外壳
+    PublishedInner2026Layout.astro 2026 正式内页外壳
+    BaseLayout.astro              共享 HTML、Meta 和全局样式外壳
+  pages/                        Astro 正式路由和文本端点
+  styles/
+    published-inner-2026.css    2026 内页自有结构样式
+    goal-2026.css               2026 内页连接视觉和玻璃皮肤
+    goal-home-lower.css         正式首页长页纸面外壳
+    goal-history.css            历届影像和波峰目录
+    goal-partner-footer.css     组织单位和备案收束区
+    global.css                  正式首屏、导航和共享组件
 scripts/
-  validate-build.mjs           构建产物硬校验
-  configure-oss.mjs            本机 ossutil 配置
-  sync-oss.mjs                 生产同步
+  manifests/public-2025.sha256  冻结归档的哈希与字节清单
+  validate-build.mjs            构建产物和跨年份边界校验
+  configure-oss.mjs             本机 ossutil 配置
+  sync-oss.mjs                  不删除远端对象的生产同步
 ```
 
+## 内容与素材所有权
+
 2026 文案、票价、组织单位、专题嘉宾、日程和报名状态只在 `src/data/conference2026.ts` 中维护。
+页面组件负责表现，不应复制独立业务数据。
+尚未确认的讲者、报告、赞助商、时间或数字不得自行补写。
+
 历届影像的 17 场活动、51 张照片、说明、焦点和内部来源记录集中维护在 `src/data/goal-history.ts`。
-页面组件负责表现，不应复制一份独立业务数据。
+照片源文件位于 `src/assets/2026/goal-history/`，由 Astro 优化后写入 `dist/_assets/`。
+页面不得直接热链 Qpic。
+`sourceUrl` 和 `sourceImageIndex` 只用于内部追溯。
 
-历届照片来自官方会议纪要导出，已下载到本地并按二进制去重，不允许在页面中直接引用 Qpic。
-画廊在接近可视区域前使用渐进增强门槛暂缓图片发现，正式首屏不会请求历届照片，禁用 JavaScript 时仍有完整静态回退。
-照片目前标记为 `official-recap-approved-for-publication`，并随正式首页公开发布。
+当前网站请求的品牌资源位于 `public/2026/brand/`。
+非发布用矢量母版位于 `assets/brand-kit/2026/`。
+需要新尺寸或格式时，应从母版生成一个明确用途的运行时导出，再放入 `public/2026/`。
+不要把整个品牌导出集合复制到公开目录。
 
-日程数据只保留已经确认的日期、场次和报告字段，尚未公布的报告不以空对象或虚构占位文案呈现。
-不要自行补写讲者、报告、赞助商或数字。
+每个组织单位在 `public/2026/logos/` 中只保留一个选定文件。
+选择关系由 `src/data/partner-logo-assets-2026.ts` 管理。
+2026 页面不得借用 `public/2025/` 中的 Logo、图标、样式或脚本。
+相同素材需要跨届使用时，应复制为 2026 自有文件并使用清楚的当前路径。
 
-2026 品牌标志不包含 2025 年标志中的 `R`。
-正式赞助商名称是“智统数合”。
-构建校验会拒绝旧标志和错误名称。
+完整视觉、动效、历史画廊和无障碍约束见 `docs/2026-design-system.md`。
 
 ## 本地开发
 
@@ -111,51 +124,50 @@ npm run dev
 npm run dev
 npm run check
 npm run test:unit
-npm test
 npm run build
+npm test
 ```
 
 `npm test` 会依次运行单元测试、Astro 类型检查、静态构建和构建产物校验。
-
-修改页面后至少检查以下路径的桌面和手机布局：
-
-- `/`
-- `/about/`
-- `/schedule/`
-- `/poster/`
-- `/guide/`
-- `/register/`
-- `/goal/`
-- `/goal/schedule/`
-- `/2025/`
+修改页面后至少检查 `/`、`/about/`、`/schedule/`、`/poster/`、`/guide/` 和 `/register/` 的桌面与手机布局。
+归档相关改动还需要检查 `/2025/`、`/2025/schedule.html` 和 `/2025/register.html`。
 
 ## 构建约束
 
-`scripts/validate-build.mjs` 会检查：
+`scripts/validate-build.mjs` 负责保护以下契约：
 
-- 重复 HTML `id`
-- 无法解析的本地链接和资源
-- 归档下载清单格式
-- 2026 官方文案是否实际渲染
-- 根首页是否为真实页面而不是跳转页
-- 2026 页面是否误用 2025 的旧 `R` 标志
-- `/goal/*` 是否全部保持 `noindex, nofollow`，并继续从 sitemap 和生产同步中排除
-- 正式 `/` 与 `/goal/` 是否按历届影像、组织单位和备案顺序渲染相同的 history-first lower page
-- 历届影像是否保持 17 场、51 张、从第 18 届开始倒序、本地响应式资源、原生懒加载和无 Qpic 热链
-- 画廊是否使用 proximity 吸附与一场一线的标题波峰目录，并移除顶部时间线与前后按钮
-- 负一页是否没有重新引入紧凑日程、日程筛选或重复报名区
-- 正式日程与 Goal 独立日程路由是否继续保留现有结构，并共用当前专题嘉宾数据
-- DOM 首屏、完整首页 HTML 和初始本地资源是否保持在独立体积预算内
+- 正式 2026 路由、冻结 2025 文件和兼容跳转的准确清单
+- 重复 HTML `id` 和无法解析的本地链接或资源
+- 2026 正式文案、17 场活动、51 张本地历届影像和组织单位顺序
+- 当前 HTML 与 CSS 不得请求 `/2025/**`
+- 冻结归档不得请求当前 `/2026/**` 或 Astro `/_assets/**`
+- `public/2025/` 必须与 `scripts/manifests/public-2025.sha256` 的哈希和字节数一致
+- 历届影像、会场素材、伙伴 Logo 和公开品牌文件必须有明确且互相对应的消费者
+- `dist/` 不得包含 `/goal/**`、`/next/**` 或品牌母版
+- OSS 同步脚本不得包含 `--delete`
 
-正式首页和 `/goal/` 验收镜像都会执行 DOM 首屏结构、初始资源预算和 history-first 内容校验。
-构建还会校验历届影像数量与倒序、可点击波峰目录、组织单位展示顺序、备案信息及两条首页路径的 lower page 一致性。
+构建前删除旧 `dist/`，避免过期预览产物掩盖路由错误。
+
+## 2025 冻结归档
+
+`public/2025/` 是不可重组的静态归档。
+不要格式化、重命名、移动或替换其中的文件。
+归档完整性由 `scripts/manifests/public-2025.sha256` 记录并在构建时校验。
+
+历史源站还保存在 `archive/2025` 分支和 `x-agi-2025-final` 标签中。
+大体积 slides 不存入 Git。
+它们应继续位于 OSS 的 `/2025/assets/slides/`，并与 `public/2025/downloads-manifest.json` 中的路径、大小和 SHA-256 一致。
+
+```bash
+npm run downloads:verify
+```
 
 ## 生产发布
 
 正式生产环境是阿里云 OSS 上的 https://www.x-agi.cc。
 GitHub Actions 只负责验证构建并保存 `dist/` artifact，不负责生产发布。
 
-发布前需要安装 ossutil 2.x，并为桶 `x-agi` 准备最小权限的 RAM AccessKey。
+发布需要 ossutil 2.x 和针对 `x-agi` 桶的最小权限 RAM AccessKey。
 不要使用阿里云主账号密钥。
 不要把 AccessKey 写进仓库、Issue、PR 或聊天记录。
 
@@ -179,45 +191,10 @@ OSS_DRY_RUN=1 npm run oss:sync
 npm run oss:sync
 ```
 
-`npm run oss:sync` 只同步经过校验的 `dist/`，并排除 `next/**` 和 `goal/**`。
-正式首页引用的 `_assets/goal-history-*` 历届影像会正常同步。
-同步不会删除桶里只存在于远端的对象。
-不要给全站同步添加 `--delete`，否则可能删除 2025 slides 和访问日志。
+生产同步必须先执行 dry run 并检查对象数量、字节数和目录范围。
+`npm run oss:sync` 只把本地 `dist/` 覆盖到对应 OSS 路径，不删除远端独有对象。
+不要给全站同步添加 `--delete`。
+全站删除可能误删单独管理的 2025 slides、访问日志或仍待人工确认的远端对象。
 
 可以用 `OSS_BUCKET` 临时覆盖默认桶名。
 只有明确准备发布到另一个桶时才应使用该变量。
-
-## 2025 归档
-
-`public/2025/` 是冻结归档。
-除归档完整性、无障碍、安全或性能修补外，不应修改其中的会议事实、讲者、赞助商和文案。
-
-历史源站还保存在 `archive/2025` 分支和 `x-agi-2025-final` 标签中。
-
-大体积 slides 不存入 Git。
-它们应继续位于 OSS 的 `/2025/assets/slides/`，并与 `public/2025/downloads-manifest.json` 中的路径、大小和 SHA-256 一致。
-
-```bash
-npm run downloads:verify
-```
-
-## 设计预览
-
-新视觉的入口位于 `src/pages/next/`，设计说明位于 `src/design-next/README.md`。
-正式首页与 `/goal/` 验收镜像共用 history-first lower page，设计说明位于 `src/design-goal/README.md`。
-两条首页路径都保留正式首屏，并在其后只编排 2015 至 2025 年的 17 场历届影像、三类组织单位与独立备案信息。
-历届影像从第 18 届开始倒序，使用原生横向滚动、柔和 proximity 吸附和随滚动或鼠标位置移动的波峰目录。
-目录在桌面位于标题右侧，在移动端位于标题下方，每场会议都是可点击按钮，点击只移动画廊的水平位置。
-当前会议通过 `aria-current="location"` 暴露，Toolbar 支持方向键、Home 和 End 移动焦点，Enter 或 Space 使用原生按钮行为跳转。
-禁用 JavaScript 时目录隐藏，画廊恢复原生横向滚动条。
-正式站与验收镜像仍共用透明顶部与 50px 后纯色承托的导航状态契约。
-完整 `/next/` 概念站不受影响。
-
-```bash
-npm run dev
-```
-
-打开 http://localhost:4321/next/ 查看。
-打开 http://localhost:4321/ 查看正式 history-first 首页。
-打开 http://localhost:4321/goal/ 查看本地验收镜像。
-`/next/` 与 `/goal/` 路由本身仍不得同步到生产环境。

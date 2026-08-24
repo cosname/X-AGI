@@ -1,40 +1,138 @@
+import { createHash } from 'node:crypto';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { gzipSync } from 'node:zlib';
-import { editionPages } from '../src/config/navigation.ts';
-import {
-  conference2026,
-  conference2026PartnerDisplayGroups,
-} from '../src/data/conference2026.ts';
-import {
-  currentEdition,
-  editionPath,
-  goalDesignEdition,
-  nextDesignEdition,
-  site,
-} from '../src/config/site.ts';
+import { conference2026 } from '../src/data/conference2026.ts';
+import { goalHistoryEvents } from '../src/data/goal-history.ts';
+import { partnerLogoByName } from '../src/data/partner-logo-assets-2026.ts';
+import { site } from '../src/config/site.ts';
 
-const root = path.resolve('dist');
-const manifest = JSON.parse(
-  await readFile('public/2025/downloads-manifest.json', 'utf8'),
-);
+const projectRoot = path.resolve('.');
+const outputRoot = path.resolve('dist');
+const archiveSourceRoot = path.resolve('public/2025');
+const archiveOutputRoot = path.join(outputRoot, '2025');
 const failures = [];
-const managedDownloads = new Set();
 
-for (const download of manifest.downloads ?? []) {
-  if (!download.path?.startsWith('/2025/assets/slides/')) {
-    failures.push(`download manifest: invalid archive path "${download.path}"`);
+const expectedHtmlFiles = [
+  'index.html',
+  'about/index.html',
+  'schedule/index.html',
+  'poster/index.html',
+  'guide/index.html',
+  'register/index.html',
+  '404.html',
+  '2026/index.html',
+  '2026/about/index.html',
+  '2026/schedule/index.html',
+  '2026/poster/index.html',
+  '2026/guide/index.html',
+  '2026/register/index.html',
+  '2026/speakers/index.html',
+  'speakers/index.html',
+  'about.html',
+  'schedule.html',
+  'guide.html',
+  'register.html',
+  'courses.html',
+  '2025/index.html',
+  '2025/about.html',
+  '2025/schedule.html',
+  '2025/courses.html',
+  '2025/guide.html',
+  '2025/register.html',
+];
+
+const currentPageFiles = [
+  'index.html',
+  'about/index.html',
+  'schedule/index.html',
+  'poster/index.html',
+  'guide/index.html',
+  'register/index.html',
+];
+
+const expectedSitemapUrls = [
+  '/',
+  '/about/',
+  '/schedule/',
+  '/poster/',
+  '/guide/',
+  '/register/',
+  '/2025/',
+  '/2025/about.html',
+  '/2025/schedule.html',
+  '/2025/courses.html',
+  '/2025/guide.html',
+  '/2025/register.html',
+].map((route) => new URL(route, site.origin).href);
+
+const currentRedirects = new Map([
+  ['2026/index.html', '/'],
+  ['2026/about/index.html', '/about/'],
+  ['2026/schedule/index.html', '/schedule/'],
+  ['2026/poster/index.html', '/poster/'],
+  ['2026/guide/index.html', '/guide/'],
+  ['2026/register/index.html', '/register/'],
+  ['2026/speakers/index.html', '/schedule/'],
+  ['speakers/index.html', '/schedule/'],
+]);
+
+const archiveCompatibilityRedirects = new Map([
+  ['about.html', '/2025/about.html'],
+  ['schedule.html', '/2025/schedule.html'],
+  ['courses.html', '/2025/courses.html'],
+  ['guide.html', '/2025/guide.html'],
+  ['register.html', '/2025/register.html'],
+]);
+
+const virtualOutputFiles = new Map([
+  ['/404/', '404.html'],
+]);
+
+const runtimeBrandFiles = [
+  'favicon.png',
+  'goal-paper-texture.webp',
+  'share-2026.png',
+  'xagi-connect-logo.png',
+];
+const brandMasterFiles = [
+  'README.md',
+  'mark-on-dark.svg',
+  'mark.svg',
+  'wordmark-on-dark.svg',
+  'wordmark.svg',
+];
+const venueSourceFiles = [
+  'beijing-friendship-hotel-plan.jpg',
+  'friendship-hotel-xagi-offer-code.png',
+  'friendship-palace-floor-2.jpg',
+];
+
+function fail(message) {
+  failures.push(message);
+}
+
+function normalized(values) {
+  return [...values].sort((left, right) => left.localeCompare(right, 'en'));
+}
+
+function validateExactSet(label, actualValues, expectedValues) {
+  const actual = normalized(actualValues);
+  const expected = normalized(expectedValues);
+  const missing = expected.filter((value) => !actual.includes(value));
+  const unexpected = actual.filter((value) => !expected.includes(value));
+
+  for (const value of missing) fail(`${label}: missing "${value}"`);
+  for (const value of unexpected) fail(`${label}: unexpected "${value}"`);
+}
+
+async function exists(file) {
+  try {
+    await stat(file);
+    return true;
+  } catch {
+    return false;
   }
-  if (!Number.isSafeInteger(download.bytes) || download.bytes <= 0) {
-    failures.push(`download manifest: invalid byte size for "${download.path}"`);
-  }
-  if (!/^[a-f0-9]{64}$/.test(download.sha256 ?? '')) {
-    failures.push(`download manifest: invalid SHA-256 for "${download.path}"`);
-  }
-  if (managedDownloads.has(download.path)) {
-    failures.push(`download manifest: duplicate path "${download.path}"`);
-  }
-  managedDownloads.add(download.path);
 }
 
 async function walk(directory) {
@@ -48,6 +146,19 @@ async function walk(directory) {
   }
 
   return files;
+}
+
+function relativeTo(directory, file) {
+  return path.relative(directory, file).split(path.sep).join('/');
+}
+
+function sha256(buffer) {
+  return createHash('sha256').update(buffer).digest('hex');
+}
+
+async function fileIntegrity(file) {
+  const buffer = await readFile(file);
+  return { bytes: buffer.byteLength, sha256: sha256(buffer) };
 }
 
 function visibleText(source) {
@@ -64,46 +175,112 @@ function visibleText(source) {
     .trim();
 }
 
-async function resolvesToOutput(htmlFile, reference) {
-  const pathname = decodeURIComponent(reference.split(/[?#]/, 1)[0]);
-  if (!pathname || managedDownloads.has(pathname)) return true;
-
-  const candidate = pathname.startsWith('/')
-    ? path.join(root, pathname.replace(/^\/+/, ''))
-    : path.resolve(path.dirname(htmlFile), pathname);
-
-  try {
-    const metadata = await stat(candidate);
-    if (metadata.isFile()) return true;
-    if (metadata.isDirectory()) {
-      const index = await stat(path.join(candidate, 'index.html'));
-      return index.isFile();
-    }
-  } catch {
-    return false;
-  }
-
-  return false;
+function cssReferences(source) {
+  return [...source.matchAll(/url\(\s*(?:"([^"]+)"|'([^']+)'|([^\s)'";]+))\s*\)/gi)]
+    .map((match) => match[1] ?? match[2] ?? match[3])
+    .filter(Boolean);
 }
 
-async function outputFileForReference(sourceFile, reference) {
-  const pathname = decodeURIComponent(reference.split(/[?#]/, 1)[0]);
-  if (
-    !pathname ||
-    managedDownloads.has(pathname) ||
-    /^(?:https?:|mailto:|tel:|data:|javascript:)/.test(reference)
-  ) {
-    return undefined;
+function htmlReferences(source) {
+  const withoutComments = source.replace(/<!--[\s\S]*?-->/g, '');
+  const references = [
+    ...[...withoutComments.matchAll(/\s(?:href|src)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)]
+      .map((match) => match[1] ?? match[2]),
+    ...[...withoutComments.matchAll(/\ssrcset\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)]
+      .flatMap((match) => (match[1] ?? match[2] ?? '').split(','))
+      .map((candidate) => candidate.trim().split(/\s+/, 1)[0]),
+    ...[...withoutComments.matchAll(/\sstyle\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)]
+      .flatMap((match) => cssReferences(match[1] ?? match[2] ?? '')),
+    ...[...withoutComments.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)]
+      .flatMap((match) => cssReferences(match[1])),
+  ];
+
+  for (const match of withoutComments.matchAll(/<meta\b[^>]*>/gi)) {
+    const tag = match[0];
+    const property = tag.match(/\s(?:property|name)=["']([^"']+)["']/i)?.[1]?.toLowerCase();
+    if (property !== 'og:image' && property !== 'twitter:image') continue;
+    const content = tag.match(/\scontent=["']([^"']+)["']/i)?.[1];
+    if (content) references.push(content);
   }
 
+  return references.filter(Boolean);
+}
+
+function isExternalReference(reference) {
+  return localReferenceValue(reference) === undefined;
+}
+
+function localReferenceValue(reference) {
+  const value = reference.trim().replace(/&amp;/g, '&');
+  if (!value || value.startsWith('#')) return undefined;
+
+  const hasScheme = /^[a-z][a-z0-9+.-]*:/i.test(value);
+  if (value.startsWith('//') || hasScheme) {
+    if (!value.startsWith('//') && !/^https?:/i.test(value)) return undefined;
+    try {
+      const absolute = new URL(value, site.origin);
+      if (absolute.origin !== new URL(site.origin).origin) return undefined;
+      return `${absolute.pathname}${absolute.search}${absolute.hash}`;
+    } catch {
+      return undefined;
+    }
+  }
+
+  return value;
+}
+
+function referencePath(reference) {
+  const rawPath = localReferenceValue(reference)?.split(/[?#]/, 1)[0] ?? '';
+  try {
+    return decodeURIComponent(rawPath);
+  } catch {
+    return rawPath;
+  }
+}
+
+function referenceTargetsArchive(sourceFile, reference) {
+  if (isExternalReference(reference)) return false;
+  const pathname = referencePath(reference);
   const candidate = pathname.startsWith('/')
-    ? path.join(root, pathname.replace(/^\/+/, ''))
+    ? path.join(outputRoot, pathname.replace(/^\/+/, ''))
     : path.resolve(path.dirname(sourceFile), pathname);
+  const relative = relativeTo(outputRoot, candidate);
+  return relative === '2025'
+    || relative.startsWith('2025/')
+    || archiveCompatibilityRedirects.has(relative);
+}
+
+function referenceTargetsCurrentAssets(sourceFile, reference) {
+  if (isExternalReference(reference)) return false;
+  const pathname = referencePath(reference);
+  const candidate = pathname.startsWith('/')
+    ? path.join(outputRoot, pathname.replace(/^\/+/, ''))
+    : path.resolve(path.dirname(sourceFile), pathname);
+  const relative = relativeTo(outputRoot, candidate);
+  return relative === '_assets'
+    || relative.startsWith('_assets/')
+    || relative === '2026'
+    || relative.startsWith('2026/');
+}
+
+async function outputFileForReference(sourceFile, reference, managedDownloads) {
+  if (isExternalReference(reference)) return undefined;
+  const pathname = referencePath(reference);
+  if (!pathname || managedDownloads.has(pathname)) return undefined;
+
+  const candidate = pathname.startsWith('/')
+    ? path.join(outputRoot, virtualOutputFiles.get(pathname) ?? pathname.replace(/^\/+/, ''))
+    : path.resolve(path.dirname(sourceFile), pathname);
+  const relativeCandidate = path.relative(outputRoot, candidate);
+  if (relativeCandidate.startsWith('..') || path.isAbsolute(relativeCandidate)) return undefined;
 
   try {
     const metadata = await stat(candidate);
     if (metadata.isFile()) return candidate;
-    if (metadata.isDirectory()) return path.join(candidate, 'index.html');
+    if (metadata.isDirectory()) {
+      const indexFile = path.join(candidate, 'index.html');
+      if ((await stat(indexFile)).isFile()) return indexFile;
+    }
   } catch {
     return undefined;
   }
@@ -111,25 +288,20 @@ async function outputFileForReference(sourceFile, reference) {
   return undefined;
 }
 
-async function collectInitialDependency(file, dependencies) {
-  if (!file || dependencies.has(file)) return;
-  dependencies.add(file);
-
-  if (!file.endsWith('.css')) return;
-  const source = await readFile(file, 'utf8');
-  const references = [...source.matchAll(/url\(["']?([^"')]+)["']?\)/g)].map(
-    (match) => match[1],
-  );
+async function validateLocalReferences(file, references, managedDownloads) {
+  const route = relativeTo(outputRoot, file);
 
   for (const reference of references) {
-    await collectInitialDependency(
-      await outputFileForReference(file, reference),
-      dependencies,
-    );
+    if (isExternalReference(reference)) continue;
+    const pathname = referencePath(reference);
+    if (!pathname || managedDownloads.has(pathname)) continue;
+    if (!(await outputFileForReference(file, reference, managedDownloads))) {
+      fail(`${route}: missing local reference "${reference}"`);
+    }
   }
 }
 
-async function initialLocalPayload(htmlFile) {
+async function initialLocalPayload(htmlFile, managedDownloads) {
   const source = await readFile(htmlFile, 'utf8');
   const dependencies = new Set([htmlFile]);
   const tags = [...source.matchAll(/<(?:link|script|img|iframe)\b[^>]*>/gi)].map(
@@ -140,13 +312,23 @@ async function initialLocalPayload(htmlFile) {
     if (/^<(?:img|iframe)\b/i.test(tag) && /\sloading=["']lazy["']/i.test(tag)) {
       continue;
     }
-
     const reference = tag.match(/\s(?:href|src)=["']([^"']+)["']/i)?.[1];
     if (!reference) continue;
-    await collectInitialDependency(
-      await outputFileForReference(htmlFile, reference),
-      dependencies,
-    );
+    const dependency = await outputFileForReference(htmlFile, reference, managedDownloads);
+    if (!dependency) continue;
+    dependencies.add(dependency);
+
+    if (dependency.endsWith('.css')) {
+      const stylesheet = await readFile(dependency, 'utf8');
+      for (const cssReference of cssReferences(stylesheet)) {
+        const cssDependency = await outputFileForReference(
+          dependency,
+          cssReference,
+          managedDownloads,
+        );
+        if (cssDependency) dependencies.add(cssDependency);
+      }
+    }
   }
 
   let bytes = 0;
@@ -154,1011 +336,484 @@ async function initialLocalPayload(htmlFile) {
   return bytes;
 }
 
-async function homepageHeroCssUsesImage(htmlFile, source, hero) {
-  const inlineStyles = [...hero.matchAll(/\sstyle\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)]
-    .map((match) => match[1] ?? match[2] ?? '');
-  if (inlineStyles.some((style) => /(?:url|image-set)\s*\(/i.test(style))) {
-    return true;
+const downloadManifest = JSON.parse(
+  await readFile(path.join(archiveSourceRoot, 'downloads-manifest.json'), 'utf8'),
+);
+const managedDownloads = new Set();
+for (const download of downloadManifest.downloads ?? []) {
+  if (!download.path?.startsWith('/2025/assets/slides/')) {
+    fail(`download manifest: invalid archive path "${download.path}"`);
   }
-
-  const styleSources = [...source.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)].map(
-    (match) => match[1],
-  );
-  const stylesheetReferences = [...source.matchAll(/<link\b[^>]*>/gi)]
-    .map((match) => match[0])
-    .filter((tag) => /\srel=["'][^"']*stylesheet[^"']*["']/i.test(tag))
-    .map((tag) => tag.match(/\shref=["']([^"']+)["']/i)?.[1])
-    .filter(Boolean);
-
-  for (const reference of stylesheetReferences) {
-    const stylesheet = await outputFileForReference(htmlFile, reference);
-    if (stylesheet?.endsWith('.css')) {
-      styleSources.push(await readFile(stylesheet, 'utf8'));
-    }
+  if (!Number.isSafeInteger(download.bytes) || download.bytes <= 0) {
+    fail(`download manifest: invalid byte size for "${download.path}"`);
   }
+  if (!/^[a-f0-9]{64}$/.test(download.sha256 ?? '')) {
+    fail(`download manifest: invalid SHA-256 for "${download.path}"`);
+  }
+  if (managedDownloads.has(download.path)) {
+    fail(`download manifest: duplicate path "${download.path}"`);
+  }
+  managedDownloads.add(download.path);
+}
 
-  const heroRules = styleSources
-    .flatMap((stylesheet) => stylesheet.split('}'))
-    .filter((rule) => (
-      rule.includes('.hero-pixel-field')
-      || rule.includes('[data-hero-pixel-field]')
-      || rule.includes('.conference-hero')
-    ));
-
-  const heroClasses = new Set(
-    [...hero.matchAll(/\sclass=["']([^"']+)["']/gi)]
-      .flatMap((match) => match[1].split(/\s+/))
-      .filter(Boolean),
-  );
-
-  return heroRules.some((rule) => {
-    if (!/(?:url|image-set)\s*\(/i.test(rule)) return false;
-    const selector = rule.split('{', 1)[0] ?? '';
-    const selectorClasses = [...selector.matchAll(/\.([a-z0-9_-]+)/gi)]
-      .map((match) => match[1]);
-    return selectorClasses.some((className) => heroClasses.has(className));
+const archiveManifestSource = await readFile('scripts/manifests/public-2025.sha256', 'utf8');
+const archiveManifest = new Map();
+for (const [index, line] of archiveManifestSource.split(/\r?\n/).entries()) {
+  if (!line || line.startsWith('#')) continue;
+  const [expectedHash, expectedBytes, repositoryPath, ...extra] = line.split('\t');
+  if (
+    extra.length > 0
+    || !/^[a-f0-9]{64}$/.test(expectedHash ?? '')
+    || !/^\d+$/.test(expectedBytes ?? '')
+    || !repositoryPath?.startsWith('public/2025/')
+  ) {
+    fail(`public-2025 manifest: invalid line ${index + 1}`);
+    continue;
+  }
+  if (archiveManifest.has(repositoryPath)) {
+    fail(`public-2025 manifest: duplicate path "${repositoryPath}"`);
+  }
+  archiveManifest.set(repositoryPath, {
+    bytes: Number(expectedBytes),
+    sha256: expectedHash,
   });
 }
 
-const outputFiles = await walk(root);
+const archiveSourceFiles = await walk(archiveSourceRoot);
+const archiveSourcePaths = archiveSourceFiles.map((file) => relativeTo(projectRoot, file));
+validateExactSet('public-2025 manifest', archiveManifest.keys(), archiveSourcePaths);
+if (archiveManifest.size !== 92) {
+  fail(`public-2025 manifest: expected 92 files, found ${archiveManifest.size}`);
+}
 
-for (const htmlFile of outputFiles.filter((file) => file.endsWith('.html'))) {
-  const relativeFile = path.relative(root, htmlFile);
+for (const sourceFile of archiveSourceFiles) {
+  const repositoryPath = relativeTo(projectRoot, sourceFile);
+  const expected = archiveManifest.get(repositoryPath);
+  if (!expected) continue;
+  const sourceIntegrity = await fileIntegrity(sourceFile);
+  if (sourceIntegrity.bytes !== expected.bytes || sourceIntegrity.sha256 !== expected.sha256) {
+    fail(`${repositoryPath}: frozen archive source differs from its integrity manifest`);
+  }
+
+  const archiveRelativePath = relativeTo(archiveSourceRoot, sourceFile);
+  const outputFile = path.join(archiveOutputRoot, archiveRelativePath);
+  if (!(await exists(outputFile))) {
+    fail(`2025/${archiveRelativePath}: frozen archive file is missing from dist`);
+    continue;
+  }
+  const outputIntegrity = await fileIntegrity(outputFile);
+  if (outputIntegrity.bytes !== expected.bytes || outputIntegrity.sha256 !== expected.sha256) {
+    fail(`2025/${archiveRelativePath}: dist copy differs from the frozen archive source`);
+  }
+}
+
+const archiveOutputFiles = await walk(archiveOutputRoot);
+validateExactSet(
+  'dist/2025 archive',
+  archiveOutputFiles.map((file) => relativeTo(archiveOutputRoot, file)),
+  archiveSourceFiles.map((file) => relativeTo(archiveSourceRoot, file)),
+);
+
+const outputFiles = await walk(outputRoot);
+const htmlFiles = outputFiles.filter((file) => file.endsWith('.html'));
+validateExactSet(
+  'generated HTML inventory',
+  htmlFiles.map((file) => relativeTo(outputRoot, file)),
+  expectedHtmlFiles,
+);
+
+for (const retiredDirectory of ['goal', 'next']) {
+  if (outputFiles.some((file) => relativeTo(outputRoot, file).startsWith(`${retiredDirectory}/`))) {
+    fail(`dist/${retiredDirectory}: retired preview output must not exist`);
+  }
+}
+
+for (const htmlFile of htmlFiles) {
   const source = await readFile(htmlFile, 'utf8');
+  const route = relativeTo(outputRoot, htmlFile);
   const withoutComments = source.replace(/<!--[\s\S]*?-->/g, '');
-  const ids = [...withoutComments.matchAll(/\sid=["']([^"']+)["']/g)].map(
-    (match) => match[1],
-  );
-
+  const ids = [...withoutComments.matchAll(/\sid=["']([^"']+)["']/g)].map((match) => match[1]);
   for (const id of new Set(ids)) {
     if (ids.filter((candidate) => candidate === id).length > 1) {
-      failures.push(`${relativeFile}: duplicate id "${id}"`);
+      fail(`${route}: duplicate id "${id}"`);
     }
   }
+  await validateLocalReferences(htmlFile, htmlReferences(source), managedDownloads);
+}
 
-  const references = [
-    ...withoutComments.matchAll(/\s(?:href|src)=["']([^"']+)["']/g),
-  ].map((match) => match[1]);
+const cssFiles = outputFiles.filter((file) => file.endsWith('.css'));
+for (const cssFile of cssFiles) {
+  const source = await readFile(cssFile, 'utf8');
+  await validateLocalReferences(cssFile, cssReferences(source), managedDownloads);
+}
 
+for (const route of currentPageFiles) {
+  const file = path.join(outputRoot, route);
+  const source = await readFile(file, 'utf8');
+  for (const reference of htmlReferences(source)) {
+    if (referenceTargetsArchive(file, reference)) {
+      fail(`${route}: current 2026 page depends on frozen /2025 content through "${reference}"`);
+    }
+  }
+}
+for (const cssFile of cssFiles.filter((file) => !relativeTo(outputRoot, file).startsWith('2025/'))) {
+  const source = await readFile(cssFile, 'utf8');
+  for (const reference of cssReferences(source)) {
+    if (referenceTargetsArchive(cssFile, reference)) {
+      fail(`${relativeTo(outputRoot, cssFile)}: current CSS depends on frozen /2025 content through "${reference}"`);
+    }
+  }
+}
+
+for (const archiveFile of archiveOutputFiles) {
+  const extension = path.extname(archiveFile).toLowerCase();
+  if (!['.html', '.css', '.js', '.json', '.svg'].includes(extension)) continue;
+  const source = await readFile(archiveFile, 'utf8');
+  const references = extension === '.css' ? cssReferences(source) : extension === '.html' ? htmlReferences(source) : [];
   for (const reference of references) {
-    if (
-      reference.startsWith('#') ||
-      /^(?:https?:|mailto:|tel:|data:|javascript:)/.test(reference)
-    ) {
-      continue;
+    if (referenceTargetsCurrentAssets(archiveFile, reference)) {
+      fail(`${relativeTo(outputRoot, archiveFile)}: frozen archive depends on current content through "${reference}"`);
     }
+  }
+  if (/\/(?:2026|_assets)\//.test(source)) {
+    fail(`${relativeTo(outputRoot, archiveFile)}: frozen archive contains a current-edition dependency`);
+  }
+}
 
-    if (!(await resolvesToOutput(htmlFile, reference))) {
-      failures.push(`${relativeFile}: missing local reference "${reference}"`);
+async function validatePublicCopies(label, publicDirectory, expectedFiles) {
+  const sourceFiles = await walk(publicDirectory);
+  const sourceNames = sourceFiles.map((file) => relativeTo(publicDirectory, file));
+  validateExactSet(`${label} source`, sourceNames, expectedFiles);
+
+  const outputDirectory = path.join(outputRoot, relativeTo(path.resolve('public'), publicDirectory));
+  const outputFilesForDirectory = await walk(outputDirectory);
+  validateExactSet(
+    `${label} output`,
+    outputFilesForDirectory.map((file) => relativeTo(outputDirectory, file)),
+    expectedFiles,
+  );
+
+  for (const relativeFile of expectedFiles) {
+    const sourceIntegrity = await fileIntegrity(path.join(publicDirectory, relativeFile));
+    const outputIntegrity = await fileIntegrity(path.join(outputDirectory, relativeFile));
+    if (
+      sourceIntegrity.bytes !== outputIntegrity.bytes
+      || sourceIntegrity.sha256 !== outputIntegrity.sha256
+    ) {
+      fail(`${label}: output copy differs for "${relativeFile}"`);
     }
   }
 }
 
-function outputRouteForPage(edition, page) {
-  const route = editionPath(edition, page).replace(/^\/+|\/+$/g, '');
-  if (!route) return 'index.html';
-  return edition.routeStyle === 'html' ? route : `${route}/index.html`;
+await validatePublicCopies('2026 runtime brand', path.resolve('public/2026/brand'), runtimeBrandFiles);
+await validatePublicCopies('2026 legal assets', path.resolve('public/2026/legal'), ['beian-icon.png']);
+
+const selectedLogoFiles = Object.values(partnerLogoByName).map((logo) => path.basename(logo.src));
+if (selectedLogoFiles.length !== 13 || new Set(selectedLogoFiles).size !== 13) {
+  fail(`2026 partner logos: expected 13 unique selections, found ${new Set(selectedLogoFiles).size}`);
 }
+await validatePublicCopies('2026 partner logos', path.resolve('public/2026/logos'), selectedLogoFiles);
 
-const buildGroups = [
-  {
-    label: 'current edition',
-    edition: currentEdition,
-    payloadBudgetScope: 'homepage',
-    requireDomHomepage: true,
-  },
-  {
-    label: 'next design',
-    edition: nextDesignEdition,
-    payloadBudgetScope: 'all',
-    requireDomHomepage: true,
-  },
-  {
-    label: 'goal design',
-    edition: goalDesignEdition,
-    payloadBudgetScope: 'homepage',
-    requireDomHomepage: true,
-  },
-];
+const public2026Root = path.resolve('public/2026');
+validateExactSet(
+  '2026 public asset tree',
+  (await walk(public2026Root)).map((file) => relativeTo(public2026Root, file)),
+  [
+    ...runtimeBrandFiles.map((file) => `brand/${file}`),
+    'legal/beian-icon.png',
+    ...selectedLogoFiles.map((file) => `logos/${file}`),
+  ],
+);
 
-for (const group of buildGroups) {
-  for (const page of editionPages(group.edition)) {
-    const route = outputRouteForPage(group.edition, page);
-    const file = path.join(root, route);
-
-    try {
-      await stat(file);
-    } catch {
-      failures.push(`${group.label}: missing generated page "${route}"`);
-      continue;
-    }
-
-    const htmlBytes = (await stat(file)).size;
-    const source = await readFile(file, 'utf8');
-    const staticMarkup = source.replace(/<script\b[\s\S]*?<\/script>/gi, '');
-    const isDomPixelHomepage = page === ''
-      && source.includes('data-hero-pixel-field');
-    const htmlBudget = isDomPixelHomepage ? 700_000 : 50_000;
-
-    if (htmlBytes > htmlBudget) {
-      failures.push(`${route}: HTML exceeds ${htmlBudget / 1_000} KB budget`);
-    }
-
-    if (page === '' && group.requireDomHomepage && !isDomPixelHomepage) {
-      failures.push(`${route}: ${group.label} homepage must render the DOM pixel field`);
-    }
-    if (source.includes('liquid-glass') || source.includes('data-liquid-glass')) {
-      failures.push(`${route}: retired liquid-glass interaction leaked into the build`);
-    }
-    if (group.edition.skin === 'legacy-2025' && !source.includes('edition-legacy-2025')) {
-      failures.push(`${route}: current edition must use the legacy 2025 skin`);
-    }
-    if (
-      group.edition.skin === 'legacy-2025'
-      && (
-        source.includes('edition-goal-2026')
-        || source.includes('data-hero-pixel-field')
-        || source.includes('data-masthead-pixel-field')
-      )
-    ) {
-      failures.push(`${route}: current edition must not load goal preview artwork`);
-    }
-    if (
-      group.edition.skin === 'goal'
-      && !source.includes('edition-site edition-2026')
-    ) {
-      failures.push(`${route}: goal page must use the shared 2026 shell`);
-    }
-    if (
-      group.edition.skin === 'goal'
-      && page !== ''
-      && !source.includes('edition-goal-2026')
-    ) {
-      failures.push(`${route}: goal inner page must use the hybrid 2026 skin`);
-    }
-    if (
-      group.edition.skin === 'goal'
-      && page !== ''
-      && (
-        !source.includes('data-masthead-pixel-field')
-        || !source.includes('data-connection-stage')
-      )
-    ) {
-      failures.push(`${route}: goal inner page must expose an interactive masthead field`);
-    }
-    if (
-      group.edition.skin === 'goal'
-      && (
-        !source.includes('data-scroll-header="true"')
-        || !source.includes('data-scroll-state="top"')
-        || !source.includes('data-scroll-threshold="50"')
-      )
-    ) {
-      failures.push(`${route}: goal page must opt into the shared scroll-header state contract`);
-    }
-    if (
-      group.edition.skin === 'goal'
-      && (
-        !staticMarkup.includes('class="site-header"')
-        || !staticMarkup.includes('/brand/xagi-connect-logo.png')
-        || !staticMarkup.includes('data-nav-capsule="true"')
-        || !staticMarkup.includes('data-nav-capsule-target')
-        || staticMarkup.includes('class="navbar ')
-        || staticMarkup.includes('/2025/assets/js/script.js')
-      )
-    ) {
-      failures.push(`${route}: goal page must use only the shared 2026 navigation component`);
-    }
-    if (
-      group.edition.skin !== 'goal'
-      && (
-        staticMarkup.includes('data-scroll-header="true"')
-        || staticMarkup.includes('data-nav-capsule="true"')
-        || staticMarkup.includes('data-nav-capsule-target')
-        || staticMarkup.includes('data-pointer-effect="ripple"')
-      )
-    ) {
-      failures.push(`${route}: goal header interaction leaked outside the goal design`);
-    }
-
-    if (isDomPixelHomepage) {
-      const compressedPageBytes = gzipSync(source).byteLength;
-      if (compressedPageBytes > 75_000) {
-        failures.push(`${route}: compressed homepage HTML exceeds 75 KB budget`);
-      }
-
-      const hero = source.match(
-        /<section\b[^>]*class="[^"]*\bconference-hero\b[^"]*"[^>]*>[\s\S]*?<\/section>/,
-      )?.[0] ?? '';
-      const compressedHeroBytes = gzipSync(hero).byteLength;
-      if (compressedHeroBytes > 55_000) {
-        failures.push(`${route}: compressed hero HTML exceeds 55 KB budget`);
-      }
-
-      const expectedPixels = Number(hero.match(/data-pixel-count="(\d+)"/)?.[1] ?? 0);
-      const renderedPixels = [...hero.matchAll(/class="hp\s/g)].length;
-      const terrainLayers = [...hero.matchAll(/\sdata-layer=/g)].length;
-      const terrainEchoes = [...hero.matchAll(/\sdata-echo=/g)].length;
-      const leftTrees = [...hero.matchAll(/data-tree-position="left"/g)].length;
-      const rightTrees = [...hero.matchAll(/data-tree-position="right"/g)].length;
-
-      if (!hero.includes('data-render-mode="dom"')) {
-        failures.push(`${route}: homepage hero is not marked as DOM-rendered`);
-      }
-      if (expectedPixels <= 0 || expectedPixels > 4_000 || renderedPixels !== expectedPixels) {
-        failures.push(`${route}: invalid DOM pixel count (${renderedPixels}/${expectedPixels})`);
-      }
-
-      if (group.edition.skin === 'goal') {
-        if (
-          !hero.includes('data-visual-composition="badge"')
-          || !hero.includes('data-terrain-enabled="true"')
-          || !hero.includes('data-tree-interaction="calm"')
-          || !hero.includes('data-terrain-profile="tree-foundation"')
-        ) {
-          failures.push(`${route}: goal homepage must expose the badge composition contract`);
-        }
-        if (leftTrees !== 0 || rightTrees !== 1) {
-          failures.push(`${route}: goal homepage must render one right tree and no left tree`);
-        }
-        if (terrainLayers !== 9 || terrainEchoes !== 11) {
-          failures.push(`${route}: goal homepage must render the responsive probability terrain`);
-        }
-        if (
-          !hero.includes('class="hero-pixel-field__paper"')
-          || /<(?:img|picture)\b/i.test(hero)
-          || !(await resolvesToOutput(file, '/2026/brand/goal-paper-texture.webp'))
-        ) {
-          failures.push(`${route}: goal homepage is missing the tiled paper surface`);
-        }
-        if (
-          !hero.includes('conference-hero__tagline-axis')
-          || /<(?:canvas|img|picture|svg)\b/i.test(hero)
-          || source.includes('hero-reference-trees')
-        ) {
-          failures.push(`${route}: goal homepage must keep the title, tree, and terrain DOM-rendered`);
-        }
-      } else {
-        if (
-          !hero.includes('data-visual-composition="grove"')
-          || !hero.includes('data-terrain-enabled="true"')
-          || !hero.includes('data-tree-interaction="direct"')
-        ) {
-          failures.push(`${route}: non-goal homepage must preserve the grove composition contract`);
-        }
-        if (leftTrees !== 1 || rightTrees !== 1) {
-          failures.push(`${route}: non-goal homepage must preserve both DOM trees`);
-        }
-        if (terrainLayers !== 9) {
-          failures.push(`${route}: expected 9 probability terrain layers, found ${terrainLayers}`);
-        }
-        if (terrainEchoes !== 11) {
-          failures.push(`${route}: expected 11 probability echoes, found ${terrainEchoes}`);
-        }
-        if (/<(?:canvas|img|picture|svg)\b/i.test(hero) || source.includes('hero-reference-trees')) {
-          failures.push(`${route}: homepage hero contains a raster, Canvas, or SVG dependency`);
-        }
-        if (await homepageHeroCssUsesImage(file, source, hero)) {
-          failures.push(`${route}: homepage hero CSS contains an image dependency`);
-        }
-      }
-    }
-
-    const shouldEnforcePayloadBudget = group.payloadBudgetScope === 'all'
-      || (group.payloadBudgetScope === 'homepage' && page === '');
-    if (shouldEnforcePayloadBudget) {
-      const payloadBytes = await initialLocalPayload(file);
-      const budget = page === '' ? 1_000_000 : 1_500_000;
-      if (payloadBytes > budget) {
-        failures.push(`${route}: initial local payload exceeds ${budget / 1_000_000} MB budget`);
-      }
-    }
+const brandKitRoot = path.resolve('assets/brand-kit/2026');
+const brandKitFiles = await walk(brandKitRoot);
+validateExactSet(
+  '2026 brand master kit',
+  brandKitFiles.map((file) => relativeTo(brandKitRoot, file)),
+  brandMasterFiles,
+);
+const masterHashes = new Set();
+for (const masterFile of brandKitFiles.filter((file) => file.endsWith('.svg'))) {
+  masterHashes.add((await fileIntegrity(masterFile)).sha256);
+}
+for (const outputFile of outputFiles) {
+  if (masterHashes.has((await fileIntegrity(outputFile)).sha256)) {
+    fail(`${relativeTo(outputRoot, outputFile)}: non-published brand master leaked into dist`);
+  }
+}
+const sourceTextFiles = (await walk(path.resolve('src'))).filter((file) =>
+  ['.astro', '.css', '.js', '.json', '.mjs', '.ts'].includes(path.extname(file)),
+);
+for (const sourceFile of sourceTextFiles) {
+  if ((await readFile(sourceFile, 'utf8')).includes('brand-kit')) {
+    fail(`${relativeTo(projectRoot, sourceFile)}: runtime source must not import the brand master kit`);
   }
 }
 
-function organizationCopy(organizations) {
-  return organizations.flatMap((organization) => [
-    organization.name,
-    ...(organization.intro ?? []),
-  ]);
+const venueRoot = path.resolve('src/assets/2026/venue');
+const venueFiles = await walk(venueRoot);
+validateExactSet(
+  '2026 venue source assets',
+  venueFiles.map((file) => relativeTo(venueRoot, file)),
+  venueSourceFiles,
+);
+const guideSource = await readFile(path.join(outputRoot, 'guide/index.html'), 'utf8');
+for (const venueFile of venueSourceFiles) {
+  const stem = path.parse(venueFile).name;
+  if (!guideSource.includes(stem)) fail(`guide/index.html: missing venue asset "${venueFile}"`);
+  if (!outputFiles.some((file) => path.basename(file).startsWith(`${stem}.`))) {
+    fail(`dist/_assets: missing emitted venue asset "${venueFile}"`);
+  }
+}
+
+const historyBasenames = goalHistoryEvents.flatMap((event) =>
+  event.photos.map((photo) => photo.basename),
+);
+if (goalHistoryEvents.length !== 17 || historyBasenames.length !== 51) {
+  fail(`goal history: expected 17 events and 51 images, found ${goalHistoryEvents.length} and ${historyBasenames.length}`);
+}
+const historyRoot = path.resolve('src/assets/2026/goal-history');
+const historySourceFiles = await walk(historyRoot);
+validateExactSet(
+  '2026 history source assets',
+  historySourceFiles.map((file) => relativeTo(historyRoot, file)),
+  historyBasenames,
+);
+
+const rootIndex = await readFile(path.join(outputRoot, 'index.html'), 'utf8');
+const historyStart = rootIndex.indexOf('id="goal-history"');
+const historyEnd = rootIndex.indexOf('id="goal-organization"', historyStart);
+const historyFragment = historyStart >= 0 && historyEnd > historyStart
+  ? rootIndex.slice(historyStart, historyEnd)
+  : '';
+const renderedHistoryEvents = [...historyFragment.matchAll(/data-history-event(?:\s|>)/g)].length;
+const renderedHistoryImages = [...historyFragment.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+if (renderedHistoryEvents !== 17) {
+  fail(`index.html: expected 17 rendered history events, found ${renderedHistoryEvents}`);
+}
+if (renderedHistoryImages.length !== 51) {
+  fail(`index.html: expected 51 rendered history images, found ${renderedHistoryImages.length}`);
+}
+for (const basename of historyBasenames) {
+  const stem = path.parse(basename).name;
+  if (!historyFragment.includes(stem)) fail(`index.html: missing history source "${basename}"`);
+  if (!outputFiles.some((file) => path.basename(file).startsWith(`${stem}.`))) {
+    fail(`dist/_assets: missing emitted history source "${basename}"`);
+  }
+}
+for (const [index, image] of renderedHistoryImages.entries()) {
+  if (!image.includes('loading="lazy"') || !image.includes('decoding="async"')) {
+    fail(`index.html: history image ${index + 1} must load lazily with async decoding`);
+  }
+  if (!image.includes('srcset=') || !image.includes('sizes=')) {
+    fail(`index.html: history image ${index + 1} must expose responsive candidates`);
+  }
+}
+if (historyFragment.includes('mmbiz.qpic.cn') || historyFragment.includes('/2026/history/')) {
+  fail('index.html: history gallery must use only owned 2026 source images');
+}
+
+for (const logo of Object.values(partnerLogoByName)) {
+  if (!rootIndex.includes(logo.src)) fail(`index.html: missing selected partner logo "${logo.src}"`);
+}
+for (const brandPath of runtimeBrandFiles.map((file) => `/2026/brand/${file}`)) {
+  if (!outputFiles.some((file) => relativeTo(outputRoot, file) === brandPath.slice(1))) {
+    fail(`dist: missing runtime brand asset "${brandPath}"`);
+  }
+}
+for (const retiredRuntimePrefix of ['href="/brand/', 'src="/brand/', 'href="/2025/', 'src="/2025/']) {
+  if (rootIndex.includes(retiredRuntimePrefix)) {
+    fail(`index.html: homepage contains retired runtime path "${retiredRuntimePrefix.slice(0, -1)}"`);
+  }
+}
+
+if (rootIndex.includes('redirect-page')) {
+  fail('index.html: official root must not be a redirect interstitial');
+}
+for (const marker of [
+  'data-hero-pixel-field',
+  'data-goal-home-contract="history-first"',
+  'edition-goal-home--with-lower',
+  'id="goal-history"',
+  'id="goal-organization"',
+  'class="goal-partners__legal"',
+]) {
+  if (!rootIndex.includes(marker)) fail(`index.html: missing published homepage marker "${marker}"`);
+}
+if (!rootIndex.includes('property="og:image"') || !rootIndex.includes('/2026/brand/share-2026.png')) {
+  fail('index.html: homepage must publish the 2026 share image');
+}
+if (!rootIndex.includes('property="og:title"') || !rootIndex.includes(conference2026.name)) {
+  fail('index.html: homepage share title must use the Chinese conference name');
+}
+if (!rootIndex.includes('property="og:description"') || !rootIndex.includes(conference2026.venue.name)) {
+  fail('index.html: homepage must publish its venue in the Open Graph description');
+}
+if (gzipSync(rootIndex).byteLength > 75_000) {
+  fail('index.html: compressed homepage HTML exceeds 75 KB');
+}
+if ((await initialLocalPayload(path.join(outputRoot, 'index.html'), managedDownloads)) > 1_000_000) {
+  fail('index.html: initial local payload exceeds 1 MB');
 }
 
 const officialCopyByRoute = new Map([
-  [
-    'about/index.html',
-    [
-      ...conference2026.introduction,
-      conference2026.conferenceOrganization.committee.title,
-      conference2026.conferenceOrganization.committee.chair,
-      ...conference2026.conferenceOrganization.committee.members,
-      conference2026.conferenceOrganization.secretariat.title,
-      conference2026.conferenceOrganization.secretariat.secretaryGeneral,
-      ...conference2026.conferenceOrganization.secretariat.members,
-      ...organizationCopy(conference2026.organizers),
-      ...organizationCopy(conference2026.coOrganizers),
-      ...organizationCopy(conference2026.sponsors),
-      conference2026.contact,
-    ],
-  ],
-  [
-    'schedule/index.html',
-    [
-      conference2026.dates.compact,
-      conference2026.venue.scheduleName,
-      conference2026.scheduleNotice,
-      'SESSIONS & SPEAKERS',
-      `大会专题与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
-      ...conference2026.programPreview.sessions.flatMap((session) => [
-        session.title,
-        session.chair.name === '待确认' ? '主席待确认' : session.chair.name,
-        ...session.speakers.map((speaker) => speaker.name),
-      ]),
-    ],
-  ],
-  [
-    'poster/index.html',
-    [
-      conference2026.poster.title,
-      conference2026.poster.headline,
-      conference2026.poster.description,
-      conference2026.poster.ticket.label,
-      String(conference2026.poster.ticket.value),
-      ...conference2026.poster.requirements,
-      ...conference2026.poster.benefits,
-      conference2026.poster.deadline.date,
-      conference2026.poster.deadline.time,
-      conference2026.scale.posters,
-      conference2026.contact,
-    ],
-  ],
-  [
-    'guide/index.html',
-    [
-      conference2026.venue.scheduleName,
-      conference2026.venue.nameEn,
-      ...conference2026.venue.maps.flatMap((map) => [map.title, map.description]),
-      '交通与住宿',
-      '北京友谊宾馆为 X-AGI 大会提供专属优惠',
-      '5328460',
-      '2026.10.16',
-      '2026.10.19',
-    ],
-  ],
-  [
-    'register/index.html',
-    [
-      conference2026.registration.description,
-      ...conference2026.registration.notes,
-      ...conference2026.tickets.notes,
-      ...conference2026.tickets.bands.flatMap((band) => [
-        band.label,
-        ...band.rows.flatMap((row) => [
-          row.name,
-          String(row.student),
-          String(row.general),
-        ]),
-      ]),
-      conference2026.venue.scheduleName,
-    ],
-  ],
+  ['about/index.html', [
+    ...conference2026.introduction,
+    conference2026.conferenceOrganization.committee.title,
+    conference2026.conferenceOrganization.committee.chair,
+    ...conference2026.conferenceOrganization.committee.members,
+    conference2026.conferenceOrganization.secretariat.title,
+    conference2026.conferenceOrganization.secretariat.secretaryGeneral,
+    ...conference2026.conferenceOrganization.secretariat.members,
+    ...conference2026.organizers.map((organization) => organization.name),
+    ...conference2026.coOrganizers.map((organization) => organization.name),
+    ...conference2026.sponsors.map((organization) => organization.name),
+    conference2026.contact,
+  ]],
+  ['schedule/index.html', [
+    conference2026.dates.compact,
+    conference2026.venue.scheduleName,
+    conference2026.scheduleNotice,
+    'SESSIONS & SPEAKERS',
+    `大会专题与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
+    ...conference2026.programPreview.sessions.flatMap((session) => [
+      session.title,
+      session.chair.name === '待确认' ? '主席待确认' : session.chair.name,
+      ...session.speakers.map((speaker) => speaker.name),
+    ]),
+  ]],
+  ['poster/index.html', [
+    conference2026.poster.title,
+    conference2026.poster.headline,
+    conference2026.poster.description,
+    conference2026.poster.ticket.label,
+    String(conference2026.poster.ticket.value),
+    ...conference2026.poster.requirements,
+    ...conference2026.poster.benefits,
+    conference2026.poster.deadline.date,
+    conference2026.poster.deadline.time,
+    conference2026.scale.posters,
+    conference2026.contact,
+  ]],
+  ['guide/index.html', [
+    conference2026.venue.scheduleName,
+    conference2026.venue.nameEn,
+    ...conference2026.venue.maps.flatMap((map) => [map.title, map.description]),
+    '交通与住宿',
+    '北京友谊宾馆为 X-AGI 大会提供专属优惠',
+    '5328460',
+    '2026.10.16',
+    '2026.10.19',
+  ]],
+  ['register/index.html', [
+    conference2026.registration.description,
+    ...conference2026.registration.notes,
+    ...conference2026.tickets.notes,
+    ...conference2026.tickets.bands.flatMap((band) => [
+      band.label,
+      ...band.rows.flatMap((row) => [row.name, String(row.student), String(row.general)]),
+    ]),
+    conference2026.venue.scheduleName,
+  ]],
 ]);
 
-for (const [officialRoute, expectedCopy] of officialCopyByRoute) {
-  for (const route of [officialRoute, `goal/${officialRoute}`]) {
-    const file = path.join(root, route);
-    const text = visibleText(await readFile(file, 'utf8'));
-
-    for (const expected of expectedCopy) {
-      if (!text.includes(expected)) {
-        failures.push(`${route}: missing official copy "${expected}"`);
-      }
-    }
-  }
-}
-
-const rootIndex = await readFile(path.join(root, 'index.html'), 'utf8');
-if (rootIndex.includes('redirect-page')) {
-  failures.push('index.html: official root must not be a redirect interstitial');
-}
-if (!rootIndex.includes('hero-section') && !rootIndex.includes('data-hero-pixel-field')) {
-  failures.push('index.html: official root must render the current edition homepage');
-}
-if (!rootIndex.includes('property="og:image"') || !rootIndex.includes('/brand/share-2026.png')) {
-  failures.push('index.html: homepage must publish a share image for chat previews');
-}
-if (!rootIndex.includes('property="og:title"') || !rootIndex.includes(conference2026.name)) {
-  failures.push('index.html: homepage share title must use the Chinese conference name');
-}
-if (!rootIndex.includes('property="og:description"') || !rootIndex.includes(conference2026.venue.name)) {
-  failures.push('index.html: homepage must publish an Open Graph description');
-}
-
-try {
-  await stat(path.join(root, 'brand/share-2026.png'));
-} catch {
-  failures.push('brand/share-2026.png: share preview image is missing from the build');
-}
-
-const rootText = visibleText(rootIndex);
-const homepagePartnerLabels = ['主办单位', '协办单位', '赞助单位'];
-if (rootText.includes('发起方')) {
-  failures.push('index.html: homepage partner list must not repeat the initiator section');
-}
-
-function validatePartnerOrder(route, text, labels) {
-  let previousPartnerLabelIndex = -1;
-  for (const label of labels) {
-    const labelIndex = text.indexOf(label);
-    if (labelIndex < 0) {
-      failures.push(`${route}: missing homepage partner label "${label}"`);
-      continue;
-    }
-    if (labelIndex < previousPartnerLabelIndex) {
-      failures.push(`${route}: homepage partner label "${label}" is out of order`);
-    }
-    previousPartnerLabelIndex = labelIndex;
-  }
-}
-
-validatePartnerOrder('index.html', rootText, homepagePartnerLabels);
-
-for (const route of ['about/index.html', 'goal/about/index.html']) {
-  const source = await readFile(path.join(root, route), 'utf8');
-  if (/<(?:h[1-6]|div)[^>]*>\s*发起方\s*<\//u.test(source)) {
-    failures.push(`${route}: organization sections must not repeat the initiator group`);
-  }
-
-  const organizerStart = source.indexOf('<div class="card-header">主办单位</div>');
-  const organizerEnd = source.indexOf('<div class="card-header">协办单位</div>', organizerStart);
-  const organizerText = organizerStart >= 0 && organizerEnd > organizerStart
-    ? visibleText(source.slice(organizerStart, organizerEnd))
-    : '';
-  if (!organizerText) failures.push(`${route}: missing approved organizer section`);
-
-  let previousOrganizerIndex = -1;
-  for (const organizer of [
-    '清华大学统计与数据科学系',
-    '中国人民大学应用统计科学研究中心',
-    '中国人民大学统计学院',
-    '统计之都',
-    'FAI 人工智能基础',
-    '中国商业统计学会人工智能分会',
-  ]) {
-    const organizerIndex = organizerText.indexOf(organizer);
-    if (organizerIndex < 0) {
-      failures.push(`${route}: missing approved organizer "${organizer}"`);
-    } else if (organizerIndex < previousOrganizerIndex) {
-      failures.push(`${route}: organizer "${organizer}" is out of the approved order`);
-    }
-    previousOrganizerIndex = Math.max(previousOrganizerIndex, organizerIndex);
-  }
-}
-
-for (const route of ['register/index.html', 'goal/register/index.html']) {
-  const source = await readFile(path.join(root, route), 'utf8');
-  if (visibleText(source).includes('报名链接')) {
-    failures.push(`${route}: redundant registration link must stay removed`);
-  }
-}
-
-if (rootText.includes('青年之夜')) {
-  failures.push('index.html: retired Youth Night copy must not be published');
-}
-
-const goalIndex = await readFile(path.join(root, 'goal/index.html'), 'utf8');
-const goalPages = ['', 'about', 'schedule', 'poster', 'guide', 'register'];
-
-for (const page of goalPages) {
-  const route = page ? `goal/${page}/index.html` : 'goal/index.html';
-  const source = page ? await readFile(path.join(root, route), 'utf8') : goalIndex;
-
-  if (!source.includes('<meta name="robots" content="noindex, nofollow">')) {
-    failures.push(`${route}: goal preview must be noindex and nofollow`);
-  }
-  if (page && !source.includes('data-pointer-effect="ripple"')) {
-    failures.push(`${route}: goal masthead must expose the ripple-only pointer field`);
-  }
-}
-
-const historyHomePages = [
-  ['index.html', rootIndex],
-  ['goal/index.html', goalIndex],
-];
-
-for (const [route, source] of historyHomePages) {
-  if (!source.includes('edition-goal-home--with-lower')) {
-    failures.push(`${route}: history-first homepage must enable the long-form shell`);
-  }
-}
-
-const goalHomeMarkers = [
-  'data-goal-home-contract="history-first"',
-  'id="goal-history"',
-  'data-history-deferred',
-  'id="goal-organization"',
-  'class="goal-partners__legal"',
-];
-for (const [route, source] of historyHomePages) {
-  let previousGoalMarkerIndex = -1;
-  for (const marker of goalHomeMarkers) {
-    const markerIndex = source.indexOf(marker);
-    if (markerIndex < 0) {
-      failures.push(`${route}: missing history-first marker "${marker}"`);
-      continue;
-    }
-    if (markerIndex < previousGoalMarkerIndex) {
-      failures.push(`${route}: history-first marker "${marker}" is out of order`);
-    }
-    previousGoalMarkerIndex = markerIndex;
-  }
-}
-
-const goalText = visibleText(goalIndex);
-const expectedGoalHomeCopy = [
-  '从 R 会到 X-AGI 大会',
-  '主办单位',
-  '协办单位',
-  '赞助单位',
-  '京ICP备2024062260号-3',
-  '京公网安备11010502057471号',
-];
-for (const [route, text] of [
-  ['index.html', rootText],
-  ['goal/index.html', goalText],
-]) {
-  for (const expected of expectedGoalHomeCopy) {
-    if (!text.includes(expected)) {
-      failures.push(`${route}: missing history-first copy "${expected}"`);
-    }
-  }
-}
-
-function historyLowerFragment(source) {
-  const start = source.indexOf('<section class="goal-home-lower"');
-  const end = source.indexOf('</main>', start);
-  return start >= 0 && end > start ? source.slice(start, end) : '';
-}
-
-const rootHistoryLower = historyLowerFragment(rootIndex);
-const goalHistoryLower = historyLowerFragment(goalIndex);
-if (!rootHistoryLower || !goalHistoryLower) {
-  failures.push('index.html and goal/index.html must both render the history-first lower page');
-} else if (rootHistoryLower !== goalHistoryLower) {
-  failures.push('index.html: published history-first lower page must match the Goal acceptance mirror');
-}
-
-for (const retiredCopy of [
-  '一条持续生长的学术连接',
-  '沿着现场，回看连接如何发生',
-  '先找到属于你的那一天',
-  '选择你进入现场的方式',
-  '来北京，和下一代 AI 研究者见面',
-  '共同连接这场大会',
-  '会议概况',
-  '历届现场',
-  '横向滚动或使用方向键浏览',
-  '上一场',
-  '下一场',
-]) {
-  if (goalText.includes(retiredCopy)) {
-    failures.push(`goal/index.html: retired lower-page copy must stay removed "${retiredCopy}"`);
-  }
-}
-
-for (const retiredMarker of [
-  'class="goal-home-lower__quick-nav"',
-  'id="goal-overview"',
-  'href="#goal-overview"',
-]) {
-  if (goalIndex.includes(retiredMarker)) {
-    failures.push(`goal/index.html: retired overview navigation must stay removed "${retiredMarker}"`);
-  }
-}
-if ((goalIndex.match(/data-glass-group/g) ?? []).length !== 1) {
-  failures.push('goal/index.html: only the compact header may use a glass group');
-}
-
-const goalHistoryStart = goalIndex.indexOf('id="goal-history"');
-const goalHistoryEnd = goalIndex.indexOf('id="goal-organization"', goalHistoryStart);
-const goalHistoryFragment = goalHistoryStart >= 0 && goalHistoryEnd > goalHistoryStart
-  ? goalIndex.slice(goalHistoryStart, goalHistoryEnd)
-  : '';
-const historyEvents = [...goalHistoryFragment.matchAll(/data-history-event(?:\s|>)/g)];
-const historyImages = [...goalHistoryFragment.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
-if (historyEvents.length !== 17) {
-  failures.push(`goal/index.html: expected 17 history events, found ${historyEvents.length}`);
-}
-if (historyImages.length !== 51) {
-  failures.push(`goal/index.html: expected 51 history images, found ${historyImages.length}`);
-}
-
-let previousEditionIndex = -1;
-for (const edition of [18, 17, 16]) {
-  const editionIndex = goalHistoryFragment.indexOf(`data-history-edition="${edition}"`);
-  if (editionIndex < 0) {
-    failures.push(`goal/index.html: missing rendered history edition ${edition}`);
-  } else if (editionIndex < previousEditionIndex) {
-    failures.push(`goal/index.html: history edition ${edition} is out of descending order`);
-  }
-  previousEditionIndex = Math.max(previousEditionIndex, editionIndex);
-}
-
-const historyProgressBars = [
-  ...goalHistoryFragment.matchAll(/\sdata-history-progress-bar(?:\s|>)/g),
-];
-if (historyProgressBars.length !== historyEvents.length) {
-  failures.push(
-    `goal/index.html: expected one waveform bar per history event, found ${historyProgressBars.length}`,
-  );
-}
-
-const historyProgressTargets = [
-  ...goalHistoryFragment.matchAll(/<button\b[^>]*\sdata-history-progress-target(?:\s|>)[^>]*>/g),
-].map((match) => match[0]);
-if (historyProgressTargets.length !== historyEvents.length) {
-  failures.push(
-    `goal/index.html: expected one directory button per history event, found ${historyProgressTargets.length}`,
-  );
-}
-for (const [index, target] of historyProgressTargets.entries()) {
-  if (!/\stype="button"(?:\s|>)/.test(target)) {
-    failures.push(`goal/index.html: history directory button ${index + 1} must use type="button"`);
-  }
-  if (!/\saria-controls="goal-history-viewport"(?:\s|>)/.test(target)) {
-    failures.push(`goal/index.html: history directory button ${index + 1} must control the gallery viewport`);
-  }
-  if (!/\saria-label="[^"]+"(?:\s|>)/.test(target)) {
-    failures.push(`goal/index.html: history directory button ${index + 1} must have an accessible label`);
-  }
-}
-if (historyProgressTargets.filter((target) => target.includes('aria-current="location"')).length !== 1) {
-  failures.push('goal/index.html: history directory must expose exactly one initial current location');
-}
-
-const historyProgressElements = [
-  ...goalHistoryFragment.matchAll(/<[^>]+\sdata-history-progress(?:\s|>)[^>]*>/g),
-].map((match) => match[0]);
-if (historyProgressElements.length !== 1) {
-  failures.push('goal/index.html: history gallery must contain one heading waveform directory');
-} else {
-  const progressElement = historyProgressElements[0];
-  if (!/\srole="toolbar"(?:\s|>)/.test(progressElement)) {
-    failures.push('goal/index.html: history directory must use toolbar semantics');
-  }
-  if (!progressElement.includes('aria-label="历届会议目录"')) {
-    failures.push('goal/index.html: history directory must expose its accessible label');
-  }
-  if (/\saria-hidden(?:=|\s|>)/.test(progressElement)) {
-    failures.push('goal/index.html: interactive history directory must not be aria-hidden');
-  }
-}
-
-const historyHeadingIndex = goalHistoryFragment.indexOf('data-history-heading');
-const historyHeadingEnd = goalHistoryFragment.indexOf('</header>', historyHeadingIndex);
-const historyProgressIndex = goalHistoryFragment.indexOf('data-history-progress');
-const historyViewportIndex = goalHistoryFragment.indexOf('data-history-viewport');
-if (
-  historyHeadingIndex < 0
-  || historyProgressIndex < historyHeadingIndex
-  || historyHeadingEnd < historyProgressIndex
-  || historyViewportIndex < historyHeadingEnd
-) {
-  failures.push('goal/index.html: history directory must stay inside the heading before the viewport');
-}
-for (const retiredMarker of [
-  'data-history-progress-thumb',
-  'data-history-controls',
-  'data-history-previous',
-  'data-history-next',
-  'data-history-status',
-  'goal-history-instructions',
-]) {
-  if (goalHistoryFragment.includes(retiredMarker)) {
-    failures.push(`goal/index.html: retired history control must stay removed "${retiredMarker}"`);
-  }
-}
-
-for (const [index, image] of historyImages.entries()) {
-  if (!image.includes('loading="lazy"') || !image.includes('decoding="async"')) {
-    failures.push(`goal/index.html: history image ${index + 1} must use lazy async loading`);
-  }
-  if (!image.includes('srcset=') || !image.includes('sizes=')) {
-    failures.push(`goal/index.html: history image ${index + 1} must expose responsive candidates`);
-  }
-  if (!image.includes('/_assets/goal-history-')) {
-    failures.push(`goal/index.html: history image ${index + 1} must use a local goal-history asset`);
-  }
-}
-if (goalHistoryFragment.includes('mmbiz.qpic.cn') || goalHistoryFragment.includes('/2026/history/')) {
-  failures.push('goal/index.html: history gallery must not hotlink Qpic or reuse the archived five-image set');
-}
-if (!goalHistoryFragment.includes('content-visibility: visible !important')) {
-  failures.push('goal/index.html: deferred history images must retain a no-JavaScript visibility fallback');
-}
-
-const goalHistoryStyles = await readFile(path.resolve('src/styles/goal-history.css'), 'utf8');
-for (const expectedStyle of [
-  'scroll-snap-type: inline proximity',
-  '.goal-history__progress-bar',
-  'transform: scaleY(var(--history-wave-scale))',
-]) {
-  if (!goalHistoryStyles.includes(expectedStyle)) {
-    failures.push(`goal-history.css: missing waveform gallery style "${expectedStyle}"`);
-  }
-}
-for (const retiredStyle of [
-  'scroll-snap-type: inline mandatory',
-  '.goal-history__progress-thumb',
-  '.goal-history__event-header::before',
-]) {
-  if (goalHistoryStyles.includes(retiredStyle)) {
-    failures.push(`goal-history.css: retired gallery style must stay removed "${retiredStyle}"`);
-  }
-}
-
-const goalHomeLowerStyles = await readFile(
-  path.resolve('src/styles/goal-home-lower.css'),
-  'utf8',
-);
-for (const expectedSelector of [
-  '.edition-goal-home.edition-goal-home--with-lower',
-  '.edition-2026.edition-goal-home.edition-goal-home--with-lower > main',
-  '.edition-2026.edition-goal-home.edition-goal-home--with-lower .conference-home',
-]) {
-  if (!goalHomeLowerStyles.includes(expectedSelector)) {
-    failures.push(
-      `goal-home-lower.css: long-page override must outrank the fixed hero shell "${expectedSelector}"`,
-    );
-  }
-}
-
-const goalHistoryController = await readFile(
-  path.resolve('src/scripts/goal-history-gallery.ts'),
-  'utf8',
-);
-for (const expectedControllerSource of [
-  'viewport.scrollTo({',
-  'galleryScrollTarget(',
-  'galleryToolbarTargetIndex(',
-  "[data-history-heading]",
-]) {
-  if (!goalHistoryController.includes(expectedControllerSource)) {
-    failures.push(
-      `goal-history-gallery.ts: missing bidirectional directory behavior "${expectedControllerSource}"`,
-    );
-  }
-}
-if (goalHistoryController.includes('scrollIntoView')) {
-  failures.push('goal-history-gallery.ts: directory navigation must not move the document vertically');
-}
-
-for (const retiredMarker of [
-  'id="goal-agenda"',
-  'data-compact-schedule',
-  'data-filter-group=',
-  'id="goal-registration"',
-]) {
-  if (goalIndex.includes(retiredMarker)) {
-    failures.push(`goal/index.html: retired lower-page marker must stay removed "${retiredMarker}"`);
-  }
-}
-
-const goalPartnerStart = goalIndex.indexOf('class="goal-partners"');
-const goalPartnerFragment = goalPartnerStart >= 0 ? goalIndex.slice(goalPartnerStart) : '';
-const goalPartnerText = visibleText(goalPartnerFragment);
-if (goalPartnerText.includes('发起单位')) {
-  failures.push('goal/index.html: compact organization footer must merge initiators into organizers');
-}
-let previousGoalPartnerIndex = -1;
-for (const group of conference2026PartnerDisplayGroups) {
-  const groupMarker = `goal-partners__group--${group.key}`;
-  const groupIndex = goalPartnerFragment.indexOf(groupMarker);
-  if (groupIndex < 0) {
-    failures.push(`goal/index.html: missing semantic partner group "${group.label}"`);
-  } else if (groupIndex < previousGoalPartnerIndex) {
-    failures.push(`goal/index.html: partner group "${group.label}" is out of order`);
-  }
-  previousGoalPartnerIndex = Math.max(previousGoalPartnerIndex, groupIndex);
-
-  let previousOrganizationIndex = -1;
-  for (const organization of group.organizations) {
-    const organizationIndex = goalPartnerFragment.indexOf(organization.name);
-    if (organizationIndex < 0) {
-      failures.push(`goal/index.html: missing ${group.label} organization "${organization.name}"`);
-    } else if (organizationIndex < previousOrganizationIndex) {
-      failures.push(`goal/index.html: ${group.label} organization "${organization.name}" is out of order`);
-    }
-    previousOrganizationIndex = Math.max(previousOrganizationIndex, organizationIndex);
-  }
-}
-
-for (const [marker, description] of [
-  ['data-compact-schedule', 'compact schedule'],
-  ['conference-program-outline', 'goal schedule outline'],
-]) {
-  if (rootIndex.includes(marker)) {
-    failures.push(`index.html: retired ${description} must not return to the history-first homepage`);
-  }
-}
-
-const scheduleIndex = await readFile(path.join(root, 'schedule/index.html'), 'utf8');
-const goalScheduleIndex = await readFile(path.join(root, 'goal/schedule/index.html'), 'utf8');
-const expectedScheduleCardCount = conference2026.programPreview.sessions.length;
-const schedulePlaceholders = [
-  conference2026.scheduleNotice,
-  'SESSIONS & SPEAKERS',
-  `大会专题与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
-];
-const retiredScheduleCopy = [
-  'Full schedule TBD. Current sessions and speakers are listed below.',
-  'Exact dates, times, rooms, and talk titles are TBD.',
-  'Time TBD',
-  'Talk title TBD',
-  'Speaker TBD',
-  'Session Chair TBD',
-  'Speakers TBD',
-  '文字日程正在发布',
-  conference2026.programPreview.note,
-];
-
-for (const [route, source] of [
-  ['schedule/index.html', scheduleIndex],
-  ['goal/schedule/index.html', goalScheduleIndex],
-]) {
+for (const [route, expectedCopy] of officialCopyByRoute) {
+  const source = await readFile(path.join(outputRoot, route), 'utf8');
   const text = visibleText(source);
-  if (!source.includes('class="schedule-intro"') || !source.includes('class="schedule-confirmed"')) {
-    failures.push(`${route}: schedule page must keep the intro and published topics`);
+  if (!source.includes('edition-2026-inner') || !source.includes('edition-goal-2026')) {
+    fail(`${route}: current inner page must use the self-contained 2026 shell`);
   }
-  if (source.includes('class="nav nav-pills schedule-tabs') || source.includes('报到日')) {
-    failures.push(`${route}: unpublished day-by-day schedule must stay off the page`);
+  if (!source.includes('data-masthead-pixel-field') || !source.includes('data-connection-stage')) {
+    fail(`${route}: current inner page must expose the interactive masthead field`);
   }
-  if (source.includes('goal-schedule-preview') || source.includes('conference-program-outline')) {
-    failures.push(`${route}: alternate schedule-preview layout must not replace the approved template`);
+  if ((await stat(path.join(outputRoot, route))).size > 50_000) {
+    fail(`${route}: HTML exceeds 50 KB`);
   }
-
-  const scheduleCards = [...source.matchAll(/class="[^"]*\bschedule-card\b[^"]*"/g)].length;
-  const topicCards = [...source.matchAll(/class="[^"]*\bschedule-topic-card\b[^"]*"/g)].length;
-  if (scheduleCards !== expectedScheduleCardCount) {
-    failures.push(`${route}: expected ${expectedScheduleCardCount} schedule cards, found ${scheduleCards}`);
+  if ((await initialLocalPayload(path.join(outputRoot, route), managedDownloads)) > 1_500_000) {
+    fail(`${route}: initial local payload exceeds 1.5 MB`);
   }
-  if (topicCards !== conference2026.programPreview.sessions.length) {
-    failures.push(`${route}: expected ${conference2026.programPreview.sessions.length} topic cards, found ${topicCards}`);
-  }
-
-  for (const placeholder of schedulePlaceholders) {
-    if (!text.includes(placeholder)) {
-      failures.push(`${route}: missing approved schedule copy "${placeholder}"`);
-    }
-  }
-  for (const copy of retiredScheduleCopy) {
-    if (text.includes(copy)) {
-      failures.push(`${route}: retired placeholder copy "${copy}" must not remain`);
-    }
+  for (const expected of expectedCopy) {
+    if (!text.includes(expected)) fail(`${route}: missing official copy "${expected}"`);
   }
 }
 
-const aiInfra = conference2026.programPreview.sessions.find((session) => session.title === 'AI Infra');
-if (!aiInfra || aiInfra.speakers.length !== 0) {
-  failures.push('conference2026: AI Infra must not publish unconfirmed speakers');
+const scheduleSource = await readFile(path.join(outputRoot, 'schedule/index.html'), 'utf8');
+const scheduleCardCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-card\b[^"]*"/g)].length;
+if (scheduleCardCount !== conference2026.programPreview.sessions.length) {
+  fail(`schedule/index.html: expected ${conference2026.programPreview.sessions.length} schedule cards, found ${scheduleCardCount}`);
 }
-const posterTicketCopy = '报名参加 Rising Stars Poster 即赠专业票。';
-if (
-  !conference2026.registration.notes.includes(posterTicketCopy)
-  || !conference2026.tickets.notes.includes(posterTicketCopy)
-) {
-  failures.push('conference2026: registration paths must preserve the audited Rising Stars Poster wording');
+if (scheduleSource.includes('schedule-tabs') || scheduleSource.includes('goal-schedule-preview')) {
+  fail('schedule/index.html: retired schedule preview structure must not return');
 }
 
-const nextIndex = await readFile(path.join(root, 'next/index.html'), 'utf8');
-
-function validatePreviewPartnerSection(route, source) {
-  const partnerStart = source.indexOf('class="conference-partners conference-partners--logos"');
-  const partnerEnd = source.indexOf('class="conference-update-strip"', partnerStart);
-  if (partnerStart < 0 || partnerEnd < 0) {
-    failures.push(`${route}: missing homepage organization logo section`);
-    return;
-  }
-
-  const partnerFragment = source.slice(partnerStart, partnerEnd);
-  const partnerText = visibleText(partnerFragment);
-  const partnerLabels = ['主办单位', '协办单位', '赞助单位'];
-
-  if (partnerText.includes('发起方')) {
-    failures.push(`${route}: homepage organization section must not repeat the initiators`);
-  }
-  validatePartnerOrder(route, partnerText, partnerLabels);
-
-  for (const organization of [
-    ...conference2026.organizers,
-    ...conference2026.coOrganizers,
-    ...conference2026.sponsors,
-  ]) {
-    if (
-      !partnerFragment.includes(`alt="${organization.name}"`)
-      && !partnerText.includes(organization.name)
-    ) {
-      failures.push(`${route}: missing homepage organization "${organization.name}"`);
-    }
-  }
+const registerSource = await readFile(path.join(outputRoot, 'register/index.html'), 'utf8');
+if (visibleText(registerSource).includes('报名链接')) {
+  fail('register/index.html: redundant registration link must stay removed');
 }
 
-validatePreviewPartnerSection('next/index.html', nextIndex);
-
-const redirectTargets = new Map([
-  ['2026/index.html', '/'],
-  ['2026/about/index.html', '/about/'],
-  ['2026/schedule/index.html', '/schedule/'],
-  ['2026/poster/index.html', '/poster/'],
-  ['2026/guide/index.html', '/guide/'],
-  ['2026/register/index.html', '/register/'],
-  ['2026/speakers/index.html', '/schedule/'],
-  ['speakers/index.html', '/schedule/'],
-]);
-
-for (const [route, target] of redirectTargets) {
-  const source = await readFile(path.join(root, route), 'utf8');
+for (const [route, target] of currentRedirects) {
+  const source = await readFile(path.join(outputRoot, route), 'utf8');
   const canonical = new URL(target, site.origin).href;
-
-  if (!source.includes(`content="0;url=${target}"`)) {
-    failures.push(`${route}: missing redirect to "${target}"`);
-  }
-  if (!source.includes('<meta name="robots" content="noindex">')) {
-    failures.push(`${route}: compatibility redirect must be noindex`);
-  }
+  if (!source.includes(`content="0;url=${target}"`)) fail(`${route}: missing redirect to "${target}"`);
+  if (!source.includes('<meta name="robots" content="noindex">')) fail(`${route}: redirect must be noindex`);
   if (!source.includes(`<link rel="canonical" href="${canonical}">`)) {
-    failures.push(`${route}: canonical must point to "${canonical}"`);
+    fail(`${route}: canonical must point to "${canonical}"`);
+  }
+}
+for (const [route, target] of archiveCompatibilityRedirects) {
+  const source = await readFile(path.join(outputRoot, route), 'utf8');
+  const canonical = new URL(target, site.origin).href;
+  if (!source.includes(`content="0;url=${target}"`)) fail(`${route}: missing archive redirect to "${target}"`);
+  if (!source.includes('<meta name="robots" content="noindex">')) fail(`${route}: redirect must be noindex`);
+  if (!source.includes(`<link rel="canonical" href="${canonical}">`)) {
+    fail(`${route}: canonical must point to "${canonical}"`);
   }
 }
 
-const robots = await readFile(path.join(root, 'robots.txt'), 'utf8');
-if (!robots.includes('Disallow: /next/')) {
-  failures.push('robots.txt: parked next design must be disallowed');
-}
-if (!robots.includes('Disallow: /goal/')) {
-  failures.push('robots.txt: goal preview must be disallowed');
+const robots = await readFile(path.join(outputRoot, 'robots.txt'), 'utf8');
+for (const retiredPath of ['/goal/', '/next/']) {
+  if (!robots.includes(`Disallow: ${retiredPath}`)) {
+    fail(`robots.txt: retired remote path "${retiredPath}" must remain disallowed`);
+  }
 }
 
-const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
-for (const route of ['/', '/about/', '/schedule/', '/poster/', '/guide/', '/register/', '/2025/']) {
-  const expectedUrl = new URL(route, site.origin).href;
-  if (!sitemap.includes(`<loc>${expectedUrl}</loc>`)) {
-    failures.push(`sitemap.xml: missing official URL "${expectedUrl}"`);
-  }
-}
-for (const unpublishedPath of ['/next/', '/goal/', '/2026/']) {
-  if (sitemap.includes(new URL(unpublishedPath, site.origin).href)) {
-    failures.push(`sitemap.xml: must not publish compatibility or preview path "${unpublishedPath}"`);
-  }
-}
+const sitemap = await readFile(path.join(outputRoot, 'sitemap.xml'), 'utf8');
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+validateExactSet('sitemap.xml URLs', sitemapUrls, expectedSitemapUrls);
 
 const syncScript = await readFile(path.resolve('scripts/sync-oss.mjs'), 'utf8');
-for (const previewDirectory of ['next', 'goal']) {
-  if (
-    !syncScript.includes(`'${previewDirectory}/**'`)
-    || !syncScript.includes(`'${previewDirectory}/*'`)
-  ) {
-    failures.push(`sync-oss.mjs: production sync must exclude "${previewDirectory}/"`);
+if (/(?:^|["'\s])--delete(?:["'\s]|$)/m.test(syncScript)) {
+  fail('sync-oss.mjs: full-site synchronization must never use --delete');
+}
+for (const retiredDirectory of ['goal', 'next']) {
+  if (syncScript.includes(`'${retiredDirectory}/**'`) || syncScript.includes(`'${retiredDirectory}/*'`)) {
+    fail(`sync-oss.mjs: retired preview exclusion for "${retiredDirectory}/" must stay removed`);
   }
 }
 if (syncScript.includes("'_assets/goal-history-*'")) {
-  failures.push('sync-oss.mjs: production sync must publish history assets used by the official homepage');
+  fail('sync-oss.mjs: production sync must publish the current history assets');
+}
+if (!syncScript.includes("path.resolve('scripts/validate-build.mjs')")) {
+  fail('sync-oss.mjs: production sync must validate dist before uploading');
 }
 
-const forbidden2026Copy = [
-  ['智猿数合', 'sponsor name is 智统数合'],
-  ['/2025/assets/images/logo.svg', '2026 pages must use the official 2026 wordmark, not last year’s R mark'],
-  ['/2025/assets/images/index/logo.svg', '2026 pages must use the official 2026 wordmark, not last year’s R mark'],
-];
-
-for (const file of outputFiles.filter((entry) => entry.endsWith('.html'))) {
-  const route = path.relative(root, file);
-  if (route.startsWith(`2025${path.sep}`)) continue;
-  const source = await readFile(file, 'utf8');
-  for (const [needle, reason] of forbidden2026Copy) {
-    if (source.includes(needle)) {
-      failures.push(`${route}: unexpected copy "${needle}" (${reason})`);
-    }
+const siteConfigSource = await readFile(path.resolve('src/config/site.ts'), 'utf8');
+for (const retiredExport of ['goalDesignEdition', 'nextDesignEdition']) {
+  if (siteConfigSource.includes(retiredExport)) {
+    fail(`src/config/site.ts: retired preview export "${retiredExport}" must stay removed`);
   }
+}
+for (const retiredPath of [
+  'src/pages/goal',
+  'src/pages/next',
+  'src/design-goal',
+  'src/design-next',
+  'design-qa.md',
+  'public/brand',
+  'public/favicon.png',
+  'public/favicon.svg',
+]) {
+  if (await exists(path.resolve(retiredPath))) fail(`${retiredPath}: retired preview source must not exist`);
 }
 
 if (failures.length > 0) {

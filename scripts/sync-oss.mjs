@@ -13,18 +13,16 @@ try {
   throw new Error('dist/ is missing. Run `npm run build` first.');
 }
 
+const validator = path.resolve('scripts/validate-build.mjs');
+const validation = spawnSync(process.execPath, [validator], { stdio: 'inherit' });
+if (validation.status !== 0) {
+  throw new Error('dist/ validation failed. Run `npm run build` before syncing.');
+}
+
 const args = [
   'sync',
   `${source}/`,
   destination,
-  '--exclude',
-  'next/**',
-  '--exclude',
-  'next/*',
-  '--exclude',
-  'goal/**',
-  '--exclude',
-  'goal/*',
   '--exclude',
   '.DS_Store',
   '--exclude',

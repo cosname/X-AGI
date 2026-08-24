@@ -5,7 +5,7 @@ export interface EditionConfig {
   status: EditionStatus;
   path: '' | `/${string}`;
   routeStyle: 'html' | 'directory';
-  skin?: 'legacy-2025' | 'next' | 'goal';
+  skin?: 'goal';
   title: string;
   titleZh: string;
   description: string;
@@ -18,7 +18,6 @@ export const site = {
   name: 'X-AGI Conference',
   origin: 'https://www.x-agi.cc',
   currentEdition: '2026',
-  upcomingEdition: '2026',
 } as const;
 
 export const editions: Record<EditionConfig['year'], EditionConfig> = {
@@ -50,21 +49,6 @@ export const editions: Record<EditionConfig['year'], EditionConfig> = {
 };
 
 export const currentEdition = editions[site.currentEdition];
-export const upcomingEdition = editions[site.upcomingEdition];
-
-/** Parked cream / pixel 2026 design. */
-export const nextDesignEdition: EditionConfig = {
-  ...editions['2026'],
-  path: '/next',
-  skin: 'next',
-};
-
-/** Local acceptance mirror: animated hero, history-first homepage, and published-content inner pages. */
-export const goalDesignEdition: EditionConfig = {
-  ...editions['2026'],
-  path: '/goal',
-  skin: 'goal',
-};
 
 export function editionPath(edition: EditionConfig, page = ''): string {
   const base = edition.path;

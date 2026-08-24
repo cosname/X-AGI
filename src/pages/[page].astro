@@ -1,13 +1,13 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import Goal2026Layout from '../layouts/Goal2026Layout.astro';
+import PublishedInner2026Layout from '../layouts/PublishedInner2026Layout.astro';
 import MastheadPixelField from '../components/MastheadPixelField.astro';
-import LegacyInnerPage from '../components/legacy/LegacyInnerPage.astro';
-import LegacyAbout from '../components/legacy/LegacyAbout.astro';
-import LegacySchedule from '../components/legacy/LegacySchedule.astro';
-import LegacyPoster from '../components/legacy/LegacyPoster.astro';
-import LegacyGuide from '../components/legacy/LegacyGuide.astro';
-import LegacyRegister from '../components/legacy/LegacyRegister.astro';
+import InnerPageShell from '../components/2026/inner/InnerPageShell.astro';
+import AboutPageContent from '../components/2026/inner/AboutPageContent.astro';
+import SchedulePageContent from '../components/2026/inner/SchedulePageContent.astro';
+import PosterPageContent from '../components/2026/inner/PosterPageContent.astro';
+import GuidePageContent from '../components/2026/inner/GuidePageContent.astro';
+import RegisterPageContent from '../components/2026/inner/RegisterPageContent.astro';
 import { currentEditionPageCopy, type CurrentEditionInnerPage } from '../config/edition-status';
 import { currentEdition, editionPath } from '../config/site';
 
@@ -21,29 +21,28 @@ export const getStaticPaths = (() =>
 
 const { page } = Astro.props as { page: PublishedPage };
 
-const copy = currentEditionPageCopy(page, undefined, currentEdition);
+const copy = currentEditionPageCopy(page);
 ---
 
-<Goal2026Layout
+<PublishedInner2026Layout
   edition={currentEdition}
   activePage={page}
   title={`${copy.label} | ${currentEdition.title}`}
   description={copy.description}
   canonicalPath={editionPath(currentEdition, page)}
 >
-  <LegacyInnerPage
+  <InnerPageShell
     edition={currentEdition}
     title={copy.label}
     status={page === 'register' || page === 'poster' ? copy.status : undefined}
-    visual="goal"
   >
     <figure slot="art" class="goal-page-header-art" aria-hidden="true">
       <MastheadPixelField pointerEffect="ripple" />
     </figure>
-    {page === 'about' && <LegacyAbout />}
-    {page === 'schedule' && <LegacySchedule />}
-    {page === 'poster' && <LegacyPoster />}
-    {page === 'guide' && <LegacyGuide />}
-    {page === 'register' && <LegacyRegister />}
-  </LegacyInnerPage>
-</Goal2026Layout>
+    {page === 'about' && <AboutPageContent />}
+    {page === 'schedule' && <SchedulePageContent />}
+    {page === 'poster' && <PosterPageContent />}
+    {page === 'guide' && <GuidePageContent />}
+    {page === 'register' && <RegisterPageContent />}
+  </InnerPageShell>
+</PublishedInner2026Layout>

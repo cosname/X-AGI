@@ -125,8 +125,8 @@ test('glass scrub stays off for inline header navigation', () => {
 });
 
 test('glass activation dismisses the lens instead of returning to rest', () => {
-  assert.equal(glassActivationShouldDismiss('A', '/goal/about/', 'about'), true);
-  assert.equal(glassActivationShouldDismiss('A', '/goal/register/', 'register'), true);
+  assert.equal(glassActivationShouldDismiss('A', '/about/', 'about'), true);
+  assert.equal(glassActivationShouldDismiss('A', '/register/', 'register'), true);
   assert.equal(glassActivationShouldDismiss('BUTTON', null, 'close'), true);
   assert.equal(glassActivationShouldDismiss('BUTTON', null, 'filter'), false);
   assert.equal(glassActivationShouldDismiss('A', '#section', 'about'), false);

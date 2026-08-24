@@ -1,0 +1,170 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { goalHistoryEvents, type GoalHistoryPhoto } from '../../../data/goal-history';
+import '../../../styles/goal-history.css';
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../../assets/2026/goal-history/*',
+  { eager: true },
+);
+const imageByBasename = new Map(
+  Object.entries(imageModules).map(([path, module]) => [path.split('/').at(-1), module.default]),
+);
+
+const modeLabels = {
+  onsite: '线下',
+  hybrid: '线上 + 线下',
+  online: '线上',
+} as const;
+
+const formatEventDates = (start: string, end: string) => {
+  const [startYear, startMonth, startDay] = start.split('-');
+  const [endYear, endMonth, endDay] = end.split('-');
+  if (start === end) return `${startYear}.${startMonth}.${startDay}`;
+  if (startYear === endYear) return `${startYear}.${startMonth}.${startDay} - ${endMonth}.${endDay}`;
+  return `${startYear}.${startMonth}.${startDay} - ${endYear}.${endMonth}.${endDay}`;
+};
+
+const imageWidths = (image: ImageMetadata, lead: boolean) => {
+  const candidates = lead ? [320, 480, 640, 800] : [200, 320, 480, 640];
+  return candidates.filter((width) => width <= image.width);
+};
+
+const events = [...goalHistoryEvents].reverse().map((event) => ({
+  ...event,
+  photos: event.photos.map((photo: GoalHistoryPhoto, index) => {
+    const image = imageByBasename.get(photo.basename);
+    if (!image) throw new Error(`Missing Goal history image: ${photo.basename}`);
+    return {
+      ...photo,
+      image,
+      lead: index === 0,
+      widths: imageWidths(image, index === 0),
+    };
+  }),
+}));
+---
+
+<section
+  class="goal-history"
+  id="goal-history"
+  aria-labelledby="goal-history-title"
+  data-history-gallery
+  data-history-deferred
+>
+  <header class="goal-history__heading" data-history-heading>
+    <h2 id="goal-history-title">从 R 会到 X-AGI 大会</h2>
+    <div
+      class="goal-history__progress"
+      role="toolbar"
+      aria-label="历届会议目录"
+      aria-orientation="horizontal"
+      data-history-progress
+      style={`--history-progress-count: ${events.length}`}
+    >
+      {events.map((event, index) => (
+        <button
+          class="goal-history__progress-target"
+          type="button"
+          aria-label={`查看第 ${event.edition} 届，${event.year} 年，${event.city}`}
+          aria-controls="goal-history-viewport"
+          aria-current={index === 0 ? 'location' : undefined}
+          tabindex={index === 0 ? 0 : -1}
+          data-history-progress-target
+          data-history-progress-event={event.id}
+          data-history-progress-index={index}
+        >
+          <span
+            class="goal-history__progress-bar"
+            aria-hidden="true"
+            data-history-progress-bar
+          ></span>
+        </button>
+      ))}
+    </div>
+  </header>
+
+  <div
+    class="goal-history__viewport"
+    id="goal-history-viewport"
+    role="region"
+    aria-label="从 R 会到 X-AGI 大会历届影像"
+    tabindex="0"
+    data-history-viewport
+  >
+    <ol class="goal-history__track">
+      {events.map((event) => (
+        <li
+          class="goal-history__event"
+          role="group"
+          aria-label={`第 ${event.edition} 届，${event.year} 年，${event.city}`}
+          data-history-event
+          data-history-edition={event.edition}
+          data-history-year={event.year}
+          data-history-city={event.city}
+        >
+          <header class="goal-history__event-header">
+            <h3>第 {event.edition} 届 · {event.city}</h3>
+            <div class="goal-history__event-details">
+              <p>{formatEventDates(event.dates.start, event.dates.end)} · {modeLabels[event.mode]}</p>
+              <p>{event.venue}</p>
+            </div>
+          </header>
+
+          <div class="goal-history__mosaic">
+            {event.photos.map((photo) => (
+              <figure
+                class:list={[
+                  'goal-history__photo',
+                  photo.lead && 'goal-history__photo--lead',
+                ]}
+                data-history-depicted-year={photo.depictedYear ? '' : undefined}
+                data-history-photo-role={photo.role}
+              >
+                <div
+                  class="goal-history__photo-surface"
+                  data-depicted-year-label={photo.depictedYear ? `${photo.depictedYear} 年` : undefined}
+                >
+                  <Image
+                    src={photo.image}
+                    alt={photo.alt}
+                    widths={photo.widths}
+                    sizes={photo.lead
+                      ? '(max-width: 40rem) 86vw, (max-width: 68rem) 47vw, 27vw'
+                      : '(max-width: 40rem) 42vw, (max-width: 68rem) 28vw, 17vw'}
+                    quality={82}
+                    loading="lazy"
+                    decoding="async"
+                    style={`object-position: ${photo.focalPoint.x}% ${photo.focalPoint.y}%`}
+                  />
+                </div>
+                <figcaption>{photo.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<noscript>
+  <style>
+    .goal-history[data-history-deferred] .goal-history__viewport {
+      content-visibility: visible !important;
+      scrollbar-width: thin !important;
+    }
+
+    .goal-history[data-history-deferred] .goal-history__viewport::-webkit-scrollbar {
+      display: block !important;
+      height: 0.45rem !important;
+    }
+
+    .goal-history__progress {
+      display: none !important;
+    }
+  </style>
+</noscript>
+
+<script src="../../../scripts/goal-history-gallery.ts"></script>

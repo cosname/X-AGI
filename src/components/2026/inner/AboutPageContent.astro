@@ -1,0 +1,102 @@
+---
+import {
+  conference2026,
+  conference2026PartnerDisplayGroups,
+} from '../../../data/conference2026';
+import { partnerLogoByName } from '../../../data/partner-logo-assets-2026';
+
+const groups = conference2026PartnerDisplayGroups.filter(
+  (group) => group.organizations.length > 0,
+);
+---
+
+<main class="main-content">
+  <div class="published-inner-container">
+    <div class="info-card">
+      <div class="card-header">关于会议</div>
+      <div class="card-body">
+        {conference2026.introduction.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+
+    <div class="info-card conference-organization-card">
+      <div class="card-header">会议组织</div>
+      <div class="card-body">
+        <section aria-labelledby="organizing-committee-title">
+          <h2 id="organizing-committee-title">{conference2026.conferenceOrganization.committee.title}</h2>
+          <dl>
+            <div>
+              <dt>主席</dt>
+              <dd>{conference2026.conferenceOrganization.committee.chair}</dd>
+            </div>
+            <div>
+              <dt>委员</dt>
+              <dd>
+                {conference2026.conferenceOrganization.committee.members.join('、')}
+                <span class="conference-organization-card__note">
+                  （{conference2026.conferenceOrganization.committee.orderNote}）
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section aria-labelledby="conference-secretariat-title">
+          <h2 id="conference-secretariat-title">{conference2026.conferenceOrganization.secretariat.title}</h2>
+          <dl>
+            <div>
+              <dt>秘书长</dt>
+              <dd>{conference2026.conferenceOrganization.secretariat.secretaryGeneral}</dd>
+            </div>
+            <div>
+              <dt>成员</dt>
+              <dd>
+                {conference2026.conferenceOrganization.secretariat.members.join('、')}
+                <span class="conference-organization-card__note">
+                  （{conference2026.conferenceOrganization.secretariat.orderNote}）
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+    </div>
+
+    {groups.map((group) => (
+      <div class="info-card">
+        <div class="card-header">{group.label}</div>
+        <div class="card-body org-list">
+          {group.organizations.map((organization, index) => {
+            const logo = partnerLogoByName[organization.name];
+            return (
+              <>
+                {index > 0 && <hr />}
+                <div class:list={['org-item', { 'org-item--text-only': !logo }]}>
+                  {logo && (
+                    <img
+                      src={logo.src}
+                      alt={organization.name}
+                      class={logo.className}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <p>
+                    {organization.url ? (
+                      <a href={organization.url} target="_blank" rel="noopener noreferrer">
+                        <strong>{organization.name}</strong>
+                      </a>
+                    ) : (
+                      <strong>{organization.name}</strong>
+                    )}
+                  </p>
+                  {organization.intro?.map((paragraph) => <p>{paragraph}</p>)}
+                </div>
+              </>
+            );
+          })}
+        </div>
+      </div>
+    ))}
+  </div>
+</main>

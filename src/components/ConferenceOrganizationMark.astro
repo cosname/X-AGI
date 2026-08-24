@@ -1,22 +1,17 @@
 ---
 import type { Organization } from '../data/conference2026';
-import {
-  partnerLogoForName,
-  type PartnerLogoSurface,
-} from '../data/legacy-partner-assets';
+import { partnerLogoForName } from '../data/partner-logo-assets-2026';
 
 interface Props {
   organization: Organization;
   presentation?: 'logo' | 'card';
-  surface?: PartnerLogoSurface;
 }
 
 const {
   organization,
   presentation = 'logo',
-  surface = 'published',
 } = Astro.props;
-const logo = partnerLogoForName(organization.name, surface);
+const logo = partnerLogoForName(organization.name);
 ---
 
 {presentation === 'card' ? (

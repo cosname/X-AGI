@@ -1,0 +1,55 @@
+---
+import type { EditionPage } from '../config/navigation';
+import type { EditionConfig } from '../config/site';
+import ShareMeta from '../components/ShareMeta.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import '../styles/global.css';
+import '../styles/published-inner-2026.css';
+import '../styles/goal-2026.css';
+
+interface Props {
+  edition: EditionConfig;
+  activePage?: EditionPage;
+  title: string;
+  description: string;
+  canonicalPath: string;
+}
+
+const {
+  edition,
+  activePage = '',
+  title,
+  description,
+  canonicalPath,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, Astro.site);
+const shareTitle = title.includes(edition.title)
+  ? title.replace(edition.title, edition.titleZh)
+  : title;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <ShareMeta title={shareTitle} description={description} canonical={canonical} />
+    <meta name="theme-color" content="#fdf8f1" />
+    <link rel="icon" type="image/png" href="/2026/brand/favicon.png" />
+    <link rel="apple-touch-icon" href="/2026/brand/xagi-connect-logo.png" />
+  </head>
+  <body class="edition-site edition-2026 edition-2026-inner edition-goal-2026">
+    <SiteHeader edition={edition} activePage={activePage} behavior="overlay-scroll" />
+
+    <slot />
+
+    <footer class="site-footer">
+      {edition.contact && (
+        <a href={`mailto:${edition.contact}`}>{edition.contact}</a>
+      )}
+    </footer>
+  </body>
+</html>

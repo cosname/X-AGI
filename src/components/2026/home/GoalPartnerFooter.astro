@@ -1,0 +1,61 @@
+---
+import { conference2026, conference2026PartnerDisplayGroups } from '../../../data/conference2026';
+import '../../../styles/goal-partner-footer.css';
+import ConferenceOrganizationMark from '../../ConferenceOrganizationMark.astro';
+---
+
+<section
+  class="goal-partners"
+  id="goal-organization"
+  aria-labelledby="goal-partners-title"
+>
+  <div class="goal-partners__inner">
+    <header class="goal-partners__heading">
+      <h2 id="goal-partners-title">组织单位</h2>
+    </header>
+
+    <div class="goal-partners__groups">
+      {conference2026PartnerDisplayGroups.map((group) => (
+        <section
+          class:list={['goal-partners__group', `goal-partners__group--${group.key}`]}
+          aria-labelledby={`goal-partners-group-${group.key}`}
+        >
+          <h3 id={`goal-partners-group-${group.key}`}>{group.label}</h3>
+          <ul class:list={['goal-partners__logos', `goal-partners__logos--${group.key}`]}>
+            {group.organizations.map((organization) => (
+              <li>
+                <ConferenceOrganizationMark
+                  organization={organization}
+                  presentation="logo"
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <footer class="goal-partners__legal" aria-label="联系与备案信息">
+      {conference2026.contact && (
+        <p>
+          <a href={`mailto:${conference2026.contact}`}>{conference2026.contact}</a>
+        </p>
+      )}
+      <p>
+        <a href="https://beian.miit.gov.cn" rel="noopener noreferrer" target="_blank">
+          京ICP备2024062260号-3
+        </a>
+        <span aria-hidden="true">|</span>
+        <a
+          class="goal-partners__beian"
+          href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502057471"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img src="/2026/legal/beian-icon.png" alt="" width="14" height="14" />
+          <span>京公网安备11010502057471号</span>
+        </a>
+      </p>
+    </footer>
+  </div>
+</section>

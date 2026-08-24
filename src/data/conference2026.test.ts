@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
+import { existsSync, readdirSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import {
   conference2026,
   conference2026OrganizerDisplayOrder,
   conference2026PartnerDisplayGroups,
 } from './conference2026.ts';
+import { partnerLogoByName } from './partner-logo-assets-2026.ts';
 
 const scheduleCategories = new Set(['arrival', 'keynote', 'parallel', 'poster']);
 
@@ -59,22 +61,7 @@ describe('conference schedule contracts', () => {
   });
 });
 
-describe('goal preview content contracts', () => {
-  it('publishes complete metadata for every archive image', () => {
-    assert.equal(conference2026.history.gallery.length, 5);
-
-    const images = new Set<string>();
-    for (const item of conference2026.history.gallery) {
-      assert.ok(item.image.startsWith('/2026/history/'));
-      assert.ok(item.width > 0 && item.height > 0);
-      assert.ok(item.alt.trim().length > 0);
-      assert.ok(item.caption.trim().length > 0);
-      assert.match(item.sourceUrl, /^https:\/\//);
-      assert.equal(images.has(item.image), false, `duplicate archive image: ${item.image}`);
-      images.add(item.image);
-    }
-  });
-
+describe('published 2026 content contracts', () => {
   it('keeps organization roles distinct and names unique', () => {
     assert.equal(conference2026.initiators.length, 2);
     assert.equal(conference2026.organizers.length, 4);
@@ -106,6 +93,32 @@ describe('goal preview content contracts', () => {
       group.organizations.map((organization) => organization.name)
     ));
     assert.equal(new Set(displayNames).size, displayNames.length);
+  });
+
+  it('keeps one selected 2026 logo for every published organization', () => {
+    const organizations = [
+      ...conference2026.initiators,
+      ...conference2026.organizers,
+      ...conference2026.coOrganizers,
+      ...conference2026.sponsors,
+    ];
+    const selectedPaths = organizations.map((organization) => {
+      const logo = partnerLogoByName[organization.name];
+      assert.ok(logo, `missing selected logo for ${organization.name}`);
+      assert.match(logo.src, /^\/2026\/logos\/[a-z0-9-]+\.(?:png|svg)$/);
+      assert.equal(
+        existsSync(new URL(`../../public${logo.src}`, import.meta.url)),
+        true,
+        `missing public logo: ${logo.src}`,
+      );
+      return logo.src;
+    });
+
+    assert.equal(new Set(selectedPaths).size, selectedPaths.length);
+
+    const publishedFiles = readdirSync(new URL('../../public/2026/logos/', import.meta.url)).sort();
+    const selectedFiles = selectedPaths.map((src) => src.split('/').at(-1) ?? '').sort();
+    assert.deepEqual(publishedFiles, selectedFiles);
   });
 
   it('retains the audited Rising Stars Poster ticket wording', () => {

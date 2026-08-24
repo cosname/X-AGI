@@ -1,18 +1,16 @@
 ---
-import EditionShell from '../components/EditionShell.astro';
-import ConferenceHome from '../components/ConferenceHome.astro';
-import GoalHomeLower from '../components/GoalHomeLower.astro';
+import PublishedHome2026Layout from '../layouts/PublishedHome2026Layout.astro';
+import PublishedHomeHero from '../components/2026/home/PublishedHomeHero.astro';
+import GoalHomeLower from '../components/2026/home/GoalHomeLower.astro';
 import { currentEdition, editionPath } from '../config/site';
 ---
 
-<EditionShell
+<PublishedHome2026Layout
   edition={currentEdition}
   canonicalPath={editionPath(currentEdition)}
   description={currentEdition.description}
-  showFooter={false}
   bodyClass="edition-goal-home edition-goal-home--with-lower"
-  headerBehavior="overlay-scroll"
 >
-  <ConferenceHome edition={currentEdition} heroOnly />
+  <PublishedHomeHero edition={currentEdition} />
   <GoalHomeLower />
-</EditionShell>
+</PublishedHome2026Layout>

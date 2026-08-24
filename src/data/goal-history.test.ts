@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import test from 'node:test';
 
 import {
@@ -100,6 +100,17 @@ test('every event has three complete and traceable photographs', () => {
       assert.equal(existsSync(assetUrl), true, `missing local asset: ${photo.basename}`);
     }
   }
+});
+
+test('history metadata and the 2026 source directory are reciprocal', () => {
+  const metadataBasenames = goalHistoryEvents
+    .flatMap((event) => event.photos.map((photo) => photo.basename))
+    .sort();
+  const sourceBasenames = readdirSync(
+    new URL('../assets/2026/goal-history/', import.meta.url),
+  ).sort();
+
+  assert.deepEqual(sourceBasenames, metadataBasenames);
 });
 
 test('the 2018 Shanghai event preserves the 2009 and 2018 comparison', () => {

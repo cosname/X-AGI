@@ -1,0 +1,32 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from './BaseLayout.astro';
+import type { EditionConfig } from '../config/site';
+
+interface Props {
+  edition: EditionConfig;
+  description?: string;
+  canonicalPath: string;
+  bodyClass?: string;
+}
+
+const {
+  edition,
+  description,
+  canonicalPath,
+  bodyClass,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={edition.title}
+  shareTitle={edition.titleZh}
+  description={description ?? edition.description}
+  canonicalPath={canonicalPath}
+  bodyClass={`edition-site edition-${edition.year}${bodyClass ? ` ${bodyClass}` : ''}`}
+>
+  <SiteHeader edition={edition} behavior="overlay-scroll" />
+  <main id="main-content">
+    <slot />
+  </main>
+</BaseLayout>

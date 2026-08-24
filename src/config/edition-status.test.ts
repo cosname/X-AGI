@@ -46,7 +46,7 @@ describe('live registration and poster status', () => {
     assert.equal(isRegistrationOpen(conference2026), true);
 
     for (const page of ['register', 'poster'] as const) {
-      const copy = currentEditionPageCopy(page, conference2026, currentEdition);
+      const copy = currentEditionPageCopy(page, conference2026);
       assert.equal(
         statusDescribesClosedOffering(copy.status),
         false,
@@ -57,19 +57,6 @@ describe('live registration and poster status', () => {
         false,
         `${page} description cannot describe a closed offering while registration is open`,
       );
-    }
-  });
-
-  it('keeps next-step destinations on the shipped edition paths', () => {
-    const actions = currentEditionActionPaths(currentEdition);
-
-    assert.equal(currentEditionPageCopy('about').next.href, actions.schedule);
-    assert.equal(currentEditionPageCopy('schedule').next.href, actions.poster);
-    assert.equal(currentEditionPageCopy('register').next.href, actions.schedule);
-
-    if (isRegistrationOpen(conference2026)) {
-      assert.equal(currentEditionPageCopy('poster').next.href, actions.register);
-      assert.equal(currentEditionPageCopy('guide').next.href, actions.register);
     }
   });
 });

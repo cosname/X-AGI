@@ -1,0 +1,548 @@
+/* Self-contained structure for the five published 2026 inner pages. */
+
+.edition-2026-inner .published-inner-container {
+  width: min(90vw, 1200px);
+  margin-inline: auto;
+  padding-inline: 15px;
+}
+
+.edition-2026-inner .page-header {
+  display: flex;
+  align-items: flex-end;
+  height: 300px;
+  padding-bottom: 36px;
+}
+
+.edition-2026-inner .page-header .header-content {
+  position: relative;
+}
+
+.edition-2026-inner .page-header h1 {
+  margin: 0;
+  font-family: var(--font-condensed, 'DIN Alternate', sans-serif);
+  font-size: 36px;
+  font-weight: 720;
+  line-height: 1.15;
+}
+
+.edition-2026-inner .page-header p {
+  margin: 0.25rem 0 0;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.edition-2026-inner .page-header .page-subtitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.75rem;
+}
+
+.edition-2026-inner .status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+}
+
+.edition-2026-inner .main-content {
+  padding: 30px 0 60px;
+}
+
+.edition-2026-inner .info-card {
+  margin-bottom: 30px;
+}
+
+.edition-2026-inner .info-card .card-header {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.edition-2026-inner .info-card .card-body {
+  padding: 30px;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.edition-2026-inner .info-card .card-body > :first-child {
+  margin-top: 0;
+}
+
+.edition-2026-inner .info-card .card-body > :last-child {
+  margin-bottom: 0;
+}
+
+.edition-2026-inner .info-card .card-body p {
+  margin-top: 0;
+}
+
+.edition-2026-inner .info-card .card-body a {
+  text-underline-offset: 0.16em;
+}
+
+.edition-2026-inner .org-list hr {
+  height: 0;
+  margin: 30px 0;
+  border: 0;
+  border-top: 1px solid;
+}
+
+.edition-2026-inner .org-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.edition-2026-inner .org-item img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 52px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.edition-2026-inner .org-item img.sponsor-kuande {
+  max-height: 65px;
+}
+
+.edition-2026-inner .org-item img.sponsor-quantverse {
+  max-height: 97.5px;
+}
+
+.edition-2026-inner .org-item p {
+  margin: 0;
+}
+
+.edition-2026-inner .conference-organization-card section + section {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid;
+}
+
+.edition-2026-inner .conference-organization-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.edition-2026-inner .conference-organization-card dl {
+  margin: 0;
+}
+
+.edition-2026-inner .conference-organization-card dl > div {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.35rem 0;
+}
+
+.edition-2026-inner .conference-organization-card dt {
+  font-weight: 700;
+}
+
+.edition-2026-inner .conference-organization-card dd {
+  margin: 0;
+  line-height: 1.9;
+}
+
+.edition-2026-inner .conference-organization-card__note {
+  color: #777b8f;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.edition-2026-inner .schedule-intro {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.edition-2026-inner .schedule-intro p {
+  margin: 0;
+}
+
+.edition-2026-inner .schedule-intro p:last-child {
+  color: #6d7482;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.edition-2026-inner .schedule-confirmed {
+  padding-top: 0.85rem;
+}
+
+.edition-2026-inner .schedule-confirmed__header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid;
+}
+
+.edition-2026-inner .schedule-confirmed__header > p:first-child {
+  margin: 0 0 0.35rem;
+  color: #6752c8;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.edition-2026-inner .schedule-confirmed__header h2 {
+  margin: 0;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  line-height: 1.2;
+}
+
+.edition-2026-inner .schedule-card {
+  scroll-margin-top: calc(var(--site-header-height) + 1.25rem);
+}
+
+.edition-2026-inner .schedule-card .card-body {
+  padding: 0;
+}
+
+.edition-2026-inner .session-chair {
+  padding: 20px 30px 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.edition-2026-inner .session-chair--pending,
+.edition-2026-inner .session-item--reserved .session-title {
+  color: #8a93a5;
+}
+
+.edition-2026-inner .session-list {
+  padding: 0 0 15px;
+}
+
+.edition-2026-inner .session-item {
+  padding: 15px 30px;
+  border-bottom: 1px solid;
+}
+
+.edition-2026-inner .session-item:last-child {
+  border-bottom: 0;
+}
+
+.edition-2026-inner .session-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.edition-2026-inner .session-speaker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.45rem;
+  font-size: 14px;
+  line-height: 1.55;
+  cursor: default;
+}
+
+.edition-2026-inner .schedule-topic-card .session-item--speaker .session-speaker {
+  margin-top: 0;
+}
+
+.edition-2026-inner .schedule-topic-card__empty .session-title {
+  display: flex;
+  align-items: center;
+  min-height: 2.4rem;
+}
+
+.edition-2026-inner .venue-details {
+  text-align: center;
+}
+
+.edition-2026-inner .venue-address {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: #111342;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.edition-2026-inner .guide-icon {
+  display: inline-block;
+  width: 1.4rem;
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.edition-2026-inner .service-section:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.edition-2026-inner .service-section h4 {
+  display: flex;
+  align-items: center;
+  margin: 0 0 10px;
+  color: #111342;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.edition-2026-inner .service-section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edition-2026-inner .service-section li {
+  position: relative;
+  padding-left: 15px;
+  color: rgb(17 19 66 / 0.78);
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.edition-2026-inner .service-section li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #6752c8;
+  content: '•';
+}
+
+.edition-2026-inner .hotel-offer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 156px;
+  align-items: start;
+  gap: clamp(1.25rem, 4vw, 3rem);
+}
+
+.edition-2026-inner .hotel-offer__summary {
+  margin: 0;
+}
+
+.edition-2026-inner .hotel-offer__code {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+.edition-2026-inner .hotel-offer__code-image {
+  position: relative;
+}
+
+.edition-2026-inner .hotel-offer__code-graphic {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.edition-2026-inner .hotel-offer__code figcaption {
+  margin-top: 0.45rem;
+  color: #6d7083;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.edition-2026-inner .registration-notes ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edition-2026-inner .registration-notes li {
+  position: relative;
+  padding-left: 15px;
+  color: rgb(17 19 66 / 0.78);
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.edition-2026-inner .registration-notes li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #6752c8;
+  content: '•';
+}
+
+.edition-2026-inner .pricing-section {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid;
+}
+
+.edition-2026-inner .pricing-title {
+  margin: 0 0 15px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.edition-2026-inner .ticket-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.edition-2026-inner .ticket-table {
+  width: 100%;
+  min-width: 34rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: transparent;
+  font-size: 14px;
+  text-align: center;
+}
+
+.edition-2026-inner .ticket-table th,
+.edition-2026-inner .ticket-table td {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.edition-2026-inner .ticket-table th:first-child,
+.edition-2026-inner .ticket-table td:first-child {
+  text-align: left;
+}
+
+.edition-2026-inner .ticket-col-type {
+  width: 40%;
+}
+
+.edition-2026-inner .ticket-col-price {
+  width: 30%;
+}
+
+.edition-2026-inner .ticket-band th {
+  font-weight: 700;
+  text-align: left;
+}
+
+.edition-2026-inner .pricing-details {
+  margin-top: 15px;
+  padding-left: 1rem;
+  color: #55596d;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.edition-2026-inner .pricing-details p {
+  margin: 0 0 5px;
+}
+
+@media (max-width: 1000px) {
+  .edition-2026-inner .published-inner-container {
+    width: 94vw;
+    padding-inline: 10px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .edition-2026-inner .page-header {
+    padding-bottom: 32px;
+  }
+
+  .edition-2026-inner .page-header h1 {
+    font-size: 28px;
+  }
+
+  .edition-2026-inner .page-header p {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .edition-2026-inner .conference-organization-card dl > div {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .edition-2026-inner .hotel-offer {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .edition-2026-inner .hotel-offer__code {
+    width: 156px;
+    margin-left: 15px;
+  }
+
+  .edition-2026-inner .schedule-intro {
+    display: block;
+  }
+
+  .edition-2026-inner .schedule-intro p:last-child {
+    margin-top: 0.45rem;
+    text-align: left;
+  }
+
+  .edition-2026-inner .session-title {
+    display: grid;
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .edition-2026-inner .published-inner-container {
+    width: 96vw;
+    padding-inline: 8px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .edition-2026-inner .page-header {
+    padding-bottom: 26px;
+  }
+
+  .edition-2026-inner .page-header p {
+    font-size: 18px;
+  }
+
+  .edition-2026-inner .status-badge {
+    padding: 0.16rem 0.58rem;
+    font-size: 0.75rem;
+  }
+
+  .edition-2026-inner .main-content {
+    padding-top: 24px;
+  }
+
+  .edition-2026-inner .info-card .card-header {
+    min-height: 50px;
+    padding: 8px 16px;
+    font-size: 16px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .edition-2026-inner .info-card .card-body {
+    padding: 1.4rem;
+  }
+
+  .edition-2026-inner .session-chair {
+    padding: 16px 20px 0;
+    font-size: 14px;
+  }
+
+  .edition-2026-inner .session-item {
+    padding: 14px 20px;
+  }
+
+  .edition-2026-inner .ticket-table {
+    min-width: 31rem;
+  }
+}
