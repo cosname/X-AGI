@@ -797,6 +797,11 @@ if (!syncScript.includes("path.resolve('scripts/validate-build.mjs')")) {
   fail('sync-oss.mjs: production sync must validate dist before uploading');
 }
 
+const goalStylesSource = await readFile(path.resolve('src/styles/goal-2026.css'), 'utf8');
+if (!/\.edition-2026\.edition-goal-2026\s+\.site-footer\s*\{[^}]*background:\s*transparent;/s.test(goalStylesSource)) {
+  fail('goal-2026.css: current inner-page footer must override the shared 2026 background regardless of stylesheet order');
+}
+
 const siteConfigSource = await readFile(path.resolve('src/config/site.ts'), 'utf8');
 for (const retiredExport of ['goalDesignEdition', 'nextDesignEdition']) {
   if (siteConfigSource.includes(retiredExport)) {
