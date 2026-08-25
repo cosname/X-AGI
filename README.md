@@ -60,7 +60,8 @@ src/
     navigation.ts               导航和正式页面集合
     edition-status.ts           页面标题、状态和下一步操作
   data/
-    conference2026.ts           2026 官方业务内容的唯一数据源
+    conference2026.ts           除专题嘉宾外的 2026 官方业务内容
+    conference2026-program.generated.ts 腾讯文档生成的专题、主席和嘉宾快照
     goal-history.ts             17 场历届影像、说明和内部来源记录
     partner-logo-assets-2026.ts 2026 正式组织单位 Logo 对照
   layouts/
@@ -76,6 +77,7 @@ src/
     goal-partner-footer.css     组织单位和备案收束区
     global.css                  正式首屏、导航和共享组件
 scripts/
+  sync-tencent-program.mjs      校验腾讯文档 CSV 并生成公开日程数据
   manifests/public-2025.sha256  冻结归档的哈希与字节清单
   validate-build.mjs            构建产物和跨年份边界校验
   configure-oss.mjs             本机 ossutil 配置
@@ -84,7 +86,8 @@ scripts/
 
 ## 内容与素材所有权
 
-2026 文案、票价、组织单位、专题嘉宾、日程和报名状态只在 `src/data/conference2026.ts` 中维护。
+2026 文案、票价、组织单位、详细日程和报名状态只在 `src/data/conference2026.ts` 中维护。
+专题、主席和嘉宾由腾讯文档生成到 `src/data/conference2026-program.generated.ts`，不得手工编辑生成文件。
 页面组件负责表现，不应复制独立业务数据。
 尚未确认的讲者、报告、赞助商、时间或数字不得自行补写。
 
@@ -131,6 +134,24 @@ npm test
 `npm test` 会依次运行单元测试、Astro 类型检查、静态构建和构建产物校验。
 修改页面后至少检查 `/`、`/about/`、`/schedule/`、`/poster/`、`/guide/` 和 `/register/` 的桌面与手机布局。
 归档相关改动还需要检查 `/2025/`、`/2025/schedule.html` 和 `/2025/register.html`。
+
+## 腾讯文档专题同步
+
+专题来源固定为腾讯文档 `X-AGI 2026 嘉宾信息` 的 `BB08J2` 标签页和 `工作表1`。
+下载当前工作表的 UTF-8 CSV 后，用绝对路径运行：
+
+```bash
+npm run schedule:sync -- --csv /absolute/path/to/X-AGI-2026-program.csv
+npm test
+```
+
+同步器严格校验八列标题、空主题、重复主题、嘉宾格式、重复嘉宾和最大行数。
+私有的 `对接人` 列会被明确丢弃，不能写入生成文件或公开页面。
+自动运行一次删除超过两个专题时会失败并保留现状。
+确认大范围删除确属预期后，人工复核 CSV，并在受监督的本地运行中加入 `--allow-large-change`。
+
+当前 `/schedule/` 公开专题、主席和嘉宾。
+生成数据同时保留来源中的 `时间` 字段，但在详细时间表正式设计和确认前不展示该字段。
 
 ## 构建约束
 
