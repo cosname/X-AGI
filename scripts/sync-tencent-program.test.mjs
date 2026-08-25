@@ -28,6 +28,10 @@ describe('Tencent program CSV parser', () => {
       name: '研究者',
       affiliation: 'Example Lab',
     });
+    assert.deepEqual(parsePerson('曹原（港大）', 'speaker'), {
+      name: '曹原',
+      affiliation: '香港大学',
+    });
   });
 
   it('parses program rows and excludes the private coordination column', () => {
