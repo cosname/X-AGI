@@ -119,6 +119,24 @@ describe('published 2026 content contracts', () => {
     assert.equal(new Set(displayNames).size, displayNames.length);
   });
 
+  it('links organizations to their verified official websites', () => {
+    const organizationUrls = new Map(
+      [...conference2026.organizers, ...conference2026.sponsors]
+        .map((organization) => [organization.name, organization.url]),
+    );
+    const expectedUrls = new Map([
+      ['中国人民大学应用统计科学研究中心', 'https://cfas.ruc.edu.cn/'],
+      ['中国人民大学统计学院', 'https://stat.ruc.edu.cn/'],
+      ['明汯投资', 'https://www.mhfunds.com/'],
+      ['宽德投资', 'https://www.wizardquant.com/'],
+      ['Will', 'https://wq-will.com/'],
+    ]);
+
+    for (const [name, url] of expectedUrls) {
+      assert.equal(organizationUrls.get(name), url);
+    }
+  });
+
   it('keeps one selected 2026 logo for every published organization', () => {
     const organizations = [
       ...conference2026.initiators,
