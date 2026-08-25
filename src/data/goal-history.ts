@@ -34,7 +34,7 @@ export type GoalHistoryEvent = {
   dates: { start: string; end: string };
   venue: string;
   mode: GoalHistoryMode;
-  sourceFile: string;
+  sourceTitle: string;
   photos: readonly [GoalHistoryPhoto, GoalHistoryPhoto, GoalHistoryPhoto];
 };
 
@@ -47,7 +47,7 @@ export const goalHistoryEvents = [
     dates: { start: '2015-06-06', end: '2015-06-07' },
     venue: '北京大学邱德拔体育馆（6月6日）；北京大学光华管理学院一号楼（6月7日）',
     mode: 'onsite',
-    sourceFile: '第八届中国R语言会议（北京）会议纪要.md',
+    sourceTitle: '第八届中国R语言会议（北京）会议纪要',
     photos: [
       {
         id: 'e08-2015-beijing-p1',
@@ -92,7 +92,7 @@ export const goalHistoryEvents = [
     dates: { start: '2016-05-27', end: '2016-05-29' },
     venue: '中国人民大学世纪馆（5月27日）；逸夫报告厅、国学馆报告厅及第一教学楼（5月28日至29日）',
     mode: 'onsite',
-    sourceFile: '第九届中国R语言会议（北京）纪要【附幻灯片资源下载】.md',
+    sourceTitle: '第九届中国R语言会议（北京）纪要【附幻灯片资源下载】',
     photos: [
       {
         id: 'e09-2016-beijing-p1',
@@ -137,7 +137,7 @@ export const goalHistoryEvents = [
     dates: { start: '2016-12-03', end: '2016-12-04' },
     venue: '中山大学梁銶琚堂；Tutorial分会场位于中山大学新数学楼209',
     mode: 'onsite',
-    sourceFile: '第九届中国R语言会议（广州）暨华南地区数据科学会议 会议纪要及会议资料.md',
+    sourceTitle: '第九届中国R语言会议（广州）暨华南地区数据科学会议会议纪要及会议资料',
     photos: [
       {
         id: 'e09-2016-guangzhou-p1',
@@ -182,7 +182,7 @@ export const goalHistoryEvents = [
     dates: { start: '2017-05-19', end: '2017-05-21' },
     venue: '清华大学新清华学堂；清华紫光国际会议中心；清华大学第六教学楼',
     mode: 'onsite',
-    sourceFile: '第十届中国R会议（北京）纪要（附会议资料下载方式）.md',
+    sourceTitle: '第十届中国R会议（北京）纪要（附会议资料下载方式）',
     photos: [
       {
         id: 'e10-2017-beijing-p1',
@@ -227,7 +227,7 @@ export const goalHistoryEvents = [
     dates: { start: '2017-06-17', end: '2017-06-18' },
     venue: '中国科学技术大学西区大礼堂、西活学术报告厅、特种楼学术报告厅',
     mode: 'onsite',
-    sourceFile: '第十届中国R会议（合肥）纪要.md',
+    sourceTitle: '第十届中国R会议（合肥）纪要',
     photos: [
       {
         id: 'e10-2017-hefei-p1',
@@ -272,7 +272,7 @@ export const goalHistoryEvents = [
     dates: { start: '2017-09-16', end: '2017-09-16' },
     venue: '兰州财经大学和平校区兴隆讲堂',
     mode: 'onsite',
-    sourceFile: '第十届中国R会议（兰州）纪要.md',
+    sourceTitle: '第十届中国R会议（兰州）纪要',
     photos: [
       {
         id: 'e10-2017-lanzhou-p1',
@@ -317,7 +317,7 @@ export const goalHistoryEvents = [
     dates: { start: '2017-12-02', end: '2017-12-03' },
     venue: '华东师范大学中山北路校区',
     mode: 'onsite',
-    sourceFile: '第十届中国R会议（上海）暨华东地区数据科学会议纪要 1.md',
+    sourceTitle: '第十届中国R会议（上海）暨华东地区数据科学会议纪要',
     photos: [
       {
         id: 'e10-2017-shanghai-p1',
@@ -362,7 +362,7 @@ export const goalHistoryEvents = [
     dates: { start: '2018-05-25', end: '2018-05-27' },
     venue: '北京香格里拉饭店新阁宴会厅（5月25日）；中国人民大学第一、第三教学楼（5月26日至27日）',
     mode: 'onsite',
-    sourceFile: '第十一届中国R会议（北京）纪要.md',
+    sourceTitle: '第十一届中国R会议（北京）纪要',
     photos: [
       {
         id: 'e11-2018-beijing-p2',
@@ -407,7 +407,7 @@ export const goalHistoryEvents = [
     dates: { start: '2018-11-24', end: '2018-11-25' },
     venue: '中山大学梁銶琚堂；Tutorial分会场位于中山大学新数学楼209',
     mode: 'onsite',
-    sourceFile: '第11届中国R会议（广州） 暨华南地区数据科学会议纪要.md',
+    sourceTitle: '第11届中国R会议（广州）暨华南地区数据科学会议纪要',
     photos: [
       {
         id: 'e11-2018-guangzhou-p3',
@@ -452,7 +452,7 @@ export const goalHistoryEvents = [
     dates: { start: '2018-12-08', end: '2018-12-09' },
     venue: '华东师范大学闵行校区体育馆（12月8日）；华东师范大学中山北路校区（12月9日）',
     mode: 'onsite',
-    sourceFile: '第11届中国R会议（上海）会议纪要.md',
+    sourceTitle: '第11届中国R会议（上海）会议纪要',
     photos: [
       {
         id: 'e11-2018-shanghai-p3',
@@ -498,7 +498,7 @@ export const goalHistoryEvents = [
     dates: { start: '2019-05-24', end: '2019-05-26' },
     venue: '中国人民大学八百人大教室（5月24日）；中国人民大学第三教学楼（5月25日至26日）',
     mode: 'onsite',
-    sourceFile: '第十二届中国R会议（北京）纪要（附会议资料下载方式）.md',
+    sourceTitle: '第十二届中国R会议（北京）纪要（附会议资料下载方式）',
     photos: [
       {
         id: 'e12-2019-beijing-p2',
@@ -543,7 +543,7 @@ export const goalHistoryEvents = [
     dates: { start: '2020-12-19', end: '2020-12-20' },
     venue: '中国人民大学明德主楼1030；线上会场位于腾讯直播室',
     mode: 'hybrid',
-    sourceFile: '第13届中国 R 会（北京）会议纪要（附会议资料下载方式）.md',
+    sourceTitle: '第13届中国 R 会（北京）会议纪要（附会议资料下载方式）',
     photos: [
       {
         id: 'e13-2020-beijing-p3',
@@ -588,7 +588,7 @@ export const goalHistoryEvents = [
     dates: { start: '2021-11-20', end: '2021-11-21' },
     venue: '中国人民大学明德主楼；线上会场通过腾讯会议直播',
     mode: 'hybrid',
-    sourceFile: '第14届中国 R 会（北京）会议纪要.md',
+    sourceTitle: '第14届中国 R 会（北京）会议纪要',
     photos: [
       {
         id: 'e14-2021-beijing-p1',
@@ -633,7 +633,7 @@ export const goalHistoryEvents = [
     dates: { start: '2022-11-19', end: '2022-11-25' },
     venue: '中国人民大学；线下会场位于明德主楼（11月19日至20日），线上通过腾讯会议参与',
     mode: 'hybrid',
-    sourceFile: '第15届中国 R 会（北京）会议纪要.md',
+    sourceTitle: '第15届中国 R 会（北京）会议纪要',
     photos: [
       {
         id: 'e15-2022-beijing-p3',
@@ -678,7 +678,7 @@ export const goalHistoryEvents = [
     dates: { start: '2023-11-25', end: '2023-11-30' },
     venue: '中国人民大学；同步设置线下与线上会场',
     mode: 'hybrid',
-    sourceFile: '第16届中国R会议暨 2023X-AGI 大会会议纪要.md',
+    sourceTitle: '第16届中国R会议暨 2023 X-AGI 大会会议纪要',
     photos: [
       {
         id: 'e16-2023-beijing-xagi-p1',
@@ -723,7 +723,7 @@ export const goalHistoryEvents = [
     dates: { start: '2024-07-20', end: '2024-07-22' },
     venue: '中国人民大学（7月20日至21日线下会场）；另设线上会场',
     mode: 'hybrid',
-    sourceFile: '会议纪要  第17届中国R会议 & 2024 X 智能大会 & 2024 数据科学国际论坛联合会议.md',
+    sourceTitle: '第17届中国R会议、2024 X智能大会与2024数据科学国际论坛联合会议纪要',
     photos: [
       {
         id: 'e17-2024-beijing-xagi-ifods-p1',
@@ -768,7 +768,7 @@ export const goalHistoryEvents = [
     dates: { start: '2025-10-17', end: '2025-10-19' },
     venue: '北京会议中心',
     mode: 'onsite',
-    sourceFile: '会议纪要  2025 X智能大会 & 第18届中国R会议.md',
+    sourceTitle: '2025 X智能大会与第18届中国R会议会议纪要',
     photos: [
       {
         id: 'e18-2025-beijing-xagi-p1',

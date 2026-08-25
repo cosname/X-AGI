@@ -14,10 +14,11 @@
   "packageManager": "npm@11.7.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npm run validate",
+    "build": "npm run assets:verify && astro build && npm run validate",
     "preview": "astro preview",
     "check": "astro check",
     "validate": "node scripts/validate-build.mjs",
+    "assets:verify": "node scripts/validate-source-archive.mjs",
     "oss:configure": "node scripts/configure-oss.mjs",
     "oss:sync": "node scripts/sync-oss.mjs",
     "schedule:sync": "node scripts/sync-tencent-program.mjs",

@@ -74,10 +74,12 @@ test('every event has three complete and traceable photographs', () => {
     assert.match(event.dates.end, /^20\d{2}-\d{2}-\d{2}$/);
     assert.ok(event.dates.start <= event.dates.end);
     assert.ok(event.venue.trim().length > 0);
-    assert.equal(event.sourceFile.includes('/'), false, `${event.id} sourceFile must be a basename`);
+    assert.ok(event.sourceTitle.trim().length > 0);
+    assert.equal(event.sourceTitle.includes('/'), false, `${event.id} sourceTitle must not be a path`);
+    assert.equal(event.sourceTitle.endsWith('.md'), false, `${event.id} sourceTitle must not pretend to be a local file`);
 
     for (const photo of event.photos) {
-      const sourceKey = `${event.sourceFile}#${photo.sourceImageIndex}`;
+      const sourceKey = `${event.sourceTitle}#${photo.sourceImageIndex}`;
       assert.equal(photoIds.has(photo.id), false, `duplicate photo id: ${photo.id}`);
       assert.equal(basenames.has(photo.basename), false, `duplicate basename: ${photo.basename}`);
       assert.equal(provenance.has(sourceKey), false, `duplicate provenance: ${sourceKey}`);

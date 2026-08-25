@@ -1,0 +1,777 @@
+{
+  "schemaVersion": 1,
+  "collection": "X-AGI 2026 source archive",
+  "importedOn": "2026-08-25",
+  "sourceCollection": "Desktop consolidation",
+  "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
+  "sourceEntryCount": 46,
+  "uniquePayloadCount": 45,
+  "archiveFileCount": 44,
+  "entries": [
+    {
+      "originalPath": "1.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/tsinghua-statistics-and-data-science-logo-source.png",
+      "status": "exact-duplicate",
+      "sha256": "a7d9a1720ea614afeb043817ffeb1b395902ff76faf6f8348da1285cf89754db",
+      "bytes": 193284,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1816,
+        "height": 254
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:47.770Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/tsinghua-stat.png"
+      ],
+      "note": "Exact duplicate of the supplied thu.png payload; only one canonical archive file is retained."
+    },
+    {
+      "originalPath": "2014.png",
+      "canonicalPath": "assets/source-archive/2026/history/china-r-e07-2014-beijing-volunteer-group.png",
+      "status": "archived",
+      "sha256": "0c5c26ddf14b08970d36be755e44ad59203ee72d1a651e684097593e3eaf7d8e",
+      "bytes": 1004255,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1024,
+        "height": 680
+      },
+      "sourceModifiedAt": "2026-08-22T13:44:18.772Z",
+      "runtimeCounterparts": [],
+      "provenanceUrls": [
+        "https://cosx.org/2014/06/7th-china-r-beijing-summary/"
+      ],
+      "note": "2014 Beijing volunteer group photo, verified against the official Capital of Statistics recap."
+    },
+    {
+      "originalPath": "2014(2).png",
+      "canonicalPath": "assets/source-archive/2026/history/china-r-2014-indoor-community-group.png",
+      "status": "archived",
+      "sha256": "af76c3ec254b1732c05d26ea1f1651f2f461359301c4971a931677efba29df8a",
+      "bytes": 2001359,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1600,
+        "height": 1060
+      },
+      "sourceModifiedAt": "2026-08-22T13:44:34.008Z",
+      "runtimeCounterparts": [],
+      "note": "Conservative name because the year is known from the supplied filename but the exact city and event remain unverified."
+    },
+    {
+      "originalPath": "第十届中国R语言会议（北京）圆桌讨论 - 清华大学新清华学堂.jpg",
+      "canonicalPath": "assets/source-archive/2026/history/china-r-e10-2017-beijing-tsinghua-new-auditorium-roundtable.jpg",
+      "status": "archived",
+      "sha256": "f1661a0af7d929dd8ee8df069b22adbeb7bb3940fa63b33eaeb1d6819f6e17f6",
+      "bytes": 23963,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 640,
+        "height": 427
+      },
+      "sourceModifiedAt": "2026-08-21T09:33:21.085Z",
+      "runtimeCounterparts": [
+        "src/assets/2026/goal-history/goal-history-e10-2017-beijing-distinctive-moment-roundtable.jpg"
+      ],
+      "note": "Original image for the 2017 Beijing roundtable at Tsinghua New Auditorium."
+    },
+    {
+      "originalPath": "第十届中国R语言会议（上海）主会场 - 华东师范大学中山北路校区.png",
+      "canonicalPath": "assets/source-archive/2026/history/china-r-e10-2017-shanghai-ecnu-zhongshan-north-main-hall.png",
+      "status": "archived",
+      "sha256": "13cd05565428fcb0db77da4f950c813e81ccb2fc0ec41021640a857f57cf53d7",
+      "bytes": 877203,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 865,
+        "height": 648
+      },
+      "sourceModifiedAt": "2026-08-21T09:32:58.450Z",
+      "runtimeCounterparts": [
+        "src/assets/2026/goal-history/goal-history-e10-2017-shanghai-context-overview.webp"
+      ],
+      "note": "Original image for the 2017 Shanghai main hall at ECNU Zhongshan North Road Campus."
+    },
+    {
+      "originalPath": "第十一届中国R语言会议（北京） 北京大学陈松蹊教授.jpg",
+      "canonicalPath": "assets/source-archive/2026/history/china-r-e11-2018-beijing-chen-songxi-talk.jpg",
+      "status": "archived",
+      "sha256": "ccd956ee60ad2e224d92516a900305f4a14f68ab33677f9e8276e7706bad9abe",
+      "bytes": 927231,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 5760,
+        "height": 3840
+      },
+      "sourceModifiedAt": "2026-08-21T09:32:45.627Z",
+      "runtimeCounterparts": [],
+      "note": "Original image of Professor Chen Songxi speaking at the 2018 Beijing conference."
+    },
+    {
+      "originalPath": "第十一届中国R语言会议（北京）分会场——中国人民大学第三教学楼.jpg",
+      "canonicalPath": "assets/source-archive/2026/history/china-r-e11-2018-beijing-ruc-third-teaching-building-breakout-audience.jpg",
+      "status": "archived",
+      "sha256": "b46ad2ff9f9ad2622f38e52f2dd7e95358e562f588d8e83a35db73b1750ce9b0",
+      "bytes": 635695,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 3968,
+        "height": 2976
+      },
+      "sourceModifiedAt": "2026-08-21T09:31:27.334Z",
+      "runtimeCounterparts": [],
+      "note": "Original image of a breakout audience in the Renmin University third teaching building."
+    },
+    {
+      "originalPath": "第十一届中国R语言会议（北京）普林斯顿大学范剑青教授.jpg",
+      "canonicalPath": "assets/source-archive/2026/history/china-r-e11-2018-beijing-fan-jianqing-talk.jpg",
+      "status": "archived",
+      "sha256": "40921777710b16213531f43e3b0a0ab509c12e2c2e829750146d811ff45a1a94",
+      "bytes": 809129,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 4270,
+        "height": 2925
+      },
+      "sourceModifiedAt": "2026-08-21T09:31:30.093Z",
+      "runtimeCounterparts": [
+        "src/assets/2026/goal-history/goal-history-e11-2018-beijing-participation-speaker.jpg"
+      ],
+      "note": "Original image of Professor Fan Jianqing speaking at the 2018 Beijing conference."
+    },
+    {
+      "originalPath": "友谊宾馆.JPG",
+      "canonicalPath": "assets/source-archive/2026/venue/beijing-friendship-hotel-site-map-original.jpg",
+      "status": "archived",
+      "sha256": "8393ff586a40f549ea3c8a880d8a99da858cc54956ea7a00939586ed01ac2482",
+      "bytes": 7036752,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 3543,
+        "height": 3543
+      },
+      "sourceModifiedAt": "2026-08-15T04:17:37.000Z",
+      "runtimeCounterparts": [
+        "src/assets/2026/venue/beijing-friendship-hotel-plan.jpg"
+      ],
+      "note": "Original high-resolution Beijing Friendship Hotel site map."
+    },
+    {
+      "originalPath": "友谊宾馆2.JPG",
+      "canonicalPath": "assets/source-archive/2026/venue/beijing-friendship-palace-floor-2-plan-original.jpg",
+      "status": "archived",
+      "sha256": "0a7e8373bd7e98c92ed329bbb24c0ab5c1e8b7754e5604ac404ebae105399be4",
+      "bytes": 11037840,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 9933,
+        "height": 7016
+      },
+      "sourceModifiedAt": "2026-08-15T04:17:44.000Z",
+      "runtimeCounterparts": [
+        "src/assets/2026/venue/friendship-palace-floor-2.jpg"
+      ],
+      "note": "Original high-resolution Friendship Palace second-floor plan."
+    },
+    {
+      "originalPath": "智统数合.eps",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/zhitong-shuhe-logo-system-master.eps",
+      "status": "archived",
+      "sha256": "a4bf21f65a4c5c511ea10c64a7625d4ec6a69d6b3e5b3c84d4734d7117f1fd0c",
+      "bytes": 6426398,
+      "mediaType": "application/postscript",
+      "dimensions": null,
+      "sourceModifiedAt": "2026-08-18T03:12:12.000Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/zhitong-shuhe.png"
+      ],
+      "note": "EPS board containing horizontal, mark, stacked, grayscale, and inverse lockups for Zhitong Shuhe."
+    },
+    {
+      "originalPath": "aitime.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/ai-time-logo-source.png",
+      "status": "archived",
+      "sha256": "06770f75b6e9316712457386dd121f9df68e7887e674871f993d277afbd5e8e5",
+      "bytes": 11557,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 140,
+        "height": 94
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:53.324Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/ai-time.png"
+      ],
+      "note": "Source logo for AI TIME."
+    },
+    {
+      "originalPath": "badge.png",
+      "canonicalPath": "assets/source-archive/2026/campaign/xagi-2026-key-visual-landscape.png",
+      "status": "archived",
+      "sha256": "7b96a49e7767607bc4651160b98e96f3e5b6807c8878fe6930d0dd2d2eddabe8",
+      "bytes": 2777871,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1800,
+        "height": 766
+      },
+      "sourceModifiedAt": "2026-08-13T11:47:21.728Z",
+      "runtimeCounterparts": [],
+      "note": "Landscape 2026 X-AGI key visual supplied at 1800 by 766 pixels."
+    },
+    {
+      "originalPath": "cos.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/capital-of-statistics-logo-source.png",
+      "status": "archived",
+      "sha256": "e495427b0a881b68af2f3791af326f3921adb869cb721fcee411cf607ab7de22",
+      "bytes": 30399,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 521,
+        "height": 120
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:53.377Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/cos.png"
+      ],
+      "note": "Source logo for Capital of Statistics."
+    },
+    {
+      "originalPath": "csscsai.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/cssc-ai-division-logo-source.png",
+      "status": "archived",
+      "sha256": "77d7bf35588e8c7f55149bcfcfa099aba0c3afa0e00663e571bf6fce4075616d",
+      "bytes": 1946173,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 10772,
+        "height": 1291
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:54.391Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/cssc-ai.png"
+      ],
+      "note": "Source logo for the Artificial Intelligence Division of the Chinese Society of Commercial Statistics."
+    },
+    {
+      "originalPath": "faic.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/fai-foundations-logo-source.png",
+      "status": "archived",
+      "sha256": "0017521d8c7ac18eb2fe2b463b454e8f4e9ca8b63de6ca55b18abf7d7e7abe68",
+      "bytes": 31495,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1080,
+        "height": 238
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:53.376Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/fai.png"
+      ],
+      "note": "Source logo for FAI Foundations of Artificial Intelligence."
+    },
+    {
+      "originalPath": "kuande.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/kuande-investment-logo-source.png",
+      "status": "archived",
+      "sha256": "f60dd23568ff5b39d341c159f30ee7c7cc0fa77556dc9ade4fa320006700fd94",
+      "bytes": 40838,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 531,
+        "height": 210
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:53.374Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/kuande.png"
+      ],
+      "note": "Source logo for Kuande Investment."
+    },
+    {
+      "originalPath": "logo.png",
+      "canonicalPath": "assets/source-archive/2026/campaign/xagi-2026-orbit-mark-reference.png",
+      "status": "archived",
+      "sha256": "65a2a193a65776afc88823af9832ce9986081609710f1423e321d8cc940a15f2",
+      "bytes": 47057,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 400,
+        "height": 400
+      },
+      "sourceModifiedAt": "2026-08-13T11:47:27.667Z",
+      "runtimeCounterparts": [
+        "public/2026/brand/xagi-connect-logo.png"
+      ],
+      "note": "Square orbit-mark reference supplied at 400 by 400 pixels."
+    },
+    {
+      "originalPath": "minghong.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/minghong-investment-logo-source.png",
+      "status": "archived",
+      "sha256": "20aa3caca18a0e5aaca5417f4c56e84159bb3ebd6b370ad78a25d860b1db96b9",
+      "bytes": 52639,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 679,
+        "height": 171
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:53.371Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/minghong.png"
+      ],
+      "note": "Source logo for Minghong Investment."
+    },
+    {
+      "originalPath": "mobile.png",
+      "canonicalPath": "assets/source-archive/2026/qa/xagi-2026-mobile-homepage-logo-qa.png",
+      "status": "archived",
+      "sha256": "bcc988169ad2a737811a44557b32b9481d1f8debb75bb01b7adb32e2d5a9f6c7",
+      "bytes": 602786,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1094,
+        "height": 2240
+      },
+      "sourceModifiedAt": "2026-08-21T03:52:37.750Z",
+      "runtimeCounterparts": [],
+      "note": "Annotated mobile homepage logo review captured on 2026-08-21."
+    },
+    {
+      "originalPath": "oscholar.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/oscholar-logo-source.png",
+      "status": "archived",
+      "sha256": "63ce324a63de38850714e22b03cc5c7dae572bad175f3efeda84242751ceeb09",
+      "bytes": 10954,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 274,
+        "height": 120
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:53.373Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/oscholar.png"
+      ],
+      "note": "Source logo for OScholar."
+    },
+    {
+      "originalPath": "thu.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/tsinghua-statistics-and-data-science-logo-source.png",
+      "status": "archived",
+      "sha256": "a7d9a1720ea614afeb043817ffeb1b395902ff76faf6f8348da1285cf89754db",
+      "bytes": 193284,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1816,
+        "height": 254
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:53.322Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/tsinghua-stat.png"
+      ],
+      "note": "Source logo for the Tsinghua University Department of Statistics and Data Science."
+    },
+    {
+      "originalPath": "tongji.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/ruc-school-of-statistics-logo-source.png",
+      "status": "archived",
+      "sha256": "ccfaae990a75c7b20819b8899483b543c544fc7c5422e508c96b51c29f375dcb",
+      "bytes": 4612337,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 12453,
+        "height": 2281
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:54.041Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/ruc-stat.png"
+      ],
+      "note": "Source logo for the Renmin University of China School of Statistics; the original basename was misleading and did not refer to Tongji University."
+    },
+    {
+      "originalPath": "will.jpg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/will-logo-source.jpg",
+      "status": "archived",
+      "sha256": "92a93ac54bb0e947b06906d25a45b36f754cce6a7a7696e5853bb0c1c848d011",
+      "bytes": 70454,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 2222,
+        "height": 960
+      },
+      "sourceModifiedAt": "2026-08-20T10:06:30.127Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/will.svg"
+      ],
+      "note": "Source visual reference for WILL."
+    },
+    {
+      "originalPath": "X-AGI logo/1.紫底.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-white-on-purple.png",
+      "status": "archived",
+      "sha256": "f8370d944e2f527b6db048259a364ce4db0222cda5e43908ef4f0ec3d24ed9eb",
+      "bytes": 226194,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 6497,
+        "height": 2333
+      },
+      "sourceModifiedAt": "2026-06-03T12:35:30.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/wordmark-on-dark.svg"
+      ],
+      "note": "White wordmark supplied on the 2026 purple field."
+    },
+    {
+      "originalPath": "X-AGI logo/10.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-gray-rounded-square.png",
+      "status": "archived",
+      "sha256": "7dfd75e2b186be746c6d9adcc5e6c204ea1ecfe17516f1e9a9cd9eb9c58a004b",
+      "bytes": 99598,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2039,
+        "height": 2040
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:42.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a gray rounded-square field."
+    },
+    {
+      "originalPath": "X-AGI logo/11.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-black-circle.png",
+      "status": "archived",
+      "sha256": "87262c07b9484c76bd1b88f3b2ce25c380c0bc7f0d1923a08af2910eada0aa15",
+      "bytes": 110299,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2040,
+        "height": 2040
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:43.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a black circular field."
+    },
+    {
+      "originalPath": "X-AGI logo/12.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-black-squircle.png",
+      "status": "archived",
+      "sha256": "f37f37cc2080b3968b665e0d2b84add7e40670576652801d376440a9164a947d",
+      "bytes": 106363,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2067,
+        "height": 2067
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:43.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a black large-radius squircle field."
+    },
+    {
+      "originalPath": "X-AGI logo/13.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-black-rounded-square.png",
+      "status": "archived",
+      "sha256": "d34add222e330404cfe3d0cc09e12a68ecb3103e5c9402fa3a06ceae72f6d0f6",
+      "bytes": 98125,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2039,
+        "height": 2040
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:43.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a black rounded-square field."
+    },
+    {
+      "originalPath": "X-AGI logo/14.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-purple-circle.png",
+      "status": "archived",
+      "sha256": "f4f53d39b71c639ee419b13284a296d7f58f36eb18a12538dde5f5f167f0bb19",
+      "bytes": 122414,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2040,
+        "height": 2040
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:43.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a purple circular field."
+    },
+    {
+      "originalPath": "X-AGI logo/15.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-transparent.png",
+      "status": "archived",
+      "sha256": "140e2a21e6435f018fe1f492a3c8d34e06522d4ee24a52997b4106a83ca37f6e",
+      "bytes": 90514,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2091,
+        "height": 2091
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:43.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on transparency."
+    },
+    {
+      "originalPath": "X-AGI logo/16.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-black-on-transparent.png",
+      "status": "archived",
+      "sha256": "7f1d5801a6c0be13e5d7c2070fb9aa356353b356706f3d33d7813c2f0709dae8",
+      "bytes": 97501,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2091,
+        "height": 2091
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:43.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark.svg"
+      ],
+      "note": "Black mark on transparency."
+    },
+    {
+      "originalPath": "X-AGI logo/17.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-purple-on-transparent.png",
+      "status": "archived",
+      "sha256": "0e63c72f51579a99eaa987a4b77b9dfc33e5d78c2dd92253d25ac5f79becee1d",
+      "bytes": 98312,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2091,
+        "height": 2091
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:44.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark.svg"
+      ],
+      "note": "Purple mark on transparency."
+    },
+    {
+      "originalPath": "X-AGI logo/18.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-purple-squircle.png",
+      "status": "archived",
+      "sha256": "9ed2446cb32788d92e2b1841ef29fdc60870d73324c83e591902c0b96aeb202c",
+      "bytes": 117873,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2067,
+        "height": 2067
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:44.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a purple large-radius squircle field."
+    },
+    {
+      "originalPath": "X-AGI logo/19.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-purple-rounded-square.png",
+      "status": "archived",
+      "sha256": "a6d2d7f5b242e658496282ec4eb8c8640fe2a7d2d17591723e4fcba22c0235ca",
+      "bytes": 109530,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2039,
+        "height": 2040
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:44.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a purple rounded-square field."
+    },
+    {
+      "originalPath": "X-AGI logo/2.紫色透明.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-purple-on-transparent.png",
+      "status": "archived",
+      "sha256": "8fbd8bc909c6797a882dc6a59037517572600738dc0a987d46f5be6ecaa2316b",
+      "bytes": 187362,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 6497,
+        "height": 2333
+      },
+      "sourceModifiedAt": "2026-06-03T12:35:30.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/wordmark.svg"
+      ],
+      "note": "Purple wordmark with a transparent background."
+    },
+    {
+      "originalPath": "X-AGI logo/3.白底黑标 .png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-black-on-white.png",
+      "status": "archived",
+      "sha256": "f5c0b313b3643d5d988d6e89a3d3450f7c78ae4cb9a17cfb015910fe2f184b55",
+      "bytes": 197687,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 6497,
+        "height": 2333
+      },
+      "sourceModifiedAt": "2026-06-03T12:35:31.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/wordmark.svg"
+      ],
+      "note": "Black wordmark supplied on white."
+    },
+    {
+      "originalPath": "X-AGI logo/4.黑底白标.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-white-on-black.png",
+      "status": "archived",
+      "sha256": "d74c404883db594ecc97bc8ce780b4f4068427f1783d348505f89b4e05b762da",
+      "bytes": 196788,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 6497,
+        "height": 2333
+      },
+      "sourceModifiedAt": "2026-06-03T12:35:31.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/wordmark-on-dark.svg"
+      ],
+      "note": "White wordmark supplied on black."
+    },
+    {
+      "originalPath": "X-AGI logo/5.双色紫黑.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-purple-black-on-white.png",
+      "status": "archived",
+      "sha256": "04c909a28701d1ba257f80795c76e06a0366de14088879ce9a1b53d317179954",
+      "bytes": 222704,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 6497,
+        "height": 2333
+      },
+      "sourceModifiedAt": "2026-06-03T12:35:32.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/wordmark.svg"
+      ],
+      "note": "Two-color purple and black wordmark supplied on white."
+    },
+    {
+      "originalPath": "X-AGI logo/6.灰底白标.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-white-on-gray.png",
+      "status": "archived",
+      "sha256": "af55ca173ef8a3e18f78836fb359ecae4e4824e39a782239ec0364d053b530dd",
+      "bytes": 209411,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 6497,
+        "height": 2333
+      },
+      "sourceModifiedAt": "2026-06-03T12:35:32.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/wordmark-on-dark.svg"
+      ],
+      "note": "White wordmark supplied on gray."
+    },
+    {
+      "originalPath": "X-AGI logo/7.白底紫标.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-purple-on-white.png",
+      "status": "archived",
+      "sha256": "57ebc199ff32411d650503b59cfb0f3e6b6bbc3f60d1e38bbe580ec577078790",
+      "bytes": 224394,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 6497,
+        "height": 2333
+      },
+      "sourceModifiedAt": "2026-06-03T12:35:29.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/wordmark.svg"
+      ],
+      "note": "Purple wordmark supplied on white."
+    },
+    {
+      "originalPath": "X-AGI logo/8.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-gray-circle.png",
+      "status": "archived",
+      "sha256": "3fdb99774903031f4de4286e12bfc1a48fd7f6f82a345ddce89394205438821a",
+      "bytes": 116001,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2040,
+        "height": 2040
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:42.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a gray circular field."
+    },
+    {
+      "originalPath": "X-AGI logo/9.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-mark-white-on-gray-squircle.png",
+      "status": "archived",
+      "sha256": "934654b03b001d7ccde31f27a941159224c3adb6f5e7c2c8d42b107ec0f5abad",
+      "bytes": 111955,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2067,
+        "height": 2066
+      },
+      "sourceModifiedAt": "2026-06-04T07:10:42.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark-on-dark.svg"
+      ],
+      "note": "White mark on a gray large-radius squircle field."
+    },
+    {
+      "originalPath": "X-AGI logo/svg格式.svg",
+      "canonicalPath": "assets/brand-kit/2026/wordmark.svg",
+      "status": "canonical-existing",
+      "sha256": "cdbe4fbc829dfc36658bd9263549478d536d37ca1c35d797489f227bee92805f",
+      "bytes": 2694,
+      "mediaType": "image/svg+xml",
+      "dimensions": null,
+      "sourceModifiedAt": "2026-06-03T12:43:51.000Z",
+      "runtimeCounterparts": [],
+      "note": "Exact duplicate of the already tracked canonical wordmark SVG; no second copy is retained."
+    },
+    {
+      "originalPath": "X-AGI logo/X-AGI logo 源文件.ai",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-logo-system-master.ai",
+      "status": "archived",
+      "sha256": "64e5935f0f7fb08d4c24635e856854a675730b4649ec975bc15e53871cc489f7",
+      "bytes": 446843,
+      "mediaType": "application/vnd.adobe.illustrator",
+      "dimensions": null,
+      "sourceModifiedAt": "2026-06-03T12:34:31.000Z",
+      "runtimeCounterparts": [
+        "assets/brand-kit/2026/mark.svg",
+        "assets/brand-kit/2026/mark-on-dark.svg",
+        "assets/brand-kit/2026/wordmark.svg",
+        "assets/brand-kit/2026/wordmark-on-dark.svg"
+      ],
+      "note": "PDF-compatible Adobe Illustrator identity master containing 25 pages or artboards."
+    },
+    {
+      "originalPath": "yingyongtongji.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/ruc-applied-statistics-center-logo-source.png",
+      "status": "archived",
+      "sha256": "915e57df2ed816a59eec3abee66ca289215b9c0f191be73386e39ad74d78c948",
+      "bytes": 44992,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 716,
+        "height": 80
+      },
+      "sourceModifiedAt": "2026-08-16T12:10:53.375Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/ruc-cas.png"
+      ],
+      "note": "Source logo for the Renmin University of China Center for Applied Statistics."
+    }
+  ]
+}

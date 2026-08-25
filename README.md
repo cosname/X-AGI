@@ -41,6 +41,7 @@ X-AGI 大会官网及年度归档的 Astro 静态站。
 ```text
 assets/
   brand-kit/2026/               不发布的 2026 品牌矢量母版
+  source-archive/2026/          不发布的完整源素材、来源映射和哈希清单
 public/
   2025/                         冻结的 2025 静态归档
   2026/
@@ -98,8 +99,18 @@ scripts/
 
 当前网站请求的品牌资源位于 `public/2026/brand/`。
 非发布用矢量母版位于 `assets/brand-kit/2026/`。
+完整的供应方原件、可编辑母版、高清照片、历史候选图和 QA 证据位于 `assets/source-archive/2026/`。
+该目录保留原始字节，但使用语义化规范文件名，并通过 `manifest.json` 记录迁移前名称。
+任何源素材都不得只保存在 Desktop、Downloads、临时目录或其他仓库外路径中。
 需要新尺寸或格式时，应从母版生成一个明确用途的运行时导出，再放入 `public/2026/`。
 不要把整个品牌导出集合复制到公开目录。
+
+2026 自有素材统一使用 ASCII 小写 kebab-case。
+文件名格式为 `<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>`。
+禁止纯数字文件名、空格、下划线、括号、中文文件名，以及 `backup`、`copy`、`draft`、`final`、`tmp`、`untitled` 等临时词。
+也禁止单独使用 `logo`、`image`、`photo`、`mobile`、`banner` 等只有素材类别、没有具体对象的名称。
+序号只允许表达真实顺序，并必须放在文件名末尾且补零。
+冻结的 `public/2025/` 不适用这条重命名规则，因为其公开 URL 和哈希必须保持不变。
 
 每个组织单位在 `public/2026/logos/` 中只保留一个选定文件。
 选择关系由 `src/data/partner-logo-assets-2026.ts` 管理。
@@ -127,11 +138,12 @@ npm run dev
 npm run dev
 npm run check
 npm run test:unit
+npm run assets:verify
 npm run build
 npm test
 ```
 
-`npm test` 会依次运行单元测试、Astro 类型检查、静态构建和构建产物校验。
+`npm test` 会依次运行单元测试、Astro 类型检查、源素材归档校验、静态构建和构建产物校验。
 修改页面后至少检查 `/`、`/about/`、`/schedule/`、`/poster/`、`/guide/` 和 `/register/` 的桌面与手机布局。
 归档相关改动还需要检查 `/2025/`、`/2025/schedule.html` 和 `/2025/register.html`。
 

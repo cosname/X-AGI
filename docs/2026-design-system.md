@@ -141,6 +141,12 @@ Curated vector masters live in `assets/brand-kit/2026/` and are not published.
 A runtime export should be created only for a specific site requirement.
 Do not publish all alternate formats, on-dark variants, intermediate exports, or byte-identical derivatives.
 
+Complete source deliveries live in `assets/source-archive/2026/` and are not published.
+This archive owns editable masters, high-resolution originals, alternate supplier exports, historical candidates, and QA evidence that would otherwise live outside the repository.
+Every archived payload must have a semantic lowercase kebab-case filename, a manifest entry, and a verified SHA-256 checksum.
+The manifest may retain a supplied filename for provenance, but no current asset may use a number-only, copy-suffixed, temporary, bare-generic, or otherwise ambiguous filename.
+No source asset may exist only on Desktop, in Downloads, or in a temporary directory.
+
 The 2025 archive is independent and frozen.
 A current page must never link to an archived asset merely because the pixels happen to match.
 Copy the needed source into 2026 ownership, choose a clear filename, and update the current consumer.
