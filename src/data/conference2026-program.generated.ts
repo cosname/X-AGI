@@ -16,7 +16,7 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "01f21282adda73bacadc70d353f429a9ed9b012957296752b004550780db180e",
+  "sourceHash": "198f06aa08488c9548d1037b6ca8349ab06183b8ebcbd798b8bcbab39ad62463",
   "sessions": [
     {
       "sourceTime": "10.17下午",
@@ -117,7 +117,12 @@ export const conference2026ProgramSource = {
         "name": "杨新宇",
         "affiliation": "Kimi"
       },
-      "speakers": []
+      "speakers": [
+        {
+          "name": "吴晨玮",
+          "affiliation": "华为"
+        }
+      ]
     },
     {
       "sourceTime": "",
