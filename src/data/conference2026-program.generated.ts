@@ -16,11 +16,29 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "198f06aa08488c9548d1037b6ca8349ab06183b8ebcbd798b8bcbab39ad62463",
+  "sourceHash": "9781e123dfbc0d64e4114c5eb2d1a5d574be5131bf2b11f5d526c7e06421c6c2",
   "sessions": [
     {
+      "sourceTime": "10.17上午",
+      "title": "Keynote",
+      "chair": {
+        "name": "王健桥",
+        "affiliation": "清华大学"
+      },
+      "speakers": [
+        {
+          "name": "冯建峰",
+          "affiliation": "复旦大学"
+        },
+        {
+          "name": "邱子涵",
+          "affiliation": "Qwen"
+        }
+      ]
+    },
+    {
       "sourceTime": "10.17下午",
-      "title": "AI + Math & Theory",
+      "title": "AI4Math & Theory",
       "chair": {
         "name": "刘方辉",
         "affiliation": "上海交通大学"
