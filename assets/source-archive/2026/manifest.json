@@ -2,11 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
+  "lastExtendedOn": "2026-08-28",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 46,
-  "uniquePayloadCount": 45,
-  "archiveFileCount": 44,
+  "sourceEntryCount": 49,
+  "uniquePayloadCount": 48,
+  "archiveFileCount": 47,
   "entries": [
     {
       "originalPath": "1.png",
@@ -772,6 +773,64 @@
         "public/2026/logos/ruc-cas.png"
       ],
       "note": "Source logo for the Renmin University of China Center for Applied Statistics."
+    },
+    {
+      "originalPath": "perfxlab_logo_中文蓝字_2025(1).ai",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/perfxlab-logo-system-master.ai",
+      "status": "archived",
+      "sha256": "44dcecc3ff7eab8c1d78abcbc3dc94c4f95ffee60cc24379b21837e154eb498c",
+      "bytes": 174655,
+      "mediaType": "application/vnd.adobe.illustrator",
+      "dimensions": null,
+      "sourceModifiedAt": "2026-08-28T15:38:52.000Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/perfxlab.svg"
+      ],
+      "provenanceUrls": [
+        "https://www.perfxlab.cn/"
+      ],
+      "note": "PDF-compatible Adobe Illustrator master supplied for the PerfXLab sponsor identity."
+    },
+    {
+      "originalPath": "codex-clipboard-b9e0f36b-81c9-446b-a83f-2523f892aa99.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/perfxlab-logo-preview-source.png",
+      "status": "archived",
+      "sha256": "0ac16a21ed3db0049e8e1065b90f0899c53cdcd59e514859781046f12831b627",
+      "bytes": 18994,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 394,
+        "height": 164
+      },
+      "sourceModifiedAt": "2026-08-28T15:39:05.000Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/perfxlab.svg"
+      ],
+      "provenanceUrls": [
+        "https://www.perfxlab.cn/"
+      ],
+      "note": "Supplied visual reference for the blue PerfXLab wordmark and Chinese company name."
+    },
+    {
+      "originalPath": "codex-clipboard-d1559fe0-5085-44eb-9418-e677f2e604dd.png",
+      "canonicalPath": "assets/source-archive/2026/partner-logos/chaspark-logo-source.png",
+      "status": "archived",
+      "sha256": "1c1fddbdbc700eb152f4b9052e2b83ffe4341495c60d3a56ae54098203c1ee28",
+      "bytes": 200413,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 2120,
+        "height": 610
+      },
+      "sourceModifiedAt": "2026-08-28T15:39:50.000Z",
+      "runtimeCounterparts": [
+        "public/2026/logos/chaspark.png"
+      ],
+      "provenanceUrls": [
+        "https://faic.cc/assets/images/%E9%BB%84%E5%A4%A7%E5%B9%B4%E8%8C%B6%E6%80%9D%E5%B1%8B.png",
+        "https://www.chaspark.com/"
+      ],
+      "note": "Supplied Chaspark mark verified as byte-identical to the official FAIC strategic-partner image."
     }
   ]
 }

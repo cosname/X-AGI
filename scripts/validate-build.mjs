@@ -2,7 +2,10 @@ import { createHash } from 'node:crypto';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { gzipSync } from 'node:zlib';
-import { conference2026 } from '../src/data/conference2026.ts';
+import {
+  conference2026,
+  conference2026PartnerDisplayGroups,
+} from '../src/data/conference2026.ts';
 import { goalHistoryEvents } from '../src/data/goal-history.ts';
 import { partnerLogoByName } from '../src/data/partner-logo-assets-2026.ts';
 import { site } from '../src/config/site.ts';
@@ -509,8 +512,18 @@ await validatePublicCopies('2026 runtime brand', path.resolve('public/2026/brand
 await validatePublicCopies('2026 legal assets', path.resolve('public/2026/legal'), ['beian-icon.png']);
 
 const selectedLogoFiles = Object.values(partnerLogoByName).map((logo) => path.basename(logo.src));
-if (selectedLogoFiles.length !== 13 || new Set(selectedLogoFiles).size !== 13) {
-  fail(`2026 partner logos: expected 13 unique selections, found ${new Set(selectedLogoFiles).size}`);
+const displayedPartnerCount = conference2026PartnerDisplayGroups.reduce(
+  (total, group) => total + group.organizations.length,
+  0,
+);
+if (
+  selectedLogoFiles.length !== displayedPartnerCount
+  || new Set(selectedLogoFiles).size !== displayedPartnerCount
+) {
+  fail(
+    `2026 partner logos: expected ${displayedPartnerCount} unique selections, `
+    + `found ${new Set(selectedLogoFiles).size}`,
+  );
 }
 await validatePublicCopies('2026 partner logos', path.resolve('public/2026/logos'), selectedLogoFiles);
 
@@ -667,6 +680,7 @@ const officialCopyByRoute = new Map([
     ...conference2026.conferenceOrganization.secretariat.members,
     ...conference2026.organizers.map((organization) => organization.name),
     ...conference2026.coOrganizers.map((organization) => organization.name),
+    ...conference2026.strategicPartners.map((organization) => organization.name),
     ...conference2026.sponsors.map((organization) => organization.name),
     conference2026.contact,
   ]],

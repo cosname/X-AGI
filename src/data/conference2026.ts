@@ -76,7 +76,7 @@ export const conference2026 = {
     '2026 X-AGI 大会拟于2026年10月16日至18日在北京友谊宾馆举行。本届大会以“AI Conference for the neXt Generation” 为主题，邀请来自国内外高校、科研机构与产业界的优秀学者和专家，共同探讨下一代人工智能研究的前沿问题与发展方向。“X”代表未知、交叉与探索。本次会议设置多个专题论坛，涵盖AI4Math、AI4Science、脑机接口、预训练算法的新进展、AI Infra、Agent、Agentic后训练、LLM评测与基准、大语言模型基础、生成建模新范式与理论基础、扩散模型理论基础与推理算法、机器学习理论、AI+Finance等多个重要方向。',
     '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台，进一步激发创新活力，推动学术与产业协同发展。Poster投稿条件：2025年1月1日之后在列表内期刊/会议录用中稿，列表包括 ICLR, NeurIPS, ICML, JMLR, T-PAMI, JASA, JRSSB, AoS, Biometrika, COLT, FOCS, STOC, TMLR, COLM, ACL, CVPR等。',
     'X-AGI 大会起源于统计之都长期推动的中国 R 会议，本届已是第十九届。迄今，统计之都已联合全国20余所高校与科研机构，在全国14个城市成功举办近50次会议，呈现近2000场演讲，吸引线上线下参会者逾50万人次。',
-    '2026 X-AGI 大会由统计之都和FAI（人工智能基础研究）发起，联合清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院、中国商业统计学会人工智能分会共同主办，OScholar、AI Time共同协办，并获得明汯投资、宽德投资、Will、数启寰宇（QuantVerse）和智统数合的大力赞助。',
+    '2026 X-AGI 大会由统计之都和FAI（人工智能基础研究）发起，联合清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院、中国商业统计学会人工智能分会共同主办，OScholar、AI Time共同协办，黄大年茶思屋科技网站为战略合作伙伴，并获得明汯投资、宽德投资、Will、数启寰宇（QuantVerse）和智统数合的钻石赞助，以及澎峰科技（PerfXLab）的黄金赞助。',
   ],
   conferenceOrganization: {
     committee: {
@@ -379,6 +379,16 @@ export const conference2026 = {
       ],
     },
   ],
+  strategicPartners: [
+    {
+      name: '黄大年茶思屋科技网站',
+      url: 'https://www.chaspark.com/',
+      intro: [
+        '黄大年茶思屋科技网站是面向全球的学术与技术交流分享平台，致力于为科研人员、工程师、高校师生及ICT人才，打造思想交流、知识共享的数字平台。',
+        '截至2025年底，平台全球用户突破370万，内容生态与服务能力持续完善：累计汇聚高质量技术论文8.4万余篇，覆盖大模型、具身智能等前沿方向；免费开放1.9亿余条专利数据查询服务，助力科研人员精准把握前沿技术发展脉络；发布650余道高价值技术难题，500余场科技竞赛与赛题活动，维护17个高质量开源项目，践行“人人可参与”的开放理念，引导用户聚焦解决实际技术问题；组织700余场学术直播，累计超200万人次观看；推出200余节“茶思大师课”“茶思下午茶”系列课程，搭建阶梯式学习路径；平台学术活动资源超1.2万项；联动诺贝尔奖、图灵奖得主与青年学者开展交流及论文解读活动；上线英文网站及多端APP，支持全球用户无缝接入交流。',
+      ],
+    },
+  ],
   sponsors: [
     {
       name: '明汯投资',
@@ -414,6 +424,13 @@ export const conference2026 = {
         '北京智统数合科技有限公司是一家统计与数据科学赋能人工智能的高科技公司，旨在以统计学与人工智能技术赋能千行百业的智能化跃迁。公司立足世界一流的统计学与数据科学根基，自主研发出独树一帜的 “统计 × AI” 技术范式，从统计学视角解构并重组人工智能技术要素，将统计推断基因植入人工智能系统，打通垂直领域AI落地应用最后一公里。',
       ],
     },
+    {
+      name: '澎峰科技（PerfXLab）',
+      url: 'https://www.perfxlab.cn/',
+      intro: [
+        'AI Infra加速计算领域知名企业，基于开源FlagOS统一系统软件栈，以及软硬件协同优化，提供极致性价比的混合云Token工厂解决方案。已在算力中心、能源、科学智能、医疗等多种行业落地应用。',
+      ],
+    },
   ],
   contact: 'xagi2026@cosx.org',
   pending: ['详细 Session 安排', '交通与住宿说明'],
@@ -428,10 +445,23 @@ export const conference2026OrganizerDisplayOrder = [
   '中国商业统计学会人工智能分会',
 ] as const;
 
+export const conference2026DiamondSponsorDisplayOrder = [
+  '明汯投资',
+  '宽德投资',
+  'Will',
+  'QuantVerse',
+  '智统数合',
+] as const;
+
+export const conference2026GoldSponsorDisplayOrder = [
+  '澎峰科技（PerfXLab）',
+] as const;
+
 const conference2026Organizations = [
   ...conference2026.initiators,
   ...conference2026.organizers,
   ...conference2026.coOrganizers,
+  ...conference2026.strategicPartners,
   ...conference2026.sponsors,
 ];
 
@@ -442,7 +472,12 @@ function organizationForDisplay(name: string): Organization {
 }
 
 export const conference2026PartnerDisplayGroups: readonly {
-  key: 'organizers' | 'co-organizers' | 'sponsors';
+  key:
+    | 'organizers'
+    | 'co-organizers'
+    | 'strategic-partners'
+    | 'diamond-sponsors'
+    | 'gold-sponsors';
   label: string;
   organizations: readonly Organization[];
 }[] = [
@@ -457,8 +492,18 @@ export const conference2026PartnerDisplayGroups: readonly {
     organizations: conference2026.coOrganizers,
   },
   {
-    key: 'sponsors',
-    label: '赞助单位',
-    organizations: conference2026.sponsors,
+    key: 'strategic-partners',
+    label: '战略合作伙伴',
+    organizations: conference2026.strategicPartners,
+  },
+  {
+    key: 'diamond-sponsors',
+    label: '钻石赞助',
+    organizations: conference2026DiamondSponsorDisplayOrder.map(organizationForDisplay),
+  },
+  {
+    key: 'gold-sponsors',
+    label: '黄金赞助',
+    organizations: conference2026GoldSponsorDisplayOrder.map(organizationForDisplay),
   },
 ];

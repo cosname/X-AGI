@@ -70,8 +70,13 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.goal-partners__logos--sponsors {
+.goal-partners__logos--diamond-sponsors {
   grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.goal-partners__logos--strategic-partners,
+.goal-partners__logos--gold-sponsors {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .goal-partners__logos li,
@@ -116,6 +121,14 @@
 .goal-partners__logos img.sponsor-will {
   width: 4rem;
   max-height: none;
+}
+
+.goal-partners__logos img.strategic-partner-chaspark {
+  max-height: 2.35rem;
+}
+
+.goal-partners__logos img.sponsor-perfxlab {
+  max-height: 2.65rem;
 }
 
 .goal-partners__logos .conference-partners__logo-fallback {
@@ -183,7 +196,7 @@
     grid-template-columns: 6.5rem minmax(0, 1fr);
   }
 
-  .goal-partners__logos--sponsors {
+  .goal-partners__logos--diamond-sponsors {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -202,7 +215,7 @@
 
   .goal-partners__logos--organizers,
   .goal-partners__logos--co-organizers,
-  .goal-partners__logos--sponsors {
+  .goal-partners__logos--diamond-sponsors {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -219,7 +232,7 @@
 @media (max-width: 24rem) {
   .goal-partners__logos--organizers,
   .goal-partners__logos--co-organizers,
-  .goal-partners__logos--sponsors {
+  .goal-partners__logos--diamond-sponsors {
     grid-template-columns: 1fr;
   }
 }
