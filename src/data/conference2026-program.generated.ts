@@ -16,7 +16,7 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "9781e123dfbc0d64e4114c5eb2d1a5d574be5131bf2b11f5d526c7e06421c6c2",
+  "sourceHash": "79926ad1a431ebfb3577a5aac374cb2b793a3db5681133f39459ebd987bdf079",
   "sessions": [
     {
       "sourceTime": "10.17上午",
@@ -275,11 +275,15 @@ export const conference2026ProgramSource = {
       "speakers": [
         {
           "name": "许慧楠",
-          "affiliation": "之江实验室"
+          "affiliation": "中国科学院大学"
         },
         {
           "name": "谢超",
           "affiliation": "清华大学"
+        },
+        {
+          "name": "吴泰霖",
+          "affiliation": "西湖大学"
         }
       ]
     }
