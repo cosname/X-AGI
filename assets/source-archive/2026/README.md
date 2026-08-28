@@ -3,8 +3,8 @@
 This directory is the canonical non-published archive for supplied 2026 source material.
 It preserves editable masters, high-resolution originals, alternate exports, historical candidates, and QA evidence that must not live only on a desktop or in a temporary directory.
 
-The archive contains 46 recorded source entries representing 45 unique payloads.
-Forty-four payloads are stored here under semantic names.
+The archive contains 49 recorded source entries representing 48 unique payloads.
+Forty-seven payloads are stored here under semantic names.
 One supplied SVG was already byte-identical to `assets/brand-kit/2026/wordmark.svg`, so the manifest points to that existing canonical file instead of storing another copy.
 The supplied `1.png` and `thu.png` files were also byte-identical, so both provenance entries point to one canonical Tsinghua source file.
 

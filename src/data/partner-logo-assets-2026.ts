@@ -31,6 +31,10 @@ const logos = {
     src: '/2026/logos/ai-time.png',
     className: 'co-organizer-ai-time',
   },
+  黄大年茶思屋科技网站: {
+    src: '/2026/logos/chaspark.png',
+    className: 'strategic-partner-chaspark',
+  },
   明汯投资: {
     src: '/2026/logos/minghong.png',
   },
@@ -49,6 +53,10 @@ const logos = {
   智统数合: {
     src: '/2026/logos/zhitong-shuhe.png',
     className: 'sponsor-zhitong-shuhe',
+  },
+  '澎峰科技（PerfXLab）': {
+    src: '/2026/logos/perfxlab.svg',
+    className: 'sponsor-perfxlab',
   },
 } as const satisfies Record<string, PartnerLogo>;
 

@@ -3,6 +3,8 @@ import { existsSync, readdirSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import {
   conference2026,
+  conference2026DiamondSponsorDisplayOrder,
+  conference2026GoldSponsorDisplayOrder,
   conference2026OrganizerDisplayOrder,
   conference2026PartnerDisplayGroups,
 } from './conference2026.ts';
@@ -90,12 +92,14 @@ describe('published 2026 content contracts', () => {
     assert.equal(conference2026.initiators.length, 2);
     assert.equal(conference2026.organizers.length, 4);
     assert.equal(conference2026.coOrganizers.length, 2);
-    assert.equal(conference2026.sponsors.length, 5);
+    assert.equal(conference2026.strategicPartners.length, 1);
+    assert.equal(conference2026.sponsors.length, 6);
 
     const organizations = [
       ...conference2026.initiators,
       ...conference2026.organizers,
       ...conference2026.coOrganizers,
+      ...conference2026.strategicPartners,
       ...conference2026.sponsors,
     ];
     const names = organizations.map((organization) => organization.name);
@@ -106,11 +110,27 @@ describe('published 2026 content contracts', () => {
   it('publishes the approved compact organization display order', () => {
     assert.deepEqual(
       conference2026PartnerDisplayGroups.map((group) => group.organizations.length),
-      [6, 2, 5],
+      [6, 2, 1, 5, 1],
+    );
+    assert.deepEqual(
+      conference2026PartnerDisplayGroups.map((group) => group.label),
+      ['主办单位', '协办单位', '战略合作伙伴', '钻石赞助', '黄金赞助'],
     );
     assert.deepEqual(
       conference2026PartnerDisplayGroups[0].organizations.map((organization) => organization.name),
       conference2026OrganizerDisplayOrder,
+    );
+    assert.deepEqual(
+      conference2026PartnerDisplayGroups[2].organizations.map((organization) => organization.name),
+      ['黄大年茶思屋科技网站'],
+    );
+    assert.deepEqual(
+      conference2026PartnerDisplayGroups[3].organizations.map((organization) => organization.name),
+      conference2026DiamondSponsorDisplayOrder,
+    );
+    assert.deepEqual(
+      conference2026PartnerDisplayGroups[4].organizations.map((organization) => organization.name),
+      conference2026GoldSponsorDisplayOrder,
     );
 
     const displayNames = conference2026PartnerDisplayGroups.flatMap((group) => (
@@ -121,7 +141,11 @@ describe('published 2026 content contracts', () => {
 
   it('links organizations to their verified official websites', () => {
     const organizationUrls = new Map(
-      [...conference2026.organizers, ...conference2026.sponsors]
+      [
+        ...conference2026.organizers,
+        ...conference2026.strategicPartners,
+        ...conference2026.sponsors,
+      ]
         .map((organization) => [organization.name, organization.url]),
     );
     const expectedUrls = new Map([
@@ -130,6 +154,8 @@ describe('published 2026 content contracts', () => {
       ['明汯投资', 'https://www.mhfunds.com/'],
       ['宽德投资', 'https://www.wizardquant.com/'],
       ['Will', 'https://wq-will.com/'],
+      ['黄大年茶思屋科技网站', 'https://www.chaspark.com/'],
+      ['澎峰科技（PerfXLab）', 'https://www.perfxlab.cn/'],
     ]);
 
     for (const [name, url] of expectedUrls) {
@@ -142,6 +168,7 @@ describe('published 2026 content contracts', () => {
       ...conference2026.initiators,
       ...conference2026.organizers,
       ...conference2026.coOrganizers,
+      ...conference2026.strategicPartners,
       ...conference2026.sponsors,
     ];
     const selectedPaths = organizations.map((organization) => {
