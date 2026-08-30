@@ -325,13 +325,13 @@
 @property --compact-nav-clip-bottom {
   syntax: '<length-percentage>';
   inherits: false;
-  initial-value: 0%;
+  initial-value: 100%;
 }
 
 @property --compact-nav-clip-left {
   syntax: '<length-percentage>';
   inherits: false;
-  initial-value: 0%;
+  initial-value: 100%;
 }
 
 .site-header[data-nav-mode='compact'] .site-navigation {
@@ -458,11 +458,7 @@
     round 1.55rem
   );
   transform: translateZ(0);
-  transition:
-    --compact-nav-clip-left var(--compact-nav-morph-duration) var(--compact-nav-morph-ease),
-    --compact-nav-clip-bottom var(--compact-nav-morph-duration) var(--compact-nav-morph-ease),
-    opacity 120ms ease 280ms,
-    visibility 0s linear var(--compact-nav-morph-duration);
+  transition: none;
   will-change: clip-path, opacity;
   pointer-events: none;
 }
@@ -490,6 +486,11 @@
     --compact-nav-clip-bottom var(--compact-nav-morph-duration) var(--compact-nav-morph-ease),
     opacity 140ms ease 220ms,
     visibility 0s linear;
+}
+
+.site-header[data-nav-transition='none'] .site-navigation__toggle,
+.site-header[data-nav-transition='none'] .site-navigation__panel {
+  transition: none !important;
 }
 
 .site-header[data-nav-mode='compact'] .site-navigation__atmosphere {

@@ -228,13 +228,35 @@ const sessionNumbers = new Map(
         header.dataset.menuActivationGuard = 'true';
         menuActivationGuardTimer = window.setTimeout(() => {
           menuActivationGuardTimer = 0;
-          if (activeTouchPointers.size > 0) return;
+          if (activeTouchPointers.size > 0) {
+            armMobileMenuActivationGuard();
+            return;
+          }
           delete header.dataset.menuActivationGuard;
-        }, 360);
+        }, 480);
+      };
+
+      const lockNavModeTransition = () => {
+        header.dataset.navTransition = 'none';
+      };
+
+      const unlockNavModeTransition = () => {
+        void header.offsetWidth;
+        window.requestAnimationFrame(() => {
+          if (header.dataset.navTransition === 'none') delete header.dataset.navTransition;
+        });
+      };
+
+      const blockGuardedMenuActivation = (event) => {
+        if (!header.hasAttribute('data-menu-activation-guard')) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        delete toggle.dataset.pointerFocus;
       };
 
       const syncImmediateMobileNavigationMode = (mode) => {
         if (!phoneNavigation.matches) return;
+        lockNavModeTransition();
         navigation.removeAttribute('data-open');
         navigation.removeAttribute('data-closing');
         header.removeAttribute('data-menu-open');
@@ -251,6 +273,7 @@ const sessionNumbers = new Map(
           panel.setAttribute('aria-hidden', 'true');
           panel.setAttribute('inert', '');
         }
+        unlockNavModeTransition();
       };
 
       const renderPeriodNavigation = (activeIndex) => {
@@ -288,6 +311,7 @@ const sessionNumbers = new Map(
         if (renderedState === 'main') return;
         const wasPeriodNavigation = renderedState.startsWith('periods:');
         renderedState = 'main';
+        syncImmediateMobileNavigationMode('main');
         delete header.dataset.scheduleNav;
         restoreAttribute(nav, 'aria-label', originalNavLabel);
         restoreAttribute(glassGroup, 'data-glass-default', originalGlassDefault);
@@ -302,7 +326,6 @@ const sessionNumbers = new Map(
           restoreAttribute(link, 'aria-current', original.ariaCurrent);
           if (link.parentElement) link.parentElement.hidden = original.hidden;
         });
-        syncImmediateMobileNavigationMode('main');
         if (wasPeriodNavigation) armMobileMenuActivationGuard();
         announceNavigationChange();
       };
@@ -328,18 +351,10 @@ const sessionNumbers = new Map(
         scrollFrame = window.requestAnimationFrame(syncNavigation);
       };
 
-      const requestScrollNavigationSync = () => {
-        if (renderedState === 'main') armMobileMenuActivationGuard();
-        requestNavigationSync();
-      };
-
-      // A touch ending as the date rail becomes the menu button can click the new target.
-      toggle.addEventListener('click', (event) => {
-        if (!header.hasAttribute('data-menu-activation-guard') || event.detail === 0) return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        delete toggle.dataset.pointerFocus;
-      }, { capture: true });
+      // A lingering iOS tap, including click.detail === 0, can land on the restored menu button.
+      toggle.addEventListener('pointerdown', blockGuardedMenuActivation, { capture: true });
+      toggle.addEventListener('click', blockGuardedMenuActivation, { capture: true });
+      navigation.addEventListener('click', blockGuardedMenuActivation, { capture: true });
 
       document.addEventListener('pointerdown', (event) => {
         if (event.pointerType === 'touch') activeTouchPointers.add(event.pointerId);
@@ -361,7 +376,7 @@ const sessionNumbers = new Map(
       });
       toggleLabelObserver.observe(toggle, { attributes: true, attributeFilter: ['aria-label'] });
 
-      window.addEventListener('scroll', requestScrollNavigationSync, { passive: true });
+      window.addEventListener('scroll', requestNavigationSync, { passive: true });
       window.addEventListener('resize', requestNavigationSync, { passive: true });
       window.addEventListener('hashchange', requestNavigationSync);
       window.addEventListener('pageshow', requestNavigationSync);
