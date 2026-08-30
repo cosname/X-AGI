@@ -11,13 +11,16 @@ export const MAX_AUTOMATED_SESSION_DELETIONS = 2;
 export const EXPECTED_HEADERS = [
   '时间',
   '主题',
+  '计划人数',
+  '完成度',
   'chair（单位）',
   'Speaker1：Title',
   'Speaker2',
   'Speaker3',
   'Speaker4',
-  '对接人',
 ];
+
+export const HALF_DAY_TIME_PATTERN = /^10\.(?:17|18)(?:上午|下午)$/u;
 
 const DEFAULT_OUTPUT = fileURLToPath(
   new URL('../src/data/conference2026-program.generated.ts', import.meta.url),
@@ -51,6 +54,8 @@ const affiliationAliases = new Map([
   ['qwen', 'Qwen'],
   ['kimi', 'Kimi'],
 ]);
+
+const emptyPersonValues = new Set(['---', 'TBD']);
 
 function cleanCell(value) {
   return value.replaceAll('\u00a0', ' ').trim();
@@ -120,22 +125,45 @@ function normalizeAffiliation(value) {
 
 export function parsePerson(value, label, { required = false } = {}) {
   const cleaned = cleanCell(value);
-  if (!cleaned) {
+  if (!cleaned || emptyPersonValues.has(cleaned.toLocaleUpperCase('en-US'))) {
     if (required) throw new Error(`${label} is empty.`);
     return null;
   }
 
-  const match = cleaned.match(/^(.*?)\s*[（(]\s*(.+)\s*[）)]\s*$/u);
+  const match = cleaned.match(
+    /^(.*?)\s*[（(]\s*([^()（）]+?)\s*[）)](?:\s*[:：]\s*(.+))?\s*$/u,
+  );
   if (!match) {
     if (/[()（）]/u.test(cleaned)) throw new Error(`${label} has malformed parentheses: ${cleaned}`);
-    return { name: cleaned };
+
+    const titleMatch = cleaned.match(/^([^:：]+?)\s*[:：]\s*(.+)$/u);
+    if (!titleMatch) return { name: cleaned };
+
+    const name = cleanCell(titleMatch[1]);
+    const talkTitle = cleanCell(titleMatch[2]);
+    if (!name) throw new Error(`${label} has an empty name.`);
+    if (!talkTitle) throw new Error(`${label} has an empty talk title.`);
+    return { name, talkTitle };
   }
 
   const name = cleanCell(match[1]);
   const affiliation = normalizeAffiliation(match[2]);
+  const talkTitle = cleanCell(match[3] ?? '');
   if (!name) throw new Error(`${label} has an empty name.`);
   if (!affiliation) throw new Error(`${label} has an empty affiliation.`);
-  return { name, affiliation };
+  return talkTitle ? { name, affiliation, talkTitle } : { name, affiliation };
+}
+
+export function parsePeople(value, label, { required = false } = {}) {
+  const parts = cleanCell(value).split(/\s*、\s*/u).filter(Boolean);
+  if (parts.length === 0) {
+    if (required) throw new Error(`${label} is empty.`);
+    return [];
+  }
+
+  return parts.map((part, index) => (
+    parsePerson(part, parts.length === 1 ? label : `${label} ${index + 1}`, { required: true })
+  ));
 }
 
 export function parseProgramCsv(input) {
@@ -163,13 +191,18 @@ export function parseProgramCsv(input) {
 
     const sourceTime = cleanCell(values[0]);
     const title = cleanCell(values[1]);
+    if (!HALF_DAY_TIME_PATTERN.test(sourceTime)) {
+      throw new Error(
+        `Row ${rowIndex + 2} time must be a 10.17/10.18 morning or afternoon slot, found "${sourceTime}".`,
+      );
+    }
     if (!title) throw new Error(`Row ${rowIndex + 2} has an empty topic.`);
     if (titles.has(title)) throw new Error(`Duplicate topic: ${title}`);
     titles.add(title);
 
-    const chair = parsePerson(values[2], `Row ${rowIndex + 2} chair`, { required: true });
+    const chairs = parsePeople(values[4], `Row ${rowIndex + 2} chair`, { required: true });
     const speakers = values
-      .slice(3, 7)
+      .slice(5, 9)
       .map((value, speakerIndex) => parsePerson(value, `Row ${rowIndex + 2} speaker ${speakerIndex + 1}`))
       .filter(Boolean);
 
@@ -178,7 +211,7 @@ export function parseProgramCsv(input) {
       throw new Error(`Row ${rowIndex + 2} contains a duplicate speaker.`);
     }
 
-    return { sourceTime, title, chair, speakers };
+    return { sourceTime, title, chairs, speakers };
   });
 
   return sessions;
@@ -216,12 +249,13 @@ export function renderProgramModule(sessions) {
     `export type Conference2026ProgramPerson = {\n` +
     `  readonly name: string;\n` +
     `  readonly affiliation?: string;\n` +
+    `  readonly talkTitle?: string;\n` +
     `};\n` +
     `\n` +
     `export type Conference2026ProgramSourceSession = {\n` +
     `  readonly sourceTime: string;\n` +
     `  readonly title: string;\n` +
-    `  readonly chair: Conference2026ProgramPerson;\n` +
+    `  readonly chairs: readonly Conference2026ProgramPerson[];\n` +
     `  readonly speakers: readonly Conference2026ProgramPerson[];\n` +
     `};\n` +
     `\n` +
@@ -233,7 +267,8 @@ export function renderProgramModule(sessions) {
     `  readonly sessions: readonly Conference2026ProgramSourceSession[];\n` +
     `};\n` +
     `\n` +
-    `export const conference2026ProgramSessions = conference2026ProgramSource.sessions;\n`;
+    `export const conference2026ProgramSessions: readonly Conference2026ProgramSourceSession[] =\n` +
+    `  conference2026ProgramSource.sessions;\n`;
 }
 
 function readGeneratedSessions(content) {

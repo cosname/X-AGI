@@ -688,12 +688,14 @@ const officialCopyByRoute = new Map([
     conference2026.dates.compact,
     conference2026.venue.scheduleName,
     conference2026.scheduleNotice,
-    'SESSIONS & SPEAKERS',
-    `大会专题与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
+    conference2026.programPreview.note,
+    'HALF-DAY PROGRAM',
+    `大会日程与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
     ...conference2026.programPreview.sessions.flatMap((session) => [
+      session.sourceTime.replace(/(上午|下午)$/u, ' $1'),
       session.title,
-      session.chair.name === '待确认' ? '主席待确认' : session.chair.name,
-      ...session.speakers.map((speaker) => speaker.name),
+      ...session.chairs.map((chair) => chair.name === '待确认' ? '主席待确认' : chair.name),
+      ...session.speakers.flatMap((speaker) => [speaker.name, speaker.talkTitle ?? '']),
     ]),
   ]],
   ['poster/index.html', [
@@ -755,6 +757,13 @@ const scheduleSource = await readFile(path.join(outputRoot, 'schedule/index.html
 const scheduleCardCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-card\b[^"]*"/g)].length;
 if (scheduleCardCount !== conference2026.programPreview.sessions.length) {
   fail(`schedule/index.html: expected ${conference2026.programPreview.sessions.length} schedule cards, found ${scheduleCardCount}`);
+}
+const schedulePeriodCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-period-group\b[^"]*"/g)].length;
+if (schedulePeriodCount !== 4) {
+  fail(`schedule/index.html: expected 4 half-day groups, found ${schedulePeriodCount}`);
+}
+if (/计划人数|完成度|对接人/u.test(visibleText(scheduleSource))) {
+  fail('schedule/index.html: internal source fields must not be published');
 }
 if (scheduleSource.includes('schedule-tabs') || scheduleSource.includes('goal-schedule-preview')) {
   fail('schedule/index.html: retired schedule preview structure must not return');

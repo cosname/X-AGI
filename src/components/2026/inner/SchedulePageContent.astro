@@ -3,10 +3,52 @@ import { conference2026 } from '../../../data/conference2026';
 
 const program = conference2026.programPreview;
 const programStatus = program.status.replace(/\.+$/, '');
+const dayByShortDate = new Map(
+  conference2026.schedule.map((day) => [day.date.slice(5), day]),
+);
 
 function isPendingChair(name: string) {
   return name === '待确认';
 }
+
+function describeTimeSlot(sourceTime: string) {
+  const match = sourceTime.match(/^(\d{2})\.(\d{2})(上午|下午)$/u);
+  if (!match) {
+    return {
+      dateLabel: sourceTime,
+      id: `schedule-slot-${sourceTime}`,
+      period: '',
+      shortDate: sourceTime,
+    };
+  }
+
+  const shortDate = `${match[1]}.${match[2]}`;
+  const day = dayByShortDate.get(shortDate);
+  const period = match[3];
+  return {
+    dateLabel: `${Number(match[1])} 月 ${Number(match[2])} 日${day ? ` · ${day.weekday}` : ''}`,
+    id: `schedule-${match[1]}${match[2]}-${period === '上午' ? 'am' : 'pm'}`,
+    period,
+    shortDate,
+  };
+}
+
+const sessionsByTime = new Map<string, Array<(typeof program.sessions)[number]>>();
+for (const session of program.sessions) {
+  const sessions = sessionsByTime.get(session.sourceTime) ?? [];
+  sessions.push(session);
+  sessionsByTime.set(session.sourceTime, sessions);
+}
+
+const programGroups = [...sessionsByTime.entries()].map(([sourceTime, sessions]) => ({
+  ...describeTimeSlot(sourceTime),
+  sessions,
+  sourceTime,
+}));
+
+const sessionNumbers = new Map(
+  program.sessions.map((session, index) => [session, index + 1]),
+);
 ---
 
 <main class="main-content">
@@ -18,47 +60,299 @@ function isPendingChair(name: string) {
 
     <section class="schedule-confirmed" aria-labelledby="schedule-confirmed-title">
       <header class="schedule-confirmed__header">
-        <p>SESSIONS &amp; SPEAKERS</p>
-        <h2 id="schedule-confirmed-title">大会专题与嘉宾（{programStatus}）</h2>
+        <p>HALF-DAY PROGRAM</p>
+        <h2 id="schedule-confirmed-title">大会日程与嘉宾（{programStatus}）</h2>
+        <p class="schedule-confirmed__note">{program.note}</p>
       </header>
 
-      {program.sessions.map((session, index) => (
-        <article class="info-card schedule-card schedule-topic-card">
-          <div class="card-header">
-            Session {String(index + 1).padStart(2, '0')} | {session.title}
-          </div>
-          <div class:list={['session-chair', { 'session-chair--pending': isPendingChair(session.chair.name) }]}>
-            {isPendingChair(session.chair.name) ? (
-              '主席待确认'
-            ) : (
-              <>
-                主席 | {session.chair.name}
-                {session.chair.affiliation ? ` | ${session.chair.affiliation}` : ''}
-              </>
-            )}
-          </div>
-          <div class="card-body">
-            <div class="session-list">
-              {session.speakers.length > 0 ? (
-                session.speakers.map((speaker) => (
-                  <div class="session-item session-item--speaker">
-                    <div class="session-speaker">
-                      <span>
-                        {speaker.name}
-                        {speaker.affiliation ? ` | ${speaker.affiliation}` : ''}
-                      </span>
+      <nav class="schedule-period-nav" aria-label="日程时段">
+        {programGroups.map((group) => (
+          <a class="schedule-period-nav__item" href={`#${group.id}`}>
+            <span class="schedule-period-nav__date">{group.shortDate}</span>
+            <strong>{group.period}</strong>
+            <span>{group.sessions.length} 个专题</span>
+          </a>
+        ))}
+      </nav>
+
+      {programGroups.map((group, groupIndex) => (
+        <section class="schedule-period-group" id={group.id} aria-labelledby={`${group.id}-title`}>
+          <header class="schedule-period-heading">
+            <div>
+              <p>DAY {String(groupIndex + 1).padStart(2, '0')}</p>
+              <h3 id={`${group.id}-title`}>{group.dateLabel}</h3>
+            </div>
+            <div class="schedule-period-heading__meta">
+              <strong>{group.period}</strong>
+              <span>{group.sessions.length} 个专题</span>
+            </div>
+          </header>
+
+          <div class="schedule-period-cards">
+            {group.sessions.map((session) => {
+              const sessionNumber = sessionNumbers.get(session) ?? 0;
+              const hasPendingChair = session.chairs.some((chair) => isPendingChair(chair.name));
+              return (
+                <article class="info-card schedule-card schedule-topic-card">
+                  <div class="card-header">
+                    <span class="schedule-topic-card__number">
+                      Session {String(sessionNumber).padStart(2, '0')}
+                    </span>
+                    <span class="schedule-topic-card__title">{session.title}</span>
+                  </div>
+                  <div class:list={['session-chair', { 'session-chair--pending': hasPendingChair }]}>
+                    {hasPendingChair ? (
+                      '主席待确认'
+                    ) : (
+                      <>
+                        <span class="session-chair__label">主席</span>
+                        <span class="session-chair__people">
+                          {session.chairs.map((chair, chairIndex) => (
+                            <>
+                              {chairIndex > 0 && (
+                                <span class="schedule-person-separator" aria-hidden="true">/</span>
+                              )}
+                              <span>
+                                {chair.name}
+                                {chair.affiliation ? ` | ${chair.affiliation}` : ''}
+                              </span>
+                            </>
+                          ))}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                  <div class="card-body">
+                    <div class="session-list">
+                      {session.speakers.length > 0 ? (
+                        session.speakers.map((speaker) => (
+                          <div class="session-item session-item--speaker">
+                            <div class="session-speaker">
+                              <span class="session-speaker__name">
+                                {speaker.name}
+                                {speaker.affiliation ? ` | ${speaker.affiliation}` : ''}
+                              </span>
+                              {speaker.talkTitle && (
+                                <p class="session-speaker__talk-title">{speaker.talkTitle}</p>
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <div class="session-item session-item--reserved schedule-topic-card__empty">
+                          <div class="session-title">{program.status}</div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                ))
-              ) : (
-                <div class="session-item session-item--reserved schedule-topic-card__empty">
-                  <div class="session-title">{program.status}</div>
-                </div>
-              )}
-            </div>
+                </article>
+              );
+            })}
           </div>
-        </article>
+        </section>
       ))}
     </section>
   </div>
 </main>
+
+<style is:inline>
+  .edition-2026-inner .schedule-confirmed__header h2 {
+    text-wrap: balance;
+  }
+
+  .edition-2026-inner .schedule-confirmed__note {
+    max-width: 48rem;
+    margin: 0.7rem 0 0;
+    color: #686d80;
+    line-height: 1.7;
+  }
+
+  .edition-2026-inner .schedule-period-nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0 0 2.5rem;
+  }
+
+  .edition-2026-inner .schedule-period-nav__item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.1rem 0.7rem;
+    align-items: end;
+    padding: 0.9rem 1rem;
+    color: #20234e;
+    text-decoration: none;
+    border: 1px solid rgb(103 82 200 / 0.22);
+    border-radius: 0.85rem;
+    background: rgb(255 253 251 / 0.64);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.72);
+    transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  }
+
+  .edition-2026-inner .schedule-period-nav__item:hover,
+  .edition-2026-inner .schedule-period-nav__item:focus-visible {
+    border-color: rgb(103 82 200 / 0.52);
+    background: rgb(255 255 255 / 0.82);
+    transform: translateY(-1px);
+  }
+
+  .edition-2026-inner .schedule-period-nav__date {
+    grid-row: 1 / span 2;
+    align-self: center;
+    color: #6752c8;
+    font-size: 0.78rem;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+  }
+
+  .edition-2026-inner .schedule-period-nav__item strong {
+    font-size: 1.08rem;
+    line-height: 1.2;
+  }
+
+  .edition-2026-inner .schedule-period-nav__item > span:last-child {
+    color: #71768a;
+    font-size: 0.76rem;
+  }
+
+  .edition-2026-inner .schedule-period-group {
+    scroll-margin-top: calc(var(--site-header-height) + 2.25rem);
+  }
+
+  .edition-2026-inner .schedule-period-group + .schedule-period-group {
+    margin-top: 3.25rem;
+  }
+
+  .edition-2026-inner .schedule-period-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 0 0.25rem 0.85rem;
+    border-bottom: 1px solid rgb(103 82 200 / 0.25);
+  }
+
+  .edition-2026-inner .schedule-period-heading p {
+    margin: 0 0 0.25rem;
+    color: #6752c8;
+    font-size: 0.7rem;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+  }
+
+  .edition-2026-inner .schedule-period-heading h3 {
+    margin: 0;
+    color: #171a48;
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+    line-height: 1.2;
+  }
+
+  .edition-2026-inner .schedule-period-heading__meta {
+    display: grid;
+    gap: 0.15rem;
+    text-align: right;
+  }
+
+  .edition-2026-inner .schedule-period-heading__meta strong {
+    color: #37287f;
+    font-size: 1.05rem;
+  }
+
+  .edition-2026-inner .schedule-period-heading__meta span {
+    color: #777b8f;
+    font-size: 0.78rem;
+  }
+
+  .edition-2026-inner .schedule-period-cards .info-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .edition-goal-2026 .schedule-topic-card .card-header {
+    justify-content: flex-start;
+    gap: 0.85rem;
+    text-align: left;
+  }
+
+  .edition-2026-inner .schedule-topic-card__number {
+    flex: 0 0 auto;
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    opacity: 0.72;
+  }
+
+  .edition-2026-inner .schedule-topic-card__title {
+    min-width: 0;
+    text-wrap: balance;
+  }
+
+  .edition-2026-inner .session-chair {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+  }
+
+  .edition-2026-inner .session-chair__label {
+    flex: 0 0 auto;
+    color: #6752c8;
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+  }
+
+  .edition-2026-inner .session-chair__people {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.55rem;
+  }
+
+  .edition-2026-inner .schedule-person-separator {
+    color: #a0a4b3;
+    font-weight: 400;
+  }
+
+  .edition-2026-inner .schedule-topic-card .session-item--speaker .session-speaker {
+    display: block;
+  }
+
+  .edition-2026-inner .session-speaker__name {
+    color: #242745;
+    font-weight: 650;
+  }
+
+  .edition-2026-inner .session-speaker__talk-title {
+    margin: 0.42rem 0 0;
+    color: #686d80;
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 767.98px) {
+    .edition-2026-inner .schedule-period-nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .edition-2026-inner .schedule-topic-card .card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.2rem;
+    }
+
+    .edition-2026-inner .schedule-topic-card__number,
+    .edition-2026-inner .schedule-topic-card__title {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .edition-2026-inner .schedule-period-heading {
+      align-items: flex-start;
+    }
+
+    .edition-2026-inner .session-chair {
+      display: grid;
+      gap: 0.35rem;
+    }
+  }
+</style>

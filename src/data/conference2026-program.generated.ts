@@ -3,12 +3,13 @@
 export type Conference2026ProgramPerson = {
   readonly name: string;
   readonly affiliation?: string;
+  readonly talkTitle?: string;
 };
 
 export type Conference2026ProgramSourceSession = {
   readonly sourceTime: string;
   readonly title: string;
-  readonly chair: Conference2026ProgramPerson;
+  readonly chairs: readonly Conference2026ProgramPerson[];
   readonly speakers: readonly Conference2026ProgramPerson[];
 };
 
@@ -16,16 +17,22 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "79926ad1a431ebfb3577a5aac374cb2b793a3db5681133f39459ebd987bdf079",
+  "sourceHash": "8d7443b25e0474f6367dffacfbd2598eed8af094b18c38f9e57dbb9f313bb82c",
   "sessions": [
     {
       "sourceTime": "10.17上午",
       "title": "Keynote",
-      "chair": {
-        "name": "王健桥",
-        "affiliation": "清华大学"
-      },
+      "chairs": [
+        {
+          "name": "王健桥",
+          "affiliation": "清华大学"
+        }
+      ],
       "speakers": [
+        {
+          "name": "孙茂松",
+          "affiliation": "清华大学"
+        },
         {
           "name": "冯建峰",
           "affiliation": "复旦大学"
@@ -39,80 +46,68 @@ export const conference2026ProgramSource = {
     {
       "sourceTime": "10.17下午",
       "title": "AI4Math & Theory",
-      "chair": {
-        "name": "刘方辉",
-        "affiliation": "上海交通大学"
-      },
-      "speakers": [
-        {
-          "name": "罗涛",
-          "affiliation": "上海交通大学"
-        },
-        {
-          "name": "邹荻凡",
-          "affiliation": "香港大学"
-        },
-        {
-          "name": "陆一平",
-          "affiliation": "北京大学"
-        },
+      "chairs": [
         {
           "name": "刘方辉",
           "affiliation": "上海交通大学"
         }
-      ]
-    },
-    {
-      "sourceTime": "10.18上午",
-      "title": "ML theory",
-      "chair": {
-        "name": "马梓业",
-        "affiliation": "香港城市大学"
-      },
+      ],
       "speakers": [
         {
-          "name": "马鉴昊",
-          "affiliation": "清华大学"
+          "name": "罗涛",
+          "affiliation": "上海交通大学",
+          "talkTitle": "从Math4AI到AI4Math的初步探索"
         },
         {
-          "name": "赵鹏",
-          "affiliation": "南京大学"
+          "name": "邹荻凡",
+          "affiliation": "香港大学",
+          "talkTitle": "LLM for ML Theory at Scale: The VALG Agent and OpenTheoryBench"
+        },
+        {
+          "name": "沈皓",
+          "affiliation": "中国科学院数学与系统科学研究院",
+          "talkTitle": "MechGeo: Autoformalizing and Proving Euclidean Geometry in Lean 4"
+        },
+        {
+          "name": "刘方辉",
+          "affiliation": "上海交通大学",
+          "talkTitle": "StatsMLlib and LeanMarathon: 从教科书到数学研究的自动形式化"
         }
       ]
     },
     {
-      "sourceTime": "10.18下午",
-      "title": "AI的数理和计算基础",
-      "chair": {
-        "name": "周峰",
-        "affiliation": "中国人民大学"
-      },
+      "sourceTime": "10.17下午",
+      "title": "LLM评测&Benchmark",
+      "chairs": [
+        {
+          "name": "张辉帅",
+          "affiliation": "北京大学"
+        }
+      ],
       "speakers": [
         {
-          "name": "马俊杰",
-          "affiliation": "中国科学院数学与系统科学研究院"
+          "name": "潘亮铭",
+          "affiliation": "北京大学",
+          "talkTitle": "大模型数据归因：从行为溯源到精准干预"
         },
         {
-          "name": "许洪腾",
-          "affiliation": "中国人民大学"
+          "name": "张辉帅",
+          "affiliation": "北京大学"
         },
         {
-          "name": "毛小介",
-          "affiliation": "清华大学"
-        },
-        {
-          "name": "周帆",
-          "affiliation": "上海财经大学"
+          "name": "王博涵"
         }
       ]
     },
     {
       "sourceTime": "10.17下午",
       "title": "预训练算法的新进展",
-      "chair": {
-        "name": "谢天",
-        "affiliation": "Qwen"
-      },
+      "chairs": [
+        {
+          "name": "谢天",
+          "affiliation": "Qwen"
+        }
+      ],
       "speakers": [
         {
           "name": "张华清",
@@ -123,120 +118,80 @@ export const conference2026ProgramSource = {
           "affiliation": "中国人民大学"
         },
         {
-          "name": "邱子涵",
-          "affiliation": "Qwen"
+          "name": "陈焕然",
+          "affiliation": "清华大学"
         }
       ]
     },
     {
-      "sourceTime": "10.18上午",
-      "title": "agentic后训练",
-      "chair": {
-        "name": "杨新宇",
-        "affiliation": "Kimi"
-      },
+      "sourceTime": "10.17下午",
+      "title": "AI Infra",
+      "chairs": [
+        {
+          "name": "杨朋昆",
+          "affiliation": "清华大学"
+        }
+      ],
       "speakers": [
         {
-          "name": "吴晨玮",
-          "affiliation": "华为"
+          "name": "李伯勋",
+          "affiliation": "无问芯穹"
+        },
+        {
+          "name": "张华枫",
+          "affiliation": "为沃科技"
+        },
+        {
+          "name": "丁鹏",
+          "affiliation": "羽医甘蓝"
+        },
+        {
+          "name": "张先轶",
+          "affiliation": "澎峰科技",
+          "talkTitle": "基于FlagOS的高性价比混合云Token工厂"
         }
       ]
     },
     {
-      "sourceTime": "",
-      "title": "AI + 教育",
-      "chair": {
-        "name": "陈思明",
-        "affiliation": "复旦大学"
-      },
-      "speakers": [
-        {
-          "name": "陈晴",
-          "affiliation": "同济大学"
-        },
-        {
-          "name": "涂尚卿",
-          "affiliation": "清华大学"
-        },
-        {
-          "name": "黄沛",
-          "affiliation": "华栖云教育"
-        }
-      ]
-    },
-    {
-      "sourceTime": "",
-      "title": "Agent技术及应用",
-      "chair": {
-        "name": "从鑫",
-        "affiliation": "清华大学"
-      },
-      "speakers": [
-        {
-          "name": "王宏宁",
-          "affiliation": "清华大学"
-        },
-        {
-          "name": "李鹏",
-          "affiliation": "清华大学"
-        },
-        {
-          "name": "从鑫",
-          "affiliation": "清华大学"
-        }
-      ]
-    },
-    {
-      "sourceTime": "",
-      "title": "LLM评测&Benchmark",
-      "chair": {
-        "name": "张辉帅",
-        "affiliation": "北京大学"
-      },
-      "speakers": []
-    },
-    {
-      "sourceTime": "",
+      "sourceTime": "10.17下午",
       "title": "AI + Finance",
-      "chair": {
-        "name": "祝武",
-        "affiliation": "清华大学"
-      },
-      "speakers": []
-    },
-    {
-      "sourceTime": "",
-      "title": "语言模型基础",
-      "chair": {
-        "name": "胡天阳",
-        "affiliation": "香港中文大学（深圳）"
-      },
+      "chairs": [
+        {
+          "name": "祝武",
+          "affiliation": "清华大学"
+        }
+      ],
       "speakers": [
         {
-          "name": "刘威杨",
-          "affiliation": "香港中文大学"
+          "name": "韩佳乐",
+          "affiliation": "深圳河套学院",
+          "talkTitle": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models"
         },
         {
-          "name": "曹原",
-          "affiliation": "香港大学"
+          "name": "Luyao Zhang",
+          "affiliation": "Duke",
+          "talkTitle": "Who Verifies Decentralized Information? Economic Incentives, Accountability, and Trustworthy AI Across Oracle Protocols"
         },
         {
-          "name": "李根",
-          "affiliation": "香港中文大学"
+          "name": "Yuan Zhang",
+          "affiliation": "上海财经大学",
+          "talkTitle": "Large and Deep Factor Models"
         },
         {
-          "name": "罗维俭",
-          "affiliation": "小红书"
+          "name": "祝武",
+          "affiliation": "清华大学"
         }
       ]
     },
     {
-      "sourceTime": "",
+      "sourceTime": "10.17下午",
       "title": "扩散模型的理论基础以及推理测算法",
-      "chair": {
-        "name": "陆一平",
-        "affiliation": "北京大学"
-      },
+      "chairs": [
+        {
+          "name": "陆一平",
+          "affiliation": "北京大学"
+        }
+      ],
       "speakers": [
         {
           "name": "焦雨领",
@@ -257,25 +212,47 @@ export const conference2026ProgramSource = {
       ]
     },
     {
-      "sourceTime": "",
-      "title": "AI Infra",
-      "chair": {
-        "name": "杨朋昆",
-        "affiliation": "清华大学"
-      },
-      "speakers": []
+      "sourceTime": "10.18上午",
+      "title": "AI + 教育",
+      "chairs": [
+        {
+          "name": "陈思明",
+          "affiliation": "复旦大学"
+        }
+      ],
+      "speakers": [
+        {
+          "name": "陈晴",
+          "affiliation": "同济大学"
+        },
+        {
+          "name": "涂尚卿",
+          "affiliation": "清华大学"
+        },
+        {
+          "name": "黄沛",
+          "affiliation": "华栖云教育"
+        }
+      ]
     },
     {
-      "sourceTime": "",
+      "sourceTime": "10.18上午",
       "title": "AI4Science",
-      "chair": {
-        "name": "谢超",
-        "affiliation": "清华大学"
-      },
+      "chairs": [
+        {
+          "name": "田润泽",
+          "affiliation": "中国人民大学"
+        },
+        {
+          "name": "谢超",
+          "affiliation": "清华大学"
+        }
+      ],
       "speakers": [
         {
           "name": "许慧楠",
-          "affiliation": "中国科学院大学"
+          "affiliation": "中国科学院大学",
+          "talkTitle": "Memory Mechanisms in Genomic Foundation Models"
         },
         {
           "name": "谢超",
@@ -284,6 +261,137 @@ export const conference2026ProgramSource = {
         {
           "name": "吴泰霖",
           "affiliation": "西湖大学"
+        },
+        {
+          "name": "李秋熠",
+          "affiliation": "中关村学院",
+          "talkTitle": "基因组大模型Carbon"
+        }
+      ]
+    },
+    {
+      "sourceTime": "10.18上午",
+      "title": "机器学习理论",
+      "chairs": [
+        {
+          "name": "马梓业",
+          "affiliation": "香港城市大学"
+        }
+      ],
+      "speakers": [
+        {
+          "name": "马鉴昊",
+          "affiliation": "清华大学",
+          "talkTitle": "步长加速梯度下降的收敛下界"
+        },
+        {
+          "name": "赵鹏",
+          "affiliation": "南京大学",
+          "talkTitle": "在线学习与大模型高效推理"
+        },
+        {
+          "name": "常恒",
+          "affiliation": "Unity China",
+          "talkTitle": "Learning to Build Agents: Adaptive Planning, Memory, and Harness Evolution"
+        }
+      ]
+    },
+    {
+      "sourceTime": "10.18上午",
+      "title": "Agentic后训练",
+      "chairs": [
+        {
+          "name": "杨新宇",
+          "affiliation": "Kimi"
+        }
+      ],
+      "speakers": [
+        {
+          "name": "吴晨玮",
+          "affiliation": "华为"
+        }
+      ]
+    },
+    {
+      "sourceTime": "10.18上午",
+      "title": "语言模型基础",
+      "chairs": [
+        {
+          "name": "胡天阳",
+          "affiliation": "香港中文大学（深圳）"
+        }
+      ],
+      "speakers": [
+        {
+          "name": "刘威杨",
+          "affiliation": "香港中文大学",
+          "talkTitle": "Pion: A Spectrum-Preserving Optimizer via Orthogonal Equivalence Transformation"
+        },
+        {
+          "name": "曹原",
+          "affiliation": "香港大学"
+        },
+        {
+          "name": "李根",
+          "affiliation": "香港中文大学"
+        },
+        {
+          "name": "罗维俭",
+          "affiliation": "小红书"
+        }
+      ]
+    },
+    {
+      "sourceTime": "10.18下午",
+      "title": "AI的数理和计算基础",
+      "chairs": [
+        {
+          "name": "周峰",
+          "affiliation": "中国人民大学"
+        }
+      ],
+      "speakers": [
+        {
+          "name": "周帆",
+          "affiliation": "上海财经大学"
+        },
+        {
+          "name": "马俊杰",
+          "affiliation": "中国科学院数学与系统科学研究院"
+        },
+        {
+          "name": "许洪腾",
+          "affiliation": "中国人民大学",
+          "talkTitle": "面向蛋白质主链生成的四元数整流匹配技术"
+        },
+        {
+          "name": "毛小介",
+          "affiliation": "清华大学",
+          "talkTitle": "Active Experimentation for Counterfactual Decision Making"
+        }
+      ]
+    },
+    {
+      "sourceTime": "10.18下午",
+      "title": "Agent技术及应用",
+      "chairs": [
+        {
+          "name": "从鑫",
+          "affiliation": "清华大学"
+        }
+      ],
+      "speakers": [
+        {
+          "name": "王宏宁",
+          "affiliation": "清华大学"
+        },
+        {
+          "name": "李鹏",
+          "affiliation": "清华大学"
+        },
+        {
+          "name": "从鑫",
+          "affiliation": "清华大学"
         }
       ]
     }
@@ -296,4 +404,5 @@ export const conference2026ProgramSource = {
   readonly sessions: readonly Conference2026ProgramSourceSession[];
 };
 
-export const conference2026ProgramSessions = conference2026ProgramSource.sessions;
+export const conference2026ProgramSessions: readonly Conference2026ProgramSourceSession[] =
+  conference2026ProgramSource.sessions;
