@@ -198,8 +198,11 @@ const sessionNumbers = new Map(
         hidden: link.parentElement?.hidden ?? false,
         text: link.textContent,
       }));
+      const phoneNavigation = window.matchMedia('(max-width: 47.99rem)');
+      const activeTouchPointers = new Set();
       let renderedState = '';
       let scrollFrame = 0;
+      let menuActivationGuardTimer = 0;
 
       const restoreAttribute = (element, name, value) => {
         if (value === null) element.removeAttribute(name);
@@ -210,8 +213,28 @@ const sessionNumbers = new Map(
         window.dispatchEvent(new Event('xagi:navigation-change'));
       };
 
+      const clearMobileMenuActivationGuard = () => {
+        if (menuActivationGuardTimer) window.clearTimeout(menuActivationGuardTimer);
+        menuActivationGuardTimer = 0;
+        delete header.dataset.menuActivationGuard;
+      };
+
+      const armMobileMenuActivationGuard = () => {
+        if (!phoneNavigation.matches) {
+          clearMobileMenuActivationGuard();
+          return;
+        }
+        if (menuActivationGuardTimer) window.clearTimeout(menuActivationGuardTimer);
+        header.dataset.menuActivationGuard = 'true';
+        menuActivationGuardTimer = window.setTimeout(() => {
+          menuActivationGuardTimer = 0;
+          if (activeTouchPointers.size > 0) return;
+          delete header.dataset.menuActivationGuard;
+        }, 360);
+      };
+
       const syncImmediateMobileNavigationMode = (mode) => {
-        if (!window.matchMedia('(max-width: 47.99rem)').matches) return;
+        if (!phoneNavigation.matches) return;
         navigation.removeAttribute('data-open');
         navigation.removeAttribute('data-closing');
         header.removeAttribute('data-menu-open');
@@ -221,6 +244,7 @@ const sessionNumbers = new Map(
         toggle.tabIndex = 0;
         header.dataset.navMode = mode === 'periods' ? 'inline' : 'compact';
         if (mode === 'periods') {
+          clearMobileMenuActivationGuard();
           panel.removeAttribute('aria-hidden');
           panel.removeAttribute('inert');
         } else {
@@ -262,6 +286,7 @@ const sessionNumbers = new Map(
 
       const restoreMainNavigation = () => {
         if (renderedState === 'main') return;
+        const wasPeriodNavigation = renderedState.startsWith('periods:');
         renderedState = 'main';
         delete header.dataset.scheduleNav;
         restoreAttribute(nav, 'aria-label', originalNavLabel);
@@ -278,6 +303,7 @@ const sessionNumbers = new Map(
           if (link.parentElement) link.parentElement.hidden = original.hidden;
         });
         syncImmediateMobileNavigationMode('main');
+        if (wasPeriodNavigation) armMobileMenuActivationGuard();
         announceNavigationChange();
       };
 
@@ -302,6 +328,30 @@ const sessionNumbers = new Map(
         scrollFrame = window.requestAnimationFrame(syncNavigation);
       };
 
+      const requestScrollNavigationSync = () => {
+        if (renderedState === 'main') armMobileMenuActivationGuard();
+        requestNavigationSync();
+      };
+
+      // A touch ending as the date rail becomes the menu button can click the new target.
+      toggle.addEventListener('click', (event) => {
+        if (!header.hasAttribute('data-menu-activation-guard') || event.detail === 0) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        delete toggle.dataset.pointerFocus;
+      }, { capture: true });
+
+      document.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'touch') activeTouchPointers.add(event.pointerId);
+      }, { passive: true });
+      const finishTouchPointer = (event) => {
+        if (event.pointerType !== 'touch') return;
+        activeTouchPointers.delete(event.pointerId);
+        if (header.hasAttribute('data-menu-activation-guard')) armMobileMenuActivationGuard();
+      };
+      document.addEventListener('pointerup', finishTouchPointer, { passive: true });
+      document.addEventListener('pointercancel', finishTouchPointer, { passive: true });
+
       const toggleLabelObserver = new MutationObserver(() => {
         if (header.dataset.scheduleNav !== 'periods') return;
         const activePeriod = periods.find((period) => period.element.id === glassGroup.dataset.glassDefault);
@@ -311,7 +361,7 @@ const sessionNumbers = new Map(
       });
       toggleLabelObserver.observe(toggle, { attributes: true, attributeFilter: ['aria-label'] });
 
-      window.addEventListener('scroll', requestNavigationSync, { passive: true });
+      window.addEventListener('scroll', requestScrollNavigationSync, { passive: true });
       window.addEventListener('resize', requestNavigationSync, { passive: true });
       window.addEventListener('hashchange', requestNavigationSync);
       window.addEventListener('pageshow', requestNavigationSync);
@@ -337,6 +387,7 @@ const sessionNumbers = new Map(
         requestNavigationSync();
       });
       document.fonts?.ready.then(requestNavigationSync).catch(() => undefined);
+      window.addEventListener('pagehide', clearMobileMenuActivationGuard);
       requestNavigationSync();
     }
   }
