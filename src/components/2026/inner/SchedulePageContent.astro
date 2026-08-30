@@ -51,7 +51,7 @@ const sessionNumbers = new Map(
 );
 ---
 
-<main class="main-content">
+<main class="main-content" data-schedule-page>
   <div class="published-inner-container">
     <header class="schedule-intro">
       <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
@@ -62,25 +62,21 @@ const sessionNumbers = new Map(
         <h2 id="schedule-confirmed-title">大会日程与嘉宾（{programStatus}）</h2>
       </header>
 
-      <nav class="schedule-period-nav" aria-label="日程时段">
-        {programGroups.map((group) => (
-          <a class="schedule-period-nav__item" href={`#${group.id}`}>
-            <span class="schedule-period-nav__date">{group.shortDate}</span>
-            <strong>{group.period}</strong>
-            <span>{group.sessions.length} 个专题</span>
-          </a>
-        ))}
-      </nav>
-
       {programGroups.map((group, groupIndex) => (
-        <section class="schedule-period-group" id={group.id} aria-labelledby={`${group.id}-title`}>
+        <section
+          class="schedule-period-group"
+          id={group.id}
+          aria-labelledby={`${group.id}-title`}
+          data-schedule-nav-label={`${group.shortDate} ${group.period}`}
+        >
           <header class="schedule-period-heading">
             <div>
               <p>DAY {String(groupIndex + 1).padStart(2, '0')}</p>
               <h3 id={`${group.id}-title`}>{group.dateLabel}</h3>
             </div>
             <div class="schedule-period-heading__meta">
-              <strong>{group.period}</strong>
+              <span class="schedule-period-heading__source-time">{group.shortDate} {group.period}</span>
+              <strong aria-hidden="true">{group.period}</strong>
               <span>{group.sessions.length} 个专题</span>
             </div>
           </header>
@@ -152,6 +148,177 @@ const sessionNumbers = new Map(
   </div>
 </main>
 
+<script is:inline>
+  {
+    const schedulePage = document.querySelector('[data-schedule-page]');
+    const header = document.querySelector('.site-header');
+    const navigation = header?.querySelector('.site-navigation');
+    const nav = navigation?.querySelector('nav');
+    const toggle = navigation?.querySelector('.site-navigation__toggle');
+    const closeControl = navigation?.querySelector('.site-navigation__close');
+    const glassGroup = navigation?.querySelector('[data-glass-group]');
+    const groups = schedulePage
+      ? [...schedulePage.querySelectorAll('[data-schedule-nav-label]')]
+      : [];
+    const links = nav
+      ? [...nav.querySelectorAll('.site-nav a[data-nav-capsule-target]')]
+      : [];
+
+    if (
+      schedulePage instanceof HTMLElement
+      && header instanceof HTMLElement
+      && navigation instanceof HTMLElement
+      && nav instanceof HTMLElement
+      && toggle instanceof HTMLButtonElement
+      && closeControl instanceof HTMLButtonElement
+      && glassGroup instanceof HTMLElement
+      && groups.every((group) => group instanceof HTMLElement)
+      && links.every((link) => link instanceof HTMLAnchorElement)
+      && groups.length > 0
+      && links.length >= groups.length
+    ) {
+      const periods = groups.map((group) => ({
+        element: group,
+        id: group.id,
+        label: group.dataset.scheduleNavLabel,
+      }));
+      const originalNavLabel = nav.getAttribute('aria-label');
+      const originalGlassDefault = glassGroup.getAttribute('data-glass-default');
+      const originalToggle = {
+        ariaLabel: toggle.getAttribute('aria-label'),
+        text: toggle.textContent,
+      };
+      const originalCloseLabel = closeControl.getAttribute('aria-label');
+      const originalLinks = links.map((link) => ({
+        ariaCurrent: link.getAttribute('aria-current'),
+        glassTarget: link.getAttribute('data-glass-target'),
+        href: link.getAttribute('href'),
+        hidden: link.parentElement?.hidden ?? false,
+        text: link.textContent,
+      }));
+      let renderedState = '';
+      let scrollFrame = 0;
+
+      const restoreAttribute = (element, name, value) => {
+        if (value === null) element.removeAttribute(name);
+        else element.setAttribute(name, value);
+      };
+
+      const announceNavigationChange = () => {
+        window.dispatchEvent(new Event('xagi:navigation-change'));
+      };
+
+      const renderPeriodNavigation = (activeIndex) => {
+        const nextState = `periods:${activeIndex}`;
+        if (renderedState === nextState) return;
+        renderedState = nextState;
+        header.dataset.scheduleNav = 'periods';
+        nav.setAttribute('aria-label', '大会日程时段');
+        const activePeriod = periods[activeIndex];
+        toggle.textContent = activePeriod.label;
+        toggle.setAttribute('aria-label', `打开日程时段导航，当前${activePeriod.label}`);
+        closeControl.setAttribute('aria-label', '收起日程时段导航');
+        glassGroup.dataset.glassDefault = activePeriod.id;
+
+        links.forEach((link, index) => {
+          const item = periods[index];
+          const listItem = link.parentElement;
+          if (item) {
+            if (listItem) listItem.hidden = false;
+            link.textContent = item.label;
+            link.setAttribute('href', `#${item.id}`);
+            link.dataset.glassTarget = item.id;
+            if (index === activeIndex) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          } else if (listItem) {
+            listItem.hidden = true;
+            link.removeAttribute('aria-current');
+          }
+        });
+        announceNavigationChange();
+      };
+
+      const restoreMainNavigation = () => {
+        if (renderedState === 'main') return;
+        renderedState = 'main';
+        delete header.dataset.scheduleNav;
+        restoreAttribute(nav, 'aria-label', originalNavLabel);
+        restoreAttribute(glassGroup, 'data-glass-default', originalGlassDefault);
+        toggle.textContent = originalToggle.text;
+        restoreAttribute(toggle, 'aria-label', originalToggle.ariaLabel);
+        restoreAttribute(closeControl, 'aria-label', originalCloseLabel);
+        links.forEach((link, index) => {
+          const original = originalLinks[index];
+          link.textContent = original.text;
+          restoreAttribute(link, 'href', original.href);
+          restoreAttribute(link, 'data-glass-target', original.glassTarget);
+          restoreAttribute(link, 'aria-current', original.ariaCurrent);
+          if (link.parentElement) link.parentElement.hidden = original.hidden;
+        });
+        announceNavigationChange();
+      };
+
+      const syncNavigation = () => {
+        scrollFrame = 0;
+        const headerBottom = header.getBoundingClientRect().bottom;
+        const activationLine = headerBottom + Math.min(44, window.innerHeight * 0.06);
+        if (periods[0].element.getBoundingClientRect().top > activationLine) {
+          restoreMainNavigation();
+          return;
+        }
+
+        let activeIndex = 0;
+        periods.forEach((period, index) => {
+          if (period.element.getBoundingClientRect().top <= activationLine) activeIndex = index;
+        });
+        renderPeriodNavigation(activeIndex);
+      };
+
+      const requestNavigationSync = () => {
+        if (scrollFrame) return;
+        scrollFrame = window.requestAnimationFrame(syncNavigation);
+      };
+
+      const toggleLabelObserver = new MutationObserver(() => {
+        if (header.dataset.scheduleNav !== 'periods') return;
+        const activePeriod = periods.find((period) => period.element.id === glassGroup.dataset.glassDefault);
+        if (!activePeriod) return;
+        const label = `打开日程时段导航，当前${activePeriod.label}`;
+        if (toggle.getAttribute('aria-label') !== label) toggle.setAttribute('aria-label', label);
+      });
+      toggleLabelObserver.observe(toggle, { attributes: true, attributeFilter: ['aria-label'] });
+
+      window.addEventListener('scroll', requestNavigationSync, { passive: true });
+      window.addEventListener('resize', requestNavigationSync, { passive: true });
+      window.addEventListener('hashchange', requestNavigationSync);
+      window.addEventListener('pageshow', requestNavigationSync);
+      nav.addEventListener('click', (event) => {
+        const link = event.target instanceof Element
+          ? event.target.closest('a[href^="#"]')
+          : null;
+        if (!(link instanceof HTMLAnchorElement) || header.dataset.scheduleNav !== 'periods') {
+          requestNavigationSync();
+          return;
+        }
+        const destination = new URL(link.href, window.location.href);
+        const target = destination.hash
+          ? document.getElementById(decodeURIComponent(destination.hash.slice(1)))
+          : null;
+        if (!target) return;
+        event.preventDefault();
+        window.history.pushState(null, '', destination.hash);
+        target.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'start',
+        });
+        requestNavigationSync();
+      });
+      document.fonts?.ready.then(requestNavigationSync).catch(() => undefined);
+      requestNavigationSync();
+    }
+  }
+</script>
+
 <style is:inline>
   .edition-2026-inner .schedule-confirmed__header h2 {
     text-wrap: balance;
@@ -164,52 +331,29 @@ const sessionNumbers = new Map(
     line-height: 1.7;
   }
 
-  .edition-2026-inner .schedule-period-nav {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin: 0 0 2.5rem;
+  .site-header[data-schedule-nav='periods'] .site-nav li[hidden] {
+    display: none !important;
   }
 
-  .edition-2026-inner .schedule-period-nav__item {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 0.1rem 0.7rem;
-    align-items: end;
-    padding: 0.9rem 1rem;
-    color: #20234e;
-    text-decoration: none;
-    border: 1px solid rgb(103 82 200 / 0.22);
-    border-radius: 0.85rem;
-    background: rgb(255 253 251 / 0.64);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.72);
-    transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+    .site-navigation__panel {
+    --site-nav-inline-gap: clamp(1.15rem, 2.35vw, 2.65rem);
   }
 
-  .edition-2026-inner .schedule-period-nav__item:hover,
-  .edition-2026-inner .schedule-period-nav__item:focus-visible {
-    border-color: rgb(103 82 200 / 0.52);
-    background: rgb(255 255 255 / 0.82);
-    transform: translateY(-1px);
+  .edition-2026 .site-header[data-schedule-nav='periods']
+    .site-nav a[aria-current='location'] {
+    color: var(--blue);
   }
 
-  .edition-2026-inner .schedule-period-nav__date {
-    grid-row: 1 / span 2;
-    align-self: center;
-    color: #6752c8;
-    font-size: 0.78rem;
-    font-weight: 750;
-    letter-spacing: 0.04em;
+  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='compact']
+    .site-navigation {
+    --compact-nav-trigger-width: 7.25rem;
+    --compact-nav-panel-width: min(9rem, calc(100vw - (var(--page-gutter) * 2)));
   }
 
-  .edition-2026-inner .schedule-period-nav__item strong {
-    font-size: 1.08rem;
-    line-height: 1.2;
-  }
-
-  .edition-2026-inner .schedule-period-nav__item > span:last-child {
-    color: #71768a;
-    font-size: 0.76rem;
+  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='compact']
+    .site-navigation__toggle {
+    letter-spacing: 0.03em;
   }
 
   .edition-2026-inner .schedule-period-group {
@@ -249,6 +393,17 @@ const sessionNumbers = new Map(
     display: grid;
     gap: 0.15rem;
     text-align: right;
+  }
+
+  .edition-2026-inner .schedule-period-heading__source-time {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .edition-2026-inner .schedule-period-heading__meta strong {
@@ -325,10 +480,6 @@ const sessionNumbers = new Map(
   }
 
   @media (max-width: 767.98px) {
-    .edition-2026-inner .schedule-period-nav {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .edition-2026-inner .schedule-topic-card .card-header {
       flex-direction: column;
       align-items: flex-start;
