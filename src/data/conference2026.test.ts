@@ -25,8 +25,9 @@ describe('conference schedule contracts', () => {
     }
   });
 
-  it('announces that the detailed schedule will be published soon', () => {
-    assert.equal(conference2026.scheduleNotice, '具体日程即将发布');
+  it('announces the published half-day schedule without claiming exact times', () => {
+    assert.equal(conference2026.scheduleNotice, '半天粒度日程已发布，具体钟点持续更新中');
+    assert.match(conference2026.programPreview.note, /具体钟点稍后公布/u);
     assert.doesNotMatch(conference2026.scheduleNotice, /TBD/i);
   });
 
@@ -65,13 +66,26 @@ describe('conference schedule contracts', () => {
     assert.equal(conference2026.programPreview.sessions, conference2026ProgramSource.sessions);
     assert.ok(conference2026ProgramSource.sessions.length > 0);
 
+    const expectedTimeSlots = new Map([
+      ['10.17上午', 1],
+      ['10.17下午', 6],
+      ['10.18上午', 5],
+      ['10.18下午', 2],
+    ]);
+    const actualTimeSlots = new Map<string, number>();
+
     const titles = new Set<string>();
     for (const session of conference2026ProgramSource.sessions) {
+      assert.match(session.sourceTime, /^10\.(?:17|18)(?:上午|下午)$/u);
+      actualTimeSlots.set(session.sourceTime, (actualTimeSlots.get(session.sourceTime) ?? 0) + 1);
       assert.ok(session.title.trim(), 'a program topic is empty');
       assert.equal(titles.has(session.title), false, `duplicate program topic: ${session.title}`);
       titles.add(session.title);
 
-      assert.ok(session.chair.name.trim(), `${session.title} has an empty chair`);
+      assert.ok(session.chairs.length > 0, `${session.title} has no chair`);
+      for (const chair of session.chairs) {
+        assert.ok(chair.name.trim(), `${session.title} has an empty chair`);
+      }
       const speakerKeys = session.speakers.map(
         (speaker) => `${speaker.name}\u0000${speaker.affiliation ?? ''}`,
       );
@@ -84,6 +98,8 @@ describe('conference schedule contracts', () => {
         assert.ok(speaker.name.trim(), `${session.title} has an empty speaker`);
       }
     }
+
+    assert.deepEqual(actualTimeSlots, expectedTimeSlots);
   });
 });
 

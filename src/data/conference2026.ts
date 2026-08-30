@@ -170,10 +170,10 @@ export const conference2026 = {
       description: '促进青年研究者与学术界、产业界之间的高质量连接。',
     },
   ],
-  scheduleNotice: '具体日程即将发布',
+  scheduleNotice: '半天粒度日程已发布，具体钟点持续更新中',
   programPreview: {
     status: '持续更新中...',
-    note: '专题与嘉宾名单持续更新，具体时段将随文字日程一并公布。',
+    note: '专题、嘉宾及报告题目持续更新，具体钟点稍后公布。',
     sessions: conference2026ProgramSessions,
   },
   // 日程是嘉宾、报告与分会场的唯一发布面。确认后的讲者、摘要、简介写进对应 session.talks。

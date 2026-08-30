@@ -32,12 +32,19 @@ describe('Tencent program CSV parser', () => {
       name: '曹原',
       affiliation: '香港大学',
     });
+    assert.deepEqual(parsePerson('研究者（Example Lab）：A confirmed talk', 'speaker'), {
+      name: '研究者',
+      affiliation: 'Example Lab',
+      talkTitle: 'A confirmed talk',
+    });
+    assert.equal(parsePerson('TBD', 'speaker'), null);
+    assert.equal(parsePerson('---', 'speaker'), null);
   });
 
-  it('parses program rows and excludes the private coordination column', () => {
+  it('parses half-day program rows and excludes internal planning columns', () => {
     const csv = [
       header,
-      '10.17下午,AI + Math & Theory,刘方辉（上交）,罗涛（上海交通大学）,,,,内部对接人',
+      '10.17下午,AI + Math & Theory,4,100%,刘方辉（上交）、谢超（清华）,罗涛（上海交通大学）：A confirmed talk,,,',
     ].join('\n');
     const sessions = parseProgramCsv(csv);
 
@@ -45,24 +52,33 @@ describe('Tencent program CSV parser', () => {
       {
         sourceTime: '10.17下午',
         title: 'AI + Math & Theory',
-        chair: { name: '刘方辉', affiliation: '上海交通大学' },
-        speakers: [{ name: '罗涛', affiliation: '上海交通大学' }],
+        chairs: [
+          { name: '刘方辉', affiliation: '上海交通大学' },
+          { name: '谢超', affiliation: '清华大学' },
+        ],
+        speakers: [
+          { name: '罗涛', affiliation: '上海交通大学', talkTitle: 'A confirmed talk' },
+        ],
       },
     ]);
-    assert.doesNotMatch(renderProgramModule(sessions), /内部对接人/u);
+    assert.doesNotMatch(renderProgramModule(sessions), /计划人数|完成度|100%/u);
   });
 
-  it('fails closed on header drift, duplicate topics, and malformed people', () => {
+  it('fails closed on header drift, invalid time slots, duplicate topics, and malformed people', () => {
     assert.throws(
-      () => parseProgramCsv(`${header.replace('时间', '日期')}\n10.17下午,主题,主席（单位）,,,,,`),
+      () => parseProgramCsv(`${header.replace('时间', '日期')}\n10.17下午,主题,4,100%,主席（单位）,,,,`),
       /Header 1/u,
     );
     assert.throws(
-      () => parseProgramCsv(`${header}\n,主题,主席（单位）,,,,,\n,主题,主席（单位）,,,,,`),
+      () => parseProgramCsv(`${header}\n10.17,主题,4,100%,主席（单位）,,,,`),
+      /time must be/u,
+    );
+    assert.throws(
+      () => parseProgramCsv(`${header}\n10.17下午,主题,4,100%,主席（单位）,,,,\n10.18上午,主题,4,100%,主席（单位）,,,,`),
       /Duplicate topic/u,
     );
     assert.throws(
-      () => parseProgramCsv(`${header}\n,主题,主席（单位,,,,,`),
+      () => parseProgramCsv(`${header}\n10.17下午,主题,4,100%,主席（单位,,,,`),
       /malformed parentheses/u,
     );
   });
