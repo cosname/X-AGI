@@ -21,6 +21,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   const outlinePaths = Array.from(root.querySelectorAll<SVGPathElement>('[data-glass-outline-path]'));
   const targets = Array.from(root.querySelectorAll<HTMLElement>('[data-glass-target]'));
   if (!lens || !material || !outline || outlinePaths.length === 0 || targets.length === 0) return;
+  const visibleTargets = () => targets.filter((target) => target.getClientRects().length > 0);
 
   root.dataset.glassInitialized = 'true';
   const controller = new AbortController();
@@ -218,10 +219,12 @@ function initializeGlassActionGroup(root: HTMLElement) {
   };
 
   const resolvePersistentTarget = () => {
-    persistentTarget = targets.find((target) => target.getAttribute('aria-pressed') === 'true')
-      ?? targets.find((target) => target.hasAttribute('aria-current'))
-      ?? targets.find((target) => target.dataset.glassTarget === root.dataset.glassDefault)
-      ?? targets[0];
+    const availableTargets = visibleTargets();
+    persistentTarget = availableTargets.find((target) => target.getAttribute('aria-pressed') === 'true')
+      ?? availableTargets.find((target) => target.hasAttribute('aria-current'))
+      ?? availableTargets.find((target) => target.dataset.glassTarget === root.dataset.glassDefault)
+      ?? availableTargets[0]
+      ?? null;
 
     targets.forEach((target) => {
       target.toggleAttribute('data-glass-selected', target === persistentTarget);
@@ -241,7 +244,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
     layoutFrame = window.requestAnimationFrame(() => {
       layoutFrame = 0;
       const rootBounds = root.getBoundingClientRect();
-      const rects = targets.map((target) => {
+      const rects = visibleTargets().map((target) => {
         const bounds = target.getBoundingClientRect();
         return {
           key: target.dataset.glassTarget ?? '',
@@ -351,6 +354,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
 
   finePointer.addEventListener('change', () => syncToCurrentState(true), { signal });
   reducedMotion.addEventListener('change', () => syncToCurrentState(true), { signal });
+  window.addEventListener('xagi:navigation-change', measureTargets, { signal });
   window.addEventListener('pageshow', (event) => {
     if (event.persisted) measureTargets();
   }, { signal });

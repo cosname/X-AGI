@@ -149,9 +149,11 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
   const navTargets = panel
     ? [...panel.querySelectorAll<HTMLElement>('[data-nav-capsule-target]')]
     : [];
-  const navDefaultTarget = panel?.querySelector<HTMLElement>('[data-nav-capsule-target][aria-current="page"]')
-    ?? panel?.querySelector<HTMLElement>('[data-nav-capsule-target]')
-    ?? null;
+  const defaultNavTarget = () => (
+    panel?.querySelector<HTMLElement>('[data-nav-capsule-target][aria-current]')
+      ?? panel?.querySelector<HTMLElement>('[data-nav-capsule-target]')
+      ?? null
+  );
   const phoneNavigation = window.matchMedia('(max-width: 47.99rem)');
   const finePointerNavigation = window.matchMedia('(hover: hover) and (pointer: fine)');
   const reducedNavigationMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -270,7 +272,7 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
     header
     && panel
     && navCapsule
-    && navDefaultTarget
+    && defaultNavTarget()
     && navTargets.length > 0
     && !isCompact()
     && finePointerNavigation.matches,
@@ -283,7 +285,8 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
     }
     setLinkScale(null);
     const railBounds = panel.getBoundingClientRect();
-    const targets = navTargets.map((target) => {
+    const visibleNavTargets = navTargets.filter((target) => target.getClientRects().length > 0);
+    const targets = visibleNavTargets.map((target) => {
       const bounds = target.getBoundingClientRect();
       const settleInset = Math.min(17, Math.max(9, bounds.width * 0.21));
       return {
@@ -299,6 +302,7 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
     });
     if (
       railBounds.width <= 0
+      || targets.length === 0
       || targets.some((target) => target.width <= 0 || target.height <= 0)
     ) {
       capsuleLayout = null;
@@ -399,7 +403,7 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
     capsuleLayout?.targets.find((candidate) => candidate.element === target)?.center ?? null
   );
 
-  const reconcileCapsule = (preferredTarget = focusedTarget ?? navDefaultTarget) => {
+  const reconcileCapsule = (preferredTarget = focusedTarget ?? defaultNavTarget()) => {
     if (capsuleDismissed) return false;
     if (!canUseFluidCapsule() || !preferredTarget || !measureCapsuleLayout()) {
       disableFluidCapsule();
@@ -419,7 +423,7 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
     const keyboardTarget = focusedTarget && panel?.contains(document.activeElement)
       ? focusedTarget
       : null;
-    const target = keyboardTarget ?? navDefaultTarget;
+    const target = keyboardTarget ?? defaultNavTarget();
     const center = targetCenter(target);
     setLinkScale(null);
     if (!target || center === null || !setCapsuleTarget(center, target)) {
@@ -611,7 +615,15 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
   }, { passive: true });
   navTargets.forEach((target) => {
     const dismissIfNavigating = () => {
-      if (target instanceof HTMLAnchorElement) dismissFluidCapsule();
+      if (!(target instanceof HTMLAnchorElement)) return;
+      const destination = new URL(target.href, window.location.href);
+      const sameDocumentHash = Boolean(
+        destination.hash
+        && destination.origin === window.location.origin
+        && destination.pathname === window.location.pathname
+        && destination.search === window.location.search
+      );
+      if (!sameDocumentHash) dismissFluidCapsule();
     };
     target.addEventListener('pointerdown', (event) => {
       if (event.button !== 0) return;
@@ -656,6 +668,7 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
   });
   finePointerNavigation.addEventListener('change', scheduleHeaderLayoutSync);
   reducedNavigationMotion.addEventListener('change', scheduleHeaderLayoutSync);
+  window.addEventListener('xagi:navigation-change', scheduleHeaderLayoutSync);
   document.fonts?.ready.then(scheduleHeaderLayoutSync).catch(() => undefined);
   document.fonts?.addEventListener('loadingdone', scheduleHeaderLayoutSync);
   window.addEventListener('pagehide', () => {
