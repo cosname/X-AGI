@@ -25,10 +25,10 @@ describe('conference schedule contracts', () => {
     }
   });
 
-  it('announces the published half-day schedule without claiming exact times', () => {
-    assert.equal(conference2026.scheduleNotice, '半天粒度日程已发布，具体钟点持续更新中');
-    assert.match(conference2026.programPreview.note, /具体钟点稍后公布/u);
-    assert.doesNotMatch(conference2026.scheduleNotice, /TBD/i);
+  it('omits retired explanatory copy from the schedule data', () => {
+    assert.equal('scheduleNotice' in conference2026, false);
+    assert.equal('note' in conference2026.programPreview, false);
+    assert.match(conference2026.programPreview.status, /持续更新中/u);
   });
 
   it('keeps reserved talk slots fully blank until details are confirmed', () => {
