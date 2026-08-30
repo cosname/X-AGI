@@ -687,9 +687,6 @@ const officialCopyByRoute = new Map([
   ['schedule/index.html', [
     conference2026.dates.compact,
     conference2026.venue.scheduleName,
-    conference2026.scheduleNotice,
-    conference2026.programPreview.note,
-    'HALF-DAY PROGRAM',
     `大会日程与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
     ...conference2026.programPreview.sessions.flatMap((session) => [
       session.sourceTime.replace(/(上午|下午)$/u, ' $1'),
@@ -754,6 +751,7 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
 }
 
 const scheduleSource = await readFile(path.join(outputRoot, 'schedule/index.html'), 'utf8');
+const scheduleVisibleText = visibleText(scheduleSource);
 const scheduleCardCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-card\b[^"]*"/g)].length;
 if (scheduleCardCount !== conference2026.programPreview.sessions.length) {
   fail(`schedule/index.html: expected ${conference2026.programPreview.sessions.length} schedule cards, found ${scheduleCardCount}`);
@@ -762,8 +760,17 @@ const schedulePeriodCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-
 if (schedulePeriodCount !== 4) {
   fail(`schedule/index.html: expected 4 half-day groups, found ${schedulePeriodCount}`);
 }
-if (/计划人数|完成度|对接人/u.test(visibleText(scheduleSource))) {
+if (/计划人数|完成度|对接人/u.test(scheduleVisibleText)) {
   fail('schedule/index.html: internal source fields must not be published');
+}
+for (const retiredCopy of [
+  '半天粒度日程已发布，具体钟点持续更新中',
+  'HALF-DAY PROGRAM',
+  '专题、嘉宾及报告题目持续更新，具体钟点稍后公布。',
+]) {
+  if (scheduleVisibleText.includes(retiredCopy)) {
+    fail(`schedule/index.html: retired explanatory copy must stay removed: "${retiredCopy}"`);
+  }
 }
 if (scheduleSource.includes('schedule-tabs') || scheduleSource.includes('goal-schedule-preview')) {
   fail('schedule/index.html: retired schedule preview structure must not return');
