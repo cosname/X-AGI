@@ -153,6 +153,7 @@ const sessionNumbers = new Map(
     const schedulePage = document.querySelector('[data-schedule-page]');
     const header = document.querySelector('.site-header');
     const navigation = header?.querySelector('.site-navigation');
+    const panel = navigation?.querySelector('.site-navigation__panel');
     const nav = navigation?.querySelector('nav');
     const toggle = navigation?.querySelector('.site-navigation__toggle');
     const closeControl = navigation?.querySelector('.site-navigation__close');
@@ -168,6 +169,7 @@ const sessionNumbers = new Map(
       schedulePage instanceof HTMLElement
       && header instanceof HTMLElement
       && navigation instanceof HTMLElement
+      && panel instanceof HTMLElement
       && nav instanceof HTMLElement
       && toggle instanceof HTMLButtonElement
       && closeControl instanceof HTMLButtonElement
@@ -208,11 +210,31 @@ const sessionNumbers = new Map(
         window.dispatchEvent(new Event('xagi:navigation-change'));
       };
 
+      const syncImmediateMobileNavigationMode = (mode) => {
+        if (!window.matchMedia('(max-width: 47.99rem)').matches) return;
+        navigation.removeAttribute('data-open');
+        navigation.removeAttribute('data-closing');
+        header.removeAttribute('data-menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.removeAttribute('aria-hidden');
+        toggle.removeAttribute('inert');
+        toggle.tabIndex = 0;
+        header.dataset.navMode = mode === 'periods' ? 'inline' : 'compact';
+        if (mode === 'periods') {
+          panel.removeAttribute('aria-hidden');
+          panel.removeAttribute('inert');
+        } else {
+          panel.setAttribute('aria-hidden', 'true');
+          panel.setAttribute('inert', '');
+        }
+      };
+
       const renderPeriodNavigation = (activeIndex) => {
         const nextState = `periods:${activeIndex}`;
         if (renderedState === nextState) return;
         renderedState = nextState;
         header.dataset.scheduleNav = 'periods';
+        syncImmediateMobileNavigationMode('periods');
         nav.setAttribute('aria-label', '大会日程时段');
         const activePeriod = periods[activeIndex];
         toggle.textContent = activePeriod.label;
@@ -255,6 +277,7 @@ const sessionNumbers = new Map(
           restoreAttribute(link, 'aria-current', original.ariaCurrent);
           if (link.parentElement) link.parentElement.hidden = original.hidden;
         });
+        syncImmediateMobileNavigationMode('main');
         announceNavigationChange();
       };
 
@@ -382,9 +405,11 @@ const sessionNumbers = new Map(
     .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
       .site-nav {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+      box-sizing: border-box;
       width: 100%;
       display: grid;
       gap: 0.16rem;
+      padding-inline: 0.45rem;
     }
 
     .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
