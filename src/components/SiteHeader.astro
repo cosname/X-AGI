@@ -468,13 +468,23 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
     if (!header || !inner) return;
     const previous = header.dataset.navMode;
     const forceInlinePeriods = usesInlinePeriodNavigation();
+    let nextMode = 'inline';
     if (phoneNavigation.matches && !forceInlinePeriods) {
-      header.dataset.navMode = 'compact';
-    } else {
-      header.dataset.navMode = 'inline';
-      if (!forceInlinePeriods && !inlineNavigationFits()) header.dataset.navMode = 'compact';
+      nextMode = 'compact';
+    } else if (!forceInlinePeriods && !inlineNavigationFits()) {
+      nextMode = 'compact';
     }
-    if (previous !== header.dataset.navMode) finishCloseNavigation({ force: true });
+    if (previous !== nextMode) {
+      header.dataset.navTransition = 'none';
+      header.dataset.navMode = nextMode;
+      finishCloseNavigation({ force: true });
+      void header.offsetWidth;
+      window.requestAnimationFrame(() => {
+        if (header.dataset.navTransition === 'none') delete header.dataset.navTransition;
+      });
+    } else {
+      header.dataset.navMode = nextMode;
+    }
     if (isCompact()) disableFluidCapsule();
     else capsuleLayout = null;
     syncPanelAccessibility();
