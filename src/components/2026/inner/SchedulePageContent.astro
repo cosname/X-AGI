@@ -345,15 +345,73 @@ const sessionNumbers = new Map(
     color: var(--blue);
   }
 
-  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='compact']
-    .site-navigation {
-    --compact-nav-trigger-width: 7.25rem;
-    --compact-nav-panel-width: min(9rem, calc(100vw - (var(--page-gutter) * 2)));
-  }
+  @media (max-width: 47.99rem) {
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-header__inner {
+      min-height: 4.5rem;
+      gap: 0;
+      padding-inline: max(0.7rem, calc(var(--page-gutter) - 0.55rem));
+    }
 
-  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='compact']
-    .site-navigation__toggle {
-    letter-spacing: 0.03em;
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-brand {
+      display: none;
+    }
+
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-navigation,
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-navigation__panel,
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-navigation__compact-glass,
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-navigation__compact-glass > nav {
+      width: 100%;
+    }
+
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-navigation {
+      margin-left: 0;
+    }
+
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-navigation__panel {
+      --site-nav-inline-gap: 0;
+    }
+
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-nav {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%;
+      display: grid;
+      gap: 0.16rem;
+    }
+
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-nav li {
+      min-width: 0;
+    }
+
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-nav a {
+      width: 100%;
+      min-height: 2.55rem;
+      justify-content: center;
+      padding-inline: 0.12rem;
+      border-bottom: 0;
+      border-radius: 999px;
+      font-size: clamp(0.7rem, 3.1vw, 0.82rem);
+      letter-spacing: 0;
+    }
+
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-nav a[aria-current='location'] {
+      color: var(--blue-deep);
+      background: var(--glass-micro-fill);
+      box-shadow: var(--glass-micro-shadow);
+      -webkit-backdrop-filter: var(--glass-micro-backdrop);
+      backdrop-filter: var(--glass-micro-backdrop);
+    }
   }
 
   .edition-2026-inner .schedule-period-group {

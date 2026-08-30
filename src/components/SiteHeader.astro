@@ -268,6 +268,10 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
   };
 
   const isCompact = () => header?.dataset.navMode === 'compact';
+  const usesInlinePeriodNavigation = () => Boolean(
+    header?.dataset.scheduleNav === 'periods'
+    && phoneNavigation.matches,
+  );
   const canUseFluidCapsule = () => Boolean(
     header
     && panel
@@ -463,11 +467,12 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
   const syncNavMode = () => {
     if (!header || !inner) return;
     const previous = header.dataset.navMode;
-    if (phoneNavigation.matches) {
+    const forceInlinePeriods = usesInlinePeriodNavigation();
+    if (phoneNavigation.matches && !forceInlinePeriods) {
       header.dataset.navMode = 'compact';
     } else {
       header.dataset.navMode = 'inline';
-      if (!inlineNavigationFits()) header.dataset.navMode = 'compact';
+      if (!forceInlinePeriods && !inlineNavigationFits()) header.dataset.navMode = 'compact';
     }
     if (previous !== header.dataset.navMode) finishCloseNavigation({ force: true });
     if (isCompact()) disableFluidCapsule();
