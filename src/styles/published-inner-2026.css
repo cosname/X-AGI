@@ -72,6 +72,18 @@
   line-height: 1.65;
 }
 
+.edition-2026-inner .about-identity-lockup {
+  width: min(22.5rem, 100%);
+  margin: 0 0 1.35rem;
+}
+
+.edition-2026-inner .about-identity-lockup img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(0.78) brightness(1.06);
+}
+
 .edition-2026-inner .info-card .card-body > :first-child {
   margin-top: 0;
 }

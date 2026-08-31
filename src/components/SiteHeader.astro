@@ -30,14 +30,7 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
   <a class="skip-link" href="#main-content">跳到主要内容</a>
   <div class="site-header__inner">
     <a class="site-brand" href={editionPath(edition)} aria-label={`${edition.titleZh} 首页`}>
-      <img
-        class="site-brand__mark"
-        src="/2026/brand/xagi-connect-logo.png"
-        alt=""
-        width="112"
-        height="112"
-        decoding="async"
-      />
+      <span class="site-brand__mark" aria-hidden="true"></span>
       <span class="site-brand__year">{edition.year}</span>
     </a>
     <div class="site-navigation">
