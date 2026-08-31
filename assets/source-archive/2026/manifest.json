@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-08-28",
+  "lastExtendedOn": "2026-08-31",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 49,
-  "uniquePayloadCount": 48,
-  "archiveFileCount": 47,
+  "sourceEntryCount": 58,
+  "uniquePayloadCount": 57,
+  "archiveFileCount": 56,
   "entries": [
     {
       "originalPath": "1.png",
@@ -831,6 +831,140 @@
         "https://www.chaspark.com/"
       ],
       "note": "Supplied Chaspark mark verified as byte-identical to the official FAIC strategic-partner image."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/1.紫底.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-purple-on-purple.png",
+      "status": "archived",
+      "sha256": "f5b87674febbe71d47439549b4e281d527b0dcf5dbe297352a42e974c6e424bc",
+      "bytes": 1481607,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 22557,
+        "height": 8098
+      },
+      "sourceModifiedAt": "2026-08-29T11:37:49.000Z",
+      "runtimeCounterparts": [],
+      "note": "Purple Chinese wordmark lockup on a solid purple field."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/2.紫色透明.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-purple-on-transparent.png",
+      "status": "archived",
+      "sha256": "bdc6e9a739ed10f918ad60d6bd37d32578312369723a873ae36f7dbdb5aa08ad",
+      "bytes": 1304007,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 22557,
+        "height": 8099
+      },
+      "sourceModifiedAt": "2026-08-29T11:37:51.000Z",
+      "runtimeCounterparts": [
+        "public/2026/brand/xagi-wordmark-zh-lockup.webp"
+      ],
+      "note": "Purple Chinese wordmark lockup with a transparent background; the published site uses a trimmed 1600px WebP."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/3.白底黑标.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-black-on-white.png",
+      "status": "archived",
+      "sha256": "280be965f0a4b1e87f1c674dd927ccf396aae052bb88354ab008806be378b1aa",
+      "bytes": 1365020,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 22557,
+        "height": 8098
+      },
+      "sourceModifiedAt": "2026-08-29T11:37:53.000Z",
+      "runtimeCounterparts": [],
+      "note": "Black Chinese wordmark lockup supplied on white."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/4.黑底白标.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-white-on-black.png",
+      "status": "archived",
+      "sha256": "ecafe2a8aa1565ceef19b521d2fea812a9bbc58da05afbb51206a7bfe226e691",
+      "bytes": 1369860,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 22557,
+        "height": 8098
+      },
+      "sourceModifiedAt": "2026-08-29T11:37:54.000Z",
+      "runtimeCounterparts": [],
+      "note": "White Chinese wordmark lockup supplied on black."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/5.双色紫黑.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-purple-black-on-white.png",
+      "status": "archived",
+      "sha256": "1e9071dc1c1f81da081e1279cf50dfb5e31aac92cc826a9d3d27975161ee66af",
+      "bytes": 1443547,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 22557,
+        "height": 8098
+      },
+      "sourceModifiedAt": "2026-08-29T11:37:56.000Z",
+      "runtimeCounterparts": [],
+      "note": "Two-color purple mark and black wordmark lockup supplied on white."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/6.灰底白标.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-white-on-gray.png",
+      "status": "archived",
+      "sha256": "2fa5a5ecbd5bf471a6f9f02d2ff797d686e7f82e757859a9549794bd9a8cc4b9",
+      "bytes": 1415953,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 22557,
+        "height": 8098
+      },
+      "sourceModifiedAt": "2026-08-29T11:37:58.000Z",
+      "runtimeCounterparts": [],
+      "note": "White Chinese wordmark lockup supplied on gray."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/7.白底紫标.png",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-purple-on-white.png",
+      "status": "archived",
+      "sha256": "315e4660da24dffac3c1ef358516b7b7f865257e5febdc32a9603e2a6000b284",
+      "bytes": 1479583,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 22557,
+        "height": 8098
+      },
+      "sourceModifiedAt": "2026-08-29T11:38:00.000Z",
+      "runtimeCounterparts": [],
+      "note": "Purple Chinese wordmark lockup supplied on white."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/logo_svg.svg",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-source.svg",
+      "status": "archived",
+      "sha256": "1da24555b5c2e542c767b05c1d3a279586646a02ad0f61845783b501b5fad268",
+      "bytes": 3421,
+      "mediaType": "image/svg+xml",
+      "dimensions": null,
+      "sourceModifiedAt": "2026-08-29T11:41:44.000Z",
+      "runtimeCounterparts": [
+        "public/2026/brand/xagi-mark.svg",
+        "public/2026/brand/xagi-wordmark-mask.svg"
+      ],
+      "note": "SVG export of the Chinese wordmark lockup. Runtime site uses split mark and wordmark SVG exports; the slogan is typeset."
+    },
+    {
+      "originalPath": "X-AGI_logo_汉字/X-AGI logo 源文件.ai",
+      "canonicalPath": "assets/source-archive/2026/brand/xagi-wordmark-zh-lockup-master.ai",
+      "status": "archived",
+      "sha256": "7189b74f7e05458835919d746ea9226e76c097174277951fac53a1df1c71f509",
+      "bytes": 496360,
+      "mediaType": "application/vnd.adobe.illustrator",
+      "dimensions": null,
+      "sourceModifiedAt": "2026-08-29T11:41:17.000Z",
+      "runtimeCounterparts": [],
+      "note": "Adobe Illustrator master for the Chinese wordmark lockup with the 交叉智能 计算未来 slogan."
     }
   ]
 }

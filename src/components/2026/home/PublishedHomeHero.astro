@@ -28,9 +28,11 @@ const actions = currentEditionActionPaths(edition);
           <span class="conference-hero__year">2026</span>
           <span class="conference-hero__name" data-title-ink>
             <span
-              class="conference-hero__wordmark conference-hero__ink"
+              class="conference-hero__wordmark conference-hero__ink conference-hero__ink--mask"
               data-title-ink-surface
-            >X-AGI</span>
+              role="img"
+              aria-label="X-AGI"
+            ></span>
             <em
               class="conference-hero__title-zh conference-hero__ink"
               data-title-ink-surface
@@ -41,6 +43,10 @@ const actions = currentEditionActionPaths(edition);
           <p class="conference-hero__tagline" lang="en">{conference2026.tagline}</p>
         </div>
         <div class="conference-hero__details">
+          <p class="conference-hero__slogan" lang="zh-Hans" data-connection-exclusion>
+            <span>交叉智能</span>
+            <span>计算未来</span>
+          </p>
           <p class="conference-hero__meta" data-connection-exclusion>
             <time datetime={conference2026.dates.start}>{conference2026.dates.display}</time>
             <span>{conference2026.venue.name}</span>

@@ -241,9 +241,37 @@
 }
 
 .edition-2026 .site-brand__mark {
-  width: 3.15rem;
-  height: 3.15rem;
-  object-fit: contain;
+  width: 2.84rem;
+  height: 2.84rem;
+  display: block;
+  flex: none;
+  background:
+    linear-gradient(122deg, transparent 22%, rgb(255 255 255 / 0.26) 33%, rgb(255 255 255 / 0.05) 42%, transparent 54%),
+    radial-gradient(ellipse 70% 40% at 42% 6%, rgb(255 255 255 / 0.3), transparent 58%),
+    radial-gradient(circle at 18% 24%, rgb(44 144 140 / 0.12), transparent 36%),
+    radial-gradient(circle at 84% 78%, rgb(242 138 43 / 0.08), transparent 34%),
+    linear-gradient(170deg, rgb(168 154 220 / 0.58) 0%, rgb(103 82 200 / 0.52) 44%, rgb(72 52 150 / 0.64) 100%);
+  -webkit-backdrop-filter: blur(14px) saturate(1.36) contrast(1.05);
+  backdrop-filter: blur(14px) saturate(1.36) contrast(1.05);
+  -webkit-mask-image: url('/2026/brand/xagi-mark.svg');
+  mask-image: url('/2026/brand/xagi-mark.svg');
+  mask-mode: alpha;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  filter:
+    drop-shadow(0 1px 1.5px rgb(40 29 105 / 0.1))
+    drop-shadow(0 6px 14px rgb(40 29 105 / 0.08));
+}
+
+.edition-2026 .site-brand:hover .site-brand__mark,
+.edition-2026 .site-brand:focus-visible .site-brand__mark {
+  filter:
+    drop-shadow(0 1px 1.5px rgb(40 29 105 / 0.12))
+    drop-shadow(0 7px 16px rgb(40 29 105 / 0.1));
 }
 
 @media (min-width: 74.01rem) {
@@ -256,17 +284,26 @@
   }
 
   .edition-2026 .site-brand__mark {
-    width: 3.4rem;
-    height: 3.4rem;
+    width: 3.06rem;
+    height: 3.06rem;
   }
 
+}
+
+.edition-2026 .site-header[data-nav-mode='compact'] .site-brand__mark {
+  width: 3rem;
+  height: 3rem;
 }
 
 .edition-2026 .site-brand__year {
   color: var(--ink);
   font-family: var(--font-condensed);
-  font-size: 0.82rem;
+  font-size: 0.98rem;
   letter-spacing: 0.16em;
+}
+
+.edition-2026 .site-header[data-nav-mode='compact'] .site-brand__year {
+  font-size: 0.82rem;
 }
 
 .edition-2026 .site-nav a {
@@ -900,6 +937,23 @@
   line-height: 1.35;
 }
 
+.edition-2026 .conference-hero__slogan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em 0.9em;
+  margin: 0.15rem 0 1.25rem;
+  color: #5a5696;
+  font-family: var(--font-serif);
+  font-size: clamp(1.02rem, 1.4vw, 1.28rem);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+}
+
+.edition-2026 .conference-hero__slogan span {
+  white-space: nowrap;
+}
+
 .edition-2026 .conference-hero__meta {
   display: flex;
   flex-wrap: wrap;
@@ -1292,8 +1346,8 @@
   }
 
   .edition-2026 .site-brand__mark {
-    width: 2.35rem;
-    height: 2.35rem;
+    width: 3rem;
+    height: 3rem;
   }
 
   .edition-2026 .conference-hero__inner {
@@ -1774,20 +1828,21 @@
 .edition-2026 .conference-home .conference-hero__year {
   display: block;
   margin: 0;
-  color: #091548;
+  color: #5c58a8;
   background: none;
-  font-family: var(--font-sans);
-  font-size: 0.71em;
-  font-weight: 300;
-  line-height: 0.8;
-  letter-spacing: 0.015em;
+  font-family: var(--font-display);
+  font-size: 0.82em;
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: 0.04em;
   -webkit-text-fill-color: currentColor;
 }
 
 .edition-2026 .conference-home .conference-hero__name {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  gap: 0.12em;
   margin-top: 0.12em;
   overflow: visible;
   background: none;
@@ -1801,27 +1856,55 @@
 
 .edition-2026 .conference-home .conference-hero__wordmark {
   display: block;
-  overflow: visible;
-  color: #111b68;
+  flex: none;
+  overflow: hidden;
+  width: calc(1em * 1821 / 475);
+  height: 1em;
+  aspect-ratio: 1821 / 475;
+  color: #5c58a8;
   line-height: 1;
+}
+
+/* Custom lockup paths cannot use background-clip:text; title-ink particles fill the mask instead. */
+.edition-2026 .conference-home .conference-hero__ink--mask {
+  background-color: #5c58a8;
+  -webkit-mask-image: url('/2026/brand/xagi-wordmark-mask.svg');
+  mask-image: url('/2026/brand/xagi-wordmark-mask.svg');
+  mask-mode: alpha;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
 
 .edition-2026 .conference-home .conference-hero__title-zh {
   display: block;
-  margin-left: 0.08em;
-  margin-bottom: 0.22em;
+  flex: none;
   overflow: visible;
-  color: #111b68;
+  color: #5c58a8;
   background: none;
   font-family: var(--font-serif);
-  font-size: 0.765em;
+  font-size: 1.14em;
   font-style: normal;
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
+  transform: translateY(-0.08em) scaleY(0.95);
+  transform-origin: left bottom;
 }
 
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .edition-2026 .conference-home .conference-hero__year {
+    color: transparent;
+    background-image: radial-gradient(circle at 50% 50%, #5c58a8 1.2px, transparent 1.34px);
+    background-size: 3.4px 3.4px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .edition-2026 .conference-home .conference-hero__ink {
     --title-mx: 50%;
     --title-my: 50%;
@@ -1841,8 +1924,15 @@
         rgb(236 232 247 / var(--title-glow-strength)) 0%,
         rgb(236 232 247 / 0) 72%
       ),
-      radial-gradient(circle at 50% 50%, #111b68 1.45px, transparent 1.58px);
+      radial-gradient(circle at 50% 50%, #5c58a8 1.45px, transparent 1.58px);
     background-size: 100% 100%, 4.2px 4.2px;
+  }
+
+  .edition-2026 .conference-home .conference-hero__ink--mask {
+    background-color: transparent;
+    background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    -webkit-text-fill-color: unset;
   }
 
   .edition-2026 .conference-home .conference-hero__title-zh {
@@ -1852,7 +1942,7 @@
         rgb(236 232 247 / var(--title-glow-strength)) 0%,
         rgb(236 232 247 / 0) 72%
       ),
-      radial-gradient(circle at 50% 50%, #111b68 1.38px, transparent 1.5px);
+      radial-gradient(circle at 50% 50%, #5c58a8 1.38px, transparent 1.5px);
     background-size: 100% 100%, 3.55px 3.55px;
   }
 }
@@ -2356,7 +2446,7 @@
   }
 
   .edition-2026 .conference-home .conference-hero__year {
-    font-size: 0.7em;
+    font-size: 0.88em;
   }
 
   .edition-2026 .conference-home .conference-hero__name {
@@ -2370,19 +2460,18 @@
         rgb(236 232 247 / var(--title-glow-strength)) 0%,
         rgb(236 232 247 / 0) 72%
       ),
-      radial-gradient(circle at 50% 50%, #111b68 1.08px, transparent 1.2px);
+      radial-gradient(circle at 50% 50%, #5c58a8 1.08px, transparent 1.2px);
     background-size: 100% 100%, 3.2px 3.2px;
   }
 
   .edition-2026 .conference-home .conference-hero__title-zh {
-    font-size: 0.765em;
     background-image:
       radial-gradient(
         circle var(--title-glow-r) at var(--title-mx) var(--title-my),
         rgb(236 232 247 / var(--title-glow-strength)) 0%,
         rgb(236 232 247 / 0) 72%
       ),
-      radial-gradient(circle at 50% 50%, #111b68 1.05px, transparent 1.16px);
+      radial-gradient(circle at 50% 50%, #5c58a8 1.05px, transparent 1.16px);
     background-size: 100% 100%, 2.75px 2.75px;
   }
 
@@ -4355,6 +4444,19 @@ button:focus-visible {
     -webkit-text-fill-color: CanvasText;
   }
 
+  .edition-2026 .conference-home .conference-hero__ink--mask {
+    color: transparent;
+    background: CanvasText;
+    -webkit-text-fill-color: unset;
+  }
+
+  .edition-2026 .site-brand__mark {
+    background: CanvasText;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    filter: none;
+  }
+
   .edition-2026 .site-nav__fluid-capsule,
   .edition-2026 .glass-action-group__lens,
   .edition-2026.edition-goal-home .conference-hero__action-capsule {
@@ -5308,7 +5410,7 @@ button:focus-visible {
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
   position: absolute;
-  bottom: calc(50% + 1.5rem);
+  bottom: calc(50% + 3.05rem);
   left: 0;
   margin: 0;
   font-size: var(--badge-title-size);
@@ -5317,34 +5419,29 @@ button:focus-visible {
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__year {
-  font-size: 0.7em;
+  font-size: 0.82em;
+  font-weight: 400;
   line-height: 0.9;
-  letter-spacing: 0.01em;
-  transform: scaleX(1.28);
+  letter-spacing: 0.04em;
+  transform: scaleX(1.1);
   transform-origin: left center;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {
   justify-content: flex-start;
-  margin-top: 0.16em;
+  align-items: center;
+  gap: 0.12em;
+  margin-top: 0.1em;
   font-size: 0.94em;
-  line-height: 0.92;
-  transform: scaleX(1.17);
-  transform-origin: left center;
+  line-height: 1;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__wordmark {
-  line-height: 0.92;
-  transform: scaleY(1.06);
-  transform-origin: left center;
+  line-height: 1;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__title-zh {
-  margin-bottom: 0.15em;
-  font-size: 0.82em;
-  line-height: 0.92;
-  transform: scaleY(1.12);
-  transform-origin: left center;
+  line-height: 1;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
@@ -5378,11 +5475,18 @@ button:focus-visible {
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__details {
   position: absolute;
-  top: calc(50% + 2.6rem);
+  top: calc(50% + 1.35rem);
   left: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.edition-2026.edition-goal-home .conference-hero--badge .conference-hero__slogan {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+  letter-spacing: 0.2em;
+  text-align: left;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__meta {
@@ -5518,12 +5622,13 @@ button:focus-visible {
     flex-direction: column;
     align-items: center;
     margin-bottom: 1.25rem;
-    font-size: clamp(4.6rem, 15vw, 6rem);
+    font-size: clamp(3.7rem, 12.4vw, 5.4rem);
     line-height: 0.87;
     text-align: center;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__year {
+    font-size: 0.88em;
     transform-origin: center;
   }
 
@@ -5538,7 +5643,7 @@ button:focus-visible {
     width: 100%;
     max-width: none;
     justify-content: center;
-    margin-bottom: 1.35rem;
+    margin-bottom: 0.4rem;
     transform: none;
   }
 
@@ -5561,6 +5666,15 @@ button:focus-visible {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__slogan {
+    justify-content: center;
+    max-width: 20rem;
+    margin-bottom: 1.35rem;
+    font-size: clamp(0.98rem, 3.4vw, 1.12rem);
+    letter-spacing: 0.16em;
+    text-align: center;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__meta {
@@ -5588,7 +5702,7 @@ button:focus-visible {
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
-    font-size: clamp(3.8rem, 19vw, 5.4rem);
+    font-size: clamp(3.2rem, 16vw, 4.6rem);
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {

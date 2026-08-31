@@ -97,6 +97,9 @@ const runtimeBrandFiles = [
   'goal-paper-texture.webp',
   'share-2026.png',
   'xagi-connect-logo.png',
+  'xagi-mark.svg',
+  'xagi-wordmark-mask.svg',
+  'xagi-wordmark-zh-lockup.webp',
 ];
 const brandMasterFiles = [
   'README.md',
