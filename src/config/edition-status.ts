@@ -57,7 +57,7 @@ export function currentEditionPageCopy(
     case 'schedule':
       return {
         page,
-        label: '日程安排',
+        label: '日程安排与嘉宾',
         description: '三天会议流程、分会场与嘉宾报告。',
         status: conference.name,
       };

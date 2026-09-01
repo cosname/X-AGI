@@ -1,8 +1,9 @@
 ---
 import { conference2026 } from '../../../data/conference2026';
+import { conference2026PersonForName } from '../../../data/conference2026-people.ts';
+import SchedulePersonProfile from './SchedulePersonProfile.astro';
 
 const program = conference2026.programPreview;
-const programStatus = program.status.replace(/\.+$/, '');
 const weekdayByShortDate = new Map(
   conference2026.schedule.map((day) => [day.date.slice(5), day.weekday]),
 );
@@ -26,7 +27,7 @@ function describeTimeSlot(sourceTime: string) {
   const weekday = weekdayByShortDate.get(shortDate);
   const period = match[3];
   return {
-    dateLabel: `${Number(match[1])} 月 ${Number(match[2])} 日${weekday ? ` · ${weekday}` : ''}`,
+    dateLabel: `${Number(match[1])} 月 ${Number(match[2])} 日${weekday ? ` · ${weekday}` : ''} · ${period}`,
     id: `schedule-${match[1]}${match[2]}-${period === '上午' ? 'am' : 'pm'}`,
     period,
     shortDate,
@@ -57,10 +58,17 @@ const sessionNumbers = new Map(
       <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
     </header>
 
-    <section class="schedule-confirmed" aria-labelledby="schedule-confirmed-title">
-      <header class="schedule-confirmed__header">
-        <h2 id="schedule-confirmed-title">大会日程与嘉宾（{programStatus}）</h2>
-      </header>
+    <section class="schedule-confirmed" aria-label="大会日程与嘉宾">
+      <div class="schedule-confirmed__header">
+        <button
+          class="schedule-profiles-toggle"
+          type="button"
+          aria-expanded="false"
+          data-schedule-profiles-toggle
+        >
+          展开全部演讲
+        </button>
+      </div>
 
       {programGroups.map((group) => (
         <section
@@ -70,14 +78,7 @@ const sessionNumbers = new Map(
           data-schedule-nav-label={`${group.shortDate} ${group.period}`}
         >
           <header class="schedule-period-heading">
-            <div>
-              <h3 id={`${group.id}-title`}>{group.dateLabel}</h3>
-            </div>
-            <div class="schedule-period-heading__meta">
-              <span class="schedule-period-heading__source-time">{group.shortDate} {group.period}</span>
-              <strong aria-hidden="true">{group.period}</strong>
-              <span>{group.sessions.length} 个专题</span>
-            </div>
+            <h3 id={`${group.id}-title`}>{group.dateLabel}</h3>
           </header>
 
           <div class="schedule-period-cards">
@@ -85,51 +86,92 @@ const sessionNumbers = new Map(
               const sessionNumber = sessionNumbers.get(session) ?? 0;
               const hasPendingChair = session.chairs.some((chair) => isPendingChair(chair.name));
               return (
-                <article class="info-card schedule-card schedule-topic-card">
+                <article
+                  class="info-card schedule-card schedule-topic-card"
+                  id={`schedule-session-${String(sessionNumber).padStart(2, '0')}`}
+                >
                   <div class="card-header">
                     <span class="schedule-topic-card__number">
                       Session {String(sessionNumber).padStart(2, '0')}
                     </span>
                     <span class="schedule-topic-card__title">{session.title}</span>
                   </div>
-                  <div class:list={['session-chair', { 'session-chair--pending': hasPendingChair }]}>
-                    {hasPendingChair ? (
-                      '主席待确认'
-                    ) : (
-                      <>
-                        <span class="session-chair__label">主席</span>
-                        <span class="session-chair__people">
-                          {session.chairs.map((chair, chairIndex) => (
+                  <section
+                    class:list={['session-chair', { 'session-chair--pending': hasPendingChair }]}
+                    aria-label="Chair"
+                    data-schedule-chair-card
+                  >
+                    <span class="session-chair__label">Chair</span>
+                    <div class="session-chair__people">
+                      {hasPendingChair ? (
+                        <span class="session-chair__person session-chair__person--pending">待确认</span>
+                      ) : (
+                        session.chairs.map((chair, chairIndex) => {
+                          const person = conference2026PersonForName(chair.name);
+                          return (
                             <>
-                              {chairIndex > 0 && (
-                                <span class="schedule-person-separator" aria-hidden="true">/</span>
+                              {person ? (
+                                <SchedulePersonProfile
+                                  person={person}
+                                  displayName={chair.name}
+                                  displayAffiliation={chair.affiliation}
+                                  disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-chair-${person.id}-${chairIndex + 1}`}
+                                  role="chair"
+                                />
+                              ) : (
+                                <span class="session-chair__person schedule-person-identity">
+                                  <strong>{chair.name}</strong>
+                                  {chair.affiliation && (
+                                    <span class="schedule-person-identity__affiliation">
+                                      <span class="schedule-person-identity__affiliation-text">
+                                        {chair.affiliation}
+                                      </span>
+                                    </span>
+                                  )}
+                                </span>
                               )}
-                              <span>
-                                {chair.name}
-                                {chair.affiliation ? ` | ${chair.affiliation}` : ''}
-                              </span>
                             </>
-                          ))}
-                        </span>
-                      </>
-                    )}
-                  </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  </section>
                   <div class="card-body">
                     <div class="session-list">
                       {session.speakers.length > 0 ? (
-                        session.speakers.map((speaker) => (
-                          <div class="session-item session-item--speaker">
-                            <div class="session-speaker">
-                              <span class="session-speaker__name">
-                                {speaker.name}
-                                {speaker.affiliation ? ` | ${speaker.affiliation}` : ''}
-                              </span>
-                              {speaker.talkTitle && (
-                                <p class="session-speaker__talk-title">{speaker.talkTitle}</p>
-                              )}
+                        session.speakers.map((speaker, speakerIndex) => {
+                          const person = conference2026PersonForName(speaker.name);
+                          return (
+                            <div class="session-item session-item--speaker">
+                              <div class="session-speaker">
+                                {speaker.talkTitle && (
+                                  <p class="session-speaker__talk-title">{speaker.talkTitle}</p>
+                                )}
+                                {person ? (
+                                  <SchedulePersonProfile
+                                    person={person}
+                                    displayName={speaker.name}
+                                    displayAffiliation={speaker.affiliation}
+                                    disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`}
+                                    role="speaker"
+                                    defaultOpen={session.title.trim().toLowerCase() === 'keynote'}
+                                  />
+                                ) : (
+                                  <span class="session-speaker__name schedule-person-identity">
+                                    <strong>{speaker.name}</strong>
+                                    {speaker.affiliation && (
+                                      <span class="schedule-person-identity__affiliation">
+                                        <span class="schedule-person-identity__affiliation-text">
+                                          {speaker.affiliation}
+                                        </span>
+                                      </span>
+                                    )}
+                                  </span>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        ))
+                          );
+                        })
                       ) : (
                         <div class="session-item session-item--reserved schedule-topic-card__empty">
                           <div class="session-title">{program.status}</div>
@@ -163,6 +205,62 @@ const sessionNumbers = new Map(
     const links = nav
       ? [...nav.querySelectorAll('.site-nav a[data-nav-capsule-target]')]
       : [];
+    let requestNavigationSync = () => undefined;
+
+    const elementForHash = (hash) => {
+      if (!hash) return null;
+      try {
+        return document.getElementById(decodeURIComponent(hash.slice(1)));
+      } catch {
+        return null;
+      }
+    };
+
+    const personProfiles = schedulePage instanceof HTMLElement
+      ? [...schedulePage.querySelectorAll('[data-schedule-person-profile]')]
+          .filter((profile) => profile instanceof HTMLDetailsElement)
+      : [];
+    const speakerProfiles = personProfiles
+      .filter((profile) => profile.dataset.personRole === 'speaker');
+    const profilesToggle = schedulePage instanceof HTMLElement
+      ? schedulePage.querySelector('[data-schedule-profiles-toggle]')
+      : null;
+
+    const syncProfilesToggle = () => {
+      if (!(profilesToggle instanceof HTMLButtonElement)) return;
+      const allOpen = speakerProfiles.length > 0
+        && speakerProfiles.every((profile) => profile.open);
+      profilesToggle.textContent = allOpen ? '收起全部演讲' : '展开全部演讲';
+      profilesToggle.setAttribute('aria-expanded', String(allOpen));
+      profilesToggle.disabled = speakerProfiles.length === 0;
+    };
+
+    if (profilesToggle instanceof HTMLButtonElement) {
+      profilesToggle.addEventListener('click', () => {
+        const shouldOpen = !speakerProfiles.every((profile) => profile.open);
+        for (const profile of speakerProfiles) profile.open = shouldOpen;
+        syncProfilesToggle();
+        requestNavigationSync();
+      });
+    }
+
+    for (const profile of personProfiles) {
+      profile.addEventListener('toggle', () => {
+        syncProfilesToggle();
+        requestNavigationSync();
+      });
+    }
+
+    const openProfileHashTarget = () => {
+      const target = elementForHash(window.location.hash);
+      if (!(target instanceof HTMLDetailsElement) || !target.matches('[data-schedule-person-profile]')) {
+        return;
+      }
+      target.open = true;
+      window.requestAnimationFrame(requestNavigationSync);
+    };
+    window.addEventListener('hashchange', openProfileHashTarget);
+    syncProfilesToggle();
 
     if (
       schedulePage instanceof HTMLElement
@@ -345,7 +443,7 @@ const sessionNumbers = new Map(
         renderPeriodNavigation(activeIndex);
       };
 
-      const requestNavigationSync = () => {
+      requestNavigationSync = () => {
         if (scrollFrame) return;
         scrollFrame = window.requestAnimationFrame(syncNavigation);
       };
@@ -388,9 +486,7 @@ const sessionNumbers = new Map(
           return;
         }
         const destination = new URL(link.href, window.location.href);
-        const target = destination.hash
-          ? document.getElementById(decodeURIComponent(destination.hash.slice(1)))
-          : null;
+        const target = elementForHash(destination.hash);
         if (!target) return;
         event.preventDefault();
         window.history.pushState(null, '', destination.hash);
@@ -404,14 +500,12 @@ const sessionNumbers = new Map(
       window.addEventListener('pagehide', clearMobileMenuActivationGuard);
       requestNavigationSync();
     }
+
+    openProfileHashTarget();
   }
 </script>
 
 <style is:inline>
-  .edition-2026-inner .schedule-confirmed__header h2 {
-    text-wrap: balance;
-  }
-
   .edition-2026-inner .schedule-confirmed__note {
     max-width: 48rem;
     margin: 0.7rem 0 0;
@@ -513,10 +607,6 @@ const sessionNumbers = new Map(
   }
 
   .edition-2026-inner .schedule-period-heading {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1.5rem;
     margin-bottom: 1rem;
     padding: 0 0.25rem 0.85rem;
     border-bottom: 1px solid rgb(103 82 200 / 0.25);
@@ -527,33 +617,6 @@ const sessionNumbers = new Map(
     color: #171a48;
     font-size: clamp(1.35rem, 2.5vw, 1.8rem);
     line-height: 1.2;
-  }
-
-  .edition-2026-inner .schedule-period-heading__meta {
-    display: grid;
-    gap: 0.15rem;
-    text-align: right;
-  }
-
-  .edition-2026-inner .schedule-period-heading__source-time {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .edition-2026-inner .schedule-period-heading__meta strong {
-    color: #37287f;
-    font-size: 1.05rem;
-  }
-
-  .edition-2026-inner .schedule-period-heading__meta span {
-    color: #777b8f;
-    font-size: 0.78rem;
   }
 
   .edition-2026-inner .schedule-period-cards .info-card:last-child {
@@ -568,10 +631,10 @@ const sessionNumbers = new Map(
 
   .edition-2026-inner .schedule-topic-card__number {
     flex: 0 0 auto;
-    font-size: 0.72rem;
-    font-weight: 750;
-    letter-spacing: 0.08em;
-    opacity: 0.72;
+    font-size: 0.84rem;
+    font-weight: 760;
+    letter-spacing: 0.07em;
+    opacity: 0.84;
   }
 
   .edition-2026-inner .schedule-topic-card__title {
@@ -580,27 +643,28 @@ const sessionNumbers = new Map(
   }
 
   .edition-2026-inner .session-chair {
-    display: flex;
-    align-items: baseline;
-    gap: 0.7rem;
-  }
-
-  .edition-2026-inner .session-chair__label {
-    flex: 0 0 auto;
-    color: #6752c8;
-    font-size: 0.76rem;
-    letter-spacing: 0.08em;
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.75rem;
   }
 
   .edition-2026-inner .session-chair__people {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 0.55rem;
+    display: grid;
+    min-width: 0;
+    gap: 0.35rem;
   }
 
-  .edition-2026-inner .schedule-person-separator {
-    color: #a0a4b3;
-    font-weight: 400;
+  .edition-2026-inner .session-chair__person {
+    min-height: 2.75rem;
+    min-width: 0;
+  }
+
+  .edition-2026-inner .session-chair__person--pending {
+    display: flex;
+    align-items: center;
+    color: #8a93a5;
+    font-weight: 550;
   }
 
   .edition-2026-inner .schedule-topic-card .session-item--speaker .session-speaker {
@@ -613,10 +677,11 @@ const sessionNumbers = new Map(
   }
 
   .edition-2026-inner .session-speaker__talk-title {
-    margin: 0.42rem 0 0;
-    color: #686d80;
-    font-size: 0.88rem;
-    line-height: 1.65;
+    margin: 0 0 0.42rem;
+    color: #4f3caf;
+    font-size: 0.94rem;
+    font-weight: 650;
+    line-height: 1.55;
   }
 
   @media (max-width: 767.98px) {
@@ -634,13 +699,13 @@ const sessionNumbers = new Map(
   }
 
   @media (max-width: 575.98px) {
-    .edition-2026-inner .schedule-period-heading {
-      align-items: flex-start;
+    .edition-2026-inner .session-chair {
+      grid-template-columns: 1fr;
+      gap: 0;
     }
 
-    .edition-2026-inner .session-chair {
-      display: grid;
-      gap: 0.35rem;
+    .edition-2026-inner .session-chair__label {
+      min-height: 2rem;
     }
   }
 </style>

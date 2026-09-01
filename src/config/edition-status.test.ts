@@ -29,6 +29,13 @@ describe('current edition destinations', () => {
     assert.equal(items.filter((item) => item.page === 'register').length, 1);
     assert.equal(editionPages(currentEdition).filter((page) => page === 'register').length, 1);
   });
+
+  it('keeps Chair and Speaker profiles inside the schedule destination', () => {
+    const items = editionNavigation(currentEdition);
+    assert.equal(items.some((item) => item.page === 'speakers'), false);
+    assert.equal(editionPages(currentEdition).some((page) => page === 'speakers'), false);
+    assert.equal(currentEditionPageCopy('schedule').label, '日程安排与嘉宾');
+  });
 });
 
 describe('live registration and poster status', () => {

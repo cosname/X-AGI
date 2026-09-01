@@ -48,6 +48,7 @@ public/
     brand/                      站点实际使用的品牌图片和纸面纹理
     legal/                      2026 自有备案图标
     logos/                      每个组织单位唯一选定的正式 Logo
+    people/                     主席与演讲嘉宾的方形 WebP 头像
 src/
   assets/2026/
     goal-history/               17 场历届影像的 51 张本地源图
@@ -63,6 +64,8 @@ src/
   data/
     conference2026.ts           除专题嘉宾外的 2026 官方业务内容
     conference2026-program.generated.ts 腾讯文档生成的专题、主席和嘉宾快照
+    conference2026-people.generated.ts 参会表生成的公开人物资料快照
+    conference2026-people.ts   人物资料、日程角色与本地头像的公开组合
     goal-history.ts             17 场历届影像、说明和内部来源记录
     partner-logo-assets-2026.ts 2026 正式组织单位 Logo 对照
   layouts/
@@ -79,6 +82,7 @@ src/
     global.css                  正式首屏、导航和共享组件
 scripts/
   sync-tencent-program.mjs      校验腾讯文档 CSV 并生成公开日程数据
+  sync-attendee-people.mjs      白名单读取参会表并生成公开人物资料
   manifests/public-2025.sha256  冻结归档的哈希与字节清单
   validate-build.mjs            构建产物和跨年份边界校验
   configure-oss.mjs             本机 ossutil 配置
@@ -87,8 +91,10 @@ scripts/
 
 ## 内容与素材所有权
 
-2026 文案、票价、组织单位、详细日程和报名状态只在 `src/data/conference2026.ts` 中维护。
+2026 文案、票价、组织单位、基础日程和报名状态只在 `src/data/conference2026.ts` 中维护。
 专题、主席和嘉宾由腾讯文档生成到 `src/data/conference2026-program.generated.ts`，不得手工编辑生成文件。
+主席与演讲嘉宾的公开简介和报告摘要由参会表生成到 `src/data/conference2026-people.generated.ts`，并在日程卡片中原位展开，不得手工编辑生成文件。
+参会表中的订单、审核、支付、邮箱、电话、微信和对接信息属于私密字段，禁止进入源码、日志、测试夹具、构建产物或公开页面。
 页面组件负责表现，不应复制独立业务数据。
 尚未确认的讲者、报告、赞助商、时间或数字不得自行补写。
 
@@ -165,6 +171,22 @@ npm test
 当前 `/schedule/` 公开专题、主席和嘉宾。
 生成数据同时公开来源中已确认的报告题目，并按 `时间` 字段展示上午、下午分组；具体钟点确认后再进一步细化。
 
+## 主席与演讲嘉宾资料同步
+
+人物资料来源是会务导出的 Chair 与 Speaker 参会表。
+同步器只允许读取 `门票类型、姓名、学校/单位、院系/部门、个人介绍、头像照片、演讲标题、演讲摘要` 八列，并明确丢弃其余列。
+原始 XLS、转换出的 CSV 和带有远程头像地址的中间文件都不得提交到仓库。
+
+```bash
+npm run people:sync -- --workbook /absolute/path/to/attendee-list.xls
+npm test
+```
+
+同步 `.xls` 或 `.xlsx` 需要本机安装 LibreOffice，并可通过 `soffice` 命令调用。
+同步器把同名 Chair 与 Speaker 合并成一个人物资料，并为中英文日程别名保留显式映射。
+头像必须下载为 2026 站点本地素材，原始字节归档到 `assets/source-archive/2026/people/`，运行时方形 WebP 放在 `public/2026/people/`。
+无法无歧义确认身份的照片必须使用统一占位，不能从集体照猜测或裁人。
+
 ## 构建约束
 
 `scripts/validate-build.mjs` 负责保护以下契约：
@@ -176,6 +198,7 @@ npm test
 - 冻结归档不得请求当前 `/2026/**` 或 Astro `/_assets/**`
 - `public/2025/` 必须与 `scripts/manifests/public-2025.sha256` 的哈希和字节数一致
 - 历届影像、会场素材、伙伴 Logo 和公开品牌文件必须有明确且互相对应的消费者
+- 日程内人物详情只能使用本地 2026 头像，必须保持原生展开语义，并不得泄露参会表私密字段
 - `dist/` 不得包含 `/goal/**`、`/next/**` 或品牌母版
 - OSS 同步脚本不得包含 `--delete`
 

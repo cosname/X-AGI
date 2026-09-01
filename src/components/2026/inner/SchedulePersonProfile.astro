@@ -1,0 +1,101 @@
+---
+import type {
+  Conference2026Person,
+  Conference2026PersonRole,
+} from '../../../data/conference2026-people.ts';
+
+interface Props {
+  person: Conference2026Person;
+  displayName: string;
+  displayAffiliation?: string;
+  disclosureId: string;
+  role: Conference2026PersonRole;
+  defaultOpen?: boolean;
+}
+
+const {
+  person,
+  displayName,
+  displayAffiliation = '',
+  disclosureId,
+  role,
+  defaultOpen = false,
+} = Astro.props;
+
+const canonicalName = person.name === displayName
+  ? person.name
+  : `${person.name} / ${displayName}`;
+const profileAffiliation = person.department
+  ? `${person.affiliation} · ${person.department}`
+  : person.affiliation;
+---
+
+<details
+  class:list={[
+    'schedule-person-profile',
+    `schedule-person-profile--${role}`,
+  ]}
+  id={disclosureId}
+  data-schedule-person-profile
+  data-person-id={person.id}
+  data-person-role={role}
+  data-default-open={defaultOpen ? 'true' : undefined}
+  open={defaultOpen}
+>
+  <summary class="schedule-person-profile__summary">
+    <span class="schedule-person-profile__summary-copy schedule-person-identity">
+      <strong>{displayName}</strong>
+      {displayAffiliation && (
+        <span class="schedule-person-identity__affiliation">
+          <span class="schedule-person-identity__affiliation-text">{displayAffiliation}</span>
+        </span>
+      )}
+    </span>
+    <span class="schedule-person-profile__toggle" aria-hidden="true">
+      <svg viewBox="0 0 20 20" focusable="false">
+        <path d="m5 7.5 5 5 5-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </span>
+  </summary>
+
+  <div class="schedule-person-profile__details">
+    <div class="schedule-person-profile__portrait-frame">
+      {person.portraitSrc ? (
+        <img
+          class="schedule-person-profile__portrait"
+          src={person.portraitSrc}
+          alt={`${person.name}头像`}
+          width="640"
+          height="640"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <span class="schedule-person-profile__portrait-placeholder" aria-hidden="true">
+          {person.name.slice(0, 1)}
+        </span>
+      )}
+    </div>
+
+    <div class="schedule-person-profile__copy">
+      {role === 'speaker' && person.abstract && (
+        <section data-profile-section="abstract">
+          <h4>演讲内容摘要</h4>
+          <p>{person.abstract}</p>
+        </section>
+      )}
+
+      <section data-profile-section="bio">
+        <h4>{role === 'speaker' ? '演讲嘉宾简介' : 'Chair 简介'}</h4>
+        <p class="schedule-person-profile__identity"><strong>{canonicalName}</strong></p>
+        <p class="schedule-person-profile__affiliation">{profileAffiliation}</p>
+        {person.bio ? (
+          <p>{person.bio}</p>
+        ) : (
+          <p class="schedule-person-profile__pending">个人简介补充中。</p>
+        )}
+        {person.profileUrl && <p><a href={person.profileUrl}>个人主页</a></p>}
+      </section>
+    </div>
+  </div>
+</details>
