@@ -9,6 +9,7 @@ import {
   capsuleForVerticalGlassPointer,
   glassActivationShouldDismiss,
   glassGroupAllowsScrub,
+  glassGroupUsesVerticalAxis,
 } from './glass-action-group-state.ts';
 import { capsuleOutlinePath } from './navigation-capsule.ts';
 
@@ -117,11 +118,19 @@ test('vertical glass pointer clamps above and below a stack', () => {
   );
 });
 
-test('glass scrub stays off for inline header navigation', () => {
+test('glass scrub stays off for main inline navigation but supports inline schedule periods', () => {
   assert.equal(glassGroupAllowsScrub(false, 'compact'), false);
   assert.equal(glassGroupAllowsScrub(true, 'inline'), false);
+  assert.equal(glassGroupAllowsScrub(true, 'inline', true), true);
   assert.equal(glassGroupAllowsScrub(true, 'compact'), true);
   assert.equal(glassGroupAllowsScrub(true, undefined), true);
+});
+
+test('schedule periods switch the compact navigation glass to a horizontal axis', () => {
+  assert.equal(glassGroupUsesVerticalAxis('vertical', undefined, 'inline'), true);
+  assert.equal(glassGroupUsesVerticalAxis('vertical', 'periods', 'inline'), false);
+  assert.equal(glassGroupUsesVerticalAxis('vertical', 'periods', 'compact'), true);
+  assert.equal(glassGroupUsesVerticalAxis(undefined, 'periods', 'inline'), false);
 });
 
 test('glass activation dismisses the lens instead of returning to rest', () => {

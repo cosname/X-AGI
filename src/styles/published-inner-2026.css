@@ -38,6 +38,15 @@
   gap: 0.45rem 0.75rem;
 }
 
+.edition-2026-inner .page-header .page-header__meta {
+  margin-top: 0.7rem;
+  color: rgb(17 19 66 / 0.56);
+  font-size: 0.9rem;
+  font-weight: 560;
+  letter-spacing: 0.015em;
+  line-height: 1.4;
+}
+
 .edition-2026-inner .status-badge {
   display: inline-flex;
   align-items: center;
@@ -169,69 +178,8 @@
   white-space: nowrap;
 }
 
-.edition-2026-inner .schedule-intro {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.edition-2026-inner .schedule-intro p {
-  margin: 0;
-}
-
-.edition-2026-inner .schedule-intro p:last-child {
-  color: #6d7482;
-  font-size: 0.9rem;
-  text-align: right;
-}
-
 .edition-2026-inner .schedule-confirmed {
-  padding-top: 0.85rem;
-}
-
-.edition-2026-inner .schedule-confirmed__header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid;
-}
-
-.edition-2026-inner .schedule-profiles-toggle {
-  display: inline-flex;
-  min-height: 2.4rem;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 0.88rem;
-  border: 1px solid rgb(79 60 175 / 0.3);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 0.42);
-  color: #4f3caf;
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 680;
-  cursor: pointer;
-  align-self: flex-end;
-  transition:
-    border-color 160ms ease,
-    background-color 160ms ease,
-    color 160ms ease;
-}
-
-.edition-2026-inner .schedule-profiles-toggle:hover {
-  border-color: rgb(79 60 175 / 0.52);
-  background: rgb(103 82 200 / 0.08);
-  color: #37287f;
-}
-
-.edition-2026-inner .schedule-profiles-toggle:focus-visible {
-  outline: 3px solid rgb(103 82 200 / 0.4);
-  outline-offset: 2px;
+  padding-top: 0;
 }
 
 .edition-2026-inner .schedule-card {
@@ -732,15 +680,6 @@
   .edition-2026-inner .hotel-offer__code {
     width: 156px;
     margin-left: 15px;
-  }
-
-  .edition-2026-inner .schedule-intro {
-    display: block;
-  }
-
-  .edition-2026-inner .schedule-intro p:last-child {
-    margin-top: 0.45rem;
-    text-align: left;
   }
 
   .edition-2026-inner .session-title {

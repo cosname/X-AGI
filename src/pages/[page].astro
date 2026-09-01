@@ -10,6 +10,7 @@ import GuidePageContent from '../components/2026/inner/GuidePageContent.astro';
 import RegisterPageContent from '../components/2026/inner/RegisterPageContent.astro';
 import { currentEditionPageCopy, type CurrentEditionInnerPage } from '../config/edition-status';
 import { currentEdition, editionPath } from '../config/site';
+import { conference2026 } from '../data/conference2026';
 
 type PublishedPage = Exclude<CurrentEditionInnerPage, 'speakers'>;
 
@@ -35,6 +36,9 @@ const copy = currentEditionPageCopy(page);
     edition={currentEdition}
     title={copy.label}
     status={page === 'register' || page === 'poster' ? copy.status : undefined}
+    meta={page === 'schedule'
+      ? `${conference2026.dates.compact} / ${conference2026.venue.scheduleName}`
+      : undefined}
   >
     <figure slot="art" class="goal-page-header-art" aria-hidden="true">
       <MastheadPixelField pointerEffect="ripple" />

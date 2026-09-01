@@ -5,6 +5,7 @@ import {
   capsuleForVerticalGlassPointer,
   glassActivationShouldDismiss,
   glassGroupAllowsScrub,
+  glassGroupUsesVerticalAxis,
   type GlassCapsuleGeometry,
   type GlassTargetGeometry,
 } from './glass-action-group-state';
@@ -28,11 +29,19 @@ function initializeGlassActionGroup(root: HTMLElement) {
   const { signal } = controller;
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const vertical = root.dataset.glassAxis === 'vertical';
   const scrubEnabled = root.hasAttribute('data-glass-scrub');
   const activateOnRelease = root.hasAttribute('data-glass-activate-on-release');
   const header = root.closest<HTMLElement>('.site-header');
-  const canScrub = () => glassGroupAllowsScrub(scrubEnabled, header?.dataset.navMode);
+  const usesVerticalAxis = () => glassGroupUsesVerticalAxis(
+    root.dataset.glassAxis,
+    header?.dataset.scheduleNav,
+    header?.dataset.navMode,
+  );
+  const canScrub = () => glassGroupAllowsScrub(
+    scrubEnabled,
+    header?.dataset.navMode,
+    header?.dataset.scheduleNav === 'periods',
+  );
   const resizeObserver = new ResizeObserver(() => {
     measureTargets();
     syncToCurrentState(true);
@@ -91,7 +100,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
     );
     outlinePaths.forEach((path) => path.setAttribute('d', outlinePath));
     // Native rounded clipping prevents the moving vertical backdrop from exposing its rectangular layer.
-    if (vertical) {
+    if (usesVerticalAxis()) {
       material.style.removeProperty('clip-path');
       material.style.removeProperty('-webkit-clip-path');
     } else {
@@ -106,7 +115,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
       capsuleTarget.x - capsuleState.x,
       capsuleTarget.y - capsuleState.y,
     );
-    const settle = vertical
+    const settle = usesVerticalAxis()
       ? 0.36 + 0.06 * (1 - Math.min(1, travel / 32))
       : 0.24;
     const response = reducedMotion.matches ? 1 : settle;
@@ -152,7 +161,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   };
 
   const capsuleForPointer = (pointerX: number, pointerY: number) => (
-    vertical
+    usesVerticalAxis()
       ? capsuleForVerticalGlassPointer(geometries, pointerY)
       : capsuleForGlassPointer(geometries, pointerX, pointerY)
   );
@@ -163,10 +172,10 @@ function initializeGlassActionGroup(root: HTMLElement) {
     const probeY = capsule?.y ?? pointerY;
     const closest = geometries.reduce<GlassTargetGeometry | null>((current, geometry) => {
       if (!current) return geometry;
-      const geometryDistance = vertical
+      const geometryDistance = usesVerticalAxis()
         ? Math.abs(geometry.centerY - probeY)
         : Math.hypot(geometry.centerX - probeX, geometry.centerY - probeY);
-      const currentDistance = vertical
+      const currentDistance = usesVerticalAxis()
         ? Math.abs(current.centerY - probeY)
         : Math.hypot(current.centerX - probeX, current.centerY - probeY);
       return geometryDistance < currentDistance ? geometry : current;
@@ -198,14 +207,11 @@ function initializeGlassActionGroup(root: HTMLElement) {
       root.releasePointerCapture(pointerId);
     }
     if (activate && target && activateOnRelease && canScrub()) {
-      if (
-        header
-        || glassActivationShouldDismiss(
-          target.tagName,
-          target instanceof HTMLAnchorElement ? target.getAttribute('href') : null,
-          target.dataset.glassTarget,
-        )
-      ) {
+      if (glassActivationShouldDismiss(
+        target.tagName,
+        target instanceof HTMLAnchorElement ? target.getAttribute('href') : null,
+        target.dataset.glassTarget,
+      )) {
         dismissLens();
       }
       suppressTrustedClick = true;
@@ -354,7 +360,10 @@ function initializeGlassActionGroup(root: HTMLElement) {
 
   finePointer.addEventListener('change', () => syncToCurrentState(true), { signal });
   reducedMotion.addEventListener('change', () => syncToCurrentState(true), { signal });
-  window.addEventListener('xagi:navigation-change', measureTargets, { signal });
+  window.addEventListener('xagi:navigation-change', () => {
+    if (header?.dataset.scheduleNav === 'periods') lensDismissed = false;
+    measureTargets();
+  }, { signal });
   window.addEventListener('pageshow', (event) => {
     if (event.persisted) measureTargets();
   }, { signal });

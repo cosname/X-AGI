@@ -27,10 +27,20 @@ export type GlassCapsuleGeometry = {
 export function glassGroupAllowsScrub(
   scrubEnabled: boolean,
   navMode?: string,
+  inlineScrubEnabled = false,
 ) {
   if (!scrubEnabled) return false;
   if (navMode == null || navMode === '') return true;
-  return navMode === 'compact';
+  return navMode === 'compact' || (navMode === 'inline' && inlineScrubEnabled);
+}
+
+export function glassGroupUsesVerticalAxis(
+  axis?: string,
+  scheduleNavigation?: string,
+  navMode?: string,
+) {
+  const usesInlineSchedulePeriods = scheduleNavigation === 'periods' && navMode === 'inline';
+  return axis === 'vertical' && !usesInlineSchedulePeriods;
 }
 
 export function glassActivationShouldDismiss(

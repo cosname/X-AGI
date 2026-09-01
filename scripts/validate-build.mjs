@@ -787,6 +787,14 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
 
 const scheduleSource = await readFile(path.join(outputRoot, 'schedule/index.html'), 'utf8');
 const scheduleVisibleText = visibleText(scheduleSource);
+const scheduleMetaIndex = scheduleSource.indexOf('class="page-header__meta"');
+const scheduleMainIndex = scheduleSource.indexOf('data-schedule-page');
+if (scheduleMetaIndex < 0 || scheduleMainIndex < 0 || scheduleMetaIndex > scheduleMainIndex) {
+  fail('schedule/index.html: date and venue metadata must stay in the page header above the schedule');
+}
+if (scheduleSource.includes('schedule-intro')) {
+  fail('schedule/index.html: date and venue metadata must not return as a standalone schedule row');
+}
 const scheduleCardCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-card\b[^"]*"/g)].length;
 if (scheduleCardCount !== conference2026.programPreview.sessions.length) {
   fail(`schedule/index.html: expected ${conference2026.programPreview.sessions.length} schedule cards, found ${scheduleCardCount}`);
@@ -939,12 +947,31 @@ for (const chairProfile of scheduleSource.matchAll(/<details\b[^>]*data-person-r
     fail('schedule/index.html: chair profiles must not render a talk abstract');
   }
 }
-const profilesToggleTag = scheduleSource.match(/<button\b[^>]*data-schedule-profiles-toggle[^>]*>/)?.[0];
-if (!profilesToggleTag || !profilesToggleTag.includes('aria-expanded="false"')) {
-  fail('schedule/index.html: schedule must include the synchronized expand-all speaker control');
+const expectedSessionProfileToggleCount = conference2026.programPreview.sessions.length;
+const expectedDisabledSessionProfileToggleCount = conference2026.programPreview.sessions
+  .filter((session) => ![...session.chairs, ...session.speakers]
+    .some((scheduledPerson) => Boolean(conference2026PersonForName(scheduledPerson.name))))
+  .length;
+const sessionProfileToggleTags = [
+  ...scheduleSource.matchAll(/<button\b[^>]*data-schedule-session-profiles-toggle[^>]*>/g),
+];
+if (sessionProfileToggleTags.length !== expectedSessionProfileToggleCount) {
+  fail(`schedule/index.html: expected ${expectedSessionProfileToggleCount} session profile controls, found ${sessionProfileToggleTags.length}`);
 }
-if (!scheduleVisibleText.includes('展开全部演讲') || scheduleVisibleText.includes('资料见本专题讲者')) {
-  fail('schedule/index.html: speaker disclosure controls must match the current schedule copy');
+if (sessionProfileToggleTags.some((match) => !match[0].includes('aria-expanded="false"'))) {
+  fail('schedule/index.html: every session profile control must expose its initial collapsed state');
+}
+const disabledSessionProfileToggleCount = sessionProfileToggleTags
+  .filter((match) => /\sdisabled(?:\s|>|=)/u.test(match[0]))
+  .length;
+if (disabledSessionProfileToggleCount !== expectedDisabledSessionProfileToggleCount) {
+  fail(`schedule/index.html: expected ${expectedDisabledSessionProfileToggleCount} disabled empty-session controls, found ${disabledSessionProfileToggleCount}`);
+}
+if (scheduleSource.includes('data-schedule-profiles-toggle') || scheduleVisibleText.includes('展开全部演讲')) {
+  fail('schedule/index.html: the retired page-level profile control must stay removed');
+}
+if (!/展开\s*全部/u.test(scheduleVisibleText) || scheduleVisibleText.includes('资料见本专题讲者')) {
+  fail('schedule/index.html: session profile controls must match the current schedule copy');
 }
 const speakerItemCount = [...scheduleSource.matchAll(/class="[^"]*\bsession-item--speaker\b[^"]*"/g)].length;
 const expectedSpeakerItemCount = conference2026.programPreview.sessions
