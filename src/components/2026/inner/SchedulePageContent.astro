@@ -323,6 +323,8 @@ const sessionNumbers = new Map(
       let renderedState = '';
       let scrollFrame = 0;
       let menuActivationGuardTimer = 0;
+      let periodNavigationLockId = '';
+      let periodNavigationUnlockTimer = 0;
 
       const restoreAttribute = (element, name, value) => {
         if (value === null) element.removeAttribute(name);
@@ -427,6 +429,30 @@ const sessionNumbers = new Map(
         announceNavigationChange();
       };
 
+      const clearPeriodNavigationLock = () => {
+        if (periodNavigationUnlockTimer) window.clearTimeout(periodNavigationUnlockTimer);
+        periodNavigationUnlockTimer = 0;
+        periodNavigationLockId = '';
+      };
+
+      const schedulePeriodNavigationUnlock = () => {
+        if (!periodNavigationLockId) return;
+        if (periodNavigationUnlockTimer) window.clearTimeout(periodNavigationUnlockTimer);
+        periodNavigationUnlockTimer = window.setTimeout(() => {
+          periodNavigationUnlockTimer = 0;
+          periodNavigationLockId = '';
+          requestNavigationSync();
+        }, 180);
+      };
+
+      const lockPeriodNavigation = (activeIndex) => {
+        const period = periods[activeIndex];
+        if (!period) return;
+        periodNavigationLockId = period.id;
+        renderPeriodNavigation(activeIndex);
+        schedulePeriodNavigationUnlock();
+      };
+
       const restoreMainNavigation = () => {
         if (renderedState === 'main') return;
         const wasPeriodNavigation = renderedState.startsWith('periods:');
@@ -452,6 +478,11 @@ const sessionNumbers = new Map(
 
       const syncNavigation = () => {
         scrollFrame = 0;
+        const lockedPeriodIndex = periods.findIndex((period) => period.id === periodNavigationLockId);
+        if (lockedPeriodIndex >= 0) {
+          renderPeriodNavigation(lockedPeriodIndex);
+          return;
+        }
         const headerBottom = header.getBoundingClientRect().bottom;
         const activationLine = headerBottom + Math.min(44, window.innerHeight * 0.06);
         if (periods[0].element.getBoundingClientRect().top > activationLine) {
@@ -469,6 +500,11 @@ const sessionNumbers = new Map(
       requestNavigationSync = () => {
         if (scrollFrame) return;
         scrollFrame = window.requestAnimationFrame(syncNavigation);
+      };
+
+      const handleNavigationScroll = () => {
+        schedulePeriodNavigationUnlock();
+        requestNavigationSync();
       };
 
       // A lingering iOS tap, including click.detail === 0, can land on the restored menu button.
@@ -496,7 +532,7 @@ const sessionNumbers = new Map(
       });
       toggleLabelObserver.observe(toggle, { attributes: true, attributeFilter: ['aria-label'] });
 
-      window.addEventListener('scroll', requestNavigationSync, { passive: true });
+      window.addEventListener('scroll', handleNavigationScroll, { passive: true });
       window.addEventListener('resize', requestNavigationSync, { passive: true });
       window.addEventListener('hashchange', requestNavigationSync);
       window.addEventListener('pageshow', requestNavigationSync);
@@ -511,7 +547,9 @@ const sessionNumbers = new Map(
         const destination = new URL(link.href, window.location.href);
         const target = elementForHash(destination.hash);
         if (!target) return;
+        const targetPeriodIndex = periods.findIndex((period) => period.element === target);
         event.preventDefault();
+        if (targetPeriodIndex >= 0) lockPeriodNavigation(targetPeriodIndex);
         window.history.pushState(null, '', destination.hash);
         target.scrollIntoView({
           behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
@@ -520,7 +558,10 @@ const sessionNumbers = new Map(
         requestNavigationSync();
       });
       document.fonts?.ready.then(requestNavigationSync).catch(() => undefined);
-      window.addEventListener('pagehide', clearMobileMenuActivationGuard);
+      window.addEventListener('pagehide', () => {
+        clearMobileMenuActivationGuard();
+        clearPeriodNavigationLock();
+      });
       requestNavigationSync();
     }
 
@@ -707,7 +748,7 @@ const sessionNumbers = new Map(
     overflow: hidden;
     padding: 0;
     border: 1px solid transparent;
-    border-radius: 50%;
+    border-radius: 999px;
     background: var(--glass-lens-fill, rgb(255 253 251 / 0.46));
     box-shadow: var(
       --glass-lens-shadow,
@@ -750,8 +791,10 @@ const sessionNumbers = new Map(
   }
 
   .edition-2026-inner .schedule-session-profiles-toggle:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
+    outline: none;
+    box-shadow:
+      var(--glass-lens-shadow),
+      0 0 0 2px #fff;
   }
 
   .edition-2026-inner .schedule-session-profiles-toggle:disabled {
