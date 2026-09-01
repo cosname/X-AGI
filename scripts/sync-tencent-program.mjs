@@ -12,7 +12,7 @@ export const EXPECTED_HEADERS = [
   '时间',
   '主题',
   '计划人数',
-  '完成度',
+  '演讲题目完成度',
   'chair（单位）',
   'Speaker1：Title',
   'Speaker2',
@@ -59,6 +59,19 @@ const emptyPersonValues = new Set(['---', 'TBD']);
 
 function cleanCell(value) {
   return value.replaceAll('\u00a0', ' ').trim();
+}
+
+function cleanTalkTitle(value) {
+  const cleaned = cleanCell(value);
+  return emptyPersonValues.has(cleaned.toLocaleUpperCase('en-US')) ? '' : cleaned;
+}
+
+function parseTalkTitleSuffix(value, label) {
+  if (!value) return '';
+
+  const match = value.match(/^(?:\s*[:：]\s*|\s+)(.*)$/u);
+  if (!match) throw new Error(`${label} has malformed text after its affiliation.`);
+  return cleanTalkTitle(match[1]);
 }
 
 export function parseCsv(input) {
@@ -130,9 +143,7 @@ export function parsePerson(value, label, { required = false } = {}) {
     return null;
   }
 
-  const match = cleaned.match(
-    /^(.*?)\s*[（(]\s*([^()（）]+?)\s*[）)](?:\s*[:：]\s*(.+))?\s*$/u,
-  );
+  const match = cleaned.match(/^(.*?)\s*[（(]\s*([^()（）]+?)\s*[）)](.*)$/u);
   if (!match) {
     if (/[()（）]/u.test(cleaned)) throw new Error(`${label} has malformed parentheses: ${cleaned}`);
 
@@ -140,15 +151,14 @@ export function parsePerson(value, label, { required = false } = {}) {
     if (!titleMatch) return { name: cleaned };
 
     const name = cleanCell(titleMatch[1]);
-    const talkTitle = cleanCell(titleMatch[2]);
+    const talkTitle = cleanTalkTitle(titleMatch[2]);
     if (!name) throw new Error(`${label} has an empty name.`);
-    if (!talkTitle) throw new Error(`${label} has an empty talk title.`);
-    return { name, talkTitle };
+    return talkTitle ? { name, talkTitle } : { name };
   }
 
   const name = cleanCell(match[1]);
   const affiliation = normalizeAffiliation(match[2]);
-  const talkTitle = cleanCell(match[3] ?? '');
+  const talkTitle = parseTalkTitleSuffix(match[3] ?? '', label);
   if (!name) throw new Error(`${label} has an empty name.`);
   if (!affiliation) throw new Error(`${label} has an empty affiliation.`);
   return talkTitle ? { name, affiliation, talkTitle } : { name, affiliation };
@@ -295,7 +305,8 @@ function readGeneratedSessions(content) {
 }
 
 export function assertSafeAutomatedUpdate(previousSessions, nextSessions) {
-  const removedSessionCount = previousSessions.length - nextSessions.length;
+  const nextTitles = new Set(nextSessions.map((session) => session.title));
+  const removedSessionCount = previousSessions.filter((session) => !nextTitles.has(session.title)).length;
   if (removedSessionCount > MAX_AUTOMATED_SESSION_DELETIONS) {
     throw new Error(
       `Refusing to remove ${removedSessionCount} sessions automatically; ` +

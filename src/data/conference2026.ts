@@ -86,6 +86,7 @@ export const conference2026 = {
       chair: '钟轶伦',
       members: [
         '常象宇',
+        '陈焕然',
         '陈思明',
         '从鑫',
         '邓柯',

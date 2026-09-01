@@ -6,8 +6,13 @@ import {
   conference2026,
   conference2026PartnerDisplayGroups,
 } from '../src/data/conference2026.ts';
+import {
+  conference2026People,
+  conference2026PersonForName,
+} from '../src/data/conference2026-people.ts';
 import { goalHistoryEvents } from '../src/data/goal-history.ts';
 import { partnerLogoByName } from '../src/data/partner-logo-assets-2026.ts';
+import { currentEditionPageCopy } from '../src/config/edition-status.ts';
 import { site } from '../src/config/site.ts';
 
 const projectRoot = path.resolve('.');
@@ -530,6 +535,21 @@ if (
 }
 await validatePublicCopies('2026 partner logos', path.resolve('public/2026/logos'), selectedLogoFiles);
 
+const personPortraitFiles = conference2026People.flatMap((person) => (
+  person.portraitSrc ? [path.basename(person.portraitSrc)] : []
+));
+if (personPortraitFiles.length !== 28 || new Set(personPortraitFiles).size !== 28) {
+  fail(
+    `2026 people portraits: expected 28 unique attendee-submitted portraits and six placeholders, `
+    + `found ${new Set(personPortraitFiles).size}`,
+  );
+}
+await validatePublicCopies(
+  '2026 people portraits',
+  path.resolve('public/2026/people'),
+  personPortraitFiles,
+);
+
 const public2026Root = path.resolve('public/2026');
 validateExactSet(
   '2026 public asset tree',
@@ -538,6 +558,7 @@ validateExactSet(
     ...runtimeBrandFiles.map((file) => `brand/${file}`),
     'legal/beian-icon.png',
     ...selectedLogoFiles.map((file) => `logos/${file}`),
+    ...personPortraitFiles.map((file) => `people/${file}`),
   ],
 );
 
@@ -690,12 +711,19 @@ const officialCopyByRoute = new Map([
   ['schedule/index.html', [
     conference2026.dates.compact,
     conference2026.venue.scheduleName,
-    `大会日程与嘉宾（${conference2026.programPreview.status.replace(/\.+$/, '')}）`,
+    currentEditionPageCopy('schedule').label,
     ...conference2026.programPreview.sessions.flatMap((session) => [
-      session.sourceTime.replace(/(上午|下午)$/u, ' $1'),
       session.title,
-      ...session.chairs.map((chair) => chair.name === '待确认' ? '主席待确认' : chair.name),
+      ...session.chairs.map((chair) => chair.name === '待确认' ? 'Chair 待确认' : chair.name),
       ...session.speakers.flatMap((speaker) => [speaker.name, speaker.talkTitle ?? '']),
+    ]),
+    ...conference2026People.flatMap((person) => [
+      person.name,
+      ...person.aliases,
+      person.affiliation,
+      person.department ?? '',
+      person.bio ?? '',
+      person.abstract ?? '',
     ]),
   ]],
   ['poster/index.html', [
@@ -742,14 +770,18 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
   if (!source.includes('data-masthead-pixel-field') || !source.includes('data-connection-stage')) {
     fail(`${route}: current inner page must expose the interactive masthead field`);
   }
-  if ((await stat(path.join(outputRoot, route))).size > 50_000) {
-    fail(`${route}: HTML exceeds 50 KB`);
+  const htmlByteLimit = route === 'schedule/index.html' ? 300_000 : 50_000;
+  if ((await stat(path.join(outputRoot, route))).size > htmlByteLimit) {
+    fail(`${route}: HTML exceeds ${Math.round(htmlByteLimit / 1000)} KB`);
   }
   if ((await initialLocalPayload(path.join(outputRoot, route), managedDownloads)) > 1_500_000) {
     fail(`${route}: initial local payload exceeds 1.5 MB`);
   }
   for (const expected of expectedCopy) {
-    if (!text.includes(expected)) fail(`${route}: missing official copy "${expected}"`);
+    const normalizedExpected = String(expected).replace(/\s+/gu, ' ').trim();
+    if (normalizedExpected && !text.includes(normalizedExpected)) {
+      fail(`${route}: missing official copy "${expected}"`);
+    }
   }
 }
 
@@ -762,6 +794,32 @@ if (scheduleCardCount !== conference2026.programPreview.sessions.length) {
 const schedulePeriodCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-period-group\b[^"]*"/g)].length;
 if (schedulePeriodCount !== 4) {
   fail(`schedule/index.html: expected 4 half-day groups, found ${schedulePeriodCount}`);
+}
+const scheduleWeekdayByDate = new Map(
+  conference2026.schedule.map((day) => [day.date.slice(5), day.weekday]),
+);
+for (const sourceTime of new Set(conference2026.programPreview.sessions.map((session) => session.sourceTime))) {
+  const match = sourceTime.match(/^(\d{2})\.(\d{2})(上午|下午)$/u);
+  if (!match) continue;
+  const shortDate = `${match[1]}.${match[2]}`;
+  const weekday = scheduleWeekdayByDate.get(shortDate);
+  const expectedLabel = `${Number(match[1])} 月 ${Number(match[2])} 日${weekday ? ` · ${weekday}` : ''} · ${match[3]}`;
+  if (!scheduleVisibleText.includes(expectedLabel)) {
+    fail(`schedule/index.html: missing combined period heading "${expectedLabel}"`);
+  }
+}
+if (scheduleVisibleText.includes('个专题')) {
+  fail('schedule/index.html: redundant topic counts must not be published in period headings');
+}
+const chairCardCount = [...scheduleSource.matchAll(/data-schedule-chair-card/g)].length;
+if (chairCardCount !== conference2026.programPreview.sessions.length) {
+  fail(`schedule/index.html: expected ${conference2026.programPreview.sessions.length} standalone Chair cards, found ${chairCardCount}`);
+}
+if (scheduleSource.includes('session-chair__label">主席') || scheduleVisibleText.includes('主席待确认')) {
+  fail('schedule/index.html: schedule role labels must use Chair consistently');
+}
+if (/\bDAY\s+\d{2}\b/u.test(scheduleVisibleText)) {
+  fail('schedule/index.html: redundant DAY labels must not be published');
 }
 if (/计划人数|完成度|对接人/u.test(scheduleVisibleText)) {
   fail('schedule/index.html: internal source fields must not be published');
@@ -777,6 +835,160 @@ for (const retiredCopy of [
 }
 if (scheduleSource.includes('schedule-tabs') || scheduleSource.includes('goal-schedule-preview')) {
   fail('schedule/index.html: retired schedule preview structure must not return');
+}
+
+const scheduledProfilePlacements = conference2026.programPreview.sessions.flatMap((session) => {
+  const speakerPlacements = session.speakers.flatMap((speaker) => {
+    const person = conference2026PersonForName(speaker.name);
+    return person ? [{
+      person,
+      role: 'speaker',
+      defaultOpen: session.title.trim().toLowerCase() === 'keynote',
+    }] : [];
+  });
+  const chairPlacements = session.chairs.flatMap((chair) => {
+    const person = conference2026PersonForName(chair.name);
+    return person ? [{
+      person,
+      role: 'chair',
+      defaultOpen: false,
+    }] : [];
+  });
+  return [...chairPlacements, ...speakerPlacements];
+});
+validateExactSet(
+  'schedule inline profile people',
+  [...new Set(scheduledProfilePlacements.map(({ person }) => person.id))],
+  conference2026People.map((person) => person.id),
+);
+
+const profileTags = [...scheduleSource.matchAll(/<details\b[^>]*data-schedule-person-profile[^>]*>/g)];
+if (profileTags.length !== scheduledProfilePlacements.length) {
+  fail(`schedule/index.html: expected ${scheduledProfilePlacements.length} inline profiles, found ${profileTags.length}`);
+}
+for (const role of ['speaker', 'chair']) {
+  const expectedRoleCount = scheduledProfilePlacements.filter((placement) => placement.role === role).length;
+  const actualRoleCount = profileTags.filter((match) => match[0].includes(`data-person-role="${role}"`)).length;
+  if (actualRoleCount !== expectedRoleCount) {
+    fail(`schedule/index.html: expected ${expectedRoleCount} ${role} profiles, found ${actualRoleCount}`);
+  }
+}
+const profileIds = profileTags.map((match) => match[0].match(/\bid="([^"]+)"/)?.[1]);
+if (profileIds.some((id) => !id) || new Set(profileIds).size !== profileIds.length) {
+  fail('schedule/index.html: inline profile disclosure ids must be present and unique');
+}
+const defaultOpenProfileTags = profileTags.filter((match) => /\sopen(?:\s|>|=)/u.test(match[0]));
+const expectedDefaultOpenPlacements = scheduledProfilePlacements.filter(({ defaultOpen }) => defaultOpen);
+if (defaultOpenProfileTags.length !== expectedDefaultOpenPlacements.length) {
+  fail(`schedule/index.html: expected ${expectedDefaultOpenPlacements.length} default-open Keynote profiles, found ${defaultOpenProfileTags.length}`);
+}
+for (const match of defaultOpenProfileTags) {
+  if (!match[0].includes('data-person-role="speaker"') || !match[0].includes('data-default-open="true"')) {
+    fail('schedule/index.html: only Keynote speaker profiles may be open by default');
+  }
+}
+if (profileTags.some((match) => /\sname=/u.test(match[0]))) {
+  fail('schedule/index.html: person disclosures must remain independent rather than becoming an accordion');
+}
+const expectedPortraitPlacements = scheduledProfilePlacements
+  .filter(({ person }) => Boolean(person.portraitSrc))
+  .length;
+const expectedPlaceholderPlacements = scheduledProfilePlacements.length - expectedPortraitPlacements;
+const inlinePortraitCount = [...scheduleSource.matchAll(/class="([^"]*)"/g)]
+  .filter((match) => match[1].split(/\s+/u).includes('schedule-person-profile__portrait'))
+  .length;
+const inlinePlaceholderCount = [...scheduleSource.matchAll(/class="([^"]*)"/g)]
+  .filter((match) => match[1].split(/\s+/u).includes('schedule-person-profile__portrait-placeholder'))
+  .length;
+if (inlinePortraitCount !== expectedPortraitPlacements) {
+  fail(`schedule/index.html: expected ${expectedPortraitPlacements} inline portraits, found ${inlinePortraitCount}`);
+}
+if (inlinePlaceholderCount !== expectedPlaceholderPlacements) {
+  fail(`schedule/index.html: expected ${expectedPlaceholderPlacements} portrait placeholders, found ${inlinePlaceholderCount}`);
+}
+for (const image of scheduleSource.matchAll(/<img\b[^>]*class="schedule-person-profile__portrait"[^>]*>/g)) {
+  if (!image[0].includes('loading="lazy"') || !image[0].includes('decoding="async"')) {
+    fail('schedule/index.html: every person portrait must load lazily with async decoding');
+  }
+  if (!image[0].includes('src="/2026/people/')) {
+    fail('schedule/index.html: every person portrait must use a local 2026 asset');
+  }
+}
+const inlineSummaryCount = [...scheduleSource.matchAll(/<summary\b[^>]*class="schedule-person-profile__summary"[^>]*>/g)].length;
+if (inlineSummaryCount !== scheduledProfilePlacements.length) {
+  fail('schedule/index.html: every inline profile must use a native summary control');
+}
+for (const summary of scheduleSource.matchAll(/<summary\b[^>]*class="schedule-person-profile__summary"[^>]*>([\s\S]*?)<\/summary>/g)) {
+  if (visibleText(summary[1]).includes('资料')) {
+    fail('schedule/index.html: profile disclosure rows must use the arrow without a redundant data label');
+  }
+}
+const bioSectionCount = [...scheduleSource.matchAll(/data-profile-section="bio"/g)].length;
+if (bioSectionCount !== scheduledProfilePlacements.length) {
+  fail('schedule/index.html: every inline profile must include one biography section');
+}
+for (const speakerProfile of scheduleSource.matchAll(/<details\b[^>]*data-person-role="speaker"[^>]*>([\s\S]*?)<\/details>/g)) {
+  const abstractIndex = speakerProfile[1].indexOf('data-profile-section="abstract"');
+  const bioIndex = speakerProfile[1].indexOf('data-profile-section="bio"');
+  if (abstractIndex >= 0 && abstractIndex > bioIndex) {
+    fail('schedule/index.html: speaker abstracts must appear before biographies');
+  }
+}
+for (const chairProfile of scheduleSource.matchAll(/<details\b[^>]*data-person-role="chair"[^>]*>([\s\S]*?)<\/details>/g)) {
+  if (chairProfile[1].includes('data-profile-section="abstract"')) {
+    fail('schedule/index.html: chair profiles must not render a talk abstract');
+  }
+}
+const profilesToggleTag = scheduleSource.match(/<button\b[^>]*data-schedule-profiles-toggle[^>]*>/)?.[0];
+if (!profilesToggleTag || !profilesToggleTag.includes('aria-expanded="false"')) {
+  fail('schedule/index.html: schedule must include the synchronized expand-all speaker control');
+}
+if (!scheduleVisibleText.includes('展开全部演讲') || scheduleVisibleText.includes('资料见本专题讲者')) {
+  fail('schedule/index.html: speaker disclosure controls must match the current schedule copy');
+}
+const speakerItemCount = [...scheduleSource.matchAll(/class="[^"]*\bsession-item--speaker\b[^"]*"/g)].length;
+const expectedSpeakerItemCount = conference2026.programPreview.sessions
+  .reduce((total, session) => total + session.speakers.length, 0);
+if (speakerItemCount !== expectedSpeakerItemCount) {
+  fail(`schedule/index.html: expected ${expectedSpeakerItemCount} speaker rows, found ${speakerItemCount}`);
+}
+const talkTitleCount = [...scheduleSource.matchAll(/class="session-speaker__talk-title"/g)].length;
+const expectedTalkTitleCount = conference2026.programPreview.sessions
+  .flatMap((session) => session.speakers)
+  .filter((speaker) => Boolean(speaker.talkTitle))
+  .length;
+if (talkTitleCount !== expectedTalkTitleCount) {
+  fail(`schedule/index.html: expected ${expectedTalkTitleCount} confirmed talk titles, found ${talkTitleCount}`);
+}
+if (scheduleSource.includes('data-people-directory') || scheduleSource.includes('/speakers/#')) {
+  fail('schedule/index.html: standalone people-directory structure or links must not return');
+}
+for (const privateMarker of [
+  '订单号',
+  '第三方订单号',
+  '支付方式',
+  '优惠邀请码',
+  '手机号',
+  '微信号',
+]) {
+  if (scheduleVisibleText.includes(privateMarker)) {
+    fail(`schedule/index.html: private workbook field leaked: "${privateMarker}"`);
+  }
+}
+for (const forbiddenSource of ['cdn-img.bagevent.com', 'attendee-list.xls']) {
+  if (scheduleSource.includes(forbiddenSource)) {
+    fail(`schedule/index.html: non-public source reference leaked: "${forbiddenSource}"`);
+  }
+}
+if (gzipSync(scheduleSource).byteLength > 100_000) {
+  fail('schedule/index.html: compressed HTML exceeds 100 KB');
+}
+for (const person of conference2026People) {
+  for (const assignment of person.schedule) {
+    if (assignment.role === 'speaker' && assignment.talkTitle && person.talkTitle !== assignment.talkTitle) {
+      fail(`schedule/index.html: ${person.name} report title must match the confirmed schedule`);
+    }
+  }
 }
 
 const registerSource = await readFile(path.join(outputRoot, 'register/index.html'), 'utf8');

@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const archiveRelativeRoot = 'assets/source-archive/2026';
@@ -79,6 +80,20 @@ for (const relativeRoot of activeNamingRoots) {
     if (ambiguousStems.has(stem)) fail(`bare generic filename in ${relativeRoot}: ${basename}`);
     for (const token of stem.split('-')) {
       if (ambiguousTokens.has(token)) fail(`ambiguous token "${token}" in ${relativeRoot}: ${basename}`);
+    }
+  }
+}
+
+for (const portraitRoot of [
+  'assets/source-archive/2026/people',
+  'public/2026/people',
+]) {
+  const absoluteRoot = path.join(projectRoot, portraitRoot);
+  if (!existsSync(absoluteRoot)) continue;
+  for (const portraitPath of walkFiles(absoluteRoot)) {
+    const metadata = await sharp(portraitPath).metadata();
+    if (metadata.exif || metadata.iptc || metadata.xmp || metadata.comments?.length) {
+      fail(`portrait contains embedded private metadata: ${toPosix(path.relative(projectRoot, portraitPath))}`);
     }
   }
 }
