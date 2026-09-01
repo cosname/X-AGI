@@ -17,7 +17,7 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "8d7443b25e0474f6367dffacfbd2598eed8af094b18c38f9e57dbb9f313bb82c",
+  "sourceHash": "0579b2c0b87a93c7919f0fa100bd1bf467fae0d145ffcc9ad2ab585e617f9f95",
   "sessions": [
     {
       "sourceTime": "10.17上午",
@@ -35,7 +35,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "冯建峰",
-          "affiliation": "复旦大学"
+          "affiliation": "复旦大学",
+          "talkTitle": "Neuroscience Where AI = Science"
         },
         {
           "name": "邱子涵",
@@ -77,7 +78,7 @@ export const conference2026ProgramSource = {
     },
     {
       "sourceTime": "10.17下午",
-      "title": "LLM评测&Benchmark",
+      "title": "LLM评测 & Benchmark",
       "chairs": [
         {
           "name": "张辉帅",
@@ -115,7 +116,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "胡译文",
-          "affiliation": "中国人民大学"
+          "affiliation": "中国人民大学",
+          "talkTitle": "Controlled LLM Training on Spectral Sphere"
         },
         {
           "name": "陈焕然",
@@ -134,10 +136,6 @@ export const conference2026ProgramSource = {
       ],
       "speakers": [
         {
-          "name": "李伯勋",
-          "affiliation": "无问芯穹"
-        },
-        {
           "name": "张华枫",
           "affiliation": "为沃科技"
         },
@@ -149,6 +147,11 @@ export const conference2026ProgramSource = {
           "name": "张先轶",
           "affiliation": "澎峰科技",
           "talkTitle": "基于FlagOS的高性价比混合云Token工厂"
+        },
+        {
+          "name": "吴晨玮",
+          "affiliation": "华为",
+          "talkTitle": "基于昇腾的AgenticRL训练技术与企业级Agent落地实践"
         }
       ]
     },
@@ -169,7 +172,7 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "Luyao Zhang",
-          "affiliation": "Duke",
+          "affiliation": "Duke Kunshan University",
           "talkTitle": "Who Verifies Decentralized Information? Economic Incentives, Accountability, and Trustworthy AI Across Oracle Protocols"
         },
         {
@@ -178,8 +181,9 @@ export const conference2026ProgramSource = {
           "talkTitle": "Large and Deep Factor Models"
         },
         {
-          "name": "祝武",
-          "affiliation": "清华大学"
+          "name": "江鸿锴",
+          "affiliation": "清华大学",
+          "talkTitle": "Do LLMs Forecast or Remember? A Bayesian Decomposition Framework for Leakage-Sensitive Financial Forecasting Evaluation"
         }
       ]
     },
@@ -190,6 +194,10 @@ export const conference2026ProgramSource = {
         {
           "name": "陆一平",
           "affiliation": "北京大学"
+        },
+        {
+          "name": "周默",
+          "affiliation": "北京大学"
         }
       ],
       "speakers": [
@@ -199,11 +207,13 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "周沛劼",
-          "affiliation": "北京大学"
+          "affiliation": "北京大学",
+          "talkTitle": "Simulation-Free Dynamic Unbalanced Optimal Transport and One-step Inference"
         },
         {
           "name": "史作强",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "Weighted Laplacian Flow: A Deterministic Particle Flow with Provable Convergence"
         },
         {
           "name": "陆一平",
@@ -227,7 +237,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "涂尚卿",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "CogEvol：面向教育普惠的课件生成模型"
         },
         {
           "name": "黄沛",
@@ -255,12 +266,12 @@ export const conference2026ProgramSource = {
           "talkTitle": "Memory Mechanisms in Genomic Foundation Models"
         },
         {
-          "name": "谢超",
-          "affiliation": "清华大学"
-        },
-        {
           "name": "吴泰霖",
           "affiliation": "西湖大学"
+        },
+        {
+          "name": "谢超",
+          "affiliation": "清华大学"
         },
         {
           "name": "李秋熠",
@@ -298,17 +309,26 @@ export const conference2026ProgramSource = {
     },
     {
       "sourceTime": "10.18上午",
-      "title": "Agentic后训练",
+      "title": "Physics of Deep Learning",
       "chairs": [
         {
-          "name": "杨新宇",
-          "affiliation": "Kimi"
+          "name": "陈焕然",
+          "affiliation": "清华大学"
         }
       ],
       "speakers": [
         {
-          "name": "吴晨玮",
-          "affiliation": "华为"
+          "name": "刘子寅",
+          "affiliation": "MIT"
+        },
+        {
+          "name": "刘子鸣",
+          "affiliation": "清华大学",
+          "talkTitle": "从AI的物理学到AI自进化"
+        },
+        {
+          "name": "张耀宇",
+          "affiliation": "上海交通大学"
         }
       ]
     },
@@ -329,15 +349,18 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "曹原",
-          "affiliation": "香港大学"
+          "affiliation": "香港大学",
+          "talkTitle": "Transformers for Operator Learning with Algorithmic Insights"
         },
         {
           "name": "李根",
-          "affiliation": "香港中文大学"
+          "affiliation": "香港中文大学",
+          "talkTitle": "ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings"
         },
         {
           "name": "罗维俭",
-          "affiliation": "小红书"
+          "affiliation": "小红书",
+          "talkTitle": "超快速扩散语言模型：现状与前沿挑战"
         }
       ]
     },
@@ -357,7 +380,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "马俊杰",
-          "affiliation": "中国科学院数学与系统科学研究院"
+          "affiliation": "中国科学院数学与系统科学研究院",
+          "talkTitle": "Spiked Matrix Models with Rotationally Invariant Noise: AMP Algorithms and Optimality"
         },
         {
           "name": "许洪腾",
@@ -383,15 +407,22 @@ export const conference2026ProgramSource = {
       "speakers": [
         {
           "name": "王宏宁",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "情境学习与协作发现：人工智能赋能教育教学新范式"
         },
         {
           "name": "李鹏",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "自然语言驱动的数学研究智能体——AIM系统的探索与实践"
+        },
+        {
+          "name": "闫宇坤",
+          "affiliation": "启元"
         },
         {
           "name": "从鑫",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "Benchmarking Language Models for Statistical Problem Formulation"
         }
       ]
     }

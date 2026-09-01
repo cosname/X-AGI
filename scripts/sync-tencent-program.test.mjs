@@ -37,6 +37,23 @@ describe('Tencent program CSV parser', () => {
       affiliation: 'Example Lab',
       talkTitle: 'A confirmed talk',
     });
+    assert.deepEqual(parsePerson('周沛劼(北京大学) A confirmed talk', 'speaker'), {
+      name: '周沛劼',
+      affiliation: '北京大学',
+      talkTitle: 'A confirmed talk',
+    });
+    assert.deepEqual(parsePerson('闫宇坤（启元）：', 'speaker'), {
+      name: '闫宇坤',
+      affiliation: '启元',
+    });
+    assert.deepEqual(parsePerson('张华清（清华）：TBD', 'speaker'), {
+      name: '张华清',
+      affiliation: '清华大学',
+    });
+    assert.throws(
+      () => parsePerson('研究者（Example Lab）unexpected text', 'speaker'),
+      /malformed text after its affiliation/u,
+    );
     assert.equal(parsePerson('TBD', 'speaker'), null);
     assert.equal(parsePerson('---', 'speaker'), null);
   });
@@ -70,6 +87,10 @@ describe('Tencent program CSV parser', () => {
       /Header 1/u,
     );
     assert.throws(
+      () => parseProgramCsv(`${header.replace('演讲题目完成度', '完成度')}\n10.17下午,主题,4,100%,主席（单位）,,,,`),
+      /Header 4/u,
+    );
+    assert.throws(
       () => parseProgramCsv(`${header}\n10.17,主题,4,100%,主席（单位）,,,,`),
       /time must be/u,
     );
@@ -89,6 +110,15 @@ describe('Tencent program CSV parser', () => {
     assert.doesNotThrow(() => assertSafeAutomatedUpdate(previousSessions, previousSessions.slice(0, 11)));
     assert.throws(
       () => assertSafeAutomatedUpdate(previousSessions, previousSessions.slice(0, 10)),
+      /Refusing to remove 3 sessions automatically/u,
+    );
+    assert.throws(
+      () => assertSafeAutomatedUpdate(previousSessions, [
+        ...previousSessions.slice(0, 10),
+        { title: 'Replacement 1' },
+        { title: 'Replacement 2' },
+        { title: 'Replacement 3' },
+      ]),
       /Refusing to remove 3 sessions automatically/u,
     );
   });

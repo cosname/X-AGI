@@ -157,8 +157,8 @@ npm run schedule:sync -- --csv /absolute/path/to/X-AGI-2026-program.csv
 npm test
 ```
 
-同步器严格校验 `时间、主题、计划人数、完成度、chair（单位）、Speaker1：Title、Speaker2、Speaker3、Speaker4` 九列标题，以及半天时段、空主题、重复主题、嘉宾格式、重复嘉宾和最大行数。
-内部使用的 `计划人数` 与 `完成度` 会被明确丢弃，不能写入生成文件或公开页面。
+同步器严格校验 `时间、主题、计划人数、演讲题目完成度、chair（单位）、Speaker1：Title、Speaker2、Speaker3、Speaker4` 九列标题，以及半天时段、空主题、重复主题、嘉宾格式、重复嘉宾和最大行数。
+内部使用的 `计划人数` 与 `演讲题目完成度` 会被明确丢弃，不能写入生成文件或公开页面。
 自动运行一次删除超过两个专题时会失败并保留现状。
 确认大范围删除确属预期后，人工复核 CSV，并在受监督的本地运行中加入 `--allow-large-change`。
 

@@ -763,6 +763,9 @@ const schedulePeriodCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-
 if (schedulePeriodCount !== 4) {
   fail(`schedule/index.html: expected 4 half-day groups, found ${schedulePeriodCount}`);
 }
+if (/\bDAY\s+\d{2}\b/u.test(scheduleVisibleText)) {
+  fail('schedule/index.html: redundant DAY labels must not be published');
+}
 if (/计划人数|完成度|对接人/u.test(scheduleVisibleText)) {
   fail('schedule/index.html: internal source fields must not be published');
 }

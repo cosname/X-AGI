@@ -3,8 +3,8 @@ import { conference2026 } from '../../../data/conference2026';
 
 const program = conference2026.programPreview;
 const programStatus = program.status.replace(/\.+$/, '');
-const dayByShortDate = new Map(
-  conference2026.schedule.map((day) => [day.date.slice(5), day]),
+const weekdayByShortDate = new Map(
+  conference2026.schedule.map((day) => [day.date.slice(5), day.weekday]),
 );
 
 function isPendingChair(name: string) {
@@ -23,10 +23,10 @@ function describeTimeSlot(sourceTime: string) {
   }
 
   const shortDate = `${match[1]}.${match[2]}`;
-  const day = dayByShortDate.get(shortDate);
+  const weekday = weekdayByShortDate.get(shortDate);
   const period = match[3];
   return {
-    dateLabel: `${Number(match[1])} 月 ${Number(match[2])} 日${day ? ` · ${day.weekday}` : ''}`,
+    dateLabel: `${Number(match[1])} 月 ${Number(match[2])} 日${weekday ? ` · ${weekday}` : ''}`,
     id: `schedule-${match[1]}${match[2]}-${period === '上午' ? 'am' : 'pm'}`,
     period,
     shortDate,
@@ -62,7 +62,7 @@ const sessionNumbers = new Map(
         <h2 id="schedule-confirmed-title">大会日程与嘉宾（{programStatus}）</h2>
       </header>
 
-      {programGroups.map((group, groupIndex) => (
+      {programGroups.map((group) => (
         <section
           class="schedule-period-group"
           id={group.id}
@@ -71,7 +71,6 @@ const sessionNumbers = new Map(
         >
           <header class="schedule-period-heading">
             <div>
-              <p>DAY {String(groupIndex + 1).padStart(2, '0')}</p>
               <h3 id={`${group.id}-title`}>{group.dateLabel}</h3>
             </div>
             <div class="schedule-period-heading__meta">
@@ -521,14 +520,6 @@ const sessionNumbers = new Map(
     margin-bottom: 1rem;
     padding: 0 0.25rem 0.85rem;
     border-bottom: 1px solid rgb(103 82 200 / 0.25);
-  }
-
-  .edition-2026-inner .schedule-period-heading p {
-    margin: 0 0 0.25rem;
-    color: #6752c8;
-    font-size: 0.7rem;
-    font-weight: 750;
-    letter-spacing: 0.13em;
   }
 
   .edition-2026-inner .schedule-period-heading h3 {
