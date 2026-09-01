@@ -5,9 +5,10 @@ interface Props {
   edition: EditionConfig;
   title: string;
   status?: string;
+  meta?: string;
 }
 
-const { edition, title, status } = Astro.props;
+const { edition, title, status, meta } = Astro.props;
 ---
 
 <header
@@ -22,6 +23,7 @@ const { edition, title, status } = Astro.props;
         {title}
         {status && <span class="status-badge status-open">{status}</span>}
       </p>
+      {meta && <p class="page-header__meta">{meta}</p>}
     </div>
   </div>
 </header>

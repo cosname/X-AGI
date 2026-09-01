@@ -272,6 +272,7 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
     && defaultNavTarget()
     && navTargets.length > 0
     && !isCompact()
+    && header.dataset.scheduleNav !== 'periods'
     && finePointerNavigation.matches,
   );
 

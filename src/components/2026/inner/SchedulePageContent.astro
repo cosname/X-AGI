@@ -54,22 +54,7 @@ const sessionNumbers = new Map(
 
 <main class="main-content" data-schedule-page>
   <div class="published-inner-container">
-    <header class="schedule-intro">
-      <p>{conference2026.dates.compact} / {conference2026.venue.scheduleName}</p>
-    </header>
-
     <section class="schedule-confirmed" aria-label="大会日程与嘉宾">
-      <div class="schedule-confirmed__header">
-        <button
-          class="schedule-profiles-toggle"
-          type="button"
-          aria-expanded="false"
-          data-schedule-profiles-toggle
-        >
-          展开全部演讲
-        </button>
-      </div>
-
       {programGroups.map((group) => (
         <section
           class="schedule-period-group"
@@ -84,57 +69,80 @@ const sessionNumbers = new Map(
           <div class="schedule-period-cards">
             {group.sessions.map((session) => {
               const sessionNumber = sessionNumbers.get(session) ?? 0;
+              const sessionLabel = `Session ${String(sessionNumber).padStart(2, '0')}`;
               const hasPendingChair = session.chairs.some((chair) => isPendingChair(chair.name));
+              const hasSessionProfiles = [...session.chairs, ...session.speakers]
+                .some((scheduledPerson) => Boolean(conference2026PersonForName(scheduledPerson.name)));
               return (
                 <article
                   class="info-card schedule-card schedule-topic-card"
                   id={`schedule-session-${String(sessionNumber).padStart(2, '0')}`}
+                  data-schedule-session-card
                 >
                   <div class="card-header">
-                    <span class="schedule-topic-card__number">
-                      Session {String(sessionNumber).padStart(2, '0')}
+                    <span class="schedule-topic-card__heading">
+                      <span class="schedule-topic-card__number">{sessionLabel}</span>
+                      <span class="schedule-topic-card__title">{session.title}</span>
                     </span>
-                    <span class="schedule-topic-card__title">{session.title}</span>
+                    <button
+                      class="schedule-session-profiles-toggle"
+                      type="button"
+                      aria-expanded="false"
+                      aria-label={hasSessionProfiles
+                        ? `展开 ${sessionLabel} 全部嘉宾资料`
+                        : `${sessionLabel} 暂无可展开嘉宾资料`}
+                      data-schedule-session-profiles-toggle
+                      data-session-label={sessionLabel}
+                      disabled={!hasSessionProfiles}
+                    >
+                      <span data-session-profiles-toggle-action>展开</span>
+                      <span>全部</span>
+                    </button>
                   </div>
                   <section
                     class:list={['session-chair', { 'session-chair--pending': hasPendingChair }]}
                     aria-label="Chair"
                     data-schedule-chair-card
                   >
-                    <span class="session-chair__label">Chair</span>
-                    <div class="session-chair__people">
-                      {hasPendingChair ? (
+                    {hasPendingChair ? (
+                      <div class="session-chair__person-row">
+                        <span class="session-chair__label">Chair</span>
                         <span class="session-chair__person session-chair__person--pending">待确认</span>
-                      ) : (
-                        session.chairs.map((chair, chairIndex) => {
-                          const person = conference2026PersonForName(chair.name);
-                          return (
-                            <>
-                              {person ? (
-                                <SchedulePersonProfile
-                                  person={person}
-                                  displayName={chair.name}
-                                  displayAffiliation={chair.affiliation}
-                                  disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-chair-${person.id}-${chairIndex + 1}`}
-                                  role="chair"
-                                />
-                              ) : (
-                                <span class="session-chair__person schedule-person-identity">
-                                  <strong>{chair.name}</strong>
-                                  {chair.affiliation && (
-                                    <span class="schedule-person-identity__affiliation">
-                                      <span class="schedule-person-identity__affiliation-text">
-                                        {chair.affiliation}
-                                      </span>
-                                    </span>
-                                  )}
+                      </div>
+                    ) : (
+                      session.chairs.map((chair, chairIndex) => {
+                        const person = conference2026PersonForName(chair.name);
+                        return person ? (
+                          <SchedulePersonProfile
+                            person={person}
+                            displayName={chair.name}
+                            displayAffiliation={chair.affiliation}
+                            disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-chair-${person.id}-${chairIndex + 1}`}
+                            role="chair"
+                            showRoleLabel={chairIndex === 0}
+                          />
+                        ) : (
+                          <div class="session-chair__person-row">
+                            <span
+                              class="session-chair__label"
+                              aria-hidden={chairIndex > 0 ? 'true' : undefined}
+                            >
+                              {chairIndex === 0 ? 'Chair' : ''}
+                            </span>
+                            <span class="session-chair__person schedule-person-identity">
+                              <strong>{chair.name}</strong>
+                              {chair.affiliation && (
+                                <span class="schedule-person-identity__affiliation">
+                                  <span class="schedule-person-identity__affiliation-text">
+                                    {chair.affiliation}
+                                  </span>
                                 </span>
                               )}
-                            </>
-                          );
-                        })
-                      )}
-                    </div>
+                            </span>
+                          </div>
+                        );
+                      })
+                    )}
                   </section>
                   <div class="card-body">
                     <div class="session-list">
@@ -216,39 +224,55 @@ const sessionNumbers = new Map(
       }
     };
 
-    const personProfiles = schedulePage instanceof HTMLElement
-      ? [...schedulePage.querySelectorAll('[data-schedule-person-profile]')]
-          .filter((profile) => profile instanceof HTMLDetailsElement)
+    const sessionCards = schedulePage instanceof HTMLElement
+      ? [...schedulePage.querySelectorAll('[data-schedule-session-card]')]
+          .filter((card) => card instanceof HTMLElement)
       : [];
-    const speakerProfiles = personProfiles
-      .filter((profile) => profile.dataset.personRole === 'speaker');
-    const profilesToggle = schedulePage instanceof HTMLElement
-      ? schedulePage.querySelector('[data-schedule-profiles-toggle]')
-      : null;
 
-    const syncProfilesToggle = () => {
-      if (!(profilesToggle instanceof HTMLButtonElement)) return;
-      const allOpen = speakerProfiles.length > 0
-        && speakerProfiles.every((profile) => profile.open);
-      profilesToggle.textContent = allOpen ? '收起全部演讲' : '展开全部演讲';
-      profilesToggle.setAttribute('aria-expanded', String(allOpen));
-      profilesToggle.disabled = speakerProfiles.length === 0;
-    };
+    for (const sessionCard of sessionCards) {
+      const profiles = [...sessionCard.querySelectorAll('[data-schedule-person-profile]')]
+        .filter((profile) => profile instanceof HTMLDetailsElement);
+      const sessionToggle = sessionCard.querySelector('[data-schedule-session-profiles-toggle]');
+      const actionLabel = sessionToggle?.querySelector('[data-session-profiles-toggle-action]');
 
-    if (profilesToggle instanceof HTMLButtonElement) {
-      profilesToggle.addEventListener('click', () => {
-        const shouldOpen = !speakerProfiles.every((profile) => profile.open);
-        for (const profile of speakerProfiles) profile.open = shouldOpen;
-        syncProfilesToggle();
-        requestNavigationSync();
-      });
-    }
+      const syncSessionToggle = () => {
+        if (!(sessionToggle instanceof HTMLButtonElement)) return;
+        const sessionLabel = sessionToggle.dataset.sessionLabel ?? '当前 Session';
+        if (profiles.length === 0) {
+          sessionToggle.disabled = true;
+          sessionToggle.setAttribute('aria-expanded', 'false');
+          sessionToggle.setAttribute('aria-label', `${sessionLabel} 暂无可展开嘉宾资料`);
+          return;
+        }
+        const allOpen = profiles.every((profile) => profile.open);
+        if (actionLabel instanceof HTMLElement) {
+          actionLabel.textContent = allOpen ? '收起' : '展开';
+        }
+        sessionToggle.setAttribute('aria-expanded', String(allOpen));
+        sessionToggle.setAttribute(
+          'aria-label',
+          `${allOpen ? '收起' : '展开'} ${sessionLabel} 全部嘉宾资料`,
+        );
+        sessionToggle.disabled = false;
+      };
 
-    for (const profile of personProfiles) {
-      profile.addEventListener('toggle', () => {
-        syncProfilesToggle();
-        requestNavigationSync();
-      });
+      if (sessionToggle instanceof HTMLButtonElement) {
+        sessionToggle.addEventListener('click', () => {
+          const shouldOpen = !profiles.every((profile) => profile.open);
+          for (const profile of profiles) profile.open = shouldOpen;
+          syncSessionToggle();
+          requestNavigationSync();
+        });
+      }
+
+      for (const profile of profiles) {
+        profile.addEventListener('toggle', () => {
+          syncSessionToggle();
+          requestNavigationSync();
+        });
+      }
+
+      syncSessionToggle();
     }
 
     const openProfileHashTarget = () => {
@@ -260,7 +284,6 @@ const sessionNumbers = new Map(
       window.requestAnimationFrame(requestNavigationSync);
     };
     window.addEventListener('hashchange', openProfileHashTarget);
-    syncProfilesToggle();
 
     if (
       schedulePage instanceof HTMLElement
@@ -522,6 +545,26 @@ const sessionNumbers = new Map(
     --site-nav-inline-gap: clamp(1.15rem, 2.35vw, 2.65rem);
   }
 
+  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+    .site-nav__fluid-capsule {
+    display: none;
+  }
+
+  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+    .site-navigation__compact-glass > .glass-action-group__lens {
+    display: block;
+  }
+
+  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+    .site-navigation__compact-glass[data-glass-scrub] {
+    cursor: grab;
+  }
+
+  .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+    .site-navigation__compact-glass[data-glass-scrubbing] {
+    cursor: grabbing;
+  }
+
   .edition-2026 .site-header[data-schedule-nav='periods']
     .site-nav a[aria-current='location'] {
     color: var(--blue);
@@ -589,6 +632,7 @@ const sessionNumbers = new Map(
     }
 
     .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-navigation__compact-glass:not([data-glass-ready='true'])
       .site-nav a[aria-current='location'] {
       color: var(--blue-deep);
       background: var(--glass-micro-fill);
@@ -624,9 +668,18 @@ const sessionNumbers = new Map(
   }
 
   .edition-goal-2026 .schedule-topic-card .card-header {
-    justify-content: flex-start;
-    gap: 0.85rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2.65rem;
+    align-items: center;
+    gap: 0.75rem;
     text-align: left;
+  }
+
+  .edition-2026-inner .schedule-topic-card__heading {
+    display: flex;
+    min-width: 0;
+    align-items: baseline;
+    gap: 0.85rem;
   }
 
   .edition-2026-inner .schedule-topic-card__number {
@@ -642,17 +695,88 @@ const sessionNumbers = new Map(
     text-wrap: balance;
   }
 
+  .edition-2026-inner .schedule-session-profiles-toggle {
+    display: grid;
+    position: relative;
+    isolation: isolate;
+    width: 2.65rem;
+    height: 2.65rem;
+    box-sizing: border-box;
+    place-content: center;
+    gap: 0.08rem;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: var(--glass-lens-fill, rgb(255 253 251 / 0.46));
+    box-shadow: var(
+      --glass-lens-shadow,
+      inset 0 1px 0 rgb(255 255 255 / 0.88),
+      inset 0 -1px 0 rgb(103 82 200 / 0.1),
+      0 4px 12px rgb(40 29 105 / 0.065)
+    );
+    -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(8px) saturate(1.05) contrast(1.015));
+    backdrop-filter: var(--glass-lens-backdrop, blur(8px) saturate(1.05) contrast(1.015));
+    color: #111b68;
+    filter: var(--glass-lens-filter, none);
+    font: inherit;
+    font-size: 0.68rem;
+    font-weight: 740;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-align: center;
+    text-shadow: inherit;
+    cursor: pointer;
+    transition:
+      box-shadow 180ms ease,
+      filter 180ms ease,
+      transform 160ms ease;
+  }
+
+  .edition-2026-inner .schedule-session-profiles-toggle > span {
+    display: block;
+    padding-left: 0.08em;
+  }
+
+  .edition-2026-inner .schedule-session-profiles-toggle:hover {
+    box-shadow:
+      var(--glass-lens-shadow),
+      0 0 3px rgb(44 144 140 / 0.12);
+    filter: brightness(1.045) saturate(1.05);
+  }
+
+  .edition-2026-inner .schedule-session-profiles-toggle:active {
+    transform: scale(0.96);
+  }
+
+  .edition-2026-inner .schedule-session-profiles-toggle:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  .edition-2026-inner .schedule-session-profiles-toggle:disabled {
+    color: rgb(17 27 104 / 0.52);
+    cursor: default;
+    filter: saturate(0.72);
+    opacity: 0.52;
+  }
+
   .edition-2026-inner .session-chair {
     display: grid;
-    grid-template-columns: 4rem minmax(0, 1fr);
-    align-items: start;
+    gap: 0.35rem;
+  }
+
+  .edition-2026-inner .session-chair__person-row,
+  .edition-2026-inner .schedule-person-profile--chair .schedule-person-profile__summary {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr) auto;
+    min-width: 0;
+    align-items: center;
     gap: 0.75rem;
   }
 
-  .edition-2026-inner .session-chair__people {
-    display: grid;
-    min-width: 0;
-    gap: 0.35rem;
+  .edition-2026-inner .session-chair__person-row {
+    grid-template-columns: 4rem minmax(0, 1fr);
   }
 
   .edition-2026-inner .session-chair__person {
@@ -685,7 +809,7 @@ const sessionNumbers = new Map(
   }
 
   @media (max-width: 767.98px) {
-    .edition-2026-inner .schedule-topic-card .card-header {
+    .edition-2026-inner .schedule-topic-card__heading {
       flex-direction: column;
       align-items: flex-start;
       gap: 0.2rem;
@@ -699,13 +823,25 @@ const sessionNumbers = new Map(
   }
 
   @media (max-width: 575.98px) {
-    .edition-2026-inner .session-chair {
-      grid-template-columns: 1fr;
-      gap: 0;
+    .edition-goal-2026 .schedule-topic-card .card-header {
+      grid-template-columns: minmax(0, 1fr) 2.55rem;
+      gap: 0.65rem;
     }
 
-    .edition-2026-inner .session-chair__label {
-      min-height: 2rem;
+    .edition-2026-inner .schedule-session-profiles-toggle {
+      width: 2.55rem;
+      height: 2.55rem;
+      font-size: 0.66rem;
+    }
+
+    .edition-2026-inner .session-chair__person-row,
+    .edition-2026-inner .schedule-person-profile--chair .schedule-person-profile__summary {
+      grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+      gap: 0.5rem;
+    }
+
+    .edition-2026-inner .session-chair__person-row {
+      grid-template-columns: 3.5rem minmax(0, 1fr);
     }
   }
 </style>

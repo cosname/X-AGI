@@ -11,6 +11,7 @@ interface Props {
   disclosureId: string;
   role: Conference2026PersonRole;
   defaultOpen?: boolean;
+  showRoleLabel?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   disclosureId,
   role,
   defaultOpen = false,
+  showRoleLabel = false,
 } = Astro.props;
 
 const canonicalName = person.name === displayName
@@ -43,6 +45,14 @@ const profileAffiliation = person.department
   open={defaultOpen}
 >
   <summary class="schedule-person-profile__summary">
+    {role === 'chair' && (
+      <span
+        class="session-chair__label"
+        aria-hidden={showRoleLabel ? undefined : 'true'}
+      >
+        {showRoleLabel ? 'Chair' : ''}
+      </span>
+    )}
     <span class="schedule-person-profile__summary-copy schedule-person-identity">
       <strong>{displayName}</strong>
       {displayAffiliation && (
