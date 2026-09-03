@@ -111,6 +111,7 @@ export const conference2026 = {
         '张桐瑞轩',
         '周峰',
         '祝武',
+        '邹嘉轩',
       ],
       orderNote: '按姓名拼音排序',
     },
