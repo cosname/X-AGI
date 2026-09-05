@@ -1,5 +1,6 @@
 ---
 import { conference2026, type TicketBand } from '../../../data/conference2026';
+import { currentEdition, editionPath } from '../../../config/site';
 
 const ticketId = conference2026.registration.url.split('/').pop();
 const ticketBands = conference2026.tickets.bands as readonly TicketBand[];
@@ -18,6 +19,14 @@ const ticketBands = conference2026.tickets.bands as readonly TicketBand[];
             {conference2026.registration.notes.map((note) => <li>{note}</li>)}
           </ul>
         </div>
+
+        <aside class="registration-travel-grant" aria-label={conference2026.travelGrant.title}>
+          <p><strong>{conference2026.travelGrant.benefit}</strong></p>
+          <p>
+            {conference2026.travelGrant.application}
+            <a href={`${editionPath(currentEdition, 'guide')}#travel-grant`}>查看补助条件与申请流程</a>
+          </p>
+        </aside>
 
         <div class="pricing-section">
           <h4 class="pricing-title">会议费用（{conference2026.tickets.currency}）:</h4>
@@ -76,6 +85,22 @@ const ticketBands = conference2026.tickets.bands as readonly TicketBand[];
     </div>
   </div>
 </main>
+
+<style>
+  .registration-travel-grant {
+    margin-top: 1.35rem;
+    padding: 0.25rem 0 0.25rem 1rem;
+    border-left: 2px solid var(--goal-purple);
+  }
+
+  .registration-travel-grant p {
+    margin-bottom: 0.4rem;
+  }
+
+  .registration-travel-grant p:last-child {
+    margin-bottom: 0;
+  }
+</style>
 
 <script is:inline>
   (function (i, s, o, g, r, a, m) {

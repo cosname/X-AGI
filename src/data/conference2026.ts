@@ -63,6 +63,34 @@ export type TicketBand = {
   rows: readonly TicketRow[];
 };
 
+// Source: 统计之都《本科生差旅补助计划 | 2026 X-AGI 大会》, 2026-09-05.
+// The supplied WeChat URL is a temporary preview; do not publish it as a permanent link.
+const undergraduateTravelGrant = {
+  title: '本科生差旅补助计划',
+  maxAmount: 2500,
+  currency: '人民币',
+  reimbursement: '实报实销',
+  introduction: '为鼓励更多本科生投身前沿科学研究、参与学术交流，大会为符合条件的参会本科生提供差旅报销支持。',
+  coverage: ['往返交通费', '会议期间住宿费'],
+  requirements: [
+    '在读全日制本科生。',
+    '一年内在下列期刊或会议录用中稿，优先第一作者或共同第一作者。',
+    '报名参加 X-AGI 的 Rising Stars Poster 海报展示活动。',
+  ],
+  venues: ['ICLR', 'NeurIPS', 'ICML', 'JMLR', 'T-PAMI', 'JASA', 'JRSSB', 'AoS', 'Biometrika', 'COLT', 'FOCS', 'STOC', 'TMLR', 'COLM', 'ACL', 'CVPR', 'EMNLP', 'ECCV'],
+  materials: '学生证扫描件及论文 / 期刊录用的相关证明材料。',
+  allocation: '每篇论文仅限一个支持名额。',
+  application: '与 Rising Stars Poster 共用报名渠道，提交一次即可。',
+  review: {
+    dateTime: '2026-09-26',
+    label: '9 月 26 日前',
+    description: '组委会完成审核，并通过邮件通知符合条件的参会者。',
+  },
+  reimbursementNote: '参会结束后，按照要求提交报销凭证。',
+  reminder: '请妥善保存往返交通、住宿等相关差旅证明。',
+  benefit: '符合条件的本科生可申请差旅补助（每人最高 2500 元，实报实销）',
+} as const;
+
 export const conference2026 = {
   sourceDate: '2026-08-18',
   sourceDateLabel: '大会专题与嘉宾信息已同步',
@@ -269,7 +297,7 @@ export const conference2026 = {
     benefits: [
       '价值 2400 人民币的 X-AGI 会议正式门票（含茶歇、餐食、伴手礼等）',
       '优秀简历直达合作企业技术负责人',
-      '京外本科生机酒支持',
+      undergraduateTravelGrant.benefit,
     ],
     deadline: {
       date: '2026.09.16',
@@ -277,6 +305,7 @@ export const conference2026 = {
       dateTime: '2026-09-17T00:00:00+08:00',
     },
   },
+  travelGrant: undergraduateTravelGrant,
   registration: {
     status: '报名开放中',
     url: 'https://www.bagevent.com/event/9252233',
