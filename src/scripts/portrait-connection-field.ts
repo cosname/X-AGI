@@ -1,3 +1,5 @@
+import { connectionDistances, connectionPulseEnergy } from './connection-pulse.ts';
+
 const PORTRAIT_MEDIA = '(max-width: 51.25rem) and (orientation: portrait)';
 const FRAME_INTERVAL = 1000 / 24;
 
@@ -170,6 +172,8 @@ export const initializePortraitConnectionFields = () => {
       vx: 0,
       vy: 0,
       depth: Number(element.dataset.nodeDepth ?? 1),
+      energy: 0,
+      distance: Infinity,
     }));
     const flockStates = (['upper', 'lower-left', 'lower-right'] as const).map((flock, index) => ({
       flock,
@@ -188,6 +192,8 @@ export const initializePortraitConnectionFields = () => {
       from: Number(element.dataset.linkFrom ?? 0),
       to: Number(element.dataset.linkTo ?? 0),
       progress: Number(element.dataset.linkProgress ?? 0.5),
+      energy: 0,
+      distance: Infinity,
     }));
 
     const pointer = {
@@ -201,6 +207,36 @@ export const initializePortraitConnectionFields = () => {
     let resizeFrame = 0;
     let lastTimestamp = 0;
     let visible = true;
+    let suspended = false;
+    let pulseStartedAt: number | null = null;
+    let pulseDuration = 0;
+    let feedbackTimer = 0;
+    let tap: { id: number; x: number; y: number; startedAt: number } | null = null;
+
+    const clearPulse = () => {
+      pulseStartedAt = null;
+      window.clearTimeout(feedbackTimer);
+      feedbackTimer = 0;
+      [...nodeStates, ...linkDots].forEach((item) => {
+        if (item.energy) {
+          item.element.style.removeProperty('box-shadow');
+          item.element.style.removeProperty('filter');
+        }
+        item.energy = 0;
+      });
+      delete field.dataset.connectionSource;
+    };
+    const paintEnergy = (item: { element: HTMLElement; energy: number }, energy: number) => {
+      if (energy === item.energy) return;
+      item.energy = energy;
+      if (energy > 0) {
+        item.element.style.boxShadow = `0 0 ${ (energy * 4).toFixed(2) }px ${ (energy * 1.5).toFixed(2) }px rgb(103 82 200 / ${(energy * 0.24).toFixed(3)})`;
+        item.element.style.filter = `saturate(${(1 + energy * 0.45).toFixed(3)})`;
+      } else {
+        item.element.style.removeProperty('box-shadow');
+        item.element.style.removeProperty('filter');
+      }
+    };
 
     const stop = () => {
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
@@ -211,6 +247,8 @@ export const initializePortraitConnectionFields = () => {
     const reset = () => {
       stop();
       pointer.active = false;
+      tap = null;
+      clearPulse();
       flockStates.forEach((flock) => {
         flock.step = 0;
         flock.nextTargetAt = 0;
@@ -226,12 +264,10 @@ export const initializePortraitConnectionFields = () => {
         node.y = 0;
         node.vx = 0;
         node.vy = 0;
-        node.element.style.removeProperty('--connection-drag-x');
-        node.element.style.removeProperty('--connection-drag-y');
+        node.element.style.removeProperty('transform');
       });
       linkDots.forEach(({ element }) => {
-        element.style.removeProperty('--connection-drag-x');
-        element.style.removeProperty('--connection-drag-y');
+        element.style.removeProperty('transform');
       });
       field.dataset.pointerSpeed = '0.00';
       field.dataset.maximumDisplacement = '0.00';
@@ -247,18 +283,21 @@ export const initializePortraitConnectionFields = () => {
       field.dataset.ready = 'true';
     };
 
-    const apply = () => {
+    const apply = (timestamp: number) => {
+      if (pulseStartedAt !== null) {
+        const elapsed = timestamp - pulseStartedAt;
+        if (elapsed > pulseDuration) clearPulse();
+        else [...nodeStates, ...linkDots].forEach((item) => paintEnergy(item, connectionPulseEnergy(item.distance, elapsed)));
+      }
       nodeStates.forEach((node) => {
-        node.element.style.setProperty('--connection-drag-x', `${node.x.toFixed(2)}px`);
-        node.element.style.setProperty('--connection-drag-y', `${node.y.toFixed(2)}px`);
+        node.element.style.transform = `translate(-50%, -50%) translate3d(${node.x.toFixed(2)}px, ${node.y.toFixed(2)}px, 0)${node.energy ? ` scale(${(1 + node.energy * 0.28).toFixed(3)})` : ''}`;
       });
-      linkDots.forEach(({ element, from, to, progress }) => {
+      linkDots.forEach(({ element, from, to, progress, energy }) => {
         const start = nodeStates[from];
         const end = nodeStates[to];
         const x = start.x * (1 - progress) + end.x * progress;
         const y = start.y * (1 - progress) + end.y * progress;
-        element.style.setProperty('--connection-drag-x', `${x.toFixed(2)}px`);
-        element.style.setProperty('--connection-drag-y', `${y.toFixed(2)}px`);
+        element.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)${energy ? ` scale(${(1 + energy).toFixed(3)})` : ''}`;
       });
     };
 
@@ -292,7 +331,7 @@ export const initializePortraitConnectionFields = () => {
     };
 
     const tick = (timestamp: number) => {
-      if (!visible || !portraitMedia.matches || document.hidden) {
+      if (suspended || !visible || !portraitMedia.matches || document.hidden || reducedMotion.matches) {
         animationFrame = 0;
         lastTimestamp = 0;
         return;
@@ -346,21 +385,21 @@ export const initializePortraitConnectionFields = () => {
         maximumDisplacement = Math.max(maximumDisplacement, Math.hypot(node.x, node.y));
       });
 
-      apply();
+      apply(timestamp);
       field.dataset.pointerSpeed = '0.00';
       field.dataset.maximumDisplacement = maximumDisplacement.toFixed(2);
-      field.dataset.interaction = maximumAvoidance > 0.02 ? 'avoid' : 'wander';
+      field.dataset.interaction = pulseStartedAt !== null ? 'connect' : maximumAvoidance > 0.02 ? 'avoid' : 'wander';
       field.dataset.avoidance = maximumAvoidance.toFixed(3);
       animationFrame = window.requestAnimationFrame(tick);
     };
 
     const start = () => {
-      if (animationFrame || reducedMotion.matches || !portraitMedia.matches || !visible) return;
+      if (suspended || animationFrame || reducedMotion.matches || !portraitMedia.matches || !visible || document.hidden) return;
       animationFrame = window.requestAnimationFrame(tick);
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      if (!event.isPrimary || reducedMotion.matches || !portraitMedia.matches || !visible) return;
+      if (event.pointerType === 'touch' || !event.isPrimary || reducedMotion.matches || !portraitMedia.matches || !visible) return;
       const currentRect = field.getBoundingClientRect();
       pointer.x = event.clientX - currentRect.left;
       pointer.y = event.clientY - currentRect.top;
@@ -373,6 +412,51 @@ export const initializePortraitConnectionFields = () => {
       start();
     };
 
+    const connect = (clientX: number, clientY: number) => {
+      clearPulse();
+      const bounds = field.getBoundingClientRect();
+      const point = { x: clientX - bounds.left, y: clientY - bounds.top };
+      const points = nodeStates.map((node) => ({ x: node.homeX + node.x, y: node.homeY + node.y }));
+      const connected = [...new Set(PORTRAIT_CONNECTION_LINKS.flatMap((link) => [link.from, link.to]))];
+      const source = connected.reduce((closest, index) =>
+        Math.hypot(points[index].x - point.x, points[index].y - point.y)
+        < Math.hypot(points[closest].x - point.x, points[closest].y - point.y) ? index : closest);
+      field.dataset.connectionSource = `${source}`;
+      field.dataset.interaction = 'connect';
+      if (reducedMotion.matches) {
+        paintEnergy(nodeStates[source], 1);
+        feedbackTimer = window.setTimeout(() => { clearPulse(); field.dataset.interaction = 'idle'; }, 650);
+        return;
+      }
+      const distances = connectionDistances(points, PORTRAIT_CONNECTION_LINKS, source);
+      nodeStates.forEach((node, index) => { node.distance = distances[index]; });
+      linkDots.forEach((dot) => {
+        const length = Math.hypot(points[dot.from].x - points[dot.to].x, points[dot.from].y - points[dot.to].y);
+        dot.distance = Math.min(distances[dot.from] + length * dot.progress, distances[dot.to] + length * (1 - dot.progress));
+      });
+      pulseDuration = Math.max(...distances.filter(Number.isFinite)) / 0.42 + 480;
+      pulseStartedAt = performance.now();
+      pointer.active = false;
+      start();
+    };
+
+    stage.addEventListener('pointerdown', (event) => {
+      tap = null;
+      if (!event.isPrimary || event.pointerType === 'mouse' || !portraitMedia.matches || !visible) return;
+      if (event.target instanceof Element && event.target.closest('a, button, input, select, textarea, summary, [role="button"]')) return;
+      tap = { id: event.pointerId, x: event.clientX, y: event.clientY, startedAt: performance.now() };
+    }, { passive: true, signal });
+    stage.addEventListener('pointermove', (event) => {
+      if (tap && (event.pointerId !== tap.id || Math.hypot(event.clientX - tap.x, event.clientY - tap.y) > 10)) tap = null;
+    }, { passive: true, signal });
+    stage.addEventListener('pointerup', (event) => {
+      if (tap && event.pointerId === tap.id && performance.now() - tap.startedAt < 500
+        && Math.hypot(event.clientX - tap.x, event.clientY - tap.y) <= 10) connect(event.clientX, event.clientY);
+      tap = null;
+    }, { passive: true, signal });
+    stage.addEventListener('pointercancel', () => { tap = null; }, { passive: true, signal });
+    window.addEventListener('scroll', () => { tap = null; }, { passive: true, signal });
+
     const clearPointer = (event: PointerEvent) => {
       if (!event.isPrimary) return;
       pointer.active = false;
@@ -382,6 +466,7 @@ export const initializePortraitConnectionFields = () => {
       if (resizeFrame) return;
       resizeFrame = window.requestAnimationFrame(() => {
         resizeFrame = 0;
+        clearPulse();
         refreshGeometry();
         start();
       });
@@ -398,7 +483,7 @@ export const initializePortraitConnectionFields = () => {
     resizeObserver.observe(stage);
     const intersectionObserver = new IntersectionObserver((entries) => {
       visible = entries[0]?.isIntersecting ?? false;
-      if (!visible) stop();
+      if (!visible) { tap = null; clearPulse(); stop(); }
       else start();
     }, { rootMargin: '80px' });
     intersectionObserver.observe(field);
@@ -410,7 +495,7 @@ export const initializePortraitConnectionFields = () => {
       pointer.active = false;
     }, { signal });
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stop();
+      if (document.hidden) { tap = null; clearPulse(); stop(); }
       else start();
     }, { signal });
     portraitMedia.addEventListener('change', () => {
@@ -420,7 +505,13 @@ export const initializePortraitConnectionFields = () => {
     }, { signal });
     reducedMotion.addEventListener('change', handleMotionPreference, { signal });
 
+    window.addEventListener('pagehide', () => { suspended = true; reset(); }, { signal });
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) { suspended = false; refreshGeometry(); start(); }
+    }, { signal });
+
     const destroy = () => {
+      clearPulse();
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
       if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
       resizeObserver.disconnect();

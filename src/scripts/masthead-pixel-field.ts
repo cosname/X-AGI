@@ -405,7 +405,7 @@ export const initializeMastheadPixelFields = () => {
     stage.addEventListener('pointercancel', deactivate, { passive: true, signal });
     window.addEventListener('blur', deactivate, { signal });
     window.addEventListener('scroll', () => {
-      if (originFrame) return;
+      if (originFrame || !visible || document.hidden) return;
       originFrame = window.requestAnimationFrame(() => {
         originFrame = 0;
         const bounds = field.getBoundingClientRect();
