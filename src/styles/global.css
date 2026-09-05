@@ -238,6 +238,67 @@
   grid-template-columns: none;
   align-items: center;
   gap: 0.65rem;
+  min-height: 3rem;
+}
+
+.edition-2026 .site-brand__logo {
+  --brand-wordmark-mask: url('/2026/brand/xagi-header-wordmark.svg');
+  --brand-light-x: 50%;
+  --brand-light-y: 8%;
+  --brand-light-energy: 0;
+  position: relative;
+  display: block;
+  width: 12.25rem;
+  aspect-ratio: 2680 / 625;
+  flex: none;
+}
+
+.edition-2026 .site-brand__logo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 28% 110% at var(--brand-light-x) var(--brand-light-y), rgb(255 255 255 / calc(var(--brand-light-energy) * 0.48)), transparent 74%),
+    linear-gradient(116deg, transparent calc(var(--brand-light-x) - 41%), rgb(255 255 255 / 0.12) calc(var(--brand-light-x) - 27%), rgb(255 255 255 / 0.36) calc(var(--brand-light-x) - 13%), rgb(255 255 255 / 0.06) calc(var(--brand-light-x) - 1%), transparent calc(var(--brand-light-x) + 14%)),
+    radial-gradient(ellipse 88% 82% at var(--brand-light-x) var(--brand-light-y), rgb(255 255 255 / 0.3), transparent 70%),
+    radial-gradient(circle at 10% 14%, rgb(44 144 140 / 0.1), transparent 34%),
+    linear-gradient(176deg, rgb(181 168 219 / 0.76) 0%, rgb(145 126 198 / 0.66) 46%, rgb(94 75 153 / 0.82) 100%);
+  -webkit-backdrop-filter: var(--glass-lens-backdrop);
+  backdrop-filter: var(--glass-lens-backdrop);
+  -webkit-mask: var(--brand-wordmark-mask) center / contain no-repeat;
+  mask: var(--brand-wordmark-mask) center / contain no-repeat;
+  mask-mode: alpha;
+}
+
+.edition-2026 .site-brand__logo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--glass-lens-highlight) 0%, rgb(255 255 255 / 0.3) 42%, var(--glass-lens-depth) 100%);
+  -webkit-mask-image: var(--brand-wordmark-mask), var(--brand-wordmark-mask);
+  mask-image: var(--brand-wordmark-mask), var(--brand-wordmark-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center, center calc(50% + 0.75px);
+  mask-position: center, center calc(50% + 0.75px);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.edition-2026 .site-brand:focus-visible .site-brand__logo,
+.edition-2026 .site-brand:is(:active, [data-brand-pressed]) .site-brand__logo {
+  --brand-light-energy: 0.7;
+}
+
+.edition-2026 .site-brand:is(:active, [data-brand-pressed]) .site-brand__logo::before {
+  filter: brightness(1.08);
+}
+
+.edition-2026 .site-header[data-nav-mode='compact'] .site-brand__logo {
+  width: 10.75rem;
 }
 
 .edition-2026 .site-brand__mark {
@@ -2963,6 +3024,10 @@ button:focus-visible {
 }
 
 @media (prefers-contrast: more) {
+  .edition-2026 .site-brand__logo::before {
+    background: var(--focus);
+  }
+
   .edition-2026.edition-goal-home,
   .edition-2026.edition-goal-2026 {
     --glass-lens-fill:
@@ -3005,11 +3070,17 @@ button:focus-visible {
     min-height: auto;
   }
 
-  .edition-2026 .site-brand__mark {
+  .edition-2026 .site-brand__mark,
+  .edition-2026 .site-brand__logo::before {
     background: CanvasText;
+    forced-color-adjust: none;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     filter: none;
+  }
+
+  .edition-2026 .site-brand__logo::after {
+    display: none;
   }
 
   .edition-2026 .site-nav__fluid-capsule,

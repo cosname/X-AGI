@@ -31,6 +31,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const scrubEnabled = root.hasAttribute('data-glass-scrub');
   const activateOnRelease = root.hasAttribute('data-glass-activate-on-release');
+  const allowsVerticalScroll = root.dataset.glassTouchScroll === 'pan-y';
   const header = root.closest<HTMLElement>('.site-header');
   const enabled = () => !header || header.dataset.navMode === 'compact' || header.dataset.scheduleNav === 'periods';
   const usesVerticalAxis = () => glassGroupUsesVerticalAxis(
@@ -54,6 +55,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   let animationFrame = 0;
   let layoutFrame = 0;
   let scrubPointerId: number | null = null;
+  let pendingScrub: { id: number; x: number; y: number } | null = null;
   let scrubTarget: HTMLElement | null = null;
   let suppressTrustedClick = false;
   let lensDismissed = false;
@@ -197,29 +199,37 @@ function initializeGlassActionGroup(root: HTMLElement) {
     setCapsuleTarget(capsuleForPointer(pointerX, pointerY));
   };
 
+  const shouldDismissTarget = (target: HTMLElement) => (
+    !(target instanceof HTMLAnchorElement && target.target === '_blank')
+    && glassActivationShouldDismiss(
+      target.tagName,
+      target instanceof HTMLAnchorElement ? target.getAttribute('href') : null,
+      target.dataset.glassTarget,
+    )
+  );
+
   const finishScrub = (activate: boolean) => {
     const target = scrubTarget;
     const pointerId = scrubPointerId;
     scrubPointerId = null;
     scrubTarget = null;
+    pendingScrub = null;
     root.removeAttribute('data-glass-scrubbing');
     targets.forEach((candidate) => candidate.removeAttribute('data-glass-preview'));
     if (pointerId !== null && root.hasPointerCapture(pointerId)) {
       root.releasePointerCapture(pointerId);
     }
     if (activate && target && activateOnRelease && canScrub()) {
-      if (glassActivationShouldDismiss(
-        target.tagName,
-        target instanceof HTMLAnchorElement ? target.getAttribute('href') : null,
-        target.dataset.glassTarget,
-      )) {
+      if (shouldDismissTarget(target)) {
         dismissLens();
       }
       suppressTrustedClick = true;
       target.click();
-      window.setTimeout(() => {
-        suppressTrustedClick = false;
-      }, 0);
+      // Scrollable touch gestures may suppress the compatibility click entirely.
+      // Otherwise consume it until the next explicit pointer or keyboard activation.
+      if (!allowsVerticalScroll) {
+        window.setTimeout(() => { suppressTrustedClick = false; }, 0);
+      }
       return;
     }
     if (!lensDismissed) syncToCurrentState();
@@ -273,11 +283,17 @@ function initializeGlassActionGroup(root: HTMLElement) {
   };
 
   root.addEventListener('pointerdown', (event) => {
+    suppressTrustedClick = false;
     if (!canScrub() || !event.isPrimary || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
     const directTarget = event.target instanceof Element
       ? event.target.closest<HTMLElement>('[data-glass-target]')
       : null;
     if (!directTarget || !root.contains(directTarget)) return;
+    if (allowsVerticalScroll) {
+      pendingScrub = { id: event.pointerId, x: event.clientX, y: event.clientY };
+      return;
+    }
     event.preventDefault();
     scrubPointerId = event.pointerId;
     root.setPointerCapture(event.pointerId);
@@ -286,21 +302,50 @@ function initializeGlassActionGroup(root: HTMLElement) {
   }, { signal });
 
   root.addEventListener('pointermove', (event) => {
+    if (pendingScrub?.id === event.pointerId) {
+      const dx = Math.abs(event.clientX - pendingScrub.x);
+      const dy = Math.abs(event.clientY - pendingScrub.y);
+      if (dy > 10 && dy >= dx) { pendingScrub = null; return; }
+      if (dx < 8 || dx <= dy) return;
+      pendingScrub = null;
+      scrubPointerId = event.pointerId;
+      root.setPointerCapture(event.pointerId);
+      root.setAttribute('data-glass-scrubbing', '');
+    }
     if (scrubPointerId === null || event.pointerId !== scrubPointerId) return;
     event.preventDefault();
     previewScrub(event.clientX, event.clientY);
   }, { passive: false, signal });
 
   root.addEventListener('pointerup', (event) => {
+    if (pendingScrub?.id === event.pointerId) pendingScrub = null;
     if (scrubPointerId === null || event.pointerId !== scrubPointerId) return;
     event.preventDefault();
     previewScrub(event.clientX, event.clientY);
-    finishScrub(true);
+    const bounds = root.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const inside = !allowsVerticalScroll || geometries.some((target) => (
+      x >= target.left - 12 && x <= target.right + 12
+      && y >= target.top - 12 && y <= target.bottom + 12
+    ));
+    suppressTrustedClick = true;
+    finishScrub(inside);
   }, { signal });
 
   root.addEventListener('pointercancel', (event) => {
+    if (pendingScrub?.id === event.pointerId) pendingScrub = null;
     if (scrubPointerId === null || event.pointerId !== scrubPointerId) return;
     finishScrub(false);
+  }, { signal });
+
+  root.addEventListener('lostpointercapture', (event) => {
+    // Ignore the link's implicit touch capture when ownership transfers to the group.
+    if (allowsVerticalScroll && event.target === root && scrubPointerId === event.pointerId
+      && !root.hasPointerCapture(event.pointerId)) finishScrub(false);
+  }, { signal });
+  root.addEventListener('dragstart', (event) => {
+    if (allowsVerticalScroll && (pendingScrub || scrubPointerId !== null)) event.preventDefault();
   }, { signal });
 
   root.addEventListener('click', (event) => {
@@ -309,6 +354,10 @@ function initializeGlassActionGroup(root: HTMLElement) {
     event.stopImmediatePropagation();
     suppressTrustedClick = false;
   }, { capture: true, signal });
+
+  root.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') suppressTrustedClick = false;
+  }, { signal });
 
   root.addEventListener('pointermove', (event) => {
     if (!enabled() || scrubPointerId !== null || !finePointer.matches || focusedTarget) return;
@@ -321,6 +370,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   }, { passive: true, signal });
 
   root.addEventListener('pointerleave', () => {
+    pendingScrub = null;
     if (lensDismissed || focusedTarget || scrubPointerId !== null) return;
     syncToCurrentState();
   }, { signal });
@@ -338,11 +388,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
         targets.forEach((candidate) => candidate.removeAttribute('aria-current'));
         target.setAttribute('aria-current', 'location');
       }
-      if (glassActivationShouldDismiss(
-        target.tagName,
-        target instanceof HTMLAnchorElement ? target.getAttribute('href') : null,
-        target.dataset.glassTarget,
-      )) {
+      if (shouldDismissTarget(target)) {
         dismissLens();
         return;
       }
@@ -375,6 +421,22 @@ function initializeGlassActionGroup(root: HTMLElement) {
       lensDismissed = false;
       measureTargets();
     }
+  }, { signal });
+
+  const cancelScrollableScrub = () => {
+    if (!allowsVerticalScroll) return;
+    pendingScrub = null;
+    if (scrubPointerId !== null) finishScrub(false);
+  };
+  window.addEventListener('blur', cancelScrollableScrub, { signal });
+  window.addEventListener('scroll', cancelScrollableScrub, { passive: true, signal });
+  window.addEventListener('pagehide', () => {
+    if (!allowsVerticalScroll) return;
+    cancelScrollableScrub();
+    window.cancelAnimationFrame(animationFrame);
+    window.cancelAnimationFrame(layoutFrame);
+    animationFrame = 0;
+    layoutFrame = 0;
   }, { signal });
 
   resizeObserver.observe(root);

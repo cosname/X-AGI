@@ -25,7 +25,7 @@
     "people:sync": "node scripts/sync-attendee-people.mjs",
     "downloads:manifest": "node scripts/generate-archive-download-manifest.mjs",
     "downloads:verify": "node scripts/verify-archive-downloads.mjs",
-    "test:unit": "node --test scripts/sync-tencent-program.test.mjs scripts/sync-attendee-people.test.mjs src/config/edition-status.test.ts src/data/conference2026.test.ts src/data/conference2026-people.test.ts src/data/goal-history.test.ts src/scripts/pixel-field.test.ts src/scripts/glass-action-group.test.ts src/scripts/goal-history-gallery.test.ts src/scripts/header-scroll-state.test.ts src/scripts/hero-action-capsule.test.ts src/scripts/hero-pixel-field.test.ts src/scripts/navigation-capsule.test.ts",
+    "test:unit": "node --test scripts/sync-tencent-program.test.mjs scripts/sync-attendee-people.test.mjs src/config/edition-status.test.ts src/data/conference2026.test.ts src/data/conference2026-people.test.ts src/data/goal-history.test.ts src/scripts/pixel-field.test.ts src/scripts/glass-action-group.test.ts src/scripts/goal-history-gallery.test.ts src/scripts/header-scroll-state.test.ts src/scripts/hero-pixel-field.test.ts src/scripts/navigation-capsule.test.ts",
     "test": "npm run test:unit && npm run check && npm run build"
   },
   "devDependencies": {

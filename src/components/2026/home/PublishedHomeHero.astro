@@ -3,6 +3,7 @@ import { currentEditionActionPaths } from '../../../config/edition-status';
 import type { EditionConfig } from '../../../config/site';
 import { conference2026 } from '../../../data/conference2026';
 import HeroPixelField from '../../HeroPixelField.astro';
+import GlassActionGroup from '../../GlassActionGroup.astro';
 
 interface Props {
   edition: EditionConfig;
@@ -51,20 +52,22 @@ const actions = currentEditionActionPaths(edition);
             <time datetime={conference2026.dates.start}>{conference2026.dates.display}</time>
             <span>{conference2026.venue.name}</span>
           </p>
-          <div
+          <GlassActionGroup
             class="conference-hero__actions"
             data-connection-exclusion
             data-hero-action-switcher
+            defaultTarget="register"
+            scrub
+            activateOnRelease
+            touchScroll="pan-y"
           >
-            <span class="conference-hero__action-capsule" aria-hidden="true">
-              <span class="conference-hero__action-material"></span>
-            </span>
             <a
               class="conference-hero__register capsule-action"
               href={conference2026.registration.url}
               target="_blank"
               rel="noopener noreferrer"
               data-hero-action-target="register"
+              data-glass-target="register"
             >
               立即报名
             </a>
@@ -72,19 +75,13 @@ const actions = currentEditionActionPaths(edition);
               class="conference-hero__schedule"
               href={actions.schedule}
               data-hero-action-target="schedule"
+              data-glass-target="schedule"
             >
               大会日程
             </a>
-          </div>
+          </GlassActionGroup>
         </div>
       </div>
     </div>
   </section>
 </div>
-
-<script>
-  import { initializeHeroActionSwitchers } from '../../../scripts/hero-action-switcher';
-
-  initializeHeroActionSwitchers();
-  document.addEventListener('astro:page-load', initializeHeroActionSwitchers);
-</script>

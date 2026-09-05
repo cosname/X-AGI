@@ -30,8 +30,7 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
   <a class="skip-link" href="#main-content">跳到主要内容</a>
   <div class="site-header__inner">
     <a class="site-brand" href={editionPath(edition)} aria-label={`${edition.titleZh} 首页`}>
-      <span class="site-brand__mark" aria-hidden="true"></span>
-      <span class="site-brand__year">{edition.year}</span>
+      <span class="site-brand__logo" aria-hidden="true"></span>
     </a>
     <div class="site-navigation">
       <button
@@ -126,9 +125,11 @@ const compactGlassDefault = activePage || navigation[0]?.page || '';
 {scrollHeader && <HeaderScrollState />}
 
 <script>
+  import { initializeBrandHighlight } from '../scripts/brand-highlight';
   import { capsuleGapMorph, capsuleOutlinePath } from '../scripts/navigation-capsule';
 
   const header = document.querySelector<HTMLElement>('.site-header');
+  initializeBrandHighlight(header?.querySelector<HTMLAnchorElement>('.site-brand') ?? null);
   const navigation = header?.querySelector<HTMLElement>('.site-navigation');
   const toggle = navigation?.querySelector<HTMLButtonElement>('.site-navigation__toggle');
   const closeControl = navigation?.querySelector<HTMLButtonElement>('.site-navigation__close');
