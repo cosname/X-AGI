@@ -1,13 +1,15 @@
 ---
 import '../styles/glass-action-group.css';
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props {
+interface Props extends HTMLAttributes<'div'> {
   class?: string;
   defaultTarget?: string;
   filterGroup?: 'date' | 'category';
   axis?: 'auto' | 'vertical';
   scrub?: boolean;
   activateOnRelease?: boolean;
+  touchScroll?: 'pan-y';
 }
 
 const {
@@ -17,16 +19,20 @@ const {
   axis = 'auto',
   scrub = false,
   activateOnRelease = false,
+  touchScroll,
+  ...attributes
 } = Astro.props;
 ---
 
 <div
+  {...attributes}
   class:list={['glass-action-group', className]}
   data-glass-group
   data-glass-default={defaultTarget}
   data-glass-axis={axis === 'auto' ? undefined : axis}
   data-glass-scrub={scrub ? '' : undefined}
   data-glass-activate-on-release={activateOnRelease ? '' : undefined}
+  data-glass-touch-scroll={touchScroll}
   data-filter-group={filterGroup}
 >
   <span class="glass-action-group__lens" aria-hidden="true" data-glass-lens>

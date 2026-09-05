@@ -10,6 +10,16 @@
   -webkit-user-select: none;
 }
 
+.glass-action-group[data-glass-touch-scroll='pan-y'] {
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Geometry is animated by the runtime, including immediate reduced-motion updates. */
+.glass-action-group__lens,
+.glass-action-group__material {
+  transition-property: none;
+}
+
 .glass-action-group__lens {
   position: absolute;
   z-index: 0;

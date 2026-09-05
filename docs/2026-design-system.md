@@ -79,12 +79,15 @@ It must not be replaced by Canvas scene composition, broad WebGL rendering, DOM 
 The mosaic tree and probability terrain remain structurally inspectable and sharp across device densities.
 
 The primary action and schedule action share one measured liquid capsule.
+They use `GlassActionGroup`, the same component as the compact navigation and schedule period controls, with the shared lens material and continuous gap morphing.
+The material stays on one layer through hover, drag, and rest.
 The capsule defaults to registration, follows pointer or keyboard ownership, and uses measured target geometry so unequal sizes and wrapped mobile rows remain aligned.
 Reduced-motion users receive immediate state changes.
 The original links remain functional without the enhanced capsule.
 
 On touch screens, a horizontal drag between the homepage actions previews the shared liquid shape and activates the selected link on release.
 Vertical gestures scroll normally, and cancelled gestures or releases outside the controls do not navigate.
+The homepage enables `touchScroll="pan-y"` so a drag starts only after horizontal intent is clear, while normal taps and modified clicks retain native link behavior.
 A light tap on the portrait background sends one fading pulse along existing connections without adding lines across the copy.
 Reduced-motion users receive a brief local highlight instead of travelling signals.
 The tree is clipped against the terrain silhouette so translucent hills retain their original material without showing roots underneath.

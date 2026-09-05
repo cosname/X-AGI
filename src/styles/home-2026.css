@@ -782,54 +782,14 @@
   isolation: isolate;
 }
 
-.edition-2026.edition-goal-home .conference-hero__action-capsule,
-.edition-2026.edition-goal-home .conference-hero__action-material {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  width: var(--hero-action-capsule-width, 0);
-  height: var(--hero-action-capsule-height, 2.65rem);
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background: var(--glass-lens-fill, rgb(255 253 251 / 0.46));
-  box-shadow: var(
-    --glass-lens-shadow,
-    inset 0 1px 0 rgb(255 255 255 / 0.88),
-    inset 0 -1px 0 rgb(103 82 200 / 0.1),
-    0 4px 12px rgb(40 29 105 / 0.065)
-  );
-  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(8px) saturate(1.05) contrast(1.015));
-  backdrop-filter: var(--glass-lens-backdrop, blur(8px) saturate(1.05) contrast(1.015));
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(
-    var(--hero-action-capsule-x, 0),
-    var(--hero-action-capsule-y, 0),
-    0
-  );
-  transition:
-    width 460ms cubic-bezier(0.22, 1, 0.36, 1),
-    height 460ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 460ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 160ms ease-out;
-  will-change: transform, width, height;
-}
-
 .edition-2026.edition-goal-home
-  .conference-hero__actions[data-action-capsule-ready='true']
-  .conference-hero__action-capsule {
-  opacity: 1;
-}
-
-.edition-2026.edition-goal-home
-  .conference-hero__actions[data-action-capsule-ready='true']
+  .conference-hero__actions[data-glass-ready='true']
   .conference-hero__register,
 .edition-2026.edition-goal-home
-  .conference-hero__actions[data-action-capsule-ready='true']
+  .conference-hero__actions[data-glass-ready='true']
   .conference-hero__register:hover,
 .edition-2026.edition-goal-home
-  .conference-hero__actions[data-action-capsule-ready='true']
+  .conference-hero__actions[data-glass-ready='true']
   .conference-hero__register:focus-visible {
   border-color: transparent;
   background: transparent;
@@ -855,11 +815,6 @@
   border-radius: 999px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .edition-2026.edition-goal-home .conference-hero__action-capsule {
-    transition: none;
-  }
-}
 
 .edition-2026 .conference-home .conference-action--primary {
   min-width: 0;
@@ -1475,7 +1430,7 @@
   }
 
   .edition-2026.edition-goal-home
-    .conference-hero__actions[data-action-capsule-ready='true']
+    .conference-hero__actions[data-glass-ready='true']
     .conference-hero__register {
     border: 2px solid Highlight !important;
     color: LinkText;
@@ -1975,35 +1930,19 @@
   }
 }
 
-/* Horizontal scrubbing shares the menu's liquid geometry; vertical gestures scroll. */
-.edition-2026.edition-goal-home .conference-hero__actions[data-hero-action-switcher] {
-  touch-action: pan-y pinch-zoom;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.edition-2026.edition-goal-home .conference-hero__actions[data-action-scrubbing] .conference-hero__action-capsule {
-  transition: none;
-}
-
-.edition-2026.edition-goal-home .conference-hero__action-material {
-  display: none;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
+/* Keep the accepted CTA geometry while sharing the menu's lens and gesture engine. */
+.edition-2026.edition-goal-home .conference-hero__actions [data-glass-target] {
+  min-height: 2.65rem;
   transform: none;
-  transition: none;
-  will-change: auto;
 }
 
-.edition-2026.edition-goal-home .conference-hero__actions[data-action-scrubbing] .conference-hero__action-capsule {
-  background: transparent;
-  box-shadow: none;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  filter: drop-shadow(0 4px 8px rgb(40 29 105 / 0.13));
+.edition-2026.edition-goal-home .conference-hero__actions .conference-hero__schedule {
+  border: 0;
 }
 
-.edition-2026.edition-goal-home .conference-hero__actions[data-action-scrubbing] .conference-hero__action-material {
-  display: block;
+.edition-2026.edition-goal-home .conference-hero__actions:not([data-glass-ready='true']) .conference-hero__register {
+  background: var(--glass-lens-fill);
+  box-shadow: var(--glass-lens-shadow);
+  -webkit-backdrop-filter: var(--glass-lens-backdrop);
+  backdrop-filter: var(--glass-lens-backdrop);
 }
