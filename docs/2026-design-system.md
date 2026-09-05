@@ -83,6 +83,13 @@ The capsule defaults to registration, follows pointer or keyboard ownership, and
 Reduced-motion users receive immediate state changes.
 The original links remain functional without the enhanced capsule.
 
+On touch screens, a horizontal drag between the homepage actions previews the shared liquid shape and activates the selected link on release.
+Vertical gestures scroll normally, and cancelled gestures or releases outside the controls do not navigate.
+A light tap on the portrait background sends one fading pulse along existing connections without adding lines across the copy.
+Reduced-motion users receive a brief local highlight instead of travelling signals.
+The tree is clipped against the terrain silhouette so translucent hills retain their original material without showing roots underneath.
+Homepage-only styles live in `src/styles/home-2026.css`, and the tree runtime is separate from the shared mathematical helpers to keep inner-page downloads small.
+
 The desktop navigation uses one shared moving lens rather than separate hover pills.
 The compact mobile navigation expands from the upper-right trigger into one shell and uses one shared lens across stacked targets.
 Closed panels must remain inert and hidden from assistive technology.

@@ -1,4 +1,5 @@
 ---
+import { treeClipAboveTerrain } from '../scripts/terrain-tree-clip';
 import pixelDataSource from '../data/hero-pixel-field.generated.json';
 import PortraitConnectionField from './PortraitConnectionField.astro';
 import {
@@ -212,7 +213,7 @@ const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
     </>
   )}
 
-  <div class="hero-pixel-field__trees">
+  <div class="hero-pixel-field__trees" style={composition === 'badge' ? `clip-path:${treeClipAboveTerrain([...basePaths.values()])}` : undefined}>
     {composition === 'grove' && (
       <div class="hero-pixel-field__tree-position hero-pixel-field__tree-position--left" data-tree-position="left">
         <div class="hero-pixel-field__tree-sway">
@@ -303,22 +304,22 @@ const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
       );
     })}
 
-    <span class="hero-pixel-field__echo-field">
+    {composition === 'grove' && <span class="hero-pixel-field__echo-field">
       {TERRAIN_ECHOES.map((echo) => (
         <i
           class="hero-pixel-field__terrain-surface hero-pixel-field__terrain-echo"
           data-echo={echo.index}
-          style={`--terrain-rgb:${composition === 'badge' ? '118 105 198' : '129 118 206'};--terrain-alpha:${echo.alpha};--terrain-path:${echoPath(echo)}`}
+          style={`--terrain-rgb:129 118 206;--terrain-alpha:${echo.alpha};--terrain-path:${echoPath(echo)}`}
         ></i>
       ))}
-    </span>
+    </span>}
   </div>
 </div>
 
 <style is:inline set:html={tokenCss}></style>
 
 <script>
-  import { initializeHeroPixelFields } from '../scripts/hero-pixel-field';
+  import { initializeHeroPixelFields } from '../scripts/hero-pixel-field-runtime';
 
   initializeHeroPixelFields();
 </script>

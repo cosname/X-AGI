@@ -56,7 +56,9 @@ const actions = currentEditionActionPaths(edition);
             data-connection-exclusion
             data-hero-action-switcher
           >
-            <span class="conference-hero__action-capsule" aria-hidden="true"></span>
+            <span class="conference-hero__action-capsule" aria-hidden="true">
+              <span class="conference-hero__action-material"></span>
+            </span>
             <a
               class="conference-hero__register capsule-action"
               href={conference2026.registration.url}
@@ -81,72 +83,8 @@ const actions = currentEditionActionPaths(edition);
 </div>
 
 <script>
-  import { heroActionCapsuleGeometry } from '../../../scripts/hero-action-capsule';
+  import { initializeHeroActionSwitchers } from '../../../scripts/hero-action-switcher';
 
-  const actionSwitchers = document.querySelectorAll<HTMLElement>('[data-hero-action-switcher]');
-
-  actionSwitchers.forEach((switcher) => {
-    if (switcher.dataset.actionCapsuleInitialized === 'true') return;
-    switcher.dataset.actionCapsuleInitialized = 'true';
-
-    const register = switcher.querySelector<HTMLElement>('[data-hero-action-target="register"]');
-    const targets = Array.from(
-      switcher.querySelectorAll<HTMLElement>('[data-hero-action-target]'),
-    );
-    if (!register || targets.length < 2) return;
-
-    let activeTarget = register;
-
-    const syncCapsule = () => {
-      const geometry = heroActionCapsuleGeometry(
-        switcher.getBoundingClientRect(),
-        activeTarget.getBoundingClientRect(),
-      );
-
-      switcher.style.setProperty('--hero-action-capsule-x', `${geometry.x}px`);
-      switcher.style.setProperty('--hero-action-capsule-y', `${geometry.y}px`);
-      switcher.style.setProperty('--hero-action-capsule-width', `${geometry.width}px`);
-      switcher.style.setProperty('--hero-action-capsule-height', `${geometry.height}px`);
-    };
-
-    const activate = (target: HTMLElement) => {
-      activeTarget = target;
-      switcher.dataset.heroActionActive = target.dataset.heroActionTarget ?? 'register';
-      syncCapsule();
-    };
-
-    targets.forEach((target) => {
-      target.addEventListener('pointerenter', (event) => {
-        if (event.pointerType === 'touch') return;
-        activate(target);
-      });
-      target.addEventListener('focus', () => activate(target));
-    });
-
-    switcher.addEventListener('pointerleave', () => activate(register));
-    switcher.addEventListener('focusout', () => {
-      window.requestAnimationFrame(() => {
-        if (!switcher.contains(document.activeElement)) activate(register);
-      });
-    });
-
-    const resizeObserver = new ResizeObserver(syncCapsule);
-    const observeTargets = () => {
-      resizeObserver.observe(switcher);
-      targets.forEach((target) => resizeObserver.observe(target));
-    };
-    observeTargets();
-
-    window.requestAnimationFrame(() => {
-      activate(register);
-      switcher.dataset.actionCapsuleReady = 'true';
-    });
-
-    window.addEventListener('pagehide', () => resizeObserver.disconnect());
-    window.addEventListener('pageshow', (event) => {
-      if (!event.persisted) return;
-      observeTargets();
-      syncCapsule();
-    });
-  });
+  initializeHeroActionSwitchers();
+  document.addEventListener('astro:page-load', initializeHeroActionSwitchers);
 </script>

@@ -7,6 +7,7 @@ node_modules/
 dist/
 output/
 .playwright-cli/
+.lavish/
 npm-debug.log*
 
 # Local archive downloads

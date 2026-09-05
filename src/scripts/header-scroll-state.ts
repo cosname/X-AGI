@@ -31,6 +31,7 @@ function syncRegisteredHeaders() {
     }
 
     const state = resolveHeaderScrollState(window.scrollY, thresholdFor(header));
+    if (header.dataset.scrollState === state) return;
     header.dataset.scrollState = state;
     header.classList.toggle('scrolled', state === 'scrolled');
   });

@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
+import { connectionDistances, connectionPulseEnergy } from './connection-pulse.ts';
+import { treeClipAboveTerrain } from './terrain-tree-clip.ts';
+
 import {
   connectionAvoidanceWeight,
   portraitConnectionFlockForNode,
@@ -213,4 +216,29 @@ test('masthead particles are deterministic and preserve the text safe zones', ()
   assert.equal(textWellHits.length, 0);
   assert.equal(mobile.length, mastheadParticleCount(390));
   assert.equal(mobileTextWellHits.length, 0);
+});
+
+// Touch signals must stay on the existing graph and finish without a persistent loop.
+
+test('touch propagation follows weighted links and cannot jump disconnected groups', () => {
+  const points = [{ x: 0, y: 0 }, { x: 30, y: 0 }, { x: 30, y: 40 }, { x: 1, y: 0 }];
+  assert.deepEqual(connectionDistances(points, [{ from: 0, to: 1 }, { from: 1, to: 2 }], 0), [0, 30, 70, Infinity]);
+  assert.deepEqual(connectionDistances(points, [{ from: 0, to: 1 }, { from: 1, to: 2 }], 2), [70, 40, 0, Infinity]);
+});
+
+test('touch wave has a delayed arrival, bounded peak and finite fade', () => {
+  assert.equal(connectionPulseEnergy(Infinity, 1000), 0);
+  assert.equal(connectionPulseEnergy(420, 999), 0);
+  assert.equal(connectionPulseEnergy(420, 1240), 1);
+  assert.equal(connectionPulseEnergy(420, 1480), 0);
+  assert.ok(connectionPulseEnergy(0, 120) > 0);
+});
+
+
+test('tree clipping follows the highest hill while preserving terrain height coordinates', () => {
+  const clip = treeClipAboveTerrain([
+    'polygon(0% 100%,0% 80%,50% 80%,50% 90%,100% 90%,100% 100%)',
+    'polygon(0% 100%,0% 85%,50% 85%,50% 70%,100% 70%,100% 100%)',
+  ]);
+  assert.equal(clip, 'polygon(0 0,100% 0,100% calc(100% - var(--badge-terrain-height) * 0.300000),50% calc(100% - var(--badge-terrain-height) * 0.300000),50% calc(100% - var(--badge-terrain-height) * 0.200000),0% calc(100% - var(--badge-terrain-height) * 0.200000))');
 });

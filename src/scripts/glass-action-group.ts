@@ -32,6 +32,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   const scrubEnabled = root.hasAttribute('data-glass-scrub');
   const activateOnRelease = root.hasAttribute('data-glass-activate-on-release');
   const header = root.closest<HTMLElement>('.site-header');
+  const enabled = () => !header || header.dataset.navMode === 'compact' || header.dataset.scheduleNav === 'periods';
   const usesVerticalAxis = () => glassGroupUsesVerticalAxis(
     root.dataset.glassAxis,
     header?.dataset.scheduleNav,
@@ -44,7 +45,6 @@ function initializeGlassActionGroup(root: HTMLElement) {
   );
   const resizeObserver = new ResizeObserver(() => {
     measureTargets();
-    syncToCurrentState(true);
   });
   const mutationObserver = new MutationObserver(() => syncToCurrentState());
 
@@ -77,6 +77,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   );
 
   const renderLens = () => {
+    if (!enabled()) return;
     lens.style.width = `${capsuleState.width.toFixed(2)}px`;
     lens.style.height = `${capsuleState.height.toFixed(2)}px`;
     lens.style.opacity = capsuleState.opacity.toFixed(3);
@@ -150,7 +151,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   };
 
   const setCapsuleTarget = (geometry: GlassCapsuleGeometry | null, immediate = false) => {
-    if (!geometry || lensDismissed) return;
+    if (!enabled() || !geometry || lensDismissed) return;
     Object.assign(capsuleTarget, geometry, { opacity: 1 });
     if (immediate || capsuleState.opacity === 0 || reducedMotion.matches) {
       Object.assign(capsuleState, capsuleTarget);
@@ -238,7 +239,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   };
 
   const syncToCurrentState = (immediate = false) => {
-    if (lensDismissed) return;
+    if (!enabled() || lensDismissed) return;
     resolvePersistentTarget();
     const activeTarget = focusedTarget ?? persistentTarget;
     const geometry = geometryFor(activeTarget);
@@ -249,6 +250,11 @@ function initializeGlassActionGroup(root: HTMLElement) {
     window.cancelAnimationFrame(layoutFrame);
     layoutFrame = window.requestAnimationFrame(() => {
       layoutFrame = 0;
+      if (!enabled()) {
+        // The desktop capsule owns the material; suppress the shared fallback skin.
+        root.dataset.glassReady = 'true';
+        return;
+      }
       const rootBounds = root.getBoundingClientRect();
       const rects = visibleTargets().map((target) => {
         const bounds = target.getBoundingClientRect();
@@ -305,7 +311,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   }, { capture: true, signal });
 
   root.addEventListener('pointermove', (event) => {
-    if (scrubPointerId !== null || !finePointer.matches || focusedTarget) return;
+    if (!enabled() || scrubPointerId !== null || !finePointer.matches || focusedTarget) return;
     const rootBounds = root.getBoundingClientRect();
     const geometry = capsuleForPointer(
       event.clientX - rootBounds.left,
@@ -365,7 +371,10 @@ function initializeGlassActionGroup(root: HTMLElement) {
     measureTargets();
   }, { signal });
   window.addEventListener('pageshow', (event) => {
-    if (event.persisted) measureTargets();
+    if (event.persisted) {
+      lensDismissed = false;
+      measureTargets();
+    }
   }, { signal });
 
   resizeObserver.observe(root);

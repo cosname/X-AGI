@@ -79,7 +79,8 @@ src/
     goal-home-lower.css         正式首页长页纸面外壳
     goal-history.css            历届影像和波峰目录
     goal-partner-footer.css     组织单位和备案收束区
-    global.css                  正式首屏、导航和共享组件
+    home-2026.css               首页构图、像素树和响应式动效
+    global.css                  导航、共享组件和玻璃材质变量
 scripts/
   sync-tencent-program.mjs      校验腾讯文档 CSV 并生成公开日程数据
   sync-attendee-people.mjs      白名单读取参会表并生成公开人物资料
