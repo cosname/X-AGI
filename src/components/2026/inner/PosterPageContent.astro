@@ -1,5 +1,6 @@
 ---
 import { conference2026 } from '../../../data/conference2026';
+import { currentEdition, editionPath } from '../../../config/site';
 
 const { poster, registration, scale } = conference2026;
 ---
@@ -30,6 +31,7 @@ const { poster, registration, scale } = conference2026;
               <ul>
                 {poster.benefits.map((benefit) => <li>{benefit}</li>)}
               </ul>
+              <a href={`${editionPath(currentEdition, 'guide')}#travel-grant`}>查看本科生差旅补助条件与申请流程</a>
             </dd>
           </div>
           <div>

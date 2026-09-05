@@ -1,0 +1,182 @@
+---
+import { conference2026 } from '../../../data/conference2026';
+import { currentEdition, editionPath } from '../../../config/site';
+
+const { travelGrant: grant, registration } = conference2026;
+---
+
+<section id="travel-grant" class="info-card travel-grant" aria-labelledby="travel-grant-title">
+  <h2 id="travel-grant-title" class="card-header">{grant.title}</h2>
+  <div class="card-body">
+    <p>{grant.introduction}</p>
+
+    <dl class="travel-grant__summary">
+      <div>
+        <dt>每人报销上限</dt>
+        <dd class="travel-grant__amount">
+          <strong>{grant.maxAmount.toLocaleString('en-US')}</strong>
+          <span>元{grant.currency}</span>
+        </dd>
+        <dd class="travel-grant__reimbursement">{grant.reimbursement}</dd>
+      </div>
+      <div>
+        <dt>补助范围</dt>
+        <dd>{grant.coverage.join('、')}</dd>
+      </div>
+      <div>
+        <dt>审核通知</dt>
+        <dd><time datetime={grant.review.dateTime}>{grant.review.label}</time></dd>
+        <dd class="travel-grant__review">完成审核并邮件通知</dd>
+      </div>
+    </dl>
+
+    <div class="travel-grant__details">
+      <section aria-labelledby="travel-grant-requirements">
+        <h3 id="travel-grant-requirements">申请要求</h3>
+        <p>申请人需同时满足以下条件：</p>
+        <ol>
+          {grant.requirements.map((requirement) => <li>{requirement}</li>)}
+        </ol>
+        <p class="travel-grant__venues">期刊 / 会议包括 {grant.venues.join(' / ')} 等。</p>
+        <p><strong>申请材料：</strong>{grant.materials}</p>
+        <p class="travel-grant__allocation">{grant.allocation}</p>
+      </section>
+
+      <section aria-labelledby="travel-grant-process">
+        <h3 id="travel-grant-process">申请与报销</h3>
+        <ol class="travel-grant__steps">
+          <li>
+            <strong>提交申请</strong>
+            <p>{grant.application}</p>
+          </li>
+          <li>
+            <strong>等待审核</strong>
+            <p><time datetime={grant.review.dateTime}>{grant.review.label}</time>，{grant.review.description}</p>
+          </li>
+          <li>
+            <strong>会后报销</strong>
+            <p>{grant.reimbursementNote}{grant.reminder}</p>
+          </li>
+        </ol>
+      </section>
+    </div>
+
+    <div class="travel-grant__actions">
+      <a class="capsule-action" href={registration.url} target="_blank" rel="noopener noreferrer">
+        申请海报展示与差旅补助
+      </a>
+      <a href={editionPath(currentEdition, 'poster')}>查看 Rising Stars Poster 详情</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .travel-grant {
+    scroll-margin-top: 6.5rem;
+  }
+
+  .travel-grant__summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem 2rem;
+    align-items: center;
+    margin: 1.5rem 0 1.75rem;
+    padding: 1.25rem 0;
+    border-block: 1px solid var(--goal-line);
+  }
+
+  .travel-grant__summary dt {
+    margin-bottom: 0.4rem;
+    color: var(--goal-purple-deep);
+    font-size: 0.8rem;
+    font-weight: 650;
+  }
+
+  .travel-grant__summary dd {
+    margin: 0;
+  }
+
+  .travel-grant__amount {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.6rem;
+  }
+
+  .travel-grant__amount strong {
+    color: var(--goal-ink);
+    font-family: var(--font-condensed);
+    font-size: 2.75rem;
+    font-weight: 650;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .travel-grant__reimbursement,
+  .travel-grant__review {
+    font-size: 0.8rem;
+  }
+
+  .travel-grant__details {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 1.75rem 3rem;
+  }
+
+  .travel-grant__details h3 {
+    margin: 0 0 0.75rem;
+    color: var(--goal-ink);
+    font-size: 1rem;
+  }
+
+  .travel-grant__details ol {
+    margin: 0 0 1rem;
+    padding-left: 1.35rem;
+  }
+
+  .travel-grant__details li + li {
+    margin-top: 0.5rem;
+  }
+
+  .travel-grant__venues {
+    color: var(--goal-purple-deep);
+    font-size: 0.8rem;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+  }
+
+  .travel-grant__allocation {
+    margin-bottom: 0;
+    font-weight: 650;
+  }
+
+  .travel-grant__steps p {
+    margin-bottom: 0.85rem;
+  }
+
+  .travel-grant__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--goal-line);
+  }
+
+  .travel-grant__actions a {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .travel-grant__summary {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .travel-grant__details {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

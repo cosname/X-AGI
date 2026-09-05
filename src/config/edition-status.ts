@@ -72,7 +72,7 @@ export function currentEditionPageCopy(
       return {
         page,
         label: '参会指南',
-        description: '会场、交通与住宿信息。',
+        description: '本科生差旅补助申请条件与流程，以及会场、交通与住宿信息。',
         status: '会场示意图已发布',
       };
     case 'register':
