@@ -3,8 +3,8 @@
 This directory is the canonical non-published archive for supplied 2026 source material.
 It preserves editable masters, high-resolution originals, alternate exports, historical candidates, and QA evidence that must not live only on a desktop or in a temporary directory.
 
-The archive contains 88 recorded source entries representing 87 unique payloads.
-Eighty-six payloads are stored here under semantic names.
+The archive contains 89 recorded source entries representing 88 unique payloads.
+Eighty-seven payloads are stored here under semantic names.
 One supplied SVG was already byte-identical to `assets/brand-kit/2026/wordmark.svg`, so the manifest points to that existing canonical file instead of storing another copy.
 The supplied `1.png` and `thu.png` files were also byte-identical, so both provenance entries point to one canonical Tsinghua source file.
 
@@ -13,6 +13,7 @@ The supplied `1.png` and `thu.png` files were also byte-identical, so both prove
 - `brand/` contains the Illustrator identity master and supplied brand export variants.
 - `campaign/` contains the supplied 2026 key visual and orbit-mark reference.
 - `partner-logos/` contains original organization logo deliveries and editable logo boards.
+- `fonts/` contains the unmodified LXGW WenKai Medium v1.522 font used to generate the homepage title subset.
 - `history/` contains high-resolution or otherwise unselected historical conference images.
 - `people/` contains 30 public portraits supplied through the 2026 attendee workbook, without registration or private contact fields.
 - Portrait source files retain their image pixels while embedded EXIF, XMP, IPTC, GPS, camera identifiers, and creator contact metadata are removed before repository storage.

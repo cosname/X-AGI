@@ -5,9 +5,9 @@
   "lastExtendedOn": "2026-09-06",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 88,
-  "uniquePayloadCount": 87,
-  "archiveFileCount": 86,
+  "sourceEntryCount": 89,
+  "uniquePayloadCount": 88,
+  "archiveFileCount": 87,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1473,6 +1473,22 @@
         "public/2026/people/qiu-zihan-portrait.webp"
       ],
       "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-06. Embedded metadata was removed before repository storage without re-encoding image pixels."
+    },
+    {
+      "originalPath": "LXGW-WenKai-v1.522/LXGWWenKai-Medium.ttf",
+      "canonicalPath": "assets/source-archive/2026/fonts/lxgw-wenkai-medium.ttf",
+      "status": "archived",
+      "sha256": "d4bdeb38a39151d74d084cba5090f8cb7d20bf83eedb78c35939ae70b9f4e3f6",
+      "bytes": 25379848,
+      "mediaType": "font/ttf",
+      "runtimeCounterparts": [
+        "src/assets/fonts/lxgw-wenkai-title-medium.woff2"
+      ],
+      "provenanceUrls": [
+        "https://github.com/lxgw/LxgwWenKai/tree/e8b5b48b79f19f29aa68b0a178eab3472ea9f7e8",
+        "https://raw.githubusercontent.com/lxgw/LxgwWenKai/e8b5b48b79f19f29aa68b0a178eab3472ea9f7e8/fonts/TTF/LXGWWenKai-Medium.ttf"
+      ],
+      "note": "Unmodified LXGW WenKai Medium v1.522 source font under SIL OFL 1.1; the local WOFF2 export contains the homepage Chinese title and edition digits. License retained at src/assets/fonts/LICENSE-LXGWWenKai.txt."
     }
   ]
 }

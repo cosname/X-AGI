@@ -97,6 +97,7 @@ export const conference2026 = {
   name: '2026 X-AGI 大会',
   nameEn: '2026 X-AGI Conference',
   nameZhOfficial: '交叉智能大会',
+  editionNumber: 19,
   sloganZh: '交叉智能 计算未来',
   tagline: 'AI Conference for the neXt Generation',
   positioning: '下一代 AI 研究者',
