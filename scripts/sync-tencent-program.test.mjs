@@ -50,6 +50,14 @@ describe('Tencent program CSV parser', () => {
       name: '张华清',
       affiliation: '清华大学',
     });
+    assert.deepEqual(parsePerson('姚金哥（）：TBD', 'speaker'), {
+      name: '姚金哥',
+    });
+    assert.deepEqual(parsePerson('研究者（ ）：PilotDeck \u2014 Agent OS', 'speaker'), {
+      name: '研究者',
+      talkTitle: 'PilotDeck - Agent OS',
+    });
+    assert.throws(() => parsePerson('（）：TBD', 'speaker'), /empty name/u);
     assert.throws(
       () => parsePerson('研究者（Example Lab）unexpected text', 'speaker'),
       /malformed text after its affiliation/u,

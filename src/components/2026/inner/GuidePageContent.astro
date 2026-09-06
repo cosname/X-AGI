@@ -3,7 +3,7 @@ import { conference2026 } from '../../../data/conference2026';
 import hotelPlan from '../../../assets/2026/venue/beijing-friendship-hotel-plan.jpg';
 import palaceFloor from '../../../assets/2026/venue/friendship-palace-floor-2.jpg';
 import hotelOfferCode from '../../../assets/2026/venue/friendship-hotel-xagi-offer-code.png';
-import TravelGrantSection from './TravelGrantSection.astro';
+import { currentEdition, editionPath } from '../../../config/site';
 
 const maps = [
   {
@@ -93,6 +93,12 @@ const maps = [
       </div>
     </div>
 
-    <TravelGrantSection />
+    <section id="travel-grant" class="info-card" aria-labelledby="travel-grant-link-title">
+      <h2 id="travel-grant-link-title" class="card-header">{conference2026.travelGrant.title}</h2>
+      <div class="card-body">
+        <p>参加 Rising Stars Poster 海报展示的本科生，可查看补助条件与申请流程。</p>
+        <a href={`${editionPath(currentEdition, 'poster')}#travel-grant`}>查看本科生差旅补助计划</a>
+      </div>
+    </section>
   </div>
 </main>
