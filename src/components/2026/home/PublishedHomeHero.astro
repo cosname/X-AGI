@@ -26,28 +26,25 @@ const actions = currentEditionActionPaths(edition);
     <div class="conference-hero__inner">
       <div class="conference-hero__copy">
         <h1 id="conference-title" data-connection-anchor="title" data-connection-exclusion data-title-ink>
-          <span class="conference-hero__year conference-hero__ink" data-title-ink-surface>2026</span>
           <span class="conference-hero__name">
+            <span class="conference-hero__year conference-hero__ink" data-title-ink-surface>2026</span>
             <span
               class="conference-hero__wordmark conference-hero__ink conference-hero__ink--mask"
               data-title-ink-surface
               role="img"
               aria-label="X-AGI"
             ></span>
-            <em
-              class="conference-hero__title-zh conference-hero__ink"
-              data-title-ink-surface
-            >大会</em>
           </span>
+          <span
+            class="conference-hero__title-zh conference-hero__ink"
+            lang="zh-Hans"
+            data-title-ink-surface
+          >第{conference2026.editionNumber}届{conference2026.nameZhOfficial}</span>
         </h1>
         <div class="conference-hero__tagline-axis" data-connection-exclusion>
           <p class="conference-hero__tagline" lang="en">{conference2026.tagline}</p>
         </div>
         <div class="conference-hero__details">
-          <p class="conference-hero__slogan" lang="zh-Hans" data-connection-exclusion>
-            <span>交叉智能</span>
-            <span>计算未来</span>
-          </p>
           <p class="conference-hero__meta" data-connection-exclusion>
             <time datetime={conference2026.dates.start}>{conference2026.dates.display}</time>
             <span>{conference2026.venue.name}</span>

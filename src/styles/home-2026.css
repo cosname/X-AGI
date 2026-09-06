@@ -1,5 +1,13 @@
 /* Homepage composition and motion. Shared navigation and material tokens stay in global.css. */
 
+/* Local title subset. Regeneration instructions live beside the font asset. */
+@font-face {
+  font-family: "XAGI WenKai";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/lxgw-wenkai-title-medium.woff2') format('woff2');
+}
 
 .edition-2026 .conference-hero {
   position: relative;
@@ -740,8 +748,8 @@
         rgb(236 232 247 / var(--title-glow-strength)) 0%,
         rgb(236 232 247 / 0) 72%
       ),
-      radial-gradient(circle at 50% 50%, #5c58a8 1.38px, transparent 1.5px);
-    background-size: 100% 100%, 3.55px 3.55px;
+      linear-gradient(#5c58a8, #5c58a8);
+    background-size: 100% 100%;
   }
 }
 
@@ -1077,17 +1085,6 @@
       ),
       radial-gradient(circle at 50% 50%, #5c58a8 1.08px, transparent 1.2px);
     background-size: 100% 100%, 3.2px 3.2px;
-  }
-
-  .edition-2026 .conference-home .conference-hero__title-zh {
-    background-image:
-      radial-gradient(
-        circle var(--title-glow-r) at var(--title-mx) var(--title-my),
-        rgb(236 232 247 / var(--title-glow-strength)) 0%,
-        rgb(236 232 247 / 0) 72%
-      ),
-      radial-gradient(circle at 50% 50%, #5c58a8 1.05px, transparent 1.16px);
-    background-size: 100% 100%, 2.75px 2.75px;
   }
 
   .edition-2026 .conference-home .conference-hero__tagline {
@@ -1630,20 +1627,22 @@
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__year {
-  font-size: 0.82em;
+  flex: none;
+  /* Archivo's digits occupy 712 of its 1000 font units; match the wordmark's ink height. */
+  font-size: calc(1em / 0.712);
   font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: 0.04em;
-  transform: scaleX(1.1);
-  transform-origin: left center;
+  line-height: 1;
+  letter-spacing: 0;
+  margin-block: -0.144em;
+  transform: translateY(0.01em);
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {
   justify-content: flex-start;
   align-items: center;
-  gap: 0.12em;
-  margin-top: 0.1em;
-  font-size: 0.94em;
+  gap: 0.14em;
+  margin-top: 0;
+  font-size: 0.8em;
   line-height: 1;
 }
 
@@ -1652,7 +1651,14 @@
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__title-zh {
-  line-height: 1;
+  margin-top: 0.4em;
+  font-family: "XAGI WenKai", var(--font-serif);
+  font-size: 0.48em;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transform: none;
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
@@ -1686,7 +1692,7 @@
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__details {
   position: absolute;
-  top: calc(50% + 1.35rem);
+  top: calc(50% + 2.15rem);
   left: 0;
   display: flex;
   flex-direction: column;
@@ -1833,20 +1839,21 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 1.25rem;
-    font-size: clamp(3.7rem, 12.4vw, 5.4rem);
+    font-size: clamp(2.6rem, calc((100vw - 2.5rem) / 6.3), 5.4rem);
     line-height: 0.87;
     text-align: center;
   }
 
-  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__year {
-    font-size: 0.88em;
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {
+    justify-content: center;
+    font-size: 0.8em;
     transform-origin: center;
   }
 
-  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {
-    justify-content: center;
-    font-size: 0.94em;
-    transform-origin: center;
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__title-zh {
+    margin-top: 0.5em;
+    font-size: 0.55em;
+    letter-spacing: 0.055em;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
@@ -1854,7 +1861,7 @@
     width: 100%;
     max-width: none;
     justify-content: center;
-    margin-bottom: 0.4rem;
+    margin-bottom: 1.6rem;
     transform: none;
   }
 
@@ -1917,7 +1924,7 @@
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {
-    font-size: 0.9em;
+    font-size: 0.72em;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline {
