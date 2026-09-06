@@ -106,11 +106,11 @@ describe('conference schedule contracts', () => {
 describe('published 2026 content contracts', () => {
   it('keeps the English conference name as the brand and the Chinese name in body copy', () => {
     assert.equal(conference2026.nameEn, '2026 X-AGI Conference');
-    assert.equal(conference2026.nameZhOfficial, '第19届交叉智能大会暨中国R会议');
+    assert.equal(conference2026.nameZhOfficial, '交叉智能大会');
     assert.equal(conference2026.sloganZh, '交叉智能 计算未来');
     assert.match(
       conference2026.introduction[0],
-      /2026 X-AGI Conference（第19届交叉智能大会暨中国R会议）/u,
+      /2026 X-AGI Conference（交叉智能大会）/u,
     );
   });
 

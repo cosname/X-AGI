@@ -96,14 +96,14 @@ export const conference2026 = {
   sourceDateLabel: '大会专题与嘉宾信息已同步',
   name: '2026 X-AGI 大会',
   nameEn: '2026 X-AGI Conference',
-  nameZhOfficial: '第19届交叉智能大会暨中国R会议',
+  nameZhOfficial: '交叉智能大会',
   sloganZh: '交叉智能 计算未来',
   tagline: 'AI Conference for the neXt Generation',
   positioning: '下一代 AI 研究者',
   description:
     '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台，进一步激发创新活力，推动学术与产业协同发展。',
   introduction: [
-    '2026 X-AGI Conference（第19届交叉智能大会暨中国R会议）拟于2026年10月16日至18日在北京友谊宾馆举行。本届大会以“AI Conference for the neXt Generation” 为主题，邀请来自国内外高校、科研机构与产业界的优秀学者和专家，共同探讨下一代人工智能研究的前沿问题与发展方向。“X”代表未知、交叉与探索。本次会议设置多个专题论坛，涵盖AI4Math、AI4Science、脑机接口、预训练算法的新进展、AI Infra、Agent、Agentic后训练、LLM评测与基准、大语言模型基础、生成建模新范式与理论基础、扩散模型理论基础与推理算法、机器学习理论、AI+Finance等多个重要方向。',
+    '2026 X-AGI Conference（交叉智能大会）拟于2026年10月16日至18日在北京友谊宾馆举行。本届大会以“AI Conference for the neXt Generation” 为主题，邀请来自国内外高校、科研机构与产业界的优秀学者和专家，共同探讨下一代人工智能研究的前沿问题与发展方向。“X”代表未知、交叉与探索。本次会议设置多个专题论坛，涵盖AI4Math、AI4Science、脑机接口、预训练算法的新进展、AI Infra、Agent、Agentic后训练、LLM评测与基准、大语言模型基础、生成建模新范式与理论基础、扩散模型理论基础与推理算法、机器学习理论、AI+Finance等多个重要方向。',
     '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台，进一步激发创新活力，推动学术与产业协同发展。Poster投稿条件：2025年1月1日之后在列表内期刊/会议录用中稿，列表包括 ICLR, NeurIPS, ICML, JMLR, T-PAMI, JASA, JRSSB, AoS, Biometrika, COLT, FOCS, STOC, TMLR, COLM, ACL, CVPR等。',
     'X-AGI 大会起源于统计之都长期推动的中国 R 会议，本届已是第十九届。迄今，统计之都已联合全国20余所高校与科研机构，在全国14个城市成功举办近50次会议，呈现近2000场演讲，吸引线上线下参会者逾50万人次。',
     '2026 X-AGI 大会由统计之都和FAI（人工智能基础研究）发起，联合清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院、中国商业统计学会人工智能分会共同主办，OScholar、AI Time共同协办，黄大年茶思屋科技网站为战略合作伙伴，并获得明汯投资、宽德投资、Will、数启寰宇（QuantVerse）和智统数合的钻石赞助，以及澎峰科技（PerfXLab）的黄金赞助。',
