@@ -58,6 +58,8 @@ const profileIdByName = new Map([
   ['刘子鸣', 'liu-ziming'],
   ['涂尚卿', 'tu-shangqing'],
   ['张华清', 'zhang-huaqing'],
+  ['闫宇坤', 'yan-yukun'],
+  ['邱子涵', 'qiu-zihan'],
 ]);
 
 const aliasesByName = new Map([

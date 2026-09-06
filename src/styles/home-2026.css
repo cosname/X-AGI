@@ -690,8 +690,14 @@
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
   .edition-2026 .conference-home .conference-hero__year {
     color: transparent;
-    background-image: radial-gradient(circle at 50% 50%, #5c58a8 1.2px, transparent 1.34px);
-    background-size: 3.4px 3.4px;
+    background-image:
+      radial-gradient(
+        circle var(--title-glow-r) at var(--title-mx) var(--title-my),
+        rgb(236 232 247 / var(--title-glow-strength)) 0%,
+        rgb(236 232 247 / 0) 72%
+      ),
+      radial-gradient(circle at 50% 50%, #5c58a8 1.2px, transparent 1.34px);
+    background-size: 100% 100%, 3.4px 3.4px;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1689,7 +1695,7 @@
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__slogan {
   margin: 0 0 1.25rem;
-  font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+  font-size: clamp(1.35rem, 1.65vw, 1.7rem);
   letter-spacing: 0.2em;
   text-align: left;
 }
@@ -1877,7 +1883,7 @@
     justify-content: center;
     max-width: 20rem;
     margin-bottom: 1.35rem;
-    font-size: clamp(0.98rem, 3.4vw, 1.12rem);
+    font-size: clamp(1.18rem, 4.2vw, 1.4rem);
     letter-spacing: 0.16em;
     text-align: center;
   }

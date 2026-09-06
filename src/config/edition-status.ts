@@ -65,14 +65,14 @@ export function currentEditionPageCopy(
       return {
         page,
         label: 'Rising Stars Poster',
-        description: 'Rising Stars Poster 申请要求、入选权益与报名信息。',
+        description: 'Rising Stars Poster 申请要求、入选权益、报名信息与本科生差旅补助计划。',
         status: registrationOpen ? conference.registration.status : '申请通道确认中',
       };
     case 'guide':
       return {
         page,
         label: '参会指南',
-        description: '本科生差旅补助申请条件与流程，以及会场、交通与住宿信息。',
+        description: '会场、交通与住宿信息。',
         status: '会场示意图已发布',
       };
     case 'register':

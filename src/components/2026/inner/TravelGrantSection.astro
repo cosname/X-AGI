@@ -1,6 +1,5 @@
 ---
 import { conference2026 } from '../../../data/conference2026';
-import { currentEdition, editionPath } from '../../../config/site';
 
 const { travelGrant: grant, registration } = conference2026;
 ---
@@ -65,7 +64,7 @@ const { travelGrant: grant, registration } = conference2026;
       <a class="capsule-action" href={registration.url} target="_blank" rel="noopener noreferrer">
         申请海报展示与差旅补助
       </a>
-      <a href={editionPath(currentEdition, 'poster')}>查看 Rising Stars Poster 详情</a>
+      <a href="#poster-details">查看 Rising Stars Poster 详情</a>
     </div>
   </div>
 </section>

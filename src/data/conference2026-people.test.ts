@@ -8,18 +8,18 @@ import {
 
 describe('2026 public Chair and Speaker profiles', () => {
   it('publishes the reviewed public-only workbook projection', () => {
-    assert.equal(conference2026PeopleRecords.length, 34);
+    assert.equal(conference2026PeopleRecords.length, 36);
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.roles.includes('chair')).length,
       8,
     );
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.roles.includes('speaker')).length,
-      27,
+      29,
     );
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.hasSubmittedPortrait).length,
-      28,
+      30,
     );
     assert.equal(
       new Set(conference2026PeopleRecords.map((person) => person.id)).size,

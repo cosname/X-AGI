@@ -62,7 +62,7 @@ function cleanCell(value) {
 }
 
 function cleanTalkTitle(value) {
-  const cleaned = cleanCell(value);
+  const cleaned = cleanCell(value).replace(/[ \t]*\u2014+[ \t]*/gu, ' - ');
   return emptyPersonValues.has(cleaned.toLocaleUpperCase('en-US')) ? '' : cleaned;
 }
 
@@ -143,7 +143,7 @@ export function parsePerson(value, label, { required = false } = {}) {
     return null;
   }
 
-  const match = cleaned.match(/^(.*?)\s*[（(]\s*([^()（）]+?)\s*[）)](.*)$/u);
+  const match = cleaned.match(/^(.*?)\s*[（(]\s*([^()（）]*?)\s*[）)](.*)$/u);
   if (!match) {
     if (/[()（）]/u.test(cleaned)) throw new Error(`${label} has malformed parentheses: ${cleaned}`);
 
@@ -160,8 +160,11 @@ export function parsePerson(value, label, { required = false } = {}) {
   const affiliation = normalizeAffiliation(match[2]);
   const talkTitle = parseTalkTitleSuffix(match[3] ?? '', label);
   if (!name) throw new Error(`${label} has an empty name.`);
-  if (!affiliation) throw new Error(`${label} has an empty affiliation.`);
-  return talkTitle ? { name, affiliation, talkTitle } : { name, affiliation };
+  return {
+    name,
+    ...(affiliation ? { affiliation } : {}),
+    ...(talkTitle ? { talkTitle } : {}),
+  };
 }
 
 export function parsePeople(value, label, { required = false } = {}) {

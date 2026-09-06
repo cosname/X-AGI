@@ -20,7 +20,7 @@ export type Conference2026PersonSourceRecord = {
 
 export const conference2026PeopleSource = {
   "sheetName": "2026 X-AGI 大会",
-  "sourceHash": "9d7d4298779c7e1a4ea51f2252596966435eb5e0469f146d32e5f7025a025dc8",
+  "sourceHash": "c94315dd6e89687f2334fb03b27401fb142093bc97548b475311cfd0f1195984",
   "people": [
     {
       "id": "mao-xiaojie",
@@ -513,6 +513,36 @@ export const conference2026PeopleSource = {
       "bio": "Huaqing Zhang is a first-year PhD at IIIS, Tsinghua University, advised by Prof. Andrew Yao. His research interests lie in the theory and training of large language models. He has been fortunate to work closely with Prof. Jingzhao Zhang and Prof. Kaifeng Lyu. He is currently interning with the Qwen pretraining team, where he works on scaling laws and optimizers.",
       "hasSubmittedPortrait": true,
       "sourceOrder": 33
+    },
+    {
+      "id": "yan-yukun",
+      "name": "闫宇坤",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "启元实验室",
+      "department": "大模型研究中心",
+      "bio": "闫宇坤，启元实验室（Qiyuan Lab）大模型中心副研究员，清华大学自然语言处理实验室（THUNLP）客座研究员，博士毕业于清华大学脑与智能实验室，主要研究方向为大模型知识增强与智能体技术。近年来，在ICLR、NeurIPS、ICML、ACL等人工智能顶级国际会议发表论文40余篇，Google引用超千次，多次担任领域主席与审稿人。主持负责大模型相关开源项目UltraRAG（Github Trending Rank 2）、PilotDeck等，累计星标量1万以上；主持负责开源模型MiniCPM-Emedding系列、VisRAG-Ret系列等，累计下载量超50万次。",
+      "talkTitle": "PilotDeck - 面向生产力的智能体操作系统尝试",
+      "abstract": "近年来，智能体技术经历了\"推理能力增强 → 工具能力提升 → 复杂问题拆解\"等发展阶段，正从\"问答工具\"和\"专业智能体\"迈向更具通用能力的智能体操作系统（Agent OS）。然而，当前Agent OS在多项目并行的记忆污染、不加区分的Token成本浪费、以及问答范式下的能动性缺失等方面仍存在显著瓶颈。\nPilotDeck以\"解放生产力的第一性原理 - 提供好的生产关系\"为设计思路，为大型语言模型提供最适合其工作的生产环境与执行模式，核心创新包括独立工作舱、项目制白盒记忆、多模型智能路由、常驻式主动执行等方面。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 34
+    },
+    {
+      "id": "qiu-zihan",
+      "name": "邱子涵",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "阿里巴巴",
+      "department": "Qwen 预训练",
+      "bio": "邱子涵本科毕业于清华大学姚班，现就职于 Qwen 预训练团队，专注于大模型架构与训练策略研究，基于模型机制提高训练稳定性和性能上限。已发表十余篇论文，其中一作论文荣获 NeurIPS 2025 最佳论文奖和 NAACL 2024 杰出论文奖。作为核心成员参与 Qwen2.5、Qwen3、Qwen3-Next、Qwen3.5、Qwen3.8-Flash-Next 等系列模型的研发，Google Scholar 引用量逾 18000。",
+      "talkTitle": "大模型中离群值的功能性分析",
+      "abstract": "大语言模型（LLM）的高维激活空间中存在若干显著的涌现现象，尤以 Attention Sinks （少数词元获得异常偏高的注意力得分）与 Residual Sinks （少数固定维度持续保持较大幅值）最为典型。这些离群值常被视为异常或量化障碍，本文则提出一种统一的功能性视角：它们是实现高维缩放的关键机制。\n\n具体而言，少量离群值与归一化层（如 Softmax、RMSNorm）协同，对非离群分量施加有效缩放，我们称之为离群值驱动的缩放（outlier-driven rescaling）。干预实验表明，离群值与归一化层联合发挥作用，主要充当缩放因子而非直接的语义载体：移除归一化层会使相应离群值消失，但训练稳定性下降；保留归一化层而裁剪离群值同样损害性能，表明该缩放机制对高维优化的稳定至关重要。这一视角亦为若干架构改进的有效性提供了统一解释。基于上述发现，我们进一步展示了将离群值吸收入可学习参数或引入显式门控缩放加以缓解的方法，有效提升了训练性能与量化鲁棒性。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 35
     }
   ]
 } as const satisfies {

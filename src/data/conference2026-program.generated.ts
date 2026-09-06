@@ -17,7 +17,7 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "0579b2c0b87a93c7919f0fa100bd1bf467fae0d145ffcc9ad2ab585e617f9f95",
+  "sourceHash": "cbaa7d45ab9981f80149b65ea583e4fd905c287bf77c12cc6806761560a63df6",
   "sessions": [
     {
       "sourceTime": "10.17上午",
@@ -40,7 +40,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "邱子涵",
-          "affiliation": "Qwen"
+          "affiliation": "Qwen",
+          "talkTitle": "大模型中离群值的功能性分析"
         }
       ]
     },
@@ -92,11 +93,16 @@ export const conference2026ProgramSource = {
           "talkTitle": "大模型数据归因：从行为溯源到精准干预"
         },
         {
-          "name": "张辉帅",
-          "affiliation": "北京大学"
+          "name": "刘泽群",
+          "affiliation": "中关村学院",
+          "talkTitle": "科学大模型的数据自动化：数据整理、推理合成与定制评测"
         },
         {
-          "name": "王博涵"
+          "name": "姚金哥"
+        },
+        {
+          "name": "张辉帅",
+          "affiliation": "北京大学"
         }
       ]
     },
@@ -413,11 +419,12 @@ export const conference2026ProgramSource = {
         {
           "name": "李鹏",
           "affiliation": "清华大学",
-          "talkTitle": "自然语言驱动的数学研究智能体——AIM系统的探索与实践"
+          "talkTitle": "自然语言驱动的数学研究智能体 - AIM系统的探索与实践"
         },
         {
           "name": "闫宇坤",
-          "affiliation": "启元"
+          "affiliation": "启元",
+          "talkTitle": "PilotDeck - 面向生产力的智能体操作系统尝试"
         },
         {
           "name": "从鑫",

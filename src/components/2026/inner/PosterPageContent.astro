@@ -1,13 +1,13 @@
 ---
 import { conference2026 } from '../../../data/conference2026';
-import { currentEdition, editionPath } from '../../../config/site';
+import TravelGrantSection from './TravelGrantSection.astro';
 
 const { poster, registration, scale } = conference2026;
 ---
 
 <main class="main-content">
   <div class="published-inner-container">
-    <div class="info-card">
+    <div id="poster-details" class="info-card">
       <div class="card-header">Rising Stars Poster</div>
       <div class="card-body">
         <p>{poster.headline}</p>
@@ -31,7 +31,7 @@ const { poster, registration, scale } = conference2026;
               <ul>
                 {poster.benefits.map((benefit) => <li>{benefit}</li>)}
               </ul>
-              <a href={`${editionPath(currentEdition, 'guide')}#travel-grant`}>查看本科生差旅补助条件与申请流程</a>
+              <a href="#travel-grant">查看本科生差旅补助条件与申请流程</a>
             </dd>
           </div>
           <div>
@@ -54,5 +54,12 @@ const { poster, registration, scale } = conference2026;
         </p>
       </div>
     </div>
+    <TravelGrantSection />
   </div>
 </main>
+
+<style>
+  #poster-details {
+    scroll-margin-top: 6.5rem;
+  }
+</style>

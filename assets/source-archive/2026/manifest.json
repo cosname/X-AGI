@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-09-01",
+  "lastExtendedOn": "2026-09-06",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 86,
-  "uniquePayloadCount": 85,
-  "archiveFileCount": 84,
+  "sourceEntryCount": 88,
+  "uniquePayloadCount": 87,
+  "archiveFileCount": 86,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1441,6 +1441,38 @@
         "public/2026/people/zhang-huaqing-portrait.webp"
       ],
       "note": "Public portrait supplied in the 2026 attendee workbook. Embedded EXIF, XMP, IPTC, GPS, camera identifiers, and creator contact metadata were removed before repository storage; image pixels were not re-encoded."
+    },
+    {
+      "originalPath": "attendee-list (1).xls#闫宇坤-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/yan-yukun-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "42a9d1f77d541b1523e93f2be6f24630fcbde38ba65456b956e94105cd0b5c21",
+      "bytes": 608252,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 3072,
+        "height": 4096
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/yan-yukun-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-06. Embedded metadata was removed before repository storage without re-encoding image pixels."
+    },
+    {
+      "originalPath": "attendee-list (1).xls#邱子涵-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/qiu-zihan-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "9e73333dac32a93e011f761c996a69f3662e7e137c9c799f8b591d4bbb5ba85b",
+      "bytes": 377536,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 2880,
+        "height": 2880
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/qiu-zihan-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-06. Embedded metadata was removed before repository storage without re-encoding image pixels."
     }
   ]
 }

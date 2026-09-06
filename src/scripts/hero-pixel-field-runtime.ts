@@ -435,8 +435,11 @@ export const initializeHeroPixelFields = () => {
       }
       const strengthToken = (strength * 0.92).toFixed(3);
       titleInkLayouts.forEach(({ element, rect }) => {
-        element.style.setProperty('--title-mx', `${snapDevicePixel(pointer.x - rect.left)}px`);
-        element.style.setProperty('--title-my', `${snapDevicePixel(pointer.y - rect.top)}px`);
+        // Relative coordinates keep the sheen under the pointer on scaled title surfaces.
+        const x = snapDevicePixel(pointer.x - rect.left) / Math.max(1, rect.right - rect.left);
+        const y = snapDevicePixel(pointer.y - rect.top) / Math.max(1, rect.bottom - rect.top);
+        element.style.setProperty('--title-mx', `${x * 100}%`);
+        element.style.setProperty('--title-my', `${y * 100}%`);
         element.style.setProperty('--title-glow-r', `${radius}px`);
         element.style.setProperty('--title-glow-strength', strengthToken);
       });
