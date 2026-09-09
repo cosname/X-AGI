@@ -2,6 +2,7 @@ import {
   assignGlassTargetRows,
   capsuleForGlassPointer,
   capsuleForGlassTarget,
+  capsuleForHorizontalGlassPointer,
   capsuleForVerticalGlassPointer,
   glassActivationShouldDismiss,
   glassGroupAllowsScrub,
@@ -59,6 +60,8 @@ function initializeGlassActionGroup(root: HTMLElement) {
   let scrubTarget: HTMLElement | null = null;
   let suppressTrustedClick = false;
   let lensDismissed = false;
+  let pointerType = finePointer.matches ? 'mouse' : 'touch';
+  const usesAxisMotion = () => usesVerticalAxis() || (allowsVerticalScroll && pointerType !== 'mouse');
 
   const capsuleState: GlassCapsuleGeometry & { opacity: number } = {
     x: 0,
@@ -102,8 +105,8 @@ function initializeGlassActionGroup(root: HTMLElement) {
       `0 0 ${capsuleState.width.toFixed(2)} ${capsuleState.height.toFixed(2)}`,
     );
     outlinePaths.forEach((path) => path.setAttribute('d', outlinePath));
-    // Native rounded clipping prevents the moving vertical backdrop from exposing its rectangular layer.
-    if (usesVerticalAxis()) {
+    // Keep the same rounded material for touch controls and compact navigation.
+    if (usesAxisMotion()) {
       material.style.removeProperty('clip-path');
       material.style.removeProperty('-webkit-clip-path');
     } else {
@@ -118,7 +121,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
       capsuleTarget.x - capsuleState.x,
       capsuleTarget.y - capsuleState.y,
     );
-    const settle = usesVerticalAxis()
+    const settle = usesAxisMotion()
       ? 0.36 + 0.06 * (1 - Math.min(1, travel / 32))
       : 0.24;
     const response = reducedMotion.matches ? 1 : settle;
@@ -166,7 +169,9 @@ function initializeGlassActionGroup(root: HTMLElement) {
   const capsuleForPointer = (pointerX: number, pointerY: number) => (
     usesVerticalAxis()
       ? capsuleForVerticalGlassPointer(geometries, pointerY)
-      : capsuleForGlassPointer(geometries, pointerX, pointerY)
+      : usesAxisMotion()
+        ? capsuleForHorizontalGlassPointer(geometries, pointerX, pointerY)
+        : capsuleForGlassPointer(geometries, pointerX, pointerY)
   );
 
   const targetForPointer = (pointerX: number, pointerY: number) => {
@@ -284,6 +289,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
 
   root.addEventListener('pointerdown', (event) => {
     suppressTrustedClick = false;
+    pointerType = event.pointerType;
     if (!canScrub() || !event.isPrimary || event.button !== 0) return;
     if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
     const directTarget = event.target instanceof Element
@@ -292,6 +298,8 @@ function initializeGlassActionGroup(root: HTMLElement) {
     if (!directTarget || !root.contains(directTarget)) return;
     if (allowsVerticalScroll) {
       pendingScrub = { id: event.pointerId, x: event.clientX, y: event.clientY };
+      // Preview the press immediately without capturing a possible vertical page scroll.
+      if (usesAxisMotion()) previewScrub(event.clientX, event.clientY);
       return;
     }
     event.preventDefault();
@@ -305,8 +313,11 @@ function initializeGlassActionGroup(root: HTMLElement) {
     if (pendingScrub?.id === event.pointerId) {
       const dx = Math.abs(event.clientX - pendingScrub.x);
       const dy = Math.abs(event.clientY - pendingScrub.y);
-      if (dy > 10 && dy >= dx) { pendingScrub = null; return; }
-      if (dx < 8 || dx <= dy) return;
+      if (dy > 10 && dy >= dx) { finishScrub(false); return; }
+      if (dx < 8 || dx <= dy) {
+        if (usesAxisMotion()) previewScrub(event.clientX, event.clientY);
+        return;
+      }
       pendingScrub = null;
       scrubPointerId = event.pointerId;
       root.setPointerCapture(event.pointerId);
@@ -318,7 +329,12 @@ function initializeGlassActionGroup(root: HTMLElement) {
   }, { passive: false, signal });
 
   root.addEventListener('pointerup', (event) => {
-    if (pendingScrub?.id === event.pointerId) pendingScrub = null;
+    if (pendingScrub?.id === event.pointerId) {
+      pendingScrub = null;
+      scrubTarget = null;
+      targets.forEach((target) => target.removeAttribute('data-glass-preview'));
+      // Let an ordinary tap produce its native click and link activation.
+    }
     if (scrubPointerId === null || event.pointerId !== scrubPointerId) return;
     event.preventDefault();
     previewScrub(event.clientX, event.clientY);
@@ -334,7 +350,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   }, { signal });
 
   root.addEventListener('pointercancel', (event) => {
-    if (pendingScrub?.id === event.pointerId) pendingScrub = null;
+    if (pendingScrub?.id === event.pointerId) { finishScrub(false); return; }
     if (scrubPointerId === null || event.pointerId !== scrubPointerId) return;
     finishScrub(false);
   }, { signal });
@@ -360,7 +376,9 @@ function initializeGlassActionGroup(root: HTMLElement) {
   }, { signal });
 
   root.addEventListener('pointermove', (event) => {
-    if (!enabled() || scrubPointerId !== null || !finePointer.matches || focusedTarget) return;
+    if (!enabled() || scrubPointerId !== null || event.pointerType !== 'mouse'
+      || !finePointer.matches || focusedTarget) return;
+    pointerType = event.pointerType;
     const rootBounds = root.getBoundingClientRect();
     const geometry = capsuleForPointer(
       event.clientX - rootBounds.left,
@@ -370,7 +388,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
   }, { passive: true, signal });
 
   root.addEventListener('pointerleave', () => {
-    pendingScrub = null;
+    if (pendingScrub) { finishScrub(false); return; }
     if (lensDismissed || focusedTarget || scrubPointerId !== null) return;
     syncToCurrentState();
   }, { signal });
@@ -425,8 +443,7 @@ function initializeGlassActionGroup(root: HTMLElement) {
 
   const cancelScrollableScrub = () => {
     if (!allowsVerticalScroll) return;
-    pendingScrub = null;
-    if (scrubPointerId !== null) finishScrub(false);
+    if (pendingScrub || scrubPointerId !== null) finishScrub(false);
   };
   window.addEventListener('blur', cancelScrollableScrub, { signal });
   window.addEventListener('scroll', cancelScrollableScrub, { passive: true, signal });

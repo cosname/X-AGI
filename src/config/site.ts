@@ -40,7 +40,7 @@ export const editions: Record<EditionConfig['year'], EditionConfig> = {
     routeStyle: 'directory',
     skin: 'goal',
     title: '2026 X-AGI Conference',
-    titleZh: '2026 X-AGI 大会',
+    titleZh: 'X-AGI 2026',
     description: '2026 X-AGI Conference（交叉智能大会）将于2026年10月16日至18日在北京友谊宾馆举行，连接统计、数据科学与人工智能的下一代研究者。',
     date: '2026.10.16-18',
     venue: '北京友谊宾馆',

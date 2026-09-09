@@ -2,10 +2,11 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
-  adsorbVerticalGlassProgress,
+  adsorbGlassProgress,
   assignGlassTargetRows,
   capsuleForGlassPointer,
   capsuleForGlassTarget,
+  capsuleForHorizontalGlassPointer,
   capsuleForVerticalGlassPointer,
   glassActivationShouldDismiss,
   glassGroupAllowsScrub,
@@ -72,13 +73,38 @@ test('vertical glass pointer stretches smoothly between stacked targets', () => 
 test('vertical glass progress holds near each stacked target', () => {
   const travel = 56;
 
-  assert.equal(adsorbVerticalGlassProgress(0, 44, 44, travel), 0);
-  assert.equal(adsorbVerticalGlassProgress(1, 44, 44, travel), 1);
-  assert.equal(adsorbVerticalGlassProgress(0.5, 44, 44, travel), 0.5);
-  assert.equal(adsorbVerticalGlassProgress(0.1, 44, 44, travel), 0);
-  assert.equal(adsorbVerticalGlassProgress(0.9, 44, 44, travel), 1);
-  assert.ok(adsorbVerticalGlassProgress(0.22, 44, 44, travel) < 0.22);
-  assert.ok(adsorbVerticalGlassProgress(0.78, 44, 44, travel) > 0.78);
+  assert.equal(adsorbGlassProgress(0, 44, 44, travel), 0);
+  assert.equal(adsorbGlassProgress(1, 44, 44, travel), 1);
+  assert.equal(adsorbGlassProgress(0.5, 44, 44, travel), 0.5);
+  assert.equal(adsorbGlassProgress(0.1, 44, 44, travel), 0);
+  assert.equal(adsorbGlassProgress(0.9, 44, 44, travel), 1);
+  assert.ok(adsorbGlassProgress(0.22, 44, 44, travel) < 0.22);
+  assert.ok(adsorbGlassProgress(0.78, 44, 44, travel) > 0.78);
+});
+
+test('horizontal touch glass uses the same motion as a rotated menu stack', () => {
+  const horizontal = assignGlassTargetRows([
+    { key: 'register', left: 0, top: 0, width: 108, height: 44 },
+    { key: 'schedule', left: 128, top: 0, width: 100, height: 44 },
+  ]);
+  const rotated = assignGlassTargetRows(horizontal.map(target => ({
+    key: target.key, left: target.top, top: target.left, width: target.height, height: target.width,
+  })));
+
+  for (const x of [-10, 54, 60, 85, 116, 145, 172, 178, 240]) {
+    const row = capsuleForHorizontalGlassPointer(horizontal, x, 22);
+    const column = capsuleForVerticalGlassPointer(rotated, x);
+    assert.ok(row && column);
+    assert.deepEqual(row, {
+      x: column.y, y: column.x, width: column.height, height: column.width, neck: column.neck,
+    });
+    assert.equal(row.neck, 0);
+  }
+});
+
+test('horizontal touch glass stays in the touched row and handles empty groups', () => {
+  assert.deepEqual(capsuleForHorizontalGlassPointer(targets, 44, 78), capsuleForGlassTarget(targets[2]));
+  assert.equal(capsuleForHorizontalGlassPointer([], 44, 78), null);
 });
 
 test('vertical glass pointer adsorbs onto the nearest stacked target', () => {
