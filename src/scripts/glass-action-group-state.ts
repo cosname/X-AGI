@@ -92,13 +92,10 @@ export function capsuleForGlassTarget(target: GlassTargetGeometry): GlassCapsule
   };
 }
 
-export function capsuleForGlassPointer(
+function nearestGlassTargetRow(
   targets: readonly GlassTargetGeometry[],
-  pointerX: number,
   pointerY: number,
-): GlassCapsuleGeometry | null {
-  if (targets.length === 0) return null;
-
+) {
   const rows = new Map<number, GlassTargetGeometry[]>();
   targets.forEach((target) => {
     const row = rows.get(target.row) ?? [];
@@ -106,7 +103,7 @@ export function capsuleForGlassPointer(
     rows.set(target.row, row);
   });
 
-  const rowTargets = [...rows.values()].reduce((closest, candidates) => {
+  return [...rows.values()].reduce((closest, candidates) => {
     if (!closest) return candidates;
     const candidateDistance = Math.abs(
       candidates.reduce((sum, target) => sum + target.centerY, 0) / candidates.length - pointerY,
@@ -115,9 +112,16 @@ export function capsuleForGlassPointer(
       closest.reduce((sum, target) => sum + target.centerY, 0) / closest.length - pointerY,
     );
     return candidateDistance < closestDistance ? candidates : closest;
-  }, null as GlassTargetGeometry[] | null);
+  }, null as GlassTargetGeometry[] | null) ?? [];
+}
 
-  if (!rowTargets) return null;
+export function capsuleForGlassPointer(
+  targets: readonly GlassTargetGeometry[],
+  pointerX: number,
+  pointerY: number,
+): GlassCapsuleGeometry | null {
+  const rowTargets = nearestGlassTargetRow(targets, pointerY);
+  if (rowTargets.length === 0) return null;
   const ordered = [...rowTargets].sort((left, right) => left.centerX - right.centerX);
   if (pointerX <= ordered[0].centerX) return capsuleForGlassTarget(ordered[0]);
   if (pointerX >= ordered.at(-1)!.centerX) return capsuleForGlassTarget(ordered.at(-1)!);
@@ -141,22 +145,22 @@ export function capsuleForGlassPointer(
   return capsuleForGlassTarget(ordered.at(-1)!);
 }
 
-// Light hold on each stacked control, then mostly follow the pointer through the gap.
-const VERTICAL_GLASS_HOLD = 0.14;
-const VERTICAL_GLASS_HOLD_MAX = 0.14;
+// Light hold on each control, then mostly follow the pointer through the gap.
+const GLASS_HOLD = 0.14;
+const GLASS_HOLD_MAX = 0.14;
 
 const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 
-export function adsorbVerticalGlassProgress(
+export function adsorbGlassProgress(
   progress: number,
-  fromHeight: number,
-  toHeight: number,
+  fromSize: number,
+  toSize: number,
   travel: number,
 ) {
   const normalized = clamp01(progress);
   if (travel <= 0) return normalized;
-  const hold = Math.min(fromHeight, toHeight) * VERTICAL_GLASS_HOLD;
-  const stick = Math.min(VERTICAL_GLASS_HOLD_MAX, hold / travel);
+  const hold = Math.min(fromSize, toSize) * GLASS_HOLD;
+  const stick = Math.min(GLASS_HOLD_MAX, hold / travel);
   if (normalized <= stick) return 0;
   if (normalized >= 1 - stick) return 1;
   const inner = (normalized - stick) / (1 - 2 * stick);
@@ -164,43 +168,63 @@ export function adsorbVerticalGlassProgress(
   return inner * 0.72 + smooth * 0.28;
 }
 
-export function capsuleForVerticalGlassPointer(
+function capsuleForAxisGlassPointer(
   targets: readonly GlassTargetGeometry[],
-  pointerY: number,
+  pointer: number,
+  vertical: boolean,
 ): GlassCapsuleGeometry | null {
   if (targets.length === 0) return null;
 
-  const ordered = [...targets].sort((top, bottom) => top.centerY - bottom.centerY);
-  if (pointerY <= ordered[0].centerY) return capsuleForGlassTarget(ordered[0]);
-  if (pointerY >= ordered.at(-1)!.centerY) return capsuleForGlassTarget(ordered.at(-1)!);
+  const center = (target: GlassTargetGeometry) => vertical ? target.centerY : target.centerX;
+  const size = (target: GlassTargetGeometry) => vertical ? target.height : target.width;
+  const ordered = [...targets].sort((from, to) => center(from) - center(to));
+  if (pointer <= center(ordered[0])) return capsuleForGlassTarget(ordered[0]);
+  if (pointer >= center(ordered.at(-1)!)) return capsuleForGlassTarget(ordered.at(-1)!);
 
   for (let index = 0; index < ordered.length - 1; index += 1) {
-    const top = ordered[index];
-    const bottom = ordered[index + 1];
-    if (pointerY > bottom.centerY) continue;
+    const from = ordered[index];
+    const to = ordered[index + 1];
+    if (pointer > center(to)) continue;
 
-    const travel = bottom.centerY - top.centerY;
-    const progress = adsorbVerticalGlassProgress(
-      (pointerY - top.centerY) / travel,
-      top.height,
-      bottom.height,
+    const travel = center(to) - center(from);
+    const progress = adsorbGlassProgress(
+      (pointer - center(from)) / travel,
+      size(from),
+      size(to),
       travel,
     );
-    if (progress <= 0) return capsuleForGlassTarget(top);
-    if (progress >= 1) return capsuleForGlassTarget(bottom);
+    if (progress <= 0) return capsuleForGlassTarget(from);
+    if (progress >= 1) return capsuleForGlassTarget(to);
 
     const bridge = Math.sin(Math.PI * progress);
     const mix = (start: number, end: number) => start + (end - start) * progress;
-    const restingHeight = mix(top.height, bottom.height);
+    const restingWidth = mix(from.width, to.width);
+    const restingHeight = mix(from.height, to.height);
+    const stretch = Math.min(18, travel * 0.24) * bridge;
 
     return {
-      x: mix(top.centerX, bottom.centerX),
-      y: mix(top.centerY, bottom.centerY),
-      width: mix(top.width, bottom.width) * (1 - bridge * 0.045),
-      height: restingHeight + Math.min(18, travel * 0.24) * bridge,
+      x: mix(from.centerX, to.centerX),
+      y: mix(from.centerY, to.centerY),
+      width: vertical ? restingWidth * (1 - bridge * 0.045) : restingWidth + stretch,
+      height: vertical ? restingHeight + stretch : restingHeight * (1 - bridge * 0.045),
       neck: 0,
     };
   }
 
   return capsuleForGlassTarget(ordered.at(-1)!);
+}
+
+export function capsuleForVerticalGlassPointer(
+  targets: readonly GlassTargetGeometry[],
+  pointerY: number,
+) {
+  return capsuleForAxisGlassPointer(targets, pointerY, true);
+}
+
+export function capsuleForHorizontalGlassPointer(
+  targets: readonly GlassTargetGeometry[],
+  pointerX: number,
+  pointerY: number,
+) {
+  return capsuleForAxisGlassPointer(nearestGlassTargetRow(targets, pointerY), pointerX, false);
 }

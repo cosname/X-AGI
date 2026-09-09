@@ -1585,7 +1585,8 @@
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge {
-  --badge-title-size: clamp(6.5rem, 7.8vw, 8.8rem);
+  /* Fit the full slogan while keeping both title rows at the same visible height. */
+  --badge-title-size: min(clamp(6.5rem, 7.8vw, 8.8rem), calc(min(50rem, 62vw) / 7.2));
   background: #f7f1ea;
 }
 
@@ -1617,6 +1618,7 @@
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
+  --badge-title-row-scale: 0.8;
   position: absolute;
   bottom: calc(50% + 3.05rem);
   left: 0;
@@ -1640,9 +1642,9 @@
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {
   justify-content: flex-start;
   align-items: center;
-  gap: 0.14em;
+  gap: 0.28em;
   margin-top: 0;
-  font-size: 0.8em;
+  font-size: calc(1em * var(--badge-title-row-scale));
   line-height: 1;
 }
 
@@ -1651,12 +1653,13 @@
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__title-zh {
-  margin-top: 0.4em;
+  margin-top: 0.2em;
   font-family: "XAGI WenKai", var(--font-serif);
-  font-size: 0.48em;
+  /* The slogan's WenKai glyphs span 952 of 1000 font units; match the wordmark's ink height. */
+  font-size: calc(1em * var(--badge-title-row-scale) / 0.952);
   font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: 0.08em;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   transform: none;
 }
@@ -1719,24 +1722,29 @@
 
 @media (max-width: 64rem) {
   .edition-2026.edition-goal-home .conference-hero--badge {
-    --badge-title-size: clamp(5.6rem, 9.6vw, 7rem);
+    --badge-title-size: min(clamp(5.6rem, 9.6vw, 7rem), calc(min(42rem, 62vw) / 7.2));
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__copy {
     left: clamp(4rem, 8.5vw, 6rem);
     width: min(42rem, 62vw);
   }
+}
 
+@media (min-width: 51.26rem) and (min-height: 28.01rem) {
+  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__copy {
+    transform: translateY(clamp(1.5rem, 4svh, 3rem));
+  }
+}
+
+@media (min-width: 51.26rem) and (max-height: 48rem) {
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
-    font-size: clamp(5.6rem, 9.6vw, 7rem);
+    /* The two title rows occupy about 1.9em; leave room for navigation above them. */
+    font-size: min(var(--badge-title-size), calc((50svh - 9.75rem) / 1.9));
   }
 }
 
 @media (min-width: 51.26rem) and (max-height: 40rem) {
-  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
-    font-size: min(var(--badge-title-size), 20svh);
-  }
-
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline {
     font-size: clamp(1.05rem, min(1.75vw, 5.2svh), 2rem);
   }
@@ -1756,6 +1764,7 @@
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
     position: static;
     margin: 0 0 clamp(0.45rem, 2svh, 0.75rem);
+    font-size: min(var(--badge-title-size), 20svh);
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
@@ -1839,21 +1848,14 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 1.25rem;
-    font-size: clamp(2.6rem, calc((100vw - 2.5rem) / 6.3), 5.4rem);
+    font-size: clamp(2rem, calc((100vw - 2.5rem) / 7.2), 5.4rem);
     line-height: 0.87;
     text-align: center;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {
     justify-content: center;
-    font-size: 0.8em;
     transform-origin: center;
-  }
-
-  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__title-zh {
-    margin-top: 0.5em;
-    font-size: 0.55em;
-    letter-spacing: 0.055em;
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline-axis {
@@ -1920,11 +1922,8 @@
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
-    font-size: clamp(3.2rem, 16vw, 4.6rem);
-  }
-
-  .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__name {
-    font-size: 0.72em;
+    --badge-title-row-scale: 0.72;
+    font-size: min(clamp(3.2rem, 16vw, 4.6rem), calc((100vw - 2rem) / 6.5));
   }
 
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__tagline {
