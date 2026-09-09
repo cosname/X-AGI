@@ -1585,7 +1585,7 @@
 }
 
 .edition-2026.edition-goal-home .conference-hero--badge {
-  /* Fit the full slogan while keeping both title rows at the same visible height. */
+  /* Fit both title rows within the available width. */
   --badge-title-size: min(clamp(6.5rem, 7.8vw, 8.8rem), calc(min(50rem, 62vw) / 7.2));
   background: #f7f1ea;
 }
@@ -1655,8 +1655,8 @@
 .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__title-zh {
   margin-top: 0.2em;
   font-family: "XAGI WenKai", var(--font-serif);
-  /* The slogan's WenKai glyphs span 952 of 1000 font units; match the wordmark's ink height. */
-  font-size: calc(1em * var(--badge-title-row-scale) / 0.952);
+  /* The slogan's ink height is 80% of the wordmark, accounting for WenKai's glyph metrics. */
+  font-size: calc(1em * var(--badge-title-row-scale) * 0.8 / 0.952);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: 0.02em;
@@ -1739,7 +1739,7 @@
 
 @media (min-width: 51.26rem) and (max-height: 48rem) {
   .edition-2026.edition-goal-home .conference-hero--badge .conference-hero__inner h1 {
-    /* The two title rows occupy about 1.9em; leave room for navigation above them. */
+    /* Reserve room for navigation above the title. */
     font-size: min(var(--badge-title-size), calc((50svh - 9.75rem) / 1.9));
   }
 }
