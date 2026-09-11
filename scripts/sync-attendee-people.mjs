@@ -60,6 +60,14 @@ const profileIdByName = new Map([
   ['张华清', 'zhang-huaqing'],
   ['闫宇坤', 'yan-yukun'],
   ['邱子涵', 'qiu-zihan'],
+  ['谢超', 'xie-chao'],
+  ['张华枫', 'zhang-huafeng'],
+  ['吴泰霖', 'wu-tailin'],
+  ['周帆', 'zhou-fan'],
+  ['焦雨领', 'jiao-yuling'],
+  ['陈晴', 'chen-qing'],
+  ['黄睿钊', 'huang-ruizhao'],
+  ['黄沛', 'huang-pei'],
 ]);
 
 const aliasesByName = new Map([

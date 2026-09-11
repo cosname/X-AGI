@@ -539,9 +539,9 @@ await validatePublicCopies('2026 partner logos', path.resolve('public/2026/logos
 const personPortraitFiles = conference2026People.flatMap((person) => (
   person.portraitSrc ? [path.basename(person.portraitSrc)] : []
 ));
-if (personPortraitFiles.length !== 30 || new Set(personPortraitFiles).size !== 30) {
+if (personPortraitFiles.length !== 38 || new Set(personPortraitFiles).size !== 38) {
   fail(
-    `2026 people portraits: expected 30 unique attendee-submitted portraits and six placeholders, `
+    `2026 people portraits: expected 38 unique attendee-submitted portraits and six placeholders, `
     + `found ${new Set(personPortraitFiles).size}`,
   );
 }
@@ -716,9 +716,12 @@ const officialCopyByRoute = new Map([
     ...conference2026.programPreview.sessions.flatMap((session) => [
       session.title,
       ...session.chairs.map((chair) => chair.name === '待确认' ? 'Chair 待确认' : chair.name),
-      ...session.speakers.flatMap((speaker) => [speaker.name, speaker.talkTitle ?? '']),
+      ...session.speakers.flatMap((speaker) => [
+        speaker.name,
+        conference2026PersonForName(speaker.name)?.talkTitle ?? speaker.talkTitle ?? '',
+      ]),
     ]),
-    ...conference2026People.flatMap((person) => [
+    ...conference2026People.filter((person) => person.schedule.length > 0).flatMap((person) => [
       person.name,
       ...person.aliases,
       person.affiliation,
@@ -868,7 +871,7 @@ const scheduledProfilePlacements = conference2026.programPreview.sessions.flatMa
 validateExactSet(
   'schedule inline profile people',
   [...new Set(scheduledProfilePlacements.map(({ person }) => person.id))],
-  conference2026People.map((person) => person.id),
+  conference2026People.filter((person) => person.schedule.length > 0).map((person) => person.id),
 );
 
 const profileTags = [...scheduleSource.matchAll(/<details\b[^>]*data-schedule-person-profile[^>]*>/g)];
@@ -983,7 +986,7 @@ if (speakerItemCount !== expectedSpeakerItemCount) {
 const talkTitleCount = [...scheduleSource.matchAll(/class="session-speaker__talk-title"/g)].length;
 const expectedTalkTitleCount = conference2026.programPreview.sessions
   .flatMap((session) => session.speakers)
-  .filter((speaker) => Boolean(speaker.talkTitle))
+  .filter((speaker) => Boolean(conference2026PersonForName(speaker.name)?.talkTitle ?? speaker.talkTitle))
   .length;
 if (talkTitleCount !== expectedTalkTitleCount) {
   fail(`schedule/index.html: expected ${expectedTalkTitleCount} confirmed talk titles, found ${talkTitleCount}`);
