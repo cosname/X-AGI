@@ -149,11 +149,12 @@ const sessionNumbers = new Map(
                       {session.speakers.length > 0 ? (
                         session.speakers.map((speaker, speakerIndex) => {
                           const person = conference2026PersonForName(speaker.name);
+                          const talkTitle = person?.talkTitle ?? speaker.talkTitle;
                           return (
                             <div class="session-item session-item--speaker">
                               <div class="session-speaker">
-                                {speaker.talkTitle && (
-                                  <p class="session-speaker__talk-title">{speaker.talkTitle}</p>
+                                {talkTitle && (
+                                  <p class="session-speaker__talk-title">{talkTitle}</p>
                                 )}
                                 {person ? (
                                   <SchedulePersonProfile

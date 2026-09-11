@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-09-06",
+  "lastExtendedOn": "2026-09-11",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 89,
-  "uniquePayloadCount": 88,
-  "archiveFileCount": 87,
+  "sourceEntryCount": 97,
+  "uniquePayloadCount": 96,
+  "archiveFileCount": 95,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1489,6 +1489,134 @@
         "https://raw.githubusercontent.com/lxgw/LxgwWenKai/e8b5b48b79f19f29aa68b0a178eab3472ea9f7e8/fonts/TTF/LXGWWenKai-Medium.ttf"
       ],
       "note": "Unmodified LXGW WenKai Medium v1.522 source font under SIL OFL 1.1; the local WOFF2 export contains the homepage Chinese title and edition digits. License retained at src/assets/fonts/LICENSE-LXGWWenKai.txt."
+    },
+    {
+      "originalPath": "attendee-list.xls#谢超-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/xie-chao-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "881df5e861f13337f251a839a3cd73dd1550df9174bb6fa4a545bf844cca3c89",
+      "bytes": 25914,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 500,
+        "height": 696
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/xie-chao-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-11. Embedded EXIF, XMP, IPTC and comment metadata were removed before repository storage without re-encoding image pixels. The 640 px WebP runtime export uses a 500 x 500 source crop at x=0, y=40 to preserve headroom and the complete head, with WebP quality 88."
+    },
+    {
+      "originalPath": "attendee-list.xls#张华枫-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/zhang-huafeng-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "4b962d34ab5b60b85bd9bb8389e8ae2af6f978d5c4aeab0b6480125d01c3347b",
+      "bytes": 96662,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1078,
+        "height": 1079
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/zhang-huafeng-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-11. Embedded EXIF, XMP, IPTC and comment metadata were removed before repository storage without re-encoding image pixels."
+    },
+    {
+      "originalPath": "attendee-list.xls#吴泰霖-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/wu-tailin-portrait-source.png",
+      "status": "archived",
+      "sha256": "3b53de1c325932fd5f7c6e1584987918b0a7168a531ca8d81e654326113c727f",
+      "bytes": 378481,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 640,
+        "height": 768
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/wu-tailin-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-11. Embedded EXIF, XMP, IPTC and comment metadata were removed before repository storage without re-encoding image pixels. The 640 px WebP runtime export uses a 640 x 640 source crop at x=0, y=16 to preserve headroom and the complete head, with WebP quality 88."
+    },
+    {
+      "originalPath": "attendee-list.xls#周帆-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/zhou-fan-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "bbad4a5007f29348537fe54487aafc3af7a93082bcda84f15e52c0972c950fae",
+      "bytes": 62101,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1280,
+        "height": 1280
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/zhou-fan-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-11. Embedded EXIF, XMP, IPTC and comment metadata were removed before repository storage without re-encoding image pixels."
+    },
+    {
+      "originalPath": "attendee-list.xls#焦雨领-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/jiao-yuling-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "6810636d4f9b9e19feb47314808ce2c52944cee2518525ebeeee3ee221156783",
+      "bytes": 41001,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 940,
+        "height": 950
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/jiao-yuling-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-11. Embedded EXIF, XMP, IPTC and comment metadata were removed before repository storage without re-encoding image pixels."
+    },
+    {
+      "originalPath": "attendee-list.xls#陈晴-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/chen-qing-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "7ce07b6899a114b2d79de911f52db05bd9f33e1f0b5a52c5b6f1663af9b22265",
+      "bytes": 48640,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1086,
+        "height": 1086
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/chen-qing-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-11. Embedded EXIF, XMP, IPTC and comment metadata were removed before repository storage without re-encoding image pixels."
+    },
+    {
+      "originalPath": "attendee-list.xls#黄睿钊-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/huang-ruizhao-portrait-source.png",
+      "status": "archived",
+      "sha256": "10d8d61d112ac55ec52dcc04d7192d1c2643461ffd8e463077bc24296b9cb70a",
+      "bytes": 1730750,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1106,
+        "height": 1422
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/huang-ruizhao-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-11. Embedded EXIF, XMP, IPTC and comment metadata were removed before repository storage without re-encoding image pixels. The 640 px WebP runtime export uses a 1106 x 1106 source crop at x=0, y=0 to preserve headroom and the complete head, with WebP quality 88."
+    },
+    {
+      "originalPath": "attendee-list.xls#黄沛-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/huang-pei-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "c19d1755b5c39a146434712ac070f3ff0b599744c353c180c8d5d7934ce79163",
+      "bytes": 203279,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 2448,
+        "height": 1632
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/huang-pei-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-11. Embedded EXIF, XMP, IPTC and comment metadata were removed before repository storage without re-encoding image pixels."
     }
   ]
 }

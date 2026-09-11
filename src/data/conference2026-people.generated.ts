@@ -20,7 +20,7 @@ export type Conference2026PersonSourceRecord = {
 
 export const conference2026PeopleSource = {
   "sheetName": "2026 X-AGI 大会",
-  "sourceHash": "c94315dd6e89687f2334fb03b27401fb142093bc97548b475311cfd0f1195984",
+  "sourceHash": "2b69d1a9931876c76132bf1a0fc1caa0f3782406350cc88699d44e4d2f85d23e",
   "people": [
     {
       "id": "mao-xiaojie",
@@ -467,7 +467,8 @@ export const conference2026PeopleSource = {
       "affiliation": "清华大学/字节跳动",
       "department": "人工智能学院",
       "bio": "I’m a PhD student at Tsinghua SAIL, advised by Prof. Jun Zhu and closely collaborating with Prof. Yinpeng Dong. I also work with Prof. Jingzhao Zhang’s group. I study the physics of deep learning: the optimization dynamics, geometry, and statistical mechanisms that could make neural-network training more explainable, predictable, and controllable.",
-      "talkTitle": "Nexus（待定）",
+      "talkTitle": "Nexus: Same Pretraining Loss, Better Downstream Generalization via Common Minima",
+      "abstract": "The foundational capabilities of large language models are acquired during pretraining on internet-scale, highly heterogeneous data mixtures. In this work, we investigate an interesting geometric question regarding the converged state of pretraining: Does the model converge to a common minimizer across all data sources (e.g., \\cref{fig:cwa_illustration:close}), or merely a minimizer of the summed loss (e.g., \\cref{fig:cwa_illustration:distant})? We hypothesize that the geometric \"closeness\" of task-specific minima is intrinsically linked to downstream generalization. We reveal that standard optimizers (e.g., AdamW) often converge to points where task-specific minima are distant from each other. To address this, we propose the Nexus optimizer, which encourages the closeness of these minima by maximizing gradient similarity during optimization. Experiments across models ranging from 130M to 3B parameters, various data mixtures and hyperparameter schedules, show that Nexus \\textit{significantly boosts downstream performance}, despite \\textit{achieving the same pretraining loss} (see \\cref{fig:demo:benchmark}). Notably, on the 3B model, Nexus reduces the out-of-distribution loss by 0.012 and yields up to a 15.0\\% accuracy improvement on complex reasoning tasks (e.g., GSM8k). This finding challenges the reliance on pretraining loss as the sole proxy for model evaluation and demonstrates the importance of implicit biases in unlocking downstream generalization.",
       "hasSubmittedPortrait": true,
       "sourceOrder": 30
     },
@@ -543,6 +544,126 @@ export const conference2026PeopleSource = {
       "abstract": "大语言模型（LLM）的高维激活空间中存在若干显著的涌现现象，尤以 Attention Sinks （少数词元获得异常偏高的注意力得分）与 Residual Sinks （少数固定维度持续保持较大幅值）最为典型。这些离群值常被视为异常或量化障碍，本文则提出一种统一的功能性视角：它们是实现高维缩放的关键机制。\n\n具体而言，少量离群值与归一化层（如 Softmax、RMSNorm）协同，对非离群分量施加有效缩放，我们称之为离群值驱动的缩放（outlier-driven rescaling）。干预实验表明，离群值与归一化层联合发挥作用，主要充当缩放因子而非直接的语义载体：移除归一化层会使相应离群值消失，但训练稳定性下降；保留归一化层而裁剪离群值同样损害性能，表明该缩放机制对高维优化的稳定至关重要。这一视角亦为若干架构改进的有效性提供了统一解释。基于上述发现，我们进一步展示了将离群值吸收入可学习参数或引入显式门控缩放加以缓解的方法，有效提升了训练性能与量化鲁棒性。",
       "hasSubmittedPortrait": true,
       "sourceOrder": 35
+    },
+    {
+      "id": "xie-chao",
+      "name": "谢超",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "清华大学",
+      "department": "心理与认知科学系",
+      "bio": "谢超，清华大学心理与认知科学系助理教授。研究方向为脑发育与精神共病的神经认知机制，结合大规模脑影像、连接组预测建模、行为遗传与计算建模等手段。以第一作者身份在Nature Medicine、Nature Mental Health，Science Advances等期刊上发表论文，并获得博新计划和教育部珠峰计划等支持，主持国自然面上和青年项目等项目。",
+      "talkTitle": "跨发育阶段精神共病的层级神经认知模型",
+      "abstract": "精神疾病共病是精准精神病学研究与临床诊疗中的关键难题，其复杂的神经病理机制仍有待深入阐明。本报告将介绍围绕精神疾病共病机制开展的系列研究，我们构建了精神共病层级神经认知模型（NeuroHiP），首次识别出一种由前额叶执行控制环路高连接特征驱动、贯穿外化与内化核心症状的通用性神经精神病理因子，揭示了不同精神疾病共病背后的共性神经机制（Nature Medicine, 2023）。在此层级模型基础上，研究进一步实现了病理机制的精细化分解，分离出两类特异性神经病理因子：其一为与冲动特质相关的外化因子，主要表现为感觉运动环路连接异常增强；其二为与神经质特质相关的内化因子，核心特征为前额叶-眶额叶目标导向环路连接异常减弱（Nature Mental Health, 2026）。上述发现在覆盖青春前期至成人期的六个独立研究队列中得到系统验证，显示出良好的稳健性与可重复性。该系列研究构建了精神疾病共病的层级化神经认知机制框架，有助于厘清共病中的共性与特异性病理差异，并为精神疾病的分层早期干预、精准诊疗体系建设以及精准精神病学的发展提供新的科学视角与理论依据。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 36
+    },
+    {
+      "id": "zhang-huafeng",
+      "name": "张华枫",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "为沃科技（南京）有限公司",
+      "department": "技术研发部",
+      "bio": "清华大学计算机科学与技术博士，现任为沃科技（南京）技术有限公司 CTO。长期从事形式化方法、软件工程、编程语言与编译器、分布式系统等领域的研究与工程实践。近年来重点关注 AI Agent 与软件工程的结合，探索如何将形式化规格、模型检查和反例驱动的验证机制引入 LLM Agent，使 Agent 在处理并发、状态、重试、故障恢复和外部副作用等复杂软件工程问题时具备更强的可验证性和工程可靠性。",
+      "talkTitle": "Formal Method Harness for LLM agents",
+      "abstract": "随着 LLM Agent 从代码生成和问答逐渐进入长流程的软件工程任务，它面对的问题已经不只是“生成结果是否正确”。当系统涉及并发操作、状态生命周期、重试、延迟结果、权限与所有权、外部副作用以及故障恢复时，很多错误本质上是状态机和时序约束被破坏，而不是一次模型调用的推理错误。\n\n本次演讲将介绍一种 Formal Method Harness for LLM Agents：把 TLA+ 和模型检查放在 Agent 外部，作为一个可执行、可检查的形式化约束层。LLM Agent 可以辅助将自然语言需求转化为状态变量、状态迁移、不变量和活性属性，再通过 TLC 等工具搜索违反系统约束的执行路径，并将 counterexample 反馈给 Agent，用于诊断、修改模型、调整实现和补充测试。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 37
+    },
+    {
+      "id": "wu-tailin",
+      "name": "吴泰霖",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "西湖大学",
+      "department": "人工智能系",
+      "bio": "吴泰霖，西湖大学工学院人工智能系特聘研究员、助理教授，原力引擎创始人。北京大学物理学院本科，麻省理工学院物理系博士，斯坦福大学计算机系博士后。主要研究领域为开发机器学习方法用于大规模科学仿真、控制、设计和发现，并在聚变、流体、物理等领域科学和工程领域应用。主持国家基金委重大研究计划培育项目等。在人工智能顶级会议和物理学顶级期刊等发表文章40余篇，其中7篇被评为热点论文。",
+      "talkTitle": "AI赋能聚变等离子体仿真、控制和诊断",
+      "abstract": "聚变等离子体因其非线性、多尺度及强耦合特性，在仿真、实时控制与高精度诊断上面临巨大挑战。本报告将展示AI赋能这三方面的潜力与挑战，并介绍本组近期成果。在仿真方面，AI可加速大规模动力学模拟，显著提升计算效率；在控制方面，强化学习等算法能实现等离子体位形和不稳定性的自适应实时调节；在诊断方面，神经网络可高效处理多源诊断数据，实现关键参数的快速反演与异常检测。三者协同，为聚变堆的智能化运维奠定基础。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 38
+    },
+    {
+      "id": "zhou-fan",
+      "name": "周帆",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "上海财经大学",
+      "department": "统计与数据科学学院",
+      "bio": "周帆，上海财经大学统计与数据科学学院常任教授，应用统计与数据科学系系主任，教育部青年长江学者，博士毕业于美国北卡罗来纳大学教堂山分校，现担任统计学顶刊JASA的副主编与人工智能顶会NeurIPS等的领域主席。研究兴趣包括深度学习，强化学习的算法与理论，大模型微调与AI智能体，在统计学，机器学习顶刊和顶会上发表了数十篇文章，带领团队建立了大模型统计推理数据集与评价体系StatEval，数据科学评测基准DataSciEval与自动化统计定理证明智能体StatProver。曾获上海市自然科学二等奖，泛华统计协会国际会议新研究者奖,北卡教堂山分校James E. Grizzle Distinguished Alumnus Award和Barry H. Margolin Award。",
+      "talkTitle": "基于先验数据拟合网络的离线策略评估",
+      "abstract": "传统离线策略评估往往针对每一份新数据独立构建评估器，而忽视了大量已有评估任务中蕴含的可迁移经验。对此，本文提出一种具备复用能力的评估模型，通过在丰富多样的合成任务上进行预训练，使模型能够直接从新数据与目标策略中一次性推断出策略价值。该模型利用基于状态转移的注意力机制处理离散状态空间，并设计轨迹 - 片段层次结构来适应连续状态场景。理论分析与实验表明，引入先验任务可有效降低有限样本下的评估偏差，且先验贡献随实际数据量增长而自动衰减。在网格世界、非线性肿瘤模拟及真实重症监护数据等多个基准上，该方法不仅超越了传统单任务评估与非神经网络方案，也显著优于精细调参的神经网络基础模型。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 39
+    },
+    {
+      "id": "jiao-yuling",
+      "name": "焦雨领",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "武汉大学",
+      "department": "人工智能学院",
+      "bio": "焦雨领，武汉大学人工智能学院，教授博导，副院长。入选教育部国家重大人才工程，主要研究机器学习、科学计算。近期关注深度学习数理基础，在计算数学、应用数学、统计学、电子工程、人工智能等领域的旗舰期刊和会议上发表论文四十多篇。主持国家重点研发计划课题、国家自然科学基金天元交叉重点项目、面上项目及一批同华为开展的校企合作项目。",
+      "talkTitle": "Offline Deep Q* Estimation with Diffusion Models",
+      "abstract": "In offline RL, estimating the optimal action-value function  can be formulated as solving the optimal Bellman equation based solely on offline observations. A fundamental challenge is that the reward function and transition kernel are unknown, so the optimal Bellman operator is not directly observable from data. To address this issue, we propose a novel framework that decouples operator estimation from value function learning. In this approach, we first formulate conditional diffusion models to estimate the reward law and transition kernel, which induces a data-driven approximation of the optimal Bellman operator. We then plug these estimators into the Bellman equation and obtain a deep estimator of  by minimizing the empirical Bellman residual over a neural network function class.   We  establish sharp nonasymptotic convergence rates for learning the optimal Bellman operator through an end-to-end analysis of conditional diffusion estimation in total variation distance.",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 40
+    },
+    {
+      "id": "chen-qing",
+      "name": "陈晴",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "同济大学",
+      "department": "设计创意学院",
+      "bio": "陈晴，同济大学设计创意学院副教授、博士生导师。上海市海外高层次计划引进人才，入选上海市晨光计划。博士毕业于香港科技大学，曾担任法国巴黎综合理工大学(Ecole Polytechnique)及法国国家信息与自动化研究所(Inria)博士后研究员。研究方向包括信息可视化、人机交互、大数据可视分析、生成式人工智能及其在智慧教育、智慧医疗、智能设计及商业智能中的应用，研究成果获得CSIG自然科学奖、亚太地区ICT Awards等奖项。她担任多个顶级国际学术会议的程序委员会委员，IEEE VIS社区主席，CSIG 可视化专委会委员、CCF 人机交互专委会执行委员，主持多个国家自然科学基金项目及多项与阿里、蚂蚁、腾讯、智谱AI等公司的校企合作课题。更多信息请访问：http://qchen.cc",
+      "talkTitle": "从灵感到实现：AI赋能教育中的创造力支持",
+      "abstract": "在生成式AI快速融入教育场景的当下，如何让AI真正赋能创造力培养而非替代人的思考，成为亟待回答的问题。本报告从设计思维与批判性思维出发，探讨AI赋能教育中的创造力支持路径。针对当前AI工具多作为“黑箱生成器”、难以促进深层认知发展的局限，提出一种可解释的人机协作范式：通过让AI暴露推理过程，引导学习者经历类比、发散、收敛与反思等高阶认知活动，从而在生成创意、形成方案、落地实现的全过程中，同时培育创造性思维与批判性思维。报告将结合创造力支持工具（Creativity Support Tools）与类比设计方法（Design-by-Analogy），介绍相关理论研究与应用，讨论如何将AI从“给出答案的生成器”转变为“可对话的协作者”，并探索其在创意教育中的实践路径与应用前景，为推动AI赋能教育提供理论支撑与工具参考。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 41
+    },
+    {
+      "id": "huang-ruizhao",
+      "name": "黄睿钊",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "香港科技大学",
+      "department": "ISOM",
+      "bio": "Ruizhao Huang is a PhD candidate at The Hong Kong University of Science and Technology (HKUST), supervised by Professors Yingying Li and Xinghua Zheng. His research interests include large portfolio optimization, high-frequency data, empirical asset pricing, and statistical machine learning.",
+      "talkTitle": "Incorporating Return Prediction in High-Dimensional Mean-Variance Portfolio Optimization",
+      "abstract": "We develop a framework that incorporates return prediction to achieve unconditional mean-variance efficiency in high dimensions. Our method, termed MAXSER-PR, builds upon the seminal “MAXSER” estimator of Ao, Li, and Zheng (2019) by integrating conditional information into the optimization, thereby providing a tractable bridge between conditional return prediction and unconditional mean-variance efficiency. Under an elliptical model for the unpredictable return component that allows for heteroskedasticity, heavy-tailedness and serial dependence, and an elastic net regularity condition, our method asymptotically attains unconditional mean-variance efficiency. We demonstrate that our method delivers superior performance through comprehensive empirical studies across multiple prediction models and high-dimensional settings.",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 42
+    },
+    {
+      "id": "huang-pei",
+      "name": "黄沛",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "华栖云",
+      "department": "教育业务部",
+      "bio": "黄沛简介\n\n黄沛，成都华栖云科技有限公司副总裁、华栖云教育研究院院长，国内资深教育技术与职业教育领域专家，商务部、人社部、全国妇联创业导师。毕业于北京理工大学，参与“国培计划”等多项国家级重点教育项目，创立“美蕙学院”及“家护在线”互联网学习平台，主持多本部级职业教育教材和智慧课程开发，参与包括复旦大学、浙江大学、北京理工大学等众多高校校级智慧平台建设，专注将前沿技术转化为教学场景落地，其成果覆盖学历教育与非学历教育全赛道。",
+      "talkTitle": "面向高等教育的AGI落地：未来学习中心建设的实践与思考",
+      "abstract": "基于国内各类层次高校落地实践经验，聚焦未来学习中心核心场景，系统探究AGI技术在高校教学赋能、师生交互、教学评价督导、智慧终端应用中的落地路径。结合高校样板间打造、产品迭代优化与场景规模化复制的实战案例，剖析AI教育产品在高等教育场景中的适配逻辑、算力管控方案与落地难点，总结AGI赋能高等教育的有效范式。同时辩证思考人工智能教育应用的边界与价值，平衡技术创新与教育本质，为新时代高校AI教育生态建设、未来学习中心标准化落地与全域推广提供可落地、可复制的实践参考与行业新思路。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 43
     }
   ]
 } as const satisfies {
