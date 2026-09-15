@@ -14,6 +14,7 @@ import { goalHistoryEvents } from '../src/data/goal-history.ts';
 import { partnerLogoByName } from '../src/data/partner-logo-assets-2026.ts';
 import { currentEditionPageCopy } from '../src/config/edition-status.ts';
 import { site } from '../src/config/site.ts';
+import { sessionPosters } from '../src/data/session-posters.ts';
 
 const projectRoot = path.resolve('.');
 const outputRoot = path.resolve('dist');
@@ -551,6 +552,12 @@ await validatePublicCopies(
   personPortraitFiles,
 );
 
+const posterFiles = sessionPosters.flatMap((poster) => [
+  path.basename(poster.posterSrc),
+  path.basename(poster.previewSrc),
+]);
+await validatePublicCopies('2026 session posters', path.resolve('public/2026/session-posters'), posterFiles);
+
 const public2026Root = path.resolve('public/2026');
 validateExactSet(
   '2026 public asset tree',
@@ -560,6 +567,7 @@ validateExactSet(
     'legal/beian-icon.png',
     ...selectedLogoFiles.map((file) => `logos/${file}`),
     ...personPortraitFiles.map((file) => `people/${file}`),
+    ...posterFiles.map((file) => `session-posters/${file}`),
   ],
 );
 
@@ -670,13 +678,31 @@ if (rootIndex.includes('redirect-page')) {
 }
 for (const marker of [
   'data-hero-pixel-field',
-  'data-goal-home-contract="history-first"',
+  'data-goal-home-contract="sessions-history-partners"',
   'edition-goal-home--with-lower',
   'id="goal-history"',
   'id="goal-organization"',
+  'id="goal-session-posters"',
   'class="goal-partners__legal"',
 ]) {
   if (!rootIndex.includes(marker)) fail(`index.html: missing published homepage marker "${marker}"`);
+}
+const posterStart = rootIndex.indexOf('id="goal-session-posters"');
+if (posterStart < 0 || posterStart >= historyStart) fail('index.html: session posters must precede conference history');
+const posterFragment = rootIndex.slice(posterStart, historyStart);
+for (const poster of sessionPosters) {
+  for (const value of [poster.previewSrc, poster.posterSrc, poster.title.replaceAll('&', '&amp;')]) {
+    if (!posterFragment.includes(value)) fail(`index.html: missing ${poster.id} gallery content: ${value}`);
+  }
+}
+const posterImages = [...posterFragment.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+if (posterImages.filter((image) => image.includes('-preview.webp')).length !== sessionPosters.length) {
+  fail('index.html: every session must have exactly one preview image');
+}
+for (const image of posterImages.filter((image) => image.includes('-preview.webp'))) {
+  if (!image.includes('loading="lazy"') || !image.includes('decoding="async"')) {
+    fail('index.html: session poster previews must load lazily with async decoding');
+  }
 }
 if (!rootIndex.includes('property="og:image"') || !rootIndex.includes('/2026/brand/share-2026.png')) {
   fail('index.html: homepage must publish the 2026 share image');

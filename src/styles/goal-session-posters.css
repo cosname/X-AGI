@@ -1,0 +1,423 @@
+.goal-session-posters {
+  --poster-ink: #32275f;
+  --poster-muted: #6d657d;
+  --poster-line: rgb(50 39 95 / 0.18);
+  --poster-edge: max(1.5rem, calc((100vw - var(--journey-content, 78rem)) / 2));
+  --poster-card-width: clamp(18rem, 25vw, 22rem);
+  padding: clamp(4.5rem, 8vw, 7.5rem) 0 0;
+  color: var(--poster-ink);
+  scroll-margin-top: calc(var(--site-header-height, 5rem) + 1rem);
+}
+
+.goal-session-posters [hidden] {
+  display: none !important;
+}
+
+.goal-session-posters__heading,
+.goal-session-posters__toolbar,
+.goal-session-posters__browse {
+  display: flex;
+  width: min(var(--journey-content, 78rem), calc(100% - 3rem));
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-inline: auto;
+}
+
+.goal-session-posters__heading {
+  align-items: end;
+  margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.goal-session-posters__eyebrow {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-condensed);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+}
+
+.goal-session-posters__heading h2 {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.goal-session-posters__schedule-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.8rem;
+  color: inherit;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.goal-session-posters__schedule-link:hover,
+.goal-session-posters__dialog-schedule:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.goal-session-posters__toolbar {
+  min-height: 3.5rem;
+  margin-bottom: 1.5rem;
+  border-block: 1px solid var(--poster-line);
+}
+
+.goal-session-posters__filters {
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
+  gap: clamp(0.6rem, 2vw, 1.75rem);
+}
+
+.goal-session-posters__filters button {
+  min-height: 2.75rem;
+  padding: 0.3rem 0.25rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--poster-muted);
+  background: transparent;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.goal-session-posters__filters button[aria-pressed="true"] {
+  border-bottom-color: var(--poster-ink);
+  color: var(--poster-ink);
+  font-weight: 700;
+}
+
+.goal-session-posters__count {
+  flex-shrink: 0;
+  margin: 0;
+  color: var(--poster-muted);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.goal-session-posters__viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: var(--poster-edge);
+  scroll-snap-type: inline proximity;
+  scrollbar-color: rgb(50 39 95 / 0.35) transparent;
+  scrollbar-width: thin;
+}
+
+.goal-session-posters__viewport:focus-visible {
+  outline: 2px solid var(--poster-ink);
+  outline-offset: -2px;
+}
+
+.goal-session-posters__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--poster-card-width);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  width: max-content;
+  margin: 0;
+  padding: 0.35rem var(--poster-edge) 1.3rem;
+  list-style: none;
+}
+
+.goal-session-posters__card {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.goal-session-posters__meta {
+  display: flex;
+  min-height: 1.6rem;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+  color: var(--poster-muted);
+  font-size: 0.74rem;
+}
+
+.goal-session-posters__number {
+  color: var(--poster-ink);
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.goal-session-posters__poster-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.goal-session-posters__poster-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--poster-line);
+  background: #f5efe7;
+  object-fit: contain;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.goal-session-posters__poster-link:hover img {
+  border-color: rgb(50 39 95 / 0.5);
+  box-shadow: 0 4px 15px rgb(50 39 95 / 0.08);
+}
+
+.goal-session-posters__poster-action {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  color: var(--poster-muted);
+  font-size: 0.73rem;
+}
+
+.goal-session-posters__card h3 {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(1rem, 1.3vw, 1.16rem);
+  font-weight: 650;
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.goal-session-posters__browse {
+  min-height: 3.75rem;
+  margin-top: 0.45rem;
+}
+
+.goal-session-posters__browse p {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  color: var(--poster-muted);
+  font-size: 0.76rem;
+}
+
+.goal-session-posters__arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.goal-session-posters__arrows button,
+.goal-session-posters__close {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--poster-line);
+  border-radius: 0;
+  color: var(--poster-ink);
+  background: transparent;
+  font: inherit;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.goal-session-posters__arrows button:hover:not(:disabled),
+.goal-session-posters__close:hover {
+  background: rgb(50 39 95 / 0.06);
+}
+
+.goal-session-posters__arrows button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+html.session-poster-dialog-open {
+  overflow: hidden;
+}
+
+.goal-session-posters__dialog {
+  width: min(54rem, calc(100% - 2rem));
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 1px solid var(--poster-line);
+  color: var(--poster-ink);
+  background: #f5efe7;
+  box-shadow: 0 20px 90px rgb(18 20 63 / 0.2);
+  overscroll-behavior: contain;
+}
+
+.goal-session-posters__dialog[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.goal-session-posters__dialog::backdrop {
+  background: rgb(18 20 40 / 0.65);
+}
+
+.goal-session-posters__dialog-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--poster-line);
+}
+
+.goal-session-posters__dialog-heading p {
+  margin: 0 0 0.3rem;
+  color: var(--poster-muted);
+  font-size: 0.74rem;
+}
+
+.goal-session-posters__dialog-heading h2 {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.goal-session-posters__dialog-heading form {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.goal-session-posters__close {
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.goal-session-posters__dialog-image {
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 1rem;
+  background: rgb(50 39 95 / 0.04);
+}
+
+.goal-session-posters__dialog-image img {
+  display: block;
+  width: min(100%, 42rem);
+  height: auto;
+  margin-inline: auto;
+  background: #f5efe7;
+}
+
+.goal-session-posters__dialog[data-zoomed] .goal-session-posters__dialog-image img {
+  width: 1080px;
+  max-width: none;
+  margin-inline: 0;
+}
+
+.goal-session-posters__dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--poster-line);
+}
+
+.goal-session-posters__dialog-actions a,
+.goal-session-posters__dialog-actions button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: inherit;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.goal-session-posters__dialog-actions button {
+  padding: 0.25rem;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.goal-session-posters__dialog-actions .goal-session-posters__download {
+  padding: 0.5rem 0.9rem;
+  color: #fffaf4;
+  background: var(--poster-ink);
+}
+
+.goal-session-posters__download span {
+  font-family: var(--font-condensed);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+}
+
+@media (max-width: 48rem) {
+  .goal-session-posters {
+    --poster-edge: 1rem;
+    --poster-card-width: min(78vw, 22rem);
+  }
+
+  .goal-session-posters__heading,
+  .goal-session-posters__toolbar,
+  .goal-session-posters__browse {
+    width: calc(100% - 2rem);
+  }
+
+  .goal-session-posters__toolbar {
+    gap: 0.6rem;
+  }
+
+  .goal-session-posters__filters button {
+    font-size: 0.78rem;
+  }
+
+  .goal-session-posters__count {
+    font-size: 0.72rem;
+  }
+
+  .goal-session-posters__dialog {
+    width: calc(100% - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .goal-session-posters__dialog-heading,
+  .goal-session-posters__dialog-actions {
+    padding-inline: 0.85rem;
+  }
+
+  .goal-session-posters__download span {
+    display: none;
+  }
+
+  .goal-session-posters__dialog-image {
+    padding: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .goal-session-posters__poster-link img {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .goal-session-posters__poster-link img,
+  .goal-session-posters__arrows button,
+  .goal-session-posters__close,
+  .goal-session-posters__dialog {
+    border-color: CanvasText;
+  }
+
+  .goal-session-posters__filters button[aria-pressed="true"] {
+    border-bottom-color: ButtonText;
+  }
+}

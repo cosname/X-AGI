@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "createdDate": "2026-09-16",
+  "source": "native image_gen",
+  "generationStrategy": "One independent text-free image per session; separate native image_gen calls.",
+  "requestedDimensions": {
+    "width": 1080,
+    "height": 1440
+  },
+  "actualSourceDimensions": {
+    "width": 1086,
+    "height": 1448
+  },
+  "entries": [
+    {
+      "sessionId": "session-01",
+      "theme": "Keynote",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: one standalone background image for a session poster, portrait 3:4, target 1080x1440 pixels.\nPrimary request: Create a refined X-AGI mathematics and artificial intelligence academic conference poster BACKGROUND ONLY. Session theme: keynote, expressed by a small abstract branching neural network and delicate orbital arcs.\nScene/backdrop: warm ivory paper #f5efe7 fills the full canvas.\nStyle/medium: precise editorial design, fine engraved linework, restrained dot patterns, subtle tactile paper grain, quietly intellectual and elegant.\nComposition/framing: At least 80% of the entire canvas must remain bright clean nearly unmarked ivory negative space for later typography and real speaker headshots. Keep the full left side and broad central area empty. Confine the tiny abstract thematic drawing to the upper-right corner and very bottom edge, with generous inset margin. Very sparse and airy.\nColor palette: warm ivory #f5efe7, deep indigo-purple #32275f, pale lavender #aa97d9. Small lavender and indigo accents only.\nText: NONE.\nConstraints: Exactly one image, not a montage, no layout panels, no border frame. No text, no lettering, no words, no numbers, no formulas, no logos, no watermark, no QR code, no portrait, no people. Do not draw dummy placeholder boxes. Avoid clutter, strong gradients, glossy 3D, dense dark areas, decorative content crossing the main blank area. This is an empty functional background for deterministic typesetting later.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-01-background.png",
+      "sha256": "a5280eb08fe041ed0f89d5cd2b80853873c12a1327097911e591d5b319e286ac",
+      "bytes": 1373756,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-02",
+      "theme": "AI4Math & Theory",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: one standalone background image for a session poster, portrait 3:4, target 1080x1440 pixels.\nPrimary request: Create a refined X-AGI mathematics and artificial intelligence academic conference poster BACKGROUND ONLY. Session theme: AI for mathematics and theory, expressed by a small elegant geometric curved surface and a precise proof-like perspective grid, absolutely WITHOUT equations or symbols.\nScene/backdrop: warm ivory paper #f5efe7 fills the full canvas.\nStyle/medium: precise editorial design, extremely thin engraved linework, restrained dot patterns, subtle tactile paper grain, quietly intellectual and elegant.\nComposition/framing: At least 80% of the entire canvas must remain bright clean nearly unmarked ivory negative space for later typography and real speaker headshots. Keep the full left side and broad central area empty. Confine the small abstract curved-grid thematic drawing to the upper-right corner and very bottom edge, with generous inset margin. Very sparse and airy, the surface should be a light wireframe only.\nColor palette: warm ivory #f5efe7, deep indigo-purple #32275f, pale lavender #aa97d9. Small lavender and indigo accents only.\nText: NONE.\nConstraints: Exactly one image, not a montage, no layout panels, no border frame. No text, no lettering, no words, no numbers, no mathematical symbols, no formulas, no logos, no watermark, no QR code, no portrait, no people. Do not draw dummy placeholder boxes. Avoid clutter, strong gradients, glossy 3D, dense dark areas, decorative content crossing the main blank area. This is an empty functional background for deterministic typesetting later.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-02-background.png",
+      "sha256": "2882f14a6bb24a1685e1d00dcbf1a899fcc07e1a80d0828ccaab92a4a24b80b7",
+      "bytes": 1445000,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-03",
+      "theme": "LLM评测 & Benchmark",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: one standalone background image for a session poster, portrait 3:4, target 1080x1440 pixels.\nPrimary request: Create a refined X-AGI mathematics and artificial intelligence academic conference poster BACKGROUND ONLY. Session theme: language model evaluation and benchmarking, expressed through tiny orderly arrays of dots and precise sparse calibration tick marks without any numbers or letters.\nScene/backdrop: warm ivory paper #f5efe7 fills the full canvas.\nStyle/medium: precise editorial design, extremely fine engraved linework, restrained dot arrays, subtle tactile paper grain, quietly intellectual and elegant.\nComposition/framing: At least 80% of the entire canvas must remain bright clean nearly unmarked ivory negative space for later typography and real speaker headshots. Keep the full left side and broad central area empty. Confine small organized dot arrays and simple calibration markings to the upper-right corner and very bottom edge. Very sparse and airy. No axes or marks running through the open center.\nColor palette: warm ivory #f5efe7, deep indigo-purple #32275f, pale lavender #aa97d9. Small lavender and indigo accents only.\nText: NONE.\nConstraints: Exactly one image, not a montage, no layout panels, no border frame. No text, no lettering, no words, no numbers, no mathematical symbols, no formulas, no logos, no watermark, no QR code, no portrait, no people. Do not draw dummy placeholder boxes. Avoid clutter, strong gradients, glossy 3D, dense dark areas, decorative content crossing the main blank area. This is an empty functional background for deterministic typesetting later.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-03-background.png",
+      "sha256": "8cc9cf4f73b8e17791a3649ea5e4ceb149e918592a18bb2703364b6616aba59e",
+      "bytes": 1429855,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-04",
+      "theme": "预训练算法",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: one standalone background image for a session poster, portrait 3:4, target 1080x1440 pixels.\nPrimary request: Create a refined X-AGI mathematics and artificial intelligence academic conference poster BACKGROUND ONLY. Session theme: pretraining algorithms, expressed by a very restrained abstract loss landscape of soft nested topographic contour lines, thin and precise, suggesting graceful optimization.\nScene/backdrop: warm ivory paper #f5efe7 fills the full canvas.\nStyle/medium: precise editorial design, extremely thin engraved contour lines, restrained tiny dots, subtle tactile paper grain, quietly intellectual and elegant.\nComposition/framing: At least 80% of the entire canvas must remain bright clean nearly unmarked ivory negative space for later typography and real speaker headshots. Keep the full left side and broad central area empty. Confine small groups of nested curved contour lines to the upper-right corner and very bottom edge. Very sparse and airy. No landscape lines or axes running through the open center.\nColor palette: warm ivory #f5efe7, deep indigo-purple #32275f, pale lavender #aa97d9. Small lavender and indigo accents only.\nText: NONE.\nConstraints: Exactly one image, not a montage, no layout panels, no border frame. No text, no lettering, no words, no numbers, no mathematical symbols, no formulas, no logos, no watermark, no QR code, no portrait, no people. Do not draw dummy placeholder boxes. Avoid clutter, strong gradients, glossy 3D, dense dark areas, decorative content crossing the main blank area. This is an empty functional background for deterministic typesetting later.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-04-background.png",
+      "sha256": "176df02c2fa14b5d12fc7b1e4d82e5abf09f53fe3a5464a1bb518221a9fb971b",
+      "bytes": 1512027,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-05",
+      "theme": "AI Infra",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: one standalone background image for a session poster, portrait 3:4, target 1080x1440 pixels.\nPrimary request: Create a refined X-AGI mathematics and artificial intelligence academic conference poster BACKGROUND ONLY. Session theme: AI infrastructure, expressed through a small precise geometric modular computing lattice, a few connected isometric cuboid outlines and tiny circuit-like nodes. Elegant mathematical geometry rather than industrial hardware.\nScene/backdrop: warm ivory paper #f5efe7 fills the full canvas.\nStyle/medium: precise editorial design, extremely fine engraved geometric linework, restrained tiny dot nodes, subtle tactile paper grain, quietly intellectual and elegant.\nComposition/framing: At least 80% of the entire canvas must remain bright clean nearly unmarked ivory negative space for later typography and real speaker headshots. Keep the full left side and broad central area empty. Confine a small lightweight cluster of modular lattice outlines to the upper-right corner and a sparse low connected lattice at the very bottom edge. Very sparse and airy, only outlines and tiny pale fills.\nColor palette: warm ivory #f5efe7, deep indigo-purple #32275f, pale lavender #aa97d9. Small lavender and indigo accents only.\nText: NONE.\nConstraints: Exactly one image, not a montage, no layout panels, no border frame. No text, no lettering, no words, no numbers, no mathematical symbols, no formulas, no logos, no watermark, no QR code, no portrait, no people. Do not draw dummy placeholder boxes. Avoid clutter, strong gradients, glossy 3D, dense dark areas, decorative content crossing the main blank area. This is an empty functional background for deterministic typesetting later.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-05-background.png",
+      "sha256": "f0526a90808e850990298c6e011e516095d0ceee2cd37261f0e71dc1bbd6b755",
+      "bytes": 1440324,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-06",
+      "theme": "AI + Finance",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing.\nAsset type: original artwork only, a blank poster background for a mathematics and AI academic conference.\nCreate one standalone portrait 3:4 image, ideally 1080 x 1440 pixels.\nStyle: restrained precision editorial design, subtle fine paper grain, elegant mathematical conference visual language.\nPalette: warm ivory paper #f5efe7 covering almost the entire image, deep indigo-violet #32275f and pale lilac #aa97d9 used sparingly for decorative line engraving and halftone dot work.\nComposition: 80 percent of the page must remain bright, clean and spacious for accurate typography and speaker portrait cards added later by another system. Keep the whole left side and center genuinely blank. Place small restrained theme motifs only along the upper-right corner and a thin lower edge, mainly lower-right. Very fine linework, airy margin, balanced printlike flatness.\nAbsolutely no text, letters, digits, logos, symbols resembling writing, labels, glyphs, human faces, people, frames for text, watermark, collage, panels or montage. No large gradients, dark-filled areas, busy imagery, ornate borders, shadows or photographic scenes.\nTheme: smooth stochastic trajectories and statistical density curves, mathematical probability motifs confined to the right corner and bottom edge. No money symbols or currency marks.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-06-background.png",
+      "sha256": "b1646d7230526bfcabdf0f95cf8097250742c431861317774cedd1cd56aee61a",
+      "bytes": 1712131,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-07",
+      "theme": "扩散模型",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing.\nAsset type: original artwork only, a blank poster background for a mathematics and AI academic conference.\nCreate one standalone portrait 3:4 image, ideally 1080 x 1440 pixels.\nStyle: restrained precision editorial design, subtle fine paper grain, elegant mathematical conference visual language.\nPalette: warm ivory paper #f5efe7 covering almost the entire image, deep indigo-violet #32275f and pale lilac #aa97d9 used sparingly for decorative line engraving and halftone dot work.\nComposition: 80 percent of the page must remain bright, clean and spacious for accurate typography and speaker portrait cards added later by another system. Keep the whole left side and center genuinely blank. Place small restrained theme motifs only along the upper-right corner and a thin lower edge, mainly lower-right. Very fine linework, airy margin, balanced printlike flatness.\nAbsolutely no text, letters, digits, logos, symbols resembling writing, labels, glyphs, human faces, people, frames for text, watermark, collage, panels or montage. No large gradients, dark-filled areas, busy imagery, ornate borders, shadows or photographic scenes.\nTheme: a fine point cloud flowing from sparse disorder to an ordered structure, restrained diffusion streams and tiny particles confined to the upper-right corner and bottom edge.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-07-background.png",
+      "sha256": "89259de45d1381215b8260a0cad5a9afdfc858d65e3920f3e73ff9c013f63b5f",
+      "bytes": 1700942,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-08",
+      "theme": "AI + 教育",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing.\nAsset type: original artwork only, a blank poster background for a mathematics and AI academic conference.\nCreate one standalone portrait 3:4 image, ideally 1080 x 1440 pixels.\nStyle: restrained precision editorial design, subtle fine paper grain, elegant mathematical conference visual language.\nPalette: warm ivory paper #f5efe7 covering almost the entire image, deep indigo-violet #32275f and pale lilac #aa97d9 used sparingly for decorative line engraving and halftone dot work.\nComposition: 80 percent of the page must remain bright, clean and spacious for accurate typography and speaker portrait cards added later by another system. Keep the whole left side and center genuinely blank. Place small restrained theme motifs only along the upper-right corner and a thin lower edge, mainly lower-right. Very fine linework, airy margin, balanced printlike flatness.\nAbsolutely no text, letters, digits, logos, symbols resembling writing, labels, glyphs, human faces, people, frames for text, watermark, collage, panels or montage. No large gradients, dark-filled areas, busy imagery, ornate borders, shadows or photographic scenes.\nTheme: layered unfolding branches of knowledge as a delicate geometric network, tiered branching paths and small nodes confined to the upper-right corner and bottom edge. No books, letters or school icons.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-08-background.png",
+      "sha256": "8fee6ee034d9a2bb0212a213d69257e1ac76990084b75ab3a31a0af6f2a3dbf0",
+      "bytes": 1680064,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-09",
+      "theme": "AI4Science",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing.\nAsset type: original artwork only, a blank poster background for a mathematics and AI academic conference.\nCreate one standalone portrait 3:4 image, ideally 1080 x 1440 pixels.\nStyle: restrained precision editorial design, subtle fine paper grain, elegant mathematical conference visual language.\nPalette: warm ivory paper #f5efe7 covering almost the entire image, deep indigo-violet #32275f and pale lilac #aa97d9 used sparingly for decorative line engraving and halftone dot work.\nComposition: 80 percent of the page must remain bright, clean and spacious for accurate typography and speaker portrait cards added later by another system. Keep the whole left side and center genuinely blank. Place small restrained theme motifs only along the upper-right corner and a thin lower edge, mainly lower-right. Very fine linework, airy margin, balanced printlike flatness.\nAbsolutely no text, letters, digits, logos, symbols resembling writing, labels, glyphs, human faces, people, frames for text, watermark, collage, panels or montage. No large gradients, dark-filled areas, busy imagery, ornate borders, shadows or photographic scenes.\nTheme: organic microscopic structures merging with precise scientific grids, understated cellular mesh and fine measured geometry confined to the upper-right corner and bottom edge. No labeling.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-09-background.png",
+      "sha256": "5fd8d4c7308f79ac5b8ce8be40092f3e1aec2421554eddd772b59e41b5d465f3",
+      "bytes": 1887227,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-10",
+      "theme": "机器学习理论",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing.\nAsset type: original artwork only, a blank poster background for a mathematics and AI academic conference.\nCreate one standalone portrait 3:4 image, ideally 1080 x 1440 pixels.\nStyle: restrained precision editorial design, subtle fine paper grain, elegant mathematical conference visual language.\nPalette: warm ivory paper #f5efe7 covering almost the entire image, deep indigo-violet #32275f and pale lilac #aa97d9 used sparingly for decorative line engraving and halftone dot work.\nComposition: 80 percent of the page must remain bright, clean and spacious for accurate typography and speaker portrait cards added later by another system. Keep the whole left side and center genuinely blank. Place small restrained theme motifs only along the upper-right corner and a thin lower edge, mainly lower-right. Very fine linework, airy margin, balanced printlike flatness.\nAbsolutely no text, letters, digits, logos, symbols resembling writing, labels, glyphs, human faces, people, frames for text, watermark, collage, panels or montage. No large gradients, dark-filled areas, busy imagery, ornate borders, shadows or photographic scenes.\nTheme: geometric separating surfaces and sparse data points, delicate decision-boundary contours and fine abstract curved planes confined to the upper-right corner and bottom edge. No labels or axes text.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-10-background.png",
+      "sha256": "fb6350be7e2183d4158d8433707c4bcbea454a874d850ac3960bc27103ef87a4",
+      "bytes": 1730082,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-11",
+      "theme": "Physics of Deep Learning",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: a single text-free portrait conference poster background for a scientific meeting, ready for separate deterministic layout of title and speaker information.\nPrimary request: Create ONE independent portrait 3:4 image, ideally 1080 by 1440 pixels. Warm ivory paper background #f5efe7, dark indigo #32275f, pale lavender #aa97d9. Refined precise editorial design with the quiet atmosphere of a mathematics conference.\nSubject: Physics of deep learning expressed only as delicate overlapping interference waves and phase-space trajectories, subtle dots and engraved fine lines. Theme graphics occupy only restrained areas of the upper-right corner and bottom edge. Sparse, elegant, carefully composed scientific abstraction.\nComposition: About 80 percent of the entire canvas must remain bright, extremely clean and essentially blank. Keep all of the left side and broad central region completely usable for later text and speaker portraits. Artwork may sit along the far right upper corner and very bottom border only, never in the main content region. No boxes, no frames.\nMaterials: subtle fine-grain uncoated ivory paper, gentle ink texture, crisp thin indigo linework with tiny lavender accents. Flat elegant print treatment, no strong gradient, no dark background.\nABSOLUTE CONSTRAINTS: no text whatsoever; no letters, numbers, equations, typographic glyphs, labels, logo, watermark, people, faces or portraits. Do not write the session subject. No collage or grid of posters. Deliver exactly one clean background image.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-11-background.png",
+      "sha256": "34ce845237cb82b79d13207b41005507f6be242f42a4819ca1f53504058cd8aa",
+      "bytes": 1867129,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-12",
+      "theme": "语言模型基础",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: a single text-free portrait conference poster background for a scientific meeting, ready for separate deterministic layout of title and speaker information.\nPrimary request: Create ONE independent portrait 3:4 image, ideally 1080 by 1440 pixels. Warm ivory paper background #f5efe7, dark indigo #32275f, pale lavender #aa97d9. Refined precise editorial design with the quiet atmosphere of a mathematics conference.\nSubject: Foundations of language models represented abstractly by very small geometric units in rhythmic sequences that interconnect with fine curved lines. Every unit is a simple tiny dot, square, ring or geometric tile, never any kind of written character. The sequences suggest mathematical structure and pattern without depicting language, keyboards or writing.\nComposition: Theme graphics occupy only restrained areas of the upper-right corner and bottom edge, about 20 percent of the canvas at most. About 80 percent must remain bright, extremely clean and essentially blank. Keep all of the left side and broad central region completely usable for later text and speaker portraits. Artwork may sit along the far right upper corner and very bottom border only, never in the main content region. No boxes, no frames.\nMaterials: subtle fine-grain uncoated ivory paper, gentle ink texture, crisp thin indigo linework with tiny lavender accents. Flat elegant print treatment, no strong gradient, no dark background.\nABSOLUTE CONSTRAINTS: no text whatsoever; no letters, numbers, equations, typographic glyphs, labels, logo, watermark, people, faces or portraits. Do not write the session subject. No collage or grid of posters. Deliver exactly one clean background image.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-12-background.png",
+      "sha256": "02340600fb2950ab6926ecffee1e7840c2d0997dd241c86ac5ba2ca971a2c5a2",
+      "bytes": 1376754,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-13",
+      "theme": "AI的数理和计算基础",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: a single text-free portrait conference poster background for a scientific meeting, ready for separate deterministic layout of title and speaker information.\nPrimary request: Create ONE independent portrait 3:4 image, ideally 1080 by 1440 pixels. Warm ivory paper background #f5efe7, dark indigo #32275f, pale lavender #aa97d9. Refined precise editorial design with the quiet atmosphere of a mathematics conference.\nSubject: Mathematical and computational foundations of AI expressed only through interwoven topological meshes and geometric computation structures. Delicate sparse wireframe ribbons with crossing contour lines and a few fine geometric facets, suggesting continuous geometry and discrete mathematical structures. Restrained fine-line engraving and tiny point constellations.\nComposition: Theme graphics occupy only restrained areas of the upper-right corner and bottom edge, about 20 percent of the canvas at most. About 80 percent must remain bright, extremely clean and essentially blank. Keep all of the left side and broad central region completely usable for later text and speaker portraits. Artwork may sit along the far right upper corner and very bottom border only, never in the main content region. No boxes, no frames.\nMaterials: subtle fine-grain uncoated ivory paper, gentle ink texture, crisp thin indigo linework with tiny lavender accents. Flat elegant print treatment, no strong gradient, no dark background.\nABSOLUTE CONSTRAINTS: no text whatsoever; no letters, numbers, equations, typographic glyphs, labels, logo, watermark, people, faces or portraits. Do not write the session subject. No collage or grid of posters. Deliver exactly one clean background image.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-13-background.png",
+      "sha256": "942929b05092fbd2c4db1c5a9f4afa93016e135c141430405dffa56491998490",
+      "bytes": 1927068,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    },
+    {
+      "sessionId": "session-14",
+      "theme": "Agent技术及应用",
+      "source": "native image_gen",
+      "prompt": "Use case: ads-marketing\nAsset type: a single text-free portrait conference poster background for a scientific meeting, ready for separate deterministic layout of title and speaker information.\nPrimary request: Create ONE independent portrait 3:4 image, ideally 1080 by 1440 pixels. Warm ivory paper background #f5efe7, dark indigo #32275f, pale lavender #aa97d9. Refined precise editorial design with the quiet atmosphere of a mathematics conference.\nSubject: Agent technology and applications represented only as a sparse elegant decision network of tiny circular nodes and clean trajectory paths. A small number of clear branching trajectories, with intermittent geometric nodes and fine curved paths, suggest decisions and movement. No arrows or directional labels. Keep the diagram abstract and restrained rather than busy.\nComposition: Theme graphics occupy only restrained areas of the upper-right corner and bottom edge, about 20 percent of the canvas at most. About 80 percent must remain bright, extremely clean and essentially blank. Keep all of the left side and broad central region completely usable for later text and speaker portraits. Artwork may sit along the far right upper corner and very bottom border only, never in the main content region. No boxes, no frames.\nMaterials: subtle fine-grain uncoated ivory paper, gentle ink texture, crisp thin indigo linework with tiny lavender accents. Flat elegant print treatment, no strong gradient, no dark background.\nABSOLUTE CONSTRAINTS: no text whatsoever; no letters, numbers, equations, arrows, typographic glyphs, labels, logo, watermark, people, faces or portraits. Do not write the session subject. No collage or grid of posters. Deliver exactly one clean background image.",
+      "retainedArchive": "assets/source-archive/2026/session-posters/session-14-background.png",
+      "sha256": "aa245ce2212fc3d7ecda7cabfe420912eb44bba513f23ff33c3d0cee8ad0043a",
+      "bytes": 1560911,
+      "width": 1086,
+      "height": 1448,
+      "format": "png",
+      "generationAttempts": 1,
+      "originalBytesPreserved": true,
+      "visualInspection": {
+        "noText": true,
+        "noPeopleOrPortraits": true,
+        "usableCentralAndLeftWhitespace": true
+      }
+    }
+  ]
+}

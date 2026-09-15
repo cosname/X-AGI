@@ -3,8 +3,8 @@
 This directory is the canonical non-published archive for supplied 2026 source material.
 It preserves editable masters, high-resolution originals, alternate exports, historical candidates, and QA evidence that must not live only on a desktop or in a temporary directory.
 
-The archive contains 97 recorded source entries representing 96 unique payloads.
-Ninety-five payloads are stored here under semantic names.
+The archive contains 125 recorded source entries representing 124 unique payloads.
+One hundred and twenty-three payloads are stored here under semantic names.
 One supplied SVG was already byte-identical to `assets/brand-kit/2026/wordmark.svg`, so the manifest points to that existing canonical file instead of storing another copy.
 The supplied `1.png` and `thu.png` files were also byte-identical, so both provenance entries point to one canonical Tsinghua source file.
 
@@ -16,6 +16,7 @@ The supplied `1.png` and `thu.png` files were also byte-identical, so both prove
 - `fonts/` contains the unmodified LXGW WenKai Medium v1.522 font used to generate the homepage title subset.
 - `history/` contains high-resolution or otherwise unselected historical conference images.
 - `people/` contains 38 public portraits supplied through the 2026 attendee workbook, without registration or private contact fields.
+- `session-posters/` contains 14 original generated backgrounds and 14 PNG posters composed from the public program and speaker portraits.
 - Portrait source files retain their image pixels while embedded EXIF, XMP, IPTC, GPS, camera identifiers, and creator contact metadata are removed before repository storage.
 - `venue/` contains the original high-resolution hotel and floor-plan files.
 - `qa/` contains annotated review evidence that explains design decisions.
@@ -27,6 +28,7 @@ The filename grammar is `<subject>-<role>[-<variant>][-<meaningful-sequence>].<e
 Pure numbers, whitespace, underscores, parentheses, Chinese filenames, and ambiguous tokens such as `backup`, `copy`, `draft`, `final`, `tmp`, and `untitled` are prohibited.
 Bare generic stems such as `logo`, `image`, `photo`, `mobile`, and `banner` are also prohibited because they identify a file category without identifying its subject.
 Meaningful sequence numbers must be placed at the end and zero-padded.
+Session poster families use the existing `session-NN` program identifier before the asset role to keep their backgrounds, PNG masters and runtime exports grouped together.
 Original supplied names are retained only inside `manifest.json` as migration provenance.
 
 ## Integrity
