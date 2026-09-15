@@ -68,6 +68,19 @@
   transition: color 170ms ease, filter 220ms ease;
 }
 
+.goal-session-posters__speakers {
+  margin: 0.5rem 0 0;
+  color: var(--poster-ink);
+  font-size: 0.8rem;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.goal-session-posters__speakers span {
+  margin-right: 0.5rem;
+  color: var(--poster-muted);
+}
+
 .goal-session-posters__schedule-link:hover,
 .goal-session-posters__dialog-schedule:hover {
   color: var(--blue-deep, #2f3199);

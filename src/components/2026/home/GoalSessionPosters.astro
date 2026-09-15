@@ -24,11 +24,12 @@ const posterAlt = (poster: (typeof sessionPosters)[number]) => [
   id="goal-session-posters"
   aria-labelledby="session-posters-title"
   data-session-poster-gallery
+  data-home-speakers
 >
   <header class="goal-session-posters__heading">
     <div>
-      <p class="goal-session-posters__eyebrow">X-AGI 2026</p>
-      <h2 id="session-posters-title">专题海报</h2>
+      <p class="goal-session-posters__eyebrow">SPEAKERS</p>
+      <h2 id="session-posters-title">演讲嘉宾</h2>
     </div>
     <a class="goal-session-posters__schedule-link" href="/schedule/">
       完整日程 <span aria-hidden="true">↗</span>
@@ -63,7 +64,7 @@ const posterAlt = (poster: (typeof sessionPosters)[number]) => [
     class="goal-session-posters__viewport"
     id="session-posters-viewport"
     role="region"
-    aria-label="专题海报列表"
+    aria-label="按专题浏览演讲嘉宾"
     aria-describedby="session-posters-browse-hint"
     tabindex="0"
     data-poster-viewport
@@ -97,6 +98,9 @@ const posterAlt = (poster: (typeof sessionPosters)[number]) => [
             </span>
           </a>
           <h3>{poster.title}</h3>
+          <p class="goal-session-posters__speakers">
+            <span>嘉宾</span> {poster.speakers.map((speaker) => speaker.name).join(' · ')}
+          </p>
         </li>
       ))}
     </ol>
