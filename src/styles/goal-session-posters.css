@@ -53,14 +53,8 @@
   min-height: 2.75rem;
   align-items: center;
   gap: 0.65rem;
-  padding: 0.6rem 1rem;
-  border: 1px solid var(--glass-lens-rim, rgb(93 70 202 / 0.4));
-  border-radius: 999px;
+  padding: 0.5rem 0;
   color: var(--poster-ink);
-  background: var(--glass-lens-fill, rgb(255 253 251 / 0.72));
-  box-shadow: var(--glass-lens-shadow, inset 0 1px 0 rgb(255 255 255 / 0.88));
-  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(14px));
-  backdrop-filter: var(--glass-lens-backdrop, blur(14px));
   font-size: 0.9rem;
   font-weight: 650;
   text-decoration: none;
@@ -97,14 +91,7 @@
   display: flex;
   min-width: 0;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.3rem;
-  border: 1px solid rgb(255 255 255 / 0.72);
-  border-radius: 999px;
-  background: var(--glass-panel-fill, rgb(255 253 250 / 0.62));
-  box-shadow: inset 0 1px 1px rgb(255 255 255 / 0.8), 0 4px 12px rgb(40 29 105 / 0.055);
-  -webkit-backdrop-filter: var(--glass-panel-backdrop, blur(18px));
-  backdrop-filter: var(--glass-panel-backdrop, blur(18px));
+  gap: 0.5rem;
 }
 
 .goal-session-posters__filters button {
@@ -173,48 +160,7 @@
 
 .goal-session-posters__card {
   min-width: 0;
-  isolation: isolate;
-  padding: 0.85rem;
-  border: 1px solid rgb(255 255 255 / 0.76);
-  border-radius: 1.15rem;
-  background: var(--glass-panel-fill, rgb(255 253 250 / 0.62));
-  box-shadow:
-    inset 0 1px 1.5px rgb(255 255 255 / 0.88),
-    inset 0 -1px 1.5px rgb(103 82 200 / 0.12),
-    0 5px 14px rgb(40 29 105 / 0.07),
-    0 0 1px rgb(93 70 202 / 0.24);
-  -webkit-backdrop-filter: var(--glass-panel-backdrop, blur(18px));
-  backdrop-filter: var(--glass-panel-backdrop, blur(18px));
   scroll-snap-align: start;
-}
-
-.goal-session-posters__meta {
-  display: flex;
-  min-height: 1.6rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-  color: var(--poster-muted);
-  font-size: 0.74rem;
-}
-
-.goal-session-posters__number {
-  display: inline-grid;
-  min-width: 2.15rem;
-  min-height: 1.9rem;
-  place-items: center;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid rgb(255 255 255 / 0.86);
-  border-radius: 999px;
-  color: var(--blue-deep, #2f3199);
-  background: var(--glass-micro-fill, rgb(255 253 251 / 0.92));
-  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.84));
-  -webkit-backdrop-filter: var(--glass-micro-backdrop, blur(10px));
-  backdrop-filter: var(--glass-micro-backdrop, blur(10px));
-  font-family: var(--font-condensed);
-  font-size: 1rem;
-  font-variant-numeric: tabular-nums;
 }
 
 .goal-session-posters__poster-link {
@@ -239,14 +185,18 @@
   box-shadow: 0 4px 15px rgb(40 29 105 / 0.08);
 }
 
-.goal-session-posters__poster-action {
+.goal-session-posters__caption {
   display: flex;
   min-height: 2.75rem;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: 0.8rem;
+  padding-top: 1rem;
+}
+
+.goal-session-posters__caption > span {
   color: var(--poster-accent);
-  font-size: 0.73rem;
+  font-size: 1rem;
 }
 
 .goal-session-posters__card h3 {
@@ -348,7 +298,6 @@ html.session-poster-dialog-open {
   gap: 1rem;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--poster-line);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.24), transparent);
 }
 
 .goal-session-posters__dialog-heading p {
@@ -380,7 +329,6 @@ html.session-poster-dialog-open {
   overflow: auto;
   overscroll-behavior: contain;
   padding: 1rem;
-  background: rgb(103 82 200 / 0.045);
 }
 
 .goal-session-posters__dialog-image img {
@@ -389,7 +337,6 @@ html.session-poster-dialog-open {
   height: auto;
   margin-inline: auto;
   background: var(--journey-paper, #f5efe7);
-  box-shadow: 0 4px 16px rgb(40 29 105 / 0.1);
 }
 
 .goal-session-posters__dialog[data-zoomed] .goal-session-posters__dialog-image img {
@@ -417,13 +364,9 @@ html.session-poster-dialog-open {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.55rem 0.9rem;
-  border: 1px solid var(--glass-lens-rim, rgb(93 70 202 / 0.4));
-  border-radius: 999px;
+  border: 0;
   color: var(--poster-ink);
-  background: var(--glass-micro-fill, rgb(255 253 251 / 0.92));
-  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.84));
-  -webkit-backdrop-filter: var(--glass-micro-backdrop, blur(10px));
-  backdrop-filter: var(--glass-micro-backdrop, blur(10px));
+  background: transparent;
   font-size: 0.85rem;
   font-weight: 650;
   text-decoration: none;
@@ -438,10 +381,6 @@ html.session-poster-dialog-open {
 
 .goal-session-posters__dialog-actions .goal-session-posters__download {
   color: var(--blue-deep, #2f3199);
-  background: var(--glass-lens-fill, rgb(255 253 251 / 0.78));
-  box-shadow: var(--glass-lens-shadow, inset 0 1px 0 rgb(255 255 255 / 0.88));
-  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(14px));
-  backdrop-filter: var(--glass-lens-backdrop, blur(14px));
 }
 
 .goal-session-posters__dialog-actions :is(a, button):hover {
@@ -451,7 +390,8 @@ html.session-poster-dialog-open {
 
 .goal-session-posters__dialog-actions button[aria-pressed="true"] {
   color: var(--blue-deep, #2f3199);
-  border-color: var(--poster-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
 }
 
 .goal-session-posters__download span {
@@ -493,10 +433,6 @@ html.session-poster-dialog-open {
     font-size: 0.72rem;
   }
 
-  .goal-session-posters__card {
-    padding: 0.7rem;
-  }
-
   .goal-session-posters__dialog {
     width: calc(100% - 1rem);
     max-height: calc(100dvh - 1rem);
@@ -524,7 +460,7 @@ html.session-poster-dialog-open {
 
   .goal-session-posters__schedule-link {
     gap: 0.35rem;
-    padding-inline: 0.7rem;
+    padding-inline: 0;
     font-size: 0.78rem;
   }
 
@@ -557,7 +493,6 @@ html.session-poster-dialog-open {
   .goal-session-posters__card,
   .goal-session-posters__filters,
   .goal-session-posters__filters button,
-  .goal-session-posters__number,
   .goal-session-posters__schedule-link,
   .goal-session-posters__arrows button,
   .goal-session-posters__close,

@@ -72,10 +72,6 @@ const posterAlt = (poster: (typeof sessionPosters)[number]) => [
     <ol class="goal-session-posters__track" data-poster-track>
       {sessionPosters.map((poster) => (
         <li class="goal-session-posters__card" data-poster-card data-poster-day={poster.day}>
-          <div class="goal-session-posters__meta">
-            <span class="goal-session-posters__number">{String(poster.number).padStart(2, '0')}</span>
-            <span>{poster.dateLabel}</span>
-          </div>
           <a
             class="goal-session-posters__poster-link"
             href={poster.posterSrc}
@@ -93,11 +89,11 @@ const posterAlt = (poster: (typeof sessionPosters)[number]) => [
               loading="lazy"
               decoding="async"
             />
-            <span class="goal-session-posters__poster-action">
-              查看海报 <span aria-hidden="true">↗</span>
-            </span>
+            <div class="goal-session-posters__caption">
+              <h3>{poster.title}</h3>
+              <span aria-hidden="true">↗</span>
+            </div>
           </a>
-          <h3>{poster.title}</h3>
           <p class="goal-session-posters__speakers">
             <span>嘉宾</span> {poster.speakers.map((speaker) => speaker.name).join(' · ')}
           </p>
