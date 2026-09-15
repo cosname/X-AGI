@@ -15,6 +15,7 @@ import { partnerLogoByName } from '../src/data/partner-logo-assets-2026.ts';
 import { currentEditionPageCopy } from '../src/config/edition-status.ts';
 import { site } from '../src/config/site.ts';
 import { sessionPosters } from '../src/data/session-posters.ts';
+import { posterResearchPapers, posterResearchSource } from '../src/data/poster-research.generated.ts';
 
 const projectRoot = path.resolve('.');
 const outputRoot = path.resolve('dist');
@@ -768,6 +769,9 @@ const officialCopyByRoute = new Map([
     conference2026.poster.deadline.time,
     conference2026.scale.posters,
     conference2026.contact,
+    '以下为报名提交的论文信息，现场展示安排以大会后续通知为准。',
+    '会议与期刊信息由报名人提供。',
+    ...posterResearchPapers.flatMap((paper) => [paper.title, paper.applicantName, paper.affiliation, paper.venue]),
   ]],
   ['guide/index.html', [
     conference2026.venue.scheduleName,
@@ -812,6 +816,29 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
     if (normalizedExpected && !text.includes(normalizedExpected)) {
       fail(`${route}: missing official copy "${expected}"`);
     }
+  }
+}
+
+const researchSource = await readFile(path.join(outputRoot, 'poster/index.html'), 'utf8');
+const researchCuration = JSON.parse(await readFile(path.resolve('src/data/poster-research-curation.json'), 'utf8'));
+const researchIds = new Set(posterResearchPapers.map((paper) => paper.id));
+if (posterResearchSource.status !== 'registration'
+  || researchIds.size !== posterResearchPapers.length
+  || researchIds.size !== new Set(researchCuration.entries.map((entry) => entry.id)).size) {
+  fail('poster/index.html: registration status, unique papers and reviewed source must agree');
+}
+for (const paper of posterResearchPapers) {
+  if (Object.keys(paper).sort().join(',') !== 'affiliation,applicantName,href,id,title,venue') {
+    fail(`poster/index.html: ${paper.id} includes a non-public registration field`);
+  }
+  const reviewed = researchCuration.entries.filter((entry) => entry.id === paper.id);
+  if (!reviewed.length || reviewed.some((entry) => ['title', 'venue', 'href'].some((key) => entry[key] !== paper[key])
+    || (entry.affiliation && entry.affiliation !== paper.affiliation))) {
+    fail(`poster/index.html: ${paper.id} is stale against its reviewed source; rerun posters:sync-research`);
+  }
+  const escapedHref = paper.href.replaceAll('&', '&amp;');
+  if (!researchSource.includes(`id="${paper.id}"`) || !researchSource.includes(`href="${escapedHref}"`)) {
+    fail(`poster/index.html: missing paper anchor or public link for ${paper.id}`);
   }
 }
 

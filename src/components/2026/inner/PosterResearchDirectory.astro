@@ -1,0 +1,58 @@
+---
+import { posterResearchPapers } from '../../../data/poster-research.generated';
+import '../../../styles/poster-research.css';
+
+const venues = [...new Set(posterResearchPapers.map((paper) => paper.venue))]
+  .filter(Boolean)
+  .sort((left, right) => left.localeCompare(right, 'zh-CN', { numeric: true }));
+---
+
+<section id="poster-research" class="info-card poster-research" aria-labelledby="poster-research-title" data-poster-research>
+  <h2 id="poster-research-title" class="card-header">
+    <span>报名论文</span>
+    <span class="poster-research__total">{posterResearchPapers.length} 篇</span>
+  </h2>
+  <div class="card-body">
+    <p class="poster-research__intro">以下为报名提交的论文信息，现场展示安排以大会后续通知为准。会议与期刊信息由报名人提供。</p>
+
+    <div class="poster-research__tools" role="search" aria-label="报名论文检索" data-research-tools hidden>
+      <label class="poster-research__search">
+        <span>搜索论文</span>
+        <input type="search" placeholder="题目、报名人或单位" autocomplete="off" aria-controls="poster-research-list" data-research-search />
+      </label>
+      <label class="poster-research__filter">
+        <span>会议 / 期刊</span>
+        <select aria-controls="poster-research-list" data-research-filter>
+          <option value="">全部会议 / 期刊</option>
+          {venues.map((venue) => <option value={venue}>{venue}</option>)}
+        </select>
+      </label>
+      <button type="button" class="poster-research__clear" data-research-clear disabled>清除筛选</button>
+      <p class="poster-research__results" role="status" aria-live="polite" aria-atomic="true" data-research-results>
+        共 {posterResearchPapers.length} 篇论文
+      </p>
+    </div>
+
+    <ul id="poster-research-list" class="poster-research__list" role="list">
+      {posterResearchPapers.map((paper) => (
+        <li id={paper.id}>
+          <h3>
+            <a href={paper.href} target="_blank" rel="noopener noreferrer">
+              <span>{paper.title}</span><span aria-hidden="true">↗</span>
+            </a>
+          </h3>
+          <p class="poster-research__metadata">
+            <span><span class="poster-research__label">报名人</span> <span data-research-name>{paper.applicantName}</span></span>
+            <span data-research-affiliation>{paper.affiliation}</span>
+            <span data-research-venue>{paper.venue}</span>
+          </p>
+        </li>
+      ))}
+    </ul>
+    <p class="poster-research__empty" data-research-empty hidden>没有找到匹配的论文，请试试其他关键词或清除筛选。</p>
+  </div>
+</section>
+
+<script>
+  import '../../../scripts/poster-research';
+</script>
