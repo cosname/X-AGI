@@ -679,21 +679,49 @@ if (rootIndex.includes('redirect-page')) {
 }
 for (const marker of [
   'data-hero-pixel-field',
-  'data-goal-home-contract="sessions-history-partners"',
+  'data-goal-home-contract="speakers-posters-history-partners"',
   'edition-goal-home--with-lower',
   'id="goal-history"',
   'id="goal-organization"',
   'id="goal-session-posters"',
+  'data-home-speakers',
+  'id="goal-poster-research"',
+  'data-home-research',
   'class="goal-partners__legal"',
 ]) {
   if (!rootIndex.includes(marker)) fail(`index.html: missing published homepage marker "${marker}"`);
 }
 const posterStart = rootIndex.indexOf('id="goal-session-posters"');
-if (posterStart < 0 || posterStart >= historyStart) fail('index.html: session posters must precede conference history');
-const posterFragment = rootIndex.slice(posterStart, historyStart);
+const homeResearchStart = rootIndex.indexOf('id="goal-poster-research"');
+if (posterStart < 0 || homeResearchStart <= posterStart || historyStart <= homeResearchStart) {
+  fail('index.html: separate speaker and Poster paper sections must precede conference history, in that order');
+}
+const posterFragment = rootIndex.slice(posterStart, homeResearchStart);
+if (!visibleText(posterFragment).includes('演讲嘉宾')) fail('index.html: speaker section must have a visible speaker heading');
 for (const poster of sessionPosters) {
   for (const value of [poster.previewSrc, poster.posterSrc, poster.title.replaceAll('&', '&amp;')]) {
     if (!posterFragment.includes(value)) fail(`index.html: missing ${poster.id} gallery content: ${value}`);
+  }
+  for (const speaker of poster.speakers) {
+    if (!visibleText(posterFragment).includes(speaker.name)) fail(`index.html: missing visible speaker name ${speaker.name}`);
+  }
+}
+const homeResearchFragment = rootIndex.slice(homeResearchStart, historyStart);
+const homeResearchText = visibleText(homeResearchFragment);
+if (!homeResearchText.includes('Poster 论文') || !homeResearchFragment.includes('href="/poster/#poster-research"')) {
+  fail('index.html: Poster section must have its own visible heading and full directory link');
+}
+if ([...homeResearchFragment.matchAll(/\bdata-home-research-card(?:\s|>)/g)].length !== posterResearchPapers.length) {
+  fail('index.html: homepage Poster section must include every research paper exactly once');
+}
+for (const paper of posterResearchPapers) {
+  for (const value of [paper.title, paper.applicantName, paper.affiliation, paper.venue]) {
+    if (!homeResearchText.includes(value.replace(/\s+/gu, ' ').trim())) {
+      fail(`index.html: homepage Poster section is missing ${paper.id} content: ${value}`);
+    }
+  }
+  if (!homeResearchFragment.includes(`href="${paper.href.replaceAll('&', '&amp;')}"`)) {
+    fail(`index.html: homepage Poster section is missing the public paper link for ${paper.id}`);
   }
 }
 const posterImages = [...posterFragment.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);

@@ -1,0 +1,61 @@
+---
+import { posterResearchPapers } from '../../../data/poster-research.generated';
+import '../../../styles/goal-poster-research.css';
+---
+
+<section class="goal-poster-research" id="goal-poster-research" aria-labelledby="home-research-title" data-home-research>
+  <header class="goal-poster-research__heading">
+    <div>
+      <p class="goal-poster-research__eyebrow">RISING STARS</p>
+      <h2 id="home-research-title">Poster 论文 <span class="goal-poster-research__total">{posterResearchPapers.length} 篇</span></h2>
+    </div>
+    <a class="goal-poster-research__directory capsule-action" href="/poster/#poster-research">
+      全部论文 <span aria-hidden="true">↗</span>
+    </a>
+  </header>
+
+  <p class="goal-poster-research__intro">报名提交的论文，现场展示安排以大会后续通知为准。会议与期刊信息由报名人提供。</p>
+
+  <div class="goal-poster-research__toolbar">
+    <div class="goal-poster-research__search" role="search" aria-label="搜索 Poster 论文" data-home-research-tools hidden>
+      <label>
+        <span>搜索论文</span>
+        <input type="search" placeholder="题目、报名人、单位或会议" autocomplete="off" aria-controls="home-research-viewport" data-home-research-search />
+      </label>
+      <button type="button" data-home-research-clear disabled>清除</button>
+    </div>
+    <p class="goal-poster-research__count" role="status" aria-live="polite" aria-atomic="true" data-home-research-count>
+      共 {posterResearchPapers.length} 篇报名论文
+    </p>
+  </div>
+
+  <div class="goal-poster-research__viewport" id="home-research-viewport" role="region" aria-label="Poster 报名论文列表" aria-describedby="home-research-hint" tabindex="0" data-home-research-viewport>
+    <ul class="goal-poster-research__track" role="list" data-home-research-track>
+      {posterResearchPapers.map((paper) => (
+        <li class="goal-poster-research__card" id={`home-${paper.id}`} data-home-research-card>
+          <a class="goal-poster-research__paper" href={paper.href} target="_blank" rel="noopener noreferrer">
+            <span class="goal-poster-research__venue" data-home-research-venue>{paper.venue}</span>
+            <h3>{paper.title}</h3>
+            <dl class="goal-poster-research__person">
+              <div><dt>报名人</dt><dd data-home-research-name>{paper.applicantName}</dd></div>
+              <div><dt>单位</dt><dd data-home-research-affiliation>{paper.affiliation}</dd></div>
+            </dl>
+            <span class="goal-poster-research__action">阅读论文 <span aria-hidden="true">↗</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <p class="goal-poster-research__empty" data-home-research-empty hidden>没有找到匹配的论文，请试试其他关键词或清除搜索。</p>
+
+  <footer class="goal-poster-research__browse" data-home-research-browse>
+    <p id="home-research-hint">横向浏览报名论文 <span aria-hidden="true">→</span></p>
+    <div class="goal-poster-research__arrows" role="group" aria-label="浏览 Poster 论文" data-home-research-arrows hidden>
+      <button type="button" aria-label="上一篇论文" aria-controls="home-research-viewport" data-home-research-previous><span aria-hidden="true">←</span></button>
+      <button type="button" aria-label="下一篇论文" aria-controls="home-research-viewport" data-home-research-next><span aria-hidden="true">→</span></button>
+    </div>
+  </footer>
+</section>
+
+<script src="../../../scripts/goal-poster-research.ts"></script>

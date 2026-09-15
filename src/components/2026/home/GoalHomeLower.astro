@@ -3,15 +3,17 @@ import '../../../styles/goal-home-lower.css';
 import GoalPartnerFooter from './GoalPartnerFooter.astro';
 import GoalHistoryGallery from './GoalHistoryGallery.astro';
 import GoalSessionPosters from './GoalSessionPosters.astro';
+import GoalPosterResearch from './GoalPosterResearch.astro';
 ---
 
 <section
   class="goal-home-lower"
-  aria-label="专题海报、历届影像与组织信息"
+  aria-label="演讲嘉宾、Poster 论文、历届影像与组织信息"
   data-goal-home-lower
-  data-goal-home-contract="sessions-history-partners"
+  data-goal-home-contract="speakers-posters-history-partners"
 >
   <GoalSessionPosters />
+  <GoalPosterResearch />
   <GoalHistoryGallery />
   <GoalPartnerFooter />
 </section>
