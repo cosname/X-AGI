@@ -1,7 +1,8 @@
 .goal-session-posters {
-  --poster-ink: #32275f;
-  --poster-muted: #6d657d;
-  --poster-line: rgb(50 39 95 / 0.18);
+  --poster-ink: var(--ink, #111342);
+  --poster-accent: var(--blue, #6752c8);
+  --poster-muted: rgb(17 19 66 / 0.64);
+  --poster-line: var(--journey-line, rgb(17 19 66 / 0.14));
   --poster-edge: max(1.5rem, calc((100vw - var(--journey-content, 78rem)) / 2));
   --poster-card-width: clamp(18rem, 25vw, 22rem);
   padding: clamp(4.5rem, 8vw, 7.5rem) 0 0;
@@ -31,6 +32,7 @@
 
 .goal-session-posters__eyebrow {
   margin: 0 0 0.65rem;
+  color: var(--poster-accent);
   font-family: var(--font-condensed);
   font-size: 0.76rem;
   font-weight: 650;
@@ -50,47 +52,76 @@
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
-  gap: 0.8rem;
-  color: inherit;
+  gap: 0.65rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--glass-lens-rim, rgb(93 70 202 / 0.4));
+  border-radius: 999px;
+  color: var(--poster-ink);
+  background: var(--glass-lens-fill, rgb(255 253 251 / 0.72));
+  box-shadow: var(--glass-lens-shadow, inset 0 1px 0 rgb(255 255 255 / 0.88));
+  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(14px));
+  backdrop-filter: var(--glass-lens-backdrop, blur(14px));
   font-size: 0.9rem;
+  font-weight: 650;
   text-decoration: none;
+  white-space: nowrap;
+  transition: color 170ms ease, filter 220ms ease;
 }
 
 .goal-session-posters__schedule-link:hover,
 .goal-session-posters__dialog-schedule:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
+  color: var(--blue-deep, #2f3199);
+  filter: brightness(1.045) saturate(1.05);
 }
 
 .goal-session-posters__toolbar {
   min-height: 3.5rem;
   margin-bottom: 1.5rem;
-  border-block: 1px solid var(--poster-line);
+  flex-wrap: wrap;
 }
 
 .goal-session-posters__filters {
   display: flex;
-  align-self: stretch;
-  align-items: stretch;
-  gap: clamp(0.6rem, 2vw, 1.75rem);
+  min-width: 0;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border: 1px solid rgb(255 255 255 / 0.72);
+  border-radius: 999px;
+  background: var(--glass-panel-fill, rgb(255 253 250 / 0.62));
+  box-shadow: inset 0 1px 1px rgb(255 255 255 / 0.8), 0 4px 12px rgb(40 29 105 / 0.055);
+  -webkit-backdrop-filter: var(--glass-panel-backdrop, blur(18px));
+  backdrop-filter: var(--glass-panel-backdrop, blur(18px));
 }
 
 .goal-session-posters__filters button {
   min-height: 2.75rem;
-  padding: 0.3rem 0.25rem;
-  border: 0;
-  border-bottom: 2px solid transparent;
+  min-width: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
   color: var(--poster-muted);
   background: transparent;
   font: inherit;
   font-size: 0.85rem;
+  white-space: nowrap;
   cursor: pointer;
+  transition: color 170ms ease, box-shadow 220ms ease, filter 220ms ease;
 }
 
 .goal-session-posters__filters button[aria-pressed="true"] {
-  border-bottom-color: var(--poster-ink);
-  color: var(--poster-ink);
+  border-color: var(--glass-lens-rim, rgb(93 70 202 / 0.4));
+  color: var(--blue-deep, #2f3199);
+  background: var(--glass-lens-fill, rgb(255 253 251 / 0.78));
+  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.9));
+  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(14px));
+  backdrop-filter: var(--glass-lens-backdrop, blur(14px));
   font-weight: 700;
+}
+
+.goal-session-posters__filters button:hover {
+  color: var(--blue-deep, #2f3199);
+  filter: brightness(1.045);
 }
 
 .goal-session-posters__count {
@@ -107,12 +138,12 @@
   overscroll-behavior-inline: contain;
   scroll-padding-inline: var(--poster-edge);
   scroll-snap-type: inline proximity;
-  scrollbar-color: rgb(50 39 95 / 0.35) transparent;
+  scrollbar-color: rgb(103 82 200 / 0.45) transparent;
   scrollbar-width: thin;
 }
 
 .goal-session-posters__viewport:focus-visible {
-  outline: 2px solid var(--poster-ink);
+  outline: 2px solid var(--poster-accent);
   outline-offset: -2px;
 }
 
@@ -123,28 +154,51 @@
   gap: clamp(1.25rem, 2.5vw, 2rem);
   width: max-content;
   margin: 0;
-  padding: 0.35rem var(--poster-edge) 1.3rem;
+  padding: 0.4rem var(--poster-edge) 1.8rem;
   list-style: none;
 }
 
 .goal-session-posters__card {
   min-width: 0;
+  isolation: isolate;
+  padding: 0.85rem;
+  border: 1px solid rgb(255 255 255 / 0.76);
+  border-radius: 1.15rem;
+  background: var(--glass-panel-fill, rgb(255 253 250 / 0.62));
+  box-shadow:
+    inset 0 1px 1.5px rgb(255 255 255 / 0.88),
+    inset 0 -1px 1.5px rgb(103 82 200 / 0.12),
+    0 5px 14px rgb(40 29 105 / 0.07),
+    0 0 1px rgb(93 70 202 / 0.24);
+  -webkit-backdrop-filter: var(--glass-panel-backdrop, blur(18px));
+  backdrop-filter: var(--glass-panel-backdrop, blur(18px));
   scroll-snap-align: start;
 }
 
 .goal-session-posters__meta {
   display: flex;
   min-height: 1.6rem;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.75rem;
   color: var(--poster-muted);
   font-size: 0.74rem;
 }
 
 .goal-session-posters__number {
-  color: var(--poster-ink);
+  display: inline-grid;
+  min-width: 2.15rem;
+  min-height: 1.9rem;
+  place-items: center;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.86);
+  border-radius: 999px;
+  color: var(--blue-deep, #2f3199);
+  background: var(--glass-micro-fill, rgb(255 253 251 / 0.92));
+  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.84));
+  -webkit-backdrop-filter: var(--glass-micro-backdrop, blur(10px));
+  backdrop-filter: var(--glass-micro-backdrop, blur(10px));
   font-family: var(--font-condensed);
   font-size: 1rem;
   font-variant-numeric: tabular-nums;
@@ -161,15 +215,15 @@
   width: 100%;
   height: auto;
   aspect-ratio: 3 / 4;
-  border: 1px solid var(--poster-line);
-  background: #f5efe7;
+  border: 1px solid rgb(103 82 200 / 0.14);
+  background: var(--journey-paper, #f5efe7);
   object-fit: contain;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .goal-session-posters__poster-link:hover img {
-  border-color: rgb(50 39 95 / 0.5);
-  box-shadow: 0 4px 15px rgb(50 39 95 / 0.08);
+  border-color: rgb(103 82 200 / 0.38);
+  box-shadow: 0 4px 15px rgb(40 29 105 / 0.08);
 }
 
 .goal-session-posters__poster-action {
@@ -178,12 +232,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
-  color: var(--poster-muted);
+  color: var(--poster-accent);
   font-size: 0.73rem;
 }
 
 .goal-session-posters__card h3 {
-  margin: 0;
+  margin: 0 0 0.2rem;
   color: inherit;
   font-size: clamp(1rem, 1.3vw, 1.16rem);
   font-weight: 650;
@@ -208,6 +262,7 @@
 
 .goal-session-posters__arrows {
   display: flex;
+  flex-shrink: 0;
   gap: 0.5rem;
 }
 
@@ -218,18 +273,23 @@
   height: 2.75rem;
   place-items: center;
   padding: 0;
-  border: 1px solid var(--poster-line);
-  border-radius: 0;
+  border: 1px solid var(--glass-lens-rim, rgb(93 70 202 / 0.4));
+  border-radius: 50%;
   color: var(--poster-ink);
-  background: transparent;
+  background: var(--glass-lens-fill, rgb(255 253 251 / 0.72));
+  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.84));
+  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(14px));
+  backdrop-filter: var(--glass-lens-backdrop, blur(14px));
   font: inherit;
   font-size: 1.15rem;
   cursor: pointer;
+  transition: color 170ms ease, filter 220ms ease;
 }
 
 .goal-session-posters__arrows button:hover:not(:disabled),
 .goal-session-posters__close:hover {
-  background: rgb(50 39 95 / 0.06);
+  color: var(--blue-deep, #2f3199);
+  filter: brightness(1.045) saturate(1.05);
 }
 
 .goal-session-posters__arrows button:disabled {
@@ -245,11 +305,15 @@ html.session-poster-dialog-open {
   width: min(54rem, calc(100% - 2rem));
   max-width: none;
   max-height: calc(100dvh - 2rem);
+  overflow: hidden;
   padding: 0;
-  border: 1px solid var(--poster-line);
+  border: 1px solid rgb(255 255 255 / 0.78);
+  border-radius: 1.4rem;
   color: var(--poster-ink);
-  background: #f5efe7;
-  box-shadow: 0 20px 90px rgb(18 20 63 / 0.2);
+  background: var(--glass-shell-fill, rgb(255 251 246 / 0.9));
+  box-shadow: var(--glass-shell-shadow, 0 18px 40px rgb(40 29 105 / 0.13));
+  -webkit-backdrop-filter: var(--glass-shell-backdrop, blur(24px));
+  backdrop-filter: var(--glass-shell-backdrop, blur(24px));
   overscroll-behavior: contain;
 }
 
@@ -259,7 +323,9 @@ html.session-poster-dialog-open {
 }
 
 .goal-session-posters__dialog::backdrop {
-  background: rgb(18 20 40 / 0.65);
+  background: rgb(17 19 66 / 0.42);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .goal-session-posters__dialog-heading {
@@ -269,6 +335,7 @@ html.session-poster-dialog-open {
   gap: 1rem;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--poster-line);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.24), transparent);
 }
 
 .goal-session-posters__dialog-heading p {
@@ -300,7 +367,7 @@ html.session-poster-dialog-open {
   overflow: auto;
   overscroll-behavior: contain;
   padding: 1rem;
-  background: rgb(50 39 95 / 0.04);
+  background: rgb(103 82 200 / 0.045);
 }
 
 .goal-session-posters__dialog-image img {
@@ -308,7 +375,8 @@ html.session-poster-dialog-open {
   width: min(100%, 42rem);
   height: auto;
   margin-inline: auto;
-  background: #f5efe7;
+  background: var(--journey-paper, #f5efe7);
+  box-shadow: 0 4px 16px rgb(40 29 105 / 0.1);
 }
 
 .goal-session-posters__dialog[data-zoomed] .goal-session-posters__dialog-image img {
@@ -319,10 +387,11 @@ html.session-poster-dialog-open {
 
 .goal-session-posters__dialog-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.9rem 1.25rem;
   border-top: 1px solid var(--poster-line);
 }
 
@@ -330,27 +399,46 @@ html.session-poster-dialog-open {
 .goal-session-posters__dialog-actions button {
   display: inline-flex;
   min-height: 2.75rem;
+  min-width: 0;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  color: inherit;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--glass-lens-rim, rgb(93 70 202 / 0.4));
+  border-radius: 999px;
+  color: var(--poster-ink);
+  background: var(--glass-micro-fill, rgb(255 253 251 / 0.92));
+  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.84));
+  -webkit-backdrop-filter: var(--glass-micro-backdrop, blur(10px));
+  backdrop-filter: var(--glass-micro-backdrop, blur(10px));
   font-size: 0.85rem;
+  font-weight: 650;
   text-decoration: none;
+  white-space: nowrap;
+  transition: color 170ms ease, filter 220ms ease;
 }
 
 .goal-session-posters__dialog-actions button {
-  padding: 0.25rem;
-  border: 0;
-  background: transparent;
   font-family: inherit;
-  white-space: nowrap;
   cursor: pointer;
 }
 
 .goal-session-posters__dialog-actions .goal-session-posters__download {
-  padding: 0.5rem 0.9rem;
-  color: #fffaf4;
-  background: var(--poster-ink);
+  color: var(--blue-deep, #2f3199);
+  background: var(--glass-lens-fill, rgb(255 253 251 / 0.78));
+  box-shadow: var(--glass-lens-shadow, inset 0 1px 0 rgb(255 255 255 / 0.88));
+  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(14px));
+  backdrop-filter: var(--glass-lens-backdrop, blur(14px));
+}
+
+.goal-session-posters__dialog-actions :is(a, button):hover {
+  color: var(--blue-deep, #2f3199);
+  filter: brightness(1.045) saturate(1.05);
+}
+
+.goal-session-posters__dialog-actions button[aria-pressed="true"] {
+  color: var(--blue-deep, #2f3199);
+  border-color: var(--poster-accent);
 }
 
 .goal-session-posters__download span {
@@ -376,12 +464,24 @@ html.session-poster-dialog-open {
     gap: 0.6rem;
   }
 
+  .goal-session-posters__filters {
+    flex: 1 1 22rem;
+    gap: 0.2rem;
+  }
+
   .goal-session-posters__filters button {
+    flex: 1 1 0;
+    padding-inline: 0.65rem;
     font-size: 0.78rem;
   }
 
   .goal-session-posters__count {
+    margin-left: auto;
     font-size: 0.72rem;
+  }
+
+  .goal-session-posters__card {
+    padding: 0.7rem;
   }
 
   .goal-session-posters__dialog {
@@ -403,21 +503,65 @@ html.session-poster-dialog-open {
   }
 }
 
+@media (max-width: 26rem) {
+  .goal-session-posters__heading {
+    align-items: start;
+    gap: 0.8rem;
+  }
+
+  .goal-session-posters__schedule-link {
+    gap: 0.35rem;
+    padding-inline: 0.7rem;
+    font-size: 0.78rem;
+  }
+
+  .goal-session-posters__filters button {
+    padding-inline: 0.4rem;
+  }
+
+  .goal-session-posters__dialog-actions {
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  .goal-session-posters__dialog-actions :is(a, button) {
+    gap: 0.35rem;
+    padding-inline: 0.65rem;
+    font-size: 0.78rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .goal-session-posters__poster-link img {
+  .goal-session-posters__poster-link img,
+  .goal-session-posters a,
+  .goal-session-posters button {
     transition: none;
   }
 }
 
 @media (forced-colors: active) {
   .goal-session-posters__poster-link img,
+  .goal-session-posters__card,
+  .goal-session-posters__filters,
+  .goal-session-posters__filters button,
+  .goal-session-posters__number,
+  .goal-session-posters__schedule-link,
   .goal-session-posters__arrows button,
   .goal-session-posters__close,
-  .goal-session-posters__dialog {
+  .goal-session-posters__dialog,
+  .goal-session-posters__dialog-actions :is(a, button) {
     border-color: CanvasText;
+    color: CanvasText;
+    background: Canvas;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
-  .goal-session-posters__filters button[aria-pressed="true"] {
-    border-bottom-color: ButtonText;
+  .goal-session-posters__filters button[aria-pressed="true"],
+  .goal-session-posters__dialog-actions button[aria-pressed="true"] {
+    border-color: Highlight;
+    color: HighlightText;
+    background: Highlight;
   }
 }
