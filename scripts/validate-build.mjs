@@ -14,6 +14,8 @@ import { goalHistoryEvents } from '../src/data/goal-history.ts';
 import { partnerLogoByName } from '../src/data/partner-logo-assets-2026.ts';
 import { currentEditionPageCopy } from '../src/config/edition-status.ts';
 import { site } from '../src/config/site.ts';
+import { sessionPosters } from '../src/data/session-posters.ts';
+import { posterResearchPapers, posterResearchSource } from '../src/data/poster-research.generated.ts';
 
 const projectRoot = path.resolve('.');
 const outputRoot = path.resolve('dist');
@@ -551,6 +553,12 @@ await validatePublicCopies(
   personPortraitFiles,
 );
 
+const posterFiles = sessionPosters.flatMap((poster) => [
+  path.basename(poster.posterSrc),
+  path.basename(poster.previewSrc),
+]);
+await validatePublicCopies('2026 session posters', path.resolve('public/2026/session-posters'), posterFiles);
+
 const public2026Root = path.resolve('public/2026');
 validateExactSet(
   '2026 public asset tree',
@@ -560,6 +568,7 @@ validateExactSet(
     'legal/beian-icon.png',
     ...selectedLogoFiles.map((file) => `logos/${file}`),
     ...personPortraitFiles.map((file) => `people/${file}`),
+    ...posterFiles.map((file) => `session-posters/${file}`),
   ],
 );
 
@@ -670,13 +679,31 @@ if (rootIndex.includes('redirect-page')) {
 }
 for (const marker of [
   'data-hero-pixel-field',
-  'data-goal-home-contract="history-first"',
+  'data-goal-home-contract="sessions-history-partners"',
   'edition-goal-home--with-lower',
   'id="goal-history"',
   'id="goal-organization"',
+  'id="goal-session-posters"',
   'class="goal-partners__legal"',
 ]) {
   if (!rootIndex.includes(marker)) fail(`index.html: missing published homepage marker "${marker}"`);
+}
+const posterStart = rootIndex.indexOf('id="goal-session-posters"');
+if (posterStart < 0 || posterStart >= historyStart) fail('index.html: session posters must precede conference history');
+const posterFragment = rootIndex.slice(posterStart, historyStart);
+for (const poster of sessionPosters) {
+  for (const value of [poster.previewSrc, poster.posterSrc, poster.title.replaceAll('&', '&amp;')]) {
+    if (!posterFragment.includes(value)) fail(`index.html: missing ${poster.id} gallery content: ${value}`);
+  }
+}
+const posterImages = [...posterFragment.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+if (posterImages.filter((image) => image.includes('-preview.webp')).length !== sessionPosters.length) {
+  fail('index.html: every session must have exactly one preview image');
+}
+for (const image of posterImages.filter((image) => image.includes('-preview.webp'))) {
+  if (!image.includes('loading="lazy"') || !image.includes('decoding="async"')) {
+    fail('index.html: session poster previews must load lazily with async decoding');
+  }
 }
 if (!rootIndex.includes('property="og:image"') || !rootIndex.includes('/2026/brand/share-2026.png')) {
   fail('index.html: homepage must publish the 2026 share image');
@@ -742,6 +769,9 @@ const officialCopyByRoute = new Map([
     conference2026.poster.deadline.time,
     conference2026.scale.posters,
     conference2026.contact,
+    '以下为报名提交的论文信息，现场展示安排以大会后续通知为准。',
+    '会议与期刊信息由报名人提供。',
+    ...posterResearchPapers.flatMap((paper) => [paper.title, paper.applicantName, paper.affiliation, paper.venue]),
   ]],
   ['guide/index.html', [
     conference2026.venue.scheduleName,
@@ -786,6 +816,29 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
     if (normalizedExpected && !text.includes(normalizedExpected)) {
       fail(`${route}: missing official copy "${expected}"`);
     }
+  }
+}
+
+const researchSource = await readFile(path.join(outputRoot, 'poster/index.html'), 'utf8');
+const researchCuration = JSON.parse(await readFile(path.resolve('src/data/poster-research-curation.json'), 'utf8'));
+const researchIds = new Set(posterResearchPapers.map((paper) => paper.id));
+if (posterResearchSource.status !== 'registration'
+  || researchIds.size !== posterResearchPapers.length
+  || researchIds.size !== new Set(researchCuration.entries.map((entry) => entry.id)).size) {
+  fail('poster/index.html: registration status, unique papers and reviewed source must agree');
+}
+for (const paper of posterResearchPapers) {
+  if (Object.keys(paper).sort().join(',') !== 'affiliation,applicantName,href,id,title,venue') {
+    fail(`poster/index.html: ${paper.id} includes a non-public registration field`);
+  }
+  const reviewed = researchCuration.entries.filter((entry) => entry.id === paper.id);
+  if (!reviewed.length || reviewed.some((entry) => ['title', 'venue', 'href'].some((key) => entry[key] !== paper[key])
+    || (entry.affiliation && entry.affiliation !== paper.affiliation))) {
+    fail(`poster/index.html: ${paper.id} is stale against its reviewed source; rerun posters:sync-research`);
+  }
+  const escapedHref = paper.href.replaceAll('&', '&amp;');
+  if (!researchSource.includes(`id="${paper.id}"`) || !researchSource.includes(`href="${escapedHref}"`)) {
+    fail(`poster/index.html: missing paper anchor or public link for ${paper.id}`);
   }
 }
 

@@ -1,6 +1,8 @@
 ---
 import { conference2026 } from '../../../data/conference2026';
 import TravelGrantSection from './TravelGrantSection.astro';
+import PosterResearchDirectory from './PosterResearchDirectory.astro';
+import { posterResearchPapers } from '../../../data/poster-research.generated';
 
 const { poster, registration, scale } = conference2026;
 ---
@@ -12,6 +14,7 @@ const { poster, registration, scale } = conference2026;
       <div class="card-body">
         <p>{poster.headline}</p>
         <p>{poster.description}</p>
+        <p><a href="#poster-research">查看 {posterResearchPapers.length} 篇报名论文 ↓</a></p>
         <dl class="poster-facts">
           <div>
             <dt>规模</dt>
@@ -54,6 +57,7 @@ const { poster, registration, scale } = conference2026;
         </p>
       </div>
     </div>
+    <PosterResearchDirectory />
     <TravelGrantSection />
   </div>
 </main>

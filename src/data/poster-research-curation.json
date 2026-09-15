@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 1,
+  "sourceDate": "2026-09-16",
+  "status": "registration",
+  "entries": [
+    {
+      "sourceKey": "d24d45f4b94d681aecbb0d956885099f9600bc10cbd2a2cc58328487969174fa",
+      "id": "poster-d942ebf1012f",
+      "title": "CodeHacker: Automated Test Case Generation for Detecting Vulnerabilities in Competitive Programming Solutions",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2026.acl-long.108/",
+      "affiliation": "香港大学 / 西北工业大学",
+      "verification": "primary-source",
+      "evidence": [
+        "https://aclanthology.org/2026.acl-long.108/"
+      ],
+      "note": "ACL Anthology 正式条目确认完整标题，提交标题遗漏末尾 Solutions；论文条目包含 Xinxiang Yin。"
+    },
+    {
+      "sourceKey": "153136a63cda423929c2c4b8ccc86e2a5c2f594a3870862f7be534ed1e8bd3dd",
+      "id": "poster-d2bfff1a8b53",
+      "title": "FormalMATH: Benchmarking Formal Mathematical Reasoning of Large Language Models",
+      "venue": "EMNLP Findings",
+      "href": "https://arxiv.org/abs/2505.02735",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2505.02735"
+      ],
+      "note": "arXiv 条目确认标题和公开链接。原填 EMNLP Findings 保留为提交信息，本次未另核会议发表状态。"
+    },
+    {
+      "sourceKey": "c6990858e0f2bf1f9a5d2ce9c5363fe1ec7dbed1dad68f9552b3a88fd6f1e394",
+      "id": "poster-ff735f051373",
+      "title": "Scaling Laws for Precision in High-Dimensional Linear Regression",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2602.19241",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2602.19241"
+      ],
+      "note": "arXiv 条目确认标题；将原始 PDF 链接规范为摘要页。原填 ICML 保留为提交信息，本次未另核会议发表状态。"
+    },
+    {
+      "sourceKey": "07db08f99a1615b567869668c5885443a6826ac8706ed1e235c6d15a69af4c4a",
+      "id": "poster-339537805502",
+      "title": "Revisiting the Role of Pretrained Weights in Model Merging: On Near-Optimality within the Core Subspace",
+      "venue": "ICML",
+      "href": "https://openreview.net/forum?id=NrGCh79ANM",
+      "verification": "primary-source",
+      "evidence": [
+        "https://icml.cc/virtual/2026/poster/64416"
+      ],
+      "note": "ICML 2026 官方海报页面确认完整标题并链接同一 OpenReview ID；补齐提交标题截断的 Subspace。OpenReview 直连需浏览器验证，已由 ICML 官方页面核对标题与链接关联。作者官方代码仓库亦列出同一标题。"
+    },
+    {
+      "sourceKey": "ab3ad43434a1a1d2597fbf0cf08b88bcf7ee153941242ba99f24d06dfdf4b982",
+      "id": "poster-66e1317d6834",
+      "title": "Improving Memory Efficiency for Training KANs via Meta Learning",
+      "venue": "ICML",
+      "href": "https://proceedings.mlr.press/v267/zhao25s.html",
+      "verification": "primary-source",
+      "evidence": [
+        "https://proceedings.mlr.press/v267/zhao25s.html"
+      ],
+      "note": "PMLR 正式论文页面确认标题及 ICML 2025，卷 267，页 77657-77676。"
+    },
+    {
+      "sourceKey": "28ac6280ac8f61c7090398f0a734e0a460384e9c2d0ee885271bda61e2d4c1d4",
+      "id": "poster-beb01cdc9c2c",
+      "title": "The Implicit Bias of Steepest Descent with Mini-batch Stochastic Gradient",
+      "venue": "ICML",
+      "href": "https://openreview.net/forum?id=OT9cxeWbEO",
+      "verification": "primary-source",
+      "evidence": [
+        "https://icml.cc/virtual/2026/poster/64352"
+      ],
+      "note": "ICML 2026 官方海报页面确认标题并链接所填 OpenReview ID；将提交的两条链接整理为一个论文主链接。arXiv 2602.11557 同时确认相同标题与作者。"
+    },
+    {
+      "sourceKey": "6c6f998c282f31148b5ed8ee75ef7f26cfef1722b1d001f1815570210d19695e",
+      "id": "poster-20d7627de19e",
+      "title": "STAR: A Benchmark for Astronomical Star Fields Super-Resolution",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2507.16385",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2507.16385"
+      ],
+      "note": "arXiv 条目确认完整标题；按正式标题恢复 STAR 及各词大小写。原填 NeurIPS 保留为提交信息，本次未另核会议发表状态。"
+    },
+    {
+      "sourceKey": "01c9ea9b30fd1e9f54a9d24642117ab5b1f05576a9fb77c481525ef6c445f85d",
+      "id": "poster-1fd3f2cb86d6",
+      "title": "Agentic Proposing: Enhancing Large Language Model Reasoning via Compositional Skill Synthesis",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2602.03279",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2602.03279"
+      ],
+      "note": "将提交文本中的 arXiv 编号 2602.03279 还原为规范摘要页，并核对标题。原填 ICML 保留为提交信息，本次未另核会议发表状态。"
+    },
+    {
+      "sourceKey": "bd9270a4daac231e752ab0ac4958f2b225037b397d760393fc5a86be16de0fcd",
+      "id": "poster-5d114adf5204",
+      "title": "Reflect-then-Correct: Rebalancing Task Optimization for Generalizable Meta-Reinforcement Learning via Distributional Value Error Reduction",
+      "venue": "ICML",
+      "href": "https://openreview.net/forum?id=AJMrn5qYih",
+      "verification": "primary-source",
+      "evidence": [
+        "https://icml.cc/virtual/2026/poster/65771"
+      ],
+      "note": "提交的 ICML 官方页面直接确认完整标题并链接 AJMrn5qYih。正式标题有 Reflect-then-Correct 前缀，并将提交时的 Meta-RL 展开为 Meta-Reinforcement Learning；作者实验室论文页同时确认。"
+    },
+    {
+      "sourceKey": "cee530388c856c0b57cee375b283ad99f00d1954b0ea1679148fe182d1e0e4e3",
+      "id": "poster-23d0d4153187",
+      "title": "Statistical Inference for Generative Model Comparison",
+      "venue": "TMLR",
+      "href": "https://openreview.net/forum?id=PXL6SBxh0q",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2501.18897"
+      ],
+      "note": "arXiv 确认正式标题及 Han Su 署名。OpenReview 正式 PDF 的公开检索记录列明 Published in TMLR (March/2026)，并指向所填 forum ID；该 PDF 证据地址为 https://openreview.net/pdf/c6a434cee30003f9221b8da6a5a732f76607c84e.pdf 。OpenReview 当前直连要求浏览器验证。原填 ICLR 2027 及 Journal-to-Conference Track 状态未独立核实，不纳入规范化 venue。"
+    },
+    {
+      "sourceKey": "2e4544ce692e02b956ceb977385e0075968e281c743c181380ba78a722837c86",
+      "id": "poster-02cffb08a0d2",
+      "title": "HyMAGE: Semantic-Aware Dynamic Hypergraph Generation",
+      "venue": "ACM SIGKDD",
+      "href": "https://doi.org/10.1145/3770855.3817897",
+      "verification": "primary-source",
+      "evidence": [
+        "https://api.crossref.org/works/10.1145/3770855.3817897"
+      ],
+      "note": "ACM 直连返回 403；通过出版方登记的 Crossref DOI 元数据确认标题、DOI 和第 32 届 ACM SIGKDD 2026 论文集。山东大学作者官方论文页面亦确认同一标题。"
+    },
+    {
+      "sourceKey": "a80a8ced9e8969b43202918d678b1495704dfdbe37d43bf57015187fed3ea242",
+      "id": "poster-c5cc3c61e490",
+      "title": "Benign Overfitting in Adversarial Training for Vision Transformers",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2604.19724",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2604.19724"
+      ],
+      "note": "arXiv 条目确认标题；将原始 PDF 链接规范为摘要页。原填 ICML 保留为提交信息，本次未另核会议发表状态。"
+    },
+    {
+      "sourceKey": "8b8582ad60e8d8613a84a2082a37a338ee7dd5cb3013d1e5f95149da5b98230e",
+      "id": "poster-136c923ca735",
+      "title": "A novel abnormal pore pressure prediction framework based on machine learning and drilling–rock mechanics parameter data",
+      "venue": "Petroleum Science",
+      "href": "https://doi.org/10.1016/j.petsci.2026.06.002",
+      "verification": "primary-source",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/pii/S199582262600350X"
+      ],
+      "note": "ScienceDirect 出版方页面的公开检索记录确认完整标题、Petroleum Science 和 DOI。补齐截断末尾 mechanics parameter data 并合并提交标题中的重复空格；直连页面返回 403。规范化 venue 仅保留期刊名，不纳入未另核的分区、影响因子或作者位次评价。"
+    },
+    {
+      "sourceKey": "f2d2cd9b9c12dc4b5328f25bbb7d6610c993089a330eb8e193b6e8c588e0044f",
+      "id": "poster-36f1f5719cb4",
+      "title": "Beyond Static Rules: Automated Discovery of Latent Vulnerabilities in Text-to-SQL",
+      "venue": "ACL Findings",
+      "href": "https://aclanthology.org/2026.findings-acl.842/",
+      "verification": "primary-source",
+      "evidence": [
+        "https://aclanthology.org/2026.findings-acl.842/"
+      ],
+      "note": "ACL Anthology 正式条目确认标题；将 PDF 链接规范为论文页面。正式论文集为 Findings of ACL 2026，原填 ACL 仍应另行保留。"
+    },
+    {
+      "sourceKey": "6d50c6b4e23b772b3a4c3d7da5d516f29d38d7d51b426f0210b63d0e7d89d445",
+      "id": "poster-3ab1bd2d3392",
+      "title": "PASTE-D2Net: Prior-Aware Spatio-Temporal Evolution Distillation Dual-Stream Network for Medical Single-Domain Generalization",
+      "venue": "ACM MM",
+      "href": "https://doi.org/10.1145/3767308.3836044",
+      "verification": "submitted-pdf",
+      "evidence": [
+        "https://doi.org/10.1145/3767308.3836044"
+      ],
+      "note": "Exact full title verified against the first page of the applicant-submitted paper PDF using text extraction and visual inspection. The same public DOI appears in the submitted PDF. The public DOI/ACM page could not be fetched, so this verifies the title against the submitted PDF, not independently fetched publisher metadata. No X-AGI acceptance or submitted-venue claim inferred.",
+      "submittedPaperSha256": "1a8f2e305c20b5589a3fdd07824abad52557a65c6832f32b044b322d76370374"
+    },
+    {
+      "sourceKey": "26d8615ba5b048610ecaf17c494d0a1d7f9d03969a968586b169e02eaa786580",
+      "id": "poster-f520da02c99f",
+      "title": "Augur: Modeling Covariate Causal Associations in Time Series via Large Language Models",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2026.acl-long.32/",
+      "verification": "primary-source",
+      "evidence": [
+        "https://aclanthology.org/2026.acl-long.32/"
+      ],
+      "note": "Exact title and canonical URL verified on ACL Anthology; the proceedings PDF first-page title independently matches."
+    },
+    {
+      "sourceKey": "fee6da08857c2de70732b96134126c96bce2e745456e8e055b54d79ad5e0d8b5",
+      "id": "poster-b40d938f20da",
+      "title": "AlphaEval: Evaluating Agents in Production",
+      "venue": "COLM",
+      "href": "https://arxiv.org/abs/2604.12162",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2604.12162"
+      ],
+      "note": "Exact title verified on arXiv. Normalized the supplied PDF URL to the canonical abstract page. Submitted venue was not independently verified."
+    },
+    {
+      "sourceKey": "4114740c6810113f9da06969a9c4e83011236c4591eb7f7ce479772a3db19bca",
+      "id": "poster-ea387cedd8d5",
+      "title": "IGNN-Solver: A Graph Neural Solver for Implicit Graph Neural Networks",
+      "venue": "T-PAMI",
+      "href": "https://arxiv.org/abs/2410.08524",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2410.08524"
+      ],
+      "note": "Exact title verified on arXiv. Submitted T-PAMI venue was not established by the consulted arXiv metadata and is not promoted to displayVenue."
+    },
+    {
+      "sourceKey": "e25fc01553f140a736061e4d56d95200d7f38982381823dbb04407bfb3342217",
+      "id": "poster-51a63928ed19",
+      "title": "Gaussian Herding across Pens: An Optimal Transport Perspective on Global Gaussian Reduction for 3DGS",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2506.09534",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2506.09534"
+      ],
+      "note": "Supplied OpenReview forum and PDF URLs returned a browser-verification page. Exact full title verified on the matching arXiv record; indexed primary OpenReview PDF also matches. Canonical arXiv abstract URL used as the directly readable public paper URL."
+    },
+    {
+      "sourceKey": "3917ef3cb439100acbca8e78333a3ea29ae78d7e63197e1bfda242c3eaad0288",
+      "id": "poster-ae83c43481fb",
+      "title": "MIHC: Multi-View Interpretable Hypergraph Neural Networks with Information Bottleneck for Chip Congestion Prediction",
+      "venue": "NeurIPS",
+      "href": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/7fc54f90195097ed0ee6200f1dc274d3-Abstract-Conference.html",
+      "verification": "primary-source",
+      "evidence": [
+        "https://proceedings.neurips.cc/paper_files/paper/2025/hash/7fc54f90195097ed0ee6200f1dc274d3-Abstract-Conference.html"
+      ],
+      "note": "Restored the truncated title and completed the truncated proceedings URL with -Abstract-Conference.html. Exact title and main-conference venue verified on the official proceedings page."
+    },
+    {
+      "sourceKey": "6cd159ec3a64d769105a99dc1026a80b7e6a7ba075a3a7a0ce8f5f68f0b0a258",
+      "id": "poster-70d62481de5a",
+      "title": "When Bias Pretends to Be Truth: How Spurious Correlations Undermine Hallucination Detection in LLMs",
+      "venue": "ICLR",
+      "href": "https://arxiv.org/abs/2511.07318",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2511.07318"
+      ],
+      "note": "Converted the supplied arXiv identifier into a canonical HTTPS abstract URL. Exact title verified on the current arXiv record. Submitted ICLR venue was not independently verified."
+    },
+    {
+      "sourceKey": "8f1b32c5154063203e6cffaaa93919cb1b612e97909d17127be01c15a2410e3f",
+      "id": "poster-c3b39bcfdced",
+      "title": "EfficientFlow: Efficient Equivariant Flow Policy Learning for Embodied AI",
+      "venue": "AAAI",
+      "href": "https://arxiv.org/abs/2512.02020",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2512.02020"
+      ],
+      "note": "Exact title and canonical URL verified on arXiv. The author-provided arXiv comments say Accepted by AAAI 2026; this was not independently checked against AAAI proceedings and is not promoted to displayVenue."
+    },
+    {
+      "sourceKey": "240361c22d1495639ee8faa8f331d00f1e9a06ed5d7983f254e33c8016cc4c85",
+      "id": "poster-0f7dd7296a17",
+      "title": "AGZO: Activation-Guided Zeroth-Order Optimization for LLM Fine-Tuning",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2601.17261",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2601.17261"
+      ],
+      "note": "Removed the truncated referrer query before trying the supplied OpenReview forum, which returned a browser-verification page. Exact title verified on matching arXiv metadata; canonical arXiv URL used. Its author-provided comments say Accepted by ICML 2026, without independent proceedings verification."
+    },
+    {
+      "sourceKey": "560e2963fa6d04ae596e828c9dae8e9a84014991ea576edf7277fe98c4bb7b63",
+      "id": "poster-f1e5e20e6992",
+      "title": "STrajRAG: Supervised trajectory retrieval augmented generation for next POI recommendation with travel semantics",
+      "venue": "Information Processing & Management",
+      "href": "https://www.sciencedirect.com/science/article/pii/S0306457325001761",
+      "verification": "primary-source",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/pii/S0306457325001761"
+      ],
+      "note": "Restored the truncated title from the search-indexed primary ScienceDirect article record, which also lists DOI 10.1016/j.ipm.2025.104235. Canonical article URL omits /abs/. Direct fetch returned HTTP 403, so verification relies on the publisher content available in the search index."
+    },
+    {
+      "sourceKey": "13dc2cdd4fd4245ffb466b3e0bf3bd8fef5839df9f48cfa09598f6ea73ca30d3",
+      "id": "poster-d9beb2030ac7",
+      "title": "Model-Based Imaginative Planning for Embodied Agents",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2026.acl-long.827/",
+      "verification": "primary-source",
+      "evidence": [
+        "https://aclanthology.org/2026.acl-long.827/"
+      ],
+      "note": "Exact title, canonical URL and venue verified on ACL Anthology. Supplemental PDF fetch exceeded the tool content-length limit; landing-page metadata was available."
+    },
+    {
+      "sourceKey": "9f1093628c7ea3130344776a40ec0b4452804697848b1fd4031aeea8d27a3540",
+      "id": "poster-ddaa41f4696e",
+      "title": "Can MLLMs Understand the Deep Implication Behind Chinese Images?",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2025.acl-long.700/",
+      "verification": "primary-source",
+      "evidence": [
+        "https://aclanthology.org/2025.acl-long.700/"
+      ],
+      "note": "Exact title, canonical URL and venue verified on ACL Anthology; the proceedings PDF first-page title independently matches."
+    },
+    {
+      "sourceKey": "4898183d72a51539d4ac660387f4dc9dd1cbefdb105989526f452e04c2f4b4ee",
+      "id": "poster-d942ebf1012f",
+      "title": "CodeHacker: Automated Test Case Generation for Detecting Vulnerabilities in Competitive Programming Solutions",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2026.acl-long.108/",
+      "affiliation": "香港大学 / 西北工业大学",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2602.20213",
+        "https://aclanthology.org/2026.acl-long.108/"
+      ],
+      "note": "Restored the final word Solutions from the exact arXiv title. Preserved this registration row for root reconciliation with the separately reported CodeHacker duplicate at row 3. No applicant merge or X-AGI acceptance inference performed."
+    },
+    {
+      "sourceKey": "6c766c0c46711910235f39038208ea6e40dbde0f7bb1c2dfe56bbc9c7f1581c1",
+      "id": "poster-99b01821f1a9",
+      "title": "Logical Phase Transitions: Understanding Collapse in LLM Logical Reasoning",
+      "venue": "ACL",
+      "href": "https://arxiv.org/abs/2601.02902",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2601.02902"
+      ],
+      "note": "Exact title and canonical URL verified on arXiv. The author-provided arXiv comments say Accepted at ACL 2026 (Main Conference), without independent proceedings verification."
+    },
+    {
+      "sourceKey": "78f4976a05fef6d4de38f53fe7aafcbdca84cf444df8a028e34e562fcc155691",
+      "id": "poster-b62b851b68d6",
+      "title": "Graph-GRPO: Training Graph Flow Models with Reinforcement Learning",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2603.10395",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2603.10395"
+      ],
+      "note": "arXiv标题与提交标题一致；ICML 2026标签依据作者在arXiv Comments中的明确说明。"
+    },
+    {
+      "sourceKey": "5ea77544b0cb12ebff47228afbc74e931a3e74c787c775ea208541a714995ee4",
+      "id": "poster-0d0abb6e4c9e",
+      "title": "Delineating Knowledge Boundaries for Honest Large Vision-Language Models",
+      "venue": "ECCV",
+      "href": "https://eccv.ecva.net/virtual/2026/poster/5732",
+      "verification": "primary-source",
+      "evidence": [
+        "https://eccv.ecva.net/virtual/2026/poster/5732"
+      ],
+      "note": "直接读取ECCV官方论文页，页面标题与canonical链接均与供链一致。"
+    },
+    {
+      "sourceKey": "5ddce766c7e6caa2f532099c8dbabb8e81c4edf102f8c0e08f647caad8e0d3f0",
+      "id": "poster-4c15e914b43e",
+      "title": "VKG-QA: Visual Knowledge Graph-based Question Answer for Large Multimodal Models",
+      "venue": "CVPR",
+      "href": "https://openaccess.thecvf.com/content/CVPR2026/html/Du_VKG-QA_Visual_Knowledge_Graph-based_Question_Answer_for_Large_Multimodal_Models_CVPR_2026_paper.html",
+      "verification": "primary-source",
+      "evidence": [
+        "https://openaccess.thecvf.com/content/CVPR2026/html/Du_VKG-QA_Visual_Knowledge_Graph-based_Question_Answer_for_Large_Multimodal_Models_CVPR_2026_paper.html"
+      ],
+      "note": "提交URL在Questio处截断；已用CVF官方论文页恢复完整公开链接，标题与该页及BibTeX一致。"
+    },
+    {
+      "sourceKey": "5d74b5e7bba3c2b7d84972438bd5267d99d1e40fd61c33cda28dd9ebff207a24",
+      "id": "poster-224c26c262ff",
+      "title": "Contractive Anchor Resolvent Diffusion for Incomplete Multi-View Clustering",
+      "venue": "ICML",
+      "href": "https://icml.cc/virtual/2026/poster/64642",
+      "verification": "primary-source",
+      "evidence": [
+        "https://icml.cc/virtual/2026/poster/64642"
+      ],
+      "note": "直接读取ICML官方论文页，完整标题与提交标题一致；canonical仅将主机名大小写规范化。"
+    },
+    {
+      "sourceKey": "3cfec1eca72972a2d2cbcac54ac64a42d4c9779ec18088683a7e2f7b082d5e20",
+      "id": "poster-37dfe0e91548",
+      "title": "DSN : Energy-efficient EMG signal classification method enabling real-time monitoring for edge healthcare",
+      "venue": "Neural Networks",
+      "href": "https://www.sciencedirect.com/science/article/pii/S0893608026007665",
+      "verification": "primary-source",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/pii/S0893608026007665"
+      ],
+      "note": "根据ScienceDirect出版方页面的搜索索引补全被截断的healthcare，并保留出版方标题中冒号前空格；直接读取出版方页面返回403。出版方标明Neural Networks卷205、January 2027，故展示标签不强加2026年份。"
+    },
+    {
+      "sourceKey": "53d5e428a1b47f224fbf2304c1408dd2aef7d923a41b85f599dc72744bea06fd",
+      "id": "poster-20cc69625fe7",
+      "title": "CWF: A Collaborative Writing Framework for Personalized and Reliable Popular Science Writing",
+      "venue": "EMNLP",
+      "href": "https://arxiv.org/abs/2609.06126",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2609.06126"
+      ],
+      "note": "供链arXiv HTML及摘要页均确认完整标题；规范为不锁定版本的摘要页。已核验论文题名，不将申请表所填EMNLP视为已确认的出版状态。"
+    },
+    {
+      "sourceKey": "431bc048ff0971a1e99ccce950d4e5967f869f2f6893b833dc2319a7d90ecf6d",
+      "id": "poster-63e8b1777613",
+      "title": "Questioning the Coverage-Length Metric in Conformal Prediction: When Shorter Intervals Are Not Better",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2601.21455",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2601.21455"
+      ],
+      "note": "arXiv摘要页确认完整题名；将截断结尾Bette补为Better。本次读取的arXiv元数据未明确给出ICML出版状态。"
+    },
+    {
+      "sourceKey": "70511c817fc68fe037c3b7d8a29e05de8c2bc0f7ef7879f74b16cd32c093f748",
+      "id": "poster-a7172647caf8",
+      "title": "Co4ICF: Co-evolving Physics-Informed Surrogate and RL-based Pulse Optimizer for Inertial Confinement Fusion",
+      "venue": "ACM SIGKDD",
+      "href": "https://arxiv.org/abs/2607.10366",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2607.10366"
+      ],
+      "note": "供链ACM DOI读取失败；使用题名及作者对应的arXiv主来源补全Fusion，并改为可核验的公开摘要页。本次未独立确认所填KDD 2026出版状态。"
+    },
+    {
+      "sourceKey": "d97885660d1f39b16edcd379a92e4d47412abe382cd92654cd354357831e5840",
+      "id": "poster-cb82eac05270",
+      "title": "Diversity-Enhanced and Classification-Aware Prompt Learning for Few-Shot Learning via Stable Diffusion",
+      "venue": "TMLR",
+      "href": "https://openreview.net/forum?id=4CfliohyqK",
+      "verification": "primary-source",
+      "evidence": [
+        "https://openreview.net/pdf?id=4CfliohyqK"
+      ],
+      "note": "OpenReview论坛页触发浏览器验证，官方PDF首页确认完整题名并补全Diffusion；页首注明TMLR 09/2025。"
+    },
+    {
+      "sourceKey": "9f2465a33bc42c61209026b1a0879b9d5f6a639f15a86191c376a942621bf21d",
+      "id": "poster-6fb10f7bfdf9",
+      "title": "CoVer: Conflict-Aware Claim Verification",
+      "venue": "EMNLP",
+      "href": "https://arxiv.org/abs/2609.00508",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2609.00508"
+      ],
+      "note": "供链PDF及arXiv摘要页均确认完整标题；规范为公开摘要页。本次读取的arXiv元数据未明确确认所填EMNLP出版状态。"
+    },
+    {
+      "sourceKey": "bb30ecc81fb7e587a05b9bdbcfaf08d070e8d89f8ea0674fe5bfbd0b9d48a9bb",
+      "id": "poster-56378cca5d9b",
+      "title": "ScopeBench: Evaluating Cultural Norm Scope Awareness in LLMs",
+      "venue": "EMNLP",
+      "href": "https://ziwayzhao.github.io/assets/pdf/ScopeBench.pdf",
+      "verification": "primary-source",
+      "evidence": [
+        "https://ziwayzhao.github.io/assets/pdf/ScopeBench.pdf"
+      ],
+      "note": "直接读取用户提供的公开作者PDF并检查首页，确认完整题名；小型大写排字规范为ScopeBench。未找到可替代的出版方或arXiv题录，保留供链，不将所填EMNLP升级为已确认出版状态。"
+    },
+    {
+      "sourceKey": "fffe57d0d0417ca60b326c017dd5315fc3da2b0be3600b4335f78da61d5b7bec",
+      "id": "poster-22a8ed133827",
+      "title": "Meric: A Unified Framework for Multimodal Music Generation and Retrieval via Representation Space Anchoring",
+      "venue": "ECCV",
+      "href": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/2169.pdf",
+      "verification": "primary-source",
+      "evidence": [
+        "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/2169.pdf"
+      ],
+      "note": "直接读取供链ECCV官方托管论文PDF首页，补全被截断的Anchoring；ECCV 2026官方Videos索引亦出现相同完整题名。保留原文Meric大小写。"
+    },
+    {
+      "sourceKey": "5aae8465723d13d78ad0c813cce473e41418ae9d4bb811e2d376ff8ac3ace663",
+      "id": "poster-c2d192f2a71b",
+      "title": "MoFO: Momentum-Filtered Optimizer for Mitigating Forgetting in LLM Fine-Tuning",
+      "venue": "TMLR",
+      "href": "https://openreview.net/forum?id=T1qXIDn9my",
+      "verification": "primary-source",
+      "evidence": [
+        "https://openreview.net/pdf?id=T1qXIDn9my"
+      ],
+      "note": "OpenReview论坛页触发浏览器验证，官方PDF首页确认完整题名，并注明TMLR 10/2025。"
+    },
+    {
+      "sourceKey": "a86812525fa348d52a7366f3d28b8f99fc0f24527b3f425b4a62b4539f06e53d",
+      "id": "poster-d89d4985330b",
+      "title": "CSRv2: Unlocking Ultra-Sparse Embeddings",
+      "venue": "ICLR",
+      "href": "https://arxiv.org/abs/2602.05735",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2602.05735"
+      ],
+      "note": "arXiv摘要页确认完整题名；ICLR 2026标签依据作者在Comments中的明确说明。"
+    },
+    {
+      "sourceKey": "07ded2eaae8b270a272d2cad56f421f86f9d47f1c6768e077e419889792d358a",
+      "id": "poster-85bec19ca7b9",
+      "title": "Hystar: Hypernetwork-driven Style-adaptive Retrieval via Dynamic SVD Modulation",
+      "venue": "ICLR",
+      "href": "https://iclr.cc/virtual/2026/poster/10006957",
+      "verification": "primary-source",
+      "evidence": [
+        "https://iclr.cc/virtual/2026/poster/10006957"
+      ],
+      "note": "直接读取ICLR官方论文页，页面标题与canonical链接均与供链一致；OpenReview最终论文PDF也注明ICLR 2026。"
+    }
+  ],
+  "exclusions": [
+    {
+      "sourceKey": "3836584a528bb861ea4ff9e5e96831106777f79e15ea77023a28c02e1721f212",
+      "reason": "Explicit test2 title and URL, without a paper attachment."
+    }
+  ]
+}
