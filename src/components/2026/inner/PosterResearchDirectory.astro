@@ -1,5 +1,6 @@
 ---
 import { posterResearchPapers } from '../../../data/poster-research.generated';
+import PaperPreview from '../PaperPreview.astro';
 import '../../../styles/poster-research.css';
 
 const venues = [...new Set(posterResearchPapers.map((paper) => paper.venue))]
@@ -36,7 +37,8 @@ const venues = [...new Set(posterResearchPapers.map((paper) => paper.venue))]
     <ul id="poster-research-list" class="poster-research__list" role="list">
       {posterResearchPapers.map((paper) => (
         <li id={paper.id}>
-          <h3>
+          <PaperPreview paperId={paper.id} titleId={`${paper.id}-title`} />
+          <h3 id={`${paper.id}-title`}>
             <a href={paper.href} target="_blank" rel="noopener noreferrer">
               <span>{paper.title}</span><span aria-hidden="true">↗</span>
             </a>

@@ -16,6 +16,7 @@ import { currentEditionPageCopy } from '../src/config/edition-status.ts';
 import { site } from '../src/config/site.ts';
 import { sessionPosters } from '../src/data/session-posters.ts';
 import { posterResearchPapers, posterResearchSource } from '../src/data/poster-research.generated.ts';
+import { paperPreviews } from '../src/data/paper-previews.ts';
 
 const projectRoot = path.resolve('.');
 const outputRoot = path.resolve('dist');
@@ -558,6 +559,8 @@ const posterFiles = sessionPosters.flatMap((poster) => [
   path.basename(poster.previewSrc),
 ]);
 await validatePublicCopies('2026 session posters', path.resolve('public/2026/session-posters'), posterFiles);
+const paperPreviewFiles = paperPreviews.map((paper) => path.basename(paper.src));
+await validatePublicCopies('2026 paper previews', path.resolve('public/2026/paper-previews'), paperPreviewFiles);
 
 const public2026Root = path.resolve('public/2026');
 validateExactSet(
@@ -569,6 +572,7 @@ validateExactSet(
     ...selectedLogoFiles.map((file) => `logos/${file}`),
     ...personPortraitFiles.map((file) => `people/${file}`),
     ...posterFiles.map((file) => `session-posters/${file}`),
+    ...paperPreviewFiles.map((file) => `paper-previews/${file}`),
   ],
 );
 
@@ -725,6 +729,15 @@ for (const paper of posterResearchPapers) {
   }
 }
 const posterImages = [...posterFragment.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+for (const route of ['index.html', 'poster/index.html']) {
+  const html = await readFile(path.join(outputRoot, route), 'utf8');
+  for (const preview of paperPreviews) {
+    const images = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]).filter((image) => image.includes(`src="${preview.src}"`));
+    if (images.length !== 1 || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"') || !html.includes(`href="${preview.pdfUrl}"`)) {
+      fail(`${route}: missing or non-lazy public PDF preview for ${preview.id}`);
+    }
+  }
+}
 if (posterImages.filter((image) => image.includes('-preview.webp')).length !== sessionPosters.length) {
   fail('index.html: every session must have exactly one preview image');
 }
@@ -832,7 +845,8 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
   if (!source.includes('data-masthead-pixel-field') || !source.includes('data-connection-stage')) {
     fail(`${route}: current inner page must expose the interactive masthead field`);
   }
-  const htmlByteLimit = route === 'schedule/index.html' ? 300_000 : 50_000;
+  // The paper directory includes static, accessible first-page PDF previews.
+  const htmlByteLimit = route === 'schedule/index.html' ? 300_000 : route === 'poster/index.html' ? 60_000 : 50_000;
   if ((await stat(path.join(outputRoot, route))).size > htmlByteLimit) {
     fail(`${route}: HTML exceeds ${Math.round(htmlByteLimit / 1000)} KB`);
   }

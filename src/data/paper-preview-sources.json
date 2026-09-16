@@ -1,0 +1,250 @@
+{
+  "checkedOn": "2026-09-16",
+  "papers": [
+    {
+      "id": "poster-d942ebf1012f",
+      "title": "CodeHacker: Automated Test Case Generation for Detecting Vulnerabilities in Competitive Programming Solutions",
+      "pdfUrl": "https://aclanthology.org/2026.acl-long.108.pdf",
+      "pdfSha256": "84ef423f8bbc95db1046f29ad66a5ac2a61529a781b50f0b3050a1859165f385"
+    },
+    {
+      "id": "poster-d2bfff1a8b53",
+      "title": "FormalMATH: Benchmarking Formal Mathematical Reasoning of Large Language Models",
+      "pdfUrl": "https://arxiv.org/pdf/2505.02735",
+      "pdfSha256": "df1a04f1f887b588268d06e02a5cbbbfd10629a7ab71c0b10b833145d2f75b07"
+    },
+    {
+      "id": "poster-ff735f051373",
+      "title": "Scaling Laws for Precision in High-Dimensional Linear Regression",
+      "pdfUrl": "https://arxiv.org/pdf/2602.19241",
+      "pdfSha256": "205ae39131aa3790822ef2104f9fb4408105536a824f4b34d9ca196b6bfb3c1d"
+    },
+    {
+      "id": "poster-339537805502",
+      "title": "Revisiting the Role of Pretrained Weights in Model Merging: On Near-Optimality within the Core Subspace",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-66e1317d6834",
+      "title": "Improving Memory Efficiency for Training KANs via Meta Learning",
+      "pdfUrl": "https://raw.githubusercontent.com/mlresearch/v267/main/assets/zhao25s/zhao25s.pdf",
+      "pdfSha256": "5676560b0cd6d530b43144b314a6cb46a36c62b360c2a8d506245f2bfa024f3e"
+    },
+    {
+      "id": "poster-beb01cdc9c2c",
+      "title": "The Implicit Bias of Steepest Descent with Mini-batch Stochastic Gradient",
+      "pdfUrl": "https://arxiv.org/pdf/2602.11557",
+      "pdfSha256": "6fab2babe590565a1735229a3eb0fc451a74808d17de2f95277c0cdd6b339de4"
+    },
+    {
+      "id": "poster-20d7627de19e",
+      "title": "STAR: A Benchmark for Astronomical Star Fields Super-Resolution",
+      "pdfUrl": "https://arxiv.org/pdf/2507.16385",
+      "pdfSha256": "c0bc3368c0f5f068a37fe5d8bf64b944bf4187490e004ba99e23bc69f5ce4dbc"
+    },
+    {
+      "id": "poster-1fd3f2cb86d6",
+      "title": "Agentic Proposing: Enhancing Large Language Model Reasoning via Compositional Skill Synthesis",
+      "pdfUrl": "https://arxiv.org/pdf/2602.03279",
+      "pdfSha256": "b974f97035e8ee226155d7e5d418f30a0fd89387da984a18a848631a2229ea62"
+    },
+    {
+      "id": "poster-5d114adf5204",
+      "title": "Reflect-then-Correct: Rebalancing Task Optimization for Generalizable Meta-Reinforcement Learning via Distributional Value Error Reduction",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-23d0d4153187",
+      "title": "Statistical Inference for Generative Model Comparison",
+      "pdfUrl": "https://arxiv.org/pdf/2501.18897",
+      "pdfSha256": "d6aa06d64ca8c457274fb8f92017c5c3e4a17e60afc0053dc4c1877de22c6fbc"
+    },
+    {
+      "id": "poster-02cffb08a0d2",
+      "title": "HyMAGE: Semantic-Aware Dynamic Hypergraph Generation",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-c5cc3c61e490",
+      "title": "Benign Overfitting in Adversarial Training for Vision Transformers",
+      "pdfUrl": "https://arxiv.org/pdf/2604.19724",
+      "pdfSha256": "ceb93de15b0039db6df4802fc21468fb5f22cedb3a9c9c7b40156906b926c4d2"
+    },
+    {
+      "id": "poster-136c923ca735",
+      "title": "A novel abnormal pore pressure prediction framework based on machine learning and drilling–rock mechanics parameter data",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-36f1f5719cb4",
+      "title": "Beyond Static Rules: Automated Discovery of Latent Vulnerabilities in Text-to-SQL",
+      "pdfUrl": "https://aclanthology.org/2026.findings-acl.842.pdf",
+      "pdfSha256": "a093560ce179e0c2eef8418757132a9e46c245e2f86a65eaadf3d2f16c08ab3a"
+    },
+    {
+      "id": "poster-3ab1bd2d3392",
+      "title": "PASTE-D2Net: Prior-Aware Spatio-Temporal Evolution Distillation Dual-Stream Network for Medical Single-Domain Generalization",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-f520da02c99f",
+      "title": "Augur: Modeling Covariate Causal Associations in Time Series via Large Language Models",
+      "pdfUrl": "https://aclanthology.org/2026.acl-long.32.pdf",
+      "pdfSha256": "243f56e4bed487444c4ccb897e79e673a0810ece6bb14d088c3463b76d370425"
+    },
+    {
+      "id": "poster-b40d938f20da",
+      "title": "AlphaEval: Evaluating Agents in Production",
+      "pdfUrl": "https://arxiv.org/pdf/2604.12162",
+      "pdfSha256": "a153dcc5cb9977dc5886c8b4bfaa2bdaefa627508c4e7d3b63c56db6641c0f3b"
+    },
+    {
+      "id": "poster-ea387cedd8d5",
+      "title": "IGNN-Solver: A Graph Neural Solver for Implicit Graph Neural Networks",
+      "pdfUrl": "https://arxiv.org/pdf/2410.08524",
+      "pdfSha256": "cde1b674f19bd7334bcaf5cabdace2e2a984b893ece3abb8187b72c2d22ea8e0"
+    },
+    {
+      "id": "poster-51a63928ed19",
+      "title": "Gaussian Herding across Pens: An Optimal Transport Perspective on Global Gaussian Reduction for 3DGS",
+      "pdfUrl": "https://arxiv.org/pdf/2506.09534",
+      "pdfSha256": "ee710832f1073f0d59b9a887daadd7f2564e1b7ee00f9ef199bb69f99bc179ac"
+    },
+    {
+      "id": "poster-ae83c43481fb",
+      "title": "MIHC: Multi-View Interpretable Hypergraph Neural Networks with Information Bottleneck for Chip Congestion Prediction",
+      "pdfUrl": "https://proceedings.neurips.cc/paper_files/paper/2025/file/7fc54f90195097ed0ee6200f1dc274d3-Paper-Conference.pdf",
+      "pdfSha256": "fb39ff72674dc852f44c9de60176940b7fae581b3bd894e65ae8b78c6ee5f7e6"
+    },
+    {
+      "id": "poster-70d62481de5a",
+      "title": "When Bias Pretends to Be Truth: How Spurious Correlations Undermine Hallucination Detection in LLMs",
+      "pdfUrl": "https://arxiv.org/pdf/2511.07318",
+      "pdfSha256": "6ab9b7b07f53cbd0ac70b25f109e71bf101228d3e5853f70e90550f297c9a8bd"
+    },
+    {
+      "id": "poster-c3b39bcfdced",
+      "title": "EfficientFlow: Efficient Equivariant Flow Policy Learning for Embodied AI",
+      "pdfUrl": "https://arxiv.org/pdf/2512.02020",
+      "pdfSha256": "70d2bdfa69293aafebdb566f33e6b2ae2e6bfd27804924aa64673c9cd7d138f2"
+    },
+    {
+      "id": "poster-0f7dd7296a17",
+      "title": "AGZO: Activation-Guided Zeroth-Order Optimization for LLM Fine-Tuning",
+      "pdfUrl": "https://arxiv.org/pdf/2601.17261",
+      "pdfSha256": "83d6a5eec7f179428d9ab6933174337789edf9f4e6c697aea6fa180cdc13a886"
+    },
+    {
+      "id": "poster-f1e5e20e6992",
+      "title": "STrajRAG: Supervised trajectory retrieval augmented generation for next POI recommendation with travel semantics",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-d9beb2030ac7",
+      "title": "Model-Based Imaginative Planning for Embodied Agents",
+      "pdfUrl": "https://aclanthology.org/2026.acl-long.827.pdf",
+      "pdfSha256": "02d3e34dd286a294d2544a0655909390dab1fbf9c21cdee50f5a1694669cc3c4"
+    },
+    {
+      "id": "poster-ddaa41f4696e",
+      "title": "Can MLLMs Understand the Deep Implication Behind Chinese Images?",
+      "pdfUrl": "https://aclanthology.org/2025.acl-long.700.pdf",
+      "pdfSha256": "3bdc8f86c65df1d6cbc0f74d5e6defc31f43fe7dfaaa946439f0fd0361849566"
+    },
+    {
+      "id": "poster-99b01821f1a9",
+      "title": "Logical Phase Transitions: Understanding Collapse in LLM Logical Reasoning",
+      "pdfUrl": "https://arxiv.org/pdf/2601.02902",
+      "pdfSha256": "9f76064a2aaafc31353a35b26a464c03d4cd350536639f4f0c974f19c944ecaf"
+    },
+    {
+      "id": "poster-b62b851b68d6",
+      "title": "Graph-GRPO: Training Graph Flow Models with Reinforcement Learning",
+      "pdfUrl": "https://arxiv.org/pdf/2603.10395",
+      "pdfSha256": "3db9977af72713aeaa5b407dcc76929bb1f7433ceb731becb19cb58d5bac46bd"
+    },
+    {
+      "id": "poster-0d0abb6e4c9e",
+      "title": "Delineating Knowledge Boundaries for Honest Large Vision-Language Models",
+      "pdfUrl": "https://arxiv.org/pdf/2604.26419",
+      "pdfSha256": "d6c1dbdf9399873443fb0b03c14e7c856876bc92eb5d06e402714bc2e39e3300"
+    },
+    {
+      "id": "poster-4c15e914b43e",
+      "title": "VKG-QA: Visual Knowledge Graph-based Question Answer for Large Multimodal Models",
+      "pdfUrl": "https://openaccess.thecvf.com/content/CVPR2026/papers/Du_VKG-QA_Visual_Knowledge_Graph-based_Question_Answer_for_Large_Multimodal_Models_CVPR_2026_paper.pdf",
+      "pdfSha256": "668f098154ef2fe8f6a69962c90a35e99c7e42d7b683edfc5a56db5be88c8d99",
+      "pdfTitle": "VKG-QA: Visual Knowledge Graph-based Question Answer for Multimodal Large Language Models",
+      "note": "CVF landing-page title differs slightly from the PDF title; same authors and official paper link."
+    },
+    {
+      "id": "poster-224c26c262ff",
+      "title": "Contractive Anchor Resolvent Diffusion for Incomplete Multi-View Clustering",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-37dfe0e91548",
+      "title": "DSN : Energy-efficient EMG signal classification method enabling real-time monitoring for edge healthcare",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-20cc69625fe7",
+      "title": "CWF: A Collaborative Writing Framework for Personalized and Reliable Popular Science Writing",
+      "pdfUrl": "https://arxiv.org/pdf/2609.06126",
+      "pdfSha256": "a0ce72490f6a7ae789b2127c63535daf421553f1f93dafb551125ef1a43c8d5f"
+    },
+    {
+      "id": "poster-63e8b1777613",
+      "title": "Questioning the Coverage-Length Metric in Conformal Prediction: When Shorter Intervals Are Not Better",
+      "pdfUrl": "https://arxiv.org/pdf/2601.21455",
+      "pdfSha256": "932cbebfd92611261d8c6ffa37e08e727e11ad3818e978c2e31bff989afc1450"
+    },
+    {
+      "id": "poster-a7172647caf8",
+      "title": "Co4ICF: Co-evolving Physics-Informed Surrogate and RL-based Pulse Optimizer for Inertial Confinement Fusion",
+      "pdfUrl": "https://arxiv.org/pdf/2607.10366",
+      "pdfSha256": "1e1478c05206934dc4ff3531e1cad225972f997c6ce2f8c3f1e909b0f67a7928"
+    },
+    {
+      "id": "poster-cb82eac05270",
+      "title": "Diversity-Enhanced and Classification-Aware Prompt Learning for Few-Shot Learning via Stable Diffusion",
+      "reason": "Public source not retrieved on 2026-09-16; original paper link retained."
+    },
+    {
+      "id": "poster-6fb10f7bfdf9",
+      "title": "CoVer: Conflict-Aware Claim Verification",
+      "pdfUrl": "https://arxiv.org/pdf/2609.00508",
+      "pdfSha256": "4c18e864171aec73e7412b5055be78811b85cb960b77a3e7cdcf0d4021206400"
+    },
+    {
+      "id": "poster-56378cca5d9b",
+      "title": "ScopeBench: Evaluating Cultural Norm Scope Awareness in LLMs",
+      "pdfUrl": "https://ziwayzhao.github.io/assets/pdf/ScopeBench.pdf",
+      "pdfSha256": "67676309778acc67a7c97d3881b633d031cfa26df63029e0ae96ffc930b1610e"
+    },
+    {
+      "id": "poster-22a8ed133827",
+      "title": "Meric: A Unified Framework for Multimodal Music Generation and Retrieval via Representation Space Anchoring",
+      "pdfUrl": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/2169.pdf",
+      "pdfSha256": "fefb9687c5dd03734c2cbf1e7d8d75496c7d2992773e98d85f7bbb0c9a9e642e"
+    },
+    {
+      "id": "poster-c2d192f2a71b",
+      "title": "MoFO: Momentum-Filtered Optimizer for Mitigating Forgetting in LLM Fine-Tuning",
+      "pdfUrl": "https://arxiv.org/pdf/2407.20999",
+      "pdfSha256": "475c321f15ab0cf9828a1774e95be336357c9dcd673fb89f7dde3e847008e2ef"
+    },
+    {
+      "id": "poster-d89d4985330b",
+      "title": "CSRv2: Unlocking Ultra-Sparse Embeddings",
+      "pdfUrl": "https://arxiv.org/pdf/2602.05735",
+      "pdfSha256": "7ba109ef95c075cec6072dee3080e28f7548058080e30df436abc00b7b94c113"
+    },
+    {
+      "id": "poster-85bec19ca7b9",
+      "title": "Hystar: Hypernetwork-driven Style-adaptive Retrieval via Dynamic SVD Modulation",
+      "pdfUrl": "https://arxiv.org/pdf/2605.10009",
+      "pdfSha256": "43e7c7be9b40f3edf7a82e45f1b83a5a5f327275f56ea71b5462feffdece1431"
+    }
+  ]
+}
