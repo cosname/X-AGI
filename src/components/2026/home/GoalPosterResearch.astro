@@ -1,5 +1,7 @@
 ---
 import { posterResearchPapers } from '../../../data/poster-research.generated';
+import { paperPreviewById } from '../../../data/paper-previews';
+import PaperPreview from '../PaperPreview.astro';
 import '../../../styles/goal-poster-research.css';
 ---
 
@@ -33,9 +35,11 @@ import '../../../styles/goal-poster-research.css';
     <ul class="goal-poster-research__track" role="list" data-home-research-track>
       {posterResearchPapers.map((paper) => (
         <li class="goal-poster-research__card" id={`home-${paper.id}`} data-home-research-card>
+          <PaperPreview paperId={paper.id} titleId={`home-${paper.id}-title`} />
+          {!paperPreviewById.has(paper.id) && <p class="goal-poster-research__preview-missing">论文预览暂未提供</p>}
           <a class="goal-poster-research__paper" href={paper.href} target="_blank" rel="noopener noreferrer">
             <span class="goal-poster-research__venue" data-home-research-venue>{paper.venue}</span>
-            <h3>{paper.title}</h3>
+            <h3 id={`home-${paper.id}-title`}>{paper.title}</h3>
             <p class="goal-poster-research__person">
               <span><span class="goal-poster-research__label">报名人</span> <span data-home-research-name>{paper.applicantName}</span></span>
               <span data-home-research-affiliation>{paper.affiliation}</span>

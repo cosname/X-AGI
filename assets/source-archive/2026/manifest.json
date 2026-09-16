@@ -5,9 +5,9 @@
   "lastExtendedOn": "2026-09-16",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 125,
-  "uniquePayloadCount": 124,
-  "archiveFileCount": 123,
+  "sourceEntryCount": 158,
+  "uniquePayloadCount": 157,
+  "archiveFileCount": 156,
   "entries": [
     {
       "originalPath": "1.png",
@@ -2079,6 +2079,534 @@
         "public/2026/session-posters/session-14-preview.webp"
       ],
       "note": "Deterministic print poster composed from the archived generated background and existing public conference program, speaker information and portraits. WebP runtime exports serve the homepage poster gallery."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-d942ebf1012f-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-d942ebf1012f-first-page.png",
+      "status": "archived",
+      "sha256": "7fabdd5cd6b1b50fdb6c3d75341df8fc9ff468fca9c21a655fb70c1e1808e20b",
+      "bytes": 440697,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-d942ebf1012f-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://aclanthology.org/2026.acl-long.108.pdf. PDF SHA-256: 84ef423f8bbc95db1046f29ad66a5ac2a61529a781b50f0b3050a1859165f385."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-d2bfff1a8b53-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-d2bfff1a8b53-first-page.png",
+      "status": "archived",
+      "sha256": "57caf8d447fee32ab73c85bbbd04caac26d64d12986882a1c22cb1c5f20c4bec",
+      "bytes": 352852,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-d2bfff1a8b53-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2505.02735. PDF SHA-256: df1a04f1f887b588268d06e02a5cbbbfd10629a7ab71c0b10b833145d2f75b07."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-ff735f051373-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-ff735f051373-first-page.png",
+      "status": "archived",
+      "sha256": "85ac6aab77e6dbd9fe4b7f3bb1cce44a1958867b4d0919be55d870cee30ef932",
+      "bytes": 319311,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-ff735f051373-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2602.19241. PDF SHA-256: 205ae39131aa3790822ef2104f9fb4408105536a824f4b34d9ca196b6bfb3c1d."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-66e1317d6834-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-66e1317d6834-first-page.png",
+      "status": "archived",
+      "sha256": "a69ef1befdcc579c9c8205d6db494f93a9c08488518a962b0fe290037f91cd5d",
+      "bytes": 454012,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-66e1317d6834-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://raw.githubusercontent.com/mlresearch/v267/main/assets/zhao25s/zhao25s.pdf. PDF SHA-256: 5676560b0cd6d530b43144b314a6cb46a36c62b360c2a8d506245f2bfa024f3e."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-beb01cdc9c2c-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-beb01cdc9c2c-first-page.png",
+      "status": "archived",
+      "sha256": "3382f6d39035be3a4b211dc6221da8286abc0c10b8af4542ae6518eeedd2d39e",
+      "bytes": 309210,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-beb01cdc9c2c-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2602.11557. PDF SHA-256: 6fab2babe590565a1735229a3eb0fc451a74808d17de2f95277c0cdd6b339de4."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-20d7627de19e-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-20d7627de19e-first-page.png",
+      "status": "archived",
+      "sha256": "7ff6b774a9cd1ed3ce437a321a8093ac2ae06b43e49b26590ba67fb22138f23f",
+      "bytes": 323591,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-20d7627de19e-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2507.16385. PDF SHA-256: c0bc3368c0f5f068a37fe5d8bf64b944bf4187490e004ba99e23bc69f5ce4dbc."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-1fd3f2cb86d6-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-1fd3f2cb86d6-first-page.png",
+      "status": "archived",
+      "sha256": "76ac14bc08d2bf9c4ad5497d711d94a00478424fe55229074750273c9ea658c2",
+      "bytes": 333374,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-1fd3f2cb86d6-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2602.03279. PDF SHA-256: b974f97035e8ee226155d7e5d418f30a0fd89387da984a18a848631a2229ea62."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-23d0d4153187-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-23d0d4153187-first-page.png",
+      "status": "archived",
+      "sha256": "994e49273699530fd8a676d73dec987493bae003b389b72f3b030baad16f11d0",
+      "bytes": 335792,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-23d0d4153187-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2501.18897. PDF SHA-256: d6aa06d64ca8c457274fb8f92017c5c3e4a17e60afc0053dc4c1877de22c6fbc."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-c5cc3c61e490-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-c5cc3c61e490-first-page.png",
+      "status": "archived",
+      "sha256": "31a14210cc6755d46f74443247bbaee1be4ca1aa903d651d30e2c1289126a751",
+      "bytes": 468364,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-c5cc3c61e490-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2604.19724. PDF SHA-256: ceb93de15b0039db6df4802fc21468fb5f22cedb3a9c9c7b40156906b926c4d2."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-36f1f5719cb4-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-36f1f5719cb4-first-page.png",
+      "status": "archived",
+      "sha256": "8932de47b21234f9262d6b95ea48faf608da68f9b1fd772d153559538899eda4",
+      "bytes": 444687,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-36f1f5719cb4-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://aclanthology.org/2026.findings-acl.842.pdf. PDF SHA-256: a093560ce179e0c2eef8418757132a9e46c245e2f86a65eaadf3d2f16c08ab3a."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-f520da02c99f-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-f520da02c99f-first-page.png",
+      "status": "archived",
+      "sha256": "3871a28508c53577dddc1da4a1596a5e695d6e48893cb6f591d39ec66fb36459",
+      "bytes": 476811,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-f520da02c99f-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://aclanthology.org/2026.acl-long.32.pdf. PDF SHA-256: 243f56e4bed487444c4ccb897e79e673a0810ece6bb14d088c3463b76d370425."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-b40d938f20da-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-b40d938f20da-first-page.png",
+      "status": "archived",
+      "sha256": "c3e311a5a48755d24f8e2570986a4cd715085d74d783b9eb6dcc13197c8e456b",
+      "bytes": 523464,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-b40d938f20da-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2604.12162. PDF SHA-256: a153dcc5cb9977dc5886c8b4bfaa2bdaefa627508c4e7d3b63c56db6641c0f3b."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-ea387cedd8d5-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-ea387cedd8d5-first-page.png",
+      "status": "archived",
+      "sha256": "884ad637b05c8be41f1bac2d4b6b265eb1b4302079b1a5b4a4a568cb5ce8f972",
+      "bytes": 584081,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-ea387cedd8d5-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2410.08524. PDF SHA-256: cde1b674f19bd7334bcaf5cabdace2e2a984b893ece3abb8187b72c2d22ea8e0."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-51a63928ed19-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-51a63928ed19-first-page.png",
+      "status": "archived",
+      "sha256": "3cf594ff8bb5c9bbb682ea29330bb43a138a0cb055df427ce682f45b4e026456",
+      "bytes": 429170,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-51a63928ed19-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2506.09534. PDF SHA-256: ee710832f1073f0d59b9a887daadd7f2564e1b7ee00f9ef199bb69f99bc179ac."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-ae83c43481fb-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-ae83c43481fb-first-page.png",
+      "status": "archived",
+      "sha256": "8890fad588b83ade56f1f2a381d1c8ce54a39acd26c1f725aa4757696c6a2f5d",
+      "bytes": 304650,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-ae83c43481fb-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://proceedings.neurips.cc/paper_files/paper/2025/file/7fc54f90195097ed0ee6200f1dc274d3-Paper-Conference.pdf. PDF SHA-256: fb39ff72674dc852f44c9de60176940b7fae581b3bd894e65ae8b78c6ee5f7e6."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-70d62481de5a-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-70d62481de5a-first-page.png",
+      "status": "archived",
+      "sha256": "b535d3f2105420c04ef8a6ea30ad1b2cd948405ba20534d9bcfe918f18bc96c3",
+      "bytes": 311466,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-70d62481de5a-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2511.07318. PDF SHA-256: 6ab9b7b07f53cbd0ac70b25f109e71bf101228d3e5853f70e90550f297c9a8bd."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-c3b39bcfdced-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-c3b39bcfdced-first-page.png",
+      "status": "archived",
+      "sha256": "b1e3529cfc9d3680692df3060b98ef8117ba40a332cea6ae839de419ca453d83",
+      "bytes": 388978,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-c3b39bcfdced-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2512.02020. PDF SHA-256: 70d2bdfa69293aafebdb566f33e6b2ae2e6bfd27804924aa64673c9cd7d138f2."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-0f7dd7296a17-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-0f7dd7296a17-first-page.png",
+      "status": "archived",
+      "sha256": "9a6039b383e5fe9b540cbfc1a378ae28f115ef9c20ffdd034287b78cd2972d2a",
+      "bytes": 474557,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-0f7dd7296a17-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2601.17261. PDF SHA-256: 83d6a5eec7f179428d9ab6933174337789edf9f4e6c697aea6fa180cdc13a886."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-d9beb2030ac7-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-d9beb2030ac7-first-page.png",
+      "status": "archived",
+      "sha256": "89803843d9068066c1555a2d4752cc867547e675143915ea9d5ba1fcb294a76a",
+      "bytes": 454568,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-d9beb2030ac7-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://aclanthology.org/2026.acl-long.827.pdf. PDF SHA-256: 02d3e34dd286a294d2544a0655909390dab1fbf9c21cdee50f5a1694669cc3c4."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-ddaa41f4696e-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-ddaa41f4696e-first-page.png",
+      "status": "archived",
+      "sha256": "bd7d19d901a0cd6f17d06dee12b78ba63270912efcee14176ad6f1f73d4bb7a5",
+      "bytes": 573230,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-ddaa41f4696e-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://aclanthology.org/2025.acl-long.700.pdf. PDF SHA-256: 3bdc8f86c65df1d6cbc0f74d5e6defc31f43fe7dfaaa946439f0fd0361849566."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-99b01821f1a9-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-99b01821f1a9-first-page.png",
+      "status": "archived",
+      "sha256": "e48a2a45dbd2efe74dd1c850eed367fab21f31dd6e3da91e8bb7a5f8aa59e99d",
+      "bytes": 441985,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-99b01821f1a9-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2601.02902. PDF SHA-256: 9f76064a2aaafc31353a35b26a464c03d4cd350536639f4f0c974f19c944ecaf."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-b62b851b68d6-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-b62b851b68d6-first-page.png",
+      "status": "archived",
+      "sha256": "03fbab4d9b05093908b23e50d2a7e1f7553e8058efe56f92cb58bf64652b6b8f",
+      "bytes": 456705,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-b62b851b68d6-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2603.10395. PDF SHA-256: 3db9977af72713aeaa5b407dcc76929bb1f7433ceb731becb19cb58d5bac46bd."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-0d0abb6e4c9e-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-0d0abb6e4c9e-first-page.png",
+      "status": "archived",
+      "sha256": "f61a7d2bac684b42baccdf8cfa93b3b3558bd5fd5b6f69bccb0e24a8e9ab25e5",
+      "bytes": 244006,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-0d0abb6e4c9e-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2604.26419. PDF SHA-256: d6c1dbdf9399873443fb0b03c14e7c856876bc92eb5d06e402714bc2e39e3300."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-4c15e914b43e-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-4c15e914b43e-first-page.png",
+      "status": "archived",
+      "sha256": "5b78ecd63abfd9bd5bb1895c8677bcd2ba85c249f2b09ea0a96c43fe4e9bccde",
+      "bytes": 481629,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-4c15e914b43e-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://openaccess.thecvf.com/content/CVPR2026/papers/Du_VKG-QA_Visual_Knowledge_Graph-based_Question_Answer_for_Large_Multimodal_Models_CVPR_2026_paper.pdf. PDF SHA-256: 668f098154ef2fe8f6a69962c90a35e99c7e42d7b683edfc5a56db5be88c8d99."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-20cc69625fe7-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-20cc69625fe7-first-page.png",
+      "status": "archived",
+      "sha256": "03565f8f17bc111c4f3324d936cb83f0a57525eb6a8322c405a72a442e98a7e2",
+      "bytes": 414181,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-20cc69625fe7-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2609.06126. PDF SHA-256: a0ce72490f6a7ae789b2127c63535daf421553f1f93dafb551125ef1a43c8d5f."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-63e8b1777613-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-63e8b1777613-first-page.png",
+      "status": "archived",
+      "sha256": "52851c4e625094d9609ffecc3320da70171c7df7e01556381da55ee915bee3c5",
+      "bytes": 447612,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-63e8b1777613-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2601.21455. PDF SHA-256: 932cbebfd92611261d8c6ffa37e08e727e11ad3818e978c2e31bff989afc1450."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-a7172647caf8-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-a7172647caf8-first-page.png",
+      "status": "archived",
+      "sha256": "a303f68d3b9861a5687808f69fba290807d9589f115b64658321432aa13d06d3",
+      "bytes": 357885,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-a7172647caf8-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2607.10366. PDF SHA-256: 1e1478c05206934dc4ff3531e1cad225972f997c6ce2f8c3f1e909b0f67a7928."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-6fb10f7bfdf9-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-6fb10f7bfdf9-first-page.png",
+      "status": "archived",
+      "sha256": "93cb81ec9fc0fa1ad9bbd1474a1dc67da3984179f19de97bf2f5f37902ea7717",
+      "bytes": 434443,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-6fb10f7bfdf9-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2609.00508. PDF SHA-256: 4c18e864171aec73e7412b5055be78811b85cb960b77a3e7cdcf0d4021206400."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-56378cca5d9b-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-56378cca5d9b-first-page.png",
+      "status": "archived",
+      "sha256": "1e1c30f5d6836355fff6f8843c4f01f0b3fdf6e86190c2c5fd8868e3189907e8",
+      "bytes": 453615,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 990,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-56378cca5d9b-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://ziwayzhao.github.io/assets/pdf/ScopeBench.pdf. PDF SHA-256: 67676309778acc67a7c97d3881b633d031cfa26df63029e0ae96ffc930b1610e."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-22a8ed133827-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-22a8ed133827-first-page.png",
+      "status": "archived",
+      "sha256": "bdcf548bc14e3c4c5a6c4891a81099479665adf214d4dd2fb15cf6afc2e1ff76",
+      "bytes": 234706,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-22a8ed133827-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/2169.pdf. PDF SHA-256: fefb9687c5dd03734c2cbf1e7d8d75496c7d2992773e98d85f7bbb0c9a9e642e."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-c2d192f2a71b-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-c2d192f2a71b-first-page.png",
+      "status": "archived",
+      "sha256": "3c051c6b990bb5e92d85e9e6670958442230ea6adf68ae833ad9573bae001c81",
+      "bytes": 262143,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-c2d192f2a71b-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2407.20999. PDF SHA-256: 475c321f15ab0cf9828a1774e95be336357c9dcd673fb89f7dde3e847008e2ef."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-d89d4985330b-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-d89d4985330b-first-page.png",
+      "status": "archived",
+      "sha256": "f83fd28727f008b88992e221492c56fa3e2ce9e7c36d8a6349cf99195b599944",
+      "bytes": 365845,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-d89d4985330b-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2602.05735. PDF SHA-256: 7ba109ef95c075cec6072dee3080e28f7548058080e30df436abc00b7b94c113."
+    },
+    {
+      "originalPath": "public-paper-previews-20260916/poster-85bec19ca7b9-first-page.png",
+      "canonicalPath": "assets/source-archive/2026/paper-previews/poster-85bec19ca7b9-first-page.png",
+      "status": "archived",
+      "sha256": "60a9260a98700b82cb38363fef32fcb32864a67c602da58b3f5569e4a584b9a0",
+      "bytes": 361075,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1082,
+        "height": 1400
+      },
+      "runtimeCounterparts": [
+        "public/2026/paper-previews/poster-85bec19ca7b9-preview.webp"
+      ],
+      "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2605.10009. PDF SHA-256: 43e7c7be9b40f3edf7a82e45f1b83a5a5f327275f56ea71b5462feffdece1431."
     }
   ]
 }

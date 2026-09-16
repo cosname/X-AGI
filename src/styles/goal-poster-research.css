@@ -182,10 +182,21 @@
 
 .goal-poster-research__card {
   display: flex;
+  flex-direction: column;
   min-width: 0;
+  padding-top: 1.1rem;
   border-top: 1px solid var(--journey-line, rgb(17 19 66 / 0.14));
   scroll-margin-top: calc(var(--site-header-height, 5rem) + 1rem);
   scroll-snap-align: start;
+}
+
+.goal-poster-research__preview-missing {
+  display: flex;
+  align-items: center;
+  min-height: calc(19rem + 1.88rem);
+  margin: 0;
+  color: var(--home-research-muted);
+  font-size: 0.85rem;
 }
 
 .goal-poster-research .goal-poster-research__paper {

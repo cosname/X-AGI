@@ -1,0 +1,49 @@
+---
+import { paperPreviewById } from '../../data/paper-previews';
+const { paperId, titleId } = Astro.props;
+const preview = paperPreviewById.get(paperId);
+---
+
+{preview && (
+  <a class="paper-preview" href={preview.pdfUrl} target="_blank" rel="noopener noreferrer" aria-describedby={titleId}>
+    <img src={preview.src} width={preview.width} height={preview.height} alt="" loading="lazy" decoding="async" />
+    <span>论文预览 <span aria-hidden="true">↗</span><small>PDF 首页</small></span>
+  </a>
+)}
+
+<style is:global>
+  .paper-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: var(--goal-purple-deep, #4f3caf);
+    text-decoration: none;
+  }
+  .paper-preview img {
+    display: block;
+    width: 100%;
+    height: 19rem;
+    object-fit: contain;
+    object-position: left center;
+  }
+  .paper-preview > span {
+    display: flex;
+    gap: 0.4rem;
+    align-items: baseline;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .paper-preview small {
+    margin-left: auto;
+    color: var(--muted, #555572);
+    font-size: 0.72rem;
+  }
+  .paper-preview:hover > span {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .paper-preview:focus-visible {
+    outline: 2px solid var(--goal-purple-deep, #4f3caf);
+    outline-offset: 3px;
+  }
+</style>
