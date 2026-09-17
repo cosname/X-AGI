@@ -15,6 +15,7 @@ import { partnerLogoByName } from '../src/data/partner-logo-assets-2026.ts';
 import { currentEditionPageCopy } from '../src/config/edition-status.ts';
 import { site } from '../src/config/site.ts';
 import { sessionPosters } from '../src/data/session-posters.ts';
+import { homeSpeakers } from '../src/data/home-speakers.ts';
 import { posterResearchPapers, posterResearchSource } from '../src/data/poster-research.generated.ts';
 import { paperPreviews } from '../src/data/paper-previews.ts';
 
@@ -696,6 +697,7 @@ for (const marker of [
   'edition-goal-home--with-lower',
   'id="goal-history"',
   'id="goal-organization"',
+  'id="goal-speakers"',
   'id="goal-session-posters"',
   'data-home-speakers',
   'id="goal-poster-research"',
@@ -704,20 +706,30 @@ for (const marker of [
 ]) {
   if (!rootIndex.includes(marker)) fail(`index.html: missing published homepage marker "${marker}"`);
 }
-const posterStart = rootIndex.indexOf('id="goal-session-posters"');
+const speakerStart = rootIndex.indexOf('id="goal-speakers"');
 const homeResearchStart = rootIndex.indexOf('id="goal-poster-research"');
-if (posterStart < 0 || homeResearchStart <= posterStart || historyStart <= homeResearchStart) {
+if (speakerStart < 0 || homeResearchStart <= speakerStart || historyStart <= homeResearchStart) {
   fail('index.html: separate speaker and Poster paper sections must precede conference history, in that order');
 }
-const posterFragment = rootIndex.slice(posterStart, homeResearchStart);
-if (!visibleText(posterFragment).includes('演讲嘉宾')) fail('index.html: speaker section must have a visible speaker heading');
-for (const poster of sessionPosters) {
-  for (const value of [poster.previewSrc, poster.posterSrc, poster.title.replaceAll('&', '&amp;')]) {
-    if (!posterFragment.includes(value)) fail(`index.html: missing ${poster.id} gallery content: ${value}`);
+const speakerFragment = rootIndex.slice(speakerStart, homeResearchStart);
+if (!visibleText(speakerFragment).includes('演讲嘉宾')) fail('index.html: speaker section must have a visible speaker heading');
+if (/data-poster-open|data-poster-dialog|\/2026\/session-posters\//.test(speakerFragment)) {
+  fail('index.html: the speaker lineup must show people directly rather than session posters');
+}
+const speakerCards = [...speakerFragment.matchAll(/<li\b[^>]*data-home-speaker="([^"]+)"[^>]*>([\s\S]*?)<\/li>/g)];
+validateExactSet('homepage speaker roster', speakerCards.map((card) => card[1]), homeSpeakers.map((speaker) => speaker.id));
+if (speakerCards.length !== homeSpeakers.length) fail('index.html: every homepage speaker must appear exactly once');
+for (const speaker of homeSpeakers) {
+  const card = speakerCards.find((match) => match[1] === speaker.id)?.[2] ?? '';
+  for (const value of [speaker.name, speaker.position, speaker.affiliation].filter(Boolean)) {
+    if (!visibleText(card).includes(value)) fail(`index.html: missing ${speaker.id} profile text: ${value}`);
   }
-  for (const speaker of poster.speakers) {
-    if (!visibleText(posterFragment).includes(speaker.name)) fail(`index.html: missing visible speaker name ${speaker.name}`);
+  const images = [...card.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+  if (images.length !== 1 || !images[0].includes(`src="${speaker.portraitSrc}"`)
+    || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"')) {
+    fail(`index.html: ${speaker.id} must have its existing portrait with lazy loading`);
   }
+  if (!card.includes(`href="${speaker.href}"`)) fail(`index.html: missing schedule profile link for ${speaker.id}`);
 }
 const homeResearchFragment = rootIndex.slice(homeResearchStart, historyStart);
 const homeResearchText = visibleText(homeResearchFragment);
@@ -737,7 +749,6 @@ for (const paper of posterResearchPapers) {
     fail(`index.html: homepage Poster section is missing the public paper link for ${paper.id}`);
   }
 }
-const posterImages = [...posterFragment.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
 for (const route of ['index.html', 'poster/index.html']) {
   const html = await readFile(path.join(outputRoot, route), 'utf8');
   for (const preview of paperPreviews) {
@@ -745,14 +756,6 @@ for (const route of ['index.html', 'poster/index.html']) {
     if (images.length !== 1 || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"') || !html.includes(`href="${preview.href.replaceAll('&', '&amp;')}"`)) {
       fail(`${route}: missing or non-lazy submitted PDF preview for ${preview.id}`);
     }
-  }
-}
-if (posterImages.filter((image) => image.includes('-preview.webp')).length !== sessionPosters.length) {
-  fail('index.html: every session must have exactly one preview image');
-}
-for (const image of posterImages.filter((image) => image.includes('-preview.webp'))) {
-  if (!image.includes('loading="lazy"') || !image.includes('decoding="async"')) {
-    fail('index.html: session poster previews must load lazily with async decoding');
   }
 }
 if (!rootIndex.includes('property="og:image"') || !rootIndex.includes('/2026/brand/share-2026.png')) {
@@ -910,6 +913,10 @@ for (const paper of posterResearchPapers) {
 }
 
 const scheduleSource = await readFile(path.join(outputRoot, 'schedule/index.html'), 'utf8');
+for (const speaker of homeSpeakers) {
+  const target = speaker.href.split('#')[1];
+  if (!scheduleSource.includes(`id="${target}"`)) fail(`index.html: broken schedule profile target for ${speaker.id}`);
+}
 const scheduleVisibleText = visibleText(scheduleSource);
 const scheduleMetaIndex = scheduleSource.indexOf('class="page-header__meta"');
 const scheduleMainIndex = scheduleSource.indexOf('data-schedule-page');

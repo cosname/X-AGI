@@ -1,0 +1,69 @@
+---
+import { homeSpeakers } from '../../../data/home-speakers';
+import '../../../styles/goal-speakers.css';
+---
+
+<section class="goal-speakers" id="goal-speakers" aria-labelledby="home-speakers-title" data-home-speakers>
+  <span id="goal-session-posters" class="goal-speakers__legacy-anchor" aria-hidden="true"></span>
+  <header class="goal-speakers__heading">
+    <div>
+      <p class="goal-speakers__eyebrow">SPEAKERS</p>
+      <h2 id="home-speakers-title">演讲嘉宾</h2>
+    </div>
+    <a class="goal-speakers__schedule-link" href="/schedule/">
+      完整日程 <span aria-hidden="true">↗</span>
+    </a>
+  </header>
+
+  <div
+    class="goal-speakers__viewport"
+    id="home-speakers-viewport"
+    role="region"
+    aria-label="演讲嘉宾阵容"
+    aria-describedby="home-speakers-hint"
+    tabindex="0"
+    data-speaker-viewport
+  >
+    <ol class="goal-speakers__track" data-speaker-track>
+      {homeSpeakers.map((speaker) => (
+        <li class="goal-speakers__person" data-home-speaker={speaker.id}>
+          <a class="goal-speakers__profile" href={speaker.href}>
+            <img
+              class="goal-speakers__portrait"
+              src={speaker.portraitSrc}
+              alt=""
+              width="640"
+              height="640"
+              loading="lazy"
+              decoding="async"
+            />
+            <h3 class="goal-speakers__identity">
+              <span class="goal-speakers__name">{speaker.name}</span>
+              {speaker.position && (
+                <>
+                  <span class="goal-speakers__separator" aria-hidden="true">|</span>
+                  <span class="goal-speakers__position">{speaker.position}</span>
+                </>
+              )}
+            </h3>
+            <p class="goal-speakers__affiliation">{speaker.affiliation}</p>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <footer class="goal-speakers__browse">
+    <p id="home-speakers-hint">横向浏览嘉宾 <span aria-hidden="true">→</span></p>
+    <div class="goal-speakers__arrows" role="group" aria-label="浏览演讲嘉宾" data-speaker-arrows hidden>
+      <button type="button" aria-label="上一组嘉宾" aria-controls="home-speakers-viewport" data-speaker-previous>
+        <span aria-hidden="true">←</span>
+      </button>
+      <button type="button" aria-label="下一组嘉宾" aria-controls="home-speakers-viewport" data-speaker-next>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </footer>
+</section>
+
+<script src="../../../scripts/home-speakers.ts"></script>
