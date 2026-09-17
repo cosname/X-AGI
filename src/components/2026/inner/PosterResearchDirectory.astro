@@ -23,10 +23,15 @@ const venues = [...new Set(posterResearchPapers.map((paper) => paper.venue))]
       </label>
       <label class="poster-research__filter">
         <span>会议 / 期刊</span>
-        <select aria-controls="poster-research-list" data-research-filter>
-          <option value="">全部会议 / 期刊</option>
-          {venues.map((venue) => <option value={venue}>{venue}</option>)}
-        </select>
+        <span class="poster-research__select">
+          <select aria-controls="poster-research-list" data-research-filter>
+            <option value="">全部会议 / 期刊</option>
+            {venues.map((venue) => <option value={venue}>{venue}</option>)}
+          </select>
+          <svg class="poster-research__select-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+            <path d="m5 7.5 5 5 5-5" />
+          </svg>
+        </span>
       </label>
       <button type="button" class="poster-research__clear" data-research-clear disabled>清除筛选</button>
       <p class="poster-research__results" role="status" aria-live="polite" aria-atomic="true" data-research-results>
