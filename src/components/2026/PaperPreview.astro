@@ -5,7 +5,7 @@ const preview = paperPreviewById.get(paperId);
 ---
 
 {preview && (
-  <a class="paper-preview" href={preview.pdfUrl} target="_blank" rel="noopener noreferrer" aria-describedby={titleId}>
+  <a class="paper-preview" href={preview.href} target="_blank" rel="noopener noreferrer" aria-describedby={titleId}>
     <img src={preview.src} width={preview.width} height={preview.height} alt="" loading="lazy" decoding="async" />
     <span>论文预览 <span aria-hidden="true">↗</span><small>PDF 首页</small></span>
   </a>
