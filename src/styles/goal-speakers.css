@@ -202,7 +202,7 @@
 @media (max-width: 48rem) {
   .goal-speakers {
     --speaker-edge: 1rem;
-    --speaker-width: 13rem;
+    --speaker-width: 14rem;
   }
 
   .goal-speakers__heading,

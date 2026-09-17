@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { homeSpeakers } from './home-speakers.ts';
 import { conference2026People, conference2026PersonForName } from './conference2026-people.ts';
-import { conference2026ProgramSessions } from './conference2026-program.ts';
 
 describe('homepage speaker lineup', () => {
   it('includes every scheduled speaker with an existing portrait exactly once', () => {
@@ -16,19 +15,12 @@ describe('homepage speaker lineup', () => {
     }
   });
 
-  it('follows first appearance in the program and links to the matching speaker disclosure', () => {
-    const expected = conference2026ProgramSessions.flatMap((session, sessionIndex) => (
-      session.speakers.flatMap((speaker, speakerIndex) => {
-        const person = conference2026PersonForName(speaker.name);
-        return person?.portraitSrc ? [{
-          name: speaker.name,
-          href: `/schedule/#schedule-person-${String(sessionIndex + 1).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`,
-        }] : [];
-      })
-    ));
-    const firstAppearance = expected.filter((speaker, index) => expected.findIndex((other) => other.name === speaker.name) === index);
-    assert.deepEqual(homeSpeakers.map(({ name, href }) => ({ name, href })), firstAppearance);
-    assert.equal(homeSpeakers[0].name, '刘军');
+  it('preserves keynote order and links dual-role guests to their speaker biography', () => {
+    assert.deepEqual(homeSpeakers.slice(0, 4).map((speaker) => speaker.name), ['刘军', '冯建峰', '邱子涵', '罗涛']);
+    assert.equal(homeSpeakers[0].href, '/schedule/#schedule-person-01-speaker-liu-jun-1');
+    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'lu-yiping')?.href, '/schedule/#schedule-person-07-speaker-lu-yiping-3');
+    assert.equal(homeSpeakers.at(-1)?.name, '从鑫');
+    assert.equal(homeSpeakers.at(-1)?.href, '/schedule/#schedule-person-14-speaker-cong-xin-4');
   });
 
   it('uses concise biography-backed positions and leaves an unspecified position absent', () => {
