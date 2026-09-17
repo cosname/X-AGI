@@ -5,7 +5,7 @@ import {
 
 // Organizer-confirmed addition, 2026-09-17: Liu Jun gives the opening address.
 // Keep the Tencent snapshot intact; retire this supplement when the source owns it.
-const organizerRemarks = { name: '刘军', talkTitle: '主办方致辞' } as const;
+const organizerRemarks = { name: '刘军', affiliation: '清华大学', talkTitle: '主办方致辞' } as const;
 
 export function withOrganizerRemarks(
   sessions: readonly Conference2026ProgramSourceSession[],
@@ -19,7 +19,7 @@ export function withOrganizerRemarks(
     return {
       ...session,
       speakers: [
-        { ...existing, ...organizerRemarks },
+        { ...organizerRemarks, ...existing, talkTitle: organizerRemarks.talkTitle },
         ...session.speakers.filter((speaker) => speaker.name !== organizerRemarks.name),
       ],
     };

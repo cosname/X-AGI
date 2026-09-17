@@ -105,7 +105,7 @@ describe('conference schedule contracts', () => {
 
   it('keeps the organizer address first without duplicating later source updates', () => {
     const keynote = conference2026ProgramSessions.find((session) => session.title === 'Keynote')!;
-    assert.deepEqual(keynote.speakers[0], { name: '刘军', talkTitle: '主办方致辞' });
+    assert.deepEqual(keynote.speakers[0], { name: '刘军', affiliation: '清华大学', talkTitle: '主办方致辞' });
     assert.deepEqual(keynote.speakers.slice(1).map((speaker) => speaker.name), ['孙茂松', '冯建峰', '邱子涵']);
     assert.deepEqual(conference2026ProgramSessions.slice(1), conference2026ProgramSource.sessions.slice(1));
 
