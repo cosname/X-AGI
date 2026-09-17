@@ -26,7 +26,8 @@
 
 ## 官网入口
 
-- `/guide/#travel-grant` 在“交通与住宿”下方展示完整补助说明。
+- `/travel-grant/` 展示完整补助说明，2026 顶部导航提供独立的“差旅补助”入口。
+- `/guide/#travel-grant` 与 `/poster/#travel-grant` 保留详情链接，兼容既有分享地址。
 - `/register/` 在票价表前展示补助提示，并链接至完整说明。
 - `/poster/` 在入选权益处展示补助摘要及详情入口。
 
@@ -35,6 +36,13 @@
 已读取二维码对应的百格页面，确认其 `eventId` 为 `9252233`，与官网入口一致。
 
 ## 验证记录
+
+2026-09-17 将完整说明移至独立 `/travel-grant/` 页面，顶部导航增加“差旅补助”，并更新 Poster、指南与报名页入口。
+保留 `/poster/#travel-grant` 和 `/guide/#travel-grant` 的详情链接。
+在 1440、390、320 像素宽度下核对补助金额、申请条件、申请流程与报名目标，并通过原生键盘操作验证导航和旧锚点入口。
+本次截图与检查记录保存在忽略的 `output/program-travel-grant-20260917/`。
+
+以下为 2026-09-05 初次上线前的验证记录。
 
 `npm run check` 通过，0 errors、0 warnings；两个 hints 来自已有 `output/release-20260905/after/` 下的构建脚本。
 清除旧构建目录后执行 `npm run build`，源素材归档校验与构建产物校验均通过。

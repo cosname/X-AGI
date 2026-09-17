@@ -13,6 +13,7 @@ export default defineConfig({
     '/2026/about': '/about/',
     '/2026/schedule': '/schedule/',
     '/2026/poster': '/poster/',
+    '/2026/travel-grant': '/travel-grant/',
     '/2026/guide': '/guide/',
     '/2026/register': '/register/',
     '/2026/speakers': '/schedule/',

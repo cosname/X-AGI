@@ -17,7 +17,7 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "cbaa7d45ab9981f80149b65ea583e4fd905c287bf77c12cc6806761560a63df6",
+  "sourceHash": "b46d441ebe62f4dde58effbea9711d3836a0216d283d09d7a755364b05ba0c48",
   "sessions": [
     {
       "sourceTime": "10.17上午",
@@ -98,11 +98,14 @@ export const conference2026ProgramSource = {
           "talkTitle": "科学大模型的数据自动化：数据整理、推理合成与定制评测"
         },
         {
-          "name": "姚金哥"
+          "name": "姚金戈",
+          "affiliation": "至知研究院",
+          "talkTitle": "大语言模型评测的两种视角"
         },
         {
           "name": "张辉帅",
-          "affiliation": "北京大学"
+          "affiliation": "北京大学",
+          "talkTitle": "大语言模型持续优化能力评测"
         }
       ]
     },
@@ -127,7 +130,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "陈焕然",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "Nexus: Same Pretraining Loss, Better Downstream Generalization via Common Minima"
         }
       ]
     },
@@ -143,11 +147,13 @@ export const conference2026ProgramSource = {
       "speakers": [
         {
           "name": "张华枫",
-          "affiliation": "为沃科技"
+          "affiliation": "为沃科技",
+          "talkTitle": "Formal Method Harness for LLM agents"
         },
         {
-          "name": "丁鹏",
-          "affiliation": "羽医甘蓝"
+          "name": "李秀红",
+          "affiliation": "无问芯穹",
+          "talkTitle": "跨集群异构PD分离：挑战、设计与工程实践"
         },
         {
           "name": "张先轶",
@@ -187,9 +193,9 @@ export const conference2026ProgramSource = {
           "talkTitle": "Large and Deep Factor Models"
         },
         {
-          "name": "江鸿锴",
-          "affiliation": "清华大学",
-          "talkTitle": "Do LLMs Forecast or Remember? A Bayesian Decomposition Framework for Leakage-Sensitive Financial Forecasting Evaluation"
+          "name": "黄睿钊",
+          "affiliation": "香港科技大学",
+          "talkTitle": "Incorporating Return Prediction in High-Dimensional Mean-Variance Portfolio Optimization"
         }
       ]
     },
@@ -208,8 +214,9 @@ export const conference2026ProgramSource = {
       ],
       "speakers": [
         {
-          "name": "焦雨领",
-          "affiliation": "武汉大学"
+          "name": "史作强",
+          "affiliation": "清华大学",
+          "talkTitle": "Weighted Laplacian Flow: A Deterministic Particle Flow with Provable Convergence"
         },
         {
           "name": "周沛劼",
@@ -217,13 +224,14 @@ export const conference2026ProgramSource = {
           "talkTitle": "Simulation-Free Dynamic Unbalanced Optimal Transport and One-step Inference"
         },
         {
-          "name": "史作强",
-          "affiliation": "清华大学",
-          "talkTitle": "Weighted Laplacian Flow: A Deterministic Particle Flow with Provable Convergence"
+          "name": "陆一平",
+          "affiliation": "北京大学",
+          "talkTitle": "基于Bellman缺陷校正的科学机器学习与生成式人工智能的推理算法"
         },
         {
-          "name": "陆一平",
-          "affiliation": "北京大学"
+          "name": "焦雨领",
+          "affiliation": "武汉大学",
+          "talkTitle": "Offline Deep Q* Estimation with Diffusion Models"
         }
       ]
     },
@@ -239,7 +247,8 @@ export const conference2026ProgramSource = {
       "speakers": [
         {
           "name": "陈晴",
-          "affiliation": "同济大学"
+          "affiliation": "同济大学",
+          "talkTitle": "从灵感到实现：AI赋能教育中的创造力支持"
         },
         {
           "name": "涂尚卿",
@@ -248,7 +257,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "黄沛",
-          "affiliation": "华栖云教育"
+          "affiliation": "华栖云教育",
+          "talkTitle": "面向高等教育的AGI落地：未来学习中心建设的实践与思考"
         }
       ]
     },
@@ -273,11 +283,13 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "吴泰霖",
-          "affiliation": "西湖大学"
+          "affiliation": "西湖大学",
+          "talkTitle": "AI赋能聚变等离子体仿真、控制和诊断"
         },
         {
           "name": "谢超",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "跨发育阶段精神共病的层级神经认知模型"
         },
         {
           "name": "李秋熠",
@@ -325,7 +337,8 @@ export const conference2026ProgramSource = {
       "speakers": [
         {
           "name": "刘子寅",
-          "affiliation": "MIT"
+          "affiliation": "MIT",
+          "talkTitle": "deep learning theory through the lens of theoretical physics"
         },
         {
           "name": "刘子鸣",
@@ -334,7 +347,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "张耀宇",
-          "affiliation": "上海交通大学"
+          "affiliation": "上海交通大学",
+          "talkTitle": "Towards the Foundation of Deep Learning"
         }
       ]
     },
@@ -382,7 +396,8 @@ export const conference2026ProgramSource = {
       "speakers": [
         {
           "name": "周帆",
-          "affiliation": "上海财经大学"
+          "affiliation": "上海财经大学",
+          "talkTitle": "基于先验数据拟合网络的离线策略评估"
         },
         {
           "name": "马俊杰",

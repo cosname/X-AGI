@@ -29,6 +29,7 @@ const expectedHtmlFiles = [
   'about/index.html',
   'schedule/index.html',
   'poster/index.html',
+  'travel-grant/index.html',
   'guide/index.html',
   'register/index.html',
   '404.html',
@@ -36,6 +37,7 @@ const expectedHtmlFiles = [
   '2026/about/index.html',
   '2026/schedule/index.html',
   '2026/poster/index.html',
+  '2026/travel-grant/index.html',
   '2026/guide/index.html',
   '2026/register/index.html',
   '2026/speakers/index.html',
@@ -58,6 +60,7 @@ const currentPageFiles = [
   'about/index.html',
   'schedule/index.html',
   'poster/index.html',
+  'travel-grant/index.html',
   'guide/index.html',
   'register/index.html',
 ];
@@ -67,6 +70,7 @@ const expectedSitemapUrls = [
   '/about/',
   '/schedule/',
   '/poster/',
+  '/travel-grant/',
   '/guide/',
   '/register/',
   '/2025/',
@@ -82,6 +86,7 @@ const currentRedirects = new Map([
   ['2026/about/index.html', '/about/'],
   ['2026/schedule/index.html', '/schedule/'],
   ['2026/poster/index.html', '/poster/'],
+  ['2026/travel-grant/index.html', '/travel-grant/'],
   ['2026/guide/index.html', '/guide/'],
   ['2026/register/index.html', '/register/'],
   ['2026/speakers/index.html', '/schedule/'],
@@ -465,6 +470,10 @@ for (const cssFile of cssFiles) {
 for (const route of currentPageFiles) {
   const file = path.join(outputRoot, route);
   const source = await readFile(file, 'utf8');
+  const navigation = source.match(/<nav\b[^>]*aria-label="2026 会议导航"[^>]*>([\s\S]*?)<\/nav>/)?.[1] ?? '';
+  if (!/<a\b[^>]*href="\/travel-grant\/"[^>]*>\s*差旅补助\s*<\/a>/.test(navigation)) {
+    fail(`${route}: current navigation must expose the standalone travel grant page`);
+  }
   for (const reference of htmlReferences(source)) {
     if (referenceTargetsArchive(file, reference)) {
       fail(`${route}: current 2026 page depends on frozen /2025 content through "${reference}"`);
@@ -813,6 +822,22 @@ const officialCopyByRoute = new Map([
     '以下为报名提交的论文信息，现场展示安排以大会后续通知为准。',
     '会议与期刊信息由报名人提供。',
     ...posterResearchPapers.flatMap((paper) => [paper.title, paper.applicantName, paper.affiliation, paper.venue]),
+  ]],
+  ['travel-grant/index.html', [
+    conference2026.travelGrant.title,
+    conference2026.travelGrant.introduction,
+    conference2026.travelGrant.maxAmount.toLocaleString('en-US'),
+    conference2026.travelGrant.reimbursement,
+    ...conference2026.travelGrant.coverage,
+    ...conference2026.travelGrant.requirements,
+    ...conference2026.travelGrant.venues,
+    conference2026.travelGrant.materials,
+    conference2026.travelGrant.allocation,
+    conference2026.travelGrant.application,
+    conference2026.travelGrant.review.label,
+    conference2026.travelGrant.review.description,
+    conference2026.travelGrant.reimbursementNote,
+    conference2026.travelGrant.reminder,
   ]],
   ['guide/index.html', [
     conference2026.venue.scheduleName,
