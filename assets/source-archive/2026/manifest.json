@@ -5,9 +5,9 @@
   "lastExtendedOn": "2026-09-17",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 158,
-  "uniquePayloadCount": 157,
-  "archiveFileCount": 156,
+  "sourceEntryCount": 160,
+  "uniquePayloadCount": 159,
+  "archiveFileCount": 158,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1644,7 +1644,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:34.888Z",
+      "sourceModifiedAt": "2026-09-17T08:31:31.376Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1677,7 +1677,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:35.918Z",
+      "sourceModifiedAt": "2026-09-17T08:31:32.404Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1710,7 +1710,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:37.002Z",
+      "sourceModifiedAt": "2026-09-17T08:31:33.472Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1743,7 +1743,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:38.055Z",
+      "sourceModifiedAt": "2026-09-17T08:31:34.524Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1776,7 +1776,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:39.117Z",
+      "sourceModifiedAt": "2026-09-17T08:31:35.569Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1802,14 +1802,14 @@
       "originalPath": "session-posters-20260916/session-06-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-06-print.png",
       "status": "archived",
-      "sha256": "e911094c5dcc53cecf0312d7bb5c56802e04ae2170300c2d0f4177fea405e1c7",
-      "bytes": 1760380,
+      "sha256": "5037430f96968de870d8bfd42ad2fb015f6af68d4a9ad9b3032c6409aba4b0a0",
+      "bytes": 1760384,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:40.172Z",
+      "sourceModifiedAt": "2026-09-17T08:31:36.674Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1835,14 +1835,14 @@
       "originalPath": "session-posters-20260916/session-07-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-07-print.png",
       "status": "archived",
-      "sha256": "d50d140bd9f5c9f6e779393cf8944c4f3e3f6065ee814dffadd21437dc680ff8",
-      "bytes": 1698187,
+      "sha256": "1f9b6c6be2936587b4b6acb17e5870bacc43a79a5f6bda3252b9d2902be3b079",
+      "bytes": 1714985,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:41.288Z",
+      "sourceModifiedAt": "2026-09-17T08:31:37.773Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1875,7 +1875,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:42.406Z",
+      "sourceModifiedAt": "2026-09-17T08:31:38.894Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1908,7 +1908,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:43.506Z",
+      "sourceModifiedAt": "2026-09-17T08:31:39.992Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1941,7 +1941,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:44.620Z",
+      "sourceModifiedAt": "2026-09-17T08:31:41.124Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1967,14 +1967,14 @@
       "originalPath": "session-posters-20260916/session-11-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-11-print.png",
       "status": "archived",
-      "sha256": "51154ede74b33d6c7932f77eccaca796657463236a6bcfc3e1a2331283518c91",
-      "bytes": 1796980,
+      "sha256": "1080f31ea5262f4260aecd123575caed3fefa3e6090c662b7479576ab5d92a14",
+      "bytes": 1834343,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:45.706Z",
+      "sourceModifiedAt": "2026-09-17T08:31:42.206Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2007,7 +2007,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:46.825Z",
+      "sourceModifiedAt": "2026-09-17T08:31:43.306Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2040,7 +2040,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:47.923Z",
+      "sourceModifiedAt": "2026-09-17T08:31:44.393Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2073,7 +2073,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:11:49.071Z",
+      "sourceModifiedAt": "2026-09-17T08:31:45.527Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"
@@ -2607,6 +2607,38 @@
         "public/2026/paper-previews/poster-85bec19ca7b9-preview.webp"
       ],
       "note": "First page rendered from public paper PDF https://arxiv.org/pdf/2605.10009. PDF SHA-256: 43e7c7be9b40f3edf7a82e45f1b83a5a5f327275f56ea71b5462feffdece1431."
+    },
+    {
+      "originalPath": "attendee-list (2).xls#陆一平-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/lu-yiping-portrait-source.png",
+      "status": "archived",
+      "sha256": "c01ef3f5f9d755e20bb81a17518b13bc1cabc1fd064d8db39e0e2d78814e135c",
+      "bytes": 1380627,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1122,
+        "height": 1402
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/lu-yiping-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-17. Embedded metadata was removed before repository storage without re-encoding image pixels."
+    },
+    {
+      "originalPath": "attendee-list (2).xls#张耀宇-portrait",
+      "canonicalPath": "assets/source-archive/2026/people/zhang-yaoyu-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "738e7ca22deba30ffcd925e379d74168908429eff6bbac03af3212a0082ea5b2",
+      "bytes": 1650190,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 3024,
+        "height": 4032
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/zhang-yaoyu-portrait.webp"
+      ],
+      "note": "Public portrait supplied in the 2026 attendee workbook on 2026-09-17. Embedded metadata was removed before repository storage without re-encoding image pixels."
     }
   ]
 }
