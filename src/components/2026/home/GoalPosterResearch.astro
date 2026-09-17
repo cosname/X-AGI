@@ -1,5 +1,5 @@
 ---
-import { posterResearchPapers } from '../../../data/poster-research.generated';
+import { posterResearchPapers } from '../../../data/poster-research';
 import { paperPreviewById } from '../../../data/paper-previews';
 import PaperPreview from '../PaperPreview.astro';
 import '../../../styles/goal-poster-research.css';
@@ -9,7 +9,7 @@ import '../../../styles/goal-poster-research.css';
   <header class="goal-poster-research__heading">
     <div>
       <p class="goal-poster-research__eyebrow">RISING STARS</p>
-      <h2 id="home-research-title">Poster 论文</h2>
+      <h2 id="home-research-title">论文展示</h2>
     </div>
     <a class="goal-poster-research__directory" href="/poster/#poster-research">
       全部论文 <span aria-hidden="true">↗</span>
@@ -19,7 +19,7 @@ import '../../../styles/goal-poster-research.css';
   <p class="goal-poster-research__intro">报名提交的论文，现场展示安排以大会后续通知为准。会议与期刊信息由报名人提供。</p>
 
   <div class="goal-poster-research__toolbar">
-    <div class="goal-poster-research__search" role="search" aria-label="搜索 Poster 论文" data-home-research-tools hidden>
+    <div class="goal-poster-research__search" role="search" aria-label="搜索展示论文" data-home-research-tools hidden>
       <label>
         <span>搜索论文</span>
         <input type="search" placeholder="题目、报名人、单位或会议" autocomplete="off" aria-controls="home-research-viewport" data-home-research-search />
@@ -31,7 +31,7 @@ import '../../../styles/goal-poster-research.css';
     </p>
   </div>
 
-  <div class="goal-poster-research__viewport" id="home-research-viewport" role="region" aria-label="Poster 报名论文列表" aria-describedby="home-research-hint" tabindex="0" data-home-research-viewport>
+  <div class="goal-poster-research__viewport" id="home-research-viewport" role="region" aria-label="论文展示列表" aria-describedby="home-research-hint" tabindex="0" data-home-research-viewport>
     <ul class="goal-poster-research__track" role="list" data-home-research-track>
       {posterResearchPapers.map((paper) => (
         <li class="goal-poster-research__card" id={`home-${paper.id}`} data-home-research-card>
@@ -55,7 +55,7 @@ import '../../../styles/goal-poster-research.css';
 
   <footer class="goal-poster-research__browse" data-home-research-browse>
     <p id="home-research-hint">横向浏览报名论文 <span aria-hidden="true">→</span></p>
-    <div class="goal-poster-research__arrows" role="group" aria-label="浏览 Poster 论文" data-home-research-arrows hidden>
+    <div class="goal-poster-research__arrows" role="group" aria-label="浏览展示论文" data-home-research-arrows hidden>
       <button type="button" aria-label="上一篇论文" aria-controls="home-research-viewport" data-home-research-previous><span aria-hidden="true">←</span></button>
       <button type="button" aria-label="下一篇论文" aria-controls="home-research-viewport" data-home-research-next><span aria-hidden="true">→</span></button>
     </div>

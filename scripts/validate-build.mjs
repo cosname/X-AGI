@@ -16,7 +16,8 @@ import { currentEditionPageCopy } from '../src/config/edition-status.ts';
 import { site } from '../src/config/site.ts';
 import { sessionPosters } from '../src/data/session-posters.ts';
 import { homeSpeakers } from '../src/data/home-speakers.ts';
-import { posterResearchPapers, posterResearchSource } from '../src/data/poster-research.generated.ts';
+import { posterResearchSource } from '../src/data/poster-research.generated.ts';
+import { posterResearchPapers } from '../src/data/poster-research.ts';
 import { paperPreviews } from '../src/data/paper-previews.ts';
 
 const projectRoot = path.resolve('.');
@@ -733,7 +734,7 @@ for (const speaker of homeSpeakers) {
 }
 const homeResearchFragment = rootIndex.slice(homeResearchStart, historyStart);
 const homeResearchText = visibleText(homeResearchFragment);
-if (!homeResearchText.includes('Poster 论文') || !homeResearchFragment.includes('href="/poster/#poster-research"')) {
+if (!homeResearchText.includes('论文展示') || !homeResearchFragment.includes('href="/poster/#poster-research"')) {
   fail('index.html: Poster section must have its own visible heading and full directory link');
 }
 if ([...homeResearchFragment.matchAll(/\bdata-home-research-card(?:\s|>)/g)].length !== posterResearchPapers.length) {
@@ -751,6 +752,11 @@ for (const paper of posterResearchPapers) {
 }
 for (const route of ['index.html', 'poster/index.html']) {
   const html = await readFile(path.join(outputRoot, route), 'utf8');
+  const prefix = route === 'index.html' ? 'home-' : '';
+  const paperPositions = posterResearchPapers.map((paper) => html.indexOf(`id="${prefix}${paper.id}"`));
+  if (paperPositions.some((position, index) => position < 0 || (index > 0 && position <= paperPositions[index - 1]))) {
+    fail(`${route}: research papers must appear once in alphabetical title order`);
+  }
   for (const preview of paperPreviews) {
     const images = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]).filter((image) => image.includes(`src="${preview.src}"`));
     if (images.length !== 1 || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"') || !html.includes(`href="${preview.href.replaceAll('&', '&amp;')}"`)) {
