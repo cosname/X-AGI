@@ -26,8 +26,3 @@ export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceR
     sourceOrder: -1,
   },
 ];
-
-// Reused at the organizer's request from the named 2025 schedule portrait.
-export const conference2026ArchivedPortraits = new Map([
-  ['liu-jun', '/2026/people/liu-jun-portrait.webp'],
-]);

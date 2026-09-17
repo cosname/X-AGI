@@ -4,10 +4,11 @@ import {
   type Conference2026PersonSourceRecord,
 } from './conference2026-people.generated.ts';
 import { conference2026ProgramSessions } from './conference2026-program.ts';
+import { conference2026ConfirmedPeople } from './conference2026-people.confirmed.ts';
 import {
+  conference2026ArchivedPeople,
   conference2026ArchivedPortraits,
-  conference2026ConfirmedPeople,
-} from './conference2026-people.confirmed.ts';
+} from './conference2026-people.archived.ts';
 
 export type { Conference2026PersonRole } from './conference2026-people.generated.ts';
 
@@ -30,11 +31,18 @@ export type Conference2026Person = Omit<Conference2026PersonSourceRecord, 'talkT
   readonly schedule: readonly Conference2026PersonScheduleItem[];
 };
 
-const publicPeopleRecords = [
+const currentPeopleRecords = [
   ...conference2026PeopleRecords.filter((person) => !conference2026ConfirmedPeople.some(
     (confirmed) => confirmed.id === person.id || confirmed.name === person.name,
   )),
   ...conference2026ConfirmedPeople,
+];
+
+const publicPeopleRecords = [
+  ...currentPeopleRecords,
+  ...conference2026ArchivedPeople.filter((person) => !currentPeopleRecords.some(
+    (current) => current.id === person.id || current.name === person.name,
+  )),
 ];
 
 const personByPublicName = new Map<string, Conference2026PersonSourceRecord>();

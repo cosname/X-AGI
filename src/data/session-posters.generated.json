@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/render-session-posters.mjs",
-  "generatedAt": "2026-09-17T15:42:42.733Z",
+  "generatedAt": "2026-09-17T15:54:45.302Z",
   "renderEnvironment": "Chrome on macOS; PingFang SC and embedded IBM Plex Sans Condensed",
   "posters": [
     {
@@ -309,7 +309,7 @@
     },
     {
       "id": "session-10",
-      "contentHash": "2dab12319a337f8391157bc681d2699002731fca898efcc070b9656b26310c3e",
+      "contentHash": "737f94781fbdbc4b87364c08ae07cc26da8d3882fa7d28661b373fd21a71aea3",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "044f6e5aa386c23d3983b406ef928626416757e4a2c58c5ee8907d05130857e0",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
