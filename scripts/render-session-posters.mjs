@@ -50,15 +50,33 @@ try {
       await document.fonts.ready;
       await Promise.all([...document.images].map(image => image.decode()));
       const problems = [];
+      const textBounds = (element) => {
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        return range.getBoundingClientRect();
+      };
+      const speakers = document.querySelector('.speakers').getBoundingClientRect();
+      const footer = document.querySelector('.footer').getBoundingClientRect();
       for (const card of document.querySelectorAll('.speaker')) {
         const bounds = card.getBoundingClientRect();
+        const talk = card.querySelector('.talk');
+        let fontSize = parseFloat(getComputedStyle(talk).fontSize);
+        while (Math.max(talk.getBoundingClientRect().bottom, textBounds(talk).bottom) > bounds.bottom - 24 && fontSize > 20) {
+          fontSize -= 0.5;
+          talk.style.fontSize = fontSize + 'px';
+        }
+        if (bounds.bottom > speakers.bottom + 1 || bounds.top < speakers.top - 1) {
+          problems.push(card.dataset.person + ': card exceeds speaker grid');
+        }
         for (const text of card.querySelectorAll('[data-fit]')) {
           const rect = text.getBoundingClientRect();
-          if (rect.bottom > bounds.bottom - 16 || rect.right > bounds.right - 16 || text.scrollWidth > text.clientWidth + 1) {
+          if (rect.bottom > bounds.bottom - 16 || rect.right > bounds.right - 16
+            || text.scrollWidth > text.clientWidth + 1 || textBounds(text).bottom > bounds.bottom - 16) {
             problems.push(card.dataset.person + ': ' + text.textContent);
           }
         }
       }
+      if (speakers.bottom > footer.top - 31) problems.push('Speaker grid overlaps footer spacing');
       const title = document.querySelector('h1').getBoundingClientRect();
       if (title.bottom > document.querySelector('.chairs').getBoundingClientRect().top - 12) problems.push('Session heading overlaps Chair');
       if (document.documentElement.scrollWidth > 1080 || document.documentElement.scrollHeight > 1440) problems.push('Page overflow');
