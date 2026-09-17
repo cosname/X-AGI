@@ -153,9 +153,12 @@ const sessionNumbers = new Map(
                           return (
                             <div class="session-item session-item--speaker">
                               <div class="session-speaker">
-                                {talkTitle && (
-                                  <p class="session-speaker__talk-title">{talkTitle}</p>
-                                )}
+                                <p class:list={[
+                                  'session-speaker__talk-title',
+                                  { 'session-speaker__talk-title--pending': !talkTitle },
+                                ]}>
+                                  {talkTitle || '报告题目待公布'}
+                                </p>
                                 {person ? (
                                   <SchedulePersonProfile
                                     person={person}
@@ -612,6 +615,14 @@ const sessionNumbers = new Map(
     color: var(--blue);
   }
 
+  @media (min-width: 48rem) {
+    .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
+      .site-nav a[data-nav-capsule-target] {
+      justify-content: center;
+      padding-inline: clamp(0.7rem, 1.1vw, 1rem);
+    }
+  }
+
   @media (max-width: 47.99rem) {
     .edition-2026 .site-header[data-schedule-nav='periods'][data-nav-mode='inline']
       .site-header__inner {
@@ -734,6 +745,9 @@ const sessionNumbers = new Map(
 
   .edition-2026-inner .schedule-topic-card__title {
     min-width: 0;
+    font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+    line-height: 1.4;
+    overflow-wrap: anywhere;
     text-wrap: balance;
   }
 
@@ -847,9 +861,15 @@ const sessionNumbers = new Map(
   .edition-2026-inner .session-speaker__talk-title {
     margin: 0 0 0.42rem;
     color: #4f3caf;
-    font-size: 0.94rem;
+    font-size: clamp(1.0625rem, 1.3vw, 1.125rem);
     font-weight: 650;
     line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .edition-2026-inner .session-speaker__talk-title--pending {
+    color: #777b8f;
+    font-weight: 500;
   }
 
   @media (max-width: 767.98px) {
