@@ -1,0 +1,238 @@
+.goal-speakers {
+  --speaker-ink: var(--journey-ink, #12143f);
+  --speaker-accent: var(--journey-violet, #6351c8);
+  --speaker-muted: rgb(17 19 66 / 0.64);
+  --speaker-edge: max(1.5rem, calc((100vw - var(--journey-content, 78rem)) / 2));
+  --speaker-width: 15rem;
+  position: relative;
+  padding-top: clamp(4.5rem, 8vw, 7.5rem);
+  color: var(--speaker-ink);
+  scroll-margin-top: calc(var(--site-header-height, 5rem) + 1rem);
+}
+
+.goal-speakers [hidden] {
+  display: none !important;
+}
+
+.goal-speakers__legacy-anchor {
+  position: absolute;
+  top: 0;
+}
+
+.goal-speakers__heading,
+.goal-speakers__browse {
+  display: flex;
+  width: min(var(--journey-content, 78rem), calc(100% - 3rem));
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-inline: auto;
+}
+
+.goal-speakers__heading {
+  align-items: end;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.goal-speakers__eyebrow {
+  margin: 0 0 0.65rem;
+  color: var(--speaker-accent);
+  font-family: var(--font-condensed);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+}
+
+.goal-speakers__heading h2 {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.goal-speakers__schedule-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.goal-speakers__viewport {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: var(--speaker-edge);
+  scroll-snap-type: inline proximity;
+  scrollbar-color: rgb(103 82 200 / 0.38) transparent;
+  scrollbar-width: thin;
+}
+
+.goal-speakers__viewport:focus-visible {
+  outline: 2px solid var(--speaker-accent);
+  outline-offset: -2px;
+}
+
+.goal-speakers__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--speaker-width);
+  align-items: start;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  width: max-content;
+  margin: 0;
+  padding: 0.4rem var(--speaker-edge) 1.4rem;
+  list-style: none;
+}
+
+.goal-speakers__person {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.goal-speakers__profile {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.goal-speakers__portrait {
+  display: block;
+  width: 10.5rem;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgb(103 82 200 / 0.06);
+  object-fit: cover;
+}
+
+.goal-speakers__identity {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.45rem;
+  margin: 1.15rem 0 0.45rem;
+  color: inherit;
+  line-height: 1.55;
+}
+
+.goal-speakers__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.goal-speakers__separator {
+  color: rgb(17 19 66 / 0.28);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.goal-speakers__position {
+  color: var(--speaker-muted);
+  font-size: 0.83rem;
+  font-weight: 450;
+}
+
+.goal-speakers__affiliation {
+  margin: 0;
+  color: var(--speaker-muted);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.goal-speakers__profile:hover .goal-speakers__name,
+.goal-speakers__schedule-link:hover {
+  color: var(--blue-deep, #2f3199);
+}
+
+.goal-speakers__browse {
+  min-height: 3.75rem;
+  margin-top: 0.25rem;
+}
+
+.goal-speakers__browse p {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  color: var(--speaker-muted);
+  font-size: 0.76rem;
+}
+
+.goal-speakers__arrows {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.goal-speakers__arrows button {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--glass-lens-rim, rgb(93 70 202 / 0.4));
+  border-radius: 50%;
+  color: inherit;
+  background: var(--glass-lens-fill, rgb(255 253 251 / 0.72));
+  box-shadow: var(--glass-micro-shadow, inset 0 1px 0 rgb(255 255 255 / 0.84));
+  -webkit-backdrop-filter: var(--glass-lens-backdrop, blur(14px));
+  backdrop-filter: var(--glass-lens-backdrop, blur(14px));
+  font: inherit;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.goal-speakers__arrows button:hover:not(:disabled) {
+  color: var(--blue-deep, #2f3199);
+}
+
+.goal-speakers__arrows button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (max-width: 48rem) {
+  .goal-speakers {
+    --speaker-edge: 1rem;
+    --speaker-width: 13rem;
+  }
+
+  .goal-speakers__heading,
+  .goal-speakers__browse {
+    width: calc(100% - 2rem);
+  }
+
+  .goal-speakers__portrait {
+    width: 9rem;
+  }
+}
+
+@media (max-width: 26rem) {
+  .goal-speakers__heading {
+    gap: 0.8rem;
+  }
+
+  .goal-speakers__schedule-link {
+    gap: 0.35rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .goal-speakers__arrows button {
+    border-color: ButtonText;
+    color: ButtonText;
+    background: ButtonFace;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
