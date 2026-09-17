@@ -4,10 +4,14 @@ import {
   type Conference2026PersonSourceRecord,
 } from './conference2026-people.generated.ts';
 import { conference2026ProgramSessions } from './conference2026-program.ts';
+import {
+  conference2026ArchivedPortraits,
+  conference2026ConfirmedPeople,
+} from './conference2026-people.confirmed.ts';
 
 export type { Conference2026PersonRole } from './conference2026-people.generated.ts';
 
-export type Conference2026PortraitStatus = 'submitted' | 'missing';
+export type Conference2026PortraitStatus = 'submitted' | 'archived' | 'missing';
 
 export type Conference2026PersonScheduleItem = {
   readonly sessionNumber: number;
@@ -26,8 +30,15 @@ export type Conference2026Person = Omit<Conference2026PersonSourceRecord, 'talkT
   readonly schedule: readonly Conference2026PersonScheduleItem[];
 };
 
+const publicPeopleRecords = [
+  ...conference2026PeopleRecords.filter((person) => !conference2026ConfirmedPeople.some(
+    (confirmed) => confirmed.id === person.id || confirmed.name === person.name,
+  )),
+  ...conference2026ConfirmedPeople,
+];
+
 const personByPublicName = new Map<string, Conference2026PersonSourceRecord>();
-for (const person of conference2026PeopleRecords) {
+for (const person of publicPeopleRecords) {
   personByPublicName.set(person.name, person);
   for (const alias of person.aliases) personByPublicName.set(alias, person);
 }
@@ -61,6 +72,7 @@ for (const [sessionIndex, session] of conference2026ProgramSessions.entries()) {
 }
 
 function portraitStatus(person: Conference2026PersonSourceRecord): Conference2026PortraitStatus {
+  if (conference2026ArchivedPortraits.has(person.id)) return 'archived';
   return person.hasSubmittedPortrait ? 'submitted' : 'missing';
 }
 
@@ -90,7 +102,7 @@ function authoritativeTalkTitle(
   return scheduleTitles[0] ?? person.talkTitle;
 }
 
-export const conference2026People: readonly Conference2026Person[] = conference2026PeopleRecords
+export const conference2026People: readonly Conference2026Person[] = publicPeopleRecords
   .map((person) => {
     const schedule = scheduleByPersonId.get(person.id) ?? [];
     const status = portraitStatus(person);
@@ -98,7 +110,9 @@ export const conference2026People: readonly Conference2026Person[] = conference2
       ...person,
       roles: combinedRoles(person, schedule),
       talkTitle: authoritativeTalkTitle(person, schedule),
-      ...(status === 'missing' ? {} : { portraitSrc: `/2026/people/${person.id}-portrait.webp` }),
+      ...(status === 'missing' ? {} : {
+        portraitSrc: conference2026ArchivedPortraits.get(person.id) ?? `/2026/people/${person.id}-portrait.webp`,
+      }),
       portraitStatus: status,
       schedule,
     };
