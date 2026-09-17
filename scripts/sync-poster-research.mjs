@@ -105,7 +105,7 @@ export function renderPosterResearchModule({ sourceHash, papers }) {
     + 'export const posterResearchPapers: readonly PosterResearchPaper[] = posterResearchSource.papers;\n';
 }
 
-async function readWorkbookCsv(file) {
+export async function readWorkbookCsv(file) {
   if (path.extname(file).toLowerCase() === '.csv') return readFile(file, 'utf8');
   const directory = await mkdtemp(path.join(os.tmpdir(), 'xagi-poster-import-'));
   try {

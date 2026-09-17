@@ -742,8 +742,8 @@ for (const route of ['index.html', 'poster/index.html']) {
   const html = await readFile(path.join(outputRoot, route), 'utf8');
   for (const preview of paperPreviews) {
     const images = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]).filter((image) => image.includes(`src="${preview.src}"`));
-    if (images.length !== 1 || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"') || !html.includes(`href="${preview.pdfUrl}"`)) {
-      fail(`${route}: missing or non-lazy public PDF preview for ${preview.id}`);
+    if (images.length !== 1 || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"') || !html.includes(`href="${preview.href.replaceAll('&', '&amp;')}"`)) {
+      fail(`${route}: missing or non-lazy submitted PDF preview for ${preview.id}`);
     }
   }
 }
