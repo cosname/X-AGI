@@ -11,6 +11,9 @@
 `src/data/session-posters.ts` 组合官方日程和已公开的人物资料，不维护第二份独立嘉宾名单。
 专题顺序、半天时段、主席、讲者、单位和已确认报告题目来自 `src/data/conference2026-program.generated.ts`。
 该文件由腾讯文档 [X-AGI 2026 嘉宾信息](https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2) 的 `BB08J2` 标签页、`工作表1` 同步生成。
+`src/data/conference2026-program.ts` 将经会务确认的补充与腾讯快照组合，供日程、人物关联和海报统一使用。
+2026-09-17 根据会务补充，在 Keynote 最前加入“刘军：主办方致辞”，其后仍为孙茂松、冯建峰、邱子涵。
+这条补充没有提供单位或头像，沿用现有缺失资料的展示方式。
 人物公开资料来自 `src/data/conference2026-people.generated.ts`，通过 `src/data/conference2026-people.ts` 按姓名及明确别名关联本地头像和日程角色。
 报告题目优先采用日程的已确认题目，缺失时使用对应人物的公开提交题目。
 参会原表和私密字段不进入海报、源码或公开 provenance。

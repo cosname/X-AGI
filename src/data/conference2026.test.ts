@@ -9,6 +9,7 @@ import {
   conference2026PartnerDisplayGroups,
 } from './conference2026.ts';
 import { conference2026ProgramSource } from './conference2026-program.generated.ts';
+import { conference2026ProgramSessions, withOrganizerRemarks } from './conference2026-program.ts';
 import { partnerLogoByName } from './partner-logo-assets-2026.ts';
 
 const scheduleCategories = new Set(['arrival', 'keynote', 'parallel', 'poster']);
@@ -63,7 +64,7 @@ describe('conference schedule contracts', () => {
     assert.equal(conference2026ProgramSource.tabId, 'BB08J2');
     assert.equal(conference2026ProgramSource.sheetName, '工作表1');
     assert.match(conference2026ProgramSource.sourceHash, /^[a-f0-9]{64}$/u);
-    assert.equal(conference2026.programPreview.sessions, conference2026ProgramSource.sessions);
+    assert.equal(conference2026.programPreview.sessions, conference2026ProgramSessions);
     assert.ok(conference2026ProgramSource.sessions.length > 0);
 
     const expectedTimeSlots = new Map([
@@ -100,6 +101,22 @@ describe('conference schedule contracts', () => {
     }
 
     assert.deepEqual(actualTimeSlots, expectedTimeSlots);
+  });
+
+  it('keeps the organizer address first without duplicating later source updates', () => {
+    const keynote = conference2026ProgramSessions.find((session) => session.title === 'Keynote')!;
+    assert.deepEqual(keynote.speakers[0], { name: '刘军', talkTitle: '主办方致辞' });
+    assert.deepEqual(keynote.speakers.slice(1).map((speaker) => speaker.name), ['孙茂松', '冯建峰', '邱子涵']);
+    assert.deepEqual(conference2026ProgramSessions.slice(1), conference2026ProgramSource.sessions.slice(1));
+
+    const refreshed = withOrganizerRemarks([{
+      ...keynote,
+      speakers: [...keynote.speakers.slice(1), { name: '刘军', affiliation: '已确认单位' }],
+    }])[0];
+    assert.equal(refreshed.speakers.length, keynote.speakers.length);
+    assert.deepEqual(refreshed.speakers[0], {
+      name: '刘军', affiliation: '已确认单位', talkTitle: '主办方致辞',
+    });
   });
 });
 

@@ -1637,14 +1637,14 @@
       "originalPath": "session-posters-20260916/session-01-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-01-print.png",
       "status": "archived",
-      "sha256": "ef945fe10d870d6113228184f097dafd9335d4dd334ea9921f07803c0a851237",
-      "bytes": 1455197,
+      "sha256": "cbe2db567d907b00acf6348ad76f6dd9c4854e533522124a9825d7fdccdc92b3",
+      "bytes": 1465517,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:31.376Z",
+      "sourceModifiedAt": "2026-09-17T09:07:17.329Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1677,7 +1677,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:32.404Z",
+      "sourceModifiedAt": "2026-09-17T09:07:18.389Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1710,7 +1710,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:33.472Z",
+      "sourceModifiedAt": "2026-09-17T09:07:19.451Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1743,7 +1743,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:34.524Z",
+      "sourceModifiedAt": "2026-09-17T09:07:20.510Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1776,7 +1776,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:35.569Z",
+      "sourceModifiedAt": "2026-09-17T09:07:21.585Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1802,14 +1802,14 @@
       "originalPath": "session-posters-20260916/session-06-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-06-print.png",
       "status": "archived",
-      "sha256": "5037430f96968de870d8bfd42ad2fb015f6af68d4a9ad9b3032c6409aba4b0a0",
-      "bytes": 1760384,
+      "sha256": "e911094c5dcc53cecf0312d7bb5c56802e04ae2170300c2d0f4177fea405e1c7",
+      "bytes": 1760380,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:36.674Z",
+      "sourceModifiedAt": "2026-09-17T09:07:22.645Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1842,7 +1842,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:37.773Z",
+      "sourceModifiedAt": "2026-09-17T09:07:23.775Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1875,7 +1875,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:38.894Z",
+      "sourceModifiedAt": "2026-09-17T09:07:24.993Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1908,7 +1908,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:39.992Z",
+      "sourceModifiedAt": "2026-09-17T09:07:26.108Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1941,7 +1941,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:41.124Z",
+      "sourceModifiedAt": "2026-09-17T09:07:27.242Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1974,7 +1974,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:42.206Z",
+      "sourceModifiedAt": "2026-09-17T09:07:28.458Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2007,7 +2007,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:43.306Z",
+      "sourceModifiedAt": "2026-09-17T09:07:29.591Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2040,7 +2040,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:44.393Z",
+      "sourceModifiedAt": "2026-09-17T09:07:30.676Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2073,7 +2073,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T08:31:45.527Z",
+      "sourceModifiedAt": "2026-09-17T09:07:31.804Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"
