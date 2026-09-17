@@ -10,6 +10,7 @@ export const posterContentHash = (poster) => digest(JSON.stringify({ conference:
 export const posterInputs = (poster) => {
   const paths = [
     'scripts/lib/session-poster-template.mjs',
+    'scripts/render-session-posters.mjs',
     ...posterTemplateAssets,
     `assets/source-archive/2026/session-posters/${poster.id}-background.png`,
     ...poster.speakers.filter((person) => person.portraitSrc).map((person) => `public${person.portraitSrc}`),

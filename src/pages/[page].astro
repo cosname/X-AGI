@@ -6,6 +6,7 @@ import InnerPageShell from '../components/2026/inner/InnerPageShell.astro';
 import AboutPageContent from '../components/2026/inner/AboutPageContent.astro';
 import SchedulePageContent from '../components/2026/inner/SchedulePageContent.astro';
 import PosterPageContent from '../components/2026/inner/PosterPageContent.astro';
+import TravelGrantPageContent from '../components/2026/inner/TravelGrantPageContent.astro';
 import GuidePageContent from '../components/2026/inner/GuidePageContent.astro';
 import RegisterPageContent from '../components/2026/inner/RegisterPageContent.astro';
 import { currentEditionPageCopy, type CurrentEditionInnerPage } from '../config/edition-status';
@@ -15,7 +16,7 @@ import { conference2026 } from '../data/conference2026';
 type PublishedPage = Exclude<CurrentEditionInnerPage, 'speakers'>;
 
 export const getStaticPaths = (() =>
-  (['about', 'schedule', 'poster', 'guide', 'register'] as const satisfies readonly PublishedPage[]).map((page) => ({
+  (['about', 'schedule', 'poster', 'travel-grant', 'guide', 'register'] as const satisfies readonly PublishedPage[]).map((page) => ({
     params: { page },
     props: { page },
   }))) satisfies GetStaticPaths;
@@ -46,6 +47,7 @@ const copy = currentEditionPageCopy(page);
     {page === 'about' && <AboutPageContent />}
     {page === 'schedule' && <SchedulePageContent />}
     {page === 'poster' && <PosterPageContent />}
+    {page === 'travel-grant' && <TravelGrantPageContent />}
     {page === 'guide' && <GuidePageContent />}
     {page === 'register' && <RegisterPageContent />}
   </InnerPageShell>

@@ -65,8 +65,15 @@ export function currentEditionPageCopy(
       return {
         page,
         label: 'Rising Stars Poster',
-        description: 'Rising Stars Poster 申请要求、入选权益、报名信息与本科生差旅补助计划。',
+        description: 'Rising Stars Poster 申请要求、入选权益、报名信息与报名论文。',
         status: registrationOpen ? conference.registration.status : '申请通道确认中',
+      };
+    case 'travel-grant':
+      return {
+        page,
+        label: '差旅补助',
+        description: '本科生差旅补助计划：申请条件、材料、审核与报销流程，每人报销上限人民币 2500 元。',
+        status: conference.travelGrant.review.label,
       };
     case 'guide':
       return {
