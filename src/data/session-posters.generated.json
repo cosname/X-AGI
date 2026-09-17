@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/render-session-posters.mjs",
-  "generatedAt": "2026-09-17T10:21:57.313Z",
+  "generatedAt": "2026-09-17T15:42:42.733Z",
   "renderEnvironment": "Chrome on macOS; PingFang SC and embedded IBM Plex Sans Condensed",
   "posters": [
     {
       "id": "session-01",
-      "contentHash": "b4d3c3159cfae2e3f4dfc2f7cd4536900db911e8dc172c4c5786edee50e43a90",
+      "contentHash": "669345fcf0dec6ef2d91a59cb10b11bf48893f0d89e5c87e2b28364382dbcc31",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "044f6e5aa386c23d3983b406ef928626416757e4a2c58c5ee8907d05130857e0",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
@@ -14,25 +14,26 @@
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-01-background.png": "a5280eb08fe041ed0f89d5cd2b80853873c12a1327097911e591d5b319e286ac",
         "public/2026/people/liu-jun-portrait.webp": "fbcb56f69eaf1f1725469bffee373f5940900473c8a52148949cf8a60ea817e5",
+        "public/2026/people/sun-maosong-portrait.webp": "0a7c91d4bd9f957f37231ed234cb4a20b87561c659ccb54a7f330e3423c10fea",
         "public/2026/people/feng-jianfeng-portrait.webp": "834fb80847e1fbf50041544abb8bb25e41f69731f4fca4c989fdb20c9de160aa",
         "public/2026/people/qiu-zihan-portrait.webp": "e1f52dc27248f54b5608113380c52c3b9acf508f03741dbada512b0d8b19a4b2"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-01-print.png": {
-          "sha256": "a0b03888ba03e73e49af8fed3833ed1e416e1bdd56076ea85c801c6ebb6d9f91",
-          "bytes": 1492081,
+          "sha256": "6244c3964d6d0a784f3154f0f7848350da769fc986dc144c82d40c6fea401eac",
+          "bytes": 1518713,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-01.webp": {
-          "sha256": "24941b3552a55551d9483215b68331d382fdf5eaa033201982a7c644a91c8989",
-          "bytes": 118746,
+          "sha256": "80e969a5213fa54c896fd1ee5c63ec3277527ed87e59b19001a1be5328565c08",
+          "bytes": 123360,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-01-preview.webp": {
-          "sha256": "f566d024433ae40bfe73c7f6170fc7a4a3311351a6ff0bd8b8bf6be31fd7eddf",
-          "bytes": 28864,
+          "sha256": "ecf640ea16fcd832c353084f7d918deb4e6b9feb868fd0178c79187b83e4f16a",
+          "bytes": 29758,
           "width": 540,
           "height": 720
         }

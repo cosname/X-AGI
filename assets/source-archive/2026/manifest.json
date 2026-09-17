@@ -5,9 +5,9 @@
   "lastExtendedOn": "2026-09-17",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 170,
-  "uniquePayloadCount": 169,
-  "archiveFileCount": 168,
+  "sourceEntryCount": 171,
+  "uniquePayloadCount": 170,
+  "archiveFileCount": 169,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1637,14 +1637,14 @@
       "originalPath": "session-posters-20260916/session-01-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-01-print.png",
       "status": "archived",
-      "sha256": "a0b03888ba03e73e49af8fed3833ed1e416e1bdd56076ea85c801c6ebb6d9f91",
-      "bytes": 1492081,
+      "sha256": "6244c3964d6d0a784f3154f0f7848350da769fc986dc144c82d40c6fea401eac",
+      "bytes": 1518713,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:42.479Z",
+      "sourceModifiedAt": "2026-09-17T15:42:27.745Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1677,7 +1677,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:43.555Z",
+      "sourceModifiedAt": "2026-09-17T15:42:28.816Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1710,7 +1710,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:44.638Z",
+      "sourceModifiedAt": "2026-09-17T15:42:29.934Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1743,7 +1743,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:45.694Z",
+      "sourceModifiedAt": "2026-09-17T15:42:30.996Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1776,7 +1776,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:46.792Z",
+      "sourceModifiedAt": "2026-09-17T15:42:32.078Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1809,7 +1809,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:47.845Z",
+      "sourceModifiedAt": "2026-09-17T15:42:33.173Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1842,7 +1842,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:48.925Z",
+      "sourceModifiedAt": "2026-09-17T15:42:34.300Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1875,7 +1875,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:50.064Z",
+      "sourceModifiedAt": "2026-09-17T15:42:35.448Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1908,7 +1908,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:51.160Z",
+      "sourceModifiedAt": "2026-09-17T15:42:36.575Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1941,7 +1941,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:52.274Z",
+      "sourceModifiedAt": "2026-09-17T15:42:37.720Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1974,7 +1974,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:53.378Z",
+      "sourceModifiedAt": "2026-09-17T15:42:38.836Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2007,7 +2007,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:54.729Z",
+      "sourceModifiedAt": "2026-09-17T15:42:39.966Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2040,7 +2040,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:55.932Z",
+      "sourceModifiedAt": "2026-09-17T15:42:41.102Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2073,7 +2073,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-17T10:21:57.077Z",
+      "sourceModifiedAt": "2026-09-17T15:42:42.489Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"
@@ -2799,6 +2799,22 @@
         "public/2026/people/liu-jun-portrait.webp"
       ],
       "note": "Portrait reused from the named Liu Jun profile in the public 2025 schedule at the organizer request on 2026-09-17. Embedded metadata was removed without re-encoding image pixels. The 2026 square runtime portrait follows the original top-quarter framing."
+    },
+    {
+      "originalPath": "organizer-supplied/sun-maosong-portrait.png",
+      "canonicalPath": "assets/source-archive/2026/people/sun-maosong-portrait-source.png",
+      "status": "archived",
+      "sha256": "2060f8d4123d3161a2b73d8e380fd12e15dbe19c5d11040276398724ab0d3e9b",
+      "bytes": 177457,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 302,
+        "height": 384
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/sun-maosong-portrait.webp"
+      ],
+      "note": "Sun Maosong portrait supplied directly by the organizer on 2026-09-17. Embedded metadata was removed without changing decoded image pixels. The 640px square runtime portrait uses top-quarter cropping; no facial retouching or generation was applied."
     }
   ]
 }

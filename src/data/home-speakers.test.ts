@@ -7,7 +7,7 @@ describe('homepage speaker lineup', () => {
   it('includes every scheduled speaker with an existing portrait exactly once', () => {
     const eligible = conference2026People.filter((person) => person.portraitSrc
       && person.schedule.some((assignment) => assignment.role === 'speaker'));
-    assert.equal(homeSpeakers.length, 40);
+    assert.equal(homeSpeakers.length, 41);
     assert.equal(new Set(homeSpeakers.map((speaker) => speaker.id)).size, homeSpeakers.length);
     assert.deepEqual(new Set(homeSpeakers.map((speaker) => speaker.id)), new Set(eligible.map((person) => person.id)));
     for (const speaker of homeSpeakers) {
@@ -16,7 +16,7 @@ describe('homepage speaker lineup', () => {
   });
 
   it('preserves keynote order and links dual-role guests to their speaker biography', () => {
-    assert.deepEqual(homeSpeakers.slice(0, 4).map((speaker) => speaker.name), ['刘军', '冯建峰', '邱子涵', '罗涛']);
+    assert.deepEqual(homeSpeakers.slice(0, 4).map((speaker) => speaker.name), ['刘军', '孙茂松', '冯建峰', '邱子涵']);
     assert.equal(homeSpeakers[0].href, '/schedule/#schedule-person-01-speaker-liu-jun-1');
     assert.equal(homeSpeakers.find((speaker) => speaker.id === 'lu-yiping')?.href, '/schedule/#schedule-person-07-speaker-lu-yiping-3');
     assert.equal(homeSpeakers.at(-1)?.name, '从鑫');

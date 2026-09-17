@@ -5,6 +5,7 @@ import { conference2026PersonForName } from './conference2026-people.ts';
 // English roles are translated for the Chinese homepage; evidence stays verbatim.
 const positions: Record<string, { label: string; evidence: string }> = {
   'liu-jun': { label: '兴华卓越讲席教授', evidence: '清华大学兴华卓越讲席教授' },
+  'sun-maosong': { label: '教授', evidence: '清华大学计算机科学与技术系教授' },
   'feng-jianfeng': { label: '浩清教授', evidence: '复旦大学浩清教授' },
   'qiu-zihan': { label: 'Qwen 预训练团队', evidence: '现就职于 Qwen 预训练团队' },
   'luo-tao': { label: '副教授', evidence: '数学科学学院/自然科学研究院副教授' },
