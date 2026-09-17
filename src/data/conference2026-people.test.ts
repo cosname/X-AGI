@@ -47,12 +47,28 @@ describe('2026 public Chair and Speaker profiles', () => {
     assert.equal(person?.talkTitle, scheduledTalk);
   });
 
+  it('reuses archived Chair information while retaining the current attendee biography', () => {
+    const ma = conference2026PersonForName('马梓业');
+    const currentMa = conference2026PeopleRecords.find((person) => person.id === 'ma-ziye');
+    assert.equal(ma?.bio, currentMa?.bio);
+    assert.equal(ma?.portraitStatus, 'archived');
+    assert.equal(ma?.portraitSrc, '/2026/people/ma-ziye-portrait.webp');
+    assert.deepEqual(ma?.roles, ['chair']);
+    assert.deepEqual(ma?.schedule.map((item) => item.title), ['机器学习理论']);
+
+    const hu = conference2026PersonForName('胡天阳');
+    assert.ok(hu?.bio?.includes('包括统计机器学习、可信 AI、特征表示学习、深度生成模型等'));
+    assert.deepEqual(hu?.roles, ['chair']);
+    assert.deepEqual(hu?.schedule.map((item) => item.title), ['语言模型基础']);
+    assert.equal(conference2026People.filter((person) => ['ma-ziye', 'hu-tianyang'].includes(person.id)).length, 2);
+  });
+
   it('uses a neutral placeholder when no unambiguous portrait is available', () => {
     const person = conference2026PersonForName('田润泽');
     assert.equal(person?.portraitStatus, 'missing');
     assert.equal(person?.portraitSrc, undefined);
     assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 6);
-    for (const name of ['马梓业', '谢天', '陈思明', '周默', '祝武']) {
+    for (const name of ['胡天阳', '谢天', '陈思明', '周默', '祝武']) {
       const candidate = conference2026PersonForName(name);
       assert.equal(candidate?.portraitStatus, 'missing');
       assert.equal(candidate?.portraitSrc, undefined);
