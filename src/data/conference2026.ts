@@ -1,4 +1,4 @@
-import { conference2026ProgramSessions } from './conference2026-program.generated.ts';
+import { conference2026ProgramSessions } from './conference2026-program.ts';
 
 export type Organization = {
   name: string;

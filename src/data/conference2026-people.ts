@@ -3,7 +3,7 @@ import {
   type Conference2026PersonRole,
   type Conference2026PersonSourceRecord,
 } from './conference2026-people.generated.ts';
-import { conference2026ProgramSessions } from './conference2026-program.generated.ts';
+import { conference2026ProgramSessions } from './conference2026-program.ts';
 
 export type { Conference2026PersonRole } from './conference2026-people.generated.ts';
 

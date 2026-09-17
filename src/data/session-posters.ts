@@ -1,4 +1,4 @@
-import { conference2026ProgramSessions } from './conference2026-program.generated.ts';
+import { conference2026ProgramSessions } from './conference2026-program.ts';
 import { conference2026PersonForName } from './conference2026-people.ts';
 import { conference2026 } from './conference2026.ts';
 
