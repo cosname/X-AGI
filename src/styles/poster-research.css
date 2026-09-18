@@ -136,6 +136,17 @@
   outline-offset: 3px;
 }
 
+.poster-research__tools :is(input, select) {
+  border-color: var(--goal-line, rgb(17 19 66 / 0.14));
+  background: rgb(255 253 251 / 0.35);
+  transition: background-color 160ms ease;
+}
+
+.poster-research__tools :is(input, select):focus {
+  background-color: rgb(255 253 251 / 0.96);
+  outline: none;
+}
+
 .poster-research .poster-research__results {
   grid-column: 1 / -1;
   margin: 0;
@@ -377,5 +388,10 @@
   .poster-research__tools :is(input, select, button),
   .poster-research [data-research-venue] {
     border-color: ButtonText;
+  }
+
+  .poster-research__tools :is(input, select):focus {
+    outline: 2px solid Highlight;
+    outline-offset: 3px;
   }
 }
