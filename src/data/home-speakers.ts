@@ -66,21 +66,26 @@ function buildHomeSpeakers(): readonly HomeSpeaker[] {
   for (const role of ['speaker', 'chair'] as const) {
     for (const [sessionIndex, session] of conference2026ProgramSessions.entries()) {
       const scheduledPeople = role === 'speaker' ? session.speakers : session.chairs;
-      for (const [personIndex, speaker] of scheduledPeople.entries()) {
-        const person = conference2026PersonForName(speaker.name);
-        if (!person || seen.has(person.id)) continue;
-        const position = positions[person.id];
-        if (position && !person.bio?.includes(position.evidence)) {
-          throw new Error(`Recheck the homepage position against the updated biography for ${person.name}.`);
+      for (const [personIndex, scheduledPerson] of scheduledPeople.entries()) {
+        if (scheduledPerson.name === '待确认') continue;
+        const person = conference2026PersonForName(scheduledPerson.name);
+        const key = person ? `person:${person.id}` : `name:${scheduledPerson.name}`;
+        if (seen.has(key)) continue;
+        const position = person ? positions[person.id] : undefined;
+        if (position && !person?.bio?.includes(position.evidence)) {
+          throw new Error(`Recheck the homepage position against the updated biography for ${scheduledPerson.name}.`);
         }
-        seen.add(person.id);
+        seen.add(key);
+        const sessionLabel = String(sessionIndex + 1).padStart(2, '0');
         speakers.push({
-          id: person.id,
-          name: speaker.name,
+          id: person?.id ?? `schedule-${role}-${sessionLabel}-${personIndex + 1}`,
+          name: scheduledPerson.name,
           ...(position ? { position: position.label } : {}),
-          affiliation: person.affiliation,
-          portraitSrc: person.portraitSrc,
-          href: `/schedule/#schedule-person-${String(sessionIndex + 1).padStart(2, '0')}-${role}-${person.id}-${personIndex + 1}`,
+          affiliation: person?.affiliation ?? scheduledPerson.affiliation ?? '',
+          portraitSrc: person?.portraitSrc,
+          href: person
+            ? `/schedule/#schedule-person-${sessionLabel}-${role}-${person.id}-${personIndex + 1}`
+            : `/schedule/#schedule-session-${sessionLabel}`,
         });
       }
     }
