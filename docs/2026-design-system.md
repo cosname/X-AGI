@@ -117,6 +117,7 @@ Venue plans, hotel codes, partner logos, and legal icons must come from 2026-own
 The `/schedule/` page keeps Chair and Speaker profiles inside their corresponding session cards through native `details` and `summary` disclosure controls.
 The disclosure rhythm may follow the 2025 archive, but it must not reuse archived Bootstrap, scripts, styles, or image paths.
 Speaker disclosures include portraits, biographies, and talk abstracts; Chair disclosures include portraits and biographies without repeating unrelated talk content.
+Speaker report titles, abstract headings and biography headings share the summary name's left edge, with the portrait to the right on desktop and above the copy on mobile.
 Every portrait uses a local square 2026 asset, an accurate display-name alternative text, lazy loading, and a reviewed crop.
 When identity cannot be established without ambiguity, use the standard portrait placeholder instead of guessing from a group photograph.
 Do not add a separate people directory page; a future guest-lineup treatment belongs in a lower homepage section and requires its own review.

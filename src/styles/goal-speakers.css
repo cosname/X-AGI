@@ -200,6 +200,30 @@
   cursor: default;
 }
 
+@media (min-width: 64rem) {
+  .goal-speakers__viewport {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .goal-speakers__track {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
+    gap: 2.25rem 1.5rem;
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  .goal-speakers__portrait {
+    max-width: 100%;
+  }
+
+  .goal-speakers__browse {
+    display: none;
+  }
+}
+
 @media (max-width: 48rem) {
   .goal-speakers__heading,
   .goal-speakers__viewport,

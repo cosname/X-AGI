@@ -17,7 +17,11 @@ function initializeSpeakerLineup(root: HTMLElement) {
   const behavior = () => reducedMotion.matches ? 'auto' : 'smooth';
   const updateArrows = () => {
     const maximum = viewport.scrollWidth - viewport.clientWidth;
-    arrows.hidden = maximum <= 2;
+    const canScroll = maximum > 2;
+    arrows.hidden = !canScroll;
+    viewport.tabIndex = canScroll ? 0 : -1;
+    if (canScroll) viewport.setAttribute('aria-describedby', 'home-speakers-hint');
+    else viewport.removeAttribute('aria-describedby');
     previous.disabled = viewport.scrollLeft <= 2;
     next.disabled = viewport.scrollLeft >= maximum - 2;
   };
@@ -40,7 +44,7 @@ function initializeSpeakerLineup(root: HTMLElement) {
   next.addEventListener('click', () => advance(1), { signal });
   viewport.addEventListener('scroll', scheduleArrowUpdate, { passive: true, signal });
   viewport.addEventListener('keydown', (event) => {
-    if (event.target !== viewport) return;
+    if (event.target !== viewport || viewport.scrollWidth <= viewport.clientWidth + 2) return;
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       event.preventDefault();
       advance(event.key === 'ArrowLeft' ? -1 : 1);
