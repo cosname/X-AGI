@@ -174,6 +174,8 @@ Copy the needed source into 2026 ownership, choose a clear filename, and update 
 ## Accessibility and input behavior
 
 All interactive controls need visible keyboard focus and practical target sizes.
+Poster paper search and venue filters indicate focus by increasing their background opacity while keeping text fully opaque.
+These fields use a system Highlight outline in forced-colors mode.
 Decorative tree, terrain, particle, and glass layers remain hidden from assistive technology and must not intercept pointer input.
 Current-page navigation semantics and expanded or inert states must remain accurate.
 
