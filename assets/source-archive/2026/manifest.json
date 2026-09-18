@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-09-17",
+  "lastExtendedOn": "2026-09-19",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 172,
-  "uniquePayloadCount": 171,
-  "archiveFileCount": 170,
+  "sourceEntryCount": 174,
+  "uniquePayloadCount": 173,
+  "archiveFileCount": 172,
   "entries": [
     {
       "originalPath": "1.png",
@@ -2831,6 +2831,38 @@
         "public/2026/people/ma-ziye-portrait.webp"
       ],
       "note": "Portrait reused at the organizer request on 2026-09-17 from the named Ziye Ma profile in the public 2025 schedule. The PNG source comes from archive/2025 commit 0f83e769818091523565f9ee8ce9e93e0d71b010. Embedded metadata was removed without changing decoded image pixels; the landscape source is center-cropped to a square for the 2026 runtime portrait."
+    },
+    {
+      "originalPath": "organizer-supplied/hu-tianyang-portrait.jpg",
+      "canonicalPath": "assets/source-archive/2026/people/hu-tianyang-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "50b14f700f9b5db98905f63a93d4d1ee5e9652f4a14923728d34b732f6347fac",
+      "bytes": 56364,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 960,
+        "height": 1440
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/hu-tianyang-portrait.webp"
+      ],
+      "note": "Portrait supplied directly by the organizer on 2026-09-19 with an explicit name-to-photo mapping. Embedded metadata was removed without changing decoded source pixels. The 640px square WebP export uses a 560 x 560 source crop at x=185, y=195, with quality 88 and no facial retouching or generation."
+    },
+    {
+      "originalPath": "organizer-supplied/chen-siming-portrait.jpg",
+      "canonicalPath": "assets/source-archive/2026/people/chen-siming-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "cb1bca1ceb04f7f1ad64850f36656d2f857aa5a6adf72577a91cdfe5ce4e51c6",
+      "bytes": 45196,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 1616
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/chen-siming-portrait.webp"
+      ],
+      "note": "Portrait supplied directly by the organizer on 2026-09-19 with an explicit name-to-photo mapping. Embedded metadata was removed without changing decoded source pixels. The 640px square WebP export uses a 1080 x 1080 source crop at x=0, y=10, with quality 88 and no facial retouching or generation."
     }
   ]
 }

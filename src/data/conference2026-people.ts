@@ -7,6 +7,7 @@ import { conference2026ProgramSessions } from './conference2026-program.ts';
 import {
   conference2026ConfirmedPeople,
   conference2026ConfirmedBios,
+  conference2026ConfirmedPortraits,
 } from './conference2026-people.confirmed.ts';
 import {
   conference2026ArchivedPeople,
@@ -86,6 +87,7 @@ for (const [sessionIndex, session] of conference2026ProgramSessions.entries()) {
 }
 
 function portraitStatus(person: Conference2026PersonSourceRecord): Conference2026PortraitStatus {
+  if (conference2026ConfirmedPortraits.has(person.id)) return 'submitted';
   if (conference2026ArchivedPortraits.has(person.id)) return 'archived';
   return person.hasSubmittedPortrait ? 'submitted' : 'missing';
 }
@@ -125,7 +127,9 @@ export const conference2026People: readonly Conference2026Person[] = publicPeopl
       roles: combinedRoles(person, schedule),
       talkTitle: authoritativeTalkTitle(person, schedule),
       ...(status === 'missing' ? {} : {
-        portraitSrc: conference2026ArchivedPortraits.get(person.id) ?? `/2026/people/${person.id}-portrait.webp`,
+        portraitSrc: conference2026ConfirmedPortraits.get(person.id)
+          ?? conference2026ArchivedPortraits.get(person.id)
+          ?? `/2026/people/${person.id}-portrait.webp`,
       }),
       portraitStatus: status,
       schedule,
