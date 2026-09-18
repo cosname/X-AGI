@@ -74,4 +74,14 @@ describe('2026 public Chair and Speaker profiles', () => {
       assert.equal(candidate?.portraitSrc, undefined);
     }
   });
+
+  it('applies a confirmed biography update without losing attendee report details', () => {
+    const qiu = conference2026PersonForName('邱子涵');
+    const attendee = conference2026PeopleRecords.find((person) => person.id === 'qiu-zihan');
+    assert.match(qiu?.bio ?? '', /引用量逾 2 万次/u);
+    assert.equal(qiu?.abstract, attendee?.abstract);
+    assert.equal(qiu?.department, attendee?.department);
+    assert.equal(qiu?.hasSubmittedPortrait, attendee?.hasSubmittedPortrait);
+    assert.equal(conference2026People.filter((person) => person.id === 'qiu-zihan').length, 1);
+  });
 });

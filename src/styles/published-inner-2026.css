@@ -645,6 +645,25 @@
   color: #85899a !important;
 }
 
+.edition-2026-inner .schedule-person-profile--speaker .schedule-person-profile__details {
+  grid-template-columns: minmax(0, 1fr) 8rem;
+  padding: 1rem 0 0.5rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.edition-2026-inner .schedule-person-profile--speaker .schedule-person-profile__copy {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.edition-2026-inner .schedule-person-profile--speaker .schedule-person-profile__portrait-frame {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+}
+
 @media (max-width: 1000px) {
   .edition-2026-inner .published-inner-container {
     width: 94vw;
@@ -694,6 +713,19 @@
   .edition-2026-inner .schedule-person-profile__portrait-frame {
     width: 7.25rem;
     height: 7.25rem;
+  }
+
+  .edition-2026-inner .schedule-person-profile--speaker .schedule-person-profile__details {
+    grid-template-columns: 1fr;
+  }
+
+  .edition-2026-inner .schedule-person-profile--speaker .schedule-person-profile__portrait-frame {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .edition-2026-inner .schedule-person-profile--speaker .schedule-person-profile__copy {
+    grid-row: 2;
   }
 }
 
