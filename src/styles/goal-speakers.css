@@ -3,6 +3,8 @@
   --speaker-accent: var(--journey-violet, #6351c8);
   --speaker-muted: rgb(17 19 66 / 0.64);
   --speaker-width: 13.5rem;
+  --speaker-gap: 1.5rem;
+  --speaker-stagger: calc((var(--speaker-width) + var(--speaker-gap)) / 2);
   position: relative;
   padding-top: clamp(4.5rem, 8vw, 7.5rem);
   color: var(--speaker-ink);
@@ -84,17 +86,22 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: var(--speaker-width);
+  grid-template-rows: repeat(2, auto);
   align-items: start;
-  gap: 0.75rem;
+  gap: 1.75rem var(--speaker-gap);
   width: max-content;
   margin: 0;
-  padding: 0.4rem 0 1.4rem;
+  padding: 0.4rem var(--speaker-stagger) 1.4rem 0;
   list-style: none;
 }
 
 .goal-speakers__person {
   min-width: 0;
   scroll-snap-align: start;
+}
+
+.goal-speakers__person:nth-child(2n) {
+  transform: translateX(var(--speaker-stagger));
 }
 
 .goal-speakers__profile {
@@ -105,7 +112,7 @@
 
 .goal-speakers__portrait {
   display: block;
-  width: 10.5rem;
+  width: 9rem;
   height: auto;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -201,30 +208,25 @@
 }
 
 @media (min-width: 64rem) {
-  .goal-speakers__viewport {
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-
   .goal-speakers__track {
-    grid-auto-flow: row;
-    grid-auto-columns: auto;
-    grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
-    gap: 2.25rem 1.5rem;
-    width: 100%;
-    padding-bottom: 0;
+    grid-template-rows: repeat(3, auto);
   }
 
-  .goal-speakers__portrait {
-    max-width: 100%;
+  .goal-speakers__person:nth-child(2n) {
+    transform: none;
   }
 
-  .goal-speakers__browse {
-    display: none;
+  .goal-speakers__person:nth-child(3n + 2) {
+    transform: translateX(var(--speaker-stagger));
   }
 }
 
 @media (max-width: 48rem) {
+  .goal-speakers {
+    --speaker-width: 11.5rem;
+    --speaker-gap: 1rem;
+  }
+
   .goal-speakers__heading,
   .goal-speakers__viewport,
   .goal-speakers__browse {
@@ -232,7 +234,7 @@
   }
 
   .goal-speakers__portrait {
-    width: 10rem;
+    width: 7.5rem;
   }
 }
 
