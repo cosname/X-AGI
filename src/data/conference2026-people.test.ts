@@ -67,12 +67,25 @@ describe('2026 public Chair and Speaker profiles', () => {
     const person = conference2026PersonForName('田润泽');
     assert.equal(person?.portraitStatus, 'missing');
     assert.equal(person?.portraitSrc, undefined);
-    assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 6);
-    for (const name of ['胡天阳', '谢天', '陈思明', '周默', '祝武']) {
+    assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 4);
+    for (const name of ['谢天', '周默', '祝武']) {
       const candidate = conference2026PersonForName(name);
       assert.equal(candidate?.portraitStatus, 'missing');
       assert.equal(candidate?.portraitSrc, undefined);
     }
+  });
+
+  it('uses organizer-supplied Chair portraits without replacing their source profiles', () => {
+    for (const [name, id] of [['胡天阳', 'hu-tianyang'], ['陈思明', 'chen-siming']]) {
+      const person = conference2026PersonForName(name);
+      assert.equal(person?.portraitStatus, 'submitted');
+      assert.equal(person?.portraitSrc, `/2026/people/${id}-portrait.webp`);
+      assert.equal(person?.hasSubmittedPortrait, false);
+      assert.deepEqual(person?.roles, ['chair']);
+    }
+    const chen = conference2026PersonForName('陈思明');
+    assert.equal(chen?.profileUrl, 'http://fduvis.net/');
+    assert.equal(chen?.department, '大数据学院');
   });
 
   it('applies a confirmed biography update without losing attendee report details', () => {
