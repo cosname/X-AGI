@@ -2,7 +2,7 @@
   --speaker-ink: var(--journey-ink, #12143f);
   --speaker-accent: var(--journey-violet, #6351c8);
   --speaker-muted: rgb(17 19 66 / 0.64);
-  --speaker-width: 13.5rem;
+  --speaker-width: 20rem;
   --speaker-gap: 1.5rem;
   --speaker-stagger: calc((var(--speaker-width) + var(--speaker-gap)) / 2);
   position: relative;
@@ -91,7 +91,7 @@
   gap: 1.75rem var(--speaker-gap);
   width: max-content;
   margin: 0;
-  padding: 0.4rem var(--speaker-stagger) 1.4rem 0;
+  padding: 0.4rem 0 1.4rem;
   list-style: none;
 }
 
@@ -107,6 +107,7 @@
 .goal-speakers__profile {
   display: block;
   color: inherit;
+  text-align: center;
   text-decoration: none;
 }
 
@@ -115,19 +116,17 @@
   width: 9rem;
   height: auto;
   aspect-ratio: 1;
+  margin-inline: auto;
   border-radius: 50%;
   background: rgb(103 82 200 / 0.06);
   object-fit: cover;
 }
 
 .goal-speakers__identity {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.15rem 0.45rem;
   margin: 1.15rem 0 0.45rem;
   color: inherit;
   line-height: 1.55;
+  white-space: nowrap;
 }
 
 .goal-speakers__name {
@@ -137,22 +136,23 @@
 
 .goal-speakers__separator {
   color: rgb(17 19 66 / 0.28);
-  font-size: 0.9rem;
   font-weight: 400;
 }
 
 .goal-speakers__position {
-  color: var(--speaker-muted);
-  font-size: 0.83rem;
   font-weight: 450;
 }
 
 .goal-speakers__affiliation {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem;
   margin: 0;
   color: var(--speaker-muted);
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 3.4vw, 0.85rem);
   line-height: 1.65;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 
 .goal-speakers__profile:hover .goal-speakers__name,
@@ -223,8 +223,9 @@
 
 @media (max-width: 48rem) {
   .goal-speakers {
-    --speaker-width: 11.5rem;
+    --speaker-width: min(20rem, calc(100vw - 2rem));
     --speaker-gap: 1rem;
+    --speaker-stagger: calc((var(--speaker-width) + var(--speaker-gap)) / 4);
   }
 
   .goal-speakers__heading,
