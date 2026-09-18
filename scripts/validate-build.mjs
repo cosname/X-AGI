@@ -726,9 +726,12 @@ for (const speaker of homeSpeakers) {
     if (!visibleText(card).includes(value)) fail(`index.html: missing ${speaker.id} profile text: ${value}`);
   }
   const images = [...card.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
-  if (images.length !== 1 || !images[0].includes(`src="${speaker.portraitSrc}"`)
-    || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"')) {
+  if (speaker.portraitSrc && (images.length !== 1 || !images[0].includes(`src="${speaker.portraitSrc}"`)
+    || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"'))) {
     fail(`index.html: ${speaker.id} must have its existing portrait with lazy loading`);
+  }
+  if (!speaker.portraitSrc && (images.length !== 0 || !card.includes('goal-speakers__portrait--placeholder'))) {
+    fail(`index.html: ${speaker.id} must remain visible with a portrait placeholder`);
   }
   if (!card.includes(`href="${speaker.href}"`)) fail(`index.html: missing schedule profile link for ${speaker.id}`);
 }

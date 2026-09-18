@@ -7,7 +7,7 @@ import '../../../styles/goal-speakers.css';
   <span id="goal-session-posters" class="goal-speakers__legacy-anchor" aria-hidden="true"></span>
   <header class="goal-speakers__heading">
     <div>
-      <p class="goal-speakers__eyebrow">SPEAKERS</p>
+      <p class="goal-speakers__eyebrow">SPEAKERS &amp; CHAIRS</p>
       <h2 id="home-speakers-title">演讲嘉宾</h2>
     </div>
     <a class="goal-speakers__schedule-link" href="/schedule/">
@@ -19,7 +19,7 @@ import '../../../styles/goal-speakers.css';
     class="goal-speakers__viewport"
     id="home-speakers-viewport"
     role="region"
-    aria-label="演讲嘉宾阵容"
+    aria-label="演讲嘉宾与 Chair 阵容"
     aria-describedby="home-speakers-hint"
     tabindex="0"
     data-speaker-viewport
@@ -28,7 +28,7 @@ import '../../../styles/goal-speakers.css';
       {homeSpeakers.map((speaker) => (
         <li class="goal-speakers__person" data-home-speaker={speaker.id}>
           <a class="goal-speakers__profile" href={speaker.href}>
-            <img
+            {speaker.portraitSrc ? <img
               class="goal-speakers__portrait"
               src={speaker.portraitSrc}
               alt=""
@@ -36,7 +36,11 @@ import '../../../styles/goal-speakers.css';
               height="640"
               loading="lazy"
               decoding="async"
-            />
+            /> : (
+              <span class="goal-speakers__portrait goal-speakers__portrait--placeholder" aria-hidden="true">
+                {speaker.name.slice(0, 1)}
+              </span>
+            )}
             <h3 class="goal-speakers__identity">
               <span class="goal-speakers__name">{speaker.name}</span>
             </h3>
@@ -57,7 +61,7 @@ import '../../../styles/goal-speakers.css';
 
   <footer class="goal-speakers__browse">
     <p id="home-speakers-hint">横向浏览嘉宾 <span aria-hidden="true">→</span></p>
-    <div class="goal-speakers__arrows" role="group" aria-label="浏览演讲嘉宾" data-speaker-arrows hidden>
+    <div class="goal-speakers__arrows" role="group" aria-label="浏览演讲嘉宾与 Chair" data-speaker-arrows hidden>
       <button type="button" aria-label="上一组嘉宾" aria-controls="home-speakers-viewport" data-speaker-previous>
         <span aria-hidden="true">←</span>
       </button>

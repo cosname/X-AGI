@@ -44,6 +44,10 @@ const positions: Record<string, { label: string; evidence: string }> = {
   'li-peng': { label: '副研究员', evidence: '清华大学智能产业研究院副研究员' },
   'yan-yukun': { label: '副研究员', evidence: '大模型中心副研究员' },
   'cong-xin': { label: '助理教授', evidence: '统计与数据科学系助理教授' },
+  'zhou-mo': { label: '助理教授', evidence: '北京大学数学科学学院助理教授' },
+  'ma-ziye': { label: '助理教授', evidence: '香港城市大学计算机系助理教授' },
+  'hu-tianyang': { label: '助理教授', evidence: '数据科学学院的助理教授' },
+  'zhou-feng': { label: '副教授', evidence: '中国人民大学统计学院副教授' },
 };
 
 export type HomeSpeaker = {
@@ -51,30 +55,34 @@ export type HomeSpeaker = {
   readonly name: string;
   readonly position?: string;
   readonly affiliation: string;
-  readonly portraitSrc: string;
+  readonly portraitSrc?: string;
   readonly href: string;
 };
 
 function buildHomeSpeakers(): readonly HomeSpeaker[] {
   const seen = new Set<string>();
   const speakers: HomeSpeaker[] = [];
-  for (const [sessionIndex, session] of conference2026ProgramSessions.entries()) {
-    for (const [speakerIndex, speaker] of session.speakers.entries()) {
-      const person = conference2026PersonForName(speaker.name);
-      if (!person?.portraitSrc || seen.has(person.id)) continue;
-      const position = positions[person.id];
-      if (position && !person.bio?.includes(position.evidence)) {
-        throw new Error(`Recheck the homepage position against the updated biography for ${person.name}.`);
+  // Preserve the speaker order and biography links, then append Chair-only guests.
+  for (const role of ['speaker', 'chair'] as const) {
+    for (const [sessionIndex, session] of conference2026ProgramSessions.entries()) {
+      const scheduledPeople = role === 'speaker' ? session.speakers : session.chairs;
+      for (const [personIndex, speaker] of scheduledPeople.entries()) {
+        const person = conference2026PersonForName(speaker.name);
+        if (!person || seen.has(person.id)) continue;
+        const position = positions[person.id];
+        if (position && !person.bio?.includes(position.evidence)) {
+          throw new Error(`Recheck the homepage position against the updated biography for ${person.name}.`);
+        }
+        seen.add(person.id);
+        speakers.push({
+          id: person.id,
+          name: speaker.name,
+          ...(position ? { position: position.label } : {}),
+          affiliation: person.affiliation,
+          portraitSrc: person.portraitSrc,
+          href: `/schedule/#schedule-person-${String(sessionIndex + 1).padStart(2, '0')}-${role}-${person.id}-${personIndex + 1}`,
+        });
       }
-      seen.add(person.id);
-      speakers.push({
-        id: person.id,
-        name: speaker.name,
-        ...(position ? { position: position.label } : {}),
-        affiliation: person.affiliation,
-        portraitSrc: person.portraitSrc,
-        href: `/schedule/#schedule-person-${String(sessionIndex + 1).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`,
-      });
     }
   }
   return speakers;
