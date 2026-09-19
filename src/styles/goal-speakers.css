@@ -2,7 +2,8 @@
   --speaker-ink: var(--journey-ink, #12143f);
   --speaker-accent: var(--journey-violet, #6351c8);
   --speaker-muted: rgb(17 19 66 / 0.64);
-  --speaker-width: 18.75rem;
+  /* Reduce the former portrait-to-portrait whitespace by 30%, keeping image sizes. */
+  --speaker-width: 15.675rem;
   --speaker-gap: 0.5rem;
   --speaker-stagger: calc((var(--speaker-width) + var(--speaker-gap)) / 2);
   position: relative;
@@ -231,7 +232,7 @@
 
 @media (max-width: 48rem) {
   .goal-speakers {
-    --speaker-width: min(18.75rem, calc(100vw - 2rem));
+    --speaker-width: min(15.225rem, calc(70vw + 0.7rem));
     --speaker-stagger: calc((var(--speaker-width) + var(--speaker-gap)) / 4);
   }
 
@@ -243,6 +244,10 @@
 
   .goal-speakers__portrait {
     width: 7.5rem;
+  }
+
+  .goal-speakers__viewport {
+    scroll-snap-type: none;
   }
 }
 
