@@ -176,6 +176,8 @@ Copy the needed source into 2026 ownership, choose a clear filename, and update 
 All interactive controls need visible keyboard focus and practical target sizes.
 Poster paper search and venue filters indicate focus by increasing their background opacity while keeping text fully opaque.
 These fields use a system Highlight outline in forced-colors mode.
+The venue picker opens a rounded, translucent listbox with a bounded scroll area, a selected checkmark and opacity-based option highlights.
+It supports keyboard navigation, type-ahead, Escape cancellation and touch selection, and keeps the native select as a fallback when the Popover API is unavailable.
 Decorative tree, terrain, particle, and glass layers remain hidden from assistive technology and must not intercept pointer input.
 Current-page navigation semantics and expanded or inert states must remain accurate.
 

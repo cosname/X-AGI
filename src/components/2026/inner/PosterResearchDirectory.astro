@@ -21,18 +21,44 @@ const venues = [...new Set(posterResearchPapers.map((paper) => paper.venue))]
         <span>搜索论文</span>
         <input type="search" placeholder="题目、报名人或单位" autocomplete="off" aria-controls="poster-research-list" data-research-search />
       </label>
-      <label class="poster-research__filter">
-        <span>会议 / 期刊</span>
+      <div class="poster-research__filter">
+        <label id="poster-venue-label" for="poster-venue-native">会议 / 期刊</label>
         <span class="poster-research__select">
-          <select aria-controls="poster-research-list" data-research-filter>
+          <select id="poster-venue-native" aria-controls="poster-research-list" data-research-filter>
             <option value="">全部会议 / 期刊</option>
             {venues.map((venue) => <option value={venue}>{venue}</option>)}
           </select>
           <svg class="poster-research__select-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
             <path d="m5 7.5 5 5 5-5" />
           </svg>
+          <button
+            id="poster-venue-trigger"
+            type="button"
+            class="poster-research__venue-trigger"
+            role="combobox"
+            aria-labelledby="poster-venue-label"
+            aria-controls="poster-venue-menu"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            popovertarget="poster-venue-menu"
+            data-venue-trigger
+            hidden
+          >
+            <span data-venue-value>全部会议 / 期刊</span>
+            <svg class="poster-research__select-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="m5 7.5 5 5 5-5" />
+            </svg>
+          </button>
         </span>
-      </label>
+        <ul id="poster-venue-menu" class="poster-research__venue-menu" role="listbox" aria-labelledby="poster-venue-label" popover="auto" data-venue-menu hidden>
+          {['', ...venues].map((venue, index) => (
+            <li id={`poster-venue-option-${index}`} role="option" aria-selected={index === 0} data-venue-option>
+              <span>{venue || '全部会议 / 期刊'}</span>
+              <span class="poster-research__venue-check" aria-hidden="true">✓</span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <button type="button" class="poster-research__clear" data-research-clear disabled>清除筛选</button>
       <p class="poster-research__results" role="status" aria-live="polite" aria-atomic="true" data-research-results>
         共 {posterResearchPapers.length} 篇论文

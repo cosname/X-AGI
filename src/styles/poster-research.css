@@ -46,7 +46,8 @@
   backdrop-filter: var(--glass-shell-backdrop);
 }
 
-.poster-research__tools label {
+.poster-research__tools label,
+.poster-research__filter {
   display: grid;
   min-width: 0;
   gap: 0.55rem;
@@ -57,6 +58,7 @@
 
 .poster-research__tools input,
 .poster-research__tools select,
+.poster-research__venue-trigger,
 .poster-research__clear {
   box-sizing: border-box;
   width: 100%;
@@ -94,6 +96,89 @@
   padding-right: 2.75rem;
   text-overflow: ellipsis;
   cursor: pointer;
+}
+
+.poster-research__select[data-venue-enhanced] > .poster-research__select-icon {
+  display: none;
+}
+
+.poster-research__venue-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 2.75rem;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.poster-research__venue-trigger [data-venue-value] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.poster-research__venue-trigger[aria-expanded="true"] .poster-research__select-icon {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.poster-research__venue-menu {
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.45rem;
+  overflow-y: auto;
+  scroll-padding-block: 0.45rem;
+  overscroll-behavior: contain;
+  border: 1px solid var(--goal-line, rgb(17 19 66 / 0.14));
+  border-radius: 1.25rem;
+  background: rgb(255 253 251 / 0.94);
+  box-shadow: var(--glass-panel-shadow);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  color: var(--goal-ink, #111342);
+  font-family: var(--font-sans);
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(103 82 200 / 0.28) transparent;
+}
+
+.poster-research__venue-menu [role="option"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 450;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms ease;
+}
+
+.poster-research__venue-menu [aria-selected="true"] {
+  background: rgb(103 82 200 / 0.07);
+  font-weight: 650;
+}
+
+.poster-research__venue-menu [data-active="true"] {
+  background: rgb(103 82 200 / 0.14);
+}
+
+.poster-research__venue-check {
+  flex: none;
+  color: var(--goal-purple-deep, #4f3caf);
+  opacity: 0;
+}
+
+.poster-research__venue-menu [aria-selected="true"] .poster-research__venue-check {
+  opacity: 1;
 }
 
 .poster-research__select-icon {
@@ -136,13 +221,14 @@
   outline-offset: 3px;
 }
 
-.poster-research__tools :is(input, select) {
+.poster-research__tools :is(input, select, .poster-research__venue-trigger) {
   border-color: var(--goal-line, rgb(17 19 66 / 0.14));
   background: rgb(255 253 251 / 0.35);
   transition: background-color 160ms ease;
 }
 
-.poster-research__tools :is(input, select):focus {
+.poster-research__tools :is(input, select, .poster-research__venue-trigger):focus,
+.poster-research__venue-trigger[aria-expanded="true"] {
   background-color: rgb(255 253 251 / 0.96);
   outline: none;
 }
@@ -378,6 +464,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .poster-research__list > li::before,
+  .poster-research__venue-menu [role="option"],
   .poster-research__tools :is(input, select, button) {
     transition: none;
   }
@@ -390,8 +477,23 @@
     border-color: ButtonText;
   }
 
-  .poster-research__tools :is(input, select):focus {
+  .poster-research__tools :is(input, select, .poster-research__venue-trigger):focus {
     outline: 2px solid Highlight;
     outline-offset: 3px;
+  }
+
+  .poster-research__venue-menu {
+    border-color: ButtonText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .poster-research__venue-menu [data-active="true"] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  .poster-research__venue-check {
+    color: CanvasText;
   }
 }
