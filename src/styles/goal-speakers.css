@@ -2,8 +2,8 @@
   --speaker-ink: var(--journey-ink, #12143f);
   --speaker-accent: var(--journey-violet, #6351c8);
   --speaker-muted: rgb(17 19 66 / 0.64);
-  --speaker-width: 20rem;
-  --speaker-gap: 1.5rem;
+  --speaker-width: 18.75rem;
+  --speaker-gap: 0.5rem;
   --speaker-stagger: calc((var(--speaker-width) + var(--speaker-gap)) / 2);
   position: relative;
   padding-top: clamp(4.5rem, 8vw, 7.5rem);
@@ -231,8 +231,7 @@
 
 @media (max-width: 48rem) {
   .goal-speakers {
-    --speaker-width: min(20rem, calc(100vw - 2rem));
-    --speaker-gap: 1rem;
+    --speaker-width: min(18.75rem, calc(100vw - 2rem));
     --speaker-stagger: calc((var(--speaker-width) + var(--speaker-gap)) / 4);
   }
 
