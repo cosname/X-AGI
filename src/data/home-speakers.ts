@@ -90,7 +90,11 @@ function buildHomeSpeakers(): readonly HomeSpeaker[] {
       }
     }
   }
-  return speakers;
+  // Keep each group's order until all portraits are ready for the final lineup.
+  return [
+    ...speakers.filter((speaker) => speaker.portraitSrc),
+    ...speakers.filter((speaker) => !speaker.portraitSrc),
+  ];
 }
 
 export const homeSpeakers = buildHomeSpeakers();
