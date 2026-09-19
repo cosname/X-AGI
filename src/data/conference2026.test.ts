@@ -12,7 +12,7 @@ import { conference2026ProgramSource } from './conference2026-program.generated.
 import { conference2026ProgramSessions, withOrganizerRemarks } from './conference2026-program.ts';
 import { partnerLogoByName } from './partner-logo-assets-2026.ts';
 
-const scheduleCategories = new Set(['arrival', 'keynote', 'parallel', 'poster']);
+const scheduleCategories = new Set(['arrival', 'keynote', 'parallel', 'poster', 'discussion']);
 
 describe('conference schedule contracts', () => {
   it('classifies every published session explicitly', () => {

@@ -16,12 +16,14 @@ export type ScheduleTalk = {
   slides?: string;
 };
 
-export type ScheduleCategory = 'arrival' | 'keynote' | 'parallel' | 'poster';
+export type ScheduleCategory = 'arrival' | 'keynote' | 'parallel' | 'poster' | 'discussion';
 
 export type ScheduleSession = {
   id: string;
   category: ScheduleCategory;
   period: string;
+  time?: string;
+  sourceTime?: string;
   title?: string;
   venue?: string;
   chair?: {
@@ -208,6 +210,7 @@ export const conference2026 = {
     sessions: conference2026ProgramSessions,
   },
   // 日程是嘉宾、报告与分会场的唯一发布面。确认后的讲者、摘要、简介写进对应 session.talks。
+  // Times confirmed by the organizers on 2026-09-19; afternoon slots apply to both days.
   schedule: [
     {
       dateTime: '2026-10-16',
@@ -232,17 +235,23 @@ export const conference2026 = {
           id: 'oct17-am',
           category: 'keynote',
           period: '上午',
+          time: '09:00-12:00',
+          sourceTime: '10.17上午',
           title: 'Keynote 会场',
-          notes: ['主持人致辞'],
           talks: [
-            { time: '', title: '', speaker: '', affiliation: '' },
-            { time: '', title: '', speaker: '', affiliation: '' },
+            { time: '09:00-09:10', title: '开幕致辞', speaker: '刘军' },
+            { time: '09:10-10:00', title: 'Keynote 1', speaker: '孙茂松' },
+            { time: '10:00-10:20', title: '茶歇' },
+            { time: '10:20-11:10', title: 'Keynote 2', speaker: '冯建峰' },
+            { time: '11:10-12:00', title: 'Keynote 3', speaker: '邱子涵' },
           ],
         },
         {
           id: 'oct17-pm-sessions',
           category: 'parallel',
           period: '下午',
+          time: '14:00-16:00',
+          sourceTime: '10.17下午',
           title: '分会场报告',
           notes: ['各分会场开展报告'],
           talks: [
@@ -255,6 +264,7 @@ export const conference2026 = {
           id: 'oct17-pm-poster',
           category: 'poster',
           period: '下午',
+          time: '16:00-18:30',
           title: 'Rising Stars Poster 展示',
           notes: ['Rising Stars Poster 展示'],
         },
@@ -266,9 +276,28 @@ export const conference2026 = {
       weekday: '周日',
       sessions: [
         {
-          id: 'oct18-sessions',
+          id: 'oct18-am-discussion',
+          category: 'discussion',
+          period: '上午',
+          time: '09:00-10:00',
+          sourceTime: '10.18上午',
+          title: '自由讨论 + 茶歇',
+        },
+        {
+          id: 'oct18-am-sessions',
           category: 'parallel',
-          period: '全天',
+          period: '上午',
+          time: '10:00-12:00',
+          sourceTime: '10.18上午',
+          title: '分会场报告',
+          notes: ['各分会场开展报告'],
+        },
+        {
+          id: 'oct18-pm-sessions',
+          category: 'parallel',
+          period: '下午',
+          time: '14:00-16:00',
+          sourceTime: '10.18下午',
           title: '分会场报告',
           notes: ['各分会场开展报告'],
           talks: [
@@ -277,6 +306,14 @@ export const conference2026 = {
             { time: '', title: '', speaker: '', affiliation: '' },
             { time: '', title: '', speaker: '', affiliation: '' },
           ],
+        },
+        {
+          id: 'oct18-pm-poster',
+          category: 'poster',
+          period: '下午',
+          time: '16:00-18:30',
+          title: 'Rising Stars Poster 展示',
+          notes: ['Rising Stars Poster 展示'],
         },
       ],
     },
