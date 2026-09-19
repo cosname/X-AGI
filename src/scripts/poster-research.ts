@@ -1,3 +1,5 @@
+import { initializeVenuePicker } from './venue-picker';
+
 const researchDirectoryCleanups = new Set<() => void>();
 
 function normalizeResearchText(text: string) {
@@ -27,8 +29,10 @@ function initializeResearchDirectory(root: HTMLElement) {
 
   const controller = new AbortController();
   const { signal } = controller;
+  const picker = initializeVenuePicker(root, filter, signal);
 
   const update = () => {
+    picker.sync();
     const terms = normalizeResearchText(search.value).split(' ').filter(Boolean);
     const venue = filter.value;
     let visibleCount = 0;
@@ -66,6 +70,7 @@ function initializeResearchDirectory(root: HTMLElement) {
 
   const cleanup = () => {
     controller.abort();
+    picker.cleanup();
     papers.forEach((paper) => { paper.element.hidden = false; });
     tools.hidden = true;
     empty.hidden = true;
