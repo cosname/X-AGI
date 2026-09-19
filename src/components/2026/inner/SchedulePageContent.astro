@@ -1,9 +1,11 @@
 ---
-import { conference2026 } from '../../../data/conference2026';
+import { conference2026, type ScheduleDay } from '../../../data/conference2026';
 import { conference2026PersonForName } from '../../../data/conference2026-people.ts';
 import SchedulePersonProfile from './SchedulePersonProfile.astro';
 
 const program = conference2026.programPreview;
+const scheduleDays: readonly ScheduleDay[] = conference2026.schedule;
+const timedSessions = scheduleDays.flatMap((day) => day.sessions);
 const weekdayByShortDate = new Map(
   conference2026.schedule.map((day) => [day.date.slice(5), day.weekday]),
 );
@@ -45,6 +47,11 @@ const programGroups = [...sessionsByTime.entries()].map(([sourceTime, sessions])
   ...describeTimeSlot(sourceTime),
   sessions,
   sourceTime,
+  timetable: timedSessions.find((session) => session.sourceTime === sourceTime && session.category !== 'discussion'),
+  discussion: timedSessions.find((session) => session.sourceTime === sourceTime && session.category === 'discussion'),
+  poster: sourceTime.endsWith('下午')
+    ? scheduleDays.find((day) => day.date.slice(5) === sourceTime.slice(0, 5))?.sessions.find((session) => session.category === 'poster')
+    : undefined,
 }));
 
 const sessionNumbers = new Map(
@@ -65,6 +72,12 @@ const sessionNumbers = new Map(
           <header class="schedule-period-heading">
             <h3 id={`${group.id}-title`}>{group.dateLabel}</h3>
           </header>
+          {group.discussion && (
+            <p class="schedule-interlude">
+              <span>{group.discussion.title}</span>
+              <span class="schedule-inline-time">{group.discussion.time}</span>
+            </p>
+          )}
 
           <div class="schedule-period-cards">
             {group.sessions.map((session) => {
@@ -83,6 +96,7 @@ const sessionNumbers = new Map(
                     <span class="schedule-topic-card__heading">
                       <span class="schedule-topic-card__number">{sessionLabel}</span>
                       <span class="schedule-topic-card__title">{session.title}</span>
+                      {group.timetable?.time && <span class="schedule-topic-card__time">{group.timetable.time}</span>}
                     </span>
                     <button
                       class="schedule-session-profiles-toggle"
@@ -150,38 +164,49 @@ const sessionNumbers = new Map(
                         session.speakers.map((speaker, speakerIndex) => {
                           const person = conference2026PersonForName(speaker.name);
                           const talkTitle = person?.talkTitle ?? speaker.talkTitle;
+                          const timedTalks = group.timetable?.talks ?? [];
+                          const timedTalkIndex = timedTalks.findIndex((talk) => talk.speaker === speaker.name);
+                          const timedTalk = timedTalks[timedTalkIndex];
+                          const precedingBreak = timedTalkIndex > 0 && !timedTalks[timedTalkIndex - 1].speaker
+                            ? timedTalks[timedTalkIndex - 1] : undefined;
                           return (
-                            <div class="session-item session-item--speaker">
-                              <div class="session-speaker">
-                                <p class:list={[
-                                  'session-speaker__talk-title',
-                                  { 'session-speaker__talk-title--pending': !talkTitle },
-                                ]}>
-                                  {talkTitle || '报告题目待公布'}
-                                </p>
-                                {person ? (
-                                  <SchedulePersonProfile
-                                    person={person}
-                                    displayName={speaker.name}
-                                    displayAffiliation={speaker.affiliation}
-                                    disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`}
-                                    role="speaker"
-                                    defaultOpen={session.title.trim().toLowerCase() === 'keynote'}
-                                  />
-                                ) : (
-                                  <span class="session-speaker__name schedule-person-identity">
-                                    <strong>{speaker.name}</strong>
-                                    {speaker.affiliation && (
-                                      <span class="schedule-person-identity__affiliation">
-                                        <span class="schedule-person-identity__affiliation-text">
-                                          {speaker.affiliation}
+                            <>
+                              {precedingBreak && (
+                                <div class="session-item schedule-break"><span>{precedingBreak.title}</span><span class="schedule-inline-time">{precedingBreak.time}</span></div>
+                              )}
+                              <div class="session-item session-item--speaker">
+                                <div class="session-speaker">
+                                  <p class:list={[
+                                    'session-speaker__talk-title',
+                                    { 'session-speaker__talk-title--pending': !talkTitle },
+                                  ]}>
+                                    <span>{talkTitle || '报告题目待公布'}</span>
+                                    {timedTalk?.time && <span class="schedule-inline-time">{timedTalk.time}</span>}
+                                  </p>
+                                  {person ? (
+                                    <SchedulePersonProfile
+                                      person={person}
+                                      displayName={speaker.name}
+                                      displayAffiliation={speaker.affiliation}
+                                      disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`}
+                                      role="speaker"
+                                      defaultOpen={session.title.trim().toLowerCase() === 'keynote'}
+                                    />
+                                  ) : (
+                                    <span class="session-speaker__name schedule-person-identity">
+                                      <strong>{speaker.name}</strong>
+                                      {speaker.affiliation && (
+                                        <span class="schedule-person-identity__affiliation">
+                                          <span class="schedule-person-identity__affiliation-text">
+                                            {speaker.affiliation}
+                                          </span>
                                         </span>
-                                      </span>
-                                    )}
-                                  </span>
-                                )}
+                                      )}
+                                    </span>
+                                  )}
+                                </div>
                               </div>
-                            </div>
+                            </>
                           );
                         })
                       ) : (
@@ -194,6 +219,15 @@ const sessionNumbers = new Map(
                 </article>
               );
             })}
+            {group.poster && (
+              <article class="schedule-poster-event" id={group.poster.id} aria-labelledby={`${group.poster.id}-title`}>
+                <div class="schedule-poster-event__heading">
+                  <h4 id={`${group.poster.id}-title`}>Rising Stars Poster</h4>
+                  <span class="schedule-inline-time">{group.poster.time}</span>
+                </div>
+                <a href="/poster/">查看海报 →</a>
+              </article>
+            )}
           </div>
         </section>
       ))}
@@ -574,6 +608,68 @@ const sessionNumbers = new Map(
 </script>
 
 <style is:inline>
+  .edition-2026-inner .schedule-topic-card__time {
+    flex: 0 0 auto;
+    font-size: 0.9rem;
+    font-weight: 450;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    opacity: 0.9;
+  }
+
+  .edition-2026-inner .schedule-inline-time {
+    color: #747386;
+    font-size: 0.9rem;
+    font-weight: 450;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .edition-2026-inner .schedule-break,
+  .edition-2026-inner .schedule-interlude,
+  .edition-2026-inner .schedule-poster-event__heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 1rem;
+  }
+
+  .edition-2026-inner .schedule-break,
+  .edition-2026-inner .schedule-interlude {
+    color: #313451;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .edition-2026-inner .schedule-interlude {
+    margin: 0 0 1.25rem;
+    padding: 0 0.25rem;
+  }
+
+  .edition-2026-inner .schedule-poster-event {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.65rem 1.5rem;
+    padding: 1.25rem 0.25rem;
+    border-top: 1px solid rgb(103 82 200 / 0.25);
+    scroll-margin-top: calc(var(--site-header-height) + 2.25rem);
+  }
+
+  .edition-2026-inner .schedule-poster-event h4 {
+    margin: 0;
+    color: #171a48;
+    font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+    font-weight: 650;
+  }
+
+  .edition-2026-inner .schedule-poster-event > a {
+    font-size: 0.9rem;
+    text-underline-offset: 0.2em;
+    white-space: nowrap;
+  }
+
   .edition-2026-inner .schedule-confirmed__note {
     max-width: 48rem;
     margin: 0.7rem 0 0;
@@ -732,15 +828,16 @@ const sessionNumbers = new Map(
     display: flex;
     min-width: 0;
     align-items: baseline;
-    gap: 0.85rem;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.85rem;
   }
 
   .edition-2026-inner .schedule-topic-card__number {
     flex: 0 0 auto;
-    font-size: 0.84rem;
-    font-weight: 760;
-    letter-spacing: 0.07em;
-    opacity: 0.84;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
   }
 
   .edition-2026-inner .schedule-topic-card__title {
@@ -859,6 +956,10 @@ const sessionNumbers = new Map(
   }
 
   .edition-2026-inner .session-speaker__talk-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.85rem;
     margin: 0 0 0.42rem;
     color: #4f3caf;
     font-size: clamp(1.0625rem, 1.3vw, 1.125rem);
@@ -874,13 +975,10 @@ const sessionNumbers = new Map(
 
   @media (max-width: 767.98px) {
     .edition-2026-inner .schedule-topic-card__heading {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.2rem;
+      gap: 0.2rem 0.85rem;
     }
 
-    .edition-2026-inner .schedule-topic-card__number,
-    .edition-2026-inner .schedule-topic-card__title {
+    .edition-2026-inner .schedule-topic-card__number {
       display: block;
       width: 100%;
     }
