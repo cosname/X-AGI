@@ -164,49 +164,40 @@ const sessionNumbers = new Map(
                         session.speakers.map((speaker, speakerIndex) => {
                           const person = conference2026PersonForName(speaker.name);
                           const talkTitle = person?.talkTitle ?? speaker.talkTitle;
-                          const timedTalks = group.timetable?.talks ?? [];
-                          const timedTalkIndex = timedTalks.findIndex((talk) => talk.speaker === speaker.name);
-                          const timedTalk = timedTalks[timedTalkIndex];
-                          const precedingBreak = timedTalkIndex > 0 && !timedTalks[timedTalkIndex - 1].speaker
-                            ? timedTalks[timedTalkIndex - 1] : undefined;
+                          const timedTalk = group.timetable?.talks?.find((talk) => talk.speaker === speaker.name);
                           return (
-                            <>
-                              {precedingBreak && (
-                                <div class="session-item schedule-break"><span>{precedingBreak.title}</span><span class="schedule-inline-time">{precedingBreak.time}</span></div>
-                              )}
-                              <div class="session-item session-item--speaker">
-                                <div class="session-speaker">
-                                  <p class:list={[
-                                    'session-speaker__talk-title',
-                                    { 'session-speaker__talk-title--pending': !talkTitle },
-                                  ]}>
-                                    <span>{talkTitle || '报告题目待公布'}</span>
-                                    {timedTalk?.time && <span class="schedule-inline-time">{timedTalk.time}</span>}
-                                  </p>
-                                  {person ? (
-                                    <SchedulePersonProfile
-                                      person={person}
-                                      displayName={speaker.name}
-                                      displayAffiliation={speaker.affiliation}
-                                      disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`}
-                                      role="speaker"
-                                      defaultOpen={session.title.trim().toLowerCase() === 'keynote'}
-                                    />
-                                  ) : (
-                                    <span class="session-speaker__name schedule-person-identity">
-                                      <strong>{speaker.name}</strong>
-                                      {speaker.affiliation && (
-                                        <span class="schedule-person-identity__affiliation">
-                                          <span class="schedule-person-identity__affiliation-text">
-                                            {speaker.affiliation}
-                                          </span>
+                            <div class="session-item session-item--speaker">
+                              <div class="session-speaker">
+                                <p class:list={[
+                                  'session-speaker__talk-title',
+                                  { 'session-speaker__talk-title--pending': !talkTitle },
+                                ]}>
+                                  <span>{talkTitle || '报告题目待公布'}</span>
+                                  {timedTalk?.time && <span class="schedule-inline-time">{timedTalk.time}</span>}
+                                </p>
+                                {person ? (
+                                  <SchedulePersonProfile
+                                    person={person}
+                                    displayName={speaker.name}
+                                    displayAffiliation={speaker.affiliation}
+                                    disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`}
+                                    role="speaker"
+                                    defaultOpen={session.title.trim().toLowerCase() === 'keynote'}
+                                  />
+                                ) : (
+                                  <span class="session-speaker__name schedule-person-identity">
+                                    <strong>{speaker.name}</strong>
+                                    {speaker.affiliation && (
+                                      <span class="schedule-person-identity__affiliation">
+                                        <span class="schedule-person-identity__affiliation-text">
+                                          {speaker.affiliation}
                                         </span>
-                                      )}
-                                    </span>
-                                  )}
-                                </div>
+                                      </span>
+                                    )}
+                                  </span>
+                                )}
                               </div>
-                            </>
+                            </div>
                           );
                         })
                       ) : (
@@ -625,7 +616,6 @@ const sessionNumbers = new Map(
     white-space: nowrap;
   }
 
-  .edition-2026-inner .schedule-break,
   .edition-2026-inner .schedule-interlude,
   .edition-2026-inner .schedule-poster-event__heading {
     display: flex;
@@ -634,7 +624,6 @@ const sessionNumbers = new Map(
     gap: 0.35rem 1rem;
   }
 
-  .edition-2026-inner .schedule-break,
   .edition-2026-inner .schedule-interlude {
     color: #313451;
     font-size: 1rem;
