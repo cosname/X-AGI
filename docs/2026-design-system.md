@@ -78,6 +78,23 @@ Cyan and orange glints are accents, not complete edge colors.
 The hero is a responsive DOM composition.
 It must not be replaced by Canvas scene composition, broad WebGL rendering, DOM rasterization, SVG `foreignObject`, or runtime screenshots of the page.
 The mosaic tree and probability terrain remain structurally inspectable and sharp across device densities.
+A full-body qilin joins the existing scene, hopping from left to right across the hills before bounding alternately to the left and right of the trunk toward the crown.
+Its enlarged silhouette launches from the left hillside to the lower right of the tree, then alternates to the left branch and the upper right crown, keeping its resting poses beside the trunk.
+The character uses the supplied transparent artwork, sampled into purple, pale lavender, and restrained gold mosaic tiles by `scripts/generate-qilin-pixel-field.mjs`.
+The tiles share vector paths by ink color and articulated body part so the small character stays sharp without exceeding the homepage payload budget.
+Its source image is retained in the source archive, and the generated pixel data must not be edited by hand.
+The 18.4-second route includes anticipation, curved hops, subtle leg and tail articulation, landing compression, and a pause at the crown.
+The character turns toward the next jump while grounded, stays upright in flight, exits beyond the right edge, and re-enters from the left.
+`QilinCharacter.astro` owns the independent mosaic character, with a head, tail, and four articulated legs with knee joints.
+`qilin-character.ts` owns its gait and pose renderer; `QilinLeap.astro` and `qilin-leap-runtime.ts` place it in the scene and supply its route and shared time.
+The character has no ground shadow or landing particles.
+The tree and character share one pauseable clock, with branch landings timed to the ascending secondary pixel wave.
+Its path follows the measured tree and terrain below the copy, and pauses with the tree offscreen or when the page is hidden.
+Pointer movement and hover never pause the character or its clock; only the tree pixels rest near the pointer, then rejoin the current scene phase when it leaves.
+Reduced motion leaves the character resting on the hill without jumping.
+Portrait mobile keeps the tree hidden and gives the character a smaller, continuously visible route hopping back and forth along the bottom hills.
+It turns while grounded at both ends, with no offscreen reset, and its clock runs independently of tree visibility and touch input.
+Phone landscape up to 1024 pixels wide and 500 pixels high uses the same hill route, with a taller hero to leave a visible lane below the copy; other short desktop viewports retain the hidden character treatment.
 
 The primary action and schedule action share one measured liquid capsule.
 They use `GlassActionGroup`, the same component as the compact navigation and schedule period controls, with the shared lens material and continuous gap morphing.

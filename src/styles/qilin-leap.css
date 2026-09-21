@@ -1,0 +1,43 @@
+.qilin-leap {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.qilin-leap:not([data-ready='true']) {
+  visibility: hidden;
+}
+
+.qilin-leap__traveller {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(clamp(110px, 11.25vw, 164px), 25svh);
+  transform: translate(-50%, -100%);
+  transform-origin: 25% 100%;
+  contain: layout style;
+}
+
+@media (max-height: 31.25rem) {
+  .qilin-leap {
+    display: none;
+  }
+}
+
+@media (max-width: 51.25rem) and (orientation: portrait), (max-width: 64rem) and (max-height: 31.25rem) {
+  .qilin-leap {
+    display: block;
+  }
+
+  .qilin-leap__traveller {
+    width: clamp(78px, 22vw, 104px);
+  }
+}
+
+@media (max-width: 64rem) and (max-height: 31.25rem) {
+  .qilin-leap__traveller {
+    width: 70px;
+  }
+}

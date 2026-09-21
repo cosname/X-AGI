@@ -1924,9 +1924,18 @@
   }
 }
 
-@media (max-width: 51.25rem) and (orientation: portrait) {
+@media (max-width: 51.25rem) and (orientation: portrait), (max-width: 64rem) and (max-height: 31.25rem) {
   .hero-pixel-field--badge .hero-pixel-field__trees {
     display: none;
+  }
+}
+
+@media (max-width: 64rem) and (max-height: 31.25rem) {
+  /* Keep a readable hill lane below the copy on short phone screens. */
+  .edition-2026.edition-goal-home.edition-goal-home--with-lower .conference-home .conference-hero.conference-hero--badge,
+  .edition-2026.edition-goal-home.edition-goal-home--with-lower .conference-home .conference-hero--badge .conference-hero__inner {
+    height: 38rem;
+    min-height: 38rem;
   }
 }
 

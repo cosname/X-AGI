@@ -150,6 +150,11 @@ const TREE_FLIP_START_Y = 1.08;
 const TREE_FLIP_JITTER = 0.07;
 const TREE_FLIP_WAVE_RADIUS = 0.115;
 
+// Arrival of the first full secondary wave, after it enters from below the tree.
+export const treeWaveArrival = (normalizedY: number) => TREE_FLIP_TRAVEL_DURATION * (
+  1 - TREE_FLIP_SECONDARY_PHASE + (TREE_FLIP_START_Y - clamp(normalizedY, 0, 1)) / TREE_FLIP_TRAVEL_RANGE
+);
+
 export type TreeFlipSample = {
   cycleIndex: number;
   primaryWave: number;

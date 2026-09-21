@@ -1,3 +1,5 @@
+import { createQilinLeap } from './qilin-leap-runtime';
+import { createSceneClock } from './qilin-leap';
 import { treeClipAboveTerrain } from './terrain-tree-clip';
 import {
   MIN_POSTERIOR_AMPLITUDE,
@@ -39,13 +41,15 @@ import {
 export const initializeHeroPixelFields = () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  const portraitLayout = window.matchMedia('(max-width: 51.25rem) and (orientation: portrait)');
+  const hillLayout = window.matchMedia('(max-width: 51.25rem) and (orientation: portrait), (max-width: 64rem) and (max-height: 31.25rem)');
 
   document.querySelectorAll<HTMLElement>('[data-hero-pixel-field]').forEach((field) => {
     if (field.dataset.initialized === 'true') return;
     field.dataset.initialized = 'true';
 
     const stage = field.closest<HTMLElement>('[data-connection-stage]') ?? field;
+    const qilin = createQilinLeap(field);
+    const sceneClock = createSceneClock();
     const veil = field.querySelector<HTMLElement>('[data-hero-sanctuary]');
     const terrainEnabled = field.dataset.terrainEnabled !== 'false';
     const terrainProfile: TerrainProfile = field.dataset.terrainProfile === 'tree-foundation'
@@ -99,7 +103,6 @@ export const initializeHeroPixelFields = () => {
     let pointerFrame = 0;
     let treePulseFrame = 0;
     let treePulsePaintTimestamp = 0;
-    let treePulseStartTimestamp = 0;
     let treePauseRequested = false;
     let treePulsePaused = false;
     let activeTreeFlipPixels = new Set<HTMLElement>();
@@ -110,8 +113,8 @@ export const initializeHeroPixelFields = () => {
     let lastTimestamp = 0;
     let lastShapeKey = '';
     const motionEnabled = () => !prefersReducedMotion.matches && finePointer.matches;
-    const treeVisible = () => field.dataset.visualComposition !== 'badge' || !portraitLayout.matches;
-    const growthMotionEnabled = () => !pageSuspended && !prefersReducedMotion.matches && treeVisible();
+    const treeVisible = () => field.dataset.visualComposition !== 'badge' || !hillLayout.matches;
+    const growthMotionEnabled = () => !pageSuspended && !prefersReducedMotion.matches && (treeVisible() || Boolean(qilin));
     const baseAmplitude = () => width < 360 ? NARROW_POSTERIOR_AMPLITUDE : BASE_POSTERIOR_AMPLITUDE;
     const terrainPixelUnit = () => width < 720 ? 4 : 5;
     const terrainShapeUnit = () => Math.max(terrainPixelUnit(), width / TERRAIN_COLUMNS);
@@ -149,6 +152,7 @@ export const initializeHeroPixelFields = () => {
         }
       });
 
+      qilin?.setTerrain(terrainPaths);
       if (clippedTrees) clippedTrees.style.clipPath = treeClipAboveTerrain(terrainPaths);
 
       echoSurfaces.forEach((surface) => {
@@ -230,7 +234,8 @@ export const initializeHeroPixelFields = () => {
       if (treePulseFrame) window.cancelAnimationFrame(treePulseFrame);
       treePulseFrame = 0;
       treePulsePaintTimestamp = 0;
-      treePulseStartTimestamp = 0;
+      sceneClock.pause();
+      qilin?.pause(prefersReducedMotion.matches);
       if (clear) clearTreePulseStyles();
     };
 
@@ -249,10 +254,10 @@ export const initializeHeroPixelFields = () => {
         return;
       }
 
-      if (!treePulseStartTimestamp) treePulseStartTimestamp = timestamp;
-      const elapsed = timestamp - treePulseStartTimestamp;
+      const elapsed = sceneClock.advance(timestamp);
+      qilin?.render(elapsed);
 
-      if (!treePulsePaintTimestamp || timestamp - treePulsePaintTimestamp >= 42) {
+      if (treeVisible() && !treePulsePaused && (!treePulsePaintTimestamp || timestamp - treePulsePaintTimestamp >= 42)) {
         treePulsePaintTimestamp = timestamp;
         let maximumFlip = 0;
         const nextActiveTreeFlipPixels = new Set<HTMLElement>();
@@ -308,8 +313,13 @@ export const initializeHeroPixelFields = () => {
         if (treePauseRequested && activeTreeFlipPixels.size === 0) {
           treePulsePaused = true;
           field.dataset.treePulsePaused = 'true';
-          stopTreePulse({ clear: true });
-          return;
+          clearTreePulseStyles();
+          // Hover rests the tree pixels, not the ambient character or its clock.
+          // The tree rejoins the current scene phase when the pointer leaves.
+          if (!qilin) {
+            stopTreePulse();
+            return;
+          }
         }
       }
       treePulseFrame = window.requestAnimationFrame(treePulseTick);
@@ -318,13 +328,14 @@ export const initializeHeroPixelFields = () => {
     const scheduleTreePulse = () => {
       if (
         treePulseFrame
-        || treePulsePaused
+        || (treePulsePaused && !qilin)
         || treeInteractionMode !== 'calm'
         || !growthMotionEnabled()
         || !visible
         || document.hidden
       ) return;
-      field.dataset.treePulsePaused = 'false';
+      field.dataset.treePulsePaused = String(treePulsePaused);
+      qilin?.play();
       treePulseFrame = window.requestAnimationFrame(treePulseTick);
     };
 
@@ -618,6 +629,8 @@ export const initializeHeroPixelFields = () => {
       collectTitleRect(fieldBox);
       resetBranches();
       field.dataset.ready = 'true';
+      qilin?.layout(!treeVisible());
+      if (prefersReducedMotion.matches) qilin?.pause(true);
       scheduleTreePulse();
     };
 
@@ -784,7 +797,7 @@ export const initializeHeroPixelFields = () => {
 
     prefersReducedMotion.addEventListener('change', resetMotion, { signal });
     finePointer.addEventListener('change', resetMotion, { signal });
-    portraitLayout.addEventListener('change', () => {
+    hillLayout.addEventListener('change', () => {
       resetMotion();
       scheduleResize();
     }, { signal });
