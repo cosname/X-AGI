@@ -1,0 +1,32 @@
+---
+import qilin from '../data/qilin-pixel-field.generated.json';
+import { QILIN_LAYERS, qilinPartFor, type QilinPart } from '../scripts/qilin-rig';
+import '../styles/qilin-character.css';
+
+interface Props { size?: string }
+const { size = '164px' } = Astro.props;
+const inksFor = (part: QilinPart) => [0, 1].flatMap((alpha) => qilin.palette.map((color, tone) => ({
+  color: `rgb(${color})`, opacity: alpha ? 0.55 : 0.94,
+  // Short butt-capped strokes have exactly the original square tile bounds.
+  path: qilin.pixels.filter(([x, y, ink, opacity]) => ink === tone && opacity === alpha && qilinPartFor(x, y) === part)
+    .map(([x, y]) => `M${x} ${y}h.89`).join(''),
+}))).filter((ink) => ink.path);
+const layers = QILIN_LAYERS.map((layer) => ({ ...layer, inks: inksFor(layer.name),
+  lower: 'child' in layer ? { name: layer.child, inks: inksFor(layer.child) } : undefined,
+}));
+---
+<div class="qilin-character" data-qilin-character style={`width:${size};aspect-ratio:${qilin.width}/${qilin.height}`} aria-hidden="true">
+  <div class="qilin-character__body" data-qilin-body-frame>
+    <svg class="qilin-character__art" data-qilin-pixel-art data-pixel-count={qilin.pixels.length}
+      viewBox={`0 0 ${qilin.width} ${qilin.height}`} fill="none" stroke-width=".89" stroke-linecap="butt" aria-hidden="true">
+      <g data-qilin-facing>
+        {layers.map((layer) => <g data-qilin-joint={layer.name}>
+          {layer.inks.map((ink) => <path d={ink.path} stroke={ink.color} opacity={ink.opacity} transform="translate(0 .445)" />)}
+          {layer.lower && <g data-qilin-joint={layer.lower.name}>
+            {layer.lower.inks.map((ink) => <path d={ink.path} stroke={ink.color} opacity={ink.opacity} transform="translate(0 .445)" />)}
+          </g>}
+        </g>)}
+      </g>
+    </svg>
+  </div>
+</div>

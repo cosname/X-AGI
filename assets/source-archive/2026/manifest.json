@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-09-19",
+  "lastExtendedOn": "2026-09-21",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 174,
-  "uniquePayloadCount": 173,
-  "archiveFileCount": 172,
+  "sourceEntryCount": 176,
+  "uniquePayloadCount": 175,
+  "archiveFileCount": 174,
   "entries": [
     {
       "originalPath": "1.png",
@@ -2863,6 +2863,38 @@
         "public/2026/people/chen-siming-portrait.webp"
       ],
       "note": "Portrait supplied directly by the organizer on 2026-09-19 with an explicit name-to-photo mapping. Embedded metadata was removed without changing decoded source pixels. The 640px square WebP export uses a 1080 x 1080 source crop at x=0, y=10, with quality 88 and no facial retouching or generation."
+    },
+    {
+      "originalPath": "organizer-supplied-20260920/qilin-mascot.jpg",
+      "canonicalPath": "assets/source-archive/2026/brand/qilin-mascot-source.jpg",
+      "status": "archived",
+      "sha256": "7e015336be446599f9e2a0ba7627901f9533b26b7f6c5693770ab874ca330ca1",
+      "bytes": 53476,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1317,
+        "height": 1194
+      },
+      "sourceModifiedAt": "2026-09-20T14:50:11.744Z",
+      "runtimeCounterparts": [],
+      "note": "Supplied for the September 20 homepage exploration; the large head replacement was withdrawn on September 21. Original reference retained, with no runtime consumer."
+    },
+    {
+      "originalPath": "organizer-supplied-20260921/qilin-leaping.png",
+      "canonicalPath": "assets/source-archive/2026/brand/qilin-leaping-source.png",
+      "status": "archived",
+      "sha256": "0bc302c3badd10c333ba97e6dcb4d422b3495dec3c0db21a306c48c0d4c856f1",
+      "bytes": 994958,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "sourceModifiedAt": "2026-09-20T17:12:02.136Z",
+      "runtimeCounterparts": [
+        "src/data/qilin-pixel-field.generated.json"
+      ],
+      "note": "Supplied for the September 21 request to retain the tree and add a mosaic qilin jumping from the hill through the branches. Original transparent PNG bytes preserved."
     }
   ]
 }
