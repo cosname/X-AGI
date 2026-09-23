@@ -139,20 +139,7 @@
   font-weight: 700;
 }
 
-.goal-speakers__separator {
-  color: rgb(17 19 66 / 0.28);
-  font-weight: 400;
-}
-
-.goal-speakers__position {
-  font-weight: 450;
-}
-
 .goal-speakers__affiliation {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.35rem;
   margin: 0;
   color: var(--speaker-muted);
   font-size: clamp(0.8rem, 3.4vw, 0.85rem);
@@ -224,7 +211,8 @@
 
 @media (max-width: 48rem) {
   .goal-speakers {
-    --speaker-width: min(15.225rem, calc(70vw + 0.7rem));
+    /* Keep 7.5rem portraits and 0.5rem gaps; reduce remaining whitespace by 30%. */
+    --speaker-width: min(12.7575rem, calc(49vw + 2.59rem));
   }
 
   .goal-speakers__heading,
@@ -235,6 +223,10 @@
 
   .goal-speakers__portrait {
     width: 7.5rem;
+  }
+
+  .goal-speakers__affiliation {
+    white-space: normal;
   }
 
   .goal-speakers__viewport {

@@ -722,7 +722,7 @@ validateExactSet('homepage speaker roster', speakerCards.map((card) => card[1]),
 if (speakerCards.length !== homeSpeakers.length) fail('index.html: every homepage speaker must appear exactly once');
 for (const speaker of homeSpeakers) {
   const card = speakerCards.find((match) => match[1] === speaker.id)?.[2] ?? '';
-  for (const value of [speaker.name, speaker.position, speaker.affiliation].filter(Boolean)) {
+  for (const value of [speaker.name, speaker.affiliation].filter(Boolean)) {
     if (!visibleText(card).includes(value)) fail(`index.html: missing ${speaker.id} profile text: ${value}`);
   }
   const images = [...card.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);

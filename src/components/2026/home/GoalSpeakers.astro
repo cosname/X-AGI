@@ -45,13 +45,7 @@ import '../../../styles/goal-speakers.css';
               <span class="goal-speakers__name">{speaker.name}</span>
             </h3>
             <p class="goal-speakers__affiliation">
-              {speaker.position && (
-                <>
-                  <span class="goal-speakers__position">{speaker.position}</span>
-                  <span class="goal-speakers__separator" aria-hidden="true">|</span>
-                </>
-              )}
-              <span>{speaker.affiliation}</span>
+              {speaker.affiliation}
             </p>
           </a>
         </li>
