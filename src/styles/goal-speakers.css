@@ -224,7 +224,8 @@
 
 @media (max-width: 48rem) {
   .goal-speakers {
-    --speaker-width: min(15.225rem, calc(70vw + 0.7rem));
+    /* Keep 7.5rem portraits and 0.5rem gaps; reduce remaining whitespace by 30%. */
+    --speaker-width: min(12.7575rem, calc(49vw + 2.59rem));
   }
 
   .goal-speakers__heading,
@@ -235,6 +236,15 @@
 
   .goal-speakers__portrait {
     width: 7.5rem;
+  }
+
+  .goal-speakers__affiliation {
+    flex-wrap: wrap;
+  }
+
+  .goal-speakers__affiliation > span:last-child {
+    max-width: 100%;
+    white-space: normal;
   }
 
   .goal-speakers__viewport {
