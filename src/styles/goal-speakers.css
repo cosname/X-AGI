@@ -139,20 +139,7 @@
   font-weight: 700;
 }
 
-.goal-speakers__separator {
-  color: rgb(17 19 66 / 0.28);
-  font-weight: 400;
-}
-
-.goal-speakers__position {
-  font-weight: 450;
-}
-
 .goal-speakers__affiliation {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.35rem;
   margin: 0;
   color: var(--speaker-muted);
   font-size: clamp(0.8rem, 3.4vw, 0.85rem);
@@ -239,11 +226,6 @@
   }
 
   .goal-speakers__affiliation {
-    flex-wrap: wrap;
-  }
-
-  .goal-speakers__affiliation > span:last-child {
-    max-width: 100%;
     white-space: normal;
   }
 

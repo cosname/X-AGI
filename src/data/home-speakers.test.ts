@@ -55,18 +55,9 @@ describe('homepage speaker lineup', () => {
       const session = conference2026ProgramSessions[sessionIndex];
       const source = [...session.speakers, ...session.chairs].find((person) => person.name === speaker.name);
       assert.equal(speaker.affiliation, source?.affiliation);
-      assert.equal(speaker.position, undefined);
       assert.equal(speaker.portraitSrc, undefined);
       assert.equal(speaker.href, `/schedule/#schedule-session-${String(sessionIndex + 1).padStart(2, '0')}`);
     }
   });
 
-  it('uses concise biography-backed positions and leaves an unspecified position absent', () => {
-    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'liu-jun')?.position, '兴华卓越讲席教授');
-    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'zhang-huaqing')?.position, '博士研究生');
-    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'luyao-zhang')?.position, '经济学助理教授');
-    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'xu-huinan')?.position, undefined);
-    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'hu-tianyang')?.position, '助理教授');
-    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'chen-siming')?.position, undefined);
-  });
 });
