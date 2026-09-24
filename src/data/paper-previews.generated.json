@@ -1,6 +1,6 @@
 {
   "generatedBy": "scripts/render-paper-previews.mjs",
-  "sourcesSha256": "1afd3aa620fa98dea44e5512b24bf79f12465f379a5590c5bfa2e5495f0962f0",
+  "sourcesSha256": "9e2f96a36db90efcd8ad1fd3b7651bb505887cd2bcfa683bb485f6426ae149c2",
   "previews": [
     {
       "id": "poster-d942ebf1012f",
@@ -589,6 +589,104 @@
       "sha256": "05678c8892b407f888419bfa9dd23c23fd73bdb23a66b5729cc45bcf3286c2d8",
       "archivePath": "assets/source-archive/2026/paper-previews/poster-85bec19ca7b9-first-page.png",
       "archiveSha256": "79d67f6fce0c6e23d7e6fafe435b44144c0ce1461441987c680759fe7ede015d"
+    },
+    {
+      "id": "poster-12055c3dc7df",
+      "title": "Benchmarking Language Models for Statistical Problem Formulation",
+      "href": "https://arxiv.org/abs/2609.01982",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "0e9b0501c40ac77d114a7a3089c5043457206e73d9f07429b0a966347f2916ac",
+      "src": "/2026/paper-previews/poster-12055c3dc7df-preview.webp",
+      "width": 640,
+      "height": 905,
+      "bytes": 116440,
+      "sha256": "af5c5e571d04b73d76fed266a82351aa2839918282bf2742525d5ef29df21c49",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-12055c3dc7df-first-page.png",
+      "archiveSha256": "07186ae285e297b14c1a4685ce784425671fc6b38ce4558bef3410abecd689b8"
+    },
+    {
+      "id": "poster-7985128eaafa",
+      "title": "SCOPE: Streaming Covariance-Orthogonal Post-Hoc Editing for Continual LLM Safety Governance",
+      "href": "https://dl.acm.org/doi/10.1145/3770855.3817993",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "6b04802ce83be5fb2f7ed5e73bbc4b95657f61789d230c9819aa33942c4382bb",
+      "src": "/2026/paper-previews/poster-7985128eaafa-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 86200,
+      "sha256": "7f773cad2e07859298f2e73e503ca2264ad96991395eea72f9b201342f5b7a75",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-7985128eaafa-first-page.png",
+      "archiveSha256": "d87f6ce5413b8b3a41e4a0d73cfda45c2d3e92bf07a5f2d881e27b987d756c61"
+    },
+    {
+      "id": "poster-e5d67567610f",
+      "title": "An Improved Clique-Picking Algorithm for Counting Markov Equivalent DAGs via Super Cliques Transfer",
+      "href": "https://proceedings.mlr.press/v267/liu25x.html",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "232cc4ec2aa9103301385863ce6832ce55fa6309ac1ef6e1eabad79b412b7924",
+      "src": "/2026/paper-previews/poster-e5d67567610f-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 111276,
+      "sha256": "581e30f20b2cff0136456dc07ce2aa573bae15080ae2b01e405da87497f7ddf4",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-e5d67567610f-first-page.png",
+      "archiveSha256": "5d997490f9d502d24d4cc063f9d9b1c1573761b73dfc08a53af21ad116468237"
+    },
+    {
+      "id": "poster-6dd712cfb147",
+      "title": "A systematic benchmarking framework and dual-view optimization strategy for single-cell DNA methylation imputation",
+      "href": "https://doi.org/10.1093/bib/bbag434",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "970950064f3bc1dd72bf0a22e77bddf8523e752f84b3f0482708c72bdd01d2a1",
+      "src": "/2026/paper-previews/poster-6dd712cfb147-preview.webp",
+      "width": 640,
+      "height": 841,
+      "bytes": 129412,
+      "sha256": "82c1a1fa4882f150bf528b8ef70ea5ead6f0fb4d2c40e5cdd089f45b8ff1e6af",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-6dd712cfb147-first-page.png",
+      "archiveSha256": "17da2f069b6dd6fd332e665d2c75942bef58ff3b25b6817634967b7c0226b155"
+    },
+    {
+      "id": "poster-0adb00382599",
+      "title": "On computing and the complexity of computing higher-order U-statistics, exactly",
+      "href": "https://link.springer.com/article/10.1007/s11222-026-10974-x",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "bcb75627eaf40f08c83f6423568a79c16052a0658c1b4fd7d6371692544e20d8",
+      "src": "/2026/paper-previews/poster-0adb00382599-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 77398,
+      "sha256": "4c9004c07d6e8e1721e10c85437304c304adee70ff488a83be2b3fd78af984c6",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-0adb00382599-first-page.png",
+      "archiveSha256": "aaeb720df64d3ff6e5a0ab18945556170780ffa47ace81ac1c598ab0a471829c"
+    },
+    {
+      "id": "poster-c07208108cd9",
+      "title": "Diffusion Models as Dataset Distillation Priors",
+      "href": "https://openreview.net/forum?id=Hvge3NzkJN",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "34b5726c083c726f776e9351f622dabd8dc46ba889d4dd1cbd3ba3dd45e26d70",
+      "src": "/2026/paper-previews/poster-c07208108cd9-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 89516,
+      "sha256": "a58c09983bdaad2301ccbeeaf67f41da14dc94663fdb67f9e7c5a1b8e840ed2e",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-c07208108cd9-first-page.png",
+      "archiveSha256": "40bda57b30ca8487386015ddcd82e28cc4fe19d4d89f9f97b983550f800c15b6"
+    },
+    {
+      "id": "poster-f4aea6615498",
+      "title": "The Sparse-Plus-Low-Rank Quasi-Newton Method for Entropic-Regularized Optimal Transport",
+      "href": "https://proceedings.mlr.press/v267/wang25ck.html",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "7ea89baddd2575cf97e7f19f2ac1f9247c1f39c58107ed71d05d6ec8b227ee18",
+      "src": "/2026/paper-previews/poster-f4aea6615498-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 98104,
+      "sha256": "e7dc1caaf453789ef76e18802841d95f2ab40e559f5edcd29047e1d793c9358d",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-f4aea6615498-first-page.png",
+      "archiveSha256": "7cd6357261c0cf037b80ee1f9015e4e1850ae47a1aa2cfd50b5ceef4690b5fe5"
     }
   ]
 }
