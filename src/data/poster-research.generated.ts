@@ -10,7 +10,7 @@ export type PosterResearchPaper = {
 };
 
 export const posterResearchSource = {
-  "sourceHash": "2f787fc038a5eef5dbad94bd6406db4d2aa2e51210966ae20427159f1430219a",
+  "sourceHash": "7dcc4bc2b905841829d86cca23d6fe2a4e561f11471f5c78405436ce828b6b7c",
   "status": "registration",
   "papers": [
     {
@@ -348,6 +348,62 @@ export const posterResearchSource = {
       "affiliation": "西安电子科技大学",
       "venue": "ICLR",
       "href": "https://iclr.cc/virtual/2026/poster/10006957"
+    },
+    {
+      "id": "poster-12055c3dc7df",
+      "title": "Benchmarking Language Models for Statistical Problem Formulation",
+      "applicantName": "赵俊哲",
+      "affiliation": "清华大学",
+      "venue": "EMNLP",
+      "href": "https://arxiv.org/abs/2609.01982"
+    },
+    {
+      "id": "poster-7985128eaafa",
+      "title": "SCOPE: Streaming Covariance-Orthogonal Post-Hoc Editing for Continual LLM Safety Governance",
+      "applicantName": "杨轶哲",
+      "affiliation": "兰州大学",
+      "venue": "ACM SIGKDD",
+      "href": "https://dl.acm.org/doi/10.1145/3770855.3817993"
+    },
+    {
+      "id": "poster-e5d67567610f",
+      "title": "An Improved Clique-Picking Algorithm for Counting Markov Equivalent DAGs via Super Cliques Transfer",
+      "applicantName": "刘力夫",
+      "affiliation": "东北师范大学",
+      "venue": "ICML",
+      "href": "https://proceedings.mlr.press/v267/liu25x.html"
+    },
+    {
+      "id": "poster-6dd712cfb147",
+      "title": "A systematic benchmarking framework and dual-view optimization strategy for single-cell DNA methylation imputation",
+      "applicantName": "梁海天",
+      "affiliation": "南开大学",
+      "venue": "Briefings in Bioinformatics",
+      "href": "https://doi.org/10.1093/bib/bbag434"
+    },
+    {
+      "id": "poster-0adb00382599",
+      "title": "On computing and the complexity of computing higher-order U-statistics, exactly",
+      "applicantName": "陈星宇",
+      "affiliation": "上海交通大学",
+      "venue": "Statistics and Computing",
+      "href": "https://link.springer.com/article/10.1007/s11222-026-10974-x"
+    },
+    {
+      "id": "poster-c07208108cd9",
+      "title": "Diffusion Models as Dataset Distillation Priors",
+      "applicantName": "苏铎",
+      "affiliation": "清华大学",
+      "venue": "ICLR",
+      "href": "https://openreview.net/forum?id=Hvge3NzkJN"
+    },
+    {
+      "id": "poster-f4aea6615498",
+      "title": "The Sparse-Plus-Low-Rank Quasi-Newton Method for Entropic-Regularized Optimal Transport",
+      "applicantName": "王晨瑞",
+      "affiliation": "中国人民大学",
+      "venue": "ICML",
+      "href": "https://proceedings.mlr.press/v267/wang25ck.html"
     }
   ]
 } as const;

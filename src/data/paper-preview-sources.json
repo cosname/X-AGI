@@ -1,8 +1,8 @@
 {
   "generatedBy": "scripts/import-submitted-paper-pdfs.mjs",
   "sourceKind": "attendee-submitted-pdf",
-  "checkedOn": "2026-09-17",
-  "workbookSha256": "849d639ac2fb4cf292f0c4dbf3a076445d056ef28287a23f14cc7ddeed161b53",
+  "checkedOn": "2026-09-24",
+  "workbookSha256": "d6cda480e9f91a3c87fd2a9a8a40e3df2f0ecc1967c26ee2188f8ec12ce5ae73",
   "papers": [
     {
       "id": "poster-d942ebf1012f",
@@ -257,6 +257,48 @@
       "title": "Hystar: Hypernetwork-driven Style-adaptive Retrieval via Dynamic SVD Modulation",
       "submissionKey": "07ded2eaae8b270a272d2cad56f421f86f9d47f1c6768e077e419889792d358a",
       "pdfSha256": "7dce8a929b0b907ab3575abb94d99aa1b48f3cdea3ab1cc0e1f35dbdd49cdd22"
+    },
+    {
+      "id": "poster-12055c3dc7df",
+      "title": "Benchmarking Language Models for Statistical Problem Formulation",
+      "submissionKey": "97b34430cc5fa1512b1e05eed65469dafcbdeacaf568b8976928b32ef5ba8364",
+      "pdfSha256": "0e9b0501c40ac77d114a7a3089c5043457206e73d9f07429b0a966347f2916ac"
+    },
+    {
+      "id": "poster-7985128eaafa",
+      "title": "SCOPE: Streaming Covariance-Orthogonal Post-Hoc Editing for Continual LLM Safety Governance",
+      "submissionKey": "d26dac2959219beba2986e310c76f25a0744ed270fd49530ecc8d3cc925ffe4e",
+      "pdfSha256": "6b04802ce83be5fb2f7ed5e73bbc4b95657f61789d230c9819aa33942c4382bb"
+    },
+    {
+      "id": "poster-e5d67567610f",
+      "title": "An Improved Clique-Picking Algorithm for Counting Markov Equivalent DAGs via Super Cliques Transfer",
+      "submissionKey": "4f6d83f5fedeec0dccc957157e16ba27fa4a1dfe48ba14cfa9d201f14b9145a0",
+      "pdfSha256": "232cc4ec2aa9103301385863ce6832ce55fa6309ac1ef6e1eabad79b412b7924"
+    },
+    {
+      "id": "poster-6dd712cfb147",
+      "title": "A systematic benchmarking framework and dual-view optimization strategy for single-cell DNA methylation imputation",
+      "submissionKey": "ce14fcde2e3025ce55a59ef4c9a5b64e172cff1b5a972c1c1278f69c0b5ad361",
+      "pdfSha256": "970950064f3bc1dd72bf0a22e77bddf8523e752f84b3f0482708c72bdd01d2a1"
+    },
+    {
+      "id": "poster-0adb00382599",
+      "title": "On computing and the complexity of computing higher-order U-statistics, exactly",
+      "submissionKey": "6b46367fd481c7e33a836ed9622f5614ad5732496efe69adf5729c77b34c977d",
+      "pdfSha256": "bcb75627eaf40f08c83f6423568a79c16052a0658c1b4fd7d6371692544e20d8"
+    },
+    {
+      "id": "poster-c07208108cd9",
+      "title": "Diffusion Models as Dataset Distillation Priors",
+      "submissionKey": "5fd2f604c0ac2fb980282171b7e6283f01025f083d8a4651d220a9ed3dd58dcb",
+      "pdfSha256": "34b5726c083c726f776e9351f622dabd8dc46ba889d4dd1cbd3ba3dd45e26d70"
+    },
+    {
+      "id": "poster-f4aea6615498",
+      "title": "The Sparse-Plus-Low-Rank Quasi-Newton Method for Entropic-Regularized Optimal Transport",
+      "submissionKey": "7f58230b43ec92d8be07b777f5d4b0ab039aa38e1be9c070194b2ab0d3f9342c",
+      "pdfSha256": "7ea89baddd2575cf97e7f19f2ac1f9247c1f39c58107ed71d05d6ec8b227ee18"
     }
   ]
 }
