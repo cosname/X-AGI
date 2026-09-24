@@ -10,6 +10,42 @@
   visibility: hidden;
 }
 
+.qilin-leap__shadow,
+.qilin-leap__dust {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.qilin-leap__shadow {
+  width: 36px;
+  height: 5px;
+  transform-origin: 0 50%;
+  fill: rgb(42 48 128);
+}
+
+.qilin-leap__dust {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  background: rgb(92 103 168);
+}
+
+.qilin-leap__dust:nth-of-type(3n) {
+  width: 3px;
+  height: 3px;
+}
+
+.qilin-leap__dust[data-surface='branch'] {
+  background: rgb(150 148 225);
+}
+
+.qilin-leap__dust[data-surface='branch']:nth-of-type(4n) {
+  background: rgb(101 168 179);
+}
+
 .qilin-leap__traveller {
   position: absolute;
   top: 0;

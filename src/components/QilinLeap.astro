@@ -3,6 +3,10 @@ import QilinCharacter from './QilinCharacter.astro';
 import '../styles/qilin-leap.css';
 ---
 <div class="qilin-leap" data-qilin-leap aria-hidden="true">
+  <svg class="qilin-leap__shadow" data-qilin-shadow viewBox="0 0 36 5" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M8 0h20v1h4v1h4v1h-4v1h-4v1H8V4H4V3H0V2h4V1h4z" />
+  </svg>
+  {Array.from({ length: 8 }, () => <i class="qilin-leap__dust" data-qilin-dust></i>)}
   <div class="qilin-leap__traveller" data-qilin-traveller>
     <QilinCharacter size="100%" />
   </div>

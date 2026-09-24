@@ -1,14 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { connectionDistances, connectionPulseEnergy } from './connection-pulse.ts';
 import { treeClipAboveTerrain } from './terrain-tree-clip.ts';
 
-import {
-  connectionAvoidanceWeight,
-  portraitConnectionFlockForNode,
-  schoolingWanderTarget,
-} from './portrait-connection-field.ts';
 import {
   BASE_POSTERIOR_AMPLITUDE,
   BASE_POSTERIOR_MEAN,
@@ -25,37 +19,6 @@ import {
   mastheadParticleCount,
   seedMastheadParticles,
 } from './masthead-pixel-field.ts';
-
-test('connection avoidance is smooth, local, and bounded', () => {
-  assert.equal(connectionAvoidanceWeight(0, 160), 1);
-  assert.equal(connectionAvoidanceWeight(160, 160), 0);
-  assert.equal(connectionAvoidanceWeight(320, 160), 0);
-  assert.ok(connectionAvoidanceWeight(40, 160) > connectionAvoidanceWeight(100, 160));
-  assert.ok(connectionAvoidanceWeight(100, 160) > 0);
-});
-
-test('portrait connection groups preserve the three intended school regions', () => {
-  assert.equal(portraitConnectionFlockForNode(0), 'upper');
-  assert.equal(portraitConnectionFlockForNode(20), 'upper');
-  assert.equal(portraitConnectionFlockForNode(21), 'lower-left');
-  assert.equal(portraitConnectionFlockForNode(27), 'lower-left');
-  assert.equal(portraitConnectionFlockForNode(28), 'lower-right');
-});
-
-test('schooling wander targets are deterministic, bounded, and non-uniform', () => {
-  const first = schoolingWanderTarget('upper', 4);
-  const repeated = schoolingWanderTarget('upper', 4);
-  const next = schoolingWanderTarget('upper', 5);
-  const lower = schoolingWanderTarget('lower-right', 4);
-
-  assert.deepEqual(first, repeated);
-  assert.notDeepEqual(first, next);
-  assert.notDeepEqual(first, lower);
-  [first, next, lower].forEach(({ x, y }) => {
-    assert.ok(x >= -1 && x <= 1);
-    assert.ok(y >= -1 && y <= 1);
-  });
-});
 
 test('gaussian density peaks at its mean', () => {
   assert.equal(gaussianDensity(0.675, 0.675, 0.078), 1);
@@ -216,22 +179,6 @@ test('masthead particles are deterministic and preserve the text safe zones', ()
   assert.equal(textWellHits.length, 0);
   assert.equal(mobile.length, mastheadParticleCount(390));
   assert.equal(mobileTextWellHits.length, 0);
-});
-
-// Touch signals must stay on the existing graph and finish without a persistent loop.
-
-test('touch propagation follows weighted links and cannot jump disconnected groups', () => {
-  const points = [{ x: 0, y: 0 }, { x: 30, y: 0 }, { x: 30, y: 40 }, { x: 1, y: 0 }];
-  assert.deepEqual(connectionDistances(points, [{ from: 0, to: 1 }, { from: 1, to: 2 }], 0), [0, 30, 70, Infinity]);
-  assert.deepEqual(connectionDistances(points, [{ from: 0, to: 1 }, { from: 1, to: 2 }], 2), [70, 40, 0, Infinity]);
-});
-
-test('touch wave has a delayed arrival, bounded peak and finite fade', () => {
-  assert.equal(connectionPulseEnergy(Infinity, 1000), 0);
-  assert.equal(connectionPulseEnergy(420, 999), 0);
-  assert.equal(connectionPulseEnergy(420, 1240), 1);
-  assert.equal(connectionPulseEnergy(420, 1480), 0);
-  assert.ok(connectionPulseEnergy(0, 120) > 0);
 });
 
 

@@ -1,7 +1,6 @@
 ---
 import { treeClipAboveTerrain } from '../scripts/terrain-tree-clip';
 import pixelDataSource from '../data/hero-pixel-field.generated.json';
-import PortraitConnectionField from './PortraitConnectionField.astro';
 import QilinLeap from './QilinLeap.astro';
 import {
   BASE_POSTERIOR_AMPLITUDE,
@@ -210,7 +209,6 @@ const terrainTokenFor = (layer: (typeof STATIC_TERRAIN_LAYERS)[number]) => (
   {composition === 'badge' && (
     <>
       <i class="hero-pixel-field__paper"></i>
-      <PortraitConnectionField />
     </>
   )}
 
