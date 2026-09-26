@@ -338,9 +338,9 @@ export const conference2026 = {
       undergraduateTravelGrant.benefit,
     ],
     deadline: {
-      date: '2026.09.16',
-      time: '24:00',
-      dateTime: '2026-09-17T00:00:00+08:00',
+      date: '2026.09.26',
+      time: '23:59',
+      dateTime: '2026-09-26T23:59:00+08:00',
     },
   },
   travelGrant: undergraduateTravelGrant,
