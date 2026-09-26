@@ -181,7 +181,7 @@ export const conference2026 = {
   },
   scale: {
     attendees: '600+',
-    posters: '50-100',
+    posters: '60',
   },
   mechanisms: [
     {
