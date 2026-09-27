@@ -10,7 +10,7 @@ export type PosterResearchPaper = {
 };
 
 export const posterResearchSource = {
-  "sourceHash": "7dcc4bc2b905841829d86cca23d6fe2a4e561f11471f5c78405436ce828b6b7c",
+  "sourceHash": "fa9fa44a7cace2154e49693446e89db3d651855a5830f3eeadb2470fa170ab1e",
   "status": "registration",
   "papers": [
     {
@@ -382,6 +382,14 @@ export const posterResearchSource = {
       "href": "https://doi.org/10.1093/bib/bbag434"
     },
     {
+      "id": "poster-11aa8c0cf04b",
+      "title": "PersonaForge: Psychology-Grounded Dual-Process Architecture for Personality-Consistent Role-Playing Agents",
+      "applicantName": "邹思瑞",
+      "affiliation": "西南财经大学",
+      "venue": "ACL Findings",
+      "href": "https://aclanthology.org/2026.findings-acl.386/"
+    },
+    {
       "id": "poster-0adb00382599",
       "title": "On computing and the complexity of computing higher-order U-statistics, exactly",
       "applicantName": "陈星宇",
@@ -404,6 +412,70 @@ export const posterResearchSource = {
       "affiliation": "中国人民大学",
       "venue": "ICML",
       "href": "https://proceedings.mlr.press/v267/wang25ck.html"
+    },
+    {
+      "id": "poster-c1b47d7c0b0d",
+      "title": "Scaling Diffusion Transformers Efficiently via μP",
+      "applicantName": "郑晨宇",
+      "affiliation": "中国人民大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2505.15270"
+    },
+    {
+      "id": "poster-4c81302353b2",
+      "title": "Attention Sink Forges Native MoE in Attention Layers: Sink-Aware Training to Address Head Collapse",
+      "applicantName": "傅子酌",
+      "affiliation": "北京大学",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2602.01203"
+    },
+    {
+      "id": "poster-53bb147467d6",
+      "title": "Co-GRPO: Co-Optimized Group Relative Policy Optimization for Masked Diffusion Model",
+      "applicantName": "周韧平",
+      "affiliation": "清华大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2512.22288"
+    },
+    {
+      "id": "poster-d15a9e17cd1b",
+      "title": "When and Why SignSGD Outperforms SGD: A Theoretical Study Based on ℓ₁-norm Lower Bounds",
+      "applicantName": "陶弘毅",
+      "affiliation": "南京大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2605.06615"
+    },
+    {
+      "id": "poster-80c3d4046112",
+      "title": "Sign-Based Optimizers Are Effective Under Heavy-Tailed Noise",
+      "applicantName": "余定之",
+      "affiliation": "南京大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2602.07425"
+    },
+    {
+      "id": "poster-25c873da8df2",
+      "title": "BReD: Block Replay Dithering for Stable Low-Bit EMA Optimizer States",
+      "applicantName": "占贺深",
+      "affiliation": "香港中文大学（深圳）/ByteDance",
+      "venue": "NeurIPS",
+      "href": "https://openreview.net/forum?id=gnKli42BZO"
+    },
+    {
+      "id": "poster-139bbebeb768",
+      "title": "Iterative Nonlinear Computation Underlying Abstract Reasoning",
+      "applicantName": "校一皓",
+      "affiliation": "上海财经大学",
+      "venue": "NeurIPS",
+      "href": "https://openreview.net/forum?id=WJZTqX8nzZ"
+    },
+    {
+      "id": "poster-ff3e2ccd47e8",
+      "title": "Sparse Blind Deconvolution via Thresholded Wirtinger Flow",
+      "applicantName": "陈梦婷",
+      "affiliation": "上海科技大学",
+      "venue": "NeurIPS",
+      "href": "https://faculty.sist.shanghaitech.edu.cn/zhao/papers.html"
     }
   ]
 } as const;

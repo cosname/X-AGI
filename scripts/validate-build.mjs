@@ -856,7 +856,7 @@ const officialCopyByRoute = new Map([
     conference2026.venue.nameEn,
     ...conference2026.venue.maps.flatMap((map) => [map.title, map.description]),
     '交通与住宿',
-    '北京友谊宾馆为 X-AGI 大会提供专属优惠',
+    '北京友谊宾馆为 XAGI 大会提供专属优惠',
     '5328460',
     '2026.10.16',
     '2026.10.19',
@@ -883,7 +883,7 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
     fail(`${route}: current inner page must expose the interactive masthead field`);
   }
   // The paper directory includes static, accessible first-page PDF previews.
-  const htmlByteLimit = route === 'schedule/index.html' ? 300_000 : route === 'poster/index.html' ? 70_000 : 50_000;
+  const htmlByteLimit = route === 'schedule/index.html' ? 300_000 : route === 'poster/index.html' ? 80_000 : 50_000;
   if ((await stat(path.join(outputRoot, route))).size > htmlByteLimit) {
     fail(`${route}: HTML exceeds ${Math.round(htmlByteLimit / 1000)} KB`);
   }

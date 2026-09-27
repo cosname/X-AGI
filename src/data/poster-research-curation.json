@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDate": "2026-09-24",
+  "sourceDate": "2026-09-27",
   "status": "registration",
   "entries": [
     {
@@ -610,6 +610,117 @@
         "https://proceedings.mlr.press/v267/wang25ck.html"
       ],
       "note": "PMLR 正式页面确认题名及 ICML 2025。报名链接是 OpenReview PDF，作者包含 Chenrui Wang。"
+    },
+    {
+      "sourceKey": "11aa8c0cf04b5dcca4cf5bc5a162619f2b27d17a03da92a991d616a0c1361b53",
+      "id": "poster-11aa8c0cf04b",
+      "title": "PersonaForge: Psychology-Grounded Dual-Process Architecture for Personality-Consistent Role-Playing Agents",
+      "venue": "ACL Findings",
+      "href": "https://aclanthology.org/2026.findings-acl.386/",
+      "verification": "primary-source",
+      "evidence": [
+        "https://aclanthology.org/2026.findings-acl.386/"
+      ],
+      "note": "ACL Anthology 及提交 PDF 确认完整标题末尾为 Agents，论文集为 Findings of ACL 2026。"
+    },
+    {
+      "sourceKey": "c1b47d7c0b0dcbf3c756005aa865f6cd1ab168b02fc3e4675b56b3911f3860ba",
+      "id": "poster-c1b47d7c0b0d",
+      "title": "Scaling Diffusion Transformers Efficiently via μP",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2505.15270",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2505.15270",
+        "https://github.com/ML-GSAI/Scaling-Diffusion-Transformers-muP"
+      ],
+      "note": "报名中的 NeurIPS 链接无法访问，改为同一论文的 arXiv 摘要页；作者官方仓库确认 NeurIPS 2025。"
+    },
+    {
+      "sourceKey": "4c81302353b21ae265f091de60225971b90b241e2f6d894643bb6387a41f4ddc",
+      "id": "poster-4c81302353b2",
+      "title": "Attention Sink Forges Native MoE in Attention Layers: Sink-Aware Training to Address Head Collapse",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2602.01203",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2602.01203"
+      ],
+      "note": "公开论文条目确认标题；会议归属保留报名填写，本次不据此推断大会最终录用。"
+    },
+    {
+      "sourceKey": "53bb147467d6687abd7277825116c863b2be9ae69e8da6352e9f77d1f5a4ad78",
+      "id": "poster-53bb147467d6",
+      "title": "Co-GRPO: Co-Optimized Group Relative Policy Optimization for Masked Diffusion Model",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2512.22288",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2512.22288"
+      ],
+      "note": "公开论文条目确认标题；会议归属保留报名填写，本次不据此推断大会最终录用。"
+    },
+    {
+      "sourceKey": "d15a9e17cd1be7d14902ef668ead908c02ee2d561680fe837e54019d408160c0",
+      "id": "poster-d15a9e17cd1b",
+      "title": "When and Why SignSGD Outperforms SGD: A Theoretical Study Based on ℓ₁-norm Lower Bounds",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2605.06615",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2605.06615"
+      ],
+      "note": "公开论文条目确认标题；会议归属保留报名填写，本次不据此推断大会最终录用。"
+    },
+    {
+      "sourceKey": "80c3d40461124cd443e1221f2aab9c5003c3f759ed96f88d20d064202a8353f8",
+      "id": "poster-80c3d4046112",
+      "title": "Sign-Based Optimizers Are Effective Under Heavy-Tailed Noise",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2602.07425",
+      "verification": "primary-source",
+      "evidence": [
+        "https://arxiv.org/abs/2602.07425"
+      ],
+      "note": "公开论文条目确认标题；会议归属保留报名填写，本次不据此推断大会最终录用。"
+    },
+    {
+      "sourceKey": "25c873da8df2b77ff47a024cd432eee989c70770211baba39d177810101df1f4",
+      "id": "poster-25c873da8df2",
+      "title": "BReD: Block Replay Dithering for Stable Low-Bit EMA Optimizer States",
+      "venue": "NeurIPS",
+      "href": "https://openreview.net/forum?id=gnKli42BZO",
+      "verification": "submitted-pdf",
+      "evidence": [
+        "https://openreview.net/forum?id=gnKli42BZO"
+      ],
+      "note": "公开 OpenReview 页面本次无法读取；标题按报名者提交的论文 PDF 首页核对。公开链接保留报名给出的同一 OpenReview ID，会议归属仅来自报名填写。",
+      "submittedPaperSha256": "5fda18285a98facd3c3c12b19c304d3ebe4c91aef2acbf426d31ad57c13f89d9"
+    },
+    {
+      "sourceKey": "139bbebeb768aeaf59f550cf0e840ca2c6a36682608bcd2f19a65707ddcadb21",
+      "id": "poster-139bbebeb768",
+      "title": "Iterative Nonlinear Computation Underlying Abstract Reasoning",
+      "venue": "NeurIPS",
+      "href": "https://openreview.net/forum?id=WJZTqX8nzZ",
+      "verification": "submitted-pdf",
+      "evidence": [
+        "https://openreview.net/forum?id=WJZTqX8nzZ"
+      ],
+      "note": "公开 OpenReview 页面本次无法读取；标题按报名者提交的论文 PDF 首页核对。公开链接保留报名给出的同一 OpenReview ID，会议归属仅来自报名填写。",
+      "submittedPaperSha256": "e7851513fbf5388a642bf1eeb0d237ce561a4fd38760a1aa2a49c5adac2be0b2"
+    },
+    {
+      "sourceKey": "ff3e2ccd47e891a554628eb8ac77c08e200f1464d0373a00795b4e16bb47a70b",
+      "id": "poster-ff3e2ccd47e8",
+      "title": "Sparse Blind Deconvolution via Thresholded Wirtinger Flow",
+      "venue": "NeurIPS",
+      "href": "https://faculty.sist.shanghaitech.edu.cn/zhao/papers.html",
+      "verification": "primary-source",
+      "evidence": [
+        "https://faculty.sist.shanghaitech.edu.cn/zhao/papers.html"
+      ],
+      "note": "作者官方论文列表确认标题、作者 Mengting Chen 及 NeurIPS 2026；提交的 OpenReview 链接带有不可访问说明，暂使用作者官方论文列表，提交 PDF 用于预览。"
     }
   ],
   "exclusions": [

@@ -1,5 +1,19 @@
 # 2026 Rising Stars Poster 报名论文
 
+## 2026 年 9 月 27 日更新
+
+本次使用 `attendee-list (3).xls` 的 61 条 Rising Stars Poster 报名记录，保留既有测试记录排除和重复报名合并规则，得到 58 篇论文，较上一版新增 9 篇。
+原有 49 篇论文的信息保持不变，首页论文展示和 Poster 目录共同读取更新后的数据。
+PersonaForge 的完整题名补齐末尾 Agents，会议归属按 ACL Anthology 标为 ACL Findings。
+Scaling Diffusion Transformers 的原填链接无法访问，改用同一论文的 arXiv 摘要页。
+Sparse Blind Deconvolution 的 OpenReview 链接附有尚不可访问的说明，暂链接至作者官方论文列表，该列表确认标题及 NeurIPS 2026。
+BReD 和 Iterative Nonlinear Computation 的公开 OpenReview 页面本次无法读取，标题按提交 PDF 首页核对，保留原报名的 OpenReview ID，未声称验证链接可访问或独立确认会议发表状态。
+其余新增标题通过公开论文条目和提交 PDF 核对，会议信息仍遵循页面已有的报名来源说明。
+新增预览与既有预览均使用报名者提交的论文 PDF 首页，原始附件地址及私人联系字段不进入公开数据。
+本次报名表 SHA-256 为 `8b957702c68e1fc657bccca4362b87fd675e1dca3d4f39b9bd189ba8666ac8fc`。
+
+## 初始整理记录
+
 Poster 页的论文目录来自 2026 年 9 月 16 日收到的报名表，展示报名信息。
 它不表示论文已获 X-AGI 最终录用，也不表示现场展示安排已确定。
 这份名单与首页的 14 张分论坛宣传海报是两个独立数据集。

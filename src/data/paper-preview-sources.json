@@ -1,8 +1,8 @@
 {
   "generatedBy": "scripts/import-submitted-paper-pdfs.mjs",
   "sourceKind": "attendee-submitted-pdf",
-  "checkedOn": "2026-09-24",
-  "workbookSha256": "d6cda480e9f91a3c87fd2a9a8a40e3df2f0ecc1967c26ee2188f8ec12ce5ae73",
+  "checkedOn": "2026-09-27",
+  "workbookSha256": "8b957702c68e1fc657bccca4362b87fd675e1dca3d4f39b9bd189ba8666ac8fc",
   "papers": [
     {
       "id": "poster-d942ebf1012f",
@@ -283,6 +283,12 @@
       "pdfSha256": "970950064f3bc1dd72bf0a22e77bddf8523e752f84b3f0482708c72bdd01d2a1"
     },
     {
+      "id": "poster-11aa8c0cf04b",
+      "title": "PersonaForge: Psychology-Grounded Dual-Process Architecture for Personality-Consistent Role-Playing Agents",
+      "submissionKey": "11aa8c0cf04b5dcca4cf5bc5a162619f2b27d17a03da92a991d616a0c1361b53",
+      "pdfSha256": "0643ed776d4037fd52953880d74b8e552d7d6ae744cef8065399510c6012f6de"
+    },
+    {
       "id": "poster-0adb00382599",
       "title": "On computing and the complexity of computing higher-order U-statistics, exactly",
       "submissionKey": "6b46367fd481c7e33a836ed9622f5614ad5732496efe69adf5729c77b34c977d",
@@ -299,6 +305,54 @@
       "title": "The Sparse-Plus-Low-Rank Quasi-Newton Method for Entropic-Regularized Optimal Transport",
       "submissionKey": "7f58230b43ec92d8be07b777f5d4b0ab039aa38e1be9c070194b2ab0d3f9342c",
       "pdfSha256": "7ea89baddd2575cf97e7f19f2ac1f9247c1f39c58107ed71d05d6ec8b227ee18"
+    },
+    {
+      "id": "poster-c1b47d7c0b0d",
+      "title": "Scaling Diffusion Transformers Efficiently via μP",
+      "submissionKey": "c1b47d7c0b0dcbf3c756005aa865f6cd1ab168b02fc3e4675b56b3911f3860ba",
+      "pdfSha256": "2ed75535db3dea8ab00c75e71de82190e150d67939e82ce9ced13e78134261a5"
+    },
+    {
+      "id": "poster-4c81302353b2",
+      "title": "Attention Sink Forges Native MoE in Attention Layers: Sink-Aware Training to Address Head Collapse",
+      "submissionKey": "4c81302353b21ae265f091de60225971b90b241e2f6d894643bb6387a41f4ddc",
+      "pdfSha256": "561d864fa5b03615c287b5bb2f60d52d7864acfd825ae6d0669795f0e4a85274"
+    },
+    {
+      "id": "poster-53bb147467d6",
+      "title": "Co-GRPO: Co-Optimized Group Relative Policy Optimization for Masked Diffusion Model",
+      "submissionKey": "53bb147467d6687abd7277825116c863b2be9ae69e8da6352e9f77d1f5a4ad78",
+      "pdfSha256": "e6ba4defc025a69f337f18fd60e77af0d277db5acd84bb131180ae91ed7638ab"
+    },
+    {
+      "id": "poster-d15a9e17cd1b",
+      "title": "When and Why SignSGD Outperforms SGD: A Theoretical Study Based on ℓ₁-norm Lower Bounds",
+      "submissionKey": "d15a9e17cd1be7d14902ef668ead908c02ee2d561680fe837e54019d408160c0",
+      "pdfSha256": "17db4a6cf4fc632b5959c82e5e1f7152a48b9942c5559bd0e39cf6f88b6142e9"
+    },
+    {
+      "id": "poster-80c3d4046112",
+      "title": "Sign-Based Optimizers Are Effective Under Heavy-Tailed Noise",
+      "submissionKey": "80c3d40461124cd443e1221f2aab9c5003c3f759ed96f88d20d064202a8353f8",
+      "pdfSha256": "a5bd163e15908e6cf69d23af2789538661058d6e8fd9fe01b86836da3715b5d7"
+    },
+    {
+      "id": "poster-25c873da8df2",
+      "title": "BReD: Block Replay Dithering for Stable Low-Bit EMA Optimizer States",
+      "submissionKey": "25c873da8df2b77ff47a024cd432eee989c70770211baba39d177810101df1f4",
+      "pdfSha256": "5fda18285a98facd3c3c12b19c304d3ebe4c91aef2acbf426d31ad57c13f89d9"
+    },
+    {
+      "id": "poster-139bbebeb768",
+      "title": "Iterative Nonlinear Computation Underlying Abstract Reasoning",
+      "submissionKey": "139bbebeb768aeaf59f550cf0e840ca2c6a36682608bcd2f19a65707ddcadb21",
+      "pdfSha256": "e7851513fbf5388a642bf1eeb0d237ce561a4fd38760a1aa2a49c5adac2be0b2"
+    },
+    {
+      "id": "poster-ff3e2ccd47e8",
+      "title": "Sparse Blind Deconvolution via Thresholded Wirtinger Flow",
+      "submissionKey": "ff3e2ccd47e891a554628eb8ac77c08e200f1464d0373a00795b4e16bb47a70b",
+      "pdfSha256": "65e486d52016dbe4ba7e9f8c8acae6470142e87b899376744f38fd4d10bc939d"
     }
   ]
 }
