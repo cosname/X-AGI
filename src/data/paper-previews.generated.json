@@ -1,6 +1,6 @@
 {
   "generatedBy": "scripts/render-paper-previews.mjs",
-  "sourcesSha256": "9e2f96a36db90efcd8ad1fd3b7651bb505887cd2bcfa683bb485f6426ae149c2",
+  "sourcesSha256": "471796fcf65942677ddc101bd139e7efd87b5c03cdf4f3dc928c6039afb1f590",
   "previews": [
     {
       "id": "poster-d942ebf1012f",
@@ -647,6 +647,20 @@
       "archiveSha256": "17da2f069b6dd6fd332e665d2c75942bef58ff3b25b6817634967b7c0226b155"
     },
     {
+      "id": "poster-11aa8c0cf04b",
+      "title": "PersonaForge: Psychology-Grounded Dual-Process Architecture for Personality-Consistent Role-Playing Agents",
+      "href": "https://aclanthology.org/2026.findings-acl.386/",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "0643ed776d4037fd52953880d74b8e552d7d6ae744cef8065399510c6012f6de",
+      "src": "/2026/paper-previews/poster-11aa8c0cf04b-preview.webp",
+      "width": 640,
+      "height": 905,
+      "bytes": 109920,
+      "sha256": "399972556d3cb97fd638966d61c558143dccbbc9492ca05389ecdabffdfda658",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-11aa8c0cf04b-first-page.png",
+      "archiveSha256": "9bb6d0ba9251457b4c2dc8b68f6ed3a790802a7b73aeb8e0724a6d0a05a559bf"
+    },
+    {
       "id": "poster-0adb00382599",
       "title": "On computing and the complexity of computing higher-order U-statistics, exactly",
       "href": "https://link.springer.com/article/10.1007/s11222-026-10974-x",
@@ -687,6 +701,118 @@
       "sha256": "e7dc1caaf453789ef76e18802841d95f2ab40e559f5edcd29047e1d793c9358d",
       "archivePath": "assets/source-archive/2026/paper-previews/poster-f4aea6615498-first-page.png",
       "archiveSha256": "7cd6357261c0cf037b80ee1f9015e4e1850ae47a1aa2cfd50b5ceef4690b5fe5"
+    },
+    {
+      "id": "poster-c1b47d7c0b0d",
+      "title": "Scaling Diffusion Transformers Efficiently via μP",
+      "href": "https://arxiv.org/abs/2505.15270",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "2ed75535db3dea8ab00c75e71de82190e150d67939e82ce9ced13e78134261a5",
+      "src": "/2026/paper-previews/poster-c1b47d7c0b0d-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 86034,
+      "sha256": "a267029588474ec62902773fc9497f46cf801bfa832cadb61038c913bc6cfcef",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-c1b47d7c0b0d-first-page.png",
+      "archiveSha256": "0f7ec8c2ae463ba0f47f3abcb720130af638828192fda311782d6abab2f73068"
+    },
+    {
+      "id": "poster-4c81302353b2",
+      "title": "Attention Sink Forges Native MoE in Attention Layers: Sink-Aware Training to Address Head Collapse",
+      "href": "https://arxiv.org/abs/2602.01203",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "561d864fa5b03615c287b5bb2f60d52d7864acfd825ae6d0669795f0e4a85274",
+      "src": "/2026/paper-previews/poster-4c81302353b2-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 113700,
+      "sha256": "27710dd5cf94b593bd6fe72f5333c8d14024628329378fe5e314ee351355d1fa",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-4c81302353b2-first-page.png",
+      "archiveSha256": "4a6aff1c83395a0718a2f02d4dc2e0e8ffb0776efed650421f757b0ad086aea3"
+    },
+    {
+      "id": "poster-53bb147467d6",
+      "title": "Co-GRPO: Co-Optimized Group Relative Policy Optimization for Masked Diffusion Model",
+      "href": "https://arxiv.org/abs/2512.22288",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "e6ba4defc025a69f337f18fd60e77af0d277db5acd84bb131180ae91ed7638ab",
+      "src": "/2026/paper-previews/poster-53bb147467d6-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 86530,
+      "sha256": "a2aba82d87fb63508a9eae471097adebd6803af691de8b48571582fb2ff0c703",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-53bb147467d6-first-page.png",
+      "archiveSha256": "72416bce7ea126299562de291ac8760157a4b495d359478a1de97f3fdcad3d12"
+    },
+    {
+      "id": "poster-d15a9e17cd1b",
+      "title": "When and Why SignSGD Outperforms SGD: A Theoretical Study Based on ℓ₁-norm Lower Bounds",
+      "href": "https://arxiv.org/abs/2605.06615",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "17db4a6cf4fc632b5959c82e5e1f7152a48b9942c5559bd0e39cf6f88b6142e9",
+      "src": "/2026/paper-previews/poster-d15a9e17cd1b-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 88422,
+      "sha256": "c010be2c7fed5b40ef1cc01dfe077d9b04b332388a207f24b6cd53cbd81f9878",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-d15a9e17cd1b-first-page.png",
+      "archiveSha256": "323d4ef3abf6fa66c30747dcd0139d1e8b7631c9491f3fb44b0ac34dc9008601"
+    },
+    {
+      "id": "poster-80c3d4046112",
+      "title": "Sign-Based Optimizers Are Effective Under Heavy-Tailed Noise",
+      "href": "https://arxiv.org/abs/2602.07425",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "a5bd163e15908e6cf69d23af2789538661058d6e8fd9fe01b86836da3715b5d7",
+      "src": "/2026/paper-previews/poster-80c3d4046112-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 88886,
+      "sha256": "c95c8c9bd1c1e607a6b8d4797e3873dec8172001fe24b38bbde9c0962e6235fa",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-80c3d4046112-first-page.png",
+      "archiveSha256": "f55745fa27a42faeab561a5c247457c11fbd8ae954e321f5a5320e753a330018"
+    },
+    {
+      "id": "poster-25c873da8df2",
+      "title": "BReD: Block Replay Dithering for Stable Low-Bit EMA Optimizer States",
+      "href": "https://openreview.net/forum?id=gnKli42BZO",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "5fda18285a98facd3c3c12b19c304d3ebe4c91aef2acbf426d31ad57c13f89d9",
+      "src": "/2026/paper-previews/poster-25c873da8df2-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 80598,
+      "sha256": "840b1ee893040dec8af5792c0a089261373b460b471dec1dfa9f7093368def2f",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-25c873da8df2-first-page.png",
+      "archiveSha256": "a8d5bfacd5e52da8a7b712e84fa5b9395eb64e1849b22f1c009ac189e71b0cde"
+    },
+    {
+      "id": "poster-139bbebeb768",
+      "title": "Iterative Nonlinear Computation Underlying Abstract Reasoning",
+      "href": "https://openreview.net/forum?id=WJZTqX8nzZ",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "e7851513fbf5388a642bf1eeb0d237ce561a4fd38760a1aa2a49c5adac2be0b2",
+      "src": "/2026/paper-previews/poster-139bbebeb768-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 56908,
+      "sha256": "4660e5f45173f42c7d1ae488f492d72d5b581511748c047326ba5e39ebecef1e",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-139bbebeb768-first-page.png",
+      "archiveSha256": "6124a46391062d8059c277eb60716ebd51a29e8ea56387416940fc1fb500c992"
+    },
+    {
+      "id": "poster-ff3e2ccd47e8",
+      "title": "Sparse Blind Deconvolution via Thresholded Wirtinger Flow",
+      "href": "https://faculty.sist.shanghaitech.edu.cn/zhao/papers.html",
+      "sourceKind": "attendee-submitted-pdf",
+      "pdfSha256": "65e486d52016dbe4ba7e9f8c8acae6470142e87b899376744f38fd4d10bc939d",
+      "src": "/2026/paper-previews/poster-ff3e2ccd47e8-preview.webp",
+      "width": 640,
+      "height": 828,
+      "bytes": 74656,
+      "sha256": "8bc94d9db86e6fad2a4ff475e1813f8922d8b303582d417b758d8f585e6b41f4",
+      "archivePath": "assets/source-archive/2026/paper-previews/poster-ff3e2ccd47e8-first-page.png",
+      "archiveSha256": "8f326e2effce0d2779225b0f1d6e35819e413b5e974ad8c3252f126182240444"
     }
   ]
 }

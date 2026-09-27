@@ -1,4 +1,6 @@
 ---
+import { site } from '../config/site';
+
 interface Props {
   title: string;
   description: string;
@@ -28,7 +30,7 @@ const imageUrl = new URL(imagePath, Astro.site);
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-<meta property="og:site_name" content="X-AGI Conference" />
+<meta property="og:site_name" content={site.name} />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:secure_url" content={imageUrl} />
