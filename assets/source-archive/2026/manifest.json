@@ -1637,14 +1637,14 @@
       "originalPath": "session-posters-20260916/session-01-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-01-print.png",
       "status": "archived",
-      "sha256": "f148436d2b91843ba7909557122b996a55372e66ad54ade0af7a5f6e55258827",
-      "bytes": 1518936,
+      "sha256": "a0854808ee1fa89b5c59f766ee98a1cae6de26493021fac954d42bb1d9560c60",
+      "bytes": 1518652,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:46.047Z",
+      "sourceModifiedAt": "2026-09-27T09:27:00.502Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1670,14 +1670,14 @@
       "originalPath": "session-posters-20260916/session-02-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-02-print.png",
       "status": "archived",
-      "sha256": "4971b00c984e70b034f31f58d6955708ace6f05785943504a5a62bbc4801d07b",
-      "bytes": 1567273,
+      "sha256": "98418872f1c90a31b35862a699b202385a80e47ad2ab6383fa9b53672d9856a8",
+      "bytes": 1566791,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:47.107Z",
+      "sourceModifiedAt": "2026-09-27T09:27:01.577Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1703,14 +1703,14 @@
       "originalPath": "session-posters-20260916/session-03-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-03-print.png",
       "status": "archived",
-      "sha256": "c92fab3c92eb5a463e4f33db2d8fe54c2cf27a54b06ad43f9e87e5779913373f",
-      "bytes": 1480405,
+      "sha256": "5a409dc513cd1d6668df28da9c0df4c45214904d534a38423ba3cfe69fdbe976",
+      "bytes": 1479950,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:48.211Z",
+      "sourceModifiedAt": "2026-09-27T09:27:02.657Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1736,14 +1736,14 @@
       "originalPath": "session-posters-20260916/session-04-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-04-print.png",
       "status": "archived",
-      "sha256": "634948eea985d279c3d36528ba8dad2684bc7fc2199c69c82200921980b8da80",
-      "bytes": 1634544,
+      "sha256": "3bf55761d1a8d81612c6ce7e313b73c906ae2f7beeb53f0e02e7838aa278e2ac",
+      "bytes": 1634291,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:49.258Z",
+      "sourceModifiedAt": "2026-09-27T09:27:03.727Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1769,14 +1769,14 @@
       "originalPath": "session-posters-20260916/session-05-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-05-print.png",
       "status": "archived",
-      "sha256": "f339b599997a5e1ee957cb105b47ee93079c60704089c876bede11d8248a2b20",
-      "bytes": 1464128,
+      "sha256": "19f3403347fc760d138a1ab9162ed84061ad918a2240bf2fafe1ec81c0a9e0c1",
+      "bytes": 1464308,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:50.307Z",
+      "sourceModifiedAt": "2026-09-27T09:27:04.758Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1802,14 +1802,14 @@
       "originalPath": "session-posters-20260916/session-06-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-06-print.png",
       "status": "archived",
-      "sha256": "5517e0488f06309c2501e7483195fa0dcf304c1c37b23a372833bcaa4e5aaca0",
-      "bytes": 1760110,
+      "sha256": "54ace98be683c80978282aa1203d7b1149aa206a724310f75c00bbeb30b3357f",
+      "bytes": 1759603,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:51.361Z",
+      "sourceModifiedAt": "2026-09-27T09:27:05.813Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1835,14 +1835,14 @@
       "originalPath": "session-posters-20260916/session-07-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-07-print.png",
       "status": "archived",
-      "sha256": "9ffb1c7c8fc6423f5a08a91254f008fc6b6f766b867ac900412be7a62f460dc3",
-      "bytes": 1715194,
+      "sha256": "e286cc75a191886c439c50b5a073b7c61b532e45da18cdf866f9ff7c4510e9e6",
+      "bytes": 1714571,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:52.464Z",
+      "sourceModifiedAt": "2026-09-27T09:27:06.912Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1868,14 +1868,14 @@
       "originalPath": "session-posters-20260916/session-08-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-08-print.png",
       "status": "archived",
-      "sha256": "c85bc93102899f12fe9e942d861e00a1d91e421ffa97658af60f6323ea8a7697",
-      "bytes": 1791415,
+      "sha256": "50f8a3928135488e1940b00c16ac9235a767ce8cb2a0c2ec6e05bf9af37ff98f",
+      "bytes": 1791384,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:53.600Z",
+      "sourceModifiedAt": "2026-09-27T09:27:08.084Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1901,14 +1901,14 @@
       "originalPath": "session-posters-20260916/session-09-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-09-print.png",
       "status": "archived",
-      "sha256": "4c3904e2e5ee97140076f951ce9caa68f2754843694b8ab1e2dcdfde487332d1",
-      "bytes": 1855010,
+      "sha256": "223b82946a1c99b00d44a6d062534f28be1c85105ccbaeeda4079eba49a0f0f5",
+      "bytes": 1854642,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:54.711Z",
+      "sourceModifiedAt": "2026-09-27T09:27:09.181Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1934,14 +1934,14 @@
       "originalPath": "session-posters-20260916/session-10-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-10-print.png",
       "status": "archived",
-      "sha256": "02a3644d3880fce65ab13ebc67f800866049d2c834de050ee4b0ab29614cf194",
-      "bytes": 1683714,
+      "sha256": "933f3cab4a85597fdadcf947106d1f9bb0ffb0d32a0bd38798c9b00ac87d96a4",
+      "bytes": 1683450,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:55.825Z",
+      "sourceModifiedAt": "2026-09-27T09:27:10.296Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1967,14 +1967,14 @@
       "originalPath": "session-posters-20260916/session-11-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-11-print.png",
       "status": "archived",
-      "sha256": "e0a07f3a5ba9028b7e7ee8a83d924d9cbc5f63984cceceac95ca3f8fc8bb08bd",
-      "bytes": 1834246,
+      "sha256": "3b0f2cf354766365383e5841edd528950991fbbfd63c76d8a7589bed7ceff973",
+      "bytes": 1833800,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:57.053Z",
+      "sourceModifiedAt": "2026-09-27T09:27:11.397Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2000,14 +2000,14 @@
       "originalPath": "session-posters-20260916/session-12-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-12-print.png",
       "status": "archived",
-      "sha256": "32f3d4f24b50c77a802fb51a79aa0c9993f0159766f69e9f2d3fb03e94b74257",
-      "bytes": 1652383,
+      "sha256": "da845e43bc823d7acb24b9df9cfa1a7dae14b27beb827e104977f487c523e360",
+      "bytes": 1652283,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:58.219Z",
+      "sourceModifiedAt": "2026-09-27T09:27:12.495Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2033,14 +2033,14 @@
       "originalPath": "session-posters-20260916/session-13-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-13-print.png",
       "status": "archived",
-      "sha256": "28204225d5a7a7451295c61f3405753c4fe7ffeff6d00c466a1c58626d37de36",
-      "bytes": 1941561,
+      "sha256": "d7b1f0bdfc98d56369c1e889ecdfa0095a1b3eb33516a7ae526e473bd5b77ef4",
+      "bytes": 1941393,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:45:59.346Z",
+      "sourceModifiedAt": "2026-09-27T09:27:13.597Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2066,14 +2066,14 @@
       "originalPath": "session-posters-20260916/session-14-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-14-print.png",
       "status": "archived",
-      "sha256": "2c7bad0864975d6c25be0a21b0c984e368aa687d4610d277ecd6eeca7143ea1b",
-      "bytes": 1583516,
+      "sha256": "047ccf710f6b3657e1802d825af327e11507066639bcf10a4a73c570eac62544",
+      "bytes": 1583043,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T04:46:00.561Z",
+      "sourceModifiedAt": "2026-09-27T09:27:14.727Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"

@@ -248,8 +248,8 @@
   --brand-light-energy: 0;
   position: relative;
   display: block;
-  width: 12.25rem;
-  aspect-ratio: 2680 / 625;
+  width: calc(12.25rem * 2490 / 2680);
+  aspect-ratio: 2490 / 625;
   flex: none;
 }
 
