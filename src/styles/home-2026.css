@@ -660,9 +660,9 @@
   display: block;
   flex: none;
   overflow: hidden;
-  width: calc(1em * 1821 / 475);
+  width: calc(1em * 1641 / 475);
   height: 1em;
-  aspect-ratio: 1821 / 475;
+  aspect-ratio: 1641 / 475;
   color: #5c58a8;
   line-height: 1;
 }
