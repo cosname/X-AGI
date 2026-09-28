@@ -70,6 +70,17 @@ const profileIdByName = new Map([
   ['黄沛', 'huang-pei'],
   ['陆一平', 'lu-yiping'],
   ['张耀宇', 'zhang-yaoyu'],
+  ['李秀红', 'li-xiuhong'],
+  ['魏太云', 'wei-taiyun'],
+  ['吴晨玮', 'wu-chenwei'],
+  ['王健桥', 'wang-jianqiao'],
+  ['刘方辉', 'liu-fanghui'],
+  ['刘军', 'liu-jun'],
+  ['孙茂松', 'sun-maosong'],
+  ['沈皓', 'shen-hao'],
+  ['周沛劼', 'zhou-peijie'],
+  ['杨朋昆', 'yang-pengkun'],
+  ['胡天阳', 'hu-tianyang'],
 ]);
 
 const aliasesByName = new Map([
@@ -195,7 +206,13 @@ export function parseAttendeePeopleCsv(input) {
   if (rawRecords.length === 0) throw new Error('Attendee CSV contains no Chair or Speaker rows.');
   if (rawRecords.length > 200) throw new Error('Attendee CSV contains more than 200 Chair or Speaker rows.');
 
-  const grouped = Map.groupBy(rawRecords, (record) => record.name);
+  // The approved 2026-09-27 registration supersedes Xu Hongteng's August record.
+  // Match the two known titles only; unknown future conflicts still fail below.
+  const hasRevisedXuTalk = rawRecords.some((record) => record.name === '许洪腾'
+    && record.talkTitle === 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow');
+  const currentRecords = rawRecords.filter((record) => !(hasRevisedXuTalk
+    && record.name === '许洪腾' && record.talkTitle === '面向蛋白质主链生成的四元数整流匹配技术'));
+  const grouped = Map.groupBy(currentRecords, (record) => record.name);
   const people = [...grouped.entries()].map(([name, records], sourceOrder) => {
     const id = mergeField(records, 'id', name);
     const talkTitle = mergeField(records, 'talkTitle', name);

@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-09-27",
+  "lastExtendedOn": "2026-09-28",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 192,
-  "uniquePayloadCount": 191,
-  "archiveFileCount": 190,
+  "sourceEntryCount": 215,
+  "uniquePayloadCount": 214,
+  "archiveFileCount": 213,
   "entries": [
     {
       "originalPath": "1.png",
@@ -22,7 +22,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:47.770Z",
       "runtimeCounterparts": [
-        "public/2026/logos/tsinghua-stat.png"
+        "public/2026/logos/tsinghua-stat.svg"
       ],
       "note": "Exact duplicate of the supplied thu.png payload; only one canonical archive file is retained."
     },
@@ -184,7 +184,7 @@
       "dimensions": null,
       "sourceModifiedAt": "2026-08-18T03:12:12.000Z",
       "runtimeCounterparts": [
-        "public/2026/logos/zhitong-shuhe.png"
+        "public/2026/logos/zhitong-shuhe.svg"
       ],
       "note": "EPS board containing horizontal, mark, stacked, grayscale, and inverse lockups for Zhitong Shuhe."
     },
@@ -201,7 +201,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:53.324Z",
       "runtimeCounterparts": [
-        "public/2026/logos/ai-time.png"
+        "public/2026/logos/ai-time.svg"
       ],
       "note": "Source logo for AI TIME."
     },
@@ -233,7 +233,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:53.377Z",
       "runtimeCounterparts": [
-        "public/2026/logos/cos.png"
+        "public/2026/logos/cos.svg"
       ],
       "note": "Source logo for Capital of Statistics."
     },
@@ -250,7 +250,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:54.391Z",
       "runtimeCounterparts": [
-        "public/2026/logos/cssc-ai.png"
+        "public/2026/logos/cssc-ai.svg"
       ],
       "note": "Source logo for the Artificial Intelligence Division of the Chinese Society of Commercial Statistics."
     },
@@ -267,7 +267,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:53.376Z",
       "runtimeCounterparts": [
-        "public/2026/logos/fai.png"
+        "public/2026/logos/fai.svg"
       ],
       "note": "Source logo for FAI Foundations of Artificial Intelligence."
     },
@@ -284,7 +284,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:53.374Z",
       "runtimeCounterparts": [
-        "public/2026/logos/kuande.png"
+        "public/2026/logos/kuande.svg"
       ],
       "note": "Source logo for Kuande Investment."
     },
@@ -318,7 +318,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:53.371Z",
       "runtimeCounterparts": [
-        "public/2026/logos/minghong.png"
+        "public/2026/logos/minghong.svg"
       ],
       "note": "Source logo for Minghong Investment."
     },
@@ -350,7 +350,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:53.373Z",
       "runtimeCounterparts": [
-        "public/2026/logos/oscholar.png"
+        "public/2026/logos/oscholar.svg"
       ],
       "note": "Source logo for OScholar."
     },
@@ -367,7 +367,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:53.322Z",
       "runtimeCounterparts": [
-        "public/2026/logos/tsinghua-stat.png"
+        "public/2026/logos/tsinghua-stat.svg"
       ],
       "note": "Source logo for the Tsinghua University Department of Statistics and Data Science."
     },
@@ -384,7 +384,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:54.041Z",
       "runtimeCounterparts": [
-        "public/2026/logos/ruc-stat.png"
+        "public/2026/logos/ruc-stat.svg"
       ],
       "note": "Source logo for the Renmin University of China School of Statistics; the original basename was misleading and did not refer to Tongji University."
     },
@@ -770,7 +770,7 @@
       },
       "sourceModifiedAt": "2026-08-16T12:10:53.375Z",
       "runtimeCounterparts": [
-        "public/2026/logos/ruc-cas.png"
+        "public/2026/logos/ruc-cas.svg"
       ],
       "note": "Source logo for the Renmin University of China Center for Applied Statistics."
     },
@@ -824,7 +824,7 @@
       },
       "sourceModifiedAt": "2026-08-28T15:39:50.000Z",
       "runtimeCounterparts": [
-        "public/2026/logos/chaspark.png"
+        "public/2026/logos/chaspark.svg"
       ],
       "provenanceUrls": [
         "https://faic.cc/assets/images/%E9%BB%84%E5%A4%A7%E5%B9%B4%E8%8C%B6%E6%80%9D%E5%B1%8B.png",
@@ -1637,14 +1637,14 @@
       "originalPath": "session-posters-20260916/session-01-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-01-print.png",
       "status": "archived",
-      "sha256": "a0854808ee1fa89b5c59f766ee98a1cae6de26493021fac954d42bb1d9560c60",
-      "bytes": 1518652,
+      "sha256": "f148436d2b91843ba7909557122b996a55372e66ad54ade0af7a5f6e55258827",
+      "bytes": 1518936,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:00.502Z",
+      "sourceModifiedAt": "2026-09-28T15:36:20.154Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1670,14 +1670,14 @@
       "originalPath": "session-posters-20260916/session-02-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-02-print.png",
       "status": "archived",
-      "sha256": "98418872f1c90a31b35862a699b202385a80e47ad2ab6383fa9b53672d9856a8",
-      "bytes": 1566791,
+      "sha256": "21e3b8aed60f416a553ceeab21708fd3b63ce40f76fdd07c20d339f52ba4ee6e",
+      "bytes": 1623829,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:01.577Z",
+      "sourceModifiedAt": "2026-09-28T15:36:21.395Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1703,14 +1703,14 @@
       "originalPath": "session-posters-20260916/session-03-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-03-print.png",
       "status": "archived",
-      "sha256": "5a409dc513cd1d6668df28da9c0df4c45214904d534a38423ba3cfe69fdbe976",
-      "bytes": 1479950,
+      "sha256": "c92fab3c92eb5a463e4f33db2d8fe54c2cf27a54b06ad43f9e87e5779913373f",
+      "bytes": 1480405,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:02.657Z",
+      "sourceModifiedAt": "2026-09-28T15:36:22.526Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1736,14 +1736,14 @@
       "originalPath": "session-posters-20260916/session-04-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-04-print.png",
       "status": "archived",
-      "sha256": "3bf55761d1a8d81612c6ce7e313b73c906ae2f7beeb53f0e02e7838aa278e2ac",
-      "bytes": 1634291,
+      "sha256": "634948eea985d279c3d36528ba8dad2684bc7fc2199c69c82200921980b8da80",
+      "bytes": 1634544,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:03.727Z",
+      "sourceModifiedAt": "2026-09-28T15:36:24.075Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1769,14 +1769,14 @@
       "originalPath": "session-posters-20260916/session-05-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-05-print.png",
       "status": "archived",
-      "sha256": "19f3403347fc760d138a1ab9162ed84061ad918a2240bf2fafe1ec81c0a9e0c1",
-      "bytes": 1464308,
+      "sha256": "e8e37688974d5ba701c0d904cb0c8241f8563c3469b11bdc7e1f61b95836f89d",
+      "bytes": 1494838,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:04.758Z",
+      "sourceModifiedAt": "2026-09-28T15:36:25.220Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1802,14 +1802,14 @@
       "originalPath": "session-posters-20260916/session-06-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-06-print.png",
       "status": "archived",
-      "sha256": "54ace98be683c80978282aa1203d7b1149aa206a724310f75c00bbeb30b3357f",
-      "bytes": 1759603,
+      "sha256": "5517e0488f06309c2501e7483195fa0dcf304c1c37b23a372833bcaa4e5aaca0",
+      "bytes": 1760110,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:05.813Z",
+      "sourceModifiedAt": "2026-09-28T15:36:26.331Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1835,14 +1835,14 @@
       "originalPath": "session-posters-20260916/session-07-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-07-print.png",
       "status": "archived",
-      "sha256": "e286cc75a191886c439c50b5a073b7c61b532e45da18cdf866f9ff7c4510e9e6",
-      "bytes": 1714571,
+      "sha256": "9289f573b281a36494230535b7cb28546996e53b29c10d351212ca39d8decf0d",
+      "bytes": 1732013,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:06.912Z",
+      "sourceModifiedAt": "2026-09-28T15:36:27.817Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1868,14 +1868,14 @@
       "originalPath": "session-posters-20260916/session-08-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-08-print.png",
       "status": "archived",
-      "sha256": "50f8a3928135488e1940b00c16ac9235a767ce8cb2a0c2ec6e05bf9af37ff98f",
-      "bytes": 1791384,
+      "sha256": "c85bc93102899f12fe9e942d861e00a1d91e421ffa97658af60f6323ea8a7697",
+      "bytes": 1791415,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:08.084Z",
+      "sourceModifiedAt": "2026-09-28T15:36:29.175Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1901,14 +1901,14 @@
       "originalPath": "session-posters-20260916/session-09-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-09-print.png",
       "status": "archived",
-      "sha256": "223b82946a1c99b00d44a6d062534f28be1c85105ccbaeeda4079eba49a0f0f5",
-      "bytes": 1854642,
+      "sha256": "4c3904e2e5ee97140076f951ce9caa68f2754843694b8ab1e2dcdfde487332d1",
+      "bytes": 1855010,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:09.181Z",
+      "sourceModifiedAt": "2026-09-28T15:36:30.272Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1934,14 +1934,14 @@
       "originalPath": "session-posters-20260916/session-10-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-10-print.png",
       "status": "archived",
-      "sha256": "933f3cab4a85597fdadcf947106d1f9bb0ffb0d32a0bd38798c9b00ac87d96a4",
-      "bytes": 1683450,
+      "sha256": "02a3644d3880fce65ab13ebc67f800866049d2c834de050ee4b0ab29614cf194",
+      "bytes": 1683714,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:10.296Z",
+      "sourceModifiedAt": "2026-09-28T15:36:31.403Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1967,14 +1967,14 @@
       "originalPath": "session-posters-20260916/session-11-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-11-print.png",
       "status": "archived",
-      "sha256": "3b0f2cf354766365383e5841edd528950991fbbfd63c76d8a7589bed7ceff973",
-      "bytes": 1833800,
+      "sha256": "e0a07f3a5ba9028b7e7ee8a83d924d9cbc5f63984cceceac95ca3f8fc8bb08bd",
+      "bytes": 1834246,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:11.397Z",
+      "sourceModifiedAt": "2026-09-28T15:36:32.502Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2000,14 +2000,14 @@
       "originalPath": "session-posters-20260916/session-12-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-12-print.png",
       "status": "archived",
-      "sha256": "da845e43bc823d7acb24b9df9cfa1a7dae14b27beb827e104977f487c523e360",
-      "bytes": 1652283,
+      "sha256": "32f3d4f24b50c77a802fb51a79aa0c9993f0159766f69e9f2d3fb03e94b74257",
+      "bytes": 1652383,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:12.495Z",
+      "sourceModifiedAt": "2026-09-28T15:36:33.653Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2033,14 +2033,14 @@
       "originalPath": "session-posters-20260916/session-13-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-13-print.png",
       "status": "archived",
-      "sha256": "d7b1f0bdfc98d56369c1e889ecdfa0095a1b3eb33516a7ae526e473bd5b77ef4",
-      "bytes": 1941393,
+      "sha256": "b02b4e5c92b1bb0c5dd56376024416bb256c6f055d3b62a7f04ed41780979a86",
+      "bytes": 1940043,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:13.597Z",
+      "sourceModifiedAt": "2026-09-28T15:36:34.789Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2066,14 +2066,14 @@
       "originalPath": "session-posters-20260916/session-14-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-14-print.png",
       "status": "archived",
-      "sha256": "047ccf710f6b3657e1802d825af327e11507066639bcf10a4a73c570eac62544",
-      "bytes": 1583043,
+      "sha256": "2c7bad0864975d6c25be0a21b0c984e368aa687d4610d277ecd6eeca7143ea1b",
+      "bytes": 1583516,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-09-27T09:27:14.727Z",
+      "sourceModifiedAt": "2026-09-28T15:36:36.334Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"
@@ -3151,6 +3151,374 @@
         "public/2026/paper-previews/poster-ff3e2ccd47e8-preview.webp"
       ],
       "note": "First page rendered from the attendee-submitted paper PDF. PDF SHA-256: 65e486d52016dbe4ba7e9f8c8acae6470142e87b899376744f38fd4d10bc939d. Workbook SHA-256: 8b957702c68e1fc657bccca4362b87fd675e1dca3d4f39b9bd189ba8666ac8fc."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/tsinghua-stat.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/tsinghua-stat.svg",
+      "status": "archived",
+      "sha256": "13bd22fa65012103e8b10e26e6b97ede5a81e1ff498548c74550b335519610dc",
+      "bytes": 176486,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 394
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/tsinghua-stat.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/ruc-cas.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/ruc-cas.svg",
+      "status": "archived",
+      "sha256": "cf4fdc29c5a9917a9819b7fc8ae095bcea225e1810f89f6f04f333ebdf3152e4",
+      "bytes": 320031,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 317
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/ruc-cas.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/ruc-stat.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/ruc-stat.svg",
+      "status": "archived",
+      "sha256": "9536536798813f60559c651b72b082e8a69e6ec43add1639401997dda27a6c8e",
+      "bytes": 561951,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 404
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/ruc-stat.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/cos.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/cos.svg",
+      "status": "archived",
+      "sha256": "4c8b8489981d863edb2f071ad5f7245ad7fbd2916d2f2754ec53d04a11f239b9",
+      "bytes": 87191,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2170,
+        "height": 725
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/cos.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/cssc-ai.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/cssc-ai.svg",
+      "status": "archived",
+      "sha256": "0d44a4f2d95bd9efe8809a738d23f49d0dd258ed5b0fecfa762b80b2d00f705a",
+      "bytes": 344828,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 328
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/cssc-ai.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/fai.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/fai.svg",
+      "status": "archived",
+      "sha256": "056d625f83a553a120f54ee0b5c4f8c102e4362ba0f67a9d54a734c144dab690",
+      "bytes": 97178,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 582
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/fai.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/oscholar.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/oscholar.svg",
+      "status": "archived",
+      "sha256": "00df44ed225f282e71e375b8b4ce7d2d42c69fc1bf5931805cbf3269fddcfa35",
+      "bytes": 2315,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 909,
+        "height": 284
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/oscholar.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/ai-time.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/ai-time.svg",
+      "status": "archived",
+      "sha256": "e8c72d59c35ce7a55a883d26f286e9f92f6ef52f54408f788122376af1600e4b",
+      "bytes": 27884,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 1910
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/ai-time.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/chaspark.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/chaspark.svg",
+      "status": "archived",
+      "sha256": "83fc1d314878bdfa993cd462f6873a9d31c7cd068c280f882c8157e148eb8c40",
+      "bytes": 159589,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 799
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/chaspark.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/minghong.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/minghong.svg",
+      "status": "archived",
+      "sha256": "c2887a2c85e6cc9788119ac4b78519a1debb98f33a025dd0e455b72f1da913c9",
+      "bytes": 11183,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 188,
+        "height": 41
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/minghong.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/kuande.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/kuande.svg",
+      "status": "archived",
+      "sha256": "e46faeaf5726ac642e5be230b8a2f5b52ca22213644829d404a77516bb11d6f2",
+      "bytes": 9599,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 257,
+        "height": 90
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/kuande.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/will.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/will.svg",
+      "status": "archived",
+      "sha256": "7e9e01b3e32aa6ad561bc71e77d48d2621bf43a8dc563cdd36e1912a00fab193",
+      "bytes": 1839,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 1221
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/will.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/quantverse.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/quantverse.svg",
+      "status": "archived",
+      "sha256": "24ca836c6f8607378774226e021e30ed2f763bd9b06fdd4cbc7b9e34de45deb3",
+      "bytes": 271572,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 1200,
+        "height": 215
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/quantverse.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/zhitong-shuhe.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/zhitong-shuhe.svg",
+      "status": "archived",
+      "sha256": "dfc716703931b283e6a8fb5a0f853dab407c8ecd8c75619636ebe0cd2ffdb2c8",
+      "bytes": 16074,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 574,
+        "height": 134
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/zhitong-shuhe.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-09-28/perfxlab.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-09-28/perfxlab.svg",
+      "status": "archived",
+      "sha256": "5d07ae78fbced3327754bdb9718e6538d346d28999b7787138267415225358d1",
+      "bytes": 19433,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 1178
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/perfxlab.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "attendee-portraits-20260928/wang-jianqiao.jpeg",
+      "canonicalPath": "assets/source-archive/2026/people/wang-jianqiao-portrait-source-20260928.jpeg",
+      "status": "archived",
+      "sha256": "72d2ac52977540e89b074bc91dd30e45752bce6e1f956eed8981f0e2aeebfba4",
+      "bytes": 58818,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1239,
+        "height": 1239
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/wang-jianqiao-portrait.webp"
+      ],
+      "note": "Portrait supplied in the September 28 attendee export, normalized to remove embedded metadata; private attachment URL omitted."
+    },
+    {
+      "originalPath": "attendee-portraits-20260928/liu-fanghui.jpeg",
+      "canonicalPath": "assets/source-archive/2026/people/liu-fanghui-portrait-source-20260928.jpeg",
+      "status": "archived",
+      "sha256": "2cccb916386493356d055bca9d71bab3d8b70ce6b31d65bb06562e2a8b78e754",
+      "bytes": 1534553,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 4698,
+        "height": 5459
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/liu-fanghui-portrait.webp"
+      ],
+      "note": "Portrait supplied in the September 28 attendee export, normalized to remove embedded metadata; private attachment URL omitted."
+    },
+    {
+      "originalPath": "attendee-portraits-20260928/shen-hao.jpeg",
+      "canonicalPath": "assets/source-archive/2026/people/shen-hao-portrait-source-20260928.jpeg",
+      "status": "archived",
+      "sha256": "b4b7dd2c6efe11a49b9f51d27ed7ab9cb35060ea5146eef6f1154099c4a3a998",
+      "bytes": 417109,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1280,
+        "height": 1706
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/shen-hao-portrait.webp"
+      ],
+      "note": "Portrait supplied in the September 28 attendee export, normalized to remove embedded metadata; private attachment URL omitted."
+    },
+    {
+      "originalPath": "attendee-portraits-20260928/li-xiuhong.jpeg",
+      "canonicalPath": "assets/source-archive/2026/people/li-xiuhong-portrait-source-20260928.jpeg",
+      "status": "archived",
+      "sha256": "212d3ae036bc586cfd4ba9d7ba1eef765cb27b171ba97a38182696809f6e5b31",
+      "bytes": 1267101,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 3066,
+        "height": 4598
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/li-xiuhong-portrait.webp"
+      ],
+      "note": "Portrait supplied in the September 28 attendee export, normalized to remove embedded metadata; private attachment URL omitted."
+    },
+    {
+      "originalPath": "attendee-portraits-20260928/wu-chenwei.jpeg",
+      "canonicalPath": "assets/source-archive/2026/people/wu-chenwei-portrait-source-20260928.jpeg",
+      "status": "archived",
+      "sha256": "84a241c5622c7e8d73e6c85f38834e120c585e4f12fc130ad4c0d464d49bccf5",
+      "bytes": 694833,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 2400,
+        "height": 3600
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/wu-chenwei-portrait.webp"
+      ],
+      "note": "Portrait supplied in the September 28 attendee export, normalized to remove embedded metadata; private attachment URL omitted."
+    },
+    {
+      "originalPath": "attendee-portraits-20260928/yang-pengkun.jpeg",
+      "canonicalPath": "assets/source-archive/2026/people/yang-pengkun-portrait-source-20260928.jpeg",
+      "status": "archived",
+      "sha256": "3ccd0f5ffe419e623606f731e5da70e04c1ff13e92a876df3c441d8db2dfa28c",
+      "bytes": 110794,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 769,
+        "height": 1155
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/yang-pengkun-portrait.webp"
+      ],
+      "note": "Portrait supplied in the September 28 attendee export, normalized to remove embedded metadata; private attachment URL omitted."
+    },
+    {
+      "originalPath": "attendee-portraits-20260928/zhou-peijie.jpeg",
+      "canonicalPath": "assets/source-archive/2026/people/zhou-peijie-portrait-source-20260928.jpeg",
+      "status": "archived",
+      "sha256": "52f59148235c5fee190b97c08359271e49d93ec1ee2f2a86cdf7de63bc6c80cf",
+      "bytes": 148194,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1430,
+        "height": 1818
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/zhou-peijie-portrait.webp"
+      ],
+      "note": "Portrait supplied in the September 28 attendee export, normalized to remove embedded metadata; private attachment URL omitted."
+    },
+    {
+      "originalPath": "attendee-portraits-20260928/xu-hongteng.jpeg",
+      "canonicalPath": "assets/source-archive/2026/people/xu-hongteng-portrait-source-20260928.jpeg",
+      "status": "archived",
+      "sha256": "f161ff56dca78f4b536fb793c67e7dd65e7e949f0749286174a1d6ba2455fe1b",
+      "bytes": 11611,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 300,
+        "height": 300
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/xu-hongteng-portrait.webp"
+      ],
+      "note": "Portrait supplied in the September 28 attendee export, normalized to remove embedded metadata; private attachment URL omitted."
     }
   ]
 }
