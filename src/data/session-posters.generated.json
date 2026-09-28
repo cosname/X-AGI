@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/render-session-posters.mjs",
-  "generatedAt": "2026-09-27T09:27:14.959Z",
+  "generatedAt": "2026-09-28T15:36:36.565Z",
   "renderEnvironment": "Chrome on macOS; PingFang SC and embedded IBM Plex Sans Condensed",
   "posters": [
     {
       "id": "session-01",
-      "contentHash": "bbfcef363d3585c43d6097bb1e581995703a0d220c3e3d9be613d9964716587b",
+      "contentHash": "ed0b7ea46784aae91c1a50a05eebebba0167dcc3e3e7f188f4449c8496dbf179",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-01-background.png": "a5280eb08fe041ed0f89d5cd2b80853873c12a1327097911e591d5b319e286ac",
         "public/2026/people/liu-jun-portrait.webp": "fbcb56f69eaf1f1725469bffee373f5940900473c8a52148949cf8a60ea817e5",
@@ -20,20 +20,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-01-print.png": {
-          "sha256": "a0854808ee1fa89b5c59f766ee98a1cae6de26493021fac954d42bb1d9560c60",
-          "bytes": 1518652,
+          "sha256": "f148436d2b91843ba7909557122b996a55372e66ad54ade0af7a5f6e55258827",
+          "bytes": 1518936,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-01.webp": {
-          "sha256": "b678681e3810abc3c70b3af34ff3ccae04b2064e33ae12bb07aed4bbf9651e23",
-          "bytes": 123654,
+          "sha256": "dad7e0f0863ac96be3a88ef1a4d46189359a5f1ee53f9288269e77f3df0c320c",
+          "bytes": 123350,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-01-preview.webp": {
-          "sha256": "70c804c1cfd6d36c2204d02c5b9fb61ca26933bb0414d5899fb7a0419e123bf0",
-          "bytes": 29772,
+          "sha256": "26ced9c59457b80fa1265a5a77a96002947f2f7f824aee995a05af9939c2e7c8",
+          "bytes": 29740,
           "width": 540,
           "height": 720
         }
@@ -41,31 +41,33 @@
     },
     {
       "id": "session-02",
-      "contentHash": "df8de83b09ba49a71dc1ba3323a10c19c9570f4004cc0fcb892bfd87db79d12c",
+      "contentHash": "7f4be9ae4bea93f0394acc7328492337aae386d886b227176dc8e3c77ef9d4f5",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-02-background.png": "2882f14a6bb24a1685e1d00dcbf1a899fcc07e1a80d0828ccaab92a4a24b80b7",
-        "public/2026/people/luo-tao-portrait.webp": "e0dee2dc4cf74ca5ff56f9a49c750de5ef0a87bba59917470ddf3fc3e347d2cf"
+        "public/2026/people/liu-fanghui-portrait.webp": "1379a2d5449c84e5ec4fda9cb43b526fc95df13bb6b3dd7f87ccf80054848b0e",
+        "public/2026/people/luo-tao-portrait.webp": "e0dee2dc4cf74ca5ff56f9a49c750de5ef0a87bba59917470ddf3fc3e347d2cf",
+        "public/2026/people/shen-hao-portrait.webp": "e63b35a8074274065a2d40b394071e541bb3faa5e9cde40e4d962fbec086bd42"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-02-print.png": {
-          "sha256": "98418872f1c90a31b35862a699b202385a80e47ad2ab6383fa9b53672d9856a8",
-          "bytes": 1566791,
+          "sha256": "21e3b8aed60f416a553ceeab21708fd3b63ce40f76fdd07c20d339f52ba4ee6e",
+          "bytes": 1623829,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-02.webp": {
-          "sha256": "57758607e025039611451491afb6a698b3843195f42af8cee8aefc52c672e93f",
-          "bytes": 151558,
+          "sha256": "28663799dac3e79d0dc0bb339bc7d7ca31f4ffe1614eca207c2fc73de7d9a565",
+          "bytes": 161690,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-02-preview.webp": {
-          "sha256": "a7d54848dd0a55927f80d352773e695ecdf06a092ba822ab1fcce914b2bf79e4",
-          "bytes": 38038,
+          "sha256": "97c415cb3dce50e21ff40fe7ab36e56c4379a18aaf215cd3e84820cdb62b8885",
+          "bytes": 39992,
           "width": 540,
           "height": 720
         }
@@ -77,26 +79,26 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-03-background.png": "8cc9cf4f73b8e17791a3649ea5e4ceb149e918592a18bb2703364b6616aba59e"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-03-print.png": {
-          "sha256": "5a409dc513cd1d6668df28da9c0df4c45214904d534a38423ba3cfe69fdbe976",
-          "bytes": 1479950,
+          "sha256": "c92fab3c92eb5a463e4f33db2d8fe54c2cf27a54b06ad43f9e87e5779913373f",
+          "bytes": 1480405,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-03.webp": {
-          "sha256": "ce3cffe3dc576ee27720cb91ab5ea01659a01b951d3ed8718cc272a7120ec7ff",
-          "bytes": 115082,
+          "sha256": "5a9fde4f107e94e2809c3a3546cef77a527da138df6bda3854887492fe5e603a",
+          "bytes": 114764,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-03-preview.webp": {
-          "sha256": "d8c879aeda1e7ffd4f3d83a455a336316d54570192f6ac58e0d18a5e4c073e65",
-          "bytes": 30734,
+          "sha256": "a9a54b70e3175195756a87251a956d4af2fd95f67efe1ea7f7274c98f4389121",
+          "bytes": 30556,
           "width": 540,
           "height": 720
         }
@@ -108,7 +110,7 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-04-background.png": "176df02c2fa14b5d12fc7b1e4d82e5abf09f53fe3a5464a1bb518221a9fb971b",
         "public/2026/people/zhang-huaqing-portrait.webp": "d043f753ff69e00689668bdd3cdb132d9000f2fee59c546ba80dd0ccf1589cc4",
@@ -117,20 +119,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-04-print.png": {
-          "sha256": "3bf55761d1a8d81612c6ce7e313b73c906ae2f7beeb53f0e02e7838aa278e2ac",
-          "bytes": 1634291,
+          "sha256": "634948eea985d279c3d36528ba8dad2684bc7fc2199c69c82200921980b8da80",
+          "bytes": 1634544,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-04.webp": {
-          "sha256": "b464cdd99623a4938dc46f619f9ea4959af5c2aa07d569cfbe048e676d5250e9",
-          "bytes": 130500,
+          "sha256": "968b5b4bb3567866273a56060c349d26b0f7164fb0bfcc7c70a254ea77bc9d1d",
+          "bytes": 130278,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-04-preview.webp": {
-          "sha256": "0764aea31f70eebdad4d9a0e4a6e3c4219d6b2cc88c308418af1ae8450ee9f1d",
-          "bytes": 33864,
+          "sha256": "55b6c1b7d89aaa6e6fa6b6795bc060c6ab57f955c7e75d6a2a593cc467644d81",
+          "bytes": 33562,
           "width": 540,
           "height": 720
         }
@@ -138,32 +140,34 @@
     },
     {
       "id": "session-05",
-      "contentHash": "ad33ba8dc731e00404e59b7e9aa07cb8144f7d1892858a1db2891d73ba0f8e24",
+      "contentHash": "617fbe1a9bddc45c60d667ae1af60f09201119d2a95db3352356b436a86b3801",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-05-background.png": "f0526a90808e850990298c6e011e516095d0ceee2cd37261f0e71dc1bbd6b755",
         "public/2026/people/zhang-huafeng-portrait.webp": "9c0bbb319a4cb496c667e69e4d1e8d70b430ebd42717512f566db514df83e633",
-        "public/2026/people/zhang-xianyi-portrait.webp": "e2386ad37605596412f6fbe147a1c2b53a77eb902a441287046c9f5387b144fd"
+        "public/2026/people/li-xiuhong-portrait.webp": "ccf7127d3239152c8ac30adc347d044eb4e87c22ce59bff9cafe29a3c463fd41",
+        "public/2026/people/zhang-xianyi-portrait.webp": "e2386ad37605596412f6fbe147a1c2b53a77eb902a441287046c9f5387b144fd",
+        "public/2026/people/wu-chenwei-portrait.webp": "f51a7f87d965f0ddbafc23b2c0ca4a902a640999ed2d85af65b2f26adc91911d"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-05-print.png": {
-          "sha256": "19f3403347fc760d138a1ab9162ed84061ad918a2240bf2fafe1ec81c0a9e0c1",
-          "bytes": 1464308,
+          "sha256": "e8e37688974d5ba701c0d904cb0c8241f8563c3469b11bdc7e1f61b95836f89d",
+          "bytes": 1494838,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-05.webp": {
-          "sha256": "7d0757df6561882469e5db51d6f539b8d2ed1176d3fd1dd70da67c0acce6b043",
-          "bytes": 112606,
+          "sha256": "8266fba9e4d5d40cb629329511889cdcf9ffbc76ca50877a16dbd1da23b51882",
+          "bytes": 117122,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-05-preview.webp": {
-          "sha256": "900874744a288c4739b78d77e465518e0c20d996adbd1c70d40c490bd4515bc4",
-          "bytes": 30752,
+          "sha256": "28b5462483941b0e8250e30e4e4fa4320a8c7fb651c9fd451367ef522a5d71fd",
+          "bytes": 31968,
           "width": 540,
           "height": 720
         }
@@ -175,7 +179,7 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-06-background.png": "b1646d7230526bfcabdf0f95cf8097250742c431861317774cedd1cd56aee61a",
         "public/2026/people/han-jiale-portrait.webp": "4a77f72d217aea3b97981725013f7a93a1f1b40e798e594eb09b63f4f3dd410f",
@@ -185,20 +189,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-06-print.png": {
-          "sha256": "54ace98be683c80978282aa1203d7b1149aa206a724310f75c00bbeb30b3357f",
-          "bytes": 1759603,
+          "sha256": "5517e0488f06309c2501e7483195fa0dcf304c1c37b23a372833bcaa4e5aaca0",
+          "bytes": 1760110,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-06.webp": {
-          "sha256": "8dafc70983c3b1aa1707d60fc85dc666b5ff5e62d6d3b6781eb0b163a87090c3",
-          "bytes": 183668,
+          "sha256": "4bb8d067b3ba1720836e9361aba3b78f66936f1324a519a901e65324e43a7013",
+          "bytes": 183530,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-06-preview.webp": {
-          "sha256": "fa6216c617a8c7d7b4327b366e03e10d8e8f96e2b6dfcba6f9e9b8aba8720765",
-          "bytes": 47416,
+          "sha256": "5f12299e3e5eaec5e4b2e6667b407ba7540306c36e455a0d3bc51d4243eeb195",
+          "bytes": 47382,
           "width": 540,
           "height": 720
         }
@@ -206,33 +210,34 @@
     },
     {
       "id": "session-07",
-      "contentHash": "901182e42d52253d63a6e11b444ded5374e172355afad2b50574895ffa41b73c",
+      "contentHash": "06378cd5926f5bbf38c7f061b9daa5a6917a64a67a0f125ec787628623e6e937",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-07-background.png": "89259de45d1381215b8260a0cad5a9afdfc858d65e3920f3e73ff9c013f63b5f",
         "public/2026/people/shi-zuoqiang-portrait.webp": "893bb8bb6ed1c0fd3d3ae08221a1c5a4adfc4e716fb3324947c6ac477e5f48c5",
+        "public/2026/people/zhou-peijie-portrait.webp": "0b026506703e636cae87bfa56065ea20aed5b7b507b9f9c89b8f2cec089f9f6d",
         "public/2026/people/lu-yiping-portrait.webp": "18a755c0ec78af5281c27ccaa1b527d1ee3ab4c9d964341ec3ebe30f64a27930",
         "public/2026/people/jiao-yuling-portrait.webp": "1be52414961395ccd42b412109d01f0452076a3da73f74a7edd677b25175fec6"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-07-print.png": {
-          "sha256": "e286cc75a191886c439c50b5a073b7c61b532e45da18cdf866f9ff7c4510e9e6",
-          "bytes": 1714571,
+          "sha256": "9289f573b281a36494230535b7cb28546996e53b29c10d351212ca39d8decf0d",
+          "bytes": 1732013,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-07.webp": {
-          "sha256": "dbd41a044cc5b51775d8220844caadb2a0143aefd91a4633517e276011959b84",
-          "bytes": 209926,
+          "sha256": "94ca216a86afcce5aa889b200a96122ace589a61ee311fdf9c681e6ef3cb4739",
+          "bytes": 212454,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-07-preview.webp": {
-          "sha256": "47395d47545756a878a388d9d6ee13c4d76a990282282f32880a8372b25df456",
-          "bytes": 54222,
+          "sha256": "a21cf506ef563c3ec8eeb887fbb68c3c971354ef4a60096e945146050415fe68",
+          "bytes": 54722,
           "width": 540,
           "height": 720
         }
@@ -244,7 +249,7 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-08-background.png": "8fee6ee034d9a2bb0212a213d69257e1ac76990084b75ab3a31a0af6f2a3dbf0",
         "public/2026/people/chen-qing-portrait.webp": "6ac46cdaf6f0df5796723be9f1d08e575966346f51ababcbfa1253eb88703780",
@@ -253,20 +258,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-08-print.png": {
-          "sha256": "50f8a3928135488e1940b00c16ac9235a767ce8cb2a0c2ec6e05bf9af37ff98f",
-          "bytes": 1791384,
+          "sha256": "c85bc93102899f12fe9e942d861e00a1d91e421ffa97658af60f6323ea8a7697",
+          "bytes": 1791415,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-08.webp": {
-          "sha256": "298ee9793545df99bd1299e4f996af797ca2f4f336c04293df30d465e6b39023",
-          "bytes": 148994,
+          "sha256": "1756d79f6c0a1cf37823f85e80cac76f2737b30b3b234bedb102739357e79b81",
+          "bytes": 148668,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-08-preview.webp": {
-          "sha256": "ac0555f4e1172a4d724e45a49fa78ee0a32cf50b87f6c9be6db272726806bf94",
-          "bytes": 35744,
+          "sha256": "0feac711b7c8760da88d2d18221fc7ff9a48962ea17abec276db1bed6c6699f3",
+          "bytes": 35654,
           "width": 540,
           "height": 720
         }
@@ -278,7 +283,7 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-09-background.png": "5fd8d4c7308f79ac5b8ce8be40092f3e1aec2421554eddd772b59e41b5d465f3",
         "public/2026/people/xu-huinan-portrait.webp": "37643592d15a34557e36d27f6caf091f20aef404426a05e8417c434ddeef688a",
@@ -288,20 +293,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-09-print.png": {
-          "sha256": "223b82946a1c99b00d44a6d062534f28be1c85105ccbaeeda4079eba49a0f0f5",
-          "bytes": 1854642,
+          "sha256": "4c3904e2e5ee97140076f951ce9caa68f2754843694b8ab1e2dcdfde487332d1",
+          "bytes": 1855010,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-09.webp": {
-          "sha256": "7dd3fb66e118ddd3f2e8761a728d191465f201e29abe13c783435e6ca2af89ce",
-          "bytes": 188396,
+          "sha256": "0106d4c346f5bee625b8be0bfe923a88cc8fdb5260faa40f73257034901c973b",
+          "bytes": 188216,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-09-preview.webp": {
-          "sha256": "bd8511032b46c8fc3568c46bc228ab941a1c2bf437a915c627ad5228743fa495",
-          "bytes": 45238,
+          "sha256": "31fe8c278bdc3d3ec25351d2199395a25bec02675cca8b9e70308e237407d439",
+          "bytes": 45268,
           "width": 540,
           "height": 720
         }
@@ -313,7 +318,7 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-10-background.png": "fb6350be7e2183d4158d8433707c4bcbea454a874d850ac3960bc27103ef87a4",
         "public/2026/people/ma-jianhao-portrait.webp": "37e932c17a9de12097c0c00bb507a109bc5acec0ec272aebfd759a1b48ff0ed5",
@@ -322,20 +327,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-10-print.png": {
-          "sha256": "933f3cab4a85597fdadcf947106d1f9bb0ffb0d32a0bd38798c9b00ac87d96a4",
-          "bytes": 1683450,
+          "sha256": "02a3644d3880fce65ab13ebc67f800866049d2c834de050ee4b0ab29614cf194",
+          "bytes": 1683714,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-10.webp": {
-          "sha256": "0a3cd48f0b7436acde1691ca2a715f1112ccfddbde597da89badcfaecd53bca5",
-          "bytes": 158860,
+          "sha256": "79d7f95972bc5baa6452fe9609f065b19f1e921e860fbb6493e5bd7bf1661adf",
+          "bytes": 158616,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-10-preview.webp": {
-          "sha256": "7ffa0bb1bf281cf8f63260039c92538546db4a4ef346dfb2ffeb1b30618f4e7c",
-          "bytes": 39446,
+          "sha256": "26c43b9c89de787be4bcf41d9724c58662a806ba6539ed7c0c03040f206fc1cc",
+          "bytes": 39298,
           "width": 540,
           "height": 720
         }
@@ -347,7 +352,7 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-11-background.png": "34ce845237cb82b79d13207b41005507f6be242f42a4819ca1f53504058cd8aa",
         "public/2026/people/liu-ziming-portrait.webp": "6e4c2898235068a466109dd2885cd0370b9e8b450b318983fd467c933d324985",
@@ -355,20 +360,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-11-print.png": {
-          "sha256": "3b0f2cf354766365383e5841edd528950991fbbfd63c76d8a7589bed7ceff973",
-          "bytes": 1833800,
+          "sha256": "e0a07f3a5ba9028b7e7ee8a83d924d9cbc5f63984cceceac95ca3f8fc8bb08bd",
+          "bytes": 1834246,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-11.webp": {
-          "sha256": "206bb928ed3fe1c0d1c21401ea8ac6cb324ff758c3a73b7e77b9e5ab6e0f1895",
-          "bytes": 174450,
+          "sha256": "e3cd573fda2aa1ef81203acb1bcecb16112571263f14c0bcbe7c7ca61eeb236f",
+          "bytes": 173870,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-11-preview.webp": {
-          "sha256": "8e263b0f34a2414dacec7d12b449f40a41248bc599f6c0990a6101e34d04cca5",
-          "bytes": 40358,
+          "sha256": "60c32545ccc4793c8c5036b652c2d2cd47ad0e7d8366da45d5d1d4d3434d2db4",
+          "bytes": 40242,
           "width": 540,
           "height": 720
         }
@@ -380,7 +385,7 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-12-background.png": "02340600fb2950ab6926ecffee1e7840c2d0997dd241c86ac5ba2ca971a2c5a2",
         "public/2026/people/liu-weiyang-portrait.webp": "ffa671f98b4a09caf3089aef0995cc9b7b323a97edc13ea4ce173014989aef0c",
@@ -390,20 +395,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-12-print.png": {
-          "sha256": "da845e43bc823d7acb24b9df9cfa1a7dae14b27beb827e104977f487c523e360",
-          "bytes": 1652283,
+          "sha256": "32f3d4f24b50c77a802fb51a79aa0c9993f0159766f69e9f2d3fb03e94b74257",
+          "bytes": 1652383,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-12.webp": {
-          "sha256": "c9e01c16ec6f358257d98dcac1491d23f4a49f6195292877ef63c0f0f72fdd6c",
-          "bytes": 149436,
+          "sha256": "ba124312b571dd423386f1b6f0d0872e79ab103e8567d0a2c6922e3c6a253eaf",
+          "bytes": 149314,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-12-preview.webp": {
-          "sha256": "60c93e396589a9e006f2e5749a260e62e3bf93604264151777ff01d2e35a3d28",
-          "bytes": 41392,
+          "sha256": "6847e385c9923ec5a2dbc7d93a072e93b76d9b3c6fb212f6f1b0d7e1bba6e6e1",
+          "bytes": 40930,
           "width": 540,
           "height": 720
         }
@@ -411,34 +416,34 @@
     },
     {
       "id": "session-13",
-      "contentHash": "82ba6f0ba039564cb869cf2d5ca7f87df14a5206e879232d9f0a6dcb59a5ed28",
+      "contentHash": "4ea4e67ec44de1024a43fbc08708d5b6111050f5a52a40170df77a762bd12ab9",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-13-background.png": "942929b05092fbd2c4db1c5a9f4afa93016e135c141430405dffa56491998490",
         "public/2026/people/zhou-fan-portrait.webp": "f9319059770f35dcc2c7d820bee17559a82ae87e6d421816644837e8f6a87d4f",
         "public/2026/people/ma-junjie-portrait.webp": "c4ef8689078794b1958b5a1172fa1fb71e02e16065049a665aaa4e282220b644",
-        "public/2026/people/xu-hongteng-portrait.webp": "31283daf4df58fbe18cbefbd27199c63487d41f03a50c38a6d627fa7c70f2792",
+        "public/2026/people/xu-hongteng-portrait.webp": "8135cbe51e271007a4668b77a5fa6498e5e5e9396afc1f24f5b1cd8fe4ef002b",
         "public/2026/people/mao-xiaojie-portrait.webp": "9706eb3c9fa177b973730ea1486c36821c3d306f6ed6e71822be7c9b196f3c7a"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-13-print.png": {
-          "sha256": "d7b1f0bdfc98d56369c1e889ecdfa0095a1b3eb33516a7ae526e473bd5b77ef4",
-          "bytes": 1941393,
+          "sha256": "b02b4e5c92b1bb0c5dd56376024416bb256c6f055d3b62a7f04ed41780979a86",
+          "bytes": 1940043,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-13.webp": {
-          "sha256": "fa5afdbbe945ce1c8029cdbab2502d43cf208d3c546b47ecbe5d74cdc0f1005b",
-          "bytes": 221386,
+          "sha256": "ddb3bb4dbfc689ba7835d5898eea7019159a4e3bd6f7ae46fa0d19d92ad6d605",
+          "bytes": 221200,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-13-preview.webp": {
-          "sha256": "9ea5198cbd137bc3d12c2a58a177c39d321763a91f618a13615ce3514c81603a",
-          "bytes": 51910,
+          "sha256": "7914bd33b1bf5a479c8480ea6f871415091f47fedc76c18e7ee716446af997fd",
+          "bytes": 52548,
           "width": 540,
           "height": 720
         }
@@ -450,7 +455,7 @@
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "7cd787767453e9a40ca72850ee68ea850e2c576e83fb65f67ceb032d9d49d6ad",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
-        "public/2026/brand/xagi-header-wordmark.svg": "c8c808ce5dcd8b13a8b6ebde315379873216da191be44a814aab005093122b7f",
+        "public/2026/brand/xagi-header-wordmark.svg": "dc20d7a7fe2ccee1971effd37ab16ed6fbd13de2fcbb281d07f5f1a60ee1d9ac",
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "assets/source-archive/2026/session-posters/session-14-background.png": "aa245ce2212fc3d7ecda7cabfe420912eb44bba513f23ff33c3d0cee8ad0043a",
         "public/2026/people/wang-hongning-portrait.webp": "1347b6a316d9767b767ead7d24c74d331e55a3e7d9a0697f61c9ff92119715f0",
@@ -460,20 +465,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-14-print.png": {
-          "sha256": "047ccf710f6b3657e1802d825af327e11507066639bcf10a4a73c570eac62544",
-          "bytes": 1583043,
+          "sha256": "2c7bad0864975d6c25be0a21b0c984e368aa687d4610d277ecd6eeca7143ea1b",
+          "bytes": 1583516,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-14.webp": {
-          "sha256": "a7f4e7f30e5f9fbb02999404ff73062d7d99007800e5ff8fe0908b77a8dfc8d8",
-          "bytes": 136744,
+          "sha256": "dc048338417c6fac11a273a8e65745893367f8f883886b0d66f227f41cd9a7af",
+          "bytes": 136366,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-14-preview.webp": {
-          "sha256": "8b62995633e28bb9097665d299feb2282a89d855507e938523b2268a45b57e61",
-          "bytes": 37060,
+          "sha256": "8ce2e44f8ee2a5376465eb81350d28eca0f488307d412fa9f0cc842bcf4a1065",
+          "bytes": 37046,
           "width": 540,
           "height": 720
         }

@@ -553,9 +553,9 @@ await validatePublicCopies('2026 partner logos', path.resolve('public/2026/logos
 const personPortraitFiles = conference2026People.flatMap((person) => (
   person.portraitSrc ? [path.basename(person.portraitSrc)] : []
 ));
-if (personPortraitFiles.length !== 45 || new Set(personPortraitFiles).size !== 45) {
+if (personPortraitFiles.length !== 52 || new Set(personPortraitFiles).size !== 52) {
   fail(
-    `2026 people portraits: expected 45 unique portraits (40 workbook, three organizer-supplied, two archived) and four placeholders, `
+    `2026 people portraits: expected 52 unique portraits and five placeholders after the September 28 registration refresh, `
     + `found ${new Set(personPortraitFiles).size}`,
   );
 }

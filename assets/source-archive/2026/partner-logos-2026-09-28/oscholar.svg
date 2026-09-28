@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_2" data-name="图层 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 908.84 284">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4f0cec;
+      }
+
+      .cls-2 {
+        fill: #5311ec;
+      }
+
+      .cls-3 {
+        fill: #9159f7;
+      }
+
+      .cls-4 {
+        fill: #af7ef8;
+      }
+
+      .cls-5 {
+        fill: #a46efa;
+      }
+
+      .cls-6 {
+        fill: #4e08f0;
+      }
+
+      .cls-7 {
+        fill: #7232f7;
+      }
+
+      .cls-8 {
+        fill: #6f30f7;
+      }
+
+      .cls-9 {
+        fill: #b07ff9;
+      }
+
+      .cls-10 {
+        fill: #4c07ef;
+      }
+
+      .cls-11 {
+        fill: #4e0aed;
+      }
+
+      .cls-12 {
+        fill: #520ff0;
+      }
+
+      .cls-13 {
+        fill: #a670fa;
+      }
+
+      .cls-14 {
+        fill: #b07ef7;
+      }
+
+      .cls-15 {
+        fill: #925af7;
+      }
+
+      .cls-16 {
+        fill: #0d1b3e;
+        font-family: TrebuchetMS-Bold, 'Trebuchet MS';
+        font-size: 148px;
+        font-weight: 700;
+        isolation: isolate;
+      }
+
+      .cls-17 {
+        fill: #4d07f0;
+      }
+    </style>
+  </defs>
+  <g id="_图层_1-2" data-name="图层 1">
+    <g>
+      <g>
+        <circle class="cls-10" cx="22.6" cy="140.5" r="22.6"/>
+        <circle class="cls-11" cx="29.4" cy="90.4" r="14"/>
+        <circle class="cls-6" cx="60.7" cy="54.9" r="22.6"/>
+        <circle class="cls-2" cx="97.8" cy="30.3" r="10.7"/>
+        <circle class="cls-8" cx="142.7" cy="22.5" r="22.5"/>
+        <circle class="cls-15" cx="191.8" cy="31.9" r="13"/>
+        <circle class="cls-13" cx="230.5" cy="61.6" r="22.2"/>
+        <circle class="cls-14" cx="253.5" cy="98.7" r="10.4"/>
+        <circle class="cls-9" cx="258.2" cy="142.1" r="22"/>
+        <circle class="cls-4" cx="248.2" cy="186" r="11.4"/>
+        <circle class="cls-5" cx="222.1" cy="224.1" r="23"/>
+        <circle class="cls-3" cx="186.1" cy="249.2" r="11.8"/>
+        <circle class="cls-7" cx="141.7" cy="259.6" r="24.4"/>
+        <circle class="cls-12" cx="91.5" cy="250.7" r="13.7"/>
+        <circle class="cls-17" cx="52.3" cy="221.5" r="22.2"/>
+        <circle class="cls-1" cx="27.8" cy="185.4" r="10.6"/>
+      </g>
+      <text class="cls-16" transform="translate(308.1 199)"><tspan x="0" y="0">Oscholar</tspan></text>
+    </g>
+  </g>
+</svg>

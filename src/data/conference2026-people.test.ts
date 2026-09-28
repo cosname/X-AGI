@@ -8,18 +8,18 @@ import {
 
 describe('2026 public Chair and Speaker profiles', () => {
   it('publishes the reviewed public-only workbook projection', () => {
-    assert.equal(conference2026PeopleRecords.length, 46);
+    assert.equal(conference2026PeopleRecords.length, 57);
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.roles.includes('chair')).length,
-      9,
+      13,
     );
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.roles.includes('speaker')).length,
-      38,
+      45,
     );
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.hasSubmittedPortrait).length,
-      40,
+      50,
     );
     assert.equal(
       new Set(conference2026PeopleRecords.map((person) => person.id)).size,
@@ -67,7 +67,7 @@ describe('2026 public Chair and Speaker profiles', () => {
     const person = conference2026PersonForName('田润泽');
     assert.equal(person?.portraitStatus, 'missing');
     assert.equal(person?.portraitSrc, undefined);
-    assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 4);
+    assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 5);
     for (const name of ['谢天', '周默', '祝武']) {
       const candidate = conference2026PersonForName(name);
       assert.equal(candidate?.portraitStatus, 'missing');
@@ -80,7 +80,7 @@ describe('2026 public Chair and Speaker profiles', () => {
       const person = conference2026PersonForName(name);
       assert.equal(person?.portraitStatus, 'submitted');
       assert.equal(person?.portraitSrc, `/2026/people/${id}-portrait.webp`);
-      assert.equal(person?.hasSubmittedPortrait, false);
+      assert.equal(person?.hasSubmittedPortrait, conference2026PeopleRecords.find((record) => record.id === id)?.hasSubmittedPortrait);
       assert.deepEqual(person?.roles, ['chair']);
     }
     const chen = conference2026PersonForName('陈思明');

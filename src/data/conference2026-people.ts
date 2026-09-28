@@ -8,6 +8,7 @@ import {
   conference2026ConfirmedPeople,
   conference2026ConfirmedBios,
   conference2026ConfirmedPortraits,
+  conference2026ConfirmedAbstracts,
 } from './conference2026-people.confirmed.ts';
 import {
   conference2026ArchivedPeople,
@@ -42,7 +43,8 @@ const currentPeopleRecords = [
   ...conference2026ConfirmedPeople,
 ].map((person) => {
   const bio = conference2026ConfirmedBios.get(person.id);
-  return bio === undefined ? person : { ...person, bio };
+  const abstract = conference2026ConfirmedAbstracts.get(person.id);
+  return { ...person, ...(bio === undefined ? {} : { bio }), ...(abstract === undefined ? {} : { abstract }) };
 });
 
 const publicPeopleRecords = [

@@ -16,7 +16,7 @@ describe('homepage speaker lineup', () => {
     for (const speaker of homeSpeakers) {
       assert.equal(speaker.portraitSrc, conference2026PersonForName(speaker.name)?.portraitSrc);
     }
-    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 17);
+    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 10);
   });
 
   it('places missing portraits last, preserves order within both groups and keeps dual-role speaker links', () => {
@@ -43,13 +43,13 @@ describe('homepage speaker lineup', () => {
     ]));
     assert.equal(homeSpeakers.find((speaker) => speaker.id === 'chen-siming')?.href, '/schedule/#schedule-person-08-chair-chen-siming-1');
     assert.equal(homeSpeakers.find((speaker) => speaker.id === 'hu-tianyang')?.href, '/schedule/#schedule-person-12-chair-hu-tianyang-1');
-    assert.equal(homeSpeakers.find((speaker) => speaker.name === '王健桥')?.href, '/schedule/#schedule-session-01');
-    assert.equal(homeSpeakers.find((speaker) => speaker.name === '杨朋昆')?.href, '/schedule/#schedule-session-05');
+    assert.equal(homeSpeakers.find((speaker) => speaker.name === '王健桥')?.href, '/schedule/#schedule-person-01-chair-wang-jianqiao-1');
+    assert.equal(homeSpeakers.find((speaker) => speaker.name === '杨朋昆')?.href, '/schedule/#schedule-person-05-chair-yang-pengkun-1');
   });
 
   it('uses confirmed schedule information when no person profile has been submitted', () => {
     const missingProfiles = homeSpeakers.filter((speaker) => !conference2026PersonForName(speaker.name));
-    assert.equal(missingProfiles.length, 13);
+    assert.equal(missingProfiles.length, 6);
     for (const speaker of missingProfiles) {
       const sessionIndex = conference2026ProgramSessions.findIndex((session) => [...session.speakers, ...session.chairs].some((person) => person.name === speaker.name));
       const session = conference2026ProgramSessions[sessionIndex];

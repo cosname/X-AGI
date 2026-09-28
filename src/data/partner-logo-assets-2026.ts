@@ -5,41 +5,41 @@ export type PartnerLogo = {
 
 const logos = {
   清华大学统计与数据科学系: {
-    src: '/2026/logos/tsinghua-stat.png',
+    src: '/2026/logos/tsinghua-stat.svg',
     className: 'organizer-tsinghua',
   },
   中国人民大学应用统计科学研究中心: {
-    src: '/2026/logos/ruc-cas.png',
+    src: '/2026/logos/ruc-cas.svg',
   },
   中国人民大学统计学院: {
-    src: '/2026/logos/ruc-stat.png',
+    src: '/2026/logos/ruc-stat.svg',
   },
   统计之都: {
-    src: '/2026/logos/cos.png',
+    src: '/2026/logos/cos.svg',
   },
   中国商业统计学会人工智能分会: {
-    src: '/2026/logos/cssc-ai.png',
+    src: '/2026/logos/cssc-ai.svg',
   },
   'FAI 人工智能基础': {
-    src: '/2026/logos/fai.png',
+    src: '/2026/logos/fai.svg',
   },
   OScholar: {
-    src: '/2026/logos/oscholar.png',
+    src: '/2026/logos/oscholar.svg',
     className: 'co-organizer-oscholar',
   },
   'AI TIME': {
-    src: '/2026/logos/ai-time.png',
+    src: '/2026/logos/ai-time.svg',
     className: 'co-organizer-ai-time',
   },
   黄大年茶思屋科技网站: {
-    src: '/2026/logos/chaspark.png',
+    src: '/2026/logos/chaspark.svg',
     className: 'strategic-partner-chaspark',
   },
   明汯投资: {
-    src: '/2026/logos/minghong.png',
+    src: '/2026/logos/minghong.svg',
   },
   宽德投资: {
-    src: '/2026/logos/kuande.png',
+    src: '/2026/logos/kuande.svg',
     className: 'sponsor-kuande',
   },
   Will: {
@@ -47,11 +47,11 @@ const logos = {
     className: 'sponsor-will',
   },
   QuantVerse: {
-    src: '/2026/logos/quantverse.png',
+    src: '/2026/logos/quantverse.svg',
     className: 'sponsor-quantverse',
   },
   智统数合: {
-    src: '/2026/logos/zhitong-shuhe.png',
+    src: '/2026/logos/zhitong-shuhe.svg',
     className: 'sponsor-zhitong-shuhe',
   },
   '澎峰科技（PerfXLab）': {

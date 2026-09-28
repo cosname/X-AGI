@@ -20,7 +20,7 @@ export type Conference2026PersonSourceRecord = {
 
 export const conference2026PeopleSource = {
   "sheetName": "2026 X-AGI 大会",
-  "sourceHash": "f456b3c73a1fb2550719f55efa658fb988dfdcd6e0f6d46ac338f180c97148a1",
+  "sourceHash": "37944ae1b0189ea7d3c197437bc346045cc03456fd205ad142c5062694db633e",
   "people": [
     {
       "id": "mao-xiaojie",
@@ -37,21 +37,6 @@ export const conference2026PeopleSource = {
       "sourceOrder": 0
     },
     {
-      "id": "xu-hongteng",
-      "name": "许洪腾",
-      "aliases": [],
-      "roles": [
-        "speaker"
-      ],
-      "affiliation": "中国人民大学",
-      "department": "高瓴人工智能学院",
-      "bio": "许洪腾，中国人民大学高瓴人工智能学院副教授，海外优青，2017年于佐治亚理工学院获得博士学位，2018至2020年担任杜克大学客座研究员，研究方向聚焦最优传输驱动的机器学习、大模型技术与科学智能。在科学智能方向，带领团队研发全球首个聚合物构象生成模型PolyConf和基准测试集。研究工作曾获得ICML2025 AI for Math研讨会杰出论文提名奖，入选《Environmental Science & Technology》副封面文章等荣誉。主持国家自然科学基金重大研究计划培育项目、中央引导地方人工智能专项等项目，常年担任ICML、NeurIPS、ICLR等国际会议领域主席，曾在KDD2019、AAAI2022、IJCAI2023、AAAI2026成功举办讲习班，获得国内外同行的关注。",
-      "talkTitle": "面向蛋白质主链生成的四元数整流匹配技术",
-      "abstract": "蛋白质主链生成在从头蛋白质设计中占据核心地位，对众多生物与医学领域应用意义重大。尽管基于扩散模型与流模型的生成式模型为攻克这一难题提供了可行思路，但这类模型生成的蛋白质所依赖的SE(3)群插值技术同时存在数值稳定性差和计算效率低的问题。本文提出一种全新的四元数整流匹配方法（Rectified Quaternion Flow，简称ReQFlow），可以实现快速且高质量的蛋白质主链生成。具体而言，该方法从随机噪声中为蛋白质肽链内的每个氨基酸残基生成局部平移量与三维旋转量，将三维旋转以单位四元数形式表示，并通过指数形式的球面线性插值构建四元数流。研究依托具备数值稳定性保障的四元数流匹配策略完成模型训练，同时对四元数流模型进行整流匹配，以此加快模型推理速度、提升生成蛋白质主链的可设计性，最终构建出ReQFlow模型。实验结果表明，ReQFlow在蛋白质主链生成任务中能够达到同级别的生成效果，同时所需采样步数大幅减少，推理耗时显著降低（例如生成长度为 300 的蛋白质主链时，速度是 RFDiffusion 的 37 倍、Genie2 的 63 倍），充分印证了该方法兼具实用性与高效性。",
-      "hasSubmittedPortrait": true,
-      "sourceOrder": 1
-    },
-    {
       "id": "luo-tao",
       "name": "罗涛",
       "aliases": [],
@@ -64,7 +49,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "从Math4AI到AI4Math的初步探索",
       "abstract": "人工智能的蓬勃发展正重塑科学研究范式，数学与AI的深度交叉呈现出“双向赋能”的新格局。本报告将汇报团队近期在“Math4AI”（基于数学理论的深度学习机理解析）与“AI4Math”（基于人工智能的数学研究辅助）两个方向的初步探索。在Math4AI层面，我们引入几何测度论、动力系统与渐近分析方法，深入剖析深度学习的训练动力学机制，针对偏微分方程求解中的泛化失效、神经网络训练中的参数凝聚与秩坍缩现象，以及注意力机制中“聚焦-稀释”的多阶段演化规律提供了初步的理论诠释。在AI4Math层面，我们致力于弥合自然语言与形式语言的语义鸿沟，提出了算子树与结构化自然语言等创新性表示框架。该框架不仅显著提升了自动形式化的准确率与语义评估的鲁棒性，更为数学文献的智能检索与学生、专家的交互式研读提供了有力工具。报告最后将展望这一交叉领域的未来挑战与研究愿景。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 2
+      "sourceOrder": 1
     },
     {
       "id": "liu-weiyang",
@@ -79,7 +64,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Pion: A Spectrum-Preserving Optimizer via Orthogonal Equivalence Transformation",
       "abstract": "We introduce Pion, a spectrum-preserving optimizer for large language model (LLM) training based on orthogonal equivalence transformation. Unlike additive optimizers such as Adam and Muon, Pion updates each weight matrix through left and right orthogonal transformations, preserving its singular values throughout training. This yields an optimization mechanism that modulates the geometry of weight matrices while keeping their spectral norm fixed. We derive the Pion update rule, systematically examine its design choices, and analyze its convergence behavior along with several key properties. Empirical results show that Pion offers a stable and competitive alternative to standard optimizers for both LLM pretraining and finetuning.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 3
+      "sourceOrder": 2
     },
     {
       "id": "zhang-xianyi",
@@ -94,7 +79,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "基于FlagOS的高性价比混合云Token工厂",
       "abstract": "面向多种异构算力，基于统一系统软件平台FlagOS，通过软硬件系统优化，打造高性价比的私有化与公有云Token工厂解决方案，满足当前AGI时代的降本增效需求。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 4
+      "sourceOrder": 3
     },
     {
       "id": "zhao-peng",
@@ -109,7 +94,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "在线学习与大模型高效推理",
       "abstract": "在线学习是一种通过交互信息持续提升模型能力的学习范式，是解决序列预测与决策问题的重要技术手段。本次报告将首先介绍我们在非稳态在线学习方面的理论进展，提出“在线集成”框架实现最优的动态遗憾界保障，有效提升了开放环境下的稳健性。进一步，本报告还将介绍在线学习技术在大模型情境下的初探。特别以高效推理为例，针对自回归生成过程计算开销大、推理延迟高的问题，我们提出了在线学习驱动的推测解码方法：基于小模型生成草稿、大尺寸模型验证的推理范式，并构建“生成-验证-自适应更新”的在线学习闭环，通过反馈信息动态优化草稿策略，有效提高了推测解码系统的接收率和推理效率。同时，报告还将介绍基于扩散模型架构的草稿生成与并行树状解码等方向进展。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 5
+      "sourceOrder": 4
     },
     {
       "id": "ma-jianhao",
@@ -124,7 +109,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "步长加速梯度下降的收敛下界",
       "abstract": "梯度下降是优化与机器学习中最基础的算法之一。对于光滑凸优化问题，经典理论给出的收敛速度为 O(T^{-1})。近年来的一系列工作发现，无须引入动量或改变算法结构，仅通过精心设计步长序列，就可以将普通梯度下降加速至约 O(T^{-1.2716})。这自然引出了一个基本问题：仅依靠步长选择，梯度下降能否达到 Nesterov 加速方法所具有的最优 O(T^{-2}) 收敛速度？\n\n本报告将介绍我们在这一问题上的最新结果。针对使用预先设定的非负步长序列的梯度下降，我们证明了一个 \\Omega(T^{-1.9319}) 的末次迭代收敛下界。这表明，无论如何设计此类步长序列，仅依靠步长调度都无法使普通梯度下降达到 O(T^{-2}) 的最优加速速度。\n\n本工作的证明由 GPT-5.6 Sol Pro 在作者指导下完成，报告也将简要分享大语言模型参与数学研究与证明发现的过程。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 6
+      "sourceOrder": 5
     },
     {
       "id": "chang-heng",
@@ -139,7 +124,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Learning to Build Agents: Adaptive Planning, Memory, and Harness Evolution",
       "abstract": "随着大语言模型推理能力持续提升，Agent系统的性能瓶颈正逐步从模型本身扩展到规划、记忆、执行与工具编排等外部机制。本报告将介绍我们近期围绕自适应Agent架构的一系列研究，包括任务感知的执行结构、可演化的规划与记忆机制，以及Harness与模型策略的协同优化。相关工作旨在探索超越单纯模型规模扩展的新路径，使Agent系统具备面向任务动态构建、持续适应与自主进化的能力。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 7
+      "sourceOrder": 6
     },
     {
       "id": "li-qiuyi",
@@ -154,7 +139,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "基因组大模型Carbon",
       "abstract": "Carbon是由北京中关村学院与HuggingFace联合开发的生成式基因组大模型，旨在降低基因组AI的应用门槛，使其不再高度依赖GPU集群资源。模型参数量为30亿，在多个基准任务上的表现优于70亿参数的Evo2模型，同时计算效率提升约275倍。Carbon在应用层面主要聚焦两个方向：其一，DNA序列设计，涵盖调控元件优化和mRNA疫苗设计等合成生物学与精准医学场景；其二，基因组注释，不依赖传统序列比对方法，而是基于序列内在特征直接解读DNA的功能信息，为比较基因组学、蛋白质发现和通路分析等下游任务提供基础支持。基于Carbon的注释能力，研究团队完成了对16万亿碱基序列的系统性注释，构建了目前已知规模最大的AI基因注释数据库Carbon Database，其数据量和物种多样性较现有公开资源扩大约8倍。该数据库对AI4S领域可作为训练DNA与蛋白语言模型的多源语料库；对生命科学领域则提供了识别新物种、新基因和新功能的潜在数据基础。Carbon模型与Carbon Database共同构成面向生命科学研究的基础设施框架。未来，北京中关村学院与HuggingFace计划进一步探索融合基因组理解与自然语言交互的模型体系，以支持更广泛的生命科学人机协作研究场景。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 8
+      "sourceOrder": 7
     },
     {
       "id": "xu-huinan",
@@ -169,7 +154,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Memory Mechanisms in Genomic Foundation Models",
       "abstract": "Genomic sequences exhibit widespread long‑range dependencies, and their data density is completely different from that of natural language. Architectures for information compression in natural language are not fully applicable to the genomic domain, and genome modeling requires its unique approaches. Studies including Gengram have introduced memory into genomic large models and achieved unprecedented performance across multiple tasks. Memory mechanisms can retain key biological features, mitigate attention computational costs, and improve the model’s ability to extract long‑range genomic signals, yielding promising effects for long‑sequence modeling.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 9
+      "sourceOrder": 8
     },
     {
       "id": "ma-ziye",
@@ -182,7 +167,7 @@ export const conference2026PeopleSource = {
       "department": "计算机系",
       "bio": "马梓业现为香港城市大学计算机系助理教授，博士毕业于加州大学伯克利分校（UC Berkeley）电子工程与计算机科学系。他的主要研究方向是AI基础算法，机器学习理论，以及数学优化（非凸优化）。他的论文主要发表在主流人工智能会议及期刊上（NeurIPS, ICML, JMLR, AISTATS, AAAI等），也曾多次获得口头报告（oral）荣誉，以及2023年的AISTATS Notable Paper。他的科研工作曾受到香港研究资助局以及国自然科学基金支持。",
       "hasSubmittedPortrait": false,
-      "sourceOrder": 10
+      "sourceOrder": 9
     },
     {
       "id": "xie-tian",
@@ -194,7 +179,7 @@ export const conference2026PeopleSource = {
       "affiliation": "阿里巴巴",
       "department": "qwen训练",
       "hasSubmittedPortrait": false,
-      "sourceOrder": 11
+      "sourceOrder": 10
     },
     {
       "id": "chen-siming",
@@ -207,7 +192,7 @@ export const conference2026PeopleSource = {
       "department": "大数据学院",
       "profileUrl": "http://fduvis.net/",
       "hasSubmittedPortrait": false,
-      "sourceOrder": 12
+      "sourceOrder": 11
     },
     {
       "id": "tian-runze",
@@ -219,7 +204,7 @@ export const conference2026PeopleSource = {
       "affiliation": "中国人民大学",
       "department": "统计学院",
       "hasSubmittedPortrait": false,
-      "sourceOrder": 13
+      "sourceOrder": 12
     },
     {
       "id": "zhou-mo",
@@ -232,7 +217,7 @@ export const conference2026PeopleSource = {
       "department": "数学科学学院",
       "bio": "周默，北京大学数学科学学院助理教授，研究方向为机器学习与控制论",
       "hasSubmittedPortrait": false,
-      "sourceOrder": 14
+      "sourceOrder": 13
     },
     {
       "id": "ma-junjie",
@@ -247,7 +232,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Spiked Matrix Models with Rotationally Invariant Noise: AMP Algorithms and Optimality",
       "abstract": "In this talk, I will present our recent work on the optimality of Approximate Message Passing (AMP) algorithms for spiked matrix models with rotationally invariant noise. We introduce a new AMP algorithm that employs a matrix denoiser - acting on the eigenvalues of the observed matrix - and an iterate denoiser - applied to the AMP iterates. The resulting dynamics admit a simple state-evolution characterization, which allows us to identify the optimal pair of denoisers achieving the minimum possible asymptotic estimation error among a broad class of iterative algorithms.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 15
+      "sourceOrder": 14
     },
     {
       "id": "zhu-wu",
@@ -260,7 +245,7 @@ export const conference2026PeopleSource = {
       "department": "经管学院",
       "bio": "Website, https://www.sem.tsinghua.edu.cn/info/1203/32022.htm",
       "hasSubmittedPortrait": false,
-      "sourceOrder": 16
+      "sourceOrder": 15
     },
     {
       "id": "yuan-zhang",
@@ -277,7 +262,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Large and Deep Factor Models",
       "abstract": "We show that a deep neural network (DNN) trained to construct a stochastic discount factor (SDF) admits an additive decomposition separating nonlinear characteristic discovery from the pricing rule that aggregates them. This decomposition yields a linear factor representation governed by the Portfolio Tangent Kernel (PTK), which summarizes the network’s learned features. In population, the implied SDF converges to a ridge-regularized version of the true SDF, with the degree of regularization determined by spectral complexity. Empirically, using U.S. equity data, the PTK representation delivers economically\nand statistically significant performance gains, while rising spectral complexity imposes tighter limits on finite-sample pricing.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 17
+      "sourceOrder": 16
     },
     {
       "id": "han-jiale",
@@ -292,7 +277,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
       "abstract": "经济世界模型（Economic World Models，EWMs）是一类生成式经济模型，通过刻画异质主体及其信念与行动，以及主体互动形成宏观结果所依赖的市场与制度机制，内生地模拟经济系统的演化。本文提出一条经济世界模型的实现路线，将其构建为由异质主体持续行动、互动、适应，并与市场和制度共同演化的生成引擎，从而自下而上地产生经济动态。我们构建了一个六级能力体系，涵盖固定规则智能体世界、自适应规则智能体世界、基于大语言模型的智能体世界、自我演化智能体、演化中的制度世界，以及与现实观测持续对齐的“仿真到现实”经济孪生。基于该体系的系统性文献综述表明，现有研究仍主要集中于较低层级的智能体与仿真环境，而具备智能体自我演化、制度内生演化、持续实证对齐和经济机制验证能力的系统仍较为少见。通过将经济世界模型的研究愿景转化为可实施的系统蓝图，本文旨在推动下一代经济仿真环境的发展，使其既能作为人类决策者的高保真试验场，也能为智能体提供训练、规划、评估与安全验证的基础环境。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 18
+      "sourceOrder": 17
     },
     {
       "id": "luo-weijian",
@@ -307,7 +292,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "超快速扩散语言模型：现状与前沿挑战",
       "abstract": "摘要：\n扩散模型展现出了卓越的生成性能，但其迭代采样过程仍然伴随着较高的计算成本。本次报告首先聚焦于标准扩散模型的超快速加速方法，包括 Diff-Instruct、Score Implicit Matching，以及它们所代表的分布匹配蒸馏范式。该类方法通过直接匹配预训练扩散教师模型的分布。我们将介绍其核心原理、理论联系，以及针对不同应用场景所发展出的实用变体。\n\n第二部分将回顾连续语言扩散模型的近期进展。这类模型构建于概率空间或词元嵌入空间，为传统的自回归解码提供了一种潜在的超高速、大规模并行建模方案。我们将重点介绍其在模型设计、训练目标和解码方法方面的最新进展，并讨论其在生成质量、推理效率和可扩展性等方面仍然面临的开放挑战。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 19
+      "sourceOrder": 18
     },
     {
       "id": "shi-zuoqiang",
@@ -322,7 +307,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Weighted Laplacian Flow: A Deterministic Particle Flow with Provable Convergence",
       "abstract": "Sampling from a target probability density is a fundamental task in statistics, machine learning, and scientific computing. We introduce weighted Laplacian flow, a deterministic particle-flow method that transports samples from a tractable initial density to a target density known up to normalization. The method evolves the logarithmic density ratio between the target and the transported distribution and constructs the particle velocity by solving a weighted Poisson equation associated with the target density.  We establish the global well-posedness of the proposed PDE system and prove that the transported density converges to the target density. Under a sublinear forcing condition, the method achieves exact convergence in finite time. Numerical experiments on multimodal, heavy-tailed, and ten-dimensional targets demonstrate that weighted Laplacian flow can perform long-range mass transport, overcome energy barriers.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 20
+      "sourceOrder": 19
     },
     {
       "id": "li-gen",
@@ -337,7 +322,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings",
       "abstract": "Existing continuous frameworks still rely on decoders supervised with cross entropy (CE) because the flow trajectories are not guaranteed to terminate at valid token embeddings. Motivated by this limitation, we introduce ConvergeFlow, an embedding-space flow-based LM, which constrains the data predictor to the convex hull of token embeddings and trains it solely with the mean squared error objective induced by flow matching. Under suitable regularity conditions, we prove that the resulting flow converges to valid token embeddings despite errors in the data predictor, enabling direct token prediction without a CE-supervised decoder. We further develop three sampling mechanisms for controlling the trade-off between the generative perplexity and entropy. Experiments on OpenWebText demonstrate that ConvergeFlow achieves performance competitive with existing continuous and discrete diffusion LMs. These findings demonstrate the potential of the flow-based paradigm for language modeling.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 21
+      "sourceOrder": 20
     },
     {
       "id": "cong-xin",
@@ -353,7 +338,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Benchmarking Language Models for Statistical Problem Formulation",
       "abstract": "Large language models (LLMs) are increasingly used as assistants for statistical and data science work, yet existing evaluations largely assume the analysis target is already specified. In practice, users arrive with informal goals and heterogeneous data, leaving the model to decide what statistical task is implied and which data are relevant. We first formalize this upstream step as Statistical Problem Formulation and decompose it into two subtasks: (1) Statistical Problem Classification and (2) Variable Identification & Role Assignment. We then introduce StatFormBench, a benchmark built from five cross-domain statistics textbooks and a data science case library, covering diverse problem types, data representations, and scenario styles. It contains 1,013 samples spanning 20 coarse-grained and 85 fine-grained statistical problem categories. Across 14 LLMs, the best one reach only 72.0 fine-grained classification accuracy and 63.2 variable set overlap.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 22
+      "sourceOrder": 21
     },
     {
       "id": "li-peng",
@@ -368,7 +353,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "自然语言驱动的数学研究智能体 - AIM系统的探索与实践",
       "abstract": "数学作为科学进步的重要基石，长期支撑着各学科的发展与突破。近年来，人工智能的迅猛发展正在推动科学研究范式发生深刻变革，也为数学研究带来了新的机遇与挑战。当 AI 遇见数学，尤其是当自然语言成为数学研究智能体理解问题、组织推理与协同探索的重要界面时，将会产生怎样的化学反应？本报告将围绕“自然语言驱动的数学研究智能体”这一主题，简要回顾 AI 在数学研究中的发展脉络与代表性进展，分析 AI 面向研究级数学问题时所面临的核心挑战。在此基础上，报告将重点介绍本团队研发的 AI 数学家系统 AIM，展示其如何通过自然语言交互与智能体协作机制，辅助数学问题探索、定理形成与可信验证。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 23
+      "sourceOrder": 22
     },
     {
       "id": "wang-hongning",
@@ -383,7 +368,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "情境学习与协作发现：人工智能赋能教育教学新范式",
       "abstract": "AI Cosmos是由清华大学计算机系交互式人工智能实验室（CoAI）研发的一款多智能体驱动的情景化教学系统（官网：aicosmos.ai），致力于将人工智能从简单的辅助教学工具进化为激发学生认知与创造力的核心伙伴。该系统突破传统AI教学工具的技术门槛，实现全流程自然语言交互，让使用者无需AI或编程基础即可通过多智能体自主编排，轻松构建涵盖多角色研讨、代码实训、交互式视频生成以及仿真实验室的虚实融合“实践空间”。AI Cosmos让师生能够全身心投入到“在做中学”的沉浸式教学体验中，实现教育创新与前沿AI技术的无缝衔接。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 24
+      "sourceOrder": 23
     },
     {
       "id": "luyao-zhang",
@@ -398,7 +383,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Who Verifies Decentralized Information? Economic Incentives, Accountability, and Trustworthy AI",
       "abstract": "Who Verifies Decentralized Information? Economic Incentives, Accountability, and Trustworthy AI Across Oracle Protocols\nBlockchain oracles enable smart contracts to use external information, but their records remain fragmented and difficult to compare. The Oracle Incentive and Accountability Atlas integrates 56 oracle categories with data from UMA, Chainlink, Flare, Tellor, and Pyth. It reconstructs verification and dispute lifecycles, identifying actors, decisions, capital at risk, rewards, penalties, and outcomes across 105.6 million traceable records. By connecting computational infrastructure with mechanism design, the Atlas reveals how incentives shape participation, information quality, and accountability. It establishes a comparative science of decentralized verification and supports the design of more resilient oracle markets, safer digital finance, and trustworthy AI systems.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 25
+      "sourceOrder": 24
     },
     {
       "id": "zhou-feng",
@@ -411,7 +396,7 @@ export const conference2026PeopleSource = {
       "department": "统计学院",
       "bio": "周峰，中国人民大学统计学院副教授，主要研究领域包括统计机器学习、贝叶斯方法、随机过程、大模型推理加速等，主持国家自然科学基金青年项目、面上项目，在JMLR、STCO、ICML、NeurIPS、ICLR、AAAI、KDD等国际期刊和会议上发表论文40余篇，担任NeurIPS、ICLR、IJCAI、AISTATS等国际会议领域主席，国际期刊《Statistics and Computing》副主编，《Transactions on Machine Learning Research》执行编辑，《Journal of Machine Learning Research》编委。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 26
+      "sourceOrder": 25
     },
     {
       "id": "feng-jianfeng",
@@ -426,7 +411,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Neuroscience Where AI = Science",
       "abstract": "Understanding our brain has always been an original source of inspiration for the development of AGI and current AI. I will first introduce the challenges we face with the sheer amount of data collected in neuroscience, ranging from point fields to continuous random fields. By using and developing statistical tools, we are able to gradually peer through the layers of the mysterious computations implemented in the brain. Empowered by our current knowledge in neuroscience, we then move toward developing a whole-brain model at the neuronal scale, with 86 billion neurons and 100 trillion parameters to be learned: the Digital Twin Brain (DTB). Finally, I will introduce several applications of the DTB, including a clinical application platform, an experimental platform, and embodied AI.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 27
+      "sourceOrder": 26
     },
     {
       "id": "hu-yiwen",
@@ -441,7 +426,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Controlled LLM Training on Spectral Sphere",
       "abstract": "Scaling large models requires optimization strategies that ensure rapid convergence grounded in stability. Maximal Update Parametrization (μP) provides a theoretical safeguard for width-invariant Θ(1) activation control, whereas emerging optimizers like Muon are only half-aligned with these constraints: they control updates but allow weights to drift. To address this limitation, we introduce the Spectral Sphere Optimizer (SSO), which enforces strict module-wise spectral constraints on both weights and their updates. By deriving the steepest descent direction on the spectral sphere, SSO realizes a fully μP-aligned optimization process. To enable large-scale training, we implement SSO as an efficient parallel algorithm within Megatron. Through extensive pretraining on diverse architectures, including Dense 1.7B, MoE 8B-A1B, and 200-layer DeepNet models, SSO consistently outperforms AdamW and Muon. Furthermore, we observe significant practical stability benefits, including im",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 28
+      "sourceOrder": 27
     },
     {
       "id": "cao-yuan",
@@ -455,7 +440,7 @@ export const conference2026PeopleSource = {
       "bio": "Yuan Cao is an assistant professor in the School of Computing and Data Science at the University of Hong Kong. Before joining HKU, he was a postdoctoral scholar at UCLA. He received his B.S. from Fudan University and Ph.D. from Princeton University. Yuan’s research interests include deep learning theory, non-convex optimization, and high-dimensional statistics.",
       "talkTitle": "Transformers for Operator Learning with Algorithmic Insights",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 29
+      "sourceOrder": 28
     },
     {
       "id": "chen-huanran",
@@ -470,7 +455,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Nexus: Same Pretraining Loss, Better Downstream Generalization via Common Minima",
       "abstract": "The foundational capabilities of large language models are acquired during pretraining on internet-scale, highly heterogeneous data mixtures. In this work, we investigate an interesting geometric question regarding the converged state of pretraining: Does the model converge to a common minimizer across all data sources (e.g., \\cref{fig:cwa_illustration:close}), or merely a minimizer of the summed loss (e.g., \\cref{fig:cwa_illustration:distant})? We hypothesize that the geometric \"closeness\" of task-specific minima is intrinsically linked to downstream generalization. We reveal that standard optimizers (e.g., AdamW) often converge to points where task-specific minima are distant from each other. To address this, we propose the Nexus optimizer, which encourages the closeness of these minima by maximizing gradient similarity during optimization. Experiments across models ranging from 130M to 3B parameters, various data mixtures and hyperparameter schedules, show that Nexus \\textit{significantly boosts downstream performance}, despite \\textit{achieving the same pretraining loss} (see \\cref{fig:demo:benchmark}). Notably, on the 3B model, Nexus reduces the out-of-distribution loss by 0.012 and yields up to a 15.0\\% accuracy improvement on complex reasoning tasks (e.g., GSM8k). This finding challenges the reliance on pretraining loss as the sole proxy for model evaluation and demonstrates the importance of implicit biases in unlocking downstream generalization.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 30
+      "sourceOrder": 29
     },
     {
       "id": "liu-ziming",
@@ -485,7 +470,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "从AI的物理学到AI自进化",
       "abstract": "今天的 AI 很大程度上仍然依赖于规模化的试错：更大的模型、更多的数据、更昂贵的实验。但如果我们希望 AI 能够真正实现自主进化，一个更基础的问题是：我们是否能够理解、预测，并最终自动设计 AI 本身？\n\n本报告将介绍我们从 Science of AI 到 AI for AI 的一系列探索。首先，我们开发了 ComfyResearch，将神经网络训练变成一个可观测、可干预的实验系统，系统研究 scaling law、grokking、优化动力学等现象；在此基础上，我们进一步构建 Physics of AI Game，把这些研究问题转化为可控的“实验题”，训练人和 AI 从训练曲线与内部 observable 出发，通过提出假设、设计干预、总结规律来解决问题。进一步地，ArchitectureIQ 将这种能力扩展到模型架构：给定不同的网络结构与训练条件，测试一个智能体能否理解架构如何影响训练动力学，并找到更好的模型设计。\n\n这些项目最终指向一个更长期的目标：构建能够理解 AI 的 Meta Model，以及能够自主开展研究的 Auto Research 系统。我们希望 AI 不再只是在巨大的架构空间中盲目搜索，而是像科学家一样，通过实验积累知识、形成规律，并利用这些规律提出新的架构和算法。\n\n从观测 AI，到理解 AI；从预测 AI，到设计 AI；最终，让 AI 成为研究和进化 AI 自身的工具。这可能代表一种不同于单纯扩大算力的新路径：Scale insight, not compute.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 31
+      "sourceOrder": 30
     },
     {
       "id": "tu-shangqing",
@@ -500,7 +485,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "CogEvol：面向教育普惠的课件生成模型",
       "abstract": "大模型的快速发展为课程资源自动化建设带来了重要机遇，但当前课件生成仍存在流程冗长、成本高昂、交互性不足等问题。本报告介绍面向学习环境生成任务的课件生成模型 CogEvol：以一句话需求为输入，单次前向同时生成排版完整的幻灯片与可交互 HTML 学习环境，并以渲染像素与交互探针作为强化学习奖励，使模型与学习者真实体验对齐。27B 模型已在真实课堂规模化应用，开源 4B 模型可在普通笔记本离线运行。本报告将分享技术路线、评测结果并探讨端侧低成本部署对教育普惠的思考。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 32
+      "sourceOrder": 31
     },
     {
       "id": "zhang-huaqing",
@@ -513,7 +498,7 @@ export const conference2026PeopleSource = {
       "department": "交叉信息研究院",
       "bio": "Huaqing Zhang is a first-year PhD at IIIS, Tsinghua University, advised by Prof. Andrew Yao. His research interests lie in the theory and training of large language models. He has been fortunate to work closely with Prof. Jingzhao Zhang and Prof. Kaifeng Lyu. He is currently interning with the Qwen pretraining team, where he works on scaling laws and optimizers.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 33
+      "sourceOrder": 32
     },
     {
       "id": "yan-yukun",
@@ -528,7 +513,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "PilotDeck - 面向生产力的智能体操作系统尝试",
       "abstract": "近年来，智能体技术经历了\"推理能力增强 → 工具能力提升 → 复杂问题拆解\"等发展阶段，正从\"问答工具\"和\"专业智能体\"迈向更具通用能力的智能体操作系统（Agent OS）。然而，当前Agent OS在多项目并行的记忆污染、不加区分的Token成本浪费、以及问答范式下的能动性缺失等方面仍存在显著瓶颈。\nPilotDeck以\"解放生产力的第一性原理 - 提供好的生产关系\"为设计思路，为大型语言模型提供最适合其工作的生产环境与执行模式，核心创新包括独立工作舱、项目制白盒记忆、多模型智能路由、常驻式主动执行等方面。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 34
+      "sourceOrder": 33
     },
     {
       "id": "qiu-zihan",
@@ -543,7 +528,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "大模型中离群值的功能性分析",
       "abstract": "大语言模型（LLM）的高维激活空间中存在若干显著的涌现现象，尤以 Attention Sinks （少数词元获得异常偏高的注意力得分）与 Residual Sinks （少数固定维度持续保持较大幅值）最为典型。这些离群值常被视为异常或量化障碍，本文则提出一种统一的功能性视角：它们是实现高维缩放的关键机制。\n\n具体而言，少量离群值与归一化层（如 Softmax、RMSNorm）协同，对非离群分量施加有效缩放，我们称之为离群值驱动的缩放（outlier-driven rescaling）。干预实验表明，离群值与归一化层联合发挥作用，主要充当缩放因子而非直接的语义载体：移除归一化层会使相应离群值消失，但训练稳定性下降；保留归一化层而裁剪离群值同样损害性能，表明该缩放机制对高维优化的稳定至关重要。这一视角亦为若干架构改进的有效性提供了统一解释。基于上述发现，我们进一步展示了将离群值吸收入可学习参数或引入显式门控缩放加以缓解的方法，有效提升了训练性能与量化鲁棒性。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 35
+      "sourceOrder": 34
     },
     {
       "id": "xie-chao",
@@ -558,7 +543,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "跨发育阶段精神共病的层级神经认知模型",
       "abstract": "精神疾病共病是精准精神病学研究与临床诊疗中的关键难题，其复杂的神经病理机制仍有待深入阐明。本报告将介绍围绕精神疾病共病机制开展的系列研究，我们构建了精神共病层级神经认知模型（NeuroHiP），首次识别出一种由前额叶执行控制环路高连接特征驱动、贯穿外化与内化核心症状的通用性神经精神病理因子，揭示了不同精神疾病共病背后的共性神经机制（Nature Medicine, 2023）。在此层级模型基础上，研究进一步实现了病理机制的精细化分解，分离出两类特异性神经病理因子：其一为与冲动特质相关的外化因子，主要表现为感觉运动环路连接异常增强；其二为与神经质特质相关的内化因子，核心特征为前额叶-眶额叶目标导向环路连接异常减弱（Nature Mental Health, 2026）。上述发现在覆盖青春前期至成人期的六个独立研究队列中得到系统验证，显示出良好的稳健性与可重复性。该系列研究构建了精神疾病共病的层级化神经认知机制框架，有助于厘清共病中的共性与特异性病理差异，并为精神疾病的分层早期干预、精准诊疗体系建设以及精准精神病学的发展提供新的科学视角与理论依据。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 36
+      "sourceOrder": 35
     },
     {
       "id": "zhang-huafeng",
@@ -573,7 +558,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Formal Method Harness for LLM agents",
       "abstract": "随着 LLM Agent 从代码生成和问答逐渐进入长流程的软件工程任务，它面对的问题已经不只是“生成结果是否正确”。当系统涉及并发操作、状态生命周期、重试、延迟结果、权限与所有权、外部副作用以及故障恢复时，很多错误本质上是状态机和时序约束被破坏，而不是一次模型调用的推理错误。\n\n本次演讲将介绍一种 Formal Method Harness for LLM Agents：把 TLA+ 和模型检查放在 Agent 外部，作为一个可执行、可检查的形式化约束层。LLM Agent 可以辅助将自然语言需求转化为状态变量、状态迁移、不变量和活性属性，再通过 TLC 等工具搜索违反系统约束的执行路径，并将 counterexample 反馈给 Agent，用于诊断、修改模型、调整实现和补充测试。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 37
+      "sourceOrder": 36
     },
     {
       "id": "wu-tailin",
@@ -588,7 +573,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "AI赋能聚变等离子体仿真、控制和诊断",
       "abstract": "聚变等离子体因其非线性、多尺度及强耦合特性，在仿真、实时控制与高精度诊断上面临巨大挑战。本报告将展示AI赋能这三方面的潜力与挑战，并介绍本组近期成果。在仿真方面，AI可加速大规模动力学模拟，显著提升计算效率；在控制方面，强化学习等算法能实现等离子体位形和不稳定性的自适应实时调节；在诊断方面，神经网络可高效处理多源诊断数据，实现关键参数的快速反演与异常检测。三者协同，为聚变堆的智能化运维奠定基础。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 38
+      "sourceOrder": 37
     },
     {
       "id": "zhou-fan",
@@ -603,7 +588,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "基于先验数据拟合网络的离线策略评估",
       "abstract": "传统离线策略评估往往针对每一份新数据独立构建评估器，而忽视了大量已有评估任务中蕴含的可迁移经验。对此，本文提出一种具备复用能力的评估模型，通过在丰富多样的合成任务上进行预训练，使模型能够直接从新数据与目标策略中一次性推断出策略价值。该模型利用基于状态转移的注意力机制处理离散状态空间，并设计轨迹 - 片段层次结构来适应连续状态场景。理论分析与实验表明，引入先验任务可有效降低有限样本下的评估偏差，且先验贡献随实际数据量增长而自动衰减。在网格世界、非线性肿瘤模拟及真实重症监护数据等多个基准上，该方法不仅超越了传统单任务评估与非神经网络方案，也显著优于精细调参的神经网络基础模型。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 39
+      "sourceOrder": 38
     },
     {
       "id": "jiao-yuling",
@@ -618,7 +603,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Offline Deep Q* Estimation with Diffusion Models",
       "abstract": "In offline RL, estimating the optimal action-value function  can be formulated as solving the optimal Bellman equation based solely on offline observations. A fundamental challenge is that the reward function and transition kernel are unknown, so the optimal Bellman operator is not directly observable from data. To address this issue, we propose a novel framework that decouples operator estimation from value function learning. In this approach, we first formulate conditional diffusion models to estimate the reward law and transition kernel, which induces a data-driven approximation of the optimal Bellman operator. We then plug these estimators into the Bellman equation and obtain a deep estimator of  by minimizing the empirical Bellman residual over a neural network function class.   We  establish sharp nonasymptotic convergence rates for learning the optimal Bellman operator through an end-to-end analysis of conditional diffusion estimation in total variation distance.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 40
+      "sourceOrder": 39
     },
     {
       "id": "chen-qing",
@@ -633,7 +618,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "从灵感到实现：AI赋能教育中的创造力支持",
       "abstract": "在生成式AI快速融入教育场景的当下，如何让AI真正赋能创造力培养而非替代人的思考，成为亟待回答的问题。本报告从设计思维与批判性思维出发，探讨AI赋能教育中的创造力支持路径。针对当前AI工具多作为“黑箱生成器”、难以促进深层认知发展的局限，提出一种可解释的人机协作范式：通过让AI暴露推理过程，引导学习者经历类比、发散、收敛与反思等高阶认知活动，从而在生成创意、形成方案、落地实现的全过程中，同时培育创造性思维与批判性思维。报告将结合创造力支持工具（Creativity Support Tools）与类比设计方法（Design-by-Analogy），介绍相关理论研究与应用，讨论如何将AI从“给出答案的生成器”转变为“可对话的协作者”，并探索其在创意教育中的实践路径与应用前景，为推动AI赋能教育提供理论支撑与工具参考。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 41
+      "sourceOrder": 40
     },
     {
       "id": "huang-ruizhao",
@@ -648,7 +633,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "Incorporating Return Prediction in High-Dimensional Mean-Variance Portfolio Optimization",
       "abstract": "We develop a framework that incorporates return prediction to achieve unconditional mean-variance efficiency in high dimensions. Our method, termed MAXSER-PR, builds upon the seminal “MAXSER” estimator of Ao, Li, and Zheng (2019) by integrating conditional information into the optimization, thereby providing a tractable bridge between conditional return prediction and unconditional mean-variance efficiency. Under an elliptical model for the unpredictable return component that allows for heteroskedasticity, heavy-tailedness and serial dependence, and an elastic net regularity condition, our method asymptotically attains unconditional mean-variance efficiency. We demonstrate that our method delivers superior performance through comprehensive empirical studies across multiple prediction models and high-dimensional settings.",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 42
+      "sourceOrder": 41
     },
     {
       "id": "huang-pei",
@@ -663,7 +648,7 @@ export const conference2026PeopleSource = {
       "talkTitle": "面向高等教育的AGI落地：未来学习中心建设的实践与思考",
       "abstract": "基于国内各类层次高校落地实践经验，聚焦未来学习中心核心场景，系统探究AGI技术在高校教学赋能、师生交互、教学评价督导、智慧终端应用中的落地路径。结合高校样板间打造、产品迭代优化与场景规模化复制的实战案例，剖析AI教育产品在高等教育场景中的适配逻辑、算力管控方案与落地难点，总结AGI赋能高等教育的有效范式。同时辩证思考人工智能教育应用的边界与价值，平衡技术创新与教育本质，为新时代高校AI教育生态建设、未来学习中心标准化落地与全域推广提供可落地、可复制的实践参考与行业新思路。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 43
+      "sourceOrder": 42
     },
     {
       "id": "lu-yiping",
@@ -676,7 +661,7 @@ export const conference2026PeopleSource = {
       "department": "国际数学研究中心",
       "bio": "陆一平，北京大学北京国际数学研究中心助理教授。2019年本科毕业于北京大学应用数学专业，2023年于斯坦福大学获得应用数学博士学位；曾任纽约大学柯朗研究所柯朗讲师、美国西北大学工业工程与管理科学系助理教授。 他的研究主要聚焦于微分方程与深度学习的交叉领域，致力于将微分方程、随机过程和控制理论等经典领域与机器学习及随机实验进行深度融合。其代表性成果包括建立了微分方程与深度学习的联系，科学机器学习的最优样本复杂度，并于近期成功解决了困扰学术界长达35年的关于带符号BAR解（signed BAR solutions）唯一性的经典难题。 他曾获得 CPAL 新星奖、芝加哥大学数据科学新星奖、斯坦福跨学科研究生奖学金等多项荣誉，并长期担任 ICML、NeurIPS、ICLR 、 AISTATS 和AAAI等国际顶级机器学习会议的领域主席以及运筹学顶级期刊Mathematics of Operations Research的副编辑。",
       "hasSubmittedPortrait": true,
-      "sourceOrder": 44
+      "sourceOrder": 43
     },
     {
       "id": "zhang-yaoyu",
@@ -691,7 +676,172 @@ export const conference2026PeopleSource = {
       "talkTitle": "towards the foundation of deep learning",
       "abstract": "深度学习在过去十余年取得了令人瞩目的进展，但我们对其基本工作原理的理解仍远落后于工程实践。面对神经网络这样高度非线性、高维、强耦合的复杂系统，仅依赖自上而下的理论推导往往难以识别真正关键的结构与规律。本报告将从“现象驱动”的视角讨论深度学习基础研究的一种可能路径：通过简单、可控的实验系统观察训练过程，发现稳定且可复现的行为规律，构造合适的描述量，并进一步研究这些现象的适用边界、相互联系及其背后的机制。结合若干深度学习与语言模型中的代表性案例，我将讨论实验与现象研究如何作为一种相对独立的科学实践，与数学理论和工程研究相互促进，并进一步思考这些零散现象如何逐步汇聚成对深度学习更系统的理解。",
       "hasSubmittedPortrait": true,
+      "sourceOrder": 44
+    },
+    {
+      "id": "li-xiuhong",
+      "name": "李秀红",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "无问芯穹",
+      "department": "技术",
+      "bio": "李秀红，无问芯穹技术副总裁，负责无问芯穹Agentic MaaS 模型推理技术。李博士在北京大学获得学士学位和博士学位，并在香港中文大学从事博士后研究。他在高性能计算、模型训练与推理基础设施领域拥有丰富经验。他在顶级国际期刊和会议上发表多篇论文，相关研究成果以第一作者和通信作者，获 ASPLOS '24 最佳论文奖和 PPoPP '19 最佳论文提名。",
+      "talkTitle": "跨集群异构PD分离：挑战、设计与工程实践",
+      "abstract": "本演讲将介绍无问芯穹发布的跨集群异构推理架构PDD（Prefill-RelayDecode-MainDecode）。该架构以高性价比的广域网以太网串联多地已建成的同构数据中心，并将传统的 PD 分离链路“P-D”创新解构为“P-RLD-MD”的三级分离式推理架构。在让“偏科”的硬件能够只刷自己最擅长的题的同时，更突破性解决了以太网环境下 KV Cache 的传输延迟痛点。实测显示，该架构在实现了首 Token 延迟降低 51.5% 的同时，单 Token 成本可降低 37.5%。不仅意味着用户端速度体验得到显著提升，更实现了全域异构算力的最大化调度，让分散各处的存量集群资源能够充分释放产业价值。",
+      "hasSubmittedPortrait": true,
       "sourceOrder": 45
+    },
+    {
+      "id": "wei-taiyun",
+      "name": "魏太云",
+      "aliases": [],
+      "roles": [
+        "chair"
+      ],
+      "affiliation": "统计之都",
+      "department": "统计之都",
+      "hasSubmittedPortrait": false,
+      "sourceOrder": 46
+    },
+    {
+      "id": "wang-jianqiao",
+      "name": "王健桥",
+      "aliases": [],
+      "roles": [
+        "chair"
+      ],
+      "affiliation": "清华大学",
+      "department": "统计与数据科学系",
+      "bio": "assistant professor",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 47
+    },
+    {
+      "id": "xu-hongteng",
+      "name": "许洪腾",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "中国人民大学",
+      "department": "高瓴人工智能学院",
+      "bio": "许洪腾，中国人民大学高瓴人工智能学院长聘副教授，博导，国家高层次青年人才。其研究方向为通用人工智能技术及其应用，特别是（1）最优传输驱动的机器学习理论与方法；（2）生成式大模型架构设计、模型压缩、模型融合；（3）AI4Math以及AI4Science等前沿应用。近年来的代表性工作包括基于最优传输距离的图神经网络设计与学习方法、数值算法驱动的大模型架构设计与高效适配、基于生成式人工智能的柔性大分子建模技术等。研究工作曾获得ICML2025 AI for Math研讨会杰出论文提名奖，入选《Environmental Science & Technology》副封面文章等荣誉。主持国家自然科学基金重大研究计划培育项目、中央引导地方人工智能专项等项目。",
+      "talkTitle": "An Improved SE(3)-Transformer Driven by Hamiltonian Flow",
+      "abstract": "The Transformer architecture plays a central role in modern deep learning, and its SE(3)-equivariant variants have been widely applied to molecular conformation modeling and optimization. In this study, we propose an improved SE(3)-Transformer architecture, called HamFormer, which revisits the design of SE(3)-Transformer through the lens of Hamiltonian flow. In particular, we define a parametrized Hamiltonian flow in the phase space of position and velocity, corresponding to optimizing an energy functional that combines an optimal transport-based potential with a damped momentum. The Lie-Trotter splitting framework of the Hamiltonian flow leads to the proposed HamFormer architecture, whose feedforward computation achieves the optimization step of the proposed energy functional. Furthermore, we combine HamFormer with Equivariant Graph Neural Network (EGNN), build a new model for molecular conformation optimization.",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 48
+    },
+    {
+      "id": "wu-chenwei",
+      "name": "吴晨玮",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "华为",
+      "department": "GTS-AI算法部",
+      "bio": "本科毕业于清华姚班，吉林省高考理科状元，杜克大学计算机博士、研究方向为深度学习理论，现就职于华为GTS-AI算法部，负责GTS领域大模型训练与应用，从算法、训练系统到实际应用开展了系统性探索。在昇腾上克服RL训练不稳定、效率低的难题，实现端到端AgenticRL模型训练方案；突破多项在昇腾上进行模型领域化训练的关键技术，实现模型领域能力提升20%以上；深入网络运维等多个GTS重大业务领域，主导设计的多款Agent应用已在华为公司内外实际业务中落地。",
+      "talkTitle": "基于昇腾的AgenticRL训练技术与企业级Agent落地实践",
+      "abstract": "随着大模型从对话式智能向自主完成复杂任务的Agent演进，如何通过强化学习提升Agent的长程规划、工具调用与环境交互能力，正在成为大模型训练的重要前沿方向。然而，相比传统语言模型训练，AgenticRL具有轨迹长、交互复杂、训练与推理强耦合等特点，在训练稳定性、系统效率以及软硬件协同等方面带来了新的挑战。\n\n本次报告将结合华为GTS在企业级Agent研发中的实践，介绍基于昇腾构建端到端AgenticRL训练体系的关键技术，包括强化学习训练稳定性与效率优化、领域模型能力增强，以及面向复杂真实任务的训练与评测方法。同时，将分享 AgenticRL 如何从训练技术走向实际业务，支撑网络运维等复杂领域中的企业级Agent落地。最后，报告将进一步探讨从“训练一个更强的模型”走向“构建能够在真实环境中持续学习和演进的智能体系统”所带来的新问题与技术机会。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 49
+    },
+    {
+      "id": "liu-fanghui",
+      "name": "刘方辉",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "上海交通大学",
+      "department": "自然科学研究院",
+      "bio": "刘方辉，上海交通大学自然科学研究院与数学科学学院副教授，数学学院与人工智能学院博士生导师，之前在英国华威大学担任助理教授。研究方向为机器学习数学理论与大模型机理分析。其主要研究工作包括函数空间视角下的机器学习理论、尺度扩展下的泛化理论，以及AI4MATH，并进一步推动理论指导实践的研究范式。2023年入选国家高层次人才青年项目，2024年获得AAAI新教师奖，2025年入选TUM全球访问教授计划，2026年获得美国美国数学与统计创新研究所（IMSI）长期访问学者资助项目。研究获得基金委面上项目、英国皇家学会、谷歌的资助。主办 NeurIPS‘24，’26研讨会，IJCV专刊客座编辑，在 ICASSP’23、CVPR’23、ISIT’24 等国际顶级会议上主讲tutorial。担任NeurIPS、ICLR、AISTATS等会议领域主席。",
+      "talkTitle": "人工智能需要什么样的理论？工程实践驱动的“旧三论”视角",
+      "abstract": "目前人工智能重塑了数学、科学研究，甚至人工智能自身。理论在人工智能发展中所起到的作用稍显欠缺。作为一门工程实践驱动的学科，我将在本次观点报告中回顾信息学科的发展，从信息论、控制论、系统论等“旧三论”视角探讨人工智能的发展需要什么样的理论，以大模型尺度律为例探讨理论指导实践范式的可能性。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 50
+    },
+    {
+      "id": "liu-jun",
+      "name": "刘军",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "清华大学",
+      "department": "统计与数据科学系",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 51
+    },
+    {
+      "id": "sun-maosong",
+      "name": "孙茂松",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "清华大学",
+      "department": "计算机科学与技术系",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 52
+    },
+    {
+      "id": "shen-hao",
+      "name": "沈皓",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "中国科学院大学",
+      "department": "中国科学院数学与系统科学研究院",
+      "bio": "中国科学院大学、中国科学院数学与系统科学研究院应用数学博士研究生\n研究方向：AI4M、形式化数学、人工智能",
+      "talkTitle": "MechGeo: Autoformalizing and Proving Euclidean Geometry in Lean 4",
+      "abstract": "We present MechGeo, a Mathlib-native agentic framework for faithful autoformalization and certified proof construction in Euclidean geometry. It combines GeoFormalizer, which translates informal problems into Lean 4 and repairs formal statements, with GeoProver, which integrates geometric reasoning, selective algebraization, and symbolic computation. All proofs and counterexamples are checked by the Lean kernel. On 43 historical IMO geometry problems, MechGeo proves 29 statements generated by GeoFormalizer, refutes the remaining 14 with Lean-verified counterexamples, and proves all 14 after expert repair. Together with IMO 2026 Problem 2, this yields faithful  formalizations and kernel-checked proofs for 44 IMO geometry problems. On the 14 geometry statements in LEAP’s Lean-IMO\u0002Bench, MechGeo proves 12, refutes the remaining two, and proves both repaired statements.",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 53
+    },
+    {
+      "id": "zhou-peijie",
+      "name": "周沛劼",
+      "aliases": [],
+      "roles": [
+        "speaker"
+      ],
+      "affiliation": "北京大学",
+      "department": "前沿交叉学科研究院",
+      "bio": "周沛劼，北京大学前沿交叉学科研究院国际机器学习研究中心和定量生物学中心研究员、博士生导师，博雅青年学者，国家级青年人才。2014年和2019年在北京大学数学科学学院获得计算数学学士和博士学位，获北京大学优秀博士论文奖；2020-2023年任美国加州大学尔湾分校数学系访问助理教授。主要从事计算系统生物学、单细胞组学动力学、复杂生物系统建模与AI for Science研究。相关成果发表在Nature正刊, 大子刊(NM, NCC, NMI,NG), NC, SA, PRX, MSB, AS等重要交叉学科期刊以及ICLR(Oral), ICML, NeurIPS, AAAI(Oral)等人工智能会议，并担任Nature Methods, PNAS, Nature Communications, Cell Genomics, Cell Systems, SIAP等多个期刊审稿人。",
+      "talkTitle": "WFR-FM: Simulation-Free Dynamic Unbalanced Optimal Transport",
+      "abstract": "The Wasserstein-Fisher-Rao (WFR) metric extends dynamic optimal transport (OT) by coupling displacement with change of mass, providing a principled geometry for modeling unbalanced snapshot dynamics. Existing WFR solvers, however, are often unstable, computationally expensive, and difficult to scale. Here we introduce WFR Flow Matching (WFR-FM), a simulation-free training algorithm that unifies flow matching with dynamic unbalanced OT. Unlike classical flow matching which regresses only a transport vector field, WFR-FM simultaneously regresses a vector field for displacement and a scalar growth rate function for birth-death dynamics, yielding continuous flows under the WFR geometry. Theoretically, we show that minimizing the WFR-FM loss exactly recovers WFR geodesics. Empirically, WFR-FM yields more accurate and robust trajectory inference in single-cell biology, reconstructing consistent dynamics with proliferation and apoptosis, estimating time-varying growth fields, and applying to",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 54
+    },
+    {
+      "id": "yang-pengkun",
+      "name": "杨朋昆",
+      "aliases": [],
+      "roles": [
+        "chair"
+      ],
+      "affiliation": "清华大学",
+      "department": "统计与数据科学系",
+      "bio": "Pengkun Yang is an associate professor at the Department of Statistics and Data Science at Tsinghua University. Prior to joining Tsinghua, he was a Postdoctoral Research Associate at the Department of Electrical Engineering at Princeton University. He received a Ph.D. degree (2018) and a master degree (2016) from the Department of Electrical and Computer Engineering at University of Illinois at Urbana-Champaign, and a B.E. degree (2013) from the Department of Electronic Engineering at Tsinghua University. His research interests include statistical inference, learning, optimization, and systems. He is a recipient of Thomas M. Cover Dissertation Award in 2020, and a recipient of Jack Keil Wolf ISIT Student Paper Award at the 2015 IEEE International Symposium on Information Theory (semi-plenary talk).",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 55
+    },
+    {
+      "id": "hu-tianyang",
+      "name": "胡天阳",
+      "aliases": [],
+      "roles": [
+        "chair"
+      ],
+      "affiliation": "香港中文大学 (深圳)",
+      "department": "数据科学学院",
+      "bio": "胡天阳博士现为香港中文大学（深圳）数据科学学院助理教授。他在清华大学获得数学学士学位，并分别于芝加哥大学和普渡大学获得统计学硕士和博士学位。在加入香港中文大学（深圳）前，他曾在新加坡国立大学任博后研究员，并在华为诺亚方舟实验室担任研究员。\n胡天阳博士的主要研究方向为数理统计与人工智能 (AI) 的交叉方向，包括统计机器学习、可信 AI、特征表示学习、深度生成模型等，旨在通过揭示 AI 模型的深层机制，为设计更有效的新算法提供理论指导。",
+      "hasSubmittedPortrait": true,
+      "sourceOrder": 56
     }
   ]
 } as const satisfies {

@@ -158,6 +158,26 @@ npm test
 
 ## 腾讯文档专题同步
 
+### 专题海报生成
+
+海报生成器已随网站源码公开，入口为 `scripts/render-session-posters.mjs`，模板为 `scripts/lib/session-poster-template.mjs`。
+它读取当前日程、公开嘉宾资料、头像和归档背景，并输出 PNG 母版、WebP 展示图和缩略图。
+先安装项目依赖、Chrome 及 `chrome-devtools-axi`，再运行 `npm run posters:render`。
+当前导出环境使用 macOS 的 PingFang SC 和项目内嵌英文字体，其他环境应先确认中文字体与布局。
+`node scripts/render-session-posters.mjs --prepare` 可仅生成自包含 HTML，供检查模板。
+生成器会检查文字溢出、更新图片摘要，并通过归档登记脚本更新来源清单。
+不要手动修改生成图片的清单或把原始报名表提交到仓库。
+
+### 合作单位矢量 Logo
+
+`src/data/partner-logo-assets-2026.ts` 为首页和会议简介共用的 Logo 映射。
+2026-09-28 版优先使用会务单独补发的 FAI、OScholar 及统计之都文件，其余使用当天提供的选定矢量文件。
+整理好与映射同名的 SVG 后，可用 `node scripts/import-partner-logos.mjs <整理后的SVG目录> <YYYY-MM-DD>` 导入并登记来源。
+原始素材保持归档，发布目录每个单位只保留一个选定版本。
+品牌文字仍为 XAGI 2026，首页大字标保留无连接符的 XAGI，左上角导航和专题海报使用旧版带波浪连接符的图形 Logo。
+
+### 导入日程
+
 专题来源固定为腾讯文档 `X-AGI 2026 嘉宾信息` 的 `BB08J2` 标签页和 `工作表1`。
 下载当前工作表的 UTF-8 CSV 后，用绝对路径运行：
 
@@ -195,6 +215,13 @@ npm test
 无法无歧义确认身份的照片必须使用统一占位，不能从集体照猜测或裁人。
 经会务确认复用的往届资料保存在 `src/data/conference2026-people.archived.ts`，仅在当年资料缺失时补充简介，当年报名表和会务确认资料优先。
 2026-09-17 复用胡天阳的 2025 Chair 简介及马梓业的 2025 头像，马梓业仍使用今年报名表中的简介；去年公开资料没有胡天阳头像，保留占位。
+
+2026-09-28 导入最新版报名表，公开人物记录为 57 份。
+许洪腾在导出表中同时存在 8 月及 9 月 27 日的两份已审核报名；同步器仅在新英文题目记录存在时排除那份已知旧中文题目记录，保留对其他冲突的报错。
+本次采用 `An Improved SE(3)-Transformer Driven by Hamiltonian Flow` 及其对应摘要，日程使用相同的会务补充。
+AI4Math & Theory 的会务确认报告顺序为刘方辉、邹荻凡、罗涛、沈皓。
+陆一平的会务补充摘要在 `conference2026-people.confirmed.ts` 中维护，题目和简介与既有来源一致。
+`On Optimal Hyperparameter Scaling for LLM Pretraining` 暂未写入人物资料，因为新表中谢天的题目为空，公开检索也未确认其归属。
 2026-09-18 根据会务反馈更新孙茂松和邱子涵的引用量，修改保存在 `conference2026-people.confirmed.ts`，不改写参会表生成快照。
 仅修改简介时使用字段级覆盖，保留报名表中的报告摘要、单位和头像信息。
 
