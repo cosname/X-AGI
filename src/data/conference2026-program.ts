@@ -26,19 +26,15 @@ export function withOrganizerRemarks(
   });
 }
 
-// Organizer-confirmed speaking order, 2026-09-28; preserve the source snapshot.
-const mathSpeakerOrder = ['刘方辉', '邹荻凡', '罗涛', '沈皓'];
+// Keep the revised attendee title while the Tencent sheet still has the old one.
+const confirmedTalkTitles = new Map([
+  ['许洪腾', 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow'],
+]);
 const revisedSessions = sourceSessions.map((session) => ({
   ...session,
-  speakers: session.speakers.map((person) => person.name === '许洪腾'
-    ? { ...person, talkTitle: 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow' }
-    : person),
+  speakers: session.speakers.map((person) => {
+    const talkTitle = confirmedTalkTitles.get(person.name);
+    return talkTitle ? { ...person, talkTitle } : person;
+  }),
 }));
-export const conference2026ProgramSessions = withOrganizerRemarks(revisedSessions).map((session) => {
-  if (session.title !== 'AI4Math & Theory') return session;
-  const ordered = mathSpeakerOrder.map((name) => session.speakers.find((person) => person.name === name));
-  if (ordered.some((person) => !person) || session.speakers.length !== ordered.length) {
-    throw new Error('Reconcile the confirmed AI4Math speaking order with the updated source.');
-  }
-  return { ...session, speakers: ordered.filter((person) => person !== undefined) };
-});
+export const conference2026ProgramSessions = withOrganizerRemarks(revisedSessions);

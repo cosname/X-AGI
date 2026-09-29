@@ -149,6 +149,35 @@ function mergeField(records, field, name) {
   return values[0] ?? '';
 }
 
+// Organizer-confirmed September 29 resubmissions. Match the exact public bios so
+// unrelated or future conflicts still fail instead of silently choosing a row.
+const confirmedProfileRevisions = [
+  {
+    name: '毛小介',
+    previousBioHash: '776cd4fc2767073aa01b80d2c28c581561c97339bdb21acf63d7e536db86ea46',
+    revisedBioHash: '00b475a591408da7c0f387f86df5039bbc3fdd85701f837dd2ef7f0db2e6511a',
+  },
+  {
+    name: '胡天阳',
+    previousBioHash: 'a61c385ba6e2448f2b4c1660e3c2dbf9df00cb3026ce134dc835c46188c08203',
+    revisedBioHash: '2c74f39152f2dfa68776719061e44b97242791731c154a262f30022b81aee2c6',
+  },
+];
+
+function reconcileConfirmedProfiles(records) {
+  const bioHash = (record) => createHash('sha256').update(record.bio).digest('hex');
+  return records.map((record) => {
+    const revision = confirmedProfileRevisions.find((candidate) => candidate.name === record.name
+      && candidate.previousBioHash === bioHash(record));
+    if (!revision) return record;
+    const revised = records.find((candidate) => candidate.name === record.name
+      && bioHash(candidate) === revision.revisedBioHash);
+    if (!revised) return record;
+    // Preserve each registration's role and report fields for the normal merge.
+    return { ...record, bio: revised.bio, affiliation: revised.affiliation };
+  });
+}
+
 export function parseAttendeePeopleCsv(input) {
   const rows = parseCsv(input);
   if (rows.length < 2) throw new Error('Attendee CSV must contain a header and data rows.');
@@ -210,8 +239,8 @@ export function parseAttendeePeopleCsv(input) {
   // Match the two known titles only; unknown future conflicts still fail below.
   const hasRevisedXuTalk = rawRecords.some((record) => record.name === '许洪腾'
     && record.talkTitle === 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow');
-  const currentRecords = rawRecords.filter((record) => !(hasRevisedXuTalk
-    && record.name === '许洪腾' && record.talkTitle === '面向蛋白质主链生成的四元数整流匹配技术'));
+  const currentRecords = reconcileConfirmedProfiles(rawRecords.filter((record) => !(hasRevisedXuTalk
+    && record.name === '许洪腾' && record.talkTitle === '面向蛋白质主链生成的四元数整流匹配技术')));
   const grouped = Map.groupBy(currentRecords, (record) => record.name);
   const people = [...grouped.entries()].map(([name, records], sourceOrder) => {
     const id = mergeField(records, 'id', name);

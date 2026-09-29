@@ -137,7 +137,9 @@ The disclosure rhythm may follow the 2025 archive, but it must not reuse archive
 Speaker disclosures include portraits, biographies, and talk abstracts; Chair disclosures include portraits and biographies without repeating unrelated talk content.
 Speaker report titles share the summary name's left edge, while expanded profiles place the portrait to the left of the abstract and biography on desktop and above the copy on mobile.
 Speaker and Chair reading areas share the schedule card's flat paper background, while the violet session heading bars and interactive controls retain their existing visual hierarchy.
-Every portrait uses a local square 2026 asset, an accurate display-name alternative text, lazy loading, and a reviewed crop.
+Every portrait uses a local 2026 asset that preserves the original aspect ratio, an accurate display-name alternative text, lazy loading, and a reviewed crop.
+Follow [the portrait framing standard](portrait-framing.md): keep the eyes near the upper third, the whole head inside the circle, and a natural neck and shoulder proportion.
+Homepage, schedule, and poster framing share `src/data/portrait-framing.ts`.
 When identity cannot be established without ambiguity, use the standard portrait placeholder instead of guessing from a group photograph.
 Do not add a separate people directory page; a future guest-lineup treatment belongs in a lower homepage section and requires its own review.
 

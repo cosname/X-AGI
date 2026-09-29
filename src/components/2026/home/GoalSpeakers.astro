@@ -1,4 +1,5 @@
 ---
+import { portraitStyle } from '../../../data/portrait-framing.ts';
 import { homeSpeakers } from '../../../data/home-speakers';
 import '../../../styles/goal-speakers.css';
 ---
@@ -28,15 +29,16 @@ import '../../../styles/goal-speakers.css';
       {homeSpeakers.map((speaker) => (
         <li class="goal-speakers__person" data-home-speaker={speaker.id}>
           <a class="goal-speakers__profile" href={speaker.href}>
-            {speaker.portraitSrc ? <img
+            {speaker.portraitSrc ? <span class="goal-speakers__portrait-frame"><img
               class="goal-speakers__portrait"
               src={speaker.portraitSrc}
+              style={portraitStyle(speaker.id)}
               alt=""
               width="640"
               height="640"
               loading="lazy"
               decoding="async"
-            /> : (
+            /></span> : (
               <span class="goal-speakers__portrait goal-speakers__portrait--placeholder" aria-hidden="true">
                 {speaker.name.slice(0, 1)}
               </span>

@@ -1,9 +1,11 @@
 import { readFileSync } from 'node:fs';
 import { posterConference } from '../../src/data/session-posters.ts';
+import { portraitStyle } from '../../src/data/portrait-framing.ts';
 
 export const posterTemplateAssets = [
   'public/2026/brand/xagi-header-wordmark.svg',
   'src/assets/fonts/ibm-plex-sans-condensed-latin.woff2',
+  'src/data/portrait-framing.ts',
 ];
 
 const escape = (text) => String(text).replace(/[&<>"']/g, (value) => ({
@@ -12,8 +14,12 @@ const escape = (text) => String(text).replace(/[&<>"']/g, (value) => ({
 const data = (file, mime) => `data:${mime};base64,${readFileSync(file).toString('base64')}`;
 
 export function sessionPosterHtml(poster, backgroundPath) {
+  const portraitCss = (person) => Object.entries(portraitStyle(person.personId, 104 / 130))
+    .filter(([, value]) => value !== undefined)
+    .map(([key, value]) => `${key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}:${value}`)
+    .join(';');
   const portrait = (person) => person.portraitSrc
-    ? `<img class="portrait" src="${data(`public${person.portraitSrc}`, 'image/webp')}" alt="${escape(person.name)}">`
+    ? `<div class="portrait"><img style="${escape(portraitCss(person))}" src="${data(`public${person.portraitSrc}`, 'image/webp')}" alt="${escape(person.name)}"></div>`
     : '<div class="portrait portrait--pending" aria-label="头像待补充"><svg viewBox="0 0 80 96" aria-hidden="true"><circle cx="40" cy="31" r="15"/><path d="M12 87v-9c0-17 12-29 28-29s28 12 28 29v9"/></svg></div>';
   return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>${escape(poster.title)}</title><style>
 @font-face{font-family:Condensed;src:url('${data(posterTemplateAssets[1], 'font/woff2')}') format('woff2');font-display:block}
@@ -25,7 +31,7 @@ export function sessionPosterHtml(poster, backgroundPath) {
 h1{margin:0;font-size:68px;line-height:1.14;letter-spacing:-1.5px;font-weight:650;max-width:930px;text-wrap:balance}.title-long{font-size:59px;letter-spacing:-.8px}.title-latin{font-family:Condensed,"PingFang SC",sans-serif;font-size:76px;letter-spacing:-1.5px}
 .chairs{border-block:1px solid rgba(60,44,94,.28);padding:22px 0;display:flex;gap:24px;align-items:center;min-height:96px;font-size:25px}.role{font-family:Condensed,sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:20px;color:#695781}.chair-list{display:flex;gap:26px;flex-wrap:wrap}.chair-name{font-weight:650}.chair-affiliation{margin-left:12px;font-size:22px;font-weight:400;color:#5d536d}
 .speakers-label{margin:28px 0 19px;display:flex;justify-content:space-between}.speakers-label span:last-child{font-size:18px;color:#756b81;letter-spacing:1px}
-.speakers{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:24px;flex:1;min-height:0}.speaker{min-height:0;padding:24px;background:rgba(255,253,248,.77);border:1px solid rgba(91,73,128,.19);display:flex;flex-direction:column;position:relative}.person{display:flex;gap:22px;align-items:center}.portrait{width:104px;height:130px;object-fit:cover;object-position:center 24%;flex:none;border:1px solid rgba(71,51,102,.12);background:#ece5ee}.portrait--pending{display:grid;place-items:center;background:#ece7ef}.portrait--pending svg{width:61px;height:77px;fill:none;stroke:#b1a5c3;stroke-width:1.5}
+.speakers{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:24px;flex:1;min-height:0}.speaker{min-height:0;padding:24px;background:rgba(255,253,248,.77);border:1px solid rgba(91,73,128,.19);display:flex;flex-direction:column;position:relative}.person{display:flex;gap:22px;align-items:center}.portrait{width:104px;height:130px;position:relative;overflow:hidden;flex:none;border:1px solid rgba(71,51,102,.12);background:#fff}.portrait img{display:block;width:100%;height:100%;max-width:none}.portrait--pending{display:grid;place-items:center;background:#ece7ef}.portrait--pending svg{width:61px;height:77px;fill:none;stroke:#b1a5c3;stroke-width:1.5}
 .person-copy{min-width:0}.person h2{font-size:35px;line-height:1.25;font-weight:650;letter-spacing:1px;margin:0 0 12px}.affiliation{margin:0;font-size:22px;line-height:1.42;color:#645870;overflow-wrap:anywhere}.talk{margin:23px 0 0;font-size:28px;font-weight:550;line-height:1.4;overflow-wrap:anywhere;text-wrap:balance}.talk--pending{font-weight:400;color:#8b8094}.speaker-number{position:absolute;right:17px;top:12px;font-family:Condensed,sans-serif;font-size:16px;color:#a99ab7}
 .speaker--three{grid-column:1/-1;flex-direction:row;align-items:center;gap:32px}.speaker--three .person{width:375px;flex-shrink:0}.speaker--three .talk{margin:0;font-size:31px;max-width:440px}
 .footer{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;margin-top:32px;padding-top:20px;border-top:1px solid rgba(60,44,94,.28);font-size:20px;color:#625573;line-height:1.5}.footer strong{font-family:Condensed,sans-serif;font-weight:500;font-size:31px;letter-spacing:1px;color:#3b2e59}.footer p{margin:0;text-align:right}.footer small{display:block;font-size:16px}

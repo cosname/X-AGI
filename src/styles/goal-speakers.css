@@ -110,13 +110,27 @@
 
 .goal-speakers__portrait {
   display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.goal-speakers__portrait-frame,
+.goal-speakers__portrait--placeholder {
+  display: block;
   width: 9rem;
   height: auto;
   aspect-ratio: 1;
   margin-inline: auto;
   border-radius: 50%;
   background: rgb(103 82 200 / 0.06);
-  object-fit: cover;
+}
+
+.goal-speakers__portrait-frame {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
 }
 
 .goal-speakers__identity {
@@ -221,7 +235,8 @@
     width: calc(100% - 2rem);
   }
 
-  .goal-speakers__portrait {
+  .goal-speakers__portrait-frame,
+  .goal-speakers__portrait--placeholder {
     width: 7.5rem;
   }
 

@@ -15,7 +15,7 @@ describe('2026 public Chair and Speaker profiles', () => {
     );
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.roles.includes('speaker')).length,
-      45,
+      46,
     );
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.hasSubmittedPortrait).length,
@@ -58,8 +58,11 @@ describe('2026 public Chair and Speaker profiles', () => {
 
     const hu = conference2026PersonForName('胡天阳');
     assert.ok(hu?.bio?.includes('包括统计机器学习、可信 AI、特征表示学习、深度生成模型等'));
-    assert.deepEqual(hu?.roles, ['chair']);
-    assert.deepEqual(hu?.schedule.map((item) => item.title), ['语言模型基础']);
+    assert.deepEqual(hu?.roles, ['chair', 'speaker']);
+    assert.deepEqual(hu?.schedule.map((item) => ({ title: item.title, role: item.role })), [
+      { title: '语言模型基础', role: 'chair' },
+      { title: '语言模型基础', role: 'speaker' },
+    ]);
     assert.equal(conference2026People.filter((person) => ['ma-ziye', 'hu-tianyang'].includes(person.id)).length, 2);
   });
 
@@ -67,8 +70,8 @@ describe('2026 public Chair and Speaker profiles', () => {
     const person = conference2026PersonForName('田润泽');
     assert.equal(person?.portraitStatus, 'missing');
     assert.equal(person?.portraitSrc, undefined);
-    assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 5);
-    for (const name of ['谢天', '周默', '祝武']) {
+    assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 4);
+    for (const name of ['谢天', '祝武']) {
       const candidate = conference2026PersonForName(name);
       assert.equal(candidate?.portraitStatus, 'missing');
       assert.equal(candidate?.portraitSrc, undefined);
@@ -76,12 +79,12 @@ describe('2026 public Chair and Speaker profiles', () => {
   });
 
   it('uses organizer-supplied Chair portraits without replacing their source profiles', () => {
-    for (const [name, id] of [['胡天阳', 'hu-tianyang'], ['陈思明', 'chen-siming']]) {
+    for (const [name, id] of [['胡天阳', 'hu-tianyang'], ['陈思明', 'chen-siming'], ['周默', 'zhou-mo']]) {
       const person = conference2026PersonForName(name);
       assert.equal(person?.portraitStatus, 'submitted');
       assert.equal(person?.portraitSrc, `/2026/people/${id}-portrait.webp`);
       assert.equal(person?.hasSubmittedPortrait, conference2026PeopleRecords.find((record) => record.id === id)?.hasSubmittedPortrait);
-      assert.deepEqual(person?.roles, ['chair']);
+      assert.deepEqual(person?.roles, id === 'hu-tianyang' ? ['chair', 'speaker'] : ['chair']);
     }
     const chen = conference2026PersonForName('陈思明');
     assert.equal(chen?.profileUrl, 'http://fduvis.net/');
