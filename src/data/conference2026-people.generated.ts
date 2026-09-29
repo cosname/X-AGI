@@ -20,7 +20,7 @@ export type Conference2026PersonSourceRecord = {
 
 export const conference2026PeopleSource = {
   "sheetName": "2026 X-AGI 大会",
-  "sourceHash": "37944ae1b0189ea7d3c197437bc346045cc03456fd205ad142c5062694db633e",
+  "sourceHash": "999bf7bb2fbf141cb6783d4ad95df76b9bf9289e3d719d5913fea0b429e7b9e9",
   "people": [
     {
       "id": "mao-xiaojie",
@@ -31,8 +31,9 @@ export const conference2026PeopleSource = {
       ],
       "affiliation": "清华大学",
       "department": "经济管理学院",
-      "bio": "毛小介，清华大学经济管理学院管理科学与工程系副教授。2016年获武汉大学数理经济与数理金融专业学士学位，2021年获得美国康奈尔大学统计与数据科学专业博士学位。主要研究方向为因果推断、数据驱动的决策理论与方法、统计机器学习。相关研究成果发表于Management Science、Operations Research、Information Systems Research、Journal of Machine Learning Research、Journal of the Royal Statistical Society Series B、NeurIPS、ICML、COLT等运筹管理、统计学与机器学习领域的知名学术期刊和学术会议。",
+      "bio": "毛小介，清华大学经济管理学院管理科学与工程系副教授。2016年获武汉大学数理经济与数理金融专业学士学位，2021年获得美国康奈尔大学统计与数据科学专业博士学位。主要研究方向为因果推断、数据驱动的决策理论与方法、统计机器学习。相关研究成果发表于Management Science、Operations Research、Information Systems Research、Journal of Machine Learning Research、Journal of the Royal Statistical Society Series B、NeurIPS、ICML、AISTATS、COLT等运筹管理、统计学与机器学习领域的知名学术期刊和学术会议。",
       "talkTitle": "Active Experimentation for Counterfactual Decision Making",
+      "abstract": "This report presents a framework for active decision experimentation in settings where covariates are easy to observe but outcome data are costly to collect. Rather than minimizing overall estimation error, the approach focuses on improving the quality of the final counterfactual treatment  assignment decision. It adaptively prioritizes data collection for covariate regions where uncertainty is most likely to affect the final action. The framework is supported by theoretical analysis and evaluated through simulations and language-model routing experiments, suggesting that decision-aware sampling can reduce deployment regret under a fixed data-collection budget.",
       "hasSubmittedPortrait": true,
       "sourceOrder": 0
     },
@@ -835,11 +836,14 @@ export const conference2026PeopleSource = {
       "name": "胡天阳",
       "aliases": [],
       "roles": [
-        "chair"
+        "chair",
+        "speaker"
       ],
-      "affiliation": "香港中文大学 (深圳)",
+      "affiliation": "香港中文大学（深圳）",
       "department": "数据科学学院",
-      "bio": "胡天阳博士现为香港中文大学（深圳）数据科学学院助理教授。他在清华大学获得数学学士学位，并分别于芝加哥大学和普渡大学获得统计学硕士和博士学位。在加入香港中文大学（深圳）前，他曾在新加坡国立大学任博后研究员，并在华为诺亚方舟实验室担任研究员。\n胡天阳博士的主要研究方向为数理统计与人工智能 (AI) 的交叉方向，包括统计机器学习、可信 AI、特征表示学习、深度生成模型等，旨在通过揭示 AI 模型的深层机制，为设计更有效的新算法提供理论指导。",
+      "bio": "胡天阳现为香港中文大学（深圳）数据科学学院的助理教授。他的主要研究方向为人工智能与统计的交叉领域，包括统计机器学习、可信 AI、特征表示学习、深度生成模型等，旨在通过揭示 AI 模型的深层机制，为设计更有效的新算法提供理论指导。",
+      "talkTitle": "扩散式语言建模探索：从掩码扩散到连续扩散",
+      "abstract": "自回归建模是当前大语言模型的主流范式，而扩散模型为语言建模与生成提供了一条不同的研究路径。本报告介绍我们从掩码扩散到连续扩散的一系列探索，讨论这一路径的潜力、局限与关键设计问题。首先，通过解耦建模范式与网络架构，重新审视掩码扩散与自回归建模的比较，并探讨潜变量方法如何缓解少步并行采样中的依赖建模不足。随后，我们转向连续扩散语言模型，围绕预训练与生成两个环节，探索适配连续去噪过程的 Transformer 架构设计，并重点介绍面向单步与少步生成的蒸馏研究。这些工作关注连续空间预测与离散 token 生成之间的关系，以及如何在降低预测不确定性的同时保留样本多样性。报告将结合这些探索，讨论扩散式语言建模的设计思路与尚待解决的问题。",
       "hasSubmittedPortrait": true,
       "sourceOrder": 56
     }

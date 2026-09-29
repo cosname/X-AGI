@@ -10,13 +10,13 @@ const scheduledChairs = new Set(conference2026ProgramSessions.flatMap((session) 
 describe('homepage speaker lineup', () => {
   it('includes every confirmed Speaker and Chair exactly once, regardless of portrait or profile availability', () => {
     const expectedNames = new Set([...scheduledSpeakers, ...scheduledChairs].filter((name) => name !== '待确认'));
-    assert.equal(homeSpeakers.length, 62);
+    assert.equal(homeSpeakers.length, 60);
     assert.equal(new Set(homeSpeakers.map((speaker) => speaker.id)).size, homeSpeakers.length);
     assert.deepEqual(new Set(homeSpeakers.map((speaker) => speaker.name)), expectedNames);
     for (const speaker of homeSpeakers) {
       assert.equal(speaker.portraitSrc, conference2026PersonForName(speaker.name)?.portraitSrc);
     }
-    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 10);
+    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 9);
   });
 
   it('places missing portraits last, preserves order within both groups and keeps dual-role speaker links', () => {
@@ -28,7 +28,7 @@ describe('homepage speaker lineup', () => {
     assert.deepEqual(homeSpeakers.slice(0, 4).map((speaker) => speaker.name), ['刘军', '孙茂松', '冯建峰', '邱子涵']);
     assert.equal(homeSpeakers[0].href, '/schedule/#schedule-person-01-speaker-liu-jun-1');
     const dualRoles = [...scheduledChairs].filter((name) => scheduledSpeakers.has(name));
-    assert.equal(dualRoles.length, 6);
+    assert.equal(dualRoles.length, 7);
     for (const name of dualRoles) {
       const entries = homeSpeakers.filter((speaker) => speaker.name === name);
       assert.equal(entries.length, 1);
@@ -39,10 +39,10 @@ describe('homepage speaker lineup', () => {
 
   it('includes Chair-only guests with their available profile or confirmed session links', () => {
     assert.deepEqual(new Set(homeSpeakers.filter((speaker) => !scheduledSpeakers.has(speaker.name)).map((speaker) => speaker.name)), new Set([
-      '王健桥', '谢天', '杨朋昆', '祝武', '周默', '陈思明', '田润泽', '马梓业', '胡天阳', '周峰',
+      '王健桥', '谢天', '杨朋昆', '祝武', '周默', '陈思明', '田润泽', '马梓业', '周峰',
     ]));
     assert.equal(homeSpeakers.find((speaker) => speaker.id === 'chen-siming')?.href, '/schedule/#schedule-person-08-chair-chen-siming-1');
-    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'hu-tianyang')?.href, '/schedule/#schedule-person-12-chair-hu-tianyang-1');
+    assert.equal(homeSpeakers.find((speaker) => speaker.id === 'hu-tianyang')?.href, '/schedule/#schedule-person-12-speaker-hu-tianyang-2');
     assert.equal(homeSpeakers.find((speaker) => speaker.name === '王健桥')?.href, '/schedule/#schedule-person-01-chair-wang-jianqiao-1');
     assert.equal(homeSpeakers.find((speaker) => speaker.name === '杨朋昆')?.href, '/schedule/#schedule-person-05-chair-yang-pengkun-1');
   });

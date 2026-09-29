@@ -17,7 +17,7 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "b46d441ebe62f4dde58effbea9711d3836a0216d283d09d7a755364b05ba0c48",
+  "sourceHash": "d1936c2a01487141bdf9a5c4906818141775c2b86e5e149ea476a481612bb080",
   "sessions": [
     {
       "sourceTime": "10.17上午",
@@ -29,6 +29,11 @@ export const conference2026ProgramSource = {
         }
       ],
       "speakers": [
+        {
+          "name": "刘军",
+          "affiliation": "清华大学",
+          "talkTitle": "主办方致辞演讲"
+        },
         {
           "name": "孙茂松",
           "affiliation": "清华大学"
@@ -56,9 +61,9 @@ export const conference2026ProgramSource = {
       ],
       "speakers": [
         {
-          "name": "罗涛",
+          "name": "刘方辉",
           "affiliation": "上海交通大学",
-          "talkTitle": "从Math4AI到AI4Math的初步探索"
+          "talkTitle": "人工智能需要什么样的数学理论？"
         },
         {
           "name": "邹荻凡",
@@ -66,14 +71,14 @@ export const conference2026ProgramSource = {
           "talkTitle": "LLM for ML Theory at Scale: The VALG Agent and OpenTheoryBench"
         },
         {
+          "name": "罗涛",
+          "affiliation": "上海交通大学",
+          "talkTitle": "从Math4AI到AI4Math的初步探索"
+        },
+        {
           "name": "沈皓",
           "affiliation": "中国科学院数学与系统科学研究院",
           "talkTitle": "MechGeo: Autoformalizing and Proving Euclidean Geometry in Lean 4"
-        },
-        {
-          "name": "刘方辉",
-          "affiliation": "上海交通大学",
-          "talkTitle": "StatsMLlib and LeanMarathon: 从教科书到数学研究的自动形式化"
         }
       ]
     },
@@ -121,7 +126,8 @@ export const conference2026ProgramSource = {
       "speakers": [
         {
           "name": "张华清",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "On Optimal Hyperparameter Scaling for LLM Pretraining"
         },
         {
           "name": "胡译文",
@@ -131,7 +137,7 @@ export const conference2026ProgramSource = {
         {
           "name": "陈焕然",
           "affiliation": "清华大学",
-          "talkTitle": "Nexus: Same Pretraining Loss, Better Downstream Generalization via Common Minima"
+          "talkTitle": "Pretraining Loss相同，模型能力则相同么？"
         }
       ]
     },
@@ -146,6 +152,11 @@ export const conference2026ProgramSource = {
       ],
       "speakers": [
         {
+          "name": "张先轶",
+          "affiliation": "澎峰科技",
+          "talkTitle": "基于FlagOS的高性价比混合云Token工厂"
+        },
+        {
           "name": "张华枫",
           "affiliation": "为沃科技",
           "talkTitle": "Formal Method Harness for LLM agents"
@@ -154,11 +165,6 @@ export const conference2026ProgramSource = {
           "name": "李秀红",
           "affiliation": "无问芯穹",
           "talkTitle": "跨集群异构PD分离：挑战、设计与工程实践"
-        },
-        {
-          "name": "张先轶",
-          "affiliation": "澎峰科技",
-          "talkTitle": "基于FlagOS的高性价比混合云Token工厂"
         },
         {
           "name": "吴晨玮",
@@ -368,19 +374,14 @@ export const conference2026ProgramSource = {
           "talkTitle": "Pion: A Spectrum-Preserving Optimizer via Orthogonal Equivalence Transformation"
         },
         {
-          "name": "曹原",
-          "affiliation": "香港大学",
-          "talkTitle": "Transformers for Operator Learning with Algorithmic Insights"
+          "name": "胡天阳",
+          "affiliation": "香港中文大学（深圳）",
+          "talkTitle": "扩散式语言建模探索：从掩码扩散到连续扩散"
         },
         {
           "name": "李根",
           "affiliation": "香港中文大学",
           "talkTitle": "ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings"
-        },
-        {
-          "name": "罗维俭",
-          "affiliation": "小红书",
-          "talkTitle": "超快速扩散语言模型：现状与前沿挑战"
         }
       ]
     },

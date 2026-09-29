@@ -553,9 +553,9 @@ await validatePublicCopies('2026 partner logos', path.resolve('public/2026/logos
 const personPortraitFiles = conference2026People.flatMap((person) => (
   person.portraitSrc ? [path.basename(person.portraitSrc)] : []
 ));
-if (personPortraitFiles.length !== 52 || new Set(personPortraitFiles).size !== 52) {
+if (personPortraitFiles.length !== 53 || new Set(personPortraitFiles).size !== 53) {
   fail(
-    `2026 people portraits: expected 52 unique portraits and five placeholders after the September 28 registration refresh, `
+    `2026 people portraits: expected 53 unique portraits and four placeholders after the September 29 Zhou Mo portrait addition, `
     + `found ${new Set(personPortraitFiles).size}`,
   );
 }

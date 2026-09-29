@@ -58,7 +58,7 @@ const affiliationAliases = new Map([
 const emptyPersonValues = new Set(['---', 'TBD']);
 
 function cleanCell(value) {
-  return value.replaceAll('\u00a0', ' ').trim();
+  return value.replaceAll('\u00a0', ' ').replaceAll('\u200b', '').trim();
 }
 
 function cleanTalkTitle(value) {
@@ -184,6 +184,12 @@ export function parseProgramCsv(input) {
   if (rows.length < 2) throw new Error('CSV must contain a header and at least one data row.');
 
   const headers = rows[0].map(cleanCell);
+  // The September 29 sheet adds an internal progress column, never public copy.
+  const abstractStatusColumn = headers.indexOf('摘要完成情况');
+  if (abstractStatusColumn !== -1) {
+    headers.splice(abstractStatusColumn, 1);
+    for (const row of rows.slice(1)) row.splice(abstractStatusColumn, 1);
+  }
   assertHeaders(headers);
 
   const populatedRows = rows

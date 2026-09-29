@@ -17,6 +17,7 @@ export const sessionPosters = conference2026ProgramSessions.map((session, index)
   const people = (records: typeof session.speakers, speaker: boolean) => records.map((record) => {
     const profile = conference2026PersonForName(record.name);
     return {
+      personId: profile?.id ?? '',
       name: record.name,
       affiliation: record.affiliation ?? profile?.affiliation ?? '',
       talkTitle: speaker ? profile?.talkTitle ?? record.talkTitle ?? '' : '',

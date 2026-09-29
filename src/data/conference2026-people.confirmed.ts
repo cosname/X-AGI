@@ -32,11 +32,12 @@ export const conference2026ConfirmedBios: ReadonlyMap<string, string> = new Map(
   ['qiu-zihan', '邱子涵本科毕业于清华大学姚班，现就职于 Qwen 预训练团队，专注于大模型架构与训练策略研究，基于模型机制提高训练稳定性和性能上限。已发表十余篇论文，其中一作论文荣获 NeurIPS 2025 最佳论文奖和 NAACL 2024 杰出论文奖。作为核心成员参与 Qwen2.5、Qwen3、Qwen3-Next、Qwen3.5、Qwen3.8-Flash-Next 等系列模型的研发，Google Scholar 引用量逾 2 万次。'],
 ]);
 
-// Portraits supplied directly by the organizer on 2026-09-19.
-// Keep the workbook and archived biography records unchanged.
+// Portraits supplied directly by the organizer on 2026-09-19 and 2026-09-29.
+// Hu Tianyang's runtime image now uses his September 29 Speaker resubmission.
 export const conference2026ConfirmedPortraits: ReadonlyMap<string, string> = new Map([
   ['hu-tianyang', '/2026/people/hu-tianyang-portrait.webp'],
   ['chen-siming', '/2026/people/chen-siming-portrait.webp'],
+  ['zhou-mo', '/2026/people/zhou-mo-portrait.webp'],
 ]);
 
 // Organizer-supplied abstract, 2026-09-28. Title and biography already match the source.
