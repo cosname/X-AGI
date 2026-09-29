@@ -59,7 +59,10 @@ describe('2026 public Chair and Speaker profiles', () => {
     const hu = conference2026PersonForName('胡天阳');
     assert.ok(hu?.bio?.includes('包括统计机器学习、可信 AI、特征表示学习、深度生成模型等'));
     assert.deepEqual(hu?.roles, ['chair', 'speaker']);
-    assert.deepEqual(hu?.schedule.map((item) => item.title), ['语言模型基础']);
+    assert.deepEqual(hu?.schedule.map((item) => ({ title: item.title, role: item.role })), [
+      { title: '语言模型基础', role: 'chair' },
+      { title: '语言模型基础', role: 'speaker' },
+    ]);
     assert.equal(conference2026People.filter((person) => ['ma-ziye', 'hu-tianyang'].includes(person.id)).length, 2);
   });
 
