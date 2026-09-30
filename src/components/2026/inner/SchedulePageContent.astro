@@ -964,12 +964,22 @@ const sessionNumbers = new Map(
 
   @media (max-width: 767.98px) {
     .edition-2026-inner .schedule-topic-card__heading {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
       gap: 0.2rem 0.85rem;
     }
 
-    .edition-2026-inner .schedule-topic-card__number {
-      display: block;
-      width: 100%;
+    .edition-2026-inner .schedule-topic-card__title {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+
+    .edition-2026-inner .schedule-topic-card__time {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: 1.125rem;
+      line-height: 1.4;
+      opacity: 0.72;
     }
   }
 
@@ -993,6 +1003,17 @@ const sessionNumbers = new Map(
 
     .edition-2026-inner .session-chair__person-row {
       grid-template-columns: 3.5rem minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 359.98px) {
+    .edition-2026-inner .schedule-topic-card__heading {
+      column-gap: 0.5rem;
+    }
+
+    .edition-2026-inner .schedule-topic-card__number,
+    .edition-2026-inner .schedule-topic-card__time {
+      font-size: 1rem;
     }
   }
 </style>
