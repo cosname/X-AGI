@@ -210,7 +210,8 @@ export const conference2026 = {
     sessions: conference2026ProgramSessions,
   },
   // 日程是嘉宾、报告与分会场的唯一发布面。确认后的讲者、摘要、简介写进对应 session.talks。
-  // Times confirmed by the organizers on 2026-09-19; afternoon slots apply to both days.
+  // Times confirmed on 2026-09-19, with the Keynote sequence revised on 2026-09-29.
+  // Afternoon slots apply to both days.
   schedule: [
     {
       dateTime: '2026-10-16',
@@ -241,8 +242,8 @@ export const conference2026 = {
           talks: [
             { time: '09:00-09:10', title: '开幕致辞', speaker: '刘军' },
             { time: '09:10-10:00', title: 'Keynote 1', speaker: '孙茂松' },
-            { time: '10:00-10:20', title: '茶歇' },
-            { time: '10:20-11:10', title: 'Keynote 2', speaker: '冯建峰' },
+            { time: '10:00-10:50', title: 'Keynote 2', speaker: '冯建峰' },
+            { time: '10:50-11:10', title: '茶歇' },
             { time: '11:10-12:00', title: 'Keynote 3', speaker: '邱子涵' },
           ],
         },

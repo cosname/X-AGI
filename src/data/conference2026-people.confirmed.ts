@@ -40,7 +40,9 @@ export const conference2026ConfirmedPortraits: ReadonlyMap<string, string> = new
   ['zhou-mo', '/2026/people/zhou-mo-portrait.webp'],
 ]);
 
-// Organizer-supplied abstract, 2026-09-28. Title and biography already match the source.
+// Organizer-supplied abstracts, 2026-09-28 and 2026-09-29.
+// Apply only the revised abstracts; retain the confirmed titles and other fields.
 export const conference2026ConfirmedAbstracts: ReadonlyMap<string, string> = new Map([
+  ['chen-huanran', '大语言模型的能力主要源于互联网级别数据上的预训练。在本工作中，我们提出了一个非常有趣的问题：“相同的预训练损失，一定意味着相同的模型能力吗？” 我们猜想，特定任务极小值点之间的几何“接近性”（Closeness）与下游泛化能力有着内在的必然联系。然而，标准的优化器（如 AdamW）往往会收敛到各任务特定极小值点彼此疏远的区域。为了打破这一局限，我们提出了 Nexus 优化器，通过在优化过程中最大化梯度相似度，显式促进这些极小值点的几何接近。在 130M 到 3B 参数规模的模型、多种数据配比和超参数下的广泛实验表明：尽管预训练损失完全相同，Nexus 却大幅度提升了下游任务的性能。 例如，Nexus 将分布外（OOD）损失降低了 0.012，并在复杂推理任务（如 GSM8k）上实现了高达 15.0% 的准确率提升。这一发现挑战了“将预训练损失作为评估模型能力唯一指标”的传统范式，有力证明了隐式偏置（Implicit Biases）在解锁下游泛化能力中的重要性。'],
   ['lu-yiping', '传统大模型主要依赖“训练时扩展”（Training-time Scaling），但在处理复杂推理和前沿数学科学问题时，单纯堆参数已遭遇边际效应瓶颈。“推理时扩展”（Inference-time Scaling）打破了这一限制，它在推理阶段注入动态计算资源，实现“算力越多、效果越好”。然而，当前生成式 AI 缺乏普适的原则性设计框架，科学机器学习（SciML）领域也亟待类似的推理时扩展体系。为此，本报告借鉴科学计算中的缺陷校正（Defect Correction）思想，在推理时将数据驱动方法与底层机理有机融合，首次为推理时扩展提供了一个具备理论保障的统一Bellman Error Correction的原则性框架。具体包含两大核心应用：\n面向科学机器学习（SciML）：针对高维半线性抛物型方程，我们将代理模型的误差严谨地表示为另一个抛物型方程的解，并利用基于蒙特卡洛的随机模拟算法对其高效修正。该方法在推理时模拟未来规划误差并动态校正当前解，实现了计算资源与精度的协同提升。我们进一步展现了离线数据驱动训练与在线机理修正的“两阶段结合”才能真正达到统计最优。\n面向生成式人工智能：我们将规划过程与缺陷校正相结合，利用顺序蒙特卡洛（SMC）方法动态修正生成规划中的累积的Belmman误差。我们在理论上首次给出了该方法在大语言模型推理中的样本复杂度分析；针对扩散模型，我们构造了顺序蒙特卡洛方法失效的不收敛反例，并进一步设计了首个基于二点格式的扩散模型推理算法，有效确保了其方差不随离散步长缩小而恶化（或增大）。\n本工作表明，通过深化数据与机理结合，将底层物理与数学规律转化为动态矫正算子来纠偏数据驱动模型在复杂推理中的累积漂移，能够让推理时算力的投入真正转化为兼具严格理论保障与高精度的智能决策。'],
 ]);

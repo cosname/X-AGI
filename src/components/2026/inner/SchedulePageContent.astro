@@ -164,40 +164,55 @@ const sessionNumbers = new Map(
                         session.speakers.map((speaker, speakerIndex) => {
                           const person = conference2026PersonForName(speaker.name);
                           const talkTitle = person?.talkTitle ?? speaker.talkTitle;
-                          const timedTalk = group.timetable?.talks?.find((talk) => talk.speaker === speaker.name);
+                          const timedTalks = group.timetable?.talks ?? [];
+                          const timedTalkIndex = timedTalks.findIndex((talk) => talk.speaker === speaker.name);
+                          const timedTalk = timedTalks[timedTalkIndex];
+                          const nextSpeakerIndex = timedTalks.findIndex((talk, index) => index > timedTalkIndex && talk.speaker);
+                          const followingInterludes = timedTalkIndex < 0 ? [] : timedTalks.slice(
+                            timedTalkIndex + 1,
+                            nextSpeakerIndex < 0 ? undefined : nextSpeakerIndex,
+                          );
                           return (
-                            <div class="session-item session-item--speaker">
-                              <div class="session-speaker">
-                                <p class:list={[
-                                  'session-speaker__talk-title',
-                                  { 'session-speaker__talk-title--pending': !talkTitle },
-                                ]}>
-                                  <span>{talkTitle || '报告题目待公布'}</span>
-                                  {timedTalk?.time && <span class="schedule-inline-time">{timedTalk.time}</span>}
-                                </p>
-                                {person ? (
-                                  <SchedulePersonProfile
-                                    person={person}
-                                    displayName={speaker.name}
-                                    displayAffiliation={speaker.affiliation}
-                                    disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`}
-                                    role="speaker"
-                                    defaultOpen={session.title.trim().toLowerCase() === 'keynote'}
-                                  />
-                                ) : (
-                                  <span class="session-speaker__name schedule-person-identity">
-                                    <strong>{speaker.name}</strong>
-                                    {speaker.affiliation && (
-                                      <span class="schedule-person-identity__affiliation">
-                                        <span class="schedule-person-identity__affiliation-text">
-                                          {speaker.affiliation}
+                            <>
+                              <div class="session-item session-item--speaker">
+                                <div class="session-speaker">
+                                  <p class:list={[
+                                    'session-speaker__talk-title',
+                                    { 'session-speaker__talk-title--pending': !talkTitle },
+                                  ]}>
+                                    <span>{talkTitle || '报告题目待公布'}</span>
+                                    {timedTalk?.time && <span class="schedule-inline-time">{timedTalk.time}</span>}
+                                  </p>
+                                  {person ? (
+                                    <SchedulePersonProfile
+                                      person={person}
+                                      displayName={speaker.name}
+                                      displayAffiliation={speaker.affiliation}
+                                      disclosureId={`schedule-person-${String(sessionNumber).padStart(2, '0')}-speaker-${person.id}-${speakerIndex + 1}`}
+                                      role="speaker"
+                                      defaultOpen={session.title.trim().toLowerCase() === 'keynote'}
+                                    />
+                                  ) : (
+                                    <span class="session-speaker__name schedule-person-identity">
+                                      <strong>{speaker.name}</strong>
+                                      {speaker.affiliation && (
+                                        <span class="schedule-person-identity__affiliation">
+                                          <span class="schedule-person-identity__affiliation-text">
+                                            {speaker.affiliation}
+                                          </span>
                                         </span>
-                                      </span>
-                                    )}
-                                  </span>
-                                )}
+                                      )}
+                                    </span>
+                                  )}
+                                </div>
                               </div>
-                            </div>
+                              {followingInterludes.map((interlude) => (
+                                <div class="session-item session-item--interlude">
+                                  <span>{interlude.title}</span>
+                                  {interlude.time && <span class="schedule-inline-time">{interlude.time}</span>}
+                                </div>
+                              ))}
+                            </>
                           );
                         })
                       ) : (
@@ -633,6 +648,16 @@ const sessionNumbers = new Map(
   .edition-2026-inner .schedule-interlude {
     margin: 0 0 1.25rem;
     padding: 0 0.25rem;
+  }
+
+  .edition-2026-inner .session-item--interlude {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 1rem;
+    color: #747386;
+    font-size: 1rem;
+    font-weight: 500;
   }
 
   .edition-2026-inner .schedule-poster-event {
