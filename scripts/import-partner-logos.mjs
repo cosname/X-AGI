@@ -4,16 +4,19 @@ import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { partnerLogoByName } from '../src/data/partner-logo-assets-2026.ts';
 
-const [input, date] = process.argv.slice(2);
+const [input, date, ...requested] = process.argv.slice(2);
 if (!input || !/^\d{4}-\d{2}-\d{2}$/.test(date ?? '')) {
-  throw new Error('Usage: node scripts/import-partner-logos.mjs <curated-svg-directory> <YYYY-MM-DD>');
+  throw new Error('Usage: node scripts/import-partner-logos.mjs <curated-svg-directory> <YYYY-MM-DD> [logo.svg ...]');
 }
 const root = 'assets/source-archive/2026';
 const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const manifest = JSON.parse(await readFile(`${root}/manifest.json`, 'utf8'));
 const selected = [...new Set(Object.values(partnerLogoByName).map((logo) => path.basename(logo.src)))];
+const names = requested.length ? [...new Set(requested)] : selected;
+const unknown = names.filter((name) => !selected.includes(name));
+if (unknown.length) throw new Error(`Unknown partner logo: ${unknown.join(', ')}`);
 // Read and validate the complete supplied batch before changing published assets.
-const batch = await Promise.all(selected.map(async (name) => {
+const batch = await Promise.all(names.map(async (name) => {
   const bytes = await readFile(path.join(input, name));
   const svg = bytes.toString();
   if (!name.endsWith('.svg') || !svg.includes('<svg')
@@ -50,8 +53,10 @@ for (const item of batch) {
       file === runtime.replace(/\.svg$/, '.png') ? runtime : file);
   }
 }
-for (const name of await readdir('public/2026/logos')) {
-  if (!selected.includes(name)) await rm(`public/2026/logos/${name}`);
+if (!requested.length) {
+  for (const name of await readdir('public/2026/logos')) {
+    if (!selected.includes(name)) await rm(`public/2026/logos/${name}`);
+  }
 }
 async function walk(dir) {
   const result = [];
