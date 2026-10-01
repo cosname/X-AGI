@@ -49,7 +49,7 @@ describe('homepage speaker lineup', () => {
 
   it('uses confirmed schedule information when no person profile has been submitted', () => {
     const missingProfiles = homeSpeakers.filter((speaker) => !conference2026PersonForName(speaker.name));
-    assert.equal(missingProfiles.length, 6);
+    assert.equal(missingProfiles.length, 5);
     for (const speaker of missingProfiles) {
       const sessionIndex = conference2026ProgramSessions.findIndex((session) => [...session.speakers, ...session.chairs].some((person) => person.name === speaker.name));
       const session = conference2026ProgramSessions[sessionIndex];

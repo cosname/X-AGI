@@ -555,7 +555,7 @@ const personPortraitFiles = conference2026People.flatMap((person) => (
 ));
 if (personPortraitFiles.length !== 53 || new Set(personPortraitFiles).size !== 53) {
   fail(
-    `2026 people portraits: expected 53 unique portraits and four placeholders after the September 29 Zhou Mo portrait addition, `
+    `2026 people portraits: expected 53 unique portraits, `
     + `found ${new Set(personPortraitFiles).size}`,
   );
 }
