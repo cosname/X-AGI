@@ -5,9 +5,9 @@
   "lastExtendedOn": "2026-10-01",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 217,
-  "uniquePayloadCount": 216,
-  "archiveFileCount": 215,
+  "sourceEntryCount": 218,
+  "uniquePayloadCount": 217,
+  "archiveFileCount": 216,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1644,7 +1644,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:39.638Z",
+      "sourceModifiedAt": "2026-10-01T07:55:25.016Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1677,7 +1677,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:40.783Z",
+      "sourceModifiedAt": "2026-10-01T07:55:26.657Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1710,7 +1710,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:41.878Z",
+      "sourceModifiedAt": "2026-10-01T07:55:27.874Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1743,7 +1743,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:43.071Z",
+      "sourceModifiedAt": "2026-10-01T07:55:28.955Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1776,7 +1776,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:44.198Z",
+      "sourceModifiedAt": "2026-10-01T07:55:30.071Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1809,7 +1809,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:45.299Z",
+      "sourceModifiedAt": "2026-10-01T07:55:31.341Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1842,7 +1842,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:46.463Z",
+      "sourceModifiedAt": "2026-10-01T07:55:32.865Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1875,7 +1875,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:47.654Z",
+      "sourceModifiedAt": "2026-10-01T07:55:34.391Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1908,7 +1908,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:48.813Z",
+      "sourceModifiedAt": "2026-10-01T07:55:35.640Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1941,7 +1941,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:49.985Z",
+      "sourceModifiedAt": "2026-10-01T07:55:36.790Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1967,14 +1967,14 @@
       "originalPath": "session-posters-20260916/session-11-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-11-print.png",
       "status": "archived",
-      "sha256": "fa649b7bfc71ad00bee5fb0cf441654d6f8854dc5b10bd113bea6ea6addf4857",
-      "bytes": 1837493,
+      "sha256": "0370b9279ef3aef62ac7329fbe485a4870e105f7e7d802cad4a39eb62aa71147",
+      "bytes": 1863524,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:51.119Z",
+      "sourceModifiedAt": "2026-10-01T07:55:37.940Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2007,7 +2007,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:52.238Z",
+      "sourceModifiedAt": "2026-10-01T07:55:39.089Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2040,7 +2040,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:53.366Z",
+      "sourceModifiedAt": "2026-10-01T07:55:40.222Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2073,7 +2073,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-01T07:34:54.517Z",
+      "sourceModifiedAt": "2026-10-01T07:55:41.406Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"
@@ -3549,6 +3549,22 @@
         "public/2026/people/hu-tianyang-portrait.webp"
       ],
       "note": "Hu Tianyang portrait from the September 29 speaker resubmission, imported on September 30. Embedded metadata removed losslessly, with identical decoded source pixels. No attachment URL is stored. Runtime WebP preserves aspect ratio and uses shared reviewed framing."
+    },
+    {
+      "originalPath": "organizer-supplied-20261001/liu-ziyin-portrait.png",
+      "canonicalPath": "assets/source-archive/2026/people/liu-ziyin-portrait-source.png",
+      "status": "archived",
+      "sha256": "f99f9b4f367b28be138b03f4a965cedb2bb139037a4e3a5322720216529ef29e",
+      "bytes": 114770,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 256,
+        "height": 318
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/liu-ziyin-portrait.webp"
+      ],
+      "note": "Liu Ziyin portrait supplied directly by the organizer on October 1. Original PNG bytes preserved with no embedded private metadata. Runtime WebP preserves all source pixels spatially and the original aspect ratio; shared framing is applied in layout."
     }
   ]
 }

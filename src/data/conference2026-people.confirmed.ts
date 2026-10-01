@@ -11,7 +11,7 @@ export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceR
     affiliation: 'MIT',
     bio: '刘子寅现任麻省理工学院（MIT）研究科学家，即将加入清华大学人工智能学院担任助理教授。他于东京大学获得物理学博士学位。刘子寅的研究主要致力于探索人工神经网络学习机制背后的科学原理与数学规律。此外，他也对理论物理和计算神经科学感兴趣。',
     abstract: '人工智能已经成为一门经验科学。我们正在这些 AI 模型中发现越来越多有趣的现象，但现代人工智能背后的组织性原理至今仍不清晰。在这场报告中，我将介绍一个我称之为“对称性\u2014不可逆性框架”（Symmetry-Irreversibility Framework, SIF）的理论框架。该框架利用了“对称性”和“不可逆性”这两个在一般科学、尤其是物理学中极为核心的概念和工具，来分析并理解深度学习中的各种现象。我将讨论一些有趣的现象\u2014\u2014例如隐式稀疏性（implicit sparsity）、坍缩（collapse）、稳定性边缘（edge of stability），以及近年来提出的“柏拉图式表征假说”（Platonic representation hypothesis）\u2014\u2014如何可能是模型中隐藏的对称性以及训练动力学不可逆性的结果。',
-    hasSubmittedPortrait: false,
+    hasSubmittedPortrait: true,
     sourceOrder: -1,
   },
   {
@@ -43,9 +43,10 @@ export const conference2026ConfirmedBios: ReadonlyMap<string, string> = new Map(
   ['qiu-zihan', '邱子涵本科毕业于清华大学姚班，现就职于 Qwen 预训练团队，专注于大模型架构与训练策略研究，基于模型机制提高训练稳定性和性能上限。已发表十余篇论文，其中一作论文荣获 NeurIPS 2025 最佳论文奖和 NAACL 2024 杰出论文奖。作为核心成员参与 Qwen2.5、Qwen3、Qwen3-Next、Qwen3.5、Qwen3.8-Flash-Next 等系列模型的研发，Google Scholar 引用量逾 2 万次。'],
 ]);
 
-// Portraits supplied directly by the organizer on 2026-09-19 and 2026-09-29.
+// Portraits supplied directly by the organizer on 2026-09-19, 2026-09-29 and 2026-10-01.
 // Hu Tianyang's runtime image now uses his September 29 Speaker resubmission.
 export const conference2026ConfirmedPortraits: ReadonlyMap<string, string> = new Map([
+  ['liu-ziyin', '/2026/people/liu-ziyin-portrait.webp'],
   ['hu-tianyang', '/2026/people/hu-tianyang-portrait.webp'],
   ['chen-siming', '/2026/people/chen-siming-portrait.webp'],
   ['zhou-mo', '/2026/people/zhou-mo-portrait.webp'],
