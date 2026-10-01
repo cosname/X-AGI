@@ -1,8 +1,19 @@
 import type { Conference2026PersonSourceRecord } from './conference2026-people.generated.ts';
 
-// Organizer-confirmed profiles and biography updates, 2026-09-18.
+// Organizer-confirmed profiles and biography updates, 2026-09-18 and 2026-10-01.
 // Keep this supplied copy separate from the attendee workbook snapshot.
 export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceRecord[] = [
+  {
+    id: 'liu-ziyin',
+    name: '刘子寅',
+    aliases: [],
+    roles: ['speaker'],
+    affiliation: 'MIT',
+    bio: '刘子寅现任麻省理工学院（MIT）研究科学家，即将加入清华大学人工智能学院担任助理教授。他于东京大学获得物理学博士学位。刘子寅的研究主要致力于探索人工神经网络学习机制背后的科学原理与数学规律。此外，他也对理论物理和计算神经科学感兴趣。',
+    abstract: '人工智能已经成为一门经验科学。我们正在这些 AI 模型中发现越来越多有趣的现象，但现代人工智能背后的组织性原理至今仍不清晰。在这场报告中，我将介绍一个我称之为“对称性\u2014不可逆性框架”（Symmetry-Irreversibility Framework, SIF）的理论框架。该框架利用了“对称性”和“不可逆性”这两个在一般科学、尤其是物理学中极为核心的概念和工具，来分析并理解深度学习中的各种现象。我将讨论一些有趣的现象\u2014\u2014例如隐式稀疏性（implicit sparsity）、坍缩（collapse）、稳定性边缘（edge of stability），以及近年来提出的“柏拉图式表征假说”（Platonic representation hypothesis）\u2014\u2014如何可能是模型中隐藏的对称性以及训练动力学不可逆性的结果。',
+    hasSubmittedPortrait: false,
+    sourceOrder: -1,
+  },
   {
     id: 'liu-jun',
     name: '刘军',
