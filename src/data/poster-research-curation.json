@@ -688,13 +688,14 @@
       "sourceKey": "25c873da8df2b77ff47a024cd432eee989c70770211baba39d177810101df1f4",
       "id": "poster-25c873da8df2",
       "title": "BReD: Block Replay Dithering for Stable Low-Bit EMA Optimizer States",
+      "affiliation": "香港中文大学（深圳）",
       "venue": "NeurIPS",
       "href": "https://openreview.net/forum?id=gnKli42BZO",
       "verification": "submitted-pdf",
       "evidence": [
         "https://openreview.net/forum?id=gnKli42BZO"
       ],
-      "note": "公开 OpenReview 页面本次无法读取；标题按报名者提交的论文 PDF 首页核对。公开链接保留报名给出的同一 OpenReview ID，会议归属仅来自报名填写。",
+      "note": "公开 OpenReview 页面本次无法读取；标题按报名者提交的论文 PDF 首页核对。公开链接保留报名给出的同一 OpenReview ID，会议归属仅来自报名填写。2026-10-01 会务转达作者确认，展示单位仅保留香港中文大学（深圳）。",
       "submittedPaperSha256": "5fda18285a98facd3c3c12b19c304d3ebe4c91aef2acbf426d31ad57c13f89d9"
     },
     {

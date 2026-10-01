@@ -10,7 +10,7 @@ export type PosterResearchPaper = {
 };
 
 export const posterResearchSource = {
-  "sourceHash": "fa9fa44a7cace2154e49693446e89db3d651855a5830f3eeadb2470fa170ab1e",
+  "sourceHash": "a019cad42d3ad2e8304ceb9c113ac4b8148f97cfd7b8c74ca1619945b9562d0d",
   "status": "registration",
   "papers": [
     {
@@ -457,7 +457,7 @@ export const posterResearchSource = {
       "id": "poster-25c873da8df2",
       "title": "BReD: Block Replay Dithering for Stable Low-Bit EMA Optimizer States",
       "applicantName": "占贺深",
-      "affiliation": "香港中文大学（深圳）/ByteDance",
+      "affiliation": "香港中文大学（深圳）",
       "venue": "NeurIPS",
       "href": "https://openreview.net/forum?id=gnKli42BZO"
     },
