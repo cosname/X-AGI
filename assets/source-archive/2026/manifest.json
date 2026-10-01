@@ -5,9 +5,9 @@
   "lastExtendedOn": "2026-10-01",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 218,
-  "uniquePayloadCount": 217,
-  "archiveFileCount": 216,
+  "sourceEntryCount": 220,
+  "uniquePayloadCount": 219,
+  "archiveFileCount": 218,
   "entries": [
     {
       "originalPath": "1.png",
@@ -3565,6 +3565,38 @@
         "public/2026/people/liu-ziyin-portrait.webp"
       ],
       "note": "Liu Ziyin portrait supplied directly by the organizer on October 1. Original PNG bytes preserved with no embedded private metadata. Runtime WebP preserves all source pixels spatially and the original aspect ratio; shared framing is applied in layout."
+    },
+    {
+      "originalPath": "partner-logos-2026-10-01/fai.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-10-01/fai.svg",
+      "status": "archived",
+      "sha256": "30bbb0f11f19d2ceacbe2a651864a80cbe5a223ebbbc086adb8927892335089b",
+      "bytes": 88646,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 2835,
+        "height": 1139
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/fai.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-10-01/cos.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-10-01/cos.svg",
+      "status": "archived",
+      "sha256": "68cf666d7738160fdcf4d759dd82f6a016b9d6447100b952f30287cb6812f53d",
+      "bytes": 86730,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 1670,
+        "height": 392
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/cos.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
     }
   ]
 }
