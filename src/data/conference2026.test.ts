@@ -134,7 +134,7 @@ describe('published 2026 content contracts', () => {
   it('keeps organization roles distinct and names unique', () => {
     assert.equal(conference2026.initiators.length, 2);
     assert.equal(conference2026.organizers.length, 4);
-    assert.equal(conference2026.coOrganizers.length, 2);
+    assert.equal(conference2026.coOrganizers.length, 3);
     assert.equal(conference2026.strategicPartners.length, 1);
     assert.equal(conference2026.sponsors.length, 6);
 
@@ -153,7 +153,7 @@ describe('published 2026 content contracts', () => {
   it('publishes the approved compact organization display order', () => {
     assert.deepEqual(
       conference2026PartnerDisplayGroups.map((group) => group.organizations.length),
-      [6, 2, 1, 5, 1],
+      [6, 3, 1, 5, 1],
     );
     assert.deepEqual(
       conference2026PartnerDisplayGroups.map((group) => group.label),

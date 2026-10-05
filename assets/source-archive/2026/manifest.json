@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-10-01",
+  "lastExtendedOn": "2026-10-05",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 220,
-  "uniquePayloadCount": 219,
-  "archiveFileCount": 218,
+  "sourceEntryCount": 221,
+  "uniquePayloadCount": 220,
+  "archiveFileCount": 219,
   "entries": [
     {
       "originalPath": "1.png",
@@ -3595,6 +3595,22 @@
       },
       "runtimeCounterparts": [
         "public/2026/logos/cos.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
+      "originalPath": "partner-logos-2026-10-05/tsinghua-sem-graduate.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-10-05/tsinghua-sem-graduate.svg",
+      "status": "archived",
+      "sha256": "983fa6fd490d583d203d6c28faba065607aa4c3db55382735cb3fdd0bd86e21d",
+      "bytes": 31549,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 663,
+        "height": 202
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/tsinghua-sem-graduate.svg"
       ],
       "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
     }

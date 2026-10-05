@@ -67,7 +67,7 @@
 }
 
 .goal-partners__logos--co-organizers {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .goal-partners__logos--diamond-sponsors {
@@ -112,6 +112,10 @@
 .goal-partners__logos img.co-organizer-oscholar,
 .goal-partners__logos img.co-organizer-ai-time {
   max-height: 2.2rem;
+}
+
+.goal-partners__logos img.co-organizer-tsinghua-sem-graduate {
+  max-height: 3rem;
 }
 
 .goal-partners__logos img.sponsor-kuande {
