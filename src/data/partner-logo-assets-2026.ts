@@ -31,6 +31,10 @@ const logos = {
     src: '/2026/logos/ai-time.svg',
     className: 'co-organizer-ai-time',
   },
+  清华大学经济管理学院研究生分会: {
+    src: '/2026/logos/tsinghua-sem-graduate.svg',
+    className: 'co-organizer-tsinghua-sem-graduate',
+  },
   黄大年茶思屋科技网站: {
     src: '/2026/logos/chaspark.svg',
     className: 'strategic-partner-chaspark',
