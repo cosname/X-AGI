@@ -76,6 +76,7 @@ const profileIdByName = new Map([
   ['王健桥', 'wang-jianqiao'],
   ['刘方辉', 'liu-fanghui'],
   ['刘军', 'liu-jun'],
+  ['刘泽群', 'liu-zequn'],
   ['孙茂松', 'sun-maosong'],
   ['沈皓', 'shen-hao'],
   ['周沛劼', 'zhou-peijie'],
