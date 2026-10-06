@@ -1,8 +1,21 @@
 import type { Conference2026PersonSourceRecord } from './conference2026-people.generated.ts';
 
-// Organizer-confirmed profiles and biography updates, 2026-09-18 and 2026-10-01.
+// Organizer-confirmed profiles and biography updates through 2026-10-06.
 // Keep this supplied copy separate from the attendee workbook snapshot.
 export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceRecord[] = [
+  {
+    id: 'liu-zequn',
+    name: '刘泽群',
+    aliases: [],
+    roles: ['speaker'],
+    affiliation: '中关村学院',
+    department: 'AI4Science',
+    bio: '刘泽群博士，现为北京中关村学院研究员，主要研究方向为大模型、AI4Science。分别于2019年和2024年在北京大学计算机学院获得学士和博士学位，在加入北京中关村学院前，曾在微软亚洲研究院担任研究员。刘泽群博士致力于科学大模型相关的研究，取得了一系列算法和应用上的突破，在Nature Machine Intelligence等顶级期刊和ACL、EMNLP、NAACL等人工智能顶级会议上发表论文十余篇，作为主要贡献者研发的MolXPT、NatureLM等科学大模型受到行业内广泛关注和认可。',
+    talkTitle: '科学大模型的数据自动化：数据整理、推理合成与定制评测',
+    abstract: '以大语言模型为代表的基础模型正在深刻重塑科学研究范式，在分子设计、医学诊断等领域展现出加速科学发现的巨大潜力。然而，科学大模型的发展在数据层面仍面临多重挑战：原始数据分散异构，推理过程缺乏显式记录，评测需求因任务而异。本报告围绕科学大模型“数据准备 - 推理学习 - 能力验证”的全生命周期，介绍我们在数据自动化方面的研究工作。在数据整理方面，我们提出多智能体协同框架 AIDE，实现科学数据检索、质量筛选与结构化组织的全流程自动化，将分散异构的原始数据转化为训练就绪的高质量资源。在推理合成方面，我们提出 DESRO，基于实验变量变化与结果差异反演潜在推理过程，并以分子优化为例实现可解释推理链的大规模合成。在定制评测方面，我们提出 SciCustom，以科学本体为语义骨架，将科学语料组织为可复用的细粒度知识单元，进而依据用户需求自动构建面向特定科研场景的评测基准。上述工作推动科学数据构建由依赖人工走向自动化，为科学大模型的持续进化提供数据支撑。',
+    hasSubmittedPortrait: true,
+    sourceOrder: -1,
+  },
   {
     id: 'liu-ziyin',
     name: '刘子寅',
@@ -43,9 +56,10 @@ export const conference2026ConfirmedBios: ReadonlyMap<string, string> = new Map(
   ['qiu-zihan', '邱子涵本科毕业于清华大学姚班，现就职于 Qwen 预训练团队，专注于大模型架构与训练策略研究，基于模型机制提高训练稳定性和性能上限。已发表十余篇论文，其中一作论文荣获 NeurIPS 2025 最佳论文奖和 NAACL 2024 杰出论文奖。作为核心成员参与 Qwen2.5、Qwen3、Qwen3-Next、Qwen3.5、Qwen3.8-Flash-Next 等系列模型的研发，Google Scholar 引用量逾 2 万次。'],
 ]);
 
-// Portraits supplied directly by the organizer on 2026-09-19, 2026-09-29 and 2026-10-01.
+// Portraits supplied directly by the organizer through 2026-10-06.
 // Hu Tianyang's runtime image now uses his September 29 Speaker resubmission.
 export const conference2026ConfirmedPortraits: ReadonlyMap<string, string> = new Map([
+  ['liu-zequn', '/2026/people/liu-zequn-portrait.webp'],
   ['liu-ziyin', '/2026/people/liu-ziyin-portrait.webp'],
   ['hu-tianyang', '/2026/people/hu-tianyang-portrait.webp'],
   ['chen-siming', '/2026/people/chen-siming-portrait.webp'],

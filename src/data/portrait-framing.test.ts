@@ -9,7 +9,7 @@ const nonHumanPortraits = new Set(['hu-yiwen', 'chen-huanran']);
 describe('reviewed portrait framing', () => {
   it('frames every human portrait without stretching the source aspect ratio', async () => {
     const people = conference2026People.filter((person) => person.portraitSrc && !nonHumanPortraits.has(person.id));
-    assert.equal(people.length, 52);
+    assert.equal(people.length, 53);
     for (const person of people) {
       const style = portraitStyle(person.id);
       assert.equal(style.position, 'absolute', person.id);

@@ -16,7 +16,7 @@ describe('homepage speaker lineup', () => {
     for (const speaker of homeSpeakers) {
       assert.equal(speaker.portraitSrc, conference2026PersonForName(speaker.name)?.portraitSrc);
     }
-    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 8);
+    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 7);
   });
 
   it('places missing portraits last, preserves order within both groups and keeps dual-role speaker links', () => {
@@ -49,7 +49,7 @@ describe('homepage speaker lineup', () => {
 
   it('uses confirmed schedule information when no person profile has been submitted', () => {
     const missingProfiles = homeSpeakers.filter((speaker) => !conference2026PersonForName(speaker.name));
-    assert.equal(missingProfiles.length, 5);
+    assert.equal(missingProfiles.length, 4);
     for (const speaker of missingProfiles) {
       const sessionIndex = conference2026ProgramSessions.findIndex((session) => [...session.speakers, ...session.chairs].some((person) => person.name === speaker.name));
       const session = conference2026ProgramSessions[sessionIndex];
