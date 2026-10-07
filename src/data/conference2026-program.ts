@@ -26,9 +26,10 @@ export function withOrganizerRemarks(
   });
 }
 
-// Keep the revised attendee title while the Tencent sheet still has the old one.
+// Keep the organizer-confirmed attendee titles while Tencent has older versions.
 const confirmedTalkTitles = new Map([
   ['许洪腾', 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow'],
+  ['刘方辉', '深度学习理论的技术科学道路'],
 ]);
 const revisedSessions = sourceSessions.map((session) => ({
   ...session,

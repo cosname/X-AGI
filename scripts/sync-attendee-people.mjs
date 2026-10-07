@@ -82,6 +82,11 @@ const profileIdByName = new Map([
   ['周沛劼', 'zhou-peijie'],
   ['杨朋昆', 'yang-pengkun'],
   ['胡天阳', 'hu-tianyang'],
+  ['潘亮铭', 'pan-liangming'],
+  ['姚金戈', 'yao-jinge'],
+  ['张辉帅', 'zhang-huishuai'],
+  ['刘子寅', 'liu-ziyin'],
+  ['邹荻凡', 'zou-difan'],
 ]);
 
 const aliasesByName = new Map([

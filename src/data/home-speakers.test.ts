@@ -16,7 +16,7 @@ describe('homepage speaker lineup', () => {
     for (const speaker of homeSpeakers) {
       assert.equal(speaker.portraitSrc, conference2026PersonForName(speaker.name)?.portraitSrc);
     }
-    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 7);
+    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 3);
   });
 
   it('places missing portraits last, preserves order within both groups and keeps dual-role speaker links', () => {
@@ -47,16 +47,15 @@ describe('homepage speaker lineup', () => {
     assert.equal(homeSpeakers.find((speaker) => speaker.name === '杨朋昆')?.href, '/schedule/#schedule-person-05-chair-yang-pengkun-1');
   });
 
-  it('uses confirmed schedule information when no person profile has been submitted', () => {
+  it('links the newly submitted profiles directly from the homepage', () => {
     const missingProfiles = homeSpeakers.filter((speaker) => !conference2026PersonForName(speaker.name));
-    assert.equal(missingProfiles.length, 4);
-    for (const speaker of missingProfiles) {
-      const sessionIndex = conference2026ProgramSessions.findIndex((session) => [...session.speakers, ...session.chairs].some((person) => person.name === speaker.name));
-      const session = conference2026ProgramSessions[sessionIndex];
-      const source = [...session.speakers, ...session.chairs].find((person) => person.name === speaker.name);
-      assert.equal(speaker.affiliation, source?.affiliation);
-      assert.equal(speaker.portraitSrc, undefined);
-      assert.equal(speaker.href, `/schedule/#schedule-session-${String(sessionIndex + 1).padStart(2, '0')}`);
+    assert.equal(missingProfiles.length, 0);
+    for (const name of ['邹荻凡', '潘亮铭', '姚金戈', '张辉帅']) {
+      const speaker = homeSpeakers.find((candidate) => candidate.name === name)!;
+      const profile = conference2026PersonForName(name)!;
+      assert.equal(speaker.affiliation, profile.affiliation);
+      assert.ok(speaker.portraitSrc);
+      assert.ok(speaker.href.includes(`-speaker-${profile.id}-`));
     }
   });
 

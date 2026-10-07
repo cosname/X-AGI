@@ -8,18 +8,18 @@ import {
 
 describe('2026 public Chair and Speaker profiles', () => {
   it('publishes the reviewed public-only workbook projection', () => {
-    assert.equal(conference2026PeopleRecords.length, 57);
+    assert.equal(conference2026PeopleRecords.length, 63);
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.roles.includes('chair')).length,
       13,
     );
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.roles.includes('speaker')).length,
-      46,
+      52,
     );
     assert.equal(
       conference2026PeopleRecords.filter((person) => person.hasSubmittedPortrait).length,
-      50,
+      56,
     );
     assert.equal(
       new Set(conference2026PeopleRecords.map((person) => person.id)).size,
@@ -45,6 +45,16 @@ describe('2026 public Chair and Speaker profiles', () => {
     const scheduledTalk = person?.schedule.find((item) => item.role === 'speaker')?.talkTitle;
     assert.match(scheduledTalk ?? '', /Across Oracle Protocols/u);
     assert.equal(person?.talkTitle, scheduledTalk);
+  });
+
+  it('publishes Liu Fanghui\'s revised title with the matching attendee abstract', () => {
+    const person = conference2026PersonForName('刘方辉');
+    const attendee = conference2026PeopleRecords.find((record) => record.id === 'liu-fanghui');
+    assert.equal(person?.talkTitle, '深度学习理论的技术科学道路');
+    assert.equal(person?.talkTitle, attendee?.talkTitle);
+    assert.equal(person?.abstract, attendee?.abstract);
+    assert.match(person?.abstract ?? '', /scaling law 算不算理论/u);
+    assert.deepEqual(person?.roles, ['chair', 'speaker']);
   });
 
   it('reuses archived Chair information while retaining the current attendee biography', () => {
