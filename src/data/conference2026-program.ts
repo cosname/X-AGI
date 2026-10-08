@@ -28,6 +28,7 @@ export function withOrganizerRemarks(
 
 // Keep the organizer-confirmed attendee titles while Tencent has older versions.
 const confirmedTalkTitles = new Map([
+  ['孙茂松', '人工智能随想录'],
   ['许洪腾', 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow'],
   ['刘方辉', '深度学习理论的技术科学道路'],
 ]);

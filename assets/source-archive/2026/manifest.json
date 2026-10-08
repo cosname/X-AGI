@@ -1637,14 +1637,14 @@
       "originalPath": "session-posters-20260916/session-01-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-01-print.png",
       "status": "archived",
-      "sha256": "4878f1f5afba67fab1ee61c195faf9f251af64bdc78c360cfebc83da37d97412",
-      "bytes": 1519969,
+      "sha256": "ae328d9972652e88401b008be12d28f607a7af12f5314a77be7be8aa12a41eb5",
+      "bytes": 1521430,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:35.471Z",
+      "sourceModifiedAt": "2026-10-08T06:51:35.301Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1677,7 +1677,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:36.782Z",
+      "sourceModifiedAt": "2026-10-08T06:51:36.507Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1710,7 +1710,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:38.122Z",
+      "sourceModifiedAt": "2026-10-08T06:51:37.656Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1743,7 +1743,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:39.338Z",
+      "sourceModifiedAt": "2026-10-08T06:51:38.809Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1776,7 +1776,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:40.575Z",
+      "sourceModifiedAt": "2026-10-08T06:51:40.053Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1802,14 +1802,14 @@
       "originalPath": "session-posters-20260916/session-06-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-06-print.png",
       "status": "archived",
-      "sha256": "63191ef8d905a00cd01175f8392eea2298f72b8f3ac3d96ed54e303f15f3622f",
-      "bytes": 1756228,
+      "sha256": "9748c7f69e21a533b75a7794c47a58e25f427bdb6871115a8b148018e1f167a8",
+      "bytes": 1756333,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:41.789Z",
+      "sourceModifiedAt": "2026-10-08T06:51:41.175Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1842,7 +1842,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:43.033Z",
+      "sourceModifiedAt": "2026-10-08T06:51:42.340Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1875,7 +1875,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:44.458Z",
+      "sourceModifiedAt": "2026-10-08T06:51:43.526Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1908,7 +1908,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:45.939Z",
+      "sourceModifiedAt": "2026-10-08T06:51:44.708Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1941,7 +1941,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:47.202Z",
+      "sourceModifiedAt": "2026-10-08T06:51:45.888Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1974,7 +1974,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:48.434Z",
+      "sourceModifiedAt": "2026-10-08T06:51:47.123Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2007,7 +2007,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:49.618Z",
+      "sourceModifiedAt": "2026-10-08T06:51:48.269Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2033,14 +2033,14 @@
       "originalPath": "session-posters-20260916/session-13-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-13-print.png",
       "status": "archived",
-      "sha256": "0b488adadc28af71a3790f749d5a387ce44635781f105b64215a7fb0c9adf02b",
-      "bytes": 1943741,
+      "sha256": "53e6456dd7df7caf56d48ab53ac4eba4f1558f11a81893a8e93fc29f4ccc383d",
+      "bytes": 1943685,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:50.839Z",
+      "sourceModifiedAt": "2026-10-08T06:51:49.423Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2073,7 +2073,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-07T16:32:52.209Z",
+      "sourceModifiedAt": "2026-10-08T06:51:50.619Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/render-session-posters.mjs",
-  "generatedAt": "2026-10-07T16:32:52.483Z",
+  "generatedAt": "2026-10-08T06:51:50.854Z",
   "renderEnvironment": "Chrome on macOS; PingFang SC and embedded IBM Plex Sans Condensed",
   "posters": [
     {
       "id": "session-01",
-      "contentHash": "e8d2341df7e8bc7eac0dd70b6db6fc8784068a9e613a1b030847463af9ce4e2a",
+      "contentHash": "13b17a58c79233006ad497fe6a356e1c188dc72e3ba8cf88be893eb0c17735e0",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "ba395879bcc144ed7f33bf5a4c96f836c43d169cce9795e6905f18a8360e56c6",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
@@ -21,20 +21,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-01-print.png": {
-          "sha256": "4878f1f5afba67fab1ee61c195faf9f251af64bdc78c360cfebc83da37d97412",
-          "bytes": 1519969,
+          "sha256": "ae328d9972652e88401b008be12d28f607a7af12f5314a77be7be8aa12a41eb5",
+          "bytes": 1521430,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-01.webp": {
-          "sha256": "ec83d9cff6e6c27a4dca2815f55af193fe35e5269767bf9f5e144d74eaa66f23",
-          "bytes": 121824,
+          "sha256": "39c42b6feecab7919caffba62d615e83243cd6b2d0fd99ffef54a92d26438ff4",
+          "bytes": 123704,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-01-preview.webp": {
-          "sha256": "05c92630ff150dd94eb20ec23d843d6bce41f354f78ba1f0be7d6de95366089e",
-          "bytes": 29784,
+          "sha256": "575680fd244d154901466fbd1a43eb56825aa8cdc1d8320759c4ad0bfcbb9e80",
+          "bytes": 30202,
           "width": 540,
           "height": 720
         }
@@ -200,20 +200,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-06-print.png": {
-          "sha256": "63191ef8d905a00cd01175f8392eea2298f72b8f3ac3d96ed54e303f15f3622f",
-          "bytes": 1756228,
+          "sha256": "9748c7f69e21a533b75a7794c47a58e25f427bdb6871115a8b148018e1f167a8",
+          "bytes": 1756333,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-06.webp": {
-          "sha256": "14e8631bc722bd4ff78ae67c852e142081e58eaf5c552bf284e66ebfc2227a9f",
-          "bytes": 181048,
+          "sha256": "4eb9108d2b16535386dd409c22f9af37d05c1bda7ae740daa79a1145ce530366",
+          "bytes": 181058,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-06-preview.webp": {
-          "sha256": "23b2bb395c99871b37cf4802095cb416dcc00f00211fa838ed3d32849bb49c6a",
-          "bytes": 47194,
+          "sha256": "b4cadf6bc676d7c5a73568a7319e216dccc883e8a54bcac01e589e740132d2cf",
+          "bytes": 47196,
           "width": 540,
           "height": 720
         }
@@ -448,20 +448,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-13-print.png": {
-          "sha256": "0b488adadc28af71a3790f749d5a387ce44635781f105b64215a7fb0c9adf02b",
-          "bytes": 1943741,
+          "sha256": "53e6456dd7df7caf56d48ab53ac4eba4f1558f11a81893a8e93fc29f4ccc383d",
+          "bytes": 1943685,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-13.webp": {
-          "sha256": "54c8c3c10caa4b28f308a103d3452a548bd45d2b2fc41897a1631658af49d9db",
-          "bytes": 219754,
+          "sha256": "d251551315383bc6223b94302175bd384622779f477525dea1487dde78a439ee",
+          "bytes": 219780,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-13-preview.webp": {
-          "sha256": "13d1cf221eaecda1b60f209e778f4e92959bcaed705b2387a852d5f99922fba7",
-          "bytes": 52604,
+          "sha256": "f58e9ccdf3d3ec3d016638ffebe497094b9c0571220b705eb336949562778e97",
+          "bytes": 52616,
           "width": 540,
           "height": 720
         }
