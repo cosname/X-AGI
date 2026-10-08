@@ -92,13 +92,13 @@ const profileAffiliation = person.department
     <div class="schedule-person-profile__copy">
       {role === 'speaker' && person.abstract && (
         <section data-profile-section="abstract">
-          <h4>演讲内容摘要</h4>
+          <h4>演讲摘要</h4>
           <p>{person.abstract}</p>
         </section>
       )}
 
       <section data-profile-section="bio">
-        <h4>{role === 'speaker' ? '演讲嘉宾简介' : 'Chair 简介'}</h4>
+        <h4>{role === 'speaker' ? '嘉宾介绍' : 'Chair 简介'}</h4>
         <p class="schedule-person-profile__identity"><strong>{canonicalName}</strong></p>
         <p class="schedule-person-profile__affiliation">{profileAffiliation}</p>
         {person.bio ? (
