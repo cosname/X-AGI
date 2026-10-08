@@ -240,7 +240,7 @@ export const conference2026 = {
           sourceTime: '10.17上午',
           title: 'Keynote 会场',
           talks: [
-            { time: '09:00-09:10', title: '开幕致辞', speaker: '刘军' },
+            { time: '08:45-09:10', title: '开幕致辞', speaker: '刘军' },
             { time: '09:10-10:00', title: 'Keynote 1', speaker: '孙茂松' },
             { time: '10:00-10:50', title: 'Keynote 2', speaker: '冯建峰' },
             { time: '10:50-11:10', title: '茶歇' },
