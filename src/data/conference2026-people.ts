@@ -7,6 +7,7 @@ import { conference2026ProgramSessions } from './conference2026-program.ts';
 import {
   conference2026ConfirmedPeople,
   conference2026ConfirmedBios,
+  conference2026ConfirmedProfileUrls,
   conference2026ConfirmedPortraits,
   conference2026ConfirmedAbstracts,
 } from './conference2026-people.confirmed.ts';
@@ -44,7 +45,13 @@ const currentPeopleRecords = [
 ].map((person) => {
   const bio = conference2026ConfirmedBios.get(person.id);
   const abstract = conference2026ConfirmedAbstracts.get(person.id);
-  return { ...person, ...(bio === undefined ? {} : { bio }), ...(abstract === undefined ? {} : { abstract }) };
+  const profileUrl = conference2026ConfirmedProfileUrls.get(person.id);
+  return {
+    ...person,
+    ...(bio === undefined ? {} : { bio }),
+    ...(abstract === undefined ? {} : { abstract }),
+    ...(profileUrl === undefined ? {} : { profileUrl }),
+  };
 });
 
 const publicPeopleRecords = [
