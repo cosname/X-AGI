@@ -55,6 +55,7 @@ export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceR
 
 // Apply only the revised public biography; retain all other attendee fields.
 export const conference2026ConfirmedBios: ReadonlyMap<string, string> = new Map([
+  ['wang-jianqiao', '王健桥，清华大学统计与数据科学系助理教授、博士生导师。2022年于宾夕法尼亚大学获得生物统计学博士学位，随后于2022年8月至2024年12月在美国哈佛大学生物统计系从事博士后研究。其研究聚焦于构建稳健且具可解释性的高维与超高维统计方法，并将其应用于复杂结构的大规模基因组数据分析，相关方法学成果发表于 Journal of the American Statistical Association、Biometrika 和 Annals of Applied Statistics。同时在医学健康领域，针对心血管疾病与慢性肾病与合作者开展深入的跨学科研究，综合利用大规模遗传、转录组和蛋白质组数据开展系统分析，成果发表在 New England Journal of Medicine、European Heart Journal 和 Nature Communications 等国际期刊上。'],
   ['chen-siming', '陈思明，复旦大学可视分析与智能决策研究组负责人。复旦大学大数据学院青年研究员，博士生导师，上海市高层次引进人才。2011年本科毕业于复旦大学，2017年获得北京大学博士学位，之后在德国波恩大学任博士后研究员，以及德国弗劳恩霍夫智能分析和信息系统研究所（Fraunhofer IAIS）任研究科学家（2017-2020）。其研究成果发表在IEEE TVCG, CGF, IEEE VIS和ACM CHI等顶级期刊和会议上，并担任多个国际会议的程序主席、组织委员会成员。其工作曾获得多次IEEE VAST Challenge数据挑战赛一等奖，以及多个会议最佳论文/海报（提名）奖，包括IEEE VIS最佳海报提名奖、EuroVA最佳论文奖、Agile最佳海报奖、ChinaVis最佳论文奖等。'],
   ['qiu-zihan', '邱子涵本科毕业于清华大学姚班，现就职于 Qwen 预训练团队，专注于大模型架构与训练策略研究，基于模型机制提高训练稳定性和性能上限。已发表十余篇论文，其中一作论文荣获 NeurIPS 2025 最佳论文奖和 NAACL 2024 杰出论文奖。作为核心成员参与 Qwen2.5、Qwen3、Qwen3-Next、Qwen3.5、Qwen3.8-Flash-Next 等系列模型的研发，Google Scholar 引用量逾 2 万次。'],
 ]);
