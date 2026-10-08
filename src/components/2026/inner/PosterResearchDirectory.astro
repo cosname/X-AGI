@@ -1,90 +1,40 @@
 ---
 import { posterResearchPapers } from '../../../data/poster-research';
 import PaperPreview from '../PaperPreview.astro';
+import ResearchPosterViewer from '../ResearchPosterViewer.astro';
+import ResearchPosterTools from '../ResearchPosterTools.astro';
 import '../../../styles/poster-research.css';
-
-const venues = [...new Set(posterResearchPapers.map((paper) => paper.venue))]
-  .filter(Boolean)
-  .sort((left, right) => left.localeCompare(right, 'zh-CN', { numeric: true }));
 ---
 
 <section id="poster-research" class="info-card poster-research" aria-labelledby="poster-research-title" data-poster-research>
   <h2 id="poster-research-title" class="card-header">
     <span>报名论文</span>
-    <span class="poster-research__total">{posterResearchPapers.length} 篇</span>
   </h2>
   <div class="card-body">
-    <p class="poster-research__intro">以下为报名提交的论文信息，现场展示安排以大会后续通知为准。会议与期刊信息由报名人提供。</p>
-
-    <div class="poster-research__tools" role="search" aria-label="报名论文检索" data-research-tools hidden>
-      <label class="poster-research__search">
-        <span>搜索论文</span>
-        <input type="search" placeholder="题目、报名人或单位" autocomplete="off" aria-controls="poster-research-list" data-research-search />
-      </label>
-      <div class="poster-research__filter">
-        <label id="poster-venue-label" for="poster-venue-native">会议 / 期刊</label>
-        <span class="poster-research__select">
-          <select id="poster-venue-native" aria-controls="poster-research-list" data-research-filter>
-            <option value="">全部会议 / 期刊</option>
-            {venues.map((venue) => <option value={venue}>{venue}</option>)}
-          </select>
-          <svg class="poster-research__select-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-            <path d="m5 7.5 5 5 5-5" />
-          </svg>
-          <button
-            id="poster-venue-trigger"
-            type="button"
-            class="poster-research__venue-trigger"
-            role="combobox"
-            aria-labelledby="poster-venue-label"
-            aria-controls="poster-venue-menu"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            popovertarget="poster-venue-menu"
-            data-venue-trigger
-            hidden
-          >
-            <span data-venue-value>全部会议 / 期刊</span>
-            <svg class="poster-research__select-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-              <path d="m5 7.5 5 5 5-5" />
-            </svg>
-          </button>
-        </span>
-        <ul id="poster-venue-menu" class="poster-research__venue-menu" role="listbox" aria-labelledby="poster-venue-label" popover="auto" data-venue-menu hidden>
-          {['', ...venues].map((venue, index) => (
-            <li id={`poster-venue-option-${index}`} role="option" aria-selected={index === 0} data-venue-option>
-              <span>{venue || '全部会议 / 期刊'}</span>
-              <span class="poster-research__venue-check" aria-hidden="true">✓</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <button type="button" class="poster-research__clear" data-research-clear disabled>清除筛选</button>
-      <p class="poster-research__results" role="status" aria-live="polite" aria-atomic="true" data-research-results>
-        共 {posterResearchPapers.length} 篇论文
-      </p>
-    </div>
+    <ResearchPosterTools idPrefix="poster-research" controls="poster-research-list" />
 
     <ul id="poster-research-list" class="poster-research__list" role="list">
       {posterResearchPapers.map((paper) => (
         <li id={paper.id}>
           <PaperPreview paperId={paper.id} titleId={`${paper.id}-title`} />
           <h3 id={`${paper.id}-title`}>
-            <a href={paper.href} target="_blank" rel="noopener noreferrer">
+            {paper.href ? <a href={paper.href} target="_blank" rel="noopener noreferrer">
               <span>{paper.title}</span><span aria-hidden="true">↗</span>
-            </a>
+            </a> : <span>{paper.title}</span>}
           </h3>
           <p class="poster-research__metadata">
-            <span><span class="poster-research__label">报名人</span> <span data-research-name>{paper.applicantName}</span></span>
+            <span data-research-name>{paper.applicantName}</span>
             <span data-research-affiliation>{paper.affiliation}</span>
-            <span data-research-venue>{paper.venue}</span>
+            {paper.venue && <span data-research-venue>{paper.venue}</span>}
           </p>
         </li>
       ))}
     </ul>
-    <p class="poster-research__empty" data-research-empty hidden>没有找到匹配的论文，请试试其他关键词或清除筛选。</p>
+    <p class="poster-research__empty" data-research-empty hidden>没有找到匹配的海报，请试试其他关键词或清除筛选。</p>
   </div>
 </section>
+
+<ResearchPosterViewer />
 
 <script>
   import '../../../scripts/poster-research';

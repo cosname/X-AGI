@@ -1,10 +1,10 @@
 ---
 import { conference2026 } from '../../../data/conference2026';
 import { currentEdition, editionPath } from '../../../config/site';
+import { isPosterRegistrationOpen } from '../../../config/edition-status';
 import PosterResearchDirectory from './PosterResearchDirectory.astro';
-import { posterResearchPapers } from '../../../data/poster-research.generated';
 
-const { poster, registration, scale } = conference2026;
+const { poster, registration } = conference2026;
 ---
 
 <main class="main-content">
@@ -12,14 +12,8 @@ const { poster, registration, scale } = conference2026;
     <div id="poster-details" class="info-card">
       <div class="card-header">Rising Stars Poster</div>
       <div class="card-body">
-        <p>{poster.headline}</p>
-        <p>{poster.description}</p>
-        <p><a href="#poster-research">查看 {posterResearchPapers.length} 篇报名论文 ↓</a></p>
+        <p><a href="#poster-research">查看海报 ↓</a></p>
         <dl class="poster-facts">
-          <div>
-            <dt>规模</dt>
-            <dd>约 {scale.posters} 份 Poster</dd>
-          </div>
           <div>
             <dt>截止</dt>
             <dd>
@@ -34,7 +28,7 @@ const { poster, registration, scale } = conference2026;
               <ul>
                 {poster.benefits.map((benefit) => <li>{benefit}</li>)}
               </ul>
-              <a href={editionPath(currentEdition, 'travel-grant')}>查看本科生差旅补助条件与申请流程</a>
+              <a href={editionPath(currentEdition, 'travel-grant')}>补助详情</a>
             </dd>
           </div>
           <div>
@@ -45,32 +39,20 @@ const { poster, registration, scale } = conference2026;
               </ol>
             </dd>
           </div>
-          <div>
-            <dt>报名入口</dt>
-            <dd>{registration.description}</dd>
-          </div>
         </dl>
-        <div class="poster-facts__action">
+        {isPosterRegistrationOpen() && <div class="poster-facts__action">
           <a class="capsule-action" href={registration.url} target="_blank" rel="noopener noreferrer">
             申请 Rising Stars Poster
           </a>
-        </div>
+        </div>}
       </div>
     </div>
     <PosterResearchDirectory />
-    <section id="travel-grant" class="info-card" aria-labelledby="travel-grant-link-title">
-      <h2 id="travel-grant-link-title" class="card-header">{conference2026.travelGrant.title}</h2>
-      <div class="card-body">
-        <p>参加 Rising Stars Poster 海报展示的本科生，可查看补助条件与申请流程。</p>
-        <a href={editionPath(currentEdition, 'travel-grant')}>查看本科生差旅补助计划</a>
-      </div>
-    </section>
   </div>
 </main>
 
 <style>
-  #poster-details,
-  #travel-grant {
+  #poster-details {
     scroll-margin-top: 6.5rem;
   }
 </style>

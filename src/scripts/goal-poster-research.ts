@@ -1,3 +1,5 @@
+import { initializeVenuePicker } from './venue-picker';
+
 const homeResearchCleanups = new Set<() => void>();
 
 function normalizeHomeResearchText(text: string) {
@@ -7,10 +9,11 @@ function normalizeHomeResearchText(text: string) {
 function initializeHomeResearch(root: HTMLElement) {
   if (root.dataset.homeResearchReady === 'true') return;
 
-  const tools = root.querySelector<HTMLElement>('[data-home-research-tools]');
-  const search = root.querySelector<HTMLInputElement>('[data-home-research-search]');
-  const clear = root.querySelector<HTMLButtonElement>('[data-home-research-clear]');
-  const count = root.querySelector<HTMLElement>('[data-home-research-count]');
+  const tools = root.querySelector<HTMLElement>('[data-poster-tools]');
+  const search = root.querySelector<HTMLInputElement>('[data-poster-search]');
+  const filter = root.querySelector<HTMLSelectElement>('[data-poster-filter]');
+  const clear = root.querySelector<HTMLButtonElement>('[data-poster-clear]');
+  const count = root.querySelector<HTMLElement>('[data-poster-results]');
   const viewport = root.querySelector<HTMLElement>('[data-home-research-viewport]');
   const track = root.querySelector<HTMLElement>('[data-home-research-track]');
   const empty = root.querySelector<HTMLElement>('[data-home-research-empty]');
@@ -26,13 +29,15 @@ function initializeHomeResearch(root: HTMLElement) {
       element.querySelector('[data-home-research-affiliation]')?.textContent,
       element.querySelector('[data-home-research-venue]')?.textContent,
     ].join(' ')),
+    venue: element.querySelector('[data-home-research-venue]')?.textContent?.trim() ?? '',
   }));
 
-  if (!tools || !search || !clear || !count || !viewport || !track || !empty || !browse
+  if (!tools || !search || !filter || !clear || !count || !viewport || !track || !empty || !browse
     || !arrows || !previous || !next || !papers.length) return;
 
   const controller = new AbortController();
   const { signal } = controller;
+  const picker = initializeVenuePicker(tools, filter, signal);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let updateFrame = 0;
 
@@ -52,21 +57,23 @@ function initializeHomeResearch(root: HTMLElement) {
   };
 
   const updateSearch = () => {
+    picker.sync();
     const terms = normalizeHomeResearchText(search.value).split(' ').filter(Boolean);
+    const venue = filter.value;
     let visibleCount = 0;
     papers.forEach((paper) => {
-      const visible = terms.every((term) => paper.text.includes(term));
+      const visible = (!venue || paper.venue === venue) && terms.every((term) => paper.text.includes(term));
       paper.element.hidden = !visible;
       if (visible) visibleCount += 1;
     });
 
-    count.textContent = terms.length
-      ? `显示 ${visibleCount} / ${papers.length} 篇报名论文`
-      : `共 ${papers.length} 篇报名论文`;
+    count.textContent = terms.length || venue
+      ? `找到 ${visibleCount} 份海报`
+      : '';
     empty.hidden = visibleCount > 0;
     viewport.hidden = visibleCount === 0;
     browse.hidden = visibleCount === 0;
-    clear.disabled = search.value.length === 0;
+    clear.disabled = search.value.length === 0 && venue === '';
     viewport.scrollTo({ left: 0, behavior: 'instant' });
     scheduleArrowUpdate();
   };
@@ -85,8 +92,10 @@ function initializeHomeResearch(root: HTMLElement) {
     if (!(event instanceof InputEvent) || !event.isComposing) updateSearch();
   }, { signal });
   search.addEventListener('compositionend', updateSearch, { signal });
+  filter.addEventListener('change', updateSearch, { signal });
   clear.addEventListener('click', () => {
     search.value = '';
+    filter.value = '';
     updateSearch();
     search.focus({ preventScroll: true });
   }, { signal });
@@ -116,6 +125,7 @@ function initializeHomeResearch(root: HTMLElement) {
 
   const cleanup = () => {
     controller.abort();
+    picker.cleanup();
     observer.disconnect();
     window.cancelAnimationFrame(updateFrame);
     papers.forEach((paper) => { paper.element.hidden = false; });
@@ -124,7 +134,7 @@ function initializeHomeResearch(root: HTMLElement) {
     tools.hidden = true;
     arrows.hidden = true;
     empty.hidden = true;
-    count.textContent = `共 ${papers.length} 篇报名论文`;
+    count.textContent = '';
     delete root.dataset.homeResearchReady;
     homeResearchCleanups.delete(cleanup);
   };

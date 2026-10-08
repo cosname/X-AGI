@@ -167,17 +167,9 @@
 }
 
 .goal-speakers__browse {
+  justify-content: flex-end;
   min-height: 3.75rem;
   margin-top: 0.25rem;
-}
-
-.goal-speakers__browse p {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 0;
-  color: var(--speaker-muted);
-  font-size: 0.76rem;
 }
 
 .goal-speakers__arrows {

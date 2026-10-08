@@ -72,7 +72,6 @@ const undergraduateTravelGrant = {
   maxAmount: 2500,
   currency: '人民币',
   reimbursement: '实报实销',
-  introduction: '为鼓励更多本科生投身前沿科学研究、参与学术交流，大会为符合条件的参会本科生提供差旅报销支持。',
   coverage: ['往返交通费', '会议期间住宿费'],
   requirements: [
     '在读全日制本科生。',
@@ -86,11 +85,10 @@ const undergraduateTravelGrant = {
   review: {
     dateTime: '2026-09-26',
     label: '9 月 26 日前',
-    description: '组委会完成审核，并通过邮件通知符合条件的参会者。',
+    description: '审核结果通过邮件通知。',
   },
-  reimbursementNote: '参会结束后，按照要求提交报销凭证。',
-  reminder: '请妥善保存往返交通、住宿等相关差旅证明。',
-  benefit: '符合条件的本科生可申请差旅补助（每人最高 2500 元，实报实销）',
+  reimbursementNote: '会后凭往返交通、住宿等差旅凭证报销。',
+  benefit: '本科生差旅补助最高 2500 元（须符合条件，实报实销）',
 } as const;
 
 export const conference2026 = {
@@ -105,10 +103,9 @@ export const conference2026 = {
   description:
     '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台，进一步激发创新活力，推动学术与产业协同发展。',
   introduction: [
-    '2026 X-AGI Conference（交叉智能大会）拟于2026年10月16日至18日在北京友谊宾馆举行。本届大会以“AI Conference for the neXt Generation” 为主题，邀请来自国内外高校、科研机构与产业界的优秀学者和专家，共同探讨下一代人工智能研究的前沿问题与发展方向。“X”代表未知、交叉与探索。本次会议设置多个专题论坛，涵盖AI4Math、AI4Science、脑机接口、预训练算法的新进展、AI Infra、Agent、Agentic后训练、LLM评测与基准、大语言模型基础、生成建模新范式与理论基础、扩散模型理论基础与推理算法、机器学习理论、AI+Finance等多个重要方向。',
-    '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台，进一步激发创新活力，推动学术与产业协同发展。Poster投稿条件：2025年1月1日之后在列表内期刊/会议录用中稿，列表包括 ICLR, NeurIPS, ICML, JMLR, T-PAMI, JASA, JRSSB, AoS, Biometrika, COLT, FOCS, STOC, TMLR, COLM, ACL, CVPR等。',
-    'XAGI 大会起源于统计之都长期推动的中国 R 会议，本届已是第十九届。迄今，统计之都已联合全国20余所高校与科研机构，在全国14个城市成功举办近50次会议，呈现近2000场演讲，吸引线上线下参会者逾50万人次。',
-    'XAGI 2026 由统计之都和FAI（人工智能基础研究）发起，联合清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院、中国商业统计学会人工智能分会共同主办，OScholar、AI Time、清华大学经济管理学院研究生分会共同协办，黄大年茶思屋科技网站为战略合作伙伴，并获得明汯投资、宽德投资、Will、数启寰宇（QuantVerse）和智统数合的钻石赞助，以及澎峰科技（PerfXLab）的黄金赞助。',
+    '2026 X-AGI Conference（交叉智能大会）将于2026年10月16日至18日在北京友谊宾馆举行。本届主题为“AI Conference for the neXt Generation”，“X”代表未知、交叉与探索。',
+    '大会专题涵盖 AI4Math、AI4Science、脑机接口、预训练算法、AI Infra、Agent、Agentic 后训练、LLM 评测与基准、大语言模型基础、生成建模、扩散模型、机器学习理论及 AI+Finance。',
+    'XAGI 大会起源于统计之都发起的中国 R 会议，本届为第十九届。迄今，统计之都已联合全国20余所高校与科研机构，在14个城市举办近50次会议，呈现近2000场演讲，吸引线上线下参会者逾50万人次。',
   ],
   conferenceOrganization: {
     committee: {
@@ -321,9 +318,7 @@ export const conference2026 = {
   ],
   poster: {
     title: 'Rising Stars Poster',
-    headline: '本次会议特设Rising Stars Poster，旨在为AI领域产学研各界同仁，特别是青年学子，搭建展示研究成果、促进学术交流的优质平台。',
-    description:
-      'Poster投稿条件：2025年1月1日之后在列表内期刊/会议录用中稿，列表包括 ICLR, NeurIPS, ICML, JMLR, T-PAMI, JASA, JRSSB, AoS, Biometrika, COLT, FOCS, STOC, TMLR, COLM, ACL, CVPR等。',
+    status: '报名已结束',
     requirements: [
       '2025年1月1日之后在列表内期刊/会议录用中稿',
       '列表包括 ICLR, NeurIPS, ICML, JMLR, T-PAMI, JASA, JRSSB, AoS, Biometrika, COLT, FOCS, STOC, TMLR, COLM, ACL, CVPR等',
@@ -348,11 +343,9 @@ export const conference2026 = {
   registration: {
     status: '报名开放中',
     url: 'https://www.bagevent.com/event/9252233',
-    description: '普通参会与 Rising Stars Poster 共用同一报名入口。',
+    description: 'XAGI 2026 参会报名、票价与门票权益。',
     notes: [
-      '完成基础参会信息后，可在报名系统中选择相应报名类型。',
       '在读本科生、硕士生、博士生优先。',
-      '报名参加 Rising Stars Poster 即赠专业票。',
     ],
   },
   tickets: {

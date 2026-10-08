@@ -9,18 +9,19 @@ function normalizeResearchText(text: string) {
 function initializeResearchDirectory(root: HTMLElement) {
   if (root.dataset.researchReady === 'true') return;
 
-  const tools = root.querySelector<HTMLElement>('[data-research-tools]');
-  const search = root.querySelector<HTMLInputElement>('[data-research-search]');
-  const filter = root.querySelector<HTMLSelectElement>('[data-research-filter]');
-  const clear = root.querySelector<HTMLButtonElement>('[data-research-clear]');
-  const results = root.querySelector<HTMLElement>('[data-research-results]');
+  const tools = root.querySelector<HTMLElement>('[data-poster-tools]');
+  const search = root.querySelector<HTMLInputElement>('[data-poster-search]');
+  const filter = root.querySelector<HTMLSelectElement>('[data-poster-filter]');
+  const clear = root.querySelector<HTMLButtonElement>('[data-poster-clear]');
+  const results = root.querySelector<HTMLElement>('[data-poster-results]');
   const empty = root.querySelector<HTMLElement>('[data-research-empty]');
   const papers = [...root.querySelectorAll<HTMLElement>('.poster-research__list > li')].map((element) => ({
     element,
     text: normalizeResearchText([
-      element.querySelector('h3 a')?.textContent,
+      element.querySelector('h3')?.textContent,
       element.querySelector('[data-research-name]')?.textContent,
       element.querySelector('[data-research-affiliation]')?.textContent,
+      element.querySelector('[data-research-venue]')?.textContent,
     ].join(' ')),
     venue: element.querySelector('[data-research-venue]')?.textContent?.trim() ?? '',
   }));
@@ -29,7 +30,7 @@ function initializeResearchDirectory(root: HTMLElement) {
 
   const controller = new AbortController();
   const { signal } = controller;
-  const picker = initializeVenuePicker(root, filter, signal);
+  const picker = initializeVenuePicker(tools, filter, signal);
 
   const update = () => {
     picker.sync();
@@ -46,8 +47,8 @@ function initializeResearchDirectory(root: HTMLElement) {
 
     const filtered = terms.length > 0 || venue !== '';
     results.textContent = filtered
-      ? `显示 ${visibleCount} / ${papers.length} 篇论文`
-      : `共 ${papers.length} 篇论文`;
+      ? `找到 ${visibleCount} 份海报`
+      : '';
     empty.hidden = visibleCount > 0;
     clear.disabled = search.value.length === 0 && venue === '';
   };

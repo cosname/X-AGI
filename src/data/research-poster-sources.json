@@ -1,0 +1,541 @@
+{
+  "reviewedOn": "2026-10-08",
+  "reviewMethod": "Every PDF in the 2026-10-08 submission folder is included. Latest poster headings take precedence over the earlier registration roster. Missing submissions are temporarily excluded from public lists. Original poster artwork is preserved.",
+  "posters": [
+    {
+      "id": "poster-136c923ca735",
+      "title": "A novel abnormal pore pressure prediction framework based on machine learning and drilling–rock mechanics parameter data",
+      "applicantName": "李华洋",
+      "fileName": "李华洋-北京大学-xagi2026海报.pdf",
+      "pdfSha256": "57a30bd18e626f862f00a1c256ab42b016067b80c6c1e2ef66a38860a84fbfa4",
+      "affiliation": "北京大学",
+      "venue": "Petroleum Science",
+      "href": "https://doi.org/10.1016/j.petsci.2026.06.002"
+    },
+    {
+      "id": "poster-6dd712cfb147",
+      "title": "A systematic benchmarking framework and dual-view optimization strategy for single-cell DNA methylation imputation",
+      "applicantName": "梁海天",
+      "fileName": "梁海天-南开大学-xagi2026海报.pdf",
+      "pdfSha256": "1177fe0249453e607dbbb24c4187cd455c22b7c7a31f85336fae5bbb38977cf8",
+      "affiliation": "南开大学",
+      "venue": "Briefings in Bioinformatics",
+      "href": "https://doi.org/10.1093/bib/bbag434"
+    },
+    {
+      "id": "poster-adaptively-grouped-bandits",
+      "title": "Adaptively Grouped Contextual Bandits for Heterogeneous Human-AI Decision Making with Conformal Prediction Sets",
+      "applicantName": "吴彦辰",
+      "affiliation": "清华大学",
+      "venue": "ICML",
+      "href": "https://proceedings.mlr.press/v306/wu26aa.html",
+      "fileName": "吴彦辰-清华大学-xagi2026海报.pdf",
+      "note": "New submission. Title, authors and ICML 2026 verified against the poster and the PMLR proceedings.",
+      "pdfSha256": "b0743706f68f52179135ef8d4d1424a08782084dd52000c63341d7b2aac66f16"
+    },
+    {
+      "id": "poster-b40d938f20da",
+      "title": "AlphaEval: Evaluating Agents in Production",
+      "applicantName": "徐秉煜",
+      "fileName": "徐秉煜-中国科学院大学-xagi2026海报.（2）.pdf",
+      "pdfSha256": "41e5d566d21f63e5c9d96bfce96ab78285278150147e42d727b0206a40d2d5a7",
+      "affiliation": "中国科学院大学",
+      "venue": "COLM",
+      "href": "https://arxiv.org/abs/2604.12162"
+    },
+    {
+      "id": "poster-e5d67567610f",
+      "title": "An Improved Clique-Picking Algorithm for Counting Markov Equivalent DAGs",
+      "applicantName": "刘力夫",
+      "fileName": "刘力夫-东北师范大学-xagi2026海报.pdf",
+      "pdfSha256": "6b14dc350c926ee992f718c7759b998e140fe0726a3057e2491cdc3fc3e51feb",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work.",
+      "affiliation": "东北师范大学",
+      "venue": "ICML",
+      "href": "https://proceedings.mlr.press/v267/liu25x.html"
+    },
+    {
+      "id": "poster-4c81302353b2",
+      "title": "Attention Sink Forges Native MoE in Attention Layers: Sink-Aware Training to Address Head Collapse",
+      "applicantName": "傅子酌",
+      "fileName": "傅子酌-北京大学-xagi2026海报.pdf",
+      "pdfSha256": "1262e3eee506e92e4ce81b46b5528c14d9929a3fc9195466e0fd9e64f0d14560",
+      "affiliation": "北京大学",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2602.01203"
+    },
+    {
+      "id": "poster-f520da02c99f",
+      "title": "Augur: Modeling Covariate Causal Associations in Time Series via Large Language Models",
+      "applicantName": "崔志清",
+      "fileName": "崔志清-南京信息工程大学-xagi2026海报.pdf",
+      "pdfSha256": "8f3e05be6be9f4fba796d58ffa7ef79abea8867ea38e0766bde8f13fbc5bdbb9",
+      "affiliation": "南京信息工程大学",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2026.acl-long.32/"
+    },
+    {
+      "id": "poster-12055c3dc7df",
+      "title": "Benchmarking Language Models for Statistical Problem Formulation",
+      "applicantName": "赵俊哲",
+      "fileName": "赵俊哲-清华大学-xagi2026海报.pdf",
+      "pdfSha256": "3534ed60bf90d66205f44201714b64eef42fa80a1fe5869c68387d51d91c3f21",
+      "affiliation": "清华大学",
+      "venue": "EMNLP",
+      "href": "https://arxiv.org/abs/2609.01982"
+    },
+    {
+      "id": "poster-36f1f5719cb4",
+      "title": "Beyond Static Rules: Automated Discovery of Latent Vulnerabilities in Text-to-SQL",
+      "applicantName": "汪汉卿",
+      "fileName": "汪汉卿.pdf",
+      "pdfSha256": "02ebfd9fdb75de4d1f38f1423fd159862d93018c53469df16c004a8c4502aea4",
+      "affiliation": "上海财经大学",
+      "venue": "ACL Findings",
+      "href": "https://aclanthology.org/2026.findings-acl.842/"
+    },
+    {
+      "id": "poster-25c873da8df2",
+      "title": "BReD: Block Replay Dithering for Stable Low-Bit EMA Optimizer States",
+      "applicantName": "占贺深",
+      "fileName": "占贺深-香港中文大学(深圳)-xagi2026海报.pdf",
+      "pdfSha256": "ec447af1713079a137b6caed8870b2fa350a0706d9e2b5034affe876909e30f9",
+      "affiliation": "香港中文大学（深圳）",
+      "venue": "NeurIPS",
+      "href": "https://openreview.net/forum?id=gnKli42BZO"
+    },
+    {
+      "id": "poster-53bb147467d6",
+      "title": "Co-GRPO: Co-Optimized Group Relative Policy Optimization for Masked Image Generation",
+      "applicantName": "周韧平",
+      "fileName": "周韧平-清华大学-xagi2026海报.pdf",
+      "pdfSha256": "53dc153ebe1f226b6459da13c85eb9f1bcb565d8b820b409c4dd7ea13ed20f83",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work.",
+      "affiliation": "清华大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2512.22288"
+    },
+    {
+      "id": "poster-a7172647caf8",
+      "title": "Co4ICF: Co-evolving Physics-Informed Surrogate and RL-based Pulse Optimizer for Inertial Confinement Fusion",
+      "applicantName": "赵佳彤",
+      "fileName": "赵佳彤-上海交通大学-xagi2026海报.pdf",
+      "pdfSha256": "f27e29c205699277e9e5107f6ea0fee85d8069a52b501b753bea24794997589f",
+      "affiliation": "上海交通大学",
+      "venue": "ACM SIGKDD",
+      "href": "https://arxiv.org/abs/2607.10366"
+    },
+    {
+      "id": "poster-d942ebf1012f",
+      "title": "CodeHacker: Automated Test Case Generation for Detecting Vulnerabilities in Competitive Programming Solutions",
+      "applicantName": "尹新祥",
+      "fileName": "尹新祥-西北工业大学-xagi2026海报.pdf",
+      "pdfSha256": "b9a3409ad9c79f0495d523603aad1f09675e24dbd6c8305e0cef2bb26f6ecdc9",
+      "affiliation": "香港大学 / 西北工业大学",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2026.acl-long.108/"
+    },
+    {
+      "id": "poster-224c26c262ff",
+      "title": "Contractive Anchor Resolvent Diffusion for Incomplete Multi-View Clustering",
+      "applicantName": "赵桐正",
+      "fileName": "赵桐正-山西大学-xagi2026海报.pdf",
+      "pdfSha256": "5752fc3cec32ae9c6e982d7f5666724c2462af58b0efac3a528b6a069ef52ec8",
+      "affiliation": "山西大学",
+      "venue": "ICML",
+      "href": "https://icml.cc/virtual/2026/poster/64642"
+    },
+    {
+      "id": "poster-d89d4985330b",
+      "title": "CSRv2: Unlocking Ultra-Sparse Embeddings",
+      "applicantName": "郭立轩",
+      "fileName": "郭立轩.pdf",
+      "pdfSha256": "e7ca0222df49daedd64f22b0ccaacf174834dcc457912efa352994ae28fc9e33",
+      "note": "Image-only PDF. Visually verified CSRv2: Unlocking Ultra-Sparse Embeddings and Lixuan Guo.",
+      "affiliation": "西安电子科技大学",
+      "venue": "ICLR",
+      "href": "https://arxiv.org/abs/2602.05735"
+    },
+    {
+      "id": "poster-20cc69625fe7",
+      "title": "CWF: A Collaborative Writing Framework for Personalized and Reliable Popular Science Writing",
+      "applicantName": "范晓煜",
+      "fileName": "范晓煜-华中科技大学-xagi2026海报.pdf",
+      "pdfSha256": "eb4dd97228ac24ae44e253c11472ad519773b217e198921f6ce1fb589db3393c",
+      "affiliation": "华中科技大学",
+      "venue": "EMNLP",
+      "href": "https://arxiv.org/abs/2609.06126"
+    },
+    {
+      "id": "poster-c07208108cd9",
+      "title": "Diffusion Models As Dataset Distillation Priors",
+      "applicantName": "苏铎",
+      "fileName": "苏铎-清华大学-xagi2026海报.pdf",
+      "pdfSha256": "658da568b716fc11561a5d10677c767bc770926909d7a067da2a1715850bc6ab",
+      "affiliation": "清华大学",
+      "venue": "ICLR",
+      "href": "https://openreview.net/forum?id=Hvge3NzkJN",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work."
+    },
+    {
+      "id": "poster-cb82eac05270",
+      "title": "Diversity-Enhanced and Classification-Aware Prompt Learning for Few-Shot Learning via Stable Diffusion",
+      "applicantName": "常高钦",
+      "fileName": "常高钦-西安交通大学-xagi2026海报.pdf",
+      "pdfSha256": "e1c4563bab53124a54262be17866a43339b1170cc2429e745a2c39cf31aaa09a",
+      "affiliation": "西安交通大学",
+      "venue": "TMLR",
+      "href": "https://openreview.net/forum?id=4CfliohyqK"
+    },
+    {
+      "id": "poster-37dfe0e91548",
+      "title": "DSN: Energy-Efficient EMG Signal Classification Method Enabling Real-Time Monitoring for Edge Healthcare",
+      "applicantName": "孟宪喆",
+      "fileName": "孟宪喆-华中科技大学-xagi2026海报.pdf",
+      "pdfSha256": "31f8dc504c48cead2a11803336aaa5955fb8ef298336adc848ef5ac492bb67b2",
+      "affiliation": "华中科技大学",
+      "venue": "Neural Networks",
+      "href": "https://www.sciencedirect.com/science/article/pii/S0893608026007665",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work."
+    },
+    {
+      "id": "poster-c3b39bcfdced",
+      "title": "EfficientFlow: Efficient Equivariant Flow Policy Learning for Embodied AI",
+      "applicantName": "梅若风",
+      "fileName": "梅若风-西安交通大学-xagi2026海报.pdf",
+      "pdfSha256": "6c2db06076ad6e5ccadc6d24af5a7b26bf18f78c549b9dbb01301b3f0e6edd49",
+      "affiliation": "西安交通大学",
+      "venue": "AAAI",
+      "href": "https://arxiv.org/abs/2512.02020"
+    },
+    {
+      "id": "poster-51a63928ed19",
+      "title": "Gaussian Herding across Pens: An Optimal Transport Perspective on Global Gaussian Reduction for 3DGS",
+      "applicantName": "王涛",
+      "fileName": "王涛-中国人民大学-xagi2026海报.pdf",
+      "pdfSha256": "7a2419a9855ad82eca83a77d1011d6cfdfbde92e32785e249c97779b666f5566",
+      "affiliation": "中国人民大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2506.09534"
+    },
+    {
+      "id": "poster-b62b851b68d6",
+      "title": "Graph-GRPO: Training Graph Flow Models with Reinforcement Learning",
+      "applicantName": "朱宝恒",
+      "fileName": "朱宝恒.pdf",
+      "pdfSha256": "e6d1ae44b6484531a980e81c673cb8984f4e51ad48ea23a94fd13d99c5fb338b",
+      "affiliation": "香港科技大学(广州)/北京邮电大学",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2603.10395"
+    },
+    {
+      "id": "poster-02cffb08a0d2",
+      "title": "HyMAGE: Semantic-Aware Dynamic Hypergraph Generation",
+      "applicantName": "谷炳桥",
+      "fileName": "谷炳桥-山东大学-xagi2026海报.pdf",
+      "pdfSha256": "50fe6f0a49b35a3b3d3930eceefa124cf72a917e2f3fa31a875291b2668ff2e3",
+      "affiliation": "山东大学",
+      "venue": "ACM SIGKDD",
+      "href": "https://doi.org/10.1145/3770855.3817897"
+    },
+    {
+      "id": "poster-85bec19ca7b9",
+      "title": "Hystar: Hypernetwork-driven Style-adaptive Retrieval via Dynamic SVD Modulation",
+      "applicantName": "蔡于嘉",
+      "fileName": "蔡于嘉-西安电子科技大学-xagi2026海报.pdf",
+      "pdfSha256": "968e7d9eb56164a60e84204d7c9ff37ea3dde2ac8193a936417ea6a227a85466",
+      "affiliation": "西安电子科技大学",
+      "venue": "ICLR",
+      "href": "https://iclr.cc/virtual/2026/poster/10006957"
+    },
+    {
+      "id": "poster-ea387cedd8d5",
+      "title": "IGNN-Solver: A Graph Neural Solver for Implicit Graph Neural Networks",
+      "applicantName": "林筠超",
+      "fileName": "林筠超-华中科技大学-xagi2026海报.pdf",
+      "pdfSha256": "bcfb42e7191ef34ef8f71ede7d8d11cd3678573226bae24bab3846bbc2c606f7",
+      "affiliation": "华中科技大学",
+      "venue": "T-PAMI",
+      "href": "https://arxiv.org/abs/2410.08524"
+    },
+    {
+      "id": "poster-66e1317d6834",
+      "title": "Improving Memory Efficiency for Training KANs via Meta Learning",
+      "applicantName": "赵张弛",
+      "fileName": "赵张弛-西安交通大学-XAGI2026海报.pdf",
+      "pdfSha256": "d7ef98262463e7f948aac5e1a1d4f372c72c87ed9fced67f7c752b1ee2b8d48a",
+      "affiliation": "西安交通大学",
+      "venue": "ICML",
+      "href": "https://proceedings.mlr.press/v267/zhao25s.html"
+    },
+    {
+      "id": "poster-139bbebeb768",
+      "title": "Iterative Nonlinear Computation Underlying Abstract Reasoning",
+      "applicantName": "校一皓",
+      "fileName": "校一皓-上财-xagi2026海报.pdf",
+      "pdfSha256": "2028ed3798c9ac4a91e7d813b61665a1c95babd6d982ebfa6229ef96586967b3",
+      "note": "Image-only PDF. Visually verified the full title. Poster retains Anonymous Author(s); matched to the submitted filename.",
+      "affiliation": "上海财经大学",
+      "venue": "NeurIPS",
+      "href": "https://openreview.net/forum?id=WJZTqX8nzZ"
+    },
+    {
+      "id": "poster-99b01821f1a9",
+      "title": "Logical Phase Transitions: Understanding Collapse in LLM Logical Reasoning",
+      "applicantName": "张幸朗",
+      "fileName": "张幸朗-华中科技大学-xgai2026海报.pdf",
+      "pdfSha256": "737e4f3708ea24b212f0e1fdc3b16e5d1fa467f069aedde95f3df0d5ced9310b",
+      "affiliation": "华中科技大学",
+      "venue": "ACL",
+      "href": "https://arxiv.org/abs/2601.02902"
+    },
+    {
+      "id": "poster-22a8ed133827",
+      "title": "Meric: A Unified Framework for Multimodal Music Generation and Retrieval via Representation Space Anchoring",
+      "applicantName": "王胤博",
+      "fileName": "王胤博-中国人民大学-xagi2026海报.pdf",
+      "pdfSha256": "36fa8ac6029e49059d29ca88777a50b396a3b664c0eb507919a10ebe92672c4f",
+      "affiliation": "中国人民大学",
+      "venue": "ECCV",
+      "href": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/2169.pdf"
+    },
+    {
+      "id": "poster-ae83c43481fb",
+      "title": "MIHC: Multi-View Interpretable Hypergraph Neural Networks with Information Bottleneck for Chip Congestion Prediction",
+      "applicantName": "张泽玥",
+      "fileName": "张泽玥-中国人民大学-xagi2026海报.pdf",
+      "pdfSha256": "aa24ca18fecd480b2207d556c8cdb376ae0474697cbada3dcf308766bb069ec4",
+      "affiliation": "中国人民大学",
+      "venue": "NeurIPS",
+      "href": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/7fc54f90195097ed0ee6200f1dc274d3-Abstract-Conference.html"
+    },
+    {
+      "id": "poster-d9beb2030ac7",
+      "title": "Model-Based Imaginative Planning for Embodied Agents",
+      "applicantName": "宋俊儒",
+      "fileName": "宋俊儒-上海交通大学-xagi2026海报.pdf",
+      "pdfSha256": "9ee676e7f15ee4dc14d8fcbc92af8daea99ab26823af1f23e1650dc7c10491e8",
+      "affiliation": "上海交通大学",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2026.acl-long.827/"
+    },
+    {
+      "id": "poster-c2d192f2a71b",
+      "title": "MoFO: Momentum-Filtered Optimizer for Mitigating Forgetting in LLM Fine-Tuning",
+      "applicantName": "王森淼",
+      "fileName": "王森淼.pdf",
+      "pdfSha256": "018af416e0e3da790a0b8bf1d8dbe8a413f3f2518cef1aafc217be4a84a6e0a8",
+      "affiliation": "香港中文大学（深圳）",
+      "venue": "TMLR",
+      "href": "https://openreview.net/forum?id=T1qXIDn9my"
+    },
+    {
+      "id": "poster-3ab1bd2d3392",
+      "title": "PASTE-D2Net: Prior-Aware Spatio-Temporal Evolution Distillation Dual-Stream Network for Medical Single-Domain Generalization",
+      "applicantName": "郑昌盛",
+      "fileName": "郑昌盛-武汉大学-xagi2026海报.pdf",
+      "pdfSha256": "00a0e28f5e2f645ae73c3f1911d2dacd3ca4b703bc0c40918721cbbf9edafd7a",
+      "affiliation": "武汉大学",
+      "venue": "ACM MM",
+      "href": "https://doi.org/10.1145/3767308.3836044"
+    },
+    {
+      "id": "poster-11aa8c0cf04b",
+      "title": "PersonaForge: Psychology-Grounded Dual-Process Architecture",
+      "applicantName": "邹思瑞",
+      "fileName": "邹思瑞.pdf",
+      "pdfSha256": "85414046f5eb74f2e91894b40ffcf4c5dd7f1dbb8784b36ba075c12bb2000b90",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work.",
+      "affiliation": "西南财经大学",
+      "venue": "ACL Findings",
+      "href": "https://aclanthology.org/2026.findings-acl.386/"
+    },
+    {
+      "id": "poster-63e8b1777613",
+      "title": "Questioning the Coverage-Length Metric in Conformal Prediction: When Shorter Intervals Are Not Better",
+      "applicantName": "卢羿舟",
+      "fileName": "卢羿舟-复旦大学-xagi2026海报.pdf",
+      "pdfSha256": "aab55a2118437b5201bc5b6837de07b524a329178a6eab9817ac05096ec66bb9",
+      "affiliation": "复旦大学",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2601.21455"
+    },
+    {
+      "id": "poster-5d114adf5204",
+      "title": "Reflect-then-Correct: Rebalancing Task Optimization for Generalizable Meta-Reinforcement Learning via Distributional Value Error Reduction",
+      "applicantName": "王敏",
+      "fileName": "王敏-中国科学院计算技术研究所-xagi2026海报.pdf",
+      "pdfSha256": "e7c837293d137f19b5e986ee60d6d359f8590e644df4b4e9e6b705d43868ec2a",
+      "affiliation": "中国科学院计算技术研究所",
+      "venue": "ICML",
+      "href": "https://openreview.net/forum?id=AJMrn5qYih"
+    },
+    {
+      "id": "poster-339537805502",
+      "title": "Revisiting the Role of Pretrained Weights in Model Merging: On Near-Optimality within the Core Subspace",
+      "applicantName": "孙文举",
+      "fileName": "孙文举-北京交通大学-xagi2026海报.pdf",
+      "pdfSha256": "c9d593ffcfd506edf82f9cb2cb8b36ad331bdf371dd78bfe11f01861f01c7b76",
+      "affiliation": "北京交通大学",
+      "venue": "ICML",
+      "href": "https://openreview.net/forum?id=NrGCh79ANM"
+    },
+    {
+      "id": "poster-c1b47d7c0b0d",
+      "title": "Scaling Diffusion Transformers Efficiently via μP",
+      "applicantName": "郑晨宇",
+      "fileName": "郑晨宇-中国人民大学-xagi2026海报.pdf",
+      "pdfSha256": "a0fef41958e4933a2af554609eb7854118da64579f17a03566d15c95087432f4",
+      "affiliation": "中国人民大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2505.15270"
+    },
+    {
+      "id": "poster-ff735f051373",
+      "title": "Scaling Laws for Precision in High-Dimensional Linear Regression",
+      "applicantName": "张德辰",
+      "fileName": "张徳辰-香港大学-xagi2026海报.pdf",
+      "pdfSha256": "e488267295c3137ce83d588884392ec5a206c0f59a5ae2a3789f6d946031db70",
+      "note": "Submitted filename uses the variant character 徳; full title and Dechen Zhang match the listed 张德辰.",
+      "affiliation": "香港大学",
+      "venue": "ICML",
+      "href": "https://arxiv.org/abs/2602.19241"
+    },
+    {
+      "id": "poster-7985128eaafa",
+      "title": "SCOPE: Streaming Covariance-Orthogonal Post-Hoc Editing for Continual LLM Safety Governance",
+      "applicantName": "杨轶哲",
+      "fileName": "杨轶哲-兰州大学-xagi2026海报.pdf",
+      "pdfSha256": "ec7ff01aab4238328ede4e82ba4f63ac2763a6d76f496b4ff7dbbb6e4ed59ad5",
+      "affiliation": "兰州大学",
+      "venue": "ACM SIGKDD",
+      "href": "https://dl.acm.org/doi/10.1145/3770855.3817993"
+    },
+    {
+      "id": "poster-80c3d4046112",
+      "title": "Sign-Based Optimizers Under Heavy-Tailed Noise: On the Effectiveness of Lion and Muon",
+      "applicantName": "余定之",
+      "fileName": "余定之-南京大学-xagi2026海报.pdf",
+      "pdfSha256": "d513d8339b2cd01e60ed5688089eb977005ea6d18b56389fd695a316b8223c89",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work.",
+      "affiliation": "南京大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2602.07425"
+    },
+    {
+      "id": "poster-ff3e2ccd47e8",
+      "title": "Sparse Blind Deconvolution via Thresholded Wirtinger Flow",
+      "applicantName": "陈梦婷",
+      "fileName": "陈梦婷-上海科技大学-xagi2026海报.pdf",
+      "pdfSha256": "8cf9e566c072b6d94bbb674f79ad0b5163abc6f60fa5b6f34b01013630a2e51a",
+      "affiliation": "上海科技大学",
+      "venue": "NeurIPS",
+      "href": "https://faculty.sist.shanghaitech.edu.cn/zhao/papers.html"
+    },
+    {
+      "id": "poster-f4aea6615498",
+      "title": "SPLR: The Sparse-Plus-Low-Rank Quasi-Newton Method for Entropic-Regularized Optimal Transport",
+      "applicantName": "王晨瑞",
+      "fileName": "王晨瑞-中国人民大学-xagi2026海报.pdf",
+      "pdfSha256": "0843a827f81d18677df3012078052b1f59b5ddc33d118220d84462d18bd85a59",
+      "affiliation": "中国人民大学",
+      "venue": "ICML",
+      "href": "https://proceedings.mlr.press/v267/wang25ck.html",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work."
+    },
+    {
+      "id": "poster-20d7627de19e",
+      "title": "STAR: A Benchmark for Astronomical Star Fields Super-Resolution",
+      "applicantName": "巫国诚",
+      "fileName": "巫国诚-香港中文大学(深圳)-xagi2026 海报.pdf",
+      "pdfSha256": "a008aed67025cc5d5110368c164ac101991a47e7515cd09739012b3f14462796",
+      "affiliation": "香港中文大学(深圳)",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2507.16385"
+    },
+    {
+      "id": "poster-23d0d4153187",
+      "title": "Statistical Inference for Generative Model Comparison",
+      "applicantName": "苏瀚",
+      "fileName": "苏瀚-清华大学-xagi2026海报.pdf",
+      "pdfSha256": "e6e3d280116145cf9b3bbd9f24fd90a94d7525a33e4615022fb108e4437c7bf4",
+      "affiliation": "清华大学",
+      "venue": "TMLR",
+      "href": "https://openreview.net/forum?id=PXL6SBxh0q"
+    },
+    {
+      "id": "poster-f1e5e20e6992",
+      "title": "STrajRAG: Supervised Trajectory Retrieval Augmented Generation for Next POI Recommendation with Travel Semantics",
+      "applicantName": "林中潭",
+      "fileName": "林中潭-中国人民大学-xagi2026海报.pdf",
+      "pdfSha256": "423a145195132aa096e71f44ab80cd12f552b9061b8093559749317d96d417d2",
+      "affiliation": "中国人民大学",
+      "venue": "Information Processing & Management",
+      "href": "https://www.sciencedirect.com/science/article/pii/S0306457325001761",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work."
+    },
+    {
+      "id": "poster-beb01cdc9c2c",
+      "title": "The Implicit Bias of Steepest Descent with Mini-batch Stochastic Gradient",
+      "applicantName": "李继初",
+      "fileName": "李继初-中国人民大学-xagi2026海报.pdf",
+      "pdfSha256": "56db215cfbfa4c843f2ce455e3692e95c00eadea77db1a952c779ae141ebf7dd",
+      "affiliation": "中国人民大学",
+      "venue": "ICML",
+      "href": "https://openreview.net/forum?id=OT9cxeWbEO"
+    },
+    {
+      "id": "poster-pervasive-blind-spot",
+      "title": "The Pervasive Blind Spot: Benchmarking VLM Inference Risks on Everyday Personal Videos",
+      "applicantName": "张书宁",
+      "affiliation": "清华大学",
+      "venue": "",
+      "href": "https://arxiv.org/abs/2511.02367",
+      "fileName": "张书宁-清华大学-xagi2026海报.pdf",
+      "note": "The latest submitted poster replaces the prior CoVer registration. Public paper link verified against arXiv; no publication venue stated on the poster.",
+      "pdfSha256": "24fc9460b16073eb9a5e3976f66173e0c23813fd9ee41d09b28f19dbed4ffa2a"
+    },
+    {
+      "id": "poster-4c15e914b43e",
+      "title": "VKG-QA: Visual Knowledge Graph-based Question Answer for Multimodal Large Language Models",
+      "applicantName": "杜云涛",
+      "fileName": "杜云涛-山东大学-xagi2026海报.pdf",
+      "pdfSha256": "34701f9d84c2e6e8947612e1205980586d87fe02ae1a1a14b89c8f7771da99ae",
+      "note": "Public heading follows the latest submitted poster. The existing public paper link refers to the same work.",
+      "affiliation": "山东大学",
+      "venue": "CVPR",
+      "href": "https://openaccess.thecvf.com/content/CVPR2026/html/Du_VKG-QA_Visual_Knowledge_Graph-based_Question_Answer_for_Large_Multimodal_Models_CVPR_2026_paper.html"
+    },
+    {
+      "id": "poster-d15a9e17cd1b",
+      "title": "When and Why SignSGD Outperforms SGD: A Theoretical Study Based on ℓ₁-norm Lower Bounds",
+      "applicantName": "陶弘毅",
+      "fileName": "陶弘毅-南京大学-xagi2026海报.pdf",
+      "pdfSha256": "d67dc173b7d21b8a99269408c21bf88d98c3b003a85278a7b959eb7ffd5ff5f9",
+      "affiliation": "南京大学",
+      "venue": "NeurIPS",
+      "href": "https://arxiv.org/abs/2605.06615"
+    },
+    {
+      "id": "poster-70d62481de5a",
+      "title": "When Bias Pretends to Be Truth: How Spurious Correlations Undermine Hallucination Detection in LLMs",
+      "applicantName": "董亦骐",
+      "fileName": "董亦骐-清华大学--xagi2026海报.pdf",
+      "pdfSha256": "a996c4e0e183bee1e658417e8409f3eca2f5644989c4a0e62880e5e18e2d6edf",
+      "affiliation": "清华大学",
+      "venue": "ICLR",
+      "href": "https://arxiv.org/abs/2511.07318"
+    },
+    {
+      "id": "poster-latent-cot-exploration",
+      "title": "Why Latent Chain-of-Thought Helps Exploration but Hurts Precise Computation",
+      "applicantName": "熊耀中",
+      "affiliation": "中国人民大学",
+      "venue": "",
+      "href": null,
+      "fileName": "熊耀中-中国人民大学-xagi2026海报.pdf",
+      "note": "New submission. Title and authors visually verified from the poster. No public paper link or publication venue confirmed; the full poster remains available.",
+      "pdfSha256": "548cfcabd71148dfcb8a370f0cbeee899afcf042adc54c9ff0be9665802a5ed1"
+    }
+  ]
+}

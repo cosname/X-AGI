@@ -1,0 +1,32 @@
+---
+import '../../styles/research-poster-viewer.css';
+---
+
+<dialog class="research-poster-viewer" id="research-poster-viewer" aria-labelledby="research-poster-viewer-title" data-research-poster-viewer>
+  <header class="research-poster-viewer__header">
+    <div>
+      <p>RISING STARS POSTER</p>
+      <h2 id="research-poster-viewer-title" data-poster-viewer-title>海报预览</h2>
+    </div>
+    <button type="button" aria-label="关闭海报" data-poster-close autofocus><span aria-hidden="true">×</span></button>
+  </header>
+  <div class="research-poster-viewer__viewport" tabindex="0" role="region" aria-label="海报，可滚动查看放大后的细节" data-poster-viewport>
+    <div class="research-poster-viewer__stage">
+      <img alt="" decoding="async" data-poster-image hidden />
+    </div>
+    <p class="research-poster-viewer__status" role="status" data-poster-status></p>
+  </div>
+  <footer class="research-poster-viewer__toolbar">
+    <div class="research-poster-viewer__zoom" role="group" aria-label="海报缩放">
+      <button type="button" aria-label="缩小海报" data-poster-zoom-out>−</button>
+      <output aria-live="polite" aria-label="缩放比例" data-poster-zoom-level>100%</output>
+      <button type="button" aria-label="放大海报" data-poster-zoom-in>+</button>
+      <button type="button" data-poster-fit>适应屏幕</button>
+    </div>
+    <a href="#" target="_blank" rel="noopener noreferrer" data-poster-original>查看原图 <span aria-hidden="true">↗</span></a>
+  </footer>
+</dialog>
+
+<script>
+  import '../../scripts/research-poster-viewer';
+</script>

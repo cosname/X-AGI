@@ -11,7 +11,6 @@ const ticketBands = conference2026.tickets.bands as readonly TicketBand[];
     <div class="info-card">
       <div class="card-header">报名须知</div>
       <div class="card-body">
-        <p>{conference2026.registration.description}</p>
         <div class="registration-notes">
           <ul>
             <li>会议时间：{conference2026.dates.display}</li>
@@ -23,8 +22,7 @@ const ticketBands = conference2026.tickets.bands as readonly TicketBand[];
         <aside class="registration-travel-grant" aria-label={conference2026.travelGrant.title}>
           <p><strong>{conference2026.travelGrant.benefit}</strong></p>
           <p>
-            {conference2026.travelGrant.application}
-            <a href={editionPath(currentEdition, 'travel-grant')}>查看补助条件与申请流程</a>
+            <a href={editionPath(currentEdition, 'travel-grant')}>补助详情</a>
           </p>
         </aside>
 

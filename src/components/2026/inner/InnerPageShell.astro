@@ -1,5 +1,6 @@
 ---
 import type { EditionConfig } from '../../../config/site';
+import { statusDescribesClosedOffering } from '../../../config/edition-status';
 
 interface Props {
   edition: EditionConfig;
@@ -21,7 +22,7 @@ const { edition, title, status, meta } = Astro.props;
       <h1>{edition.titleZh}</h1>
       <p class={status ? 'page-subtitle' : undefined}>
         {title}
-        {status && <span class="status-badge status-open">{status}</span>}
+        {status && <span class:list={['status-badge', statusDescribesClosedOffering(status) ? 'status-closed' : 'status-open']}>{status}</span>}
       </p>
       {meta && <p class="page-header__meta">{meta}</p>}
     </div>

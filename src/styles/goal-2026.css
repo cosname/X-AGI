@@ -81,6 +81,13 @@
   color: var(--goal-purple-deep);
 }
 
+.edition-goal-2026 .status-badge.status-closed {
+  border-color: #c3c3c3;
+  background: #eaeaea;
+  box-shadow: none;
+  color: #626262;
+}
+
 .edition-goal-2026 .main-content {
   background: transparent;
   padding-bottom: 0.35rem;

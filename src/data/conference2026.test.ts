@@ -236,7 +236,6 @@ describe('published 2026 content contracts', () => {
   it('retains the audited Rising Stars Poster ticket wording', () => {
     const expected = '报名参加 Rising Stars Poster 即赠专业票。';
 
-    assert.ok(conference2026.registration.notes.includes(expected));
     assert.ok(conference2026.tickets.notes.includes(expected));
   });
 });

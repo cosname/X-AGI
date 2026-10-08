@@ -44,8 +44,6 @@ const maps = [
               />
               <figcaption>
                 <strong>{map.title}</strong>
-                {' '}
-                {map.description}
               </figcaption>
             </figure>
           ))}
@@ -54,27 +52,20 @@ const maps = [
     </div>
 
     <div class="info-card">
-      <div class="card-header">交通与住宿</div>
+      <div class="card-header">住宿</div>
       <div class="card-body">
         <div class="service-section">
-          <h4>交通</h4>
-          <ul>
-            <li>机场、火车站与公共交通路线待发布</li>
-          </ul>
-        </div>
-        <div class="service-section">
-          <h4>住宿</h4>
           <div class="hotel-offer">
             <ul class="hotel-offer__summary">
               <li>
-                北京友谊宾馆为 XAGI 大会提供专属优惠，微信扫码进入酒店小程序，使用专属编号 5328460 查看
+                友谊宾馆专属优惠：
                 <time datetime="2026-10-16">2026.10.16</time>
                 至
                 <time datetime="2026-10-19">2026.10.19</time>
-                期间的预订信息。
+                ，编号 5328460。
               </li>
               <li>
-                如需预订 10 月 16 日前的住宿，可致电酒店预订部：<a href="tel:0108498080">010-8498080</a>。
+                10 月 16 日前的住宿请致电：<a href="tel:0108498080">010-8498080</a>。
               </li>
             </ul>
             <figure class="hotel-offer__code">
@@ -89,19 +80,13 @@ const maps = [
                   decoding="async"
                 />
               </div>
-              <figcaption>微信扫码查看专属优惠</figcaption>
+              <figcaption>微信扫码预订</figcaption>
             </figure>
           </div>
         </div>
       </div>
     </div>
 
-    <section id="travel-grant" class="info-card" aria-labelledby="travel-grant-link-title">
-      <h2 id="travel-grant-link-title" class="card-header">{conference2026.travelGrant.title}</h2>
-      <div class="card-body">
-        <p>参加 Rising Stars Poster 海报展示的本科生，可查看补助条件与申请流程。</p>
-        <a href={editionPath(currentEdition, 'travel-grant')}>查看本科生差旅补助计划</a>
-      </div>
-    </section>
+    <p id="travel-grant"><a href={editionPath(currentEdition, 'travel-grant')}>本科生差旅补助</a></p>
   </div>
 </main>

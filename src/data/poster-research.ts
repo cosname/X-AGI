@@ -1,6 +1,8 @@
-import { posterResearchPapers as submittedPapers } from './poster-research.generated.ts';
+import submissions from './research-poster-sources.json' with { type: 'json' };
 
-// Both public lists use title order without changing the imported registration data.
-export const posterResearchPapers = submittedPapers.toSorted((left, right) =>
+// Latest poster submissions determine the public roster. Keep review metadata private.
+export const posterResearchPapers = submissions.posters.map(({ id, title, applicantName, affiliation, venue, href }) => ({
+  id, title, applicantName, affiliation, venue, href,
+})).toSorted((left, right) =>
   left.title.localeCompare(right.title, 'en', { sensitivity: 'base', numeric: true }),
 );

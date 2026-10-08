@@ -19,6 +19,7 @@ const CLOSED_OFFERING_MARKERS = [
   '尚未开放',
   '申请信息即将发布',
   '报名已截止',
+  '报名已结束',
   '报名关闭',
 ] as const;
 
@@ -38,6 +39,12 @@ export function isRegistrationOpen(
   conference: Pick<typeof conference2026, 'registration'> = conference2026,
 ): boolean {
   return Boolean(conference.registration.url) && !statusDescribesClosedOffering(conference.registration.status);
+}
+
+export function isPosterRegistrationOpen(
+  conference: { poster: { status: string }; registration: { url: string } } = conference2026,
+): boolean {
+  return Boolean(conference.registration.url) && !statusDescribesClosedOffering(conference.poster.status);
 }
 
 export function currentEditionPageCopy(
@@ -66,7 +73,7 @@ export function currentEditionPageCopy(
         page,
         label: 'Rising Stars Poster',
         description: 'Rising Stars Poster 申请要求、入选权益、报名信息与报名论文。',
-        status: registrationOpen ? conference.registration.status : '申请通道确认中',
+        status: conference.poster.status,
       };
     case 'travel-grant':
       return {

@@ -1,6 +1,7 @@
 ---
 import { conference2026 } from '../../../data/conference2026';
 import { currentEdition, editionPath } from '../../../config/site';
+import { isPosterRegistrationOpen } from '../../../config/edition-status';
 
 const { travelGrant: grant, registration } = conference2026;
 ---
@@ -8,8 +9,6 @@ const { travelGrant: grant, registration } = conference2026;
 <section id="travel-grant" class="info-card travel-grant" aria-labelledby="travel-grant-title">
   <h2 id="travel-grant-title" class="card-header">{grant.title}</h2>
   <div class="card-body">
-    <p>{grant.introduction}</p>
-
     <dl class="travel-grant__summary">
       <div>
         <dt>每人报销上限</dt>
@@ -26,14 +25,12 @@ const { travelGrant: grant, registration } = conference2026;
       <div>
         <dt>审核通知</dt>
         <dd><time datetime={grant.review.dateTime}>{grant.review.label}</time></dd>
-        <dd class="travel-grant__review">完成审核并邮件通知</dd>
       </div>
     </dl>
 
     <div class="travel-grant__details">
       <section aria-labelledby="travel-grant-requirements">
-        <h3 id="travel-grant-requirements">申请要求</h3>
-        <p>申请人需同时满足以下条件：</p>
+        <h3 id="travel-grant-requirements">申请条件（须全部满足）</h3>
         <ol>
           {grant.requirements.map((requirement) => <li>{requirement}</li>)}
         </ol>
@@ -51,21 +48,21 @@ const { travelGrant: grant, registration } = conference2026;
           </li>
           <li>
             <strong>等待审核</strong>
-            <p><time datetime={grant.review.dateTime}>{grant.review.label}</time>，{grant.review.description}</p>
+            <p>{grant.review.description}</p>
           </li>
           <li>
             <strong>会后报销</strong>
-            <p>{grant.reimbursementNote}{grant.reminder}</p>
+            <p>{grant.reimbursementNote}</p>
           </li>
         </ol>
       </section>
     </div>
 
     <div class="travel-grant__actions">
-      <a class="capsule-action" href={registration.url} target="_blank" rel="noopener noreferrer">
+      {isPosterRegistrationOpen() && <a class="capsule-action" href={registration.url} target="_blank" rel="noopener noreferrer">
         申请海报展示与差旅补助
-      </a>
-      <a href={`${editionPath(currentEdition, 'poster')}#poster-details`}>查看 Rising Stars Poster 详情</a>
+      </a>}
+      <a href={`${editionPath(currentEdition, 'poster')}#poster-details`}>Rising Stars Poster 详情</a>
     </div>
   </div>
 </section>
@@ -112,8 +109,7 @@ const { travelGrant: grant, registration } = conference2026;
     font-variant-numeric: tabular-nums;
   }
 
-  .travel-grant__reimbursement,
-  .travel-grant__review {
+  .travel-grant__reimbursement {
     font-size: 0.8rem;
   }
 

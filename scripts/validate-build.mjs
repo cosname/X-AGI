@@ -16,9 +16,10 @@ import { currentEditionPageCopy } from '../src/config/edition-status.ts';
 import { site } from '../src/config/site.ts';
 import { sessionPosters } from '../src/data/session-posters.ts';
 import { homeSpeakers } from '../src/data/home-speakers.ts';
-import { posterResearchSource } from '../src/data/poster-research.generated.ts';
+import { posterResearchSource, posterResearchPapers as registeredResearchPapers } from '../src/data/poster-research.generated.ts';
 import { posterResearchPapers } from '../src/data/poster-research.ts';
 import { paperPreviews } from '../src/data/paper-previews.ts';
+import { researchPosters, researchPosterById } from '../src/data/research-posters.ts';
 
 const projectRoot = path.resolve('.');
 const outputRoot = path.resolve('dist');
@@ -572,6 +573,8 @@ const posterFiles = sessionPosters.flatMap((poster) => [
 await validatePublicCopies('2026 session posters', path.resolve('public/2026/session-posters'), posterFiles);
 const paperPreviewFiles = paperPreviews.map((paper) => path.basename(paper.src));
 await validatePublicCopies('2026 paper previews', path.resolve('public/2026/paper-previews'), paperPreviewFiles);
+const researchPosterFiles = researchPosters.flatMap((poster) => [poster.thumbnail.src, poster.full.src]).map((src) => path.basename(src));
+await validatePublicCopies('2026 research posters', path.resolve('public/2026/research-posters'), researchPosterFiles);
 
 const public2026Root = path.resolve('public/2026');
 validateExactSet(
@@ -584,6 +587,7 @@ validateExactSet(
     ...personPortraitFiles.map((file) => `people/${file}`),
     ...posterFiles.map((file) => `session-posters/${file}`),
     ...paperPreviewFiles.map((file) => `paper-previews/${file}`),
+    ...researchPosterFiles.map((file) => `research-posters/${file}`),
   ],
 );
 
@@ -737,7 +741,7 @@ for (const speaker of homeSpeakers) {
 }
 const homeResearchFragment = rootIndex.slice(homeResearchStart, historyStart);
 const homeResearchText = visibleText(homeResearchFragment);
-if (!homeResearchText.includes('论文展示') || !homeResearchFragment.includes('href="/poster/#poster-research"')) {
+if (!homeResearchText.includes('海报展示') || !homeResearchFragment.includes('href="/poster/#poster-research"')) {
   fail('index.html: Poster section must have its own visible heading and full directory link');
 }
 if ([...homeResearchFragment.matchAll(/\bdata-home-research-card(?:\s|>)/g)].length !== posterResearchPapers.length) {
@@ -749,22 +753,47 @@ for (const paper of posterResearchPapers) {
       fail(`index.html: homepage Poster section is missing ${paper.id} content: ${value}`);
     }
   }
-  if (!homeResearchFragment.includes(`href="${paper.href.replaceAll('&', '&amp;')}"`)) {
+  if (paper.href && !homeResearchFragment.includes(`href="${paper.href.replaceAll('&', '&amp;')}"`)) {
     fail(`index.html: homepage Poster section is missing the public paper link for ${paper.id}`);
   }
 }
 for (const route of ['index.html', 'poster/index.html']) {
   const html = await readFile(path.join(outputRoot, route), 'utf8');
+  for (const marker of ['data-poster-tools', 'data-poster-search', 'data-poster-filter', 'data-poster-clear']) {
+    if (!html.includes(marker)) fail(`${route}: missing shared poster filter control ${marker}`);
+  }
+  if (html.includes('以下展示作者最新提交的海报') || /共\s*\d+\s*篇(?:报名)?论文/.test(html)) {
+    fail(`${route}: removed poster explanations and visible totals must not return`);
+  }
   const prefix = route === 'index.html' ? 'home-' : '';
   const paperPositions = posterResearchPapers.map((paper) => html.indexOf(`id="${prefix}${paper.id}"`));
   if (paperPositions.some((position, index) => position < 0 || (index > 0 && position <= paperPositions[index - 1]))) {
     fail(`${route}: research papers must appear once in alphabetical title order`);
   }
-  for (const preview of paperPreviews) {
-    const images = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]).filter((image) => image.includes(`src="${preview.src}"`));
-    if (images.length !== 1 || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"') || !html.includes(`href="${preview.href.replaceAll('&', '&amp;')}"`)) {
-      fail(`${route}: missing or non-lazy submitted PDF preview for ${preview.id}`);
+  for (const paper of posterResearchPapers) {
+    const poster = researchPosterById.get(paper.id);
+    if (!poster) {
+      fail(`${route}: every public paper needs its submitted poster: ${paper.id}`);
+      continue;
     }
+    const images = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]).filter((image) => image.includes(`src="${poster.thumbnail.src}"`));
+    if (images.length !== 1 || !images[0].includes('loading="lazy"') || !images[0].includes('decoding="async"')
+      || (paper.href && !html.includes(`href="${paper.href.replaceAll('&', '&amp;')}"`))) {
+      fail(`${route}: missing or non-lazy research poster for ${paper.id}`);
+    }
+    if (!html.includes(`href="${poster.full.src}"`) || html.includes(`src="${poster.full.src}"`)) {
+      fail(`${route}: load the full poster only on demand: ${paper.id}`);
+    }
+  }
+  for (const registered of registeredResearchPapers) {
+    if (!researchPosterById.has(registered.id) && html.includes(`id="${prefix}${registered.id}"`)) {
+      fail(`${route}: registration without a current poster must not appear: ${registered.id}`);
+    }
+  }
+  if ([...html.matchAll(/\bdata-research-poster(?:\s|>)/g)].length !== researchPosters.length
+    || [...html.matchAll(/\bdata-research-poster-viewer(?:\s|>)/g)].length !== 1
+    || html.includes('海报待补') || html.includes('/2026/paper-previews/')) {
+    fail(`${route}: show every submitted poster, one shared viewer, and no paper-page placeholders`);
   }
 }
 if (!rootIndex.includes('property="og:image"') || !rootIndex.includes('/2026/brand/share-2026.png')) {
@@ -821,23 +850,18 @@ const officialCopyByRoute = new Map([
   ]],
   ['poster/index.html', [
     conference2026.poster.title,
-    conference2026.poster.headline,
-    conference2026.poster.description,
+    conference2026.poster.status,
     conference2026.poster.ticket.label,
     String(conference2026.poster.ticket.value),
     ...conference2026.poster.requirements,
     ...conference2026.poster.benefits,
     conference2026.poster.deadline.date,
     conference2026.poster.deadline.time,
-    conference2026.scale.posters,
     conference2026.contact,
-    '以下为报名提交的论文信息，现场展示安排以大会后续通知为准。',
-    '会议与期刊信息由报名人提供。',
     ...posterResearchPapers.flatMap((paper) => [paper.title, paper.applicantName, paper.affiliation, paper.venue]),
   ]],
   ['travel-grant/index.html', [
     conference2026.travelGrant.title,
-    conference2026.travelGrant.introduction,
     conference2026.travelGrant.maxAmount.toLocaleString('en-US'),
     conference2026.travelGrant.reimbursement,
     ...conference2026.travelGrant.coverage,
@@ -849,20 +873,18 @@ const officialCopyByRoute = new Map([
     conference2026.travelGrant.review.label,
     conference2026.travelGrant.review.description,
     conference2026.travelGrant.reimbursementNote,
-    conference2026.travelGrant.reminder,
   ]],
   ['guide/index.html', [
     conference2026.venue.scheduleName,
     conference2026.venue.nameEn,
-    ...conference2026.venue.maps.flatMap((map) => [map.title, map.description]),
-    '交通与住宿',
-    '北京友谊宾馆为 XAGI 大会提供专属优惠',
+    ...conference2026.venue.maps.map((map) => map.title),
+    '住宿',
+    '友谊宾馆专属优惠',
     '5328460',
     '2026.10.16',
     '2026.10.19',
   ]],
   ['register/index.html', [
-    conference2026.registration.description,
     ...conference2026.registration.notes,
     ...conference2026.tickets.notes,
     ...conference2026.tickets.bands.flatMap((band) => [
@@ -882,10 +904,13 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
   if (!source.includes('data-masthead-pixel-field') || !source.includes('data-connection-stage')) {
     fail(`${route}: current inner page must expose the interactive masthead field`);
   }
-  // The paper directory includes static, accessible first-page PDF previews.
-  const htmlByteLimit = route === 'schedule/index.html' ? 300_000 : route === 'poster/index.html' ? 80_000 : 50_000;
+  // The directory includes the complete static poster roster and accessible viewer.
+  const htmlByteLimit = route === 'schedule/index.html' ? 300_000 : route === 'poster/index.html' ? 90_000 : 50_000;
   if ((await stat(path.join(outputRoot, route))).size > htmlByteLimit) {
     fail(`${route}: HTML exceeds ${Math.round(htmlByteLimit / 1000)} KB`);
+  }
+  if (route === 'poster/index.html' && gzipSync(source).byteLength > 20_000) {
+    fail(`${route}: compressed HTML exceeds 20 KB`);
   }
   if ((await initialLocalPayload(path.join(outputRoot, route), managedDownloads)) > 1_500_000) {
     fail(`${route}: initial local payload exceeds 1.5 MB`);
@@ -900,23 +925,35 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
 
 const researchSource = await readFile(path.join(outputRoot, 'poster/index.html'), 'utf8');
 const researchCuration = JSON.parse(await readFile(path.resolve('src/data/poster-research-curation.json'), 'utf8'));
-const researchIds = new Set(posterResearchPapers.map((paper) => paper.id));
+const registrationIds = new Set(registeredResearchPapers.map((paper) => paper.id));
 if (posterResearchSource.status !== 'registration'
-  || researchIds.size !== posterResearchPapers.length
-  || researchIds.size !== new Set(researchCuration.entries.map((entry) => entry.id)).size) {
-  fail('poster/index.html: registration status, unique papers and reviewed source must agree');
+  || registrationIds.size !== registeredResearchPapers.length
+  || registrationIds.size !== new Set(researchCuration.entries.map((entry) => entry.id)).size) {
+  fail('Research registration snapshot and its reviewed source must agree');
 }
-for (const paper of posterResearchPapers) {
+for (const paper of registeredResearchPapers) {
   if (Object.keys(paper).sort().join(',') !== 'affiliation,applicantName,href,id,title,venue') {
-    fail(`poster/index.html: ${paper.id} includes a non-public registration field`);
+    fail(`Research registration snapshot: ${paper.id} includes a non-public field`);
   }
   const reviewed = researchCuration.entries.filter((entry) => entry.id === paper.id);
   if (!reviewed.length || reviewed.some((entry) => ['title', 'venue', 'href'].some((key) => entry[key] !== paper[key])
     || (entry.affiliation && entry.affiliation !== paper.affiliation))) {
-    fail(`poster/index.html: ${paper.id} is stale against its reviewed source; rerun posters:sync-research`);
+    fail(`Research registration snapshot: ${paper.id} is stale against its reviewed source; rerun posters:sync-research`);
   }
-  const escapedHref = paper.href.replaceAll('&', '&amp;');
-  if (!researchSource.includes(`id="${paper.id}"`) || !researchSource.includes(`href="${escapedHref}"`)) {
+}
+const researchSubmissions = JSON.parse(await readFile(path.resolve('src/data/research-poster-sources.json'), 'utf8'));
+const researchIds = new Set(posterResearchPapers.map((paper) => paper.id));
+if (researchIds.size !== posterResearchPapers.length || researchIds.size !== researchSubmissions.posters.length
+  || researchIds.size !== researchPosters.length || researchSubmissions.posters.some((poster) => !researchIds.has(poster.id))) {
+  fail('poster/index.html: every submitted poster must appear exactly once, with no registration-only entries');
+}
+for (const paper of posterResearchPapers) {
+  const reviewed = researchSubmissions.posters.find((poster) => poster.id === paper.id);
+  const fields = ['affiliation', 'applicantName', 'href', 'id', 'title', 'venue'];
+  if (Object.keys(paper).sort().join(',') !== fields.join(',') || !reviewed || fields.some((key) => paper[key] !== reviewed[key])) {
+    fail(`poster/index.html: ${paper.id} must contain only the reviewed public poster fields`);
+  }
+  if (!researchSource.includes(`id="${paper.id}"`) || (paper.href && !researchSource.includes(`href="${paper.href.replaceAll('&', '&amp;')}"`))) {
     fail(`poster/index.html: missing paper anchor or public link for ${paper.id}`);
   }
 }

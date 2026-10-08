@@ -4,6 +4,7 @@ import {
   conference2026PartnerDisplayGroups,
 } from '../../../data/conference2026';
 import { partnerLogoByName } from '../../../data/partner-logo-assets-2026';
+import { currentEdition, editionPath } from '../../../config/site';
 
 const groups = conference2026PartnerDisplayGroups.filter(
   (group) => group.organizations.length > 0,
@@ -25,6 +26,7 @@ const groups = conference2026PartnerDisplayGroups.filter(
           />
         </figure>
         {conference2026.introduction.map((paragraph) => <p>{paragraph}</p>)}
+        <p>大会设 <a href={editionPath(currentEdition, 'poster')}>Rising Stars Poster</a>，供青年研究者展示研究成果。</p>
       </div>
     </div>
 

@@ -1,13 +1,14 @@
 ---
-import { paperPreviewById } from '../../data/paper-previews';
+import { researchPosterById } from '../../data/research-posters';
 const { paperId, titleId } = Astro.props;
-const preview = paperPreviewById.get(paperId);
+const poster = researchPosterById.get(paperId);
 ---
 
-{preview && (
-  <a class="paper-preview" href={preview.href} target="_blank" rel="noopener noreferrer" aria-describedby={titleId}>
-    <img src={preview.src} width={preview.width} height={preview.height} alt="" loading="lazy" decoding="async" />
-    <span>论文预览 <span aria-hidden="true">↗</span><small>PDF 首页</small></span>
+{poster && (
+  <a class="paper-preview paper-preview--poster" href={poster.full.src} target="_blank" rel="noopener noreferrer" aria-describedby={titleId}
+    data-research-poster>
+    <img src={poster.thumbnail.src} width={poster.thumbnail.width} height={poster.thumbnail.height} alt="" loading="lazy" decoding="async" />
+    <span>查看海报 <span aria-hidden="true">⤢</span></span>
   </a>
 )}
 
@@ -33,11 +34,6 @@ const preview = paperPreviewById.get(paperId);
     font-size: 0.8rem;
     line-height: 1.6;
   }
-  .paper-preview small {
-    margin-left: auto;
-    color: var(--muted, #555572);
-    font-size: 0.72rem;
-  }
   .paper-preview:hover > span {
     text-decoration: underline;
     text-underline-offset: 0.2em;
@@ -45,5 +41,11 @@ const preview = paperPreviewById.get(paperId);
   .paper-preview:focus-visible {
     outline: 2px solid var(--goal-purple-deep, #4f3caf);
     outline-offset: 3px;
+  }
+  .paper-preview--poster {
+    cursor: zoom-in;
+  }
+  .paper-preview--poster img {
+    object-position: center;
   }
 </style>

@@ -8,6 +8,7 @@ import {
   currentEditionActionPaths,
   currentEditionPageCopy,
   isRegistrationOpen,
+  isPosterRegistrationOpen,
   statusDescribesClosedOffering,
 } from './edition-status.ts';
 
@@ -39,7 +40,7 @@ describe('current edition destinations', () => {
 });
 
 describe('live registration and poster status', () => {
-  it('does not describe register or poster as closed while registration is open', () => {
+  it('keeps general registration open after poster applications close', () => {
     assert.equal(
       Boolean(conference2026.registration.url),
       true,
@@ -52,18 +53,16 @@ describe('live registration and poster status', () => {
     );
     assert.equal(isRegistrationOpen(conference2026), true);
 
-    for (const page of ['register', 'poster'] as const) {
-      const copy = currentEditionPageCopy(page, conference2026);
-      assert.equal(
-        statusDescribesClosedOffering(copy.status),
-        false,
-        `${page} status cannot describe a closed offering while registration is open`,
-      );
-      assert.equal(
-        statusDescribesClosedOffering(copy.description),
-        false,
-        `${page} description cannot describe a closed offering while registration is open`,
-      );
-    }
+    assert.equal(statusDescribesClosedOffering(currentEditionPageCopy('register').status), false);
+    assert.equal(currentEditionPageCopy('poster').status, '报名已结束');
+    assert.equal(statusDescribesClosedOffering(currentEditionPageCopy('poster').status), true);
+    assert.equal(isPosterRegistrationOpen(), false);
+  });
+
+  it('only exposes poster applications when their own status and signup URL allow them', () => {
+    const registration = { url: conference2026.registration.url };
+    assert.equal(isPosterRegistrationOpen({ registration, poster: { status: '报名开放中' } }), true);
+    assert.equal(isPosterRegistrationOpen({ registration, poster: { status: '报名已结束' } }), false);
+    assert.equal(isPosterRegistrationOpen({ registration: { url: '' }, poster: { status: '报名开放中' } }), false);
   });
 });

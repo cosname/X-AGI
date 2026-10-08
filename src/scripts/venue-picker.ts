@@ -3,10 +3,9 @@ export function initializeVenuePicker(root: HTMLElement, select: HTMLSelectEleme
   const trigger = root.querySelector<HTMLButtonElement>('[data-venue-trigger]');
   const value = root.querySelector<HTMLElement>('[data-venue-value]');
   const menu = root.querySelector<HTMLElement>('[data-venue-menu]');
-  const label = root.querySelector<HTMLLabelElement>('#poster-venue-label');
   const options = [...root.querySelectorAll<HTMLElement>('[data-venue-option]')];
   const fallback = { sync() {}, cleanup() {} };
-  if (!trigger || !value || !menu || !label || options.length !== select.options.length
+  if (!trigger || !value || !menu || options.length !== select.options.length
     || typeof menu.showPopover !== 'function') return fallback;
 
   let active = select.selectedIndex;
@@ -146,7 +145,6 @@ export function initializeVenuePicker(root: HTMLElement, select: HTMLSelectEleme
   trigger.hidden = false;
   menu.hidden = false;
   trigger.parentElement!.dataset.venueEnhanced = 'true';
-  label.htmlFor = trigger.id;
   sync();
 
   return {
@@ -159,7 +157,6 @@ export function initializeVenuePicker(root: HTMLElement, select: HTMLSelectEleme
       trigger.hidden = true;
       menu.hidden = true;
       select.hidden = false;
-      label.htmlFor = select.id;
       delete trigger.parentElement!.dataset.venueEnhanced;
     },
   };

@@ -1,0 +1,57 @@
+---
+import { posterResearchPapers } from '../../data/poster-research';
+import '../../styles/research-poster-tools.css';
+
+interface Props {
+  idPrefix: string;
+  controls: string;
+  class?: string;
+}
+
+const { idPrefix, controls, class: className } = Astro.props;
+const venues = [...new Set(posterResearchPapers.map((paper) => paper.venue))]
+  .filter(Boolean)
+  .sort((left, right) => left.localeCompare(right, 'zh-CN', { numeric: true }));
+const menuId = `${idPrefix}-venue-menu`;
+---
+
+<div class:list={['research-poster-tools', className]} role="search" aria-label="筛选海报" data-poster-tools hidden>
+  <input type="search" class="research-poster-tools__search" aria-label="搜索海报" placeholder="题目、报名人或单位" autocomplete="off" aria-controls={controls} data-poster-search />
+  <div class="research-poster-tools__select">
+    <select id={`${idPrefix}-venue-native`} aria-label="会议 / 期刊" aria-controls={controls} data-poster-filter>
+      <option value="">全部会议 / 期刊</option>
+      {venues.map((venue) => <option value={venue}>{venue}</option>)}
+    </select>
+    <svg class="research-poster-tools__select-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <path d="m5 7.5 5 5 5-5" />
+    </svg>
+    <button
+      id={`${idPrefix}-venue-trigger`}
+      type="button"
+      class="research-poster-tools__venue-trigger"
+      role="combobox"
+      aria-label="会议 / 期刊"
+      aria-controls={menuId}
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      popovertarget={menuId}
+      data-venue-trigger
+      hidden
+    >
+      <span data-venue-value>全部会议 / 期刊</span>
+      <svg class="research-poster-tools__select-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <path d="m5 7.5 5 5 5-5" />
+      </svg>
+    </button>
+  </div>
+  <ul id={menuId} class="research-poster-tools__venue-menu" role="listbox" aria-label="会议 / 期刊" popover="auto" data-venue-menu hidden>
+    {['', ...venues].map((venue, index) => (
+      <li id={`${idPrefix}-venue-option-${index}`} role="option" aria-selected={index === 0} data-venue-option>
+        <span>{venue || '全部会议 / 期刊'}</span>
+        <span class="research-poster-tools__venue-check" aria-hidden="true">✓</span>
+      </li>
+    ))}
+  </ul>
+  <button type="button" class="research-poster-tools__clear" data-poster-clear disabled>清除筛选</button>
+  <p class="research-poster-tools__status" role="status" aria-live="polite" aria-atomic="true" data-poster-results></p>
+</div>

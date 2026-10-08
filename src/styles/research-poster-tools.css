@@ -1,0 +1,259 @@
+.research-poster-tools {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.65fr) auto;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.research-poster-tools[hidden],
+.research-poster-tools [hidden] {
+  display: none !important;
+}
+
+.research-poster-tools input,
+.research-poster-tools select,
+.research-poster-tools__venue-trigger,
+.research-poster-tools__clear {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  padding: 0.65rem 1.05rem;
+  border: 1px solid var(--glass-lens-rim);
+  border-radius: 999px;
+  background: var(--glass-micro-fill);
+  box-shadow: var(--glass-micro-shadow);
+  -webkit-backdrop-filter: var(--glass-micro-backdrop);
+  backdrop-filter: var(--glass-micro-backdrop);
+  color: var(--goal-ink, #111342);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 450;
+  line-height: 1.35;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.research-poster-tools input::placeholder {
+  color: var(--muted, #555572);
+  opacity: 1;
+}
+
+.research-poster-tools__select {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+.research-poster-tools select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 2.75rem;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.research-poster-tools__select[data-venue-enhanced] > .research-poster-tools__select-icon {
+  display: none;
+}
+
+.research-poster-tools__venue-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 2.75rem;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.research-poster-tools__venue-trigger [data-venue-value] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.research-poster-tools__venue-trigger[aria-expanded="true"] .research-poster-tools__select-icon {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.research-poster-tools__venue-menu {
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.45rem;
+  overflow-y: auto;
+  scroll-padding-block: 0.45rem;
+  overscroll-behavior: contain;
+  border: 1px solid var(--goal-line, rgb(17 19 66 / 0.14));
+  border-radius: 1.25rem;
+  background: rgb(255 253 251 / 0.94);
+  box-shadow: var(--glass-panel-shadow);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  color: var(--goal-ink, #111342);
+  font-family: var(--font-sans);
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(103 82 200 / 0.28) transparent;
+}
+
+.research-poster-tools__venue-menu [role="option"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 450;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms ease;
+}
+
+.research-poster-tools__venue-menu [aria-selected="true"] {
+  background: rgb(103 82 200 / 0.07);
+  font-weight: 650;
+}
+
+.research-poster-tools__venue-menu [data-active="true"] {
+  background: rgb(103 82 200 / 0.14);
+}
+
+.research-poster-tools__venue-check {
+  flex: none;
+  color: var(--goal-purple-deep, #4f3caf);
+  opacity: 0;
+}
+
+.research-poster-tools__venue-menu [aria-selected="true"] .research-poster-tools__venue-check {
+  opacity: 1;
+}
+
+.research-poster-tools__select-icon {
+  position: absolute;
+  top: 50%;
+  right: 1.05rem;
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.research-poster-tools__clear {
+  width: auto;
+  color: var(--goal-purple-deep, #4f3caf);
+  font-size: 0.85rem;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+  background: var(--glass-lens-fill);
+  box-shadow: var(--glass-lens-shadow);
+}
+
+.research-poster-tools__clear:hover:not(:disabled) {
+  border-color: var(--goal-purple-deep, #4f3caf);
+}
+
+.research-poster-tools__clear:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.research-poster-tools :is(input, select, button, a):focus-visible {
+  outline: 2px solid var(--goal-purple-deep, #4f3caf);
+  outline-offset: 3px;
+}
+
+.research-poster-tools :is(input, select, .research-poster-tools__venue-trigger) {
+  border-color: var(--goal-line, rgb(17 19 66 / 0.14));
+  background: rgb(255 253 251 / 0.35);
+  transition: background-color 160ms ease;
+}
+
+.research-poster-tools :is(input, select, .research-poster-tools__venue-trigger):focus,
+.research-poster-tools__venue-trigger[aria-expanded="true"] {
+  background-color: rgb(255 253 251 / 0.96);
+  outline: none;
+}
+
+.research-poster-tools__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .research-poster-tools {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.65rem;
+  }
+
+  .research-poster-tools__search {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 390px) {
+  .research-poster-tools :is(input, select, .research-poster-tools__venue-trigger) {
+    font-size: 0.9rem;
+  }
+
+  .research-poster-tools__clear {
+    padding-inline: 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .research-poster-tools__venue-menu [role="option"],
+  .research-poster-tools :is(input, select, button) {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .research-poster-tools :is(input, select, button) {
+    border-color: ButtonText;
+  }
+
+  .research-poster-tools :is(input, select, .research-poster-tools__venue-trigger):focus {
+    outline: 2px solid Highlight;
+    outline-offset: 3px;
+  }
+
+  .research-poster-tools__venue-menu {
+    border-color: ButtonText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .research-poster-tools__venue-menu [data-active="true"] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  .research-poster-tools__venue-check {
+    color: CanvasText;
+  }
+}

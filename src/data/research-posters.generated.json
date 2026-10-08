@@ -1,0 +1,1046 @@
+{
+  "generatedBy": "scripts/import-research-posters.mjs",
+  "sourcesSha256": "249597187fe94f5d321397818fc4cbb590362885dc37ec2fef36e6058f865406",
+  "posters": [
+    {
+      "id": "poster-136c923ca735",
+      "title": "A novel abnormal pore pressure prediction framework based on machine learning and drilling–rock mechanics parameter data",
+      "pdfSha256": "57a30bd18e626f862f00a1c256ab42b016067b80c6c1e2ef66a38860a84fbfa4",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-136c923ca735-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-136c923ca735-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 71018,
+        "sha256": "fabc380c184120ae53ca444eaa99b06a98f1341adf3299946406686a9bb5295f"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-136c923ca735-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1360428,
+        "sha256": "9a3b9e4cce56e5e2b892e63ca62c10d14038c3932199d42144be599cf045a411"
+      }
+    },
+    {
+      "id": "poster-6dd712cfb147",
+      "title": "A systematic benchmarking framework and dual-view optimization strategy for single-cell DNA methylation imputation",
+      "pdfSha256": "1177fe0249453e607dbbb24c4187cd455c22b7c7a31f85336fae5bbb38977cf8",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-6dd712cfb147-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-6dd712cfb147-thumbnail.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 88858,
+        "sha256": "01347555e089da8e5fad20288a6cbc2a15096fb8230c795c9f7e33b48cbfa91e"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-6dd712cfb147-full.webp",
+        "width": 3001,
+        "height": 4000,
+        "bytes": 1240622,
+        "sha256": "8d6958cef8872f929052141c9fbd8d49b207bc8c8127dd711c206b0450c29433"
+      }
+    },
+    {
+      "id": "poster-adaptively-grouped-bandits",
+      "title": "Adaptively Grouped Contextual Bandits for Heterogeneous Human-AI Decision Making with Conformal Prediction Sets",
+      "pdfSha256": "b0743706f68f52179135ef8d4d1424a08782084dd52000c63341d7b2aac66f16",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-adaptively-grouped-bandits-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-adaptively-grouped-bandits-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 46450,
+        "sha256": "a935fd49ba5d4e0d4e0e1e857e366b60b10c081504f54f12f2574b65124125ab"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-adaptively-grouped-bandits-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 762866,
+        "sha256": "7d2591f0d15be5189e1b751a8d8d6a15ffe939f9937e25392f61c100ab7e4b34"
+      }
+    },
+    {
+      "id": "poster-b40d938f20da",
+      "title": "AlphaEval: Evaluating Agents in Production",
+      "pdfSha256": "41e5d566d21f63e5c9d96bfce96ab78285278150147e42d727b0206a40d2d5a7",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-b40d938f20da-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-b40d938f20da-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 40278,
+        "sha256": "2340286bb4a454182bcce45061d2049b6dd4a7f6af6ee60a31931ad90130e950"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-b40d938f20da-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 635982,
+        "sha256": "f7fb6267588cc13cb8a2aeee8464e067acb5a394e4b3d0c8e14a47dc0b45c9f1"
+      }
+    },
+    {
+      "id": "poster-e5d67567610f",
+      "title": "An Improved Clique-Picking Algorithm for Counting Markov Equivalent DAGs",
+      "pdfSha256": "6b14dc350c926ee992f718c7759b998e140fe0726a3057e2491cdc3fc3e51feb",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-e5d67567610f-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-e5d67567610f-thumbnail.webp",
+        "width": 640,
+        "height": 384,
+        "bytes": 42928,
+        "sha256": "6ef98256b08605ecfa4619ba0522d7a6206ca24aafcdb16ed597e014566729de"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-e5d67567610f-full.webp",
+        "width": 4000,
+        "height": 2400,
+        "bytes": 847378,
+        "sha256": "179ebbd522022dc93c95e1351ba5dbe2be5e0ecc339b9e1f72de6fcad3643c2c"
+      }
+    },
+    {
+      "id": "poster-4c81302353b2",
+      "title": "Attention Sink Forges Native MoE in Attention Layers: Sink-Aware Training to Address Head Collapse",
+      "pdfSha256": "1262e3eee506e92e4ce81b46b5528c14d9929a3fc9195466e0fd9e64f0d14560",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-4c81302353b2-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-4c81302353b2-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 59514,
+        "sha256": "6077c83390cb2fedf5b926e0eb5001c6d82e1f8e277c118e72079d43e3f53ace"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-4c81302353b2-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1035962,
+        "sha256": "bf35918af2ed0f3734e2a7ab1f0e42709e149a50453bd22930d358dd98b21541"
+      }
+    },
+    {
+      "id": "poster-f520da02c99f",
+      "title": "Augur: Modeling Covariate Causal Associations in Time Series via Large Language Models",
+      "pdfSha256": "8f3e05be6be9f4fba796d58ffa7ef79abea8867ea38e0766bde8f13fbc5bdbb9",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-f520da02c99f-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-f520da02c99f-thumbnail.webp",
+        "width": 640,
+        "height": 905,
+        "bytes": 134006,
+        "sha256": "548b33a71c290fdb16f9f0b6cfdfd6e763004c7d6455469b624880bf97164e46"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-f520da02c99f-full.webp",
+        "width": 2830,
+        "height": 4000,
+        "bytes": 1233546,
+        "sha256": "f50d629f22cb346f869607b86d464f947e3836ea9448d4abc25c99dbf1c80d3d"
+      }
+    },
+    {
+      "id": "poster-12055c3dc7df",
+      "title": "Benchmarking Language Models for Statistical Problem Formulation",
+      "pdfSha256": "3534ed60bf90d66205f44201714b64eef42fa80a1fe5869c68387d51d91c3f21",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-12055c3dc7df-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-12055c3dc7df-thumbnail.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 107896,
+        "sha256": "5ebc6302af1a04d75eec12e9ee3e3ec2b8bc9fd3c4657666baed754024b8cf2c"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-12055c3dc7df-full.webp",
+        "width": 3000,
+        "height": 4000,
+        "bytes": 1206468,
+        "sha256": "5858476f386c0b8f544bd565f8b27b2e9b426055db4964d722eba98a795a9234"
+      }
+    },
+    {
+      "id": "poster-36f1f5719cb4",
+      "title": "Beyond Static Rules: Automated Discovery of Latent Vulnerabilities in Text-to-SQL",
+      "pdfSha256": "02ebfd9fdb75de4d1f38f1423fd159862d93018c53469df16c004a8c4502aea4",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-36f1f5719cb4-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-36f1f5719cb4-thumbnail.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 43556,
+        "sha256": "f791c3ef2b2eb53d2fb430414fd304022d2990556162b5dbdaf398670cd23aee"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-36f1f5719cb4-full.webp",
+        "width": 4000,
+        "height": 2667,
+        "bytes": 673978,
+        "sha256": "75a18f9e7ac2103176803c1f4921cb9a05cb2f03d84bd0595ce8ae7f7c768287"
+      }
+    },
+    {
+      "id": "poster-25c873da8df2",
+      "title": "BReD: Block Replay Dithering for Stable Low-Bit EMA Optimizer States",
+      "pdfSha256": "ec447af1713079a137b6caed8870b2fa350a0706d9e2b5034affe876909e30f9",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-25c873da8df2-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-25c873da8df2-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 47432,
+        "sha256": "d25de65e7608c7dc0d08941d250122fd890040eba9d1dfb00baf3dae9a7684ed"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-25c873da8df2-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 650738,
+        "sha256": "00009cf056e05e5b54de74e325ef632baf1958453b2be3ba38d600aa1cbc982b"
+      }
+    },
+    {
+      "id": "poster-53bb147467d6",
+      "title": "Co-GRPO: Co-Optimized Group Relative Policy Optimization for Masked Image Generation",
+      "pdfSha256": "53dc153ebe1f226b6459da13c85eb9f1bcb565d8b820b409c4dd7ea13ed20f83",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-53bb147467d6-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-53bb147467d6-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 79916,
+        "sha256": "1cd7925af84195ec759b6a64110e8d3ba2c37aef75d9861cb5cbde8a50ac5747"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-53bb147467d6-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1194522,
+        "sha256": "8ab80e61a9363ec566e7eaa9bc44cf8e008f23053725dd6f4de0c47f9e869b69"
+      }
+    },
+    {
+      "id": "poster-a7172647caf8",
+      "title": "Co4ICF: Co-evolving Physics-Informed Surrogate and RL-based Pulse Optimizer for Inertial Confinement Fusion",
+      "pdfSha256": "f27e29c205699277e9e5107f6ea0fee85d8069a52b501b753bea24794997589f",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-a7172647caf8-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-a7172647caf8-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 57494,
+        "sha256": "293f3cacb4b763d6c14522e3feee9c9111e538fca8481ba425404c3301b31956"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-a7172647caf8-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1012238,
+        "sha256": "40174060b77fb898058682b80d069c6801172bb314058c1260b732cb7f164267"
+      }
+    },
+    {
+      "id": "poster-d942ebf1012f",
+      "title": "CodeHacker: Automated Test Case Generation for Detecting Vulnerabilities in Competitive Programming Solutions",
+      "pdfSha256": "b9a3409ad9c79f0495d523603aad1f09675e24dbd6c8305e0cef2bb26f6ecdc9",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-d942ebf1012f-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-d942ebf1012f-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 59288,
+        "sha256": "e2c983c50573fa1e64929b793ef7a6301dc1d451435785165784a11fabba33fa"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-d942ebf1012f-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1001908,
+        "sha256": "7a92c4bae59c976ef712379879435bf2d60a9c771d26e602f47d8e42b76ff554"
+      }
+    },
+    {
+      "id": "poster-224c26c262ff",
+      "title": "Contractive Anchor Resolvent Diffusion for Incomplete Multi-View Clustering",
+      "pdfSha256": "5752fc3cec32ae9c6e982d7f5666724c2462af58b0efac3a528b6a069ef52ec8",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-224c26c262ff-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-224c26c262ff-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 48066,
+        "sha256": "65e95502c5d041878e9b8706217eb030fcfa82e0c9e3bdb59914cdb9b3135658"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-224c26c262ff-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 849574,
+        "sha256": "c057166d8ff15fce46ef0e4343c23e16018b5a2c7c0b9f6c523148c867465674"
+      }
+    },
+    {
+      "id": "poster-d89d4985330b",
+      "title": "CSRv2: Unlocking Ultra-Sparse Embeddings",
+      "pdfSha256": "e7ca0222df49daedd64f22b0ccaacf174834dcc457912efa352994ae28fc9e33",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-d89d4985330b-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-d89d4985330b-thumbnail.webp",
+        "width": 640,
+        "height": 453,
+        "bytes": 53860,
+        "sha256": "dfe8fb606cd4c77658deec103c1d35ed0e677f932e6f9338dff6bf14edcd85e7"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-d89d4985330b-full.webp",
+        "width": 4000,
+        "height": 2829,
+        "bytes": 948860,
+        "sha256": "24582743804a83a77de1d6f9dde806f938cd6461079462aede7295ed7c7b177f"
+      }
+    },
+    {
+      "id": "poster-20cc69625fe7",
+      "title": "CWF: A Collaborative Writing Framework for Personalized and Reliable Popular Science Writing",
+      "pdfSha256": "eb4dd97228ac24ae44e253c11472ad519773b217e198921f6ce1fb589db3393c",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-20cc69625fe7-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-20cc69625fe7-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 58278,
+        "sha256": "5b8b45ee97dae344ccd52ab6a62d27718f70678eebabbc64f394c611910b01c6"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-20cc69625fe7-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1503226,
+        "sha256": "162afea73a71998744c0b9340f75ef9eb270306c0c690906e5be9524ccea9d11"
+      }
+    },
+    {
+      "id": "poster-c07208108cd9",
+      "title": "Diffusion Models As Dataset Distillation Priors",
+      "pdfSha256": "658da568b716fc11561a5d10677c767bc770926909d7a067da2a1715850bc6ab",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-c07208108cd9-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-c07208108cd9-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 59196,
+        "sha256": "5ab1fa93ce85a6960e75d3014e99f5f73ff89fb8d695b2af98e66034fa6761dc"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-c07208108cd9-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 961428,
+        "sha256": "a72a110db3a0f78c61ad976e4cbce93b48eb92ac654a73d6a5a13bf54d19006f"
+      }
+    },
+    {
+      "id": "poster-cb82eac05270",
+      "title": "Diversity-Enhanced and Classification-Aware Prompt Learning for Few-Shot Learning via Stable Diffusion",
+      "pdfSha256": "e1c4563bab53124a54262be17866a43339b1170cc2429e745a2c39cf31aaa09a",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-cb82eac05270-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-cb82eac05270-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 64516,
+        "sha256": "5829408c4abb3cd5c06c83add20d35aea19af20dbffc53160586e88a86c114f8"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-cb82eac05270-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1367334,
+        "sha256": "25d1fff11ba9da748c0da54e110dda65e5248e26e5bbeb62e7e0ec3e901e90af"
+      }
+    },
+    {
+      "id": "poster-37dfe0e91548",
+      "title": "DSN: Energy-Efficient EMG Signal Classification Method Enabling Real-Time Monitoring for Edge Healthcare",
+      "pdfSha256": "31f8dc504c48cead2a11803336aaa5955fb8ef298336adc848ef5ac492bb67b2",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-37dfe0e91548-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-37dfe0e91548-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 59730,
+        "sha256": "c600ca8cf122cc228c709d6d8714e0fa9bf41bc0f7bd5ee4b44c16b404248a80"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-37dfe0e91548-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1342076,
+        "sha256": "fe7a6b2a944c380a74c2639e965936ad383a113778a0db39955c1a5825a28b51"
+      }
+    },
+    {
+      "id": "poster-c3b39bcfdced",
+      "title": "EfficientFlow: Efficient Equivariant Flow Policy Learning for Embodied AI",
+      "pdfSha256": "6c2db06076ad6e5ccadc6d24af5a7b26bf18f78c549b9dbb01301b3f0e6edd49",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-c3b39bcfdced-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-c3b39bcfdced-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 60452,
+        "sha256": "662824e4fb8337eff9912dff5f20ebeb84c84e9bc4ff98a9cd49a32a144ea8eb"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-c3b39bcfdced-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1395562,
+        "sha256": "9414721369d096cfff8476bdd91622c73c536223b078508c49c05a546ec9f80d"
+      }
+    },
+    {
+      "id": "poster-51a63928ed19",
+      "title": "Gaussian Herding across Pens: An Optimal Transport Perspective on Global Gaussian Reduction for 3DGS",
+      "pdfSha256": "7a2419a9855ad82eca83a77d1011d6cfdfbde92e32785e249c97779b666f5566",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-51a63928ed19-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-51a63928ed19-thumbnail.webp",
+        "width": 640,
+        "height": 479,
+        "bytes": 50314,
+        "sha256": "646539c3e28caecd0c880941f6e0352e6ecbb27cc37cb25bcd520305c5e62c42"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-51a63928ed19-full.webp",
+        "width": 4000,
+        "height": 2991,
+        "bytes": 995378,
+        "sha256": "2bc1999bc67a7cc48bbc39435903f7d877ffa73fd11c78f15c733015745555c2"
+      }
+    },
+    {
+      "id": "poster-b62b851b68d6",
+      "title": "Graph-GRPO: Training Graph Flow Models with Reinforcement Learning",
+      "pdfSha256": "e6d1ae44b6484531a980e81c673cb8984f4e51ad48ea23a94fd13d99c5fb338b",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-b62b851b68d6-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-b62b851b68d6-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 50816,
+        "sha256": "d606f97e5d725bc87ad5159d1676fb04136e2b2cb1dcd6bccd8bf6f9931f5fc3"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-b62b851b68d6-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 884032,
+        "sha256": "5e75d3bc677facadf2f14a5d1c21433d235ff416194d747b635aaf8d1dc44b3b"
+      }
+    },
+    {
+      "id": "poster-02cffb08a0d2",
+      "title": "HyMAGE: Semantic-Aware Dynamic Hypergraph Generation",
+      "pdfSha256": "50fe6f0a49b35a3b3d3930eceefa124cf72a917e2f3fa31a875291b2668ff2e3",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-02cffb08a0d2-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-02cffb08a0d2-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 71050,
+        "sha256": "74d981e326bb8f8857238eb4550789bc3935db98ee340a92044819fcd216bccc"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-02cffb08a0d2-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1725842,
+        "sha256": "91899b7bd4b3afe6cc7b66654508d8de9c4e6b0e705e472f616e1bd47b3fa1c4"
+      }
+    },
+    {
+      "id": "poster-85bec19ca7b9",
+      "title": "Hystar: Hypernetwork-driven Style-adaptive Retrieval via Dynamic SVD Modulation",
+      "pdfSha256": "968e7d9eb56164a60e84204d7c9ff37ea3dde2ac8193a936417ea6a227a85466",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-85bec19ca7b9-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-85bec19ca7b9-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 72048,
+        "sha256": "c0227369bb8761b59f6ba246537415fcf3a66fad8f2b610e34d8eed8fee90d27"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-85bec19ca7b9-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1580664,
+        "sha256": "ce8cd76aa929bc6e6d3509e3665c5782bed7f003a9e78124bbfd994fc5b46bcd"
+      }
+    },
+    {
+      "id": "poster-ea387cedd8d5",
+      "title": "IGNN-Solver: A Graph Neural Solver for Implicit Graph Neural Networks",
+      "pdfSha256": "bcfb42e7191ef34ef8f71ede7d8d11cd3678573226bae24bab3846bbc2c606f7",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-ea387cedd8d5-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-ea387cedd8d5-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 59670,
+        "sha256": "8433eca2aeb04d65f619e12169e117f2d2edccf874c1566504f9ac0f08fb96c2"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-ea387cedd8d5-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1052638,
+        "sha256": "dc2bb1befb626c7e8efc9988fb2e52e9f7dd83167168240992f5e4abe01c5498"
+      }
+    },
+    {
+      "id": "poster-66e1317d6834",
+      "title": "Improving Memory Efficiency for Training KANs via Meta Learning",
+      "pdfSha256": "d7ef98262463e7f948aac5e1a1d4f372c72c87ed9fced67f7c752b1ee2b8d48a",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-66e1317d6834-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-66e1317d6834-thumbnail.webp",
+        "width": 640,
+        "height": 384,
+        "bytes": 49400,
+        "sha256": "f31984b0f0dd9a1f5a2b3d0e1722f0610f6cf48d14331dca5f94be33e87ec699"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-66e1317d6834-full.webp",
+        "width": 4000,
+        "height": 2401,
+        "bytes": 991006,
+        "sha256": "0e44d7f4916ffdf181cda91d91458c6037355d693d2431435d01b2b58ca984b7"
+      }
+    },
+    {
+      "id": "poster-139bbebeb768",
+      "title": "Iterative Nonlinear Computation Underlying Abstract Reasoning",
+      "pdfSha256": "2028ed3798c9ac4a91e7d813b61665a1c95babd6d982ebfa6229ef96586967b3",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-139bbebeb768-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-139bbebeb768-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 60768,
+        "sha256": "5071367059420f6eda23338b3c95a567633d41d99f928cb0f1a5a5ad01a7dc18"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-139bbebeb768-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 898248,
+        "sha256": "4083c5761591e685f7cb62d0c62bfacdbb4b31255ecc262f7cbea1b64173d3bc"
+      }
+    },
+    {
+      "id": "poster-99b01821f1a9",
+      "title": "Logical Phase Transitions: Understanding Collapse in LLM Logical Reasoning",
+      "pdfSha256": "737e4f3708ea24b212f0e1fdc3b16e5d1fa467f069aedde95f3df0d5ced9310b",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-99b01821f1a9-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-99b01821f1a9-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 57162,
+        "sha256": "4c7b42072315ebfa23889510e3ae8b3446bdbe93432c3aef749f41e63c07abb4"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-99b01821f1a9-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 937590,
+        "sha256": "c1ffc5f08c61c583aca561acbcf954b8f8fd4233fe7b5aa871a61467148394cc"
+      }
+    },
+    {
+      "id": "poster-22a8ed133827",
+      "title": "Meric: A Unified Framework for Multimodal Music Generation and Retrieval via Representation Space Anchoring",
+      "pdfSha256": "36fa8ac6029e49059d29ca88777a50b396a3b664c0eb507919a10ebe92672c4f",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-22a8ed133827-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-22a8ed133827-thumbnail.webp",
+        "width": 640,
+        "height": 457,
+        "bytes": 48284,
+        "sha256": "2dcea45e6f8fd9b35effcbde549ec3bdf036cbabbf13b31d4499a1201dbd3ed6"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-22a8ed133827-full.webp",
+        "width": 4000,
+        "height": 2858,
+        "bytes": 1030100,
+        "sha256": "208293bf8669cb76621368fda776820c4ff5682577a4a53aa77a9c033e8e6ec8"
+      }
+    },
+    {
+      "id": "poster-ae83c43481fb",
+      "title": "MIHC: Multi-View Interpretable Hypergraph Neural Networks with Information Bottleneck for Chip Congestion Prediction",
+      "pdfSha256": "aa24ca18fecd480b2207d556c8cdb376ae0474697cbada3dcf308766bb069ec4",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-ae83c43481fb-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-ae83c43481fb-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 61490,
+        "sha256": "4845429108625c489c8d670ff9de928c160af2c772de67b476f4253f53f2d8aa"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-ae83c43481fb-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1033844,
+        "sha256": "0251e81071ca95938132eb22169649734a6d8a64266373958daddcfeaac35520"
+      }
+    },
+    {
+      "id": "poster-d9beb2030ac7",
+      "title": "Model-Based Imaginative Planning for Embodied Agents",
+      "pdfSha256": "9ee676e7f15ee4dc14d8fcbc92af8daea99ab26823af1f23e1650dc7c10491e8",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-d9beb2030ac7-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-d9beb2030ac7-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 61486,
+        "sha256": "bc29b94aa6b78a890dd3bca0c8a125d8651c55b54af37b68252e3477d2430cd2"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-d9beb2030ac7-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1208610,
+        "sha256": "2ed98f9599ad54f498a24397452e9576d298352bd5824bf71f35f5b0eb86236a"
+      }
+    },
+    {
+      "id": "poster-c2d192f2a71b",
+      "title": "MoFO: Momentum-Filtered Optimizer for Mitigating Forgetting in LLM Fine-Tuning",
+      "pdfSha256": "018af416e0e3da790a0b8bf1d8dbe8a413f3f2518cef1aafc217be4a84a6e0a8",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-c2d192f2a71b-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-c2d192f2a71b-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 44742,
+        "sha256": "0b4840334f2959bb3ffcc1076330e035282f08baf78164d437cdab1388e72667"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-c2d192f2a71b-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 724334,
+        "sha256": "5c06101ac3c8d12e79703cae50ae9b1a8e95d3af00e3bef801667cba9738d641"
+      }
+    },
+    {
+      "id": "poster-3ab1bd2d3392",
+      "title": "PASTE-D2Net: Prior-Aware Spatio-Temporal Evolution Distillation Dual-Stream Network for Medical Single-Domain Generalization",
+      "pdfSha256": "00a0e28f5e2f645ae73c3f1911d2dacd3ca4b703bc0c40918721cbbf9edafd7a",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-3ab1bd2d3392-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-3ab1bd2d3392-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 65372,
+        "sha256": "61d01de1f12ace293b3354394ec2e3ba0926e675117f1d3c10a6f77ada59470e"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-3ab1bd2d3392-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1787754,
+        "sha256": "09b2e3a544d5f34949ee06311ada8207479e6b8e70eae4c8c2e38fc55d9e0c79"
+      }
+    },
+    {
+      "id": "poster-11aa8c0cf04b",
+      "title": "PersonaForge: Psychology-Grounded Dual-Process Architecture",
+      "pdfSha256": "85414046f5eb74f2e91894b40ffcf4c5dd7f1dbb8784b36ba075c12bb2000b90",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-11aa8c0cf04b-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-11aa8c0cf04b-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 53654,
+        "sha256": "d467813bea69a2b42e39e0c4dc7238db98591fdb3897a7fc2a36ac31c713aa5d"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-11aa8c0cf04b-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 641630,
+        "sha256": "064e038fa424e0edf4594bb0d35348e075a367c3e4f769e672850f23620ddcbc"
+      }
+    },
+    {
+      "id": "poster-63e8b1777613",
+      "title": "Questioning the Coverage-Length Metric in Conformal Prediction: When Shorter Intervals Are Not Better",
+      "pdfSha256": "aab55a2118437b5201bc5b6837de07b524a329178a6eab9817ac05096ec66bb9",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-63e8b1777613-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-63e8b1777613-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 46154,
+        "sha256": "d7c5bbaafe8f70a129da4b1cc42e7b884de09e022fe2616791cef01b85427d40"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-63e8b1777613-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 848534,
+        "sha256": "b2d078a3cbed717b79659a1e3cfee2ea0d5d76b87a5d6631307044f5561b7356"
+      }
+    },
+    {
+      "id": "poster-5d114adf5204",
+      "title": "Reflect-then-Correct: Rebalancing Task Optimization for Generalizable Meta-Reinforcement Learning via Distributional Value Error Reduction",
+      "pdfSha256": "e7c837293d137f19b5e986ee60d6d359f8590e644df4b4e9e6b705d43868ec2a",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-5d114adf5204-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-5d114adf5204-thumbnail.webp",
+        "width": 640,
+        "height": 453,
+        "bytes": 57680,
+        "sha256": "146b8c6572efcec34d9b4387504c5d8a35c4b9940477ed0b2197fea662cd354a"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-5d114adf5204-full.webp",
+        "width": 4000,
+        "height": 2830,
+        "bytes": 970076,
+        "sha256": "4b7af74126bee7d4a18a19539d8bc5d64da94b97ad352e4b8915a7472508020d"
+      }
+    },
+    {
+      "id": "poster-339537805502",
+      "title": "Revisiting the Role of Pretrained Weights in Model Merging: On Near-Optimality within the Core Subspace",
+      "pdfSha256": "c9d593ffcfd506edf82f9cb2cb8b36ad331bdf371dd78bfe11f01861f01c7b76",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-339537805502-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-339537805502-thumbnail.webp",
+        "width": 640,
+        "height": 425,
+        "bytes": 50614,
+        "sha256": "4109c5a892cd89c924ccf3458eb05a2c8130885abcf17234c4b7c13a098dd0c6"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-339537805502-full.webp",
+        "width": 4000,
+        "height": 2657,
+        "bytes": 849930,
+        "sha256": "ff3e3003f966d5d14fe65a5107c2516f3abeedbcb4f403f5e324e92a145cc0b8"
+      }
+    },
+    {
+      "id": "poster-c1b47d7c0b0d",
+      "title": "Scaling Diffusion Transformers Efficiently via μP",
+      "pdfSha256": "a0fef41958e4933a2af554609eb7854118da64579f17a03566d15c95087432f4",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-c1b47d7c0b0d-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-c1b47d7c0b0d-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 62674,
+        "sha256": "01df38e0a7472a8f8e8850d80e398d68ac0f2b47468f08a34933f19287e5e23f"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-c1b47d7c0b0d-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1183526,
+        "sha256": "8d1e9a0aae05a1cc11d6cc44458c19db7fd81c98abdcd6ea11a629947de595e2"
+      }
+    },
+    {
+      "id": "poster-ff735f051373",
+      "title": "Scaling Laws for Precision in High-Dimensional Linear Regression",
+      "pdfSha256": "e488267295c3137ce83d588884392ec5a206c0f59a5ae2a3789f6d946031db70",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-ff735f051373-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-ff735f051373-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 57206,
+        "sha256": "3dc7314eeff01829cbc6815ca612263edcc90c1be1e4751f713b7687bb0d71e3"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-ff735f051373-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1006288,
+        "sha256": "67c0121014170ee58b024260af5689a3e1916b6c37941c37acdb3e00c6f72ecd"
+      }
+    },
+    {
+      "id": "poster-7985128eaafa",
+      "title": "SCOPE: Streaming Covariance-Orthogonal Post-Hoc Editing for Continual LLM Safety Governance",
+      "pdfSha256": "ec7ff01aab4238328ede4e82ba4f63ac2763a6d76f496b4ff7dbbb6e4ed59ad5",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-7985128eaafa-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-7985128eaafa-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 82132,
+        "sha256": "878a09192d94e7d2bf7367acdf12f841e658647202d0469739310b9c7f77ea21"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-7985128eaafa-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1764008,
+        "sha256": "d4eb432f43507f4d442c3eb168f7ebf55a7feee0fa6a30c86d2e42ebb5cd4df0"
+      }
+    },
+    {
+      "id": "poster-80c3d4046112",
+      "title": "Sign-Based Optimizers Under Heavy-Tailed Noise: On the Effectiveness of Lion and Muon",
+      "pdfSha256": "d513d8339b2cd01e60ed5688089eb977005ea6d18b56389fd695a316b8223c89",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-80c3d4046112-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-80c3d4046112-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 70106,
+        "sha256": "d58d3e5a955874b1d87db30c07264153c828846008e7c25763b779e0c535d6a8"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-80c3d4046112-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1432220,
+        "sha256": "112d004ebdf52375272d7d3391cf1e5682768ef8b342178f088b8d17cb929d12"
+      }
+    },
+    {
+      "id": "poster-ff3e2ccd47e8",
+      "title": "Sparse Blind Deconvolution via Thresholded Wirtinger Flow",
+      "pdfSha256": "8cf9e566c072b6d94bbb674f79ad0b5163abc6f60fa5b6f34b01013630a2e51a",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-ff3e2ccd47e8-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-ff3e2ccd47e8-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 50156,
+        "sha256": "e73c95373fd997e410dde5a61bca9819c3de005a8970fd19d6a6d5c64dc05372"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-ff3e2ccd47e8-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 999522,
+        "sha256": "f005d7d72ca858513664a4559ff1bc0fb98936f23d7360b085e08e52bd4512f8"
+      }
+    },
+    {
+      "id": "poster-f4aea6615498",
+      "title": "SPLR: The Sparse-Plus-Low-Rank Quasi-Newton Method for Entropic-Regularized Optimal Transport",
+      "pdfSha256": "0843a827f81d18677df3012078052b1f59b5ddc33d118220d84462d18bd85a59",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-f4aea6615498-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-f4aea6615498-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 58238,
+        "sha256": "02656a631e57f2a1469eca5aa30bc8cb55e58160b8d6dbd9d5875fc6d334b0b6"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-f4aea6615498-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1105912,
+        "sha256": "1d8054ee4a7370647741fbc80f784d243a43a150aceebef9d6009d1f99d56f12"
+      }
+    },
+    {
+      "id": "poster-20d7627de19e",
+      "title": "STAR: A Benchmark for Astronomical Star Fields Super-Resolution",
+      "pdfSha256": "a008aed67025cc5d5110368c164ac101991a47e7515cd09739012b3f14462796",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-20d7627de19e-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-20d7627de19e-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 56188,
+        "sha256": "aeb22f5194de9ee5373925476b67425707dfbad282e29e15614e97ec3bb1beb7"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-20d7627de19e-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1298840,
+        "sha256": "4dd289e8817fd13335e49310b8330446bbe55c207b8c8ac48927c9ac9cb6a24c"
+      }
+    },
+    {
+      "id": "poster-23d0d4153187",
+      "title": "Statistical Inference for Generative Model Comparison",
+      "pdfSha256": "e6e3d280116145cf9b3bbd9f24fd90a94d7525a33e4615022fb108e4437c7bf4",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-23d0d4153187-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-23d0d4153187-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 45090,
+        "sha256": "4c831dc371dde8da2742140bd34ab1f163e6719df283e15483182cb19ade435c"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-23d0d4153187-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 913788,
+        "sha256": "14556f43a10541946eea50175b2255e01086d85b1d747375145e4ac5e1513eb3"
+      }
+    },
+    {
+      "id": "poster-f1e5e20e6992",
+      "title": "STrajRAG: Supervised Trajectory Retrieval Augmented Generation for Next POI Recommendation with Travel Semantics",
+      "pdfSha256": "423a145195132aa096e71f44ab80cd12f552b9061b8093559749317d96d417d2",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-f1e5e20e6992-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-f1e5e20e6992-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 76510,
+        "sha256": "da325430360fd68fafb1b7128c8ab7f10f389b7354f132bc4f06f0f848ce39db"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-f1e5e20e6992-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1168744,
+        "sha256": "95335cd7077f701c4b6b76a457a478439562578cf7b6e3b4f43c9addce39ebb2"
+      }
+    },
+    {
+      "id": "poster-beb01cdc9c2c",
+      "title": "The Implicit Bias of Steepest Descent with Mini-batch Stochastic Gradient",
+      "pdfSha256": "56db215cfbfa4c843f2ce455e3692e95c00eadea77db1a952c779ae141ebf7dd",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-beb01cdc9c2c-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-beb01cdc9c2c-thumbnail.webp",
+        "width": 640,
+        "height": 482,
+        "bytes": 81176,
+        "sha256": "f0f61c0f3ee258bab805529bc081c5db7c15bd5e6cc8e8b3dd4388024129a41c"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-beb01cdc9c2c-full.webp",
+        "width": 4000,
+        "height": 3010,
+        "bytes": 1183680,
+        "sha256": "71041732cdbc91068fc631c8ae6db73486dd23ee8442a6a83c6c0e311e94bd13"
+      }
+    },
+    {
+      "id": "poster-pervasive-blind-spot",
+      "title": "The Pervasive Blind Spot: Benchmarking VLM Inference Risks on Everyday Personal Videos",
+      "pdfSha256": "24fc9460b16073eb9a5e3976f66173e0c23813fd9ee41d09b28f19dbed4ffa2a",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-pervasive-blind-spot-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-pervasive-blind-spot-thumbnail.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 98894,
+        "sha256": "004a801567d1210e27b8b4caa4043ec1235dd3392a17167913b52c25db77835e"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-pervasive-blind-spot-full.webp",
+        "width": 3000,
+        "height": 4000,
+        "bytes": 1006120,
+        "sha256": "812a96b3607657994ac2c9bdafac4c4e8a4cf13cd7a4c8cc14f3992f7bccd932"
+      }
+    },
+    {
+      "id": "poster-4c15e914b43e",
+      "title": "VKG-QA: Visual Knowledge Graph-based Question Answer for Multimodal Large Language Models",
+      "pdfSha256": "34701f9d84c2e6e8947612e1205980586d87fe02ae1a1a14b89c8f7771da99ae",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-4c15e914b43e-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-4c15e914b43e-thumbnail.webp",
+        "width": 640,
+        "height": 320,
+        "bytes": 51788,
+        "sha256": "f7bc018d4d2797ef9dde462d3fd9baf909ec798652fe1aaf64acf3e1d0ec280f"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-4c15e914b43e-full.webp",
+        "width": 4000,
+        "height": 2000,
+        "bytes": 1153742,
+        "sha256": "02e75eaa4b659af02890f5877b1b4e4aad249814b2b9a4f5776e3c4d3af79485"
+      }
+    },
+    {
+      "id": "poster-d15a9e17cd1b",
+      "title": "When and Why SignSGD Outperforms SGD: A Theoretical Study Based on ℓ₁-norm Lower Bounds",
+      "pdfSha256": "d67dc173b7d21b8a99269408c21bf88d98c3b003a85278a7b959eb7ffd5ff5f9",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-d15a9e17cd1b-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-d15a9e17cd1b-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 58840,
+        "sha256": "0ff9c35a9544d4f11fbebe63f02bdc4f5321eb2ef2970c35914969ebdb8ccd19"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-d15a9e17cd1b-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 916264,
+        "sha256": "70d0c9930ab92ba4907596c65e22f52f2d7d6e12413f3fd523bd56bc23df319d"
+      }
+    },
+    {
+      "id": "poster-70d62481de5a",
+      "title": "When Bias Pretends to Be Truth: How Spurious Correlations Undermine Hallucination Detection in LLMs",
+      "pdfSha256": "a996c4e0e183bee1e658417e8409f3eca2f5644989c4a0e62880e5e18e2d6edf",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-70d62481de5a-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-70d62481de5a-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 72396,
+        "sha256": "f43d81e92154cb9adb2f67f1edf21b68f6e8d9eae843a28cd9e3dae1eaa2542c"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-70d62481de5a-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1047428,
+        "sha256": "35a0b0f3aaa0cc219747d208420f1900932128dded81c5a212887e36d7695beb"
+      }
+    },
+    {
+      "id": "poster-latent-cot-exploration",
+      "title": "Why Latent Chain-of-Thought Helps Exploration but Hurts Precise Computation",
+      "pdfSha256": "548cfcabd71148dfcb8a370f0cbeee899afcf042adc54c9ff0be9665802a5ed1",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-latent-cot-exploration-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-latent-cot-exploration-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 59898,
+        "sha256": "aca4a6b321b2dca20ec17af8a70a7c6dcd8a2986ff3dc65fd2ea648994368c1a"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-latent-cot-exploration-full.webp",
+        "width": 4000,
+        "height": 3001,
+        "bytes": 1483176,
+        "sha256": "04fdb5a03299527a9650763f3415306e77386ce7da1e2349feba22703cfcedf8"
+      }
+    }
+  ]
+}

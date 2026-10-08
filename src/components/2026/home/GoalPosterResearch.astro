@@ -1,7 +1,8 @@
 ---
 import { posterResearchPapers } from '../../../data/poster-research';
-import { paperPreviewById } from '../../../data/paper-previews';
 import PaperPreview from '../PaperPreview.astro';
+import ResearchPosterViewer from '../ResearchPosterViewer.astro';
+import ResearchPosterTools from '../ResearchPosterTools.astro';
 import '../../../styles/goal-poster-research.css';
 ---
 
@@ -9,57 +10,48 @@ import '../../../styles/goal-poster-research.css';
   <header class="goal-poster-research__heading">
     <div>
       <p class="goal-poster-research__eyebrow">RISING STARS</p>
-      <h2 id="home-research-title">论文展示</h2>
+      <h2 id="home-research-title">海报展示</h2>
     </div>
     <a class="goal-poster-research__directory" href="/poster/#poster-research">
-      全部论文 <span aria-hidden="true">↗</span>
+      全部海报 <span aria-hidden="true">↗</span>
     </a>
   </header>
 
-  <p class="goal-poster-research__intro">报名提交的论文，现场展示安排以大会后续通知为准。会议与期刊信息由报名人提供。</p>
+  <ResearchPosterTools idPrefix="home-research" controls="home-research-viewport" class="goal-poster-research__toolbar" />
 
-  <div class="goal-poster-research__toolbar">
-    <div class="goal-poster-research__search" role="search" aria-label="搜索展示论文" data-home-research-tools hidden>
-      <label>
-        <span>搜索论文</span>
-        <input type="search" placeholder="题目、报名人、单位或会议" autocomplete="off" aria-controls="home-research-viewport" data-home-research-search />
-      </label>
-      <button type="button" data-home-research-clear disabled>清除</button>
-    </div>
-    <p class="goal-poster-research__count" role="status" aria-live="polite" aria-atomic="true" data-home-research-count>
-      共 {posterResearchPapers.length} 篇报名论文
-    </p>
-  </div>
-
-  <div class="goal-poster-research__viewport" id="home-research-viewport" role="region" aria-label="论文展示列表" aria-describedby="home-research-hint" tabindex="0" data-home-research-viewport>
+  <div class="goal-poster-research__viewport" id="home-research-viewport" role="region" aria-label="海报展示列表" aria-describedby="home-research-hint" tabindex="0" data-home-research-viewport>
     <ul class="goal-poster-research__track" role="list" data-home-research-track>
-      {posterResearchPapers.map((paper) => (
-        <li class="goal-poster-research__card" id={`home-${paper.id}`} data-home-research-card>
-          <PaperPreview paperId={paper.id} titleId={`home-${paper.id}-title`} />
-          {!paperPreviewById.has(paper.id) && <p class="goal-poster-research__preview-missing">论文预览暂未提供</p>}
-          <a class="goal-poster-research__paper" href={paper.href} target="_blank" rel="noopener noreferrer">
-            <span class="goal-poster-research__venue" data-home-research-venue>{paper.venue}</span>
-            <h3 id={`home-${paper.id}-title`}>{paper.title}</h3>
-            <p class="goal-poster-research__person">
-              <span><span class="goal-poster-research__label">报名人</span> <span data-home-research-name>{paper.applicantName}</span></span>
-              <span data-home-research-affiliation>{paper.affiliation}</span>
-            </p>
-            <span class="goal-poster-research__action">阅读论文 <span aria-hidden="true">↗</span></span>
-          </a>
-        </li>
-      ))}
+      {posterResearchPapers.map((paper) => {
+        const PaperDetails = paper.href ? 'a' : 'div';
+        return (
+          <li class="goal-poster-research__card" id={`home-${paper.id}`} data-home-research-card>
+            <PaperPreview paperId={paper.id} titleId={`home-${paper.id}-title`} />
+            <PaperDetails class="goal-poster-research__paper" href={paper.href || undefined} target={paper.href ? '_blank' : undefined} rel={paper.href ? 'noopener noreferrer' : undefined}>
+              {paper.venue && <span class="goal-poster-research__venue" data-home-research-venue>{paper.venue}</span>}
+              <h3 id={`home-${paper.id}-title`}>{paper.title}</h3>
+              <p class="goal-poster-research__person">
+                <span data-home-research-name>{paper.applicantName}</span>
+                <span data-home-research-affiliation>{paper.affiliation}</span>
+              </p>
+              {paper.href && <span class="goal-poster-research__action">阅读论文 <span aria-hidden="true">↗</span></span>}
+            </PaperDetails>
+          </li>
+        );
+      })}
     </ul>
   </div>
 
-  <p class="goal-poster-research__empty" data-home-research-empty hidden>没有找到匹配的论文，请试试其他关键词或清除搜索。</p>
+  <p class="goal-poster-research__empty" data-home-research-empty hidden>没有找到匹配的海报，请试试其他关键词或清除筛选。</p>
 
   <footer class="goal-poster-research__browse" data-home-research-browse>
-    <p id="home-research-hint">横向浏览报名论文 <span aria-hidden="true">→</span></p>
-    <div class="goal-poster-research__arrows" role="group" aria-label="浏览展示论文" data-home-research-arrows hidden>
-      <button type="button" aria-label="上一篇论文" aria-controls="home-research-viewport" data-home-research-previous><span aria-hidden="true">←</span></button>
-      <button type="button" aria-label="下一篇论文" aria-controls="home-research-viewport" data-home-research-next><span aria-hidden="true">→</span></button>
+    <p id="home-research-hint" class="visually-hidden">可横向浏览海报，或使用左右方向键。</p>
+    <div class="goal-poster-research__arrows" role="group" aria-label="浏览展示海报" data-home-research-arrows hidden>
+      <button type="button" aria-label="上一张海报" aria-controls="home-research-viewport" data-home-research-previous><span aria-hidden="true">←</span></button>
+      <button type="button" aria-label="下一张海报" aria-controls="home-research-viewport" data-home-research-next><span aria-hidden="true">→</span></button>
     </div>
   </footer>
 </section>
+
+<ResearchPosterViewer />
 
 <script src="../../../scripts/goal-poster-research.ts"></script>
