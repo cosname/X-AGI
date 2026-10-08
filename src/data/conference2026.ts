@@ -236,7 +236,7 @@ export const conference2026 = {
           id: 'oct17-am',
           category: 'keynote',
           period: '上午',
-          time: '09:00-12:00',
+          time: '08:45-12:00',
           sourceTime: '10.17上午',
           title: 'Keynote 会场',
           talks: [
