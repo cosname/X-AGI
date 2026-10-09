@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-10-08",
+  "lastExtendedOn": "2026-10-09",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 279,
-  "uniquePayloadCount": 278,
-  "archiveFileCount": 277,
+  "sourceEntryCount": 280,
+  "uniquePayloadCount": 279,
+  "archiveFileCount": 278,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1629,7 +1629,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.568Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1637,14 +1637,14 @@
       "originalPath": "session-posters-20260916/session-01-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-01-print.png",
       "status": "archived",
-      "sha256": "ae328d9972652e88401b008be12d28f607a7af12f5314a77be7be8aa12a41eb5",
-      "bytes": 1521430,
+      "sha256": "dbedaee7698442aaaa2d321f2a6fba99af984ae53e10da6b183952fd5c07d329",
+      "bytes": 1522782,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:35.301Z",
+      "sourceModifiedAt": "2026-10-09T04:13:44.313Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1662,7 +1662,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.572Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1670,14 +1670,14 @@
       "originalPath": "session-posters-20260916/session-02-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-02-print.png",
       "status": "archived",
-      "sha256": "5c088936545bade3f64b0d6906ffb56b01ed87c8e2f8b8788294cd69e89676ba",
-      "bytes": 1628794,
+      "sha256": "57dcf8e8f7c4ce86321acac21c14ce3682d6ba95af7d3a660452ad7eb9723f17",
+      "bytes": 1629377,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:36.507Z",
+      "sourceModifiedAt": "2026-10-09T04:13:45.454Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1695,7 +1695,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.577Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1703,14 +1703,14 @@
       "originalPath": "session-posters-20260916/session-03-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-03-print.png",
       "status": "archived",
-      "sha256": "ace4a3449735f3ba338bdbd1b2954a66b1f58fabf58567251222660e0612f370",
-      "bytes": 1554256,
+      "sha256": "c992a9a9510f8beaf353f5eadac473ed76802d1b9c9adef98808591ac9181ad4",
+      "bytes": 1554859,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:37.656Z",
+      "sourceModifiedAt": "2026-10-09T04:13:46.799Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1728,7 +1728,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.581Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1736,14 +1736,14 @@
       "originalPath": "session-posters-20260916/session-04-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-04-print.png",
       "status": "archived",
-      "sha256": "9816ca63d44d359ed3625faaa4e06657fa3edfcdbfbbf90b2ab6ffd124fd7e2d",
-      "bytes": 1628250,
+      "sha256": "43dbefc287939b04c2a4788f90680e8d8155f67a8ab53e74de6fc588b63fb8b1",
+      "bytes": 1629045,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:38.809Z",
+      "sourceModifiedAt": "2026-10-09T04:13:47.897Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1761,7 +1761,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.585Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1769,14 +1769,14 @@
       "originalPath": "session-posters-20260916/session-05-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-05-print.png",
       "status": "archived",
-      "sha256": "e8920dc97b3340838fb42512f6c3903825ae7445b41418ba14236729d8e22cab",
-      "bytes": 1502852,
+      "sha256": "d6dbe64e6e8ccdc235605a6628fea80cdbd169e44d243fc9ab0e9905a0453b37",
+      "bytes": 1503766,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:40.053Z",
+      "sourceModifiedAt": "2026-10-09T04:13:49.013Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1794,7 +1794,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.590Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1802,14 +1802,14 @@
       "originalPath": "session-posters-20260916/session-06-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-06-print.png",
       "status": "archived",
-      "sha256": "9748c7f69e21a533b75a7794c47a58e25f427bdb6871115a8b148018e1f167a8",
-      "bytes": 1756333,
+      "sha256": "8fe6f0094c786bebb3eec26360db24b5d8814531ce23c257f083c1c174165a76",
+      "bytes": 1756657,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:41.175Z",
+      "sourceModifiedAt": "2026-10-09T04:13:50.136Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1827,7 +1827,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.594Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1835,14 +1835,14 @@
       "originalPath": "session-posters-20260916/session-07-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-07-print.png",
       "status": "archived",
-      "sha256": "32a667a02047437143966be0af722f3c50384c0bc1a55255cafd777a6f94641a",
-      "bytes": 1733861,
+      "sha256": "5cc59c3b6e49bf143a547f90b7a1577b0d7261798f453730bd54f335c711910d",
+      "bytes": 1734562,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:42.340Z",
+      "sourceModifiedAt": "2026-10-09T04:13:51.301Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1860,7 +1860,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.600Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1868,14 +1868,14 @@
       "originalPath": "session-posters-20260916/session-08-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-08-print.png",
       "status": "archived",
-      "sha256": "569038d2cd1f22d1280139f7af745f0d05d43e24f9b5bb276ebd26e190b39eab",
-      "bytes": 1789699,
+      "sha256": "783b6edd7a806777605c937e263e4c36e63976f7b87a34d1aeffda636cf0001f",
+      "bytes": 1790167,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:43.526Z",
+      "sourceModifiedAt": "2026-10-09T04:13:52.470Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1893,7 +1893,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.604Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1901,14 +1901,14 @@
       "originalPath": "session-posters-20260916/session-09-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-09-print.png",
       "status": "archived",
-      "sha256": "da67ac618cd7fcd5859459ccc507a6cbed9304b5df9a279252fe7106689edd58",
-      "bytes": 1845616,
+      "sha256": "9e8d0ea80e10875418d604c5b6e5a29d1b55ef4ae0dd6cb1c025b2ad9fe9d6c3",
+      "bytes": 1846252,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:44.708Z",
+      "sourceModifiedAt": "2026-10-09T04:13:53.671Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1926,7 +1926,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.608Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1934,14 +1934,14 @@
       "originalPath": "session-posters-20260916/session-10-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-10-print.png",
       "status": "archived",
-      "sha256": "c15fbea4e646f4d649bb273250aa3e9458e33d6d2a7a4362b2e856cf11e8a01b",
-      "bytes": 1691504,
+      "sha256": "a9a63921cd6ed4520011adaac062d12b0e9d270489e792e15d10ee7ffaf82d68",
+      "bytes": 1692117,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:45.888Z",
+      "sourceModifiedAt": "2026-10-09T04:13:54.833Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1959,7 +1959,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.613Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1967,14 +1967,14 @@
       "originalPath": "session-posters-20260916/session-11-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-11-print.png",
       "status": "archived",
-      "sha256": "0370b9279ef3aef62ac7329fbe485a4870e105f7e7d802cad4a39eb62aa71147",
-      "bytes": 1863524,
+      "sha256": "822edc428615c56f514b7b07212ab5c65fc98c0f5e8df9b25edb937a4b748c71",
+      "bytes": 1864129,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:47.123Z",
+      "sourceModifiedAt": "2026-10-09T04:13:55.985Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -1992,7 +1992,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.618Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -2000,14 +2000,14 @@
       "originalPath": "session-posters-20260916/session-12-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-12-print.png",
       "status": "archived",
-      "sha256": "2798443d601251c992d4fd943f8790eae8bc44d8b67f5a1043c836c23209f14f",
-      "bytes": 1613060,
+      "sha256": "8bc710b72a04aae27e39f39efb4a71b400535127d2ca4c9d91e266e5d959a0d7",
+      "bytes": 1632772,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:48.269Z",
+      "sourceModifiedAt": "2026-10-09T04:13:57.132Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2025,7 +2025,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.622Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -2033,14 +2033,14 @@
       "originalPath": "session-posters-20260916/session-13-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-13-print.png",
       "status": "archived",
-      "sha256": "53e6456dd7df7caf56d48ab53ac4eba4f1558f11a81893a8e93fc29f4ccc383d",
-      "bytes": 1943685,
+      "sha256": "784392cad9d34d2fd7e8da5a135218be04b4deb815b50250b95cd6a1971e2d29",
+      "bytes": 1944061,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:49.423Z",
+      "sourceModifiedAt": "2026-10-09T04:13:58.289Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2058,7 +2058,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-09-15T18:44:29.628Z",
+      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -2066,14 +2066,14 @@
       "originalPath": "session-posters-20260916/session-14-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-14-print.png",
       "status": "archived",
-      "sha256": "6ac95ba4b713fdf9dec42a053632432e6abab1dde873c2a65ba4328769236cc0",
-      "bytes": 1578115,
+      "sha256": "45a4acf6c72aa68cc013110643bd0054a5583de5b3f1b7875357b30362b2a42b",
+      "bytes": 1578775,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-08T06:51:50.619Z",
+      "sourceModifiedAt": "2026-10-09T04:13:59.467Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"
@@ -4384,6 +4384,22 @@
         "public/2026/research-posters/poster-latent-cot-exploration-full.webp"
       ],
       "note": "Author-submitted research poster, matched to poster-latent-cot-exploration on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
+    },
+    {
+      "originalPath": "organizer-supplied-20261009/1122085780.jpg",
+      "canonicalPath": "assets/source-archive/2026/people/wang-haonan-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "db19f14bafd028e35cbffffbeb2c7fe467db7065b99a0e7cc8b8e5b106b24ad9",
+      "bytes": 631735,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 3163,
+        "height": 3163
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/wang-haonan-portrait.webp"
+      ],
+      "note": "Wang Haonan portrait supplied directly by the organizer on October 9, 2026. Embedded EXIF removed losslessly with identical decoded pixels. Runtime WebP preserves the complete source composition and aspect ratio; shared layout framing is applied separately."
     }
   ]
 }

@@ -118,6 +118,16 @@ describe('conference schedule contracts', () => {
       name: '刘军', affiliation: '已确认单位', talkTitle: '主办方致辞',
     });
   });
+
+  it('publishes all confirmed rooms and the revised language-model lineup', () => {
+    assert.deepEqual(conference2026ProgramSessions.map((session) => session.venue), [
+      '聚英厅', '9会', '7会', '5会', '3会', '4会', '8会',
+      '4会', '8会', '3会', '5会', '7会', '4会', '3会',
+    ]);
+    assert.deepEqual(conference2026ProgramSessions.flatMap((session, index) => session.livestream ? [index + 1] : []), [1, 5, 10, 14]);
+    assert.deepEqual(conference2026ProgramSessions[11].speakers.map((speaker) => speaker.name), ['刘威杨', '刘华斌', '李根', '王淏楠']);
+    assert.deepEqual(conference2026ProgramSessions[11].chairs.map((chair) => chair.name), ['胡天阳']);
+  });
 });
 
 describe('published 2026 content contracts', () => {

@@ -554,9 +554,9 @@ await validatePublicCopies('2026 partner logos', path.resolve('public/2026/logos
 const personPortraitFiles = conference2026People.flatMap((person) => (
   person.portraitSrc ? [path.basename(person.portraitSrc)] : []
 ));
-if (personPortraitFiles.length !== 59 || new Set(personPortraitFiles).size !== 59) {
+if (personPortraitFiles.length !== 60 || new Set(personPortraitFiles).size !== 60) {
   fail(
-    `2026 people portraits: expected 59 unique portraits, `
+    `2026 people portraits: expected 60 unique portraits, `
     + `found ${new Set(personPortraitFiles).size}`,
   );
 }
@@ -845,7 +845,7 @@ const officialCopyByRoute = new Map([
       person.affiliation,
       person.department ?? '',
       person.bio ?? '',
-      person.abstract ?? '',
+      person.schedule.some((assignment) => assignment.role === 'speaker') ? person.abstract ?? '' : '',
     ]),
   ]],
   ['poster/index.html', [
@@ -975,6 +975,17 @@ if (scheduleSource.includes('schedule-intro')) {
 const scheduleCardCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-card\b[^"]*"/g)].length;
 if (scheduleCardCount !== conference2026.programPreview.sessions.length) {
   fail(`schedule/index.html: expected ${conference2026.programPreview.sessions.length} schedule cards, found ${scheduleCardCount}`);
+}
+const scheduleCards = [...scheduleSource.matchAll(/<article\b[^>]*data-schedule-session-card[^>]*>([\s\S]*?)<\/article>/g)];
+for (const [index, session] of conference2026.programPreview.sessions.entries()) {
+  const card = scheduleCards[index]?.[1] ?? '';
+  const venue = card.match(/<span\b[^>]*data-session-venue[^>]*>([\s\S]*?)<\/span>/)?.[1];
+  if (visibleText(venue ?? '') !== (session.venue ?? '')) {
+    fail(`schedule/index.html: Session ${index + 1} has a missing or incorrect venue`);
+  }
+  if (card.includes('data-session-livestream') !== Boolean(session.livestream)) {
+    fail(`schedule/index.html: Session ${index + 1} has an incorrect livestream label`);
+  }
 }
 const schedulePeriodCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-period-group\b[^"]*"/g)].length;
 if (schedulePeriodCount !== 4) {

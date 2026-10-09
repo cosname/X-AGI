@@ -1,8 +1,20 @@
 import type { Conference2026PersonSourceRecord } from './conference2026-people.generated.ts';
 
-// Organizer-confirmed profiles and biography updates through 2026-10-08.
+// Organizer-confirmed profiles and biography updates through 2026-10-09.
 // Keep this supplied copy separate from the attendee workbook snapshot.
 export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceRecord[] = [
+  {
+    id: 'wang-haonan',
+    name: '王淏楠',
+    aliases: [],
+    roles: ['speaker'],
+    affiliation: 'Sharpa',
+    bio: '王淏楠，新加坡国立大学计算机科学博士，现任 Sharpa 具身智能预训练负责人，曾任腾讯混元 Principal Research Scientist。主要研究方向包括大模型训练与推理、强化学习后训练、多模态生成及世界模型，主导了统一多模态强化学习框架 UniRL 的设计与开发。相关研究发表于 NeurIPS、ICML、ICLR 等国际会议，参与的研究获 NeurIPS 2022 最佳论文奖，第一作者论文入选 ICML 2024 口头报告。近期关注 On-Policy Distillation 中的监督选择与梯度估计问题。',
+    talkTitle: 'Signal and Noise in On-Policy Distillation: 1% of Tokens Can Be Enough',
+    abstract: 'On-Policy Distillation（OPD）让学生在自身生成的轨迹上接受教师的逐 token 指导，但密集反馈是否都能转化为有效学习？本报告从 SFT、RL 与 OPD 的联系出发，讨论训练轨迹、监督信号与梯度估计之间的关系，并结合近期工作，分析教师反馈的有用性与采样梯度的可靠性为何需要分别考虑。通过信息几何下的信号与噪声分解，该工作提出信息效率比（IER），并将其与已有的 token 有用性指标结合，选择参与蒸馏的监督位置。数学与医学推理实验表明，在部分设置下，仅在 0.1%–1% 的 token 位置施加蒸馏损失，即可达到或超过全 token OPD 的表现。报告将据此讨论稀疏监督何以有效，以及梯度估计视角对后训练方法设计的启示。',
+    hasSubmittedPortrait: true,
+    sourceOrder: -1,
+  },
   {
     id: 'liu-zequn',
     name: '刘泽群',

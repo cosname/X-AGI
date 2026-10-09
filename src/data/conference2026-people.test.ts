@@ -7,6 +7,17 @@ import {
 } from './conference2026-people.ts';
 
 describe('2026 public Chair and Speaker profiles', () => {
+  it('joins Wang Haonan to the confirmed session with his current employer and supplied report', () => {
+    const person = conference2026PersonForName('王淏楠');
+    assert.equal(person?.affiliation, 'Sharpa');
+    assert.equal(person?.portraitSrc, '/2026/people/wang-haonan-portrait.webp');
+    assert.equal(person?.talkTitle, 'Signal and Noise in On-Policy Distillation: 1% of Tokens Can Be Enough');
+    assert.match(person?.abstract ?? '', /0\.1%–1%/u);
+    assert.deepEqual(person?.schedule.map((item) => ({ session: item.sessionNumber, time: item.sourceTime, role: item.role })), [
+      { session: 12, time: '10.18上午', role: 'speaker' },
+    ]);
+  });
+
   it('publishes the reviewed public-only workbook projection', () => {
     assert.equal(conference2026PeopleRecords.length, 63);
     assert.equal(
@@ -71,7 +82,6 @@ describe('2026 public Chair and Speaker profiles', () => {
     assert.deepEqual(hu?.roles, ['chair', 'speaker']);
     assert.deepEqual(hu?.schedule.map((item) => ({ title: item.title, role: item.role })), [
       { title: '语言模型基础', role: 'chair' },
-      { title: '语言模型基础', role: 'speaker' },
     ]);
     assert.equal(conference2026People.filter((person) => ['ma-ziye', 'hu-tianyang'].includes(person.id)).length, 2);
   });

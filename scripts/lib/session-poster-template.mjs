@@ -42,6 +42,6 @@ h1{margin:0;font-size:68px;line-height:1.14;letter-spacing:-1.5px;font-weight:65
 <div class="chairs"><span class="role">Chair</span><div class="chair-list">${poster.chairs.map(person => `<span><span class="chair-name">${escape(person.name)}</span><span class="chair-affiliation">${escape(person.affiliation || '单位待公布')}</span></span>`).join('')}</div></div>
 <div class="speakers-label"><span class="role">Speakers & Talks</span><span>${poster.speakers.length} ${poster.title === 'Keynote' ? '项议程' : '场报告'}</span></div>
 <section class="speakers">${poster.speakers.map((person, index) => `<article class="speaker ${poster.speakers.length === 3 && index === 2 ? 'speaker--three' : ''}" data-person="${escape(person.name)}"><span class="speaker-number">0${index + 1}</span><div class="person">${portrait(person)}<div class="person-copy"><h2 data-fit>${escape(person.name)}</h2><p class="affiliation" data-fit>${escape(person.affiliation || '单位待公布')}</p></div></div><h3 class="talk ${person.talkTitle ? '' : 'talk--pending'}" data-fit>${escape(person.talkTitle || '题目待公布')}</h3></article>`).join('')}</section>
-<footer class="footer"><strong>x-agi.cc</strong><p>${escape(posterConference.date)} · ${escape(posterConference.venue)}<small>报告安排以官网最新议程为准</small></p></footer>
+<footer class="footer"><strong>x-agi.cc</strong><p>${escape(posterConference.date)} · ${escape(posterConference.venue)}${poster.venue ? ` · ${escape(poster.venue)}` : ''}<small>报告安排以官网最新议程为准</small></p></footer>
 </main></body></html>`;
 }

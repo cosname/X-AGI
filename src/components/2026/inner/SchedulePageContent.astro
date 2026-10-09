@@ -97,6 +97,12 @@ const sessionNumbers = new Map(
                       <span class="schedule-topic-card__number">{sessionLabel}</span>
                       <span class="schedule-topic-card__title">{session.title}</span>
                       {group.timetable?.time && <span class="schedule-topic-card__time">{group.timetable.time}</span>}
+                      {session.venue && (
+                        <span class="schedule-topic-card__location">
+                          <span data-session-venue aria-label={`会场：${session.venue}`}>{session.venue}</span>
+                          {session.livestream && <span data-session-livestream> · 直播</span>}
+                        </span>
+                      )}
                     </span>
                     <button
                       class="schedule-session-profiles-toggle"
@@ -623,6 +629,13 @@ const sessionNumbers = new Map(
     opacity: 0.9;
   }
 
+  .edition-2026-inner .schedule-topic-card__location {
+    font-size: 0.9rem;
+    font-weight: 450;
+    white-space: nowrap;
+    opacity: 0.85;
+  }
+
   .edition-2026-inner .schedule-inline-time {
     color: #747386;
     font-size: 0.9rem;
@@ -1005,6 +1018,11 @@ const sessionNumbers = new Map(
       font-size: 1.125rem;
       line-height: 1.4;
       opacity: 0.72;
+    }
+
+    .edition-2026-inner .schedule-topic-card__location {
+      grid-column: 1 / -1;
+      grid-row: 3;
     }
   }
 

@@ -31,12 +31,20 @@ const confirmedTalkTitles = new Map([
   ['孙茂松', '人工智能随想录'],
   ['许洪腾', 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow'],
   ['刘方辉', '深度学习理论的技术科学道路'],
+  ['王淏楠', 'Signal and Noise in On-Policy Distillation: 1% of Tokens Can Be Enough'],
 ]);
+// The organizer's October 9 biography confirms his current employer.
+const confirmedAffiliations = new Map([['王淏楠', 'Sharpa']]);
 const revisedSessions = sourceSessions.map((session) => ({
   ...session,
   speakers: session.speakers.map((person) => {
     const talkTitle = confirmedTalkTitles.get(person.name);
-    return talkTitle ? { ...person, talkTitle } : person;
+    const affiliation = confirmedAffiliations.get(person.name);
+    return {
+      ...person,
+      ...(talkTitle ? { talkTitle } : {}),
+      ...(affiliation ? { affiliation } : {}),
+    };
   }),
 }));
 export const conference2026ProgramSessions = withOrganizerRemarks(revisedSessions);

@@ -28,6 +28,7 @@ export const sessionPosters = conference2026ProgramSessions.map((session, index)
     number,
     id,
     title: session.title,
+    venue: session.venue ?? '',
     sourceTime: session.sourceTime,
     day: match[1] as '17' | '18',
     dateLabel: `10 月 ${match[1]} 日 · ${match[2]}`,

@@ -19,6 +19,7 @@ export const EXPECTED_HEADERS = [
   'Speaker3',
   'Speaker4',
 ];
+const optionalHeaders = new Set(['摘要完成情况', '会场安排', '是否直播']);
 
 export const HALF_DAY_TIME_PATTERN = /^10\.(?:17|18)(?:上午|下午)$/u;
 
@@ -184,13 +185,11 @@ export function parseProgramCsv(input) {
   if (rows.length < 2) throw new Error('CSV must contain a header and at least one data row.');
 
   const headers = rows[0].map(cleanCell);
-  // The September 29 sheet adds an internal progress column, never public copy.
-  const abstractStatusColumn = headers.indexOf('摘要完成情况');
-  if (abstractStatusColumn !== -1) {
-    headers.splice(abstractStatusColumn, 1);
-    for (const row of rows.slice(1)) row.splice(abstractStatusColumn, 1);
-  }
-  assertHeaders(headers);
+  if (new Set(headers).size !== headers.length) throw new Error('Duplicate program header.');
+  assertHeaders(headers.filter((header) => !optionalHeaders.has(header)));
+  const requiredColumns = EXPECTED_HEADERS.map((header) => headers.indexOf(header));
+  const venueColumn = headers.indexOf('会场安排');
+  const livestreamColumn = headers.indexOf('是否直播');
 
   const populatedRows = rows
     .slice(1)
@@ -201,12 +200,17 @@ export function parseProgramCsv(input) {
 
   const titles = new Set();
   const sessions = populatedRows.map((candidate, rowIndex) => {
-    if (candidate.length > EXPECTED_HEADERS.length) {
-      throw new Error(`Row ${rowIndex + 2} has more than ${EXPECTED_HEADERS.length} columns.`);
+    if (candidate.length > headers.length) {
+      throw new Error(`Row ${rowIndex + 2} has more than ${headers.length} columns.`);
     }
 
-    const values = [...candidate];
-    while (values.length < EXPECTED_HEADERS.length) values.push('');
+    // Project only public fields; planning counts and progress stay out of output.
+    const values = requiredColumns.map((column) => candidate[column] ?? '');
+    const venue = cleanCell(candidate[venueColumn] ?? '');
+    const livestream = cleanCell(candidate[livestreamColumn] ?? '');
+    if (livestream && !['直播', '不直播'].includes(livestream)) {
+      throw new Error(`Row ${rowIndex + 2} has an unknown livestream status.`);
+    }
 
     const sourceTime = cleanCell(values[0]);
     const title = cleanCell(values[1]);
@@ -230,7 +234,11 @@ export function parseProgramCsv(input) {
       throw new Error(`Row ${rowIndex + 2} contains a duplicate speaker.`);
     }
 
-    return { sourceTime, title, chairs, speakers };
+    return {
+      sourceTime, title, chairs, speakers,
+      ...(venue ? { venue } : {}),
+      ...(livestream ? { livestream: livestream === '直播' } : {}),
+    };
   });
 
   return sessions;
@@ -254,11 +262,12 @@ export function semanticHash(sessions) {
   return createHash('sha256').update(JSON.stringify(sessions)).digest('hex');
 }
 
-export function renderProgramModule(sessions) {
+export function renderProgramModule(sessions, { sourceFile } = {}) {
   const source = {
     url: TENCENT_PROGRAM_URL,
     tabId: TENCENT_PROGRAM_TAB_ID,
     sheetName: TENCENT_PROGRAM_SHEET_NAME,
+    ...(sourceFile ? { sourceFile } : {}),
     sourceHash: semanticHash(sessions),
     sessions,
   };
@@ -274,6 +283,8 @@ export function renderProgramModule(sessions) {
     `export type Conference2026ProgramSourceSession = {\n` +
     `  readonly sourceTime: string;\n` +
     `  readonly title: string;\n` +
+    `  readonly venue?: string;\n` +
+    `  readonly livestream?: boolean;\n` +
     `  readonly chairs: readonly Conference2026ProgramPerson[];\n` +
     `  readonly speakers: readonly Conference2026ProgramPerson[];\n` +
     `};\n` +
@@ -282,6 +293,7 @@ export function renderProgramModule(sessions) {
     `  readonly url: string;\n` +
     `  readonly tabId: string;\n` +
     `  readonly sheetName: string;\n` +
+    `  readonly sourceFile?: string;\n` +
     `  readonly sourceHash: string;\n` +
     `  readonly sessions: readonly Conference2026ProgramSourceSession[];\n` +
     `};\n` +
@@ -328,11 +340,11 @@ export function assertSafeAutomatedUpdate(previousSessions, nextSessions) {
 export async function syncProgramFromCsv(
   csvPath,
   outputPath = DEFAULT_OUTPUT,
-  { allowLargeChange = false } = {},
+  { allowLargeChange = false, sourceFile } = {},
 ) {
   const csv = await readFile(csvPath, 'utf8');
   const sessions = parseProgramCsv(csv);
-  const nextContent = renderProgramModule(sessions);
+  const nextContent = renderProgramModule(sessions, { sourceFile });
   const currentContent = await readFile(outputPath, 'utf8').catch(() => '');
 
   if (currentContent && !allowLargeChange) {
@@ -352,6 +364,7 @@ function parseArguments(argv) {
   let csvPath = '';
   let outputPath = DEFAULT_OUTPUT;
   let allowLargeChange = false;
+  let sourceFile;
 
   for (let index = 0; index < argv.length; index += 1) {
     const argument = argv[index];
@@ -363,6 +376,10 @@ function parseArguments(argv) {
       index += 1;
     } else if (argument === '--allow-large-change') {
       allowLargeChange = true;
+    } else if (argument === '--source-file') {
+      sourceFile = argv[index + 1] ?? '';
+      if (!sourceFile || /[\\/]/u.test(sourceFile)) throw new Error('--source-file must be a filename only.');
+      index += 1;
     } else {
       throw new Error(`Unknown argument: ${argument}`);
     }
@@ -371,14 +388,14 @@ function parseArguments(argv) {
   if (!csvPath) throw new Error('Usage: npm run schedule:sync -- --csv /absolute/path/to/program.csv');
   if (!path.isAbsolute(csvPath)) throw new Error('--csv must be an absolute path.');
   if (!path.isAbsolute(outputPath)) throw new Error('--output must be an absolute path.');
-  return { csvPath, outputPath, allowLargeChange };
+  return { csvPath, outputPath, allowLargeChange, sourceFile };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   try {
-    const { csvPath, outputPath, allowLargeChange } = parseArguments(process.argv.slice(2));
-    const result = await syncProgramFromCsv(csvPath, outputPath, { allowLargeChange });
+    const { csvPath, outputPath, allowLargeChange, sourceFile } = parseArguments(process.argv.slice(2));
+    const result = await syncProgramFromCsv(csvPath, outputPath, { allowLargeChange, sourceFile });
     console.log(
       result.changed
         ? `Updated ${result.outputPath} with ${result.sessionCount} sessions.`

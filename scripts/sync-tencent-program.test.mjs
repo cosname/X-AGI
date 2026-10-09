@@ -112,6 +112,26 @@ describe('Tencent program CSV parser', () => {
     );
   });
 
+  it('imports rooms and confirmed livestreams while discarding internal progress', () => {
+    const headers = [...EXPECTED_HEADERS];
+    headers.splice(4, 0, '摘要完成情况');
+    headers.push('会场安排', '是否直播');
+    const sessions = parseProgramCsv([
+      headers.join(','),
+      '10.18上午,语言模型基础,4,100%,internal-only,胡天阳（港中深）,刘华斌（蚂蚁集团）：New talk,王淏楠（腾讯混元）：,,,7会,直播',
+      '10.18下午,另一专题,4,100%,internal-only,主席（单位）,嘉宾（单位）,,,,4会,',
+    ].join('\n'));
+    assert.equal(sessions[0].venue, '7会');
+    assert.equal(sessions[0].livestream, true);
+    assert.equal(sessions[1].venue, '4会');
+    assert.equal('livestream' in sessions[1], false);
+    assert.equal(sessions[0].speakers[1].name, '王淏楠');
+    assert.equal(sessions[0].speakers[1].talkTitle, undefined);
+    assert.doesNotMatch(renderProgramModule(sessions), /internal-only|计划人数|完成度|摘要完成情况/u);
+    assert.throws(() => parseProgramCsv(`${headers.join(',')}\n10.18上午,专题,,,internal,主席（单位）,,,,,7会,未知`), /unknown livestream/u);
+    assert.throws(() => parseProgramCsv(`${header},会场安排,会场安排\n10.18上午,专题,,,主席（单位）,,,,,`), /Duplicate program header/u);
+  });
+
   it('fails closed on unexpectedly large session deletions', () => {
     const previousSessions = Array.from({ length: 13 }, (_, index) => ({ title: `Topic ${index}` }));
 

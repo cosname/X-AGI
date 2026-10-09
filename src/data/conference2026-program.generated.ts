@@ -9,6 +9,8 @@ export type Conference2026ProgramPerson = {
 export type Conference2026ProgramSourceSession = {
   readonly sourceTime: string;
   readonly title: string;
+  readonly venue?: string;
+  readonly livestream?: boolean;
   readonly chairs: readonly Conference2026ProgramPerson[];
   readonly speakers: readonly Conference2026ProgramPerson[];
 };
@@ -17,7 +19,8 @@ export const conference2026ProgramSource = {
   "url": "https://docs.qq.com/sheet/DUnZzaE5Ia2pVRHRj?tab=BB08J2",
   "tabId": "BB08J2",
   "sheetName": "工作表1",
-  "sourceHash": "d1936c2a01487141bdf9a5c4906818141775c2b86e5e149ea476a481612bb080",
+  "sourceFile": "X-AGI 2026 嘉宾信息.xlsx",
+  "sourceHash": "e0a9075aee79256d8cd7e74938ba0c3b8f4c63039e7a4b08ecdbb2e311a1831b",
   "sessions": [
     {
       "sourceTime": "10.17上午",
@@ -36,7 +39,8 @@ export const conference2026ProgramSource = {
         },
         {
           "name": "孙茂松",
-          "affiliation": "清华大学"
+          "affiliation": "清华大学",
+          "talkTitle": "人工智能随想录"
         },
         {
           "name": "冯建峰",
@@ -48,7 +52,9 @@ export const conference2026ProgramSource = {
           "affiliation": "Qwen",
           "talkTitle": "大模型中离群值的功能性分析"
         }
-      ]
+      ],
+      "venue": "聚英厅",
+      "livestream": true
     },
     {
       "sourceTime": "10.17下午",
@@ -80,7 +86,8 @@ export const conference2026ProgramSource = {
           "affiliation": "中国科学院数学与系统科学研究院",
           "talkTitle": "MechGeo: Autoformalizing and Proving Euclidean Geometry in Lean 4"
         }
-      ]
+      ],
+      "venue": "9会"
     },
     {
       "sourceTime": "10.17下午",
@@ -112,7 +119,8 @@ export const conference2026ProgramSource = {
           "affiliation": "北京大学",
           "talkTitle": "大语言模型持续优化能力评测"
         }
-      ]
+      ],
+      "venue": "7会"
     },
     {
       "sourceTime": "10.17下午",
@@ -139,7 +147,8 @@ export const conference2026ProgramSource = {
           "affiliation": "清华大学",
           "talkTitle": "Pretraining Loss相同，模型能力则相同么？"
         }
-      ]
+      ],
+      "venue": "5会"
     },
     {
       "sourceTime": "10.17下午",
@@ -171,7 +180,9 @@ export const conference2026ProgramSource = {
           "affiliation": "华为",
           "talkTitle": "基于昇腾的AgenticRL训练技术与企业级Agent落地实践"
         }
-      ]
+      ],
+      "venue": "3会",
+      "livestream": true
     },
     {
       "sourceTime": "10.17下午",
@@ -203,7 +214,8 @@ export const conference2026ProgramSource = {
           "affiliation": "香港科技大学",
           "talkTitle": "Incorporating Return Prediction in High-Dimensional Mean-Variance Portfolio Optimization"
         }
-      ]
+      ],
+      "venue": "4会"
     },
     {
       "sourceTime": "10.17下午",
@@ -239,7 +251,8 @@ export const conference2026ProgramSource = {
           "affiliation": "武汉大学",
           "talkTitle": "Offline Deep Q* Estimation with Diffusion Models"
         }
-      ]
+      ],
+      "venue": "8会"
     },
     {
       "sourceTime": "10.18上午",
@@ -266,7 +279,8 @@ export const conference2026ProgramSource = {
           "affiliation": "华栖云教育",
           "talkTitle": "面向高等教育的AGI落地：未来学习中心建设的实践与思考"
         }
-      ]
+      ],
+      "venue": "4会"
     },
     {
       "sourceTime": "10.18上午",
@@ -302,7 +316,8 @@ export const conference2026ProgramSource = {
           "affiliation": "中关村学院",
           "talkTitle": "基因组大模型Carbon"
         }
-      ]
+      ],
+      "venue": "8会"
     },
     {
       "sourceTime": "10.18上午",
@@ -329,7 +344,9 @@ export const conference2026ProgramSource = {
           "affiliation": "Unity China",
           "talkTitle": "Learning to Build Agents: Adaptive Planning, Memory, and Harness Evolution"
         }
-      ]
+      ],
+      "venue": "3会",
+      "livestream": true
     },
     {
       "sourceTime": "10.18上午",
@@ -356,7 +373,8 @@ export const conference2026ProgramSource = {
           "affiliation": "上海交通大学",
           "talkTitle": "Towards the Foundation of Deep Learning"
         }
-      ]
+      ],
+      "venue": "5会"
     },
     {
       "sourceTime": "10.18上午",
@@ -374,16 +392,21 @@ export const conference2026ProgramSource = {
           "talkTitle": "Pion: A Spectrum-Preserving Optimizer via Orthogonal Equivalence Transformation"
         },
         {
-          "name": "胡天阳",
-          "affiliation": "香港中文大学（深圳）",
-          "talkTitle": "扩散式语言建模探索：从掩码扩散到连续扩散"
+          "name": "刘华斌",
+          "affiliation": "蚂蚁集团",
+          "talkTitle": "Parallel Generation, Iterative Refinement: The Evolution of LLaDA 2.x in Practice"
         },
         {
           "name": "李根",
           "affiliation": "香港中文大学",
           "talkTitle": "ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings"
+        },
+        {
+          "name": "王淏楠",
+          "affiliation": "腾讯混元"
         }
-      ]
+      ],
+      "venue": "7会"
     },
     {
       "sourceTime": "10.18下午",
@@ -415,7 +438,8 @@ export const conference2026ProgramSource = {
           "affiliation": "清华大学",
           "talkTitle": "Active Experimentation for Counterfactual Decision Making"
         }
-      ]
+      ],
+      "venue": "4会"
     },
     {
       "sourceTime": "10.18下午",
@@ -447,13 +471,16 @@ export const conference2026ProgramSource = {
           "affiliation": "清华大学",
           "talkTitle": "Benchmarking Language Models for Statistical Problem Formulation"
         }
-      ]
+      ],
+      "venue": "3会",
+      "livestream": true
     }
   ]
 } as const satisfies {
   readonly url: string;
   readonly tabId: string;
   readonly sheetName: string;
+  readonly sourceFile?: string;
   readonly sourceHash: string;
   readonly sessions: readonly Conference2026ProgramSourceSession[];
 };
