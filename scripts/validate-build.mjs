@@ -977,6 +977,11 @@ for (const [index, session] of conference2026.programPreview.sessions.entries())
   if (visibleText(venue ?? '') !== (session.venue ?? '')) {
     fail(`schedule/index.html: Session ${index + 1} has a missing or incorrect venue`);
   }
+  const venueDetail = card.match(/<span\b[^>]*data-session-venue-detail[^>]*>([\s\S]*?)<\/span>/)?.[1];
+  const expectedVenueDetail = conference2026.venue.roomDetails.get(session.venue ?? '');
+  if (visibleText(venueDetail ?? '') !== (expectedVenueDetail ? `（${expectedVenueDetail}）` : '')) {
+    fail(`schedule/index.html: Session ${index + 1} has a missing or incorrect venue detail`);
+  }
   if (card.includes('data-session-livestream')) {
     fail(`schedule/index.html: Session ${index + 1} must not display a livestream label`);
   }

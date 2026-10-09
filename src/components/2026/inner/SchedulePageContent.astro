@@ -83,6 +83,7 @@ const sessionNumbers = new Map(
             {group.sessions.map((session) => {
               const sessionNumber = sessionNumbers.get(session) ?? 0;
               const sessionLabel = `Session ${String(sessionNumber).padStart(2, '0')}`;
+              const venueDetail = conference2026.venue.roomDetails.get(session.venue ?? '');
               const hasPendingChair = session.chairs.some((chair) => isPendingChair(chair.name));
               const hasSessionProfiles = [...session.chairs, ...session.speakers]
                 .some((scheduledPerson) => Boolean(conference2026PersonForName(scheduledPerson.name)));
@@ -100,6 +101,7 @@ const sessionNumbers = new Map(
                       {session.venue && (
                         <span class="schedule-topic-card__location">
                           <span data-session-venue aria-label={`会场：${session.venue}`}>{session.venue}</span>
+                          {venueDetail && <span data-session-venue-detail>（{venueDetail}）</span>}
                         </span>
                       )}
                     </span>

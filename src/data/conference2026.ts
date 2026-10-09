@@ -161,6 +161,16 @@ export const conference2026 = {
     scheduleName: '北京市友谊宾馆',
     city: '北京',
     nameEn: 'Beijing Friendship Hotel',
+    // Room names and floor verified against the archived Friendship Palace guide plan.
+    roomDetails: new Map([
+      ['聚英厅', '友谊宫二层'],
+      ['3会', '友谊宫二层3号会议室'],
+      ['4会', '友谊宫二层4号会议室'],
+      ['5会', '友谊宫二层5号会议室'],
+      ['7会', '友谊宫二层7号会议室'],
+      ['8会', '友谊宫二层8号会议室'],
+      ['9会', '友谊宫二层9号会议室'],
+    ]),
     maps: [
       {
         key: 'campus',
