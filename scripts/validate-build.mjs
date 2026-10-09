@@ -977,8 +977,8 @@ for (const [index, session] of conference2026.programPreview.sessions.entries())
   if (visibleText(venue ?? '') !== (session.venue ?? '')) {
     fail(`schedule/index.html: Session ${index + 1} has a missing or incorrect venue`);
   }
-  if (card.includes('data-session-livestream') !== Boolean(session.livestream)) {
-    fail(`schedule/index.html: Session ${index + 1} has an incorrect livestream label`);
+  if (card.includes('data-session-livestream')) {
+    fail(`schedule/index.html: Session ${index + 1} must not display a livestream label`);
   }
 }
 const schedulePeriodCount = [...scheduleSource.matchAll(/class="[^"]*\bschedule-period-group\b[^"]*"/g)].length;
