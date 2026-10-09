@@ -4,6 +4,16 @@ import type { Conference2026PersonSourceRecord } from './conference2026-people.g
 // Keep this supplied copy separate from the attendee workbook snapshot.
 export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceRecord[] = [
   {
+    id: 'liu-huabin',
+    name: '刘华斌',
+    aliases: [],
+    roles: ['speaker'],
+    affiliation: '蚂蚁集团',
+    abstract: '扩散语言模型通过并行生成与迭代去噪，为大语言模型提供了不同于逐 token 自回归生成的技术路径。如何将这种潜力转化为可规模化训练、高效推理，并能胜任复杂任务的模型，是 LLaDA 团队持续探索的核心问题。本报告将以 LLaDA 2.x 系列的演进为主线，介绍团队在dLLM模型训练、推理机制与Agentic能力上的研究与实践：LLaDA 2.0 通过自回归模型到块扩散模型的渐进式转换，将扩散语言模型扩展至千亿参数规模；LLaDA 2.1 将并行生成与 token 编辑结合，改善解码速度与生成质量的权衡；LLaDA 2.2 进一步引入支持插入、删除与替换的编辑机制，结合长上下文、块级专家路由和面向交互反馈的强化学习，探索多轮、长程智能体任务。在此基础上，报告将讨论扩散语言模型在训练目标、并行解码与迭代修正中的关键问题，并展望其与自回归模型的协同，以及向原生多模态统一模型的发展方向。',
+    hasSubmittedPortrait: false,
+    sourceOrder: -1,
+  },
+  {
     id: 'wang-haonan',
     name: '王淏楠',
     aliases: [],
@@ -67,6 +77,7 @@ export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceR
 
 // Apply only the revised public biography; retain all other attendee fields.
 export const conference2026ConfirmedBios: ReadonlyMap<string, string> = new Map([
+  ['huang-pei', '黄沛，成都华栖云科技有限公司副总裁、华栖云教育研究院院长，国内资深教育技术与职业教育领域专家，商务部、人社部、全国妇联创业导师。毕业于北京理工大学，参与“国培计划”等多项国家级重点教育项目，创立“美蕙学院”及“家护在线”互联网学习平台，主持多本部级职业教育教材和智慧课程开发，参与包括复旦大学、浙江大学、北京理工大学等众多高校校级智慧平台建设，专注将前沿技术转化为教学场景落地，其成果覆盖学历教育与非学历教育全赛道。'],
   ['xie-tian', '谢天，本科毕业于中国科学技术大学，现就职于 Qwen。专注于预训练模型架构及其训练优化算法研究，希望通过算法侧改进提升智能上限。'],
   ['liu-fanghui', '刘方辉，上海交通大学自然科学研究院与数学科学学院副教授，数学学院与人工智能学院博士生导师，之前在英国华威大学担任助理教授。研究方向为机器学习数学理论与大模型机理分析。其主要研究工作包括函数空间视角下的机器学习理论、尺度扩展下的泛化理论，并进一步推动理论指导实践的研究范式。2023年入选国家高层次人才青年项目，2024年获得AAAI新教师奖，2025年入选TUM全球访问教授计划，2026年获得美国数学与统计创新研究所（IMSI）长期访问学者资助项目。研究获得基金委面上项目、英国皇家学会、谷歌的资助。主办 NeurIPS‘24，’26研讨会，担任IJCV专刊客座编辑，在 ICASSP’23、CVPR’23、ISIT’24 等国际顶级会议上主讲tutorial。担任NeurIPS、ICLR、AISTATS等会议领域主席。'],
   ['wang-jianqiao', '王健桥，清华大学统计与数据科学系助理教授、博士生导师。2022年于宾夕法尼亚大学获得生物统计学博士学位，随后于2022年8月至2024年12月在美国哈佛大学生物统计系从事博士后研究。其研究聚焦于构建稳健且具可解释性的高维与超高维统计方法，并将其应用于复杂结构的大规模基因组数据分析，相关方法学成果发表于 Journal of the American Statistical Association、Biometrika 和 Annals of Applied Statistics。同时在医学健康领域，针对心血管疾病与慢性肾病与合作者开展深入的跨学科研究，综合利用大规模遗传、转录组和蛋白质组数据开展系统分析，成果发表在 New England Journal of Medicine、European Heart Journal 和 Nature Communications 等国际期刊上。'],

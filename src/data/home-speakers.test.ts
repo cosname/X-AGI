@@ -49,7 +49,7 @@ describe('homepage speaker lineup', () => {
 
   it('links the newly submitted profiles directly from the homepage', () => {
     const missingProfiles = homeSpeakers.filter((speaker) => !conference2026PersonForName(speaker.name));
-    assert.deepEqual(missingProfiles.map((speaker) => speaker.name), ['刘华斌']);
+    assert.deepEqual(missingProfiles.map((speaker) => speaker.name), []);
     for (const name of ['邹荻凡', '潘亮铭', '姚金戈', '张辉帅', '王淏楠']) {
       const speaker = homeSpeakers.find((candidate) => candidate.name === name)!;
       const profile = conference2026PersonForName(name)!;

@@ -90,8 +90,8 @@ describe('2026 public Chair and Speaker profiles', () => {
     const person = conference2026PersonForName('田润泽');
     assert.equal(person?.portraitStatus, 'missing');
     assert.equal(person?.portraitSrc, undefined);
-    assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 4);
-    for (const name of ['谢天', '祝武']) {
+    assert.equal(conference2026People.filter((candidate) => !candidate.portraitSrc).length, 5);
+    for (const name of ['谢天', '祝武', '刘华斌']) {
       const candidate = conference2026PersonForName(name);
       assert.equal(candidate?.portraitStatus, 'missing');
       assert.equal(candidate?.portraitSrc, undefined);
