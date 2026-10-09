@@ -9,8 +9,9 @@ export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceR
     aliases: [],
     roles: ['speaker'],
     affiliation: '蚂蚁集团',
+    bio: '刘华斌，博士毕业于上海交通大学，现就职于蚂蚁技术研究院-LLaDA团队，专注于扩散语言模型的训练范式和架构研究。',
     abstract: '扩散语言模型通过并行生成与迭代去噪，为大语言模型提供了不同于逐 token 自回归生成的技术路径。如何将这种潜力转化为可规模化训练、高效推理，并能胜任复杂任务的模型，是 LLaDA 团队持续探索的核心问题。本报告将以 LLaDA 2.x 系列的演进为主线，介绍团队在dLLM模型训练、推理机制与Agentic能力上的研究与实践：LLaDA 2.0 通过自回归模型到块扩散模型的渐进式转换，将扩散语言模型扩展至千亿参数规模；LLaDA 2.1 将并行生成与 token 编辑结合，改善解码速度与生成质量的权衡；LLaDA 2.2 进一步引入支持插入、删除与替换的编辑机制，结合长上下文、块级专家路由和面向交互反馈的强化学习，探索多轮、长程智能体任务。在此基础上，报告将讨论扩散语言模型在训练目标、并行解码与迭代修正中的关键问题，并展望其与自回归模型的协同，以及向原生多模态统一模型的发展方向。',
-    hasSubmittedPortrait: false,
+    hasSubmittedPortrait: true,
     sourceOrder: -1,
   },
   {

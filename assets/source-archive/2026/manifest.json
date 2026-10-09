@@ -5,9 +5,9 @@
   "lastExtendedOn": "2026-10-09",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 280,
-  "uniquePayloadCount": 279,
-  "archiveFileCount": 278,
+  "sourceEntryCount": 281,
+  "uniquePayloadCount": 280,
+  "archiveFileCount": 279,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1802,14 +1802,14 @@
       "originalPath": "session-posters-20260916/session-06-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-06-print.png",
       "status": "archived",
-      "sha256": "c550ea69ceae4e795092752a6babff2ccd55a6e1afb7162d2ffa0db7a15a0f79",
-      "bytes": 1756608,
+      "sha256": "8fe6f0094c786bebb3eec26360db24b5d8814531ce23c257f083c1c174165a76",
+      "bytes": 1756657,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T06:14:16.211Z",
+      "sourceModifiedAt": "2026-10-09T07:57:11.351Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -2000,14 +2000,14 @@
       "originalPath": "session-posters-20260916/session-12-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-12-print.png",
       "status": "archived",
-      "sha256": "8bc710b72a04aae27e39f39efb4a71b400535127d2ca4c9d91e266e5d959a0d7",
-      "bytes": 1632772,
+      "sha256": "28c59d20309805c6eaa4145a47f58b730aa5d00b03c2b3742953d84e322b3b6c",
+      "bytes": 1648918,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:57.132Z",
+      "sourceModifiedAt": "2026-10-09T07:57:18.619Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2033,14 +2033,14 @@
       "originalPath": "session-posters-20260916/session-13-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-13-print.png",
       "status": "archived",
-      "sha256": "4eafc42f909e31d50ffa8b05aa8d0e981ad19d9280b606c4f0f0c0f655f2cec2",
-      "bytes": 1944090,
+      "sha256": "a2b7576e435fcf5801734dbaa28b277602dc332125ad9dffbf26b5f32dbb777b",
+      "bytes": 1944126,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T06:14:34.245Z",
+      "sourceModifiedAt": "2026-10-09T07:57:19.789Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -4400,6 +4400,22 @@
         "public/2026/people/wang-haonan-portrait.webp"
       ],
       "note": "Wang Haonan portrait supplied directly by the organizer on October 9, 2026. Embedded EXIF removed losslessly with identical decoded pixels. Runtime WebP preserves the complete source composition and aspect ratio; shared layout framing is applied separately."
+    },
+    {
+      "originalPath": "organizer-supplied-20261009/2142574440.png",
+      "canonicalPath": "assets/source-archive/2026/people/liu-huabin-portrait-source.png",
+      "status": "archived",
+      "sha256": "a6ae84b0f96d06c0e743e595f7252b28279754263ee4a5af83a07af9496797fc",
+      "bytes": 27370,
+      "mediaType": "image/png",
+      "dimensions": {
+        "width": 138,
+        "height": 166
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/liu-huabin-portrait.webp"
+      ],
+      "note": "Liu Huabin portrait supplied directly by the organizer on October 9, 2026. The archived PNG preserves the original bytes and contains no embedded private metadata. Lossless WebP preserves the original dimensions and visible pixels; shared layout framing is applied separately."
     }
   ]
 }
