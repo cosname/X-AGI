@@ -851,12 +851,6 @@ const officialCopyByRoute = new Map([
   ['poster/index.html', [
     conference2026.poster.title,
     conference2026.poster.status,
-    conference2026.poster.ticket.label,
-    String(conference2026.poster.ticket.value),
-    ...conference2026.poster.requirements,
-    ...conference2026.poster.benefits,
-    conference2026.poster.deadline.date,
-    conference2026.poster.deadline.time,
     conference2026.contact,
     ...posterResearchPapers.flatMap((paper) => [paper.title, paper.applicantName, paper.affiliation, paper.venue]),
   ]],

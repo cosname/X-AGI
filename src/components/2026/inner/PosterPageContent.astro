@@ -1,14 +1,18 @@
 ---
+import PosterResearchDirectory from './PosterResearchDirectory.astro';
+
+/* Registration details are retained for a future call for posters.
 import { conference2026 } from '../../../data/conference2026';
 import { currentEdition, editionPath } from '../../../config/site';
 import { isPosterRegistrationOpen } from '../../../config/edition-status';
-import PosterResearchDirectory from './PosterResearchDirectory.astro';
 
 const { poster, registration } = conference2026;
+*/
 ---
 
 <main class="main-content">
   <div class="published-inner-container">
+    {/* Registration has closed. Keep this section in source for future use.
     <div id="poster-details" class="info-card">
       <div class="card-header">Rising Stars Poster</div>
       <div class="card-body">
@@ -47,12 +51,15 @@ const { poster, registration } = conference2026;
         </div>}
       </div>
     </div>
+    */}
     <PosterResearchDirectory />
   </div>
 </main>
 
+{/* Styles for the archived registration section.
 <style>
   #poster-details {
     scroll-margin-top: 6.5rem;
   }
 </style>
+*/}

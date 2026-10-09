@@ -72,7 +72,7 @@ export function currentEditionPageCopy(
       return {
         page,
         label: 'Rising Stars Poster',
-        description: 'Rising Stars Poster 申请要求、入选权益、报名信息与报名论文。',
+        description: 'Rising Stars Poster 海报与论文展示。',
         status: conference.poster.status,
       };
     case 'travel-grant':
