@@ -1,30 +1,39 @@
-# 2026-10-08 作者海报与待核对名单
+# 作者海报与待核对名单
 
-以会务提供的最新文件夹为准，全部 52 份单页 PDF 均已纳入网站展示。
-原网站有 58 条报名记录，本次暂移除 8 条缺少海报的记录，替换张书宁的论文，并新增吴彦辰、熊耀中两条记录。
-首页与 Poster 目录统一展示 52 份作者海报，不再展示论文首页占位。
+截至 2026-10-10，会务提供的全部 55 份单页 PDF 均已纳入网站展示。
+2026-10-08 导入 52 份海报，2026-10-10 补入山东大学宋俊儒、张辰皓和陈星宇的 3 份海报。
+原网站有 58 条报名记录，目前暂移除 5 条缺少海报的记录，替换张书宁的论文，并新增吴彦辰、熊耀中两条记录。
+首页与 Poster 目录统一展示 55 份作者海报，不再展示论文首页占位。
 海报题名与旧报名信息不同时，以最新海报为准。
-以下“未找到”仅指本次文件夹，不表示作者没有在其他渠道提交。
+以下“未找到”仅指本次已核对的材料，不表示作者没有在其他渠道提交。
 
-## 暂移除的 8 条记录，供会务核对
+## 暂移除的 5 条记录，供会务核对
 
 | 报名人 | 原报名单位 | 原报名论文 |
 | --- | --- | --- |
 | 焦政博 | 上海财经大学 | Agentic Proposing: Enhancing Large Language Model Reasoning via Compositional Skill Synthesis |
 | 林威 | 香港中文大学 | AGZO: Activation-Guided Zeroth-Order Optimization for LLM Fine-Tuning |
 | 张家铭 | 中国人民大学 | Benign Overfitting in Adversarial Training for Vision Transformers |
-| 张辰皓 | 华中科技大学/腾讯 | Can MLLMs Understand the Deep Implication Behind Chinese Images? |
-| 宋俊儒 | 山东大学 | Delineating Knowledge Boundaries for Honest Large Vision-Language Models |
 | 郁昼亮 | 香港中文大学 | FormalMATH: Benchmarking Formal Mathematical Reasoning of Large Language Models |
-| 陈星宇 | 上海交通大学 | On computing and the complexity of computing higher-order U-statistics, exactly |
 | 赵子维 | Technical University of Munich | ScopeBench: Evaluating Cultural Norm Scope Awareness in LLMs |
 
 宋俊儒需按单位与论文区分。
-本次暂移除的是山东大学的 Delineating Knowledge Boundaries 记录。
-上海交通大学的 Model-Based Imaginative Planning for Embodied Agents 已提交海报，继续展示。
+山东大学的 Delineating Knowledge Boundaries 与上海交通大学的 Model-Based Imaginative Planning for Embodied Agents 均已提交海报，两条记录分别展示。
 张书宁已提交新论文海报，因此不列入待催交名单。
 
-## 本次新增与替换
+## 2026-10-10 补交海报
+
+| 报名人 | 原报名单位 | 海报题名 |
+| --- | --- | --- |
+| 宋俊儒 | 山东大学 | Delineating Knowledge Boundaries for Honest Large Vision-Language Models |
+| 张辰皓 | 华中科技大学/腾讯 | Can MLLMs Understand the Deep Implication Behind Chinese Images? |
+| 陈星宇 | 上海交通大学 | On computing and the complexity of computing higher-order U-statistics, exactly |
+
+三份海报均通过 PDF 文字提取与整页渲染核对，题名与原报名记录对应。
+三条记录恢复原有稳定 ID、单位及已核对的公开论文链接。
+原始海报按原字节归档，网页图片完整保留原始比例和内容。
+
+## 2026-10-08 新增与替换
 
 | 报名人 | 单位 | 最新海报题名 | 处理 |
 | --- | --- | --- | --- |
@@ -44,11 +53,11 @@
 张德辰的文件名使用“张徳辰”，海报题名及英文署名 Dechen Zhang 与原记录一致。
 郭立轩和校一皓提交的是图片型 PDF，题名通过渲染图核对。
 校一皓的海报保留 Anonymous Author(s) 署名，报名人依据已有报名记录及提交文件名。
-全部 52 份 PDF 均已完成整页视觉检查，原始海报内容保持原样。
+全部 55 份 PDF 均已完成整页视觉检查，原始海报内容保持原样。
 
 ## 网站与素材
 
-首页和 Poster 目录共用 52 份海报缩略图及同一个查看器组件。
+首页和 Poster 目录共用 55 份海报缩略图及同一个查看器组件。
 点击缩略图可放大、缩小、滚动查看、适应屏幕和查看原图，也可按 Escape 关闭。
 缩略图按需加载，高分辨率图片仅在打开查看器后加载。
 没有 JavaScript 时，海报链接仍可直接打开高分辨率图片。
@@ -60,6 +69,7 @@
 640px 宽的 WebP 缩略图和最长边 4000px 的 WebP 大图位于 `public/2026/research-posters/`，保持原始长宽比。
 导入器先校验整批文件名、摘要及单页结构，确保每个 PDF 恰好对应一条展示记录。
 未改变的 PDF 可复用通过摘要校验的图片；新海报重新渲染。
+超长海报的缩略图按需降低 WebP 编码质量，以满足 180KB 上限；完整大图保持原有质量。
 生成清单及全局归档清单由导入器维护，不手动修改。
 
 ```sh
@@ -69,7 +79,17 @@ npm test
 
 本记录保留素材与页面核对结果，发布状态以部署验证为准。
 
-## 本地验证
+## 2026-10-10 补交验证
+
+153 项单元测试通过，107 个文件的 Astro 检查为 0 errors、0 warnings、0 hints。
+55 份海报素材校验、整站构建及构建结果校验均通过。
+19 项本地浏览器检查通过，涵盖两处 55 条记录、同名论文区分、新海报搜索、论文链接、按需加载、放大及关闭后的焦点恢复。
+桌面 1440px、手机模拟 390px 和 320px 已检查，未出现海报裁切或页面横向溢出。
+本次同时核对秘书处新增成员程子懿及拼音排序。
+原有 52 份海报图片和 282 条工作区归档记录保持不变。
+验证日志及截图位于本地 `output/poster-supplement-20261010/`。
+
+## 2026-10-08 本地验证
 
 149 项单元测试通过，Astro 检查为 0 errors、0 warnings，另有 28 条既有提示。
 素材校验、52 份海报导出校验、整站构建及构建结果校验均通过。

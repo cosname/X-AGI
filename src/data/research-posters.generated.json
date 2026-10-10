@@ -1,6 +1,6 @@
 {
   "generatedBy": "scripts/import-research-posters.mjs",
-  "sourcesSha256": "249597187fe94f5d321397818fc4cbb590362885dc37ec2fef36e6058f865406",
+  "sourcesSha256": "0182eed1ec02974c575f64f2c33623c52eb96ed50b11178d01620739b23f20a7",
   "posters": [
     {
       "id": "poster-136c923ca735",
@@ -203,6 +203,26 @@
       }
     },
     {
+      "id": "poster-ddaa41f4696e",
+      "title": "Can MLLMs Understand the Deep Implication Behind Chinese Images?",
+      "pdfSha256": "a824a1799ac3f3222c0e0e2db8d29e9376bdc0b59ad21ca8a9c974eebcfbd0b3",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-ddaa41f4696e-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-ddaa41f4696e-thumbnail.webp",
+        "width": 640,
+        "height": 1421,
+        "bytes": 175882,
+        "sha256": "4580c57cf3103af2be084d1fc2861e117352bd56819bdf92cb2e7f69e3e080c8"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-ddaa41f4696e-full.webp",
+        "width": 1801,
+        "height": 4000,
+        "bytes": 1429308,
+        "sha256": "08dcd5216348064e2a2bc449012ef087cd578cbc644cee8f5ea5d7e1dcbf5445"
+      }
+    },
+    {
       "id": "poster-53bb147467d6",
       "title": "Co-GRPO: Co-Optimized Group Relative Policy Optimization for Masked Image Generation",
       "pdfSha256": "53dc153ebe1f226b6459da13c85eb9f1bcb565d8b820b409c4dd7ea13ed20f83",
@@ -320,6 +340,26 @@
         "height": 3001,
         "bytes": 1503226,
         "sha256": "162afea73a71998744c0b9340f75ef9eb270306c0c690906e5be9524ccea9d11"
+      }
+    },
+    {
+      "id": "poster-0d0abb6e4c9e",
+      "title": "Delineating Knowledge Boundaries for Honest Large Vision-Language Models",
+      "pdfSha256": "0a6199a2e73c335bcc040b975bee9d6b293fd391e61e1aeab5ecc8d48f8471af",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-0d0abb6e4c9e-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-0d0abb6e4c9e-thumbnail.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 64860,
+        "sha256": "5246b5f56ac73cf382bd1478f3d3bdb91031573cbfd9693d1ad8e65b924ae08b"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-0d0abb6e4c9e-full.webp",
+        "width": 4000,
+        "height": 3000,
+        "bytes": 1240522,
+        "sha256": "86a765419820258256270d61caf206fdb3733e62ff4e2f237529512190461f66"
       }
     },
     {
@@ -640,6 +680,26 @@
         "height": 3000,
         "bytes": 724334,
         "sha256": "5c06101ac3c8d12e79703cae50ae9b1a8e95d3af00e3bef801667cba9738d641"
+      }
+    },
+    {
+      "id": "poster-0adb00382599",
+      "title": "On computing and the complexity of computing higher-order U-statistics, exactly",
+      "pdfSha256": "5a7897c94428c04a75dc22bd960fbc0d13dd758a3144f3f262296d9f818d7d88",
+      "archivePath": "assets/source-archive/2026/research-posters/poster-0adb00382599-poster.pdf",
+      "thumbnail": {
+        "src": "/2026/research-posters/poster-0adb00382599-thumbnail.webp",
+        "width": 640,
+        "height": 905,
+        "bytes": 81108,
+        "sha256": "7b4d615335283ad653089d673fe78f9c04b38d001042153a31ec2b20dceb71b7"
+      },
+      "full": {
+        "src": "/2026/research-posters/poster-0adb00382599-full.webp",
+        "width": 2830,
+        "height": 4000,
+        "bytes": 869718,
+        "sha256": "354d780dfcb3917f6d8cc04b1039591bca7ce4feb9b31876b3b953e5cee541ab"
       }
     },
     {

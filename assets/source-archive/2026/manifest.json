@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-10-09",
+  "lastExtendedOn": "2026-10-10",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 281,
-  "uniquePayloadCount": 280,
-  "archiveFileCount": 279,
+  "sourceEntryCount": 284,
+  "uniquePayloadCount": 283,
+  "archiveFileCount": 282,
   "entries": [
     {
       "originalPath": "1.png",
@@ -4416,6 +4416,45 @@
         "public/2026/people/liu-huabin-portrait.webp"
       ],
       "note": "Liu Huabin portrait supplied directly by the organizer on October 9, 2026. The archived PNG preserves the original bytes and contains no embedded private metadata. Lossless WebP preserves the original dimensions and visible pixels; shared layout framing is applied separately."
+    },
+    {
+      "originalPath": "submitted-research-posters/张辰皓.pdf",
+      "canonicalPath": "assets/source-archive/2026/research-posters/poster-ddaa41f4696e-poster.pdf",
+      "status": "archived",
+      "sha256": "a824a1799ac3f3222c0e0e2db8d29e9376bdc0b59ad21ca8a9c974eebcfbd0b3",
+      "bytes": 2773267,
+      "mediaType": "application/pdf",
+      "runtimeCounterparts": [
+        "public/2026/research-posters/poster-ddaa41f4696e-thumbnail.webp",
+        "public/2026/research-posters/poster-ddaa41f4696e-full.webp"
+      ],
+      "note": "Author-submitted research poster, matched to poster-ddaa41f4696e on 2026-10-10. Original PDF bytes preserved; only raster previews are published."
+    },
+    {
+      "originalPath": "submitted-research-posters/宋俊儒-山东大学-xagi2026海报.pdf",
+      "canonicalPath": "assets/source-archive/2026/research-posters/poster-0d0abb6e4c9e-poster.pdf",
+      "status": "archived",
+      "sha256": "0a6199a2e73c335bcc040b975bee9d6b293fd391e61e1aeab5ecc8d48f8471af",
+      "bytes": 639236,
+      "mediaType": "application/pdf",
+      "runtimeCounterparts": [
+        "public/2026/research-posters/poster-0d0abb6e4c9e-thumbnail.webp",
+        "public/2026/research-posters/poster-0d0abb6e4c9e-full.webp"
+      ],
+      "note": "Author-submitted research poster, matched to poster-0d0abb6e4c9e on 2026-10-10. Original PDF bytes preserved; only raster previews are published."
+    },
+    {
+      "originalPath": "submitted-research-posters/陈星宇.pdf",
+      "canonicalPath": "assets/source-archive/2026/research-posters/poster-0adb00382599-poster.pdf",
+      "status": "archived",
+      "sha256": "5a7897c94428c04a75dc22bd960fbc0d13dd758a3144f3f262296d9f818d7d88",
+      "bytes": 95373,
+      "mediaType": "application/pdf",
+      "runtimeCounterparts": [
+        "public/2026/research-posters/poster-0adb00382599-thumbnail.webp",
+        "public/2026/research-posters/poster-0adb00382599-full.webp"
+      ],
+      "note": "Author-submitted research poster, matched to poster-0adb00382599 on 2026-10-10. Original PDF bytes preserved; only raster previews are published."
     }
   ]
 }

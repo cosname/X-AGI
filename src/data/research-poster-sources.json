@@ -1,6 +1,6 @@
 {
-  "reviewedOn": "2026-10-08",
-  "reviewMethod": "Every PDF in the 2026-10-08 submission folder is included. Latest poster headings take precedence over the earlier registration roster. Missing submissions are temporarily excluded from public lists. Original poster artwork is preserved.",
+  "reviewedOn": "2026-10-10",
+  "reviewMethod": "Every PDF in the 2026-10-08 submission folder and all three supplements received on 2026-10-10 are included. Latest poster headings take precedence over the earlier registration roster. Missing submissions are temporarily excluded from public lists. Original poster artwork is preserved.",
   "posters": [
     {
       "id": "poster-136c923ca735",
@@ -105,6 +105,17 @@
       "href": "https://openreview.net/forum?id=gnKli42BZO"
     },
     {
+      "id": "poster-ddaa41f4696e",
+      "title": "Can MLLMs Understand the Deep Implication Behind Chinese Images?",
+      "applicantName": "张辰皓",
+      "affiliation": "华中科技大学/腾讯",
+      "venue": "ACL",
+      "href": "https://aclanthology.org/2025.acl-long.700/",
+      "fileName": "张辰皓.pdf",
+      "pdfSha256": "a824a1799ac3f3222c0e0e2db8d29e9376bdc0b59ad21ca8a9c974eebcfbd0b3",
+      "note": "Supplement received on 2026-10-10. Poster heading and authors visually matched to the original registration record; the verified public paper link is retained."
+    },
+    {
       "id": "poster-53bb147467d6",
       "title": "Co-GRPO: Co-Optimized Group Relative Policy Optimization for Masked Image Generation",
       "applicantName": "周韧平",
@@ -165,6 +176,17 @@
       "affiliation": "华中科技大学",
       "venue": "EMNLP",
       "href": "https://arxiv.org/abs/2609.06126"
+    },
+    {
+      "id": "poster-0d0abb6e4c9e",
+      "title": "Delineating Knowledge Boundaries for Honest Large Vision-Language Models",
+      "applicantName": "宋俊儒",
+      "affiliation": "山东大学",
+      "venue": "ECCV",
+      "href": "https://eccv.ecva.net/virtual/2026/poster/5732",
+      "fileName": "宋俊儒-山东大学-xagi2026海报.pdf",
+      "pdfSha256": "0a6199a2e73c335bcc040b975bee9d6b293fd391e61e1aeab5ecc8d48f8471af",
+      "note": "Supplement received on 2026-10-10. Poster heading and authors visually matched to the original registration record; the verified public paper link is retained."
     },
     {
       "id": "poster-c07208108cd9",
@@ -328,6 +350,17 @@
       "affiliation": "香港中文大学（深圳）",
       "venue": "TMLR",
       "href": "https://openreview.net/forum?id=T1qXIDn9my"
+    },
+    {
+      "id": "poster-0adb00382599",
+      "title": "On computing and the complexity of computing higher-order U-statistics, exactly",
+      "applicantName": "陈星宇",
+      "affiliation": "上海交通大学",
+      "venue": "Statistics and Computing",
+      "href": "https://link.springer.com/article/10.1007/s11222-026-10974-x",
+      "fileName": "陈星宇.pdf",
+      "pdfSha256": "5a7897c94428c04a75dc22bd960fbc0d13dd758a3144f3f262296d9f818d7d88",
+      "note": "Supplement received on 2026-10-10. Poster heading and authors visually matched to the original registration record; the verified public paper link is retained."
     },
     {
       "id": "poster-3ab1bd2d3392",

@@ -145,7 +145,7 @@ export const conference2026 = {
     secretariat: {
       title: '大会秘书处',
       secretaryGeneral: '邱潇锐',
-      members: ['邓欣怡', '黄涵碧', '李芷汀', '田润泽', '王胤博'],
+      members: ['程子懿', '邓欣怡', '黄涵碧', '李芷汀', '田润泽', '王胤博'],
       orderNote: '按姓名拼音排序',
     },
   },

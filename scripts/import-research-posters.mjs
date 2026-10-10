@@ -51,6 +51,7 @@ for (const source of sources.posters) {
   const reusable = previous && ['thumbnail', 'full'].every((role) => {
     const image = previous[role];
     return image.src === `/2026/research-posters/${source.id}-${role}.webp`
+      && image.bytes < (role === 'thumbnail' ? 180_000 : 4_000_000)
       && existsSync(`public${image.src}`) && digest(readFileSync(`public${image.src}`)) === image.sha256;
   });
   if (!reusable && !existsSync(`${png}.png`)) {
@@ -60,14 +61,23 @@ for (const source of sources.posters) {
   if (!reusable) {
     for (const [role, width, quality] of [['thumbnail', 640, 82], ['full', 4000, 92]]) {
       const src = `/2026/research-posters/${source.id}-${role}.webp`;
-      await sharp(`${png}.png`).resize({ width, withoutEnlargement: true }).webp({ quality, effort: 6 }).toFile(`public${src}`);
+      let exportQuality = quality;
+      const encode = () => sharp(`${png}.png`).resize({ width, withoutEnlargement: true }).webp({ quality: exportQuality, effort: 6 }).toBuffer();
+      let bytes = await encode();
+      while (role === 'thumbnail' && bytes.length >= 180_000 && exportQuality > 58) {
+        exportQuality -= 8;
+        bytes = await encode();
+      }
+      assert.ok(bytes.length < (role === 'thumbnail' ? 180_000 : 4_000_000), `Oversized ${role}: ${source.id}`);
+      writeFileSync(`public${src}`, bytes);
       const image = await sharp(`public${src}`).metadata();
-      const bytes = readFileSync(`public${src}`);
       exports[role] = { src, width: image.width, height: image.height, bytes: bytes.length, sha256: digest(bytes) };
     }
   }
   posters.push({ id: source.id, title: source.title, pdfSha256: source.pdfSha256, archivePath, ...exports });
   const bytes = readFileSync(archivePath);
+  const index = archive.entries.findIndex((item) => item.canonicalPath === archivePath);
+  const previousEntry = archive.entries[index];
   const entry = {
     originalPath: `submitted-research-posters/${source.fileName}`,
     canonicalPath: archivePath,
@@ -76,9 +86,9 @@ for (const source of sources.posters) {
     bytes: bytes.length,
     mediaType: 'application/pdf',
     runtimeCounterparts: Object.values(exports).map((image) => `public${image.src}`),
-    note: `Author-submitted research poster, matched to ${source.id} on ${sources.reviewedOn}. Original PDF bytes preserved; only raster previews are published.`,
+    note: previousEntry?.sha256 === source.pdfSha256 ? previousEntry.note
+      : `Author-submitted research poster, matched to ${source.id} on ${sources.reviewedOn}. Original PDF bytes preserved; only raster previews are published.`,
   };
-  const index = archive.entries.findIndex((item) => item.canonicalPath === archivePath);
   if (index < 0) archive.entries.push(entry);
   else archive.entries[index] = entry;
   console.log(`${source.id}: poster archived; ${reusable ? 'verified existing images' : 'rendered new images'}`);
