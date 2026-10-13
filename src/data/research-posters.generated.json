@@ -1,6 +1,6 @@
 {
   "generatedBy": "scripts/import-research-posters.mjs",
-  "sourcesSha256": "0182eed1ec02974c575f64f2c33623c52eb96ed50b11178d01620739b23f20a7",
+  "sourcesSha256": "bbb1068d2f85eba415c49c366e627b536c8c92fc6ae3588f0e3bc0676cad56f6",
   "posters": [
     {
       "id": "poster-136c923ca735",
@@ -565,21 +565,21 @@
     {
       "id": "poster-139bbebeb768",
       "title": "Iterative Nonlinear Computation Underlying Abstract Reasoning",
-      "pdfSha256": "2028ed3798c9ac4a91e7d813b61665a1c95babd6d982ebfa6229ef96586967b3",
+      "pdfSha256": "02977ec6853e2e3391f652db04fea4f7f056b72f058812e3f4edd886cb7fa811",
       "archivePath": "assets/source-archive/2026/research-posters/poster-139bbebeb768-poster.pdf",
       "thumbnail": {
         "src": "/2026/research-posters/poster-139bbebeb768-thumbnail.webp",
         "width": 640,
         "height": 480,
-        "bytes": 60768,
-        "sha256": "5071367059420f6eda23338b3c95a567633d41d99f928cb0f1a5a5ad01a7dc18"
+        "bytes": 76968,
+        "sha256": "2e9ebc80d4944272de52b7046d73b809c8a6296981654c7ebc89ad65339f4195"
       },
       "full": {
         "src": "/2026/research-posters/poster-139bbebeb768-full.webp",
         "width": 4000,
         "height": 3000,
-        "bytes": 898248,
-        "sha256": "4083c5761591e685f7cb62d0c62bfacdbb4b31255ecc262f7cbea1b64173d3bc"
+        "bytes": 1066074,
+        "sha256": "2e43d8ab380bc430a0dc12086627ab8d301220ba468a1cea4598296ae80579b3"
       }
     },
     {

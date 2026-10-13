@@ -1,6 +1,6 @@
 {
-  "reviewedOn": "2026-10-10",
-  "reviewMethod": "Every PDF in the 2026-10-08 submission folder and all three supplements received on 2026-10-10 are included. Latest poster headings take precedence over the earlier registration roster. Missing submissions are temporarily excluded from public lists. Original poster artwork is preserved.",
+  "reviewedOn": "2026-10-13",
+  "reviewMethod": "Every PDF in the 2026-10-08 submission folder and all three supplements received on 2026-10-10 are included. The replacement from 校一皓 was visually reviewed on 2026-10-13. Latest poster headings take precedence over the earlier registration roster. Missing submissions are temporarily excluded from public lists. Original poster artwork is preserved.",
   "posters": [
     {
       "id": "poster-136c923ca735",
@@ -295,8 +295,8 @@
       "title": "Iterative Nonlinear Computation Underlying Abstract Reasoning",
       "applicantName": "校一皓",
       "fileName": "校一皓-上财-xagi2026海报.pdf",
-      "pdfSha256": "2028ed3798c9ac4a91e7d813b61665a1c95babd6d982ebfa6229ef96586967b3",
-      "note": "Image-only PDF. Visually verified the full title. Poster retains Anonymous Author(s); matched to the submitted filename.",
+      "pdfSha256": "02977ec6853e2e3391f652db04fea4f7f056b72f058812e3f4edd886cb7fa811",
+      "note": "Replacement received on 2026-10-13. Image-only PDF; visually verified the full title and the author line including Yihao Xiao.",
       "affiliation": "上海财经大学",
       "venue": "NeurIPS",
       "href": "https://openreview.net/forum?id=WJZTqX8nzZ"
