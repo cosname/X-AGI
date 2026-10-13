@@ -17,7 +17,7 @@ function buildHomeSpeakers(): readonly HomeSpeaker[] {
     for (const [sessionIndex, session] of conference2026ProgramSessions.entries()) {
       const scheduledPeople = role === 'speaker' ? session.speakers : session.chairs;
       for (const [personIndex, scheduledPerson] of scheduledPeople.entries()) {
-        if (scheduledPerson.name === '待确认') continue;
+        if (['待确认', 'TBD'].includes(scheduledPerson.name)) continue;
         const person = conference2026PersonForName(scheduledPerson.name);
         const key = person ? `person:${person.id}` : `name:${scheduledPerson.name}`;
         if (seen.has(key)) continue;

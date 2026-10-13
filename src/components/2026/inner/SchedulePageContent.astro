@@ -1,6 +1,7 @@
 ---
 import { conference2026, type ScheduleDay } from '../../../data/conference2026';
 import { conference2026PersonForName } from '../../../data/conference2026-people.ts';
+import { programSessionTalks } from '../../../data/conference2026-talk-times.ts';
 import SchedulePersonProfile from './SchedulePersonProfile.astro';
 import ScheduleOverview from './ScheduleOverview.astro';
 
@@ -89,6 +90,7 @@ const sessionNumbers = new Map(
               const hasPendingChair = session.chairs.some((chair) => isPendingChair(chair.name));
               const hasSessionProfiles = [...session.chairs, ...session.speakers]
                 .some((scheduledPerson) => Boolean(conference2026PersonForName(scheduledPerson.name)));
+              const timedTalks = programSessionTalks(session, group.timetable);
               return (
                 <article
                   class="info-card schedule-card schedule-topic-card"
@@ -173,7 +175,6 @@ const sessionNumbers = new Map(
                         session.speakers.map((speaker, speakerIndex) => {
                           const person = conference2026PersonForName(speaker.name);
                           const talkTitle = person?.talkTitle ?? speaker.talkTitle;
-                          const timedTalks = group.timetable?.talks ?? [];
                           const timedTalkIndex = timedTalks.findIndex((talk) => talk.speaker === speaker.name);
                           const timedTalk = timedTalks[timedTalkIndex];
                           const nextSpeakerIndex = timedTalks.findIndex((talk, index) => index > timedTalkIndex && talk.speaker);

@@ -1769,14 +1769,14 @@
       "originalPath": "session-posters-20260916/session-05-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-05-print.png",
       "status": "archived",
-      "sha256": "d6dbe64e6e8ccdc235605a6628fea80cdbd169e44d243fc9ab0e9905a0453b37",
-      "bytes": 1503766,
+      "sha256": "6f703f0a90c88504202b359bb16a6bf0692c8712e0f6370d7606eefa461509d8",
+      "bytes": 1455637,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:49.013Z",
+      "sourceModifiedAt": "2026-10-13T13:17:24.952Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1967,14 +1967,14 @@
       "originalPath": "session-posters-20260916/session-11-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-11-print.png",
       "status": "archived",
-      "sha256": "822edc428615c56f514b7b07212ab5c65fc98c0f5e8df9b25edb937a4b748c71",
-      "bytes": 1864129,
+      "sha256": "840f2b441172e0d5779e91bf58c5f24a6d5a932f500733017d2bf71362a8926d",
+      "bytes": 1827944,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:55.985Z",
+      "sourceModifiedAt": "2026-10-13T13:35:43.703Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2033,14 +2033,14 @@
       "originalPath": "session-posters-20260916/session-13-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-13-print.png",
       "status": "archived",
-      "sha256": "7bb5d914b04f12908974be1d9199ac47c2d5e74b3cc395e7c6678791391808c2",
-      "bytes": 1913012,
+      "sha256": "12cc6b31d9cace93dbbc32674e3ddf417fa53c7904fdea94b26888af0373460d",
+      "bytes": 1912944,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-13T12:25:19.445Z",
+      "sourceModifiedAt": "2026-10-13T13:35:45.976Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"

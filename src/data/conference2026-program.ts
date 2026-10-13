@@ -36,14 +36,21 @@ const confirmedTalkTitles = new Map([
 ]);
 // The organizer's October 9 biography confirms his current employer.
 const confirmedAffiliations = new Map([['王淏楠', 'Sharpa']]);
+// Organizer-confirmed withdrawals, 2026-10-13.
+const withdrawnSpeakers = new Set(['周帆', '毛小介', '张华枫', '刘子寅']);
 const revisedSessions = sourceSessions.map((session) => {
+  const availableSpeakers = session.speakers.filter((person) => !withdrawnSpeakers.has(person.name));
   // Organizer-confirmed October 13 lineup: Zhou Feng gives the final talk.
   const speakers = session.title === 'AI的数理和计算基础'
     ? [
-      ...session.speakers.filter((person) => !['周帆', '毛小介', '周峰'].includes(person.name)),
+      ...availableSpeakers.filter((person) => person.name !== '周峰'),
       { name: '周峰', affiliation: '中国人民大学' },
     ]
-    : session.speakers;
+    : availableSpeakers;
+  // The organizer reserved a third 40-minute talk; the speaker is not confirmed yet.
+  if (session.title === 'Physics of Deep Learning' && speakers.length === 2) {
+    speakers.push({ name: 'TBD' });
+  }
   return {
     ...session,
     speakers: speakers.map((person) => {

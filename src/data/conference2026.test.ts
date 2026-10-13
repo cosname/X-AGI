@@ -10,6 +10,7 @@ import {
 } from './conference2026.ts';
 import { conference2026ProgramSource } from './conference2026-program.generated.ts';
 import { conference2026ProgramSessions, withOrganizerRemarks } from './conference2026-program.ts';
+import { programSessionTalks } from './conference2026-talk-times.ts';
 import { partnerLogoByName } from './partner-logo-assets-2026.ts';
 
 const scheduleCategories = new Set(['arrival', 'keynote', 'parallel', 'poster', 'discussion']);
@@ -127,6 +128,39 @@ describe('conference schedule contracts', () => {
     assert.deepEqual(conference2026ProgramSessions.flatMap((session, index) => session.livestream ? [index + 1] : []), [1, 5, 10, 14]);
     assert.deepEqual(conference2026ProgramSessions[11].speakers.map((speaker) => speaker.name), ['刘威杨', '刘华斌', '李根', '王淏楠']);
     assert.deepEqual(conference2026ProgramSessions[11].chairs.map((chair) => chair.name), ['胡天阳']);
+  });
+
+  it('assigns consecutive individual slots and preserves the confirmed Keynote timetable', () => {
+    const timetables = conference2026.schedule.flatMap((day) => day.sessions);
+    const expectedSlots = new Map([
+      ['10.17下午/3', ['14:00-14:40', '14:40-15:20', '15:20-16:00']],
+      ['10.17下午/4', ['14:00-14:30', '14:30-15:00', '15:00-15:30', '15:30-16:00']],
+      ['10.18上午/3', ['10:00-10:40', '10:40-11:20', '11:20-12:00']],
+      ['10.18上午/4', ['10:00-10:30', '10:30-11:00', '11:00-11:30', '11:30-12:00']],
+      ['10.18下午/3', ['14:00-14:40', '14:40-15:20', '15:20-16:00']],
+      ['10.18下午/4', ['14:00-14:30', '14:30-15:00', '15:00-15:30', '15:30-16:00']],
+    ]);
+    for (const session of conference2026ProgramSessions) {
+      const timetable = timetables.find((entry) => entry.sourceTime === session.sourceTime && entry.category !== 'discussion');
+      const talks = programSessionTalks(session, timetable);
+      if (timetable?.category === 'keynote') {
+        assert.equal(talks, timetable.talks);
+        assert.deepEqual(talks.map((talk) => talk.time), ['08:45-09:10', '09:10-10:00', '10:00-10:50', '10:50-11:10', '11:10-12:00']);
+      } else {
+        assert.deepEqual(talks.map((talk) => talk.speaker), session.speakers.map((speaker) => speaker.name));
+        assert.deepEqual(talks.map((talk) => talk.time), expectedSlots.get(`${session.sourceTime}/${session.speakers.length}`), session.title);
+      }
+    }
+    assert.deepEqual(conference2026ProgramSessions[4].speakers.map((speaker) => speaker.name), ['张先轶', '李秀红', '吴晨玮']);
+    assert.deepEqual(conference2026ProgramSessions[10].speakers.map((speaker) => speaker.name), ['刘子鸣', '张耀宇', 'TBD']);
+  });
+
+  it('requires confirmation instead of inventing slots for a changed session length or speaker count', () => {
+    const session = conference2026ProgramSessions[4];
+    const timetable = conference2026.schedule.flatMap((day) => day.sessions).find((entry) => entry.category === 'parallel')!;
+    assert.throws(() => programSessionTalks(session, { ...timetable, time: '14:00-15:30' }), /Expected a two-hour parallel session/u);
+    assert.throws(() => programSessionTalks({ ...session, speakers: session.speakers.slice(0, 1) }, timetable), /Confirm individual talk times/u);
+    assert.throws(() => programSessionTalks({ ...session, speakers: session.speakers.slice(0, 2) }, timetable), /Confirm individual talk times/u);
   });
 });
 

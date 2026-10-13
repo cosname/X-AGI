@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/render-session-posters.mjs",
-  "generatedAt": "2026-10-13T12:26:20.242Z",
+  "generatedAt": "2026-10-13T13:35:47.362Z",
   "renderEnvironment": "Chrome on macOS; PingFang SC and embedded IBM Plex Sans Condensed",
   "posters": [
     {
@@ -149,7 +149,7 @@
     },
     {
       "id": "session-05",
-      "contentHash": "df05313a0a87251b7a908ec832e9f1fc02df981fa48e59f0292004ff26025b54",
+      "contentHash": "8c08caa6cfa727357ceb366ab5a90060c9113f3a86b2d8ab178d159fab1b2196",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "a8d1071f2b6bfac22e2a84b87869bd788cf1b259522036b8033dc406a1e34f31",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
@@ -158,26 +158,25 @@
         "src/data/portrait-framing.ts": "2ddb2d9b0de548eff59212a0e47e70376161f781b0f33496d75c0567be7b5378",
         "assets/source-archive/2026/session-posters/session-05-background.png": "f0526a90808e850990298c6e011e516095d0ceee2cd37261f0e71dc1bbd6b755",
         "public/2026/people/zhang-xianyi-portrait.webp": "74b0955f9dd19c3261a68a74c9538451e22229c42c18e04cee4c94c7696088d0",
-        "public/2026/people/zhang-huafeng-portrait.webp": "8e48206633adaa7c0b53f09deb83e95bb9f5aa2bc84211bb12d646d3a46daf98",
         "public/2026/people/li-xiuhong-portrait.webp": "172ac13dfdb1df5dd74f59d13c2461152b82edf5f908bd7d9c1b2da96ca5cb89",
         "public/2026/people/wu-chenwei-portrait.webp": "ffa5c7811fad0cd3b3d2e560a684118d9de39e419342987581576bf87875dc0c"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-05-print.png": {
-          "sha256": "d6dbe64e6e8ccdc235605a6628fea80cdbd169e44d243fc9ab0e9905a0453b37",
-          "bytes": 1503766,
+          "sha256": "6f703f0a90c88504202b359bb16a6bf0692c8712e0f6370d7606eefa461509d8",
+          "bytes": 1455637,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-05.webp": {
-          "sha256": "0c7bf47f38c1b5d04e4708989c9ec7e9f97010f807e59be51c544d78281f9859",
-          "bytes": 117328,
+          "sha256": "e1ff38d75aee01d7da1ea49f843f77fc78d0b1e779aab328553eed2159220f3e",
+          "bytes": 105364,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-05-preview.webp": {
-          "sha256": "6a6779bbc3770146d5b1edd38e53b2f67f90c0ff2ac0a298a9e9e3e634f29097",
-          "bytes": 32382,
+          "sha256": "4a73f02fccce55d51b9ed0bdf20ee69a34049e5741f4bffd6c5634dd50d2845e",
+          "bytes": 28946,
           "width": 540,
           "height": 720
         }
@@ -363,7 +362,7 @@
     },
     {
       "id": "session-11",
-      "contentHash": "ceaca8689f2bf81a0477ca5a113cbaf36ce773a7e7044278708086aaad710f17",
+      "contentHash": "9211ab8dbcc681b7ec22d59418e67401ab7fa1bdcbdd7a521de20f1556e2f41c",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "a8d1071f2b6bfac22e2a84b87869bd788cf1b259522036b8033dc406a1e34f31",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
@@ -371,26 +370,25 @@
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "src/data/portrait-framing.ts": "2ddb2d9b0de548eff59212a0e47e70376161f781b0f33496d75c0567be7b5378",
         "assets/source-archive/2026/session-posters/session-11-background.png": "34ce845237cb82b79d13207b41005507f6be242f42a4819ca1f53504058cd8aa",
-        "public/2026/people/liu-ziyin-portrait.webp": "c3c663000fca3c4f093aaa684ccd029d247ddea2fcab2ab8950a37d70033dcf3",
         "public/2026/people/liu-ziming-portrait.webp": "50ad814e7a535e2579e974b45c6cb1970088fcbbdf1ea223b3f2b4ab6b5bcfba",
         "public/2026/people/zhang-yaoyu-portrait.webp": "3edd9d079278859a32fb9d8981e973b31d0a19c04883d326e5839f2eb9152f7d"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-11-print.png": {
-          "sha256": "822edc428615c56f514b7b07212ab5c65fc98c0f5e8df9b25edb937a4b748c71",
-          "bytes": 1864129,
+          "sha256": "840f2b441172e0d5779e91bf58c5f24a6d5a932f500733017d2bf71362a8926d",
+          "bytes": 1827944,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-11.webp": {
-          "sha256": "0fe04dca146b8bfe0ff8e5ceb61939b90e271e28ae26747a65c2b9d228f76447",
-          "bytes": 175630,
+          "sha256": "ddc3785189a5d0a4c75aca5d6c4a4dca902e62a18cff0e72704093d36e4f02ec",
+          "bytes": 164106,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-11-preview.webp": {
-          "sha256": "6c74ba3d68249a76c98c6a80f4fa71e754a295917e8408a4ebe55edd1236e1ee",
-          "bytes": 41050,
+          "sha256": "1294090441471cc659c2f243de36210daaa54f7de767def5deade5e6dd3fba34",
+          "bytes": 37852,
           "width": 540,
           "height": 720
         }
@@ -448,20 +446,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-13-print.png": {
-          "sha256": "7bb5d914b04f12908974be1d9199ac47c2d5e74b3cc395e7c6678791391808c2",
-          "bytes": 1913012,
+          "sha256": "12cc6b31d9cace93dbbc32674e3ddf417fa53c7904fdea94b26888af0373460d",
+          "bytes": 1912944,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-13.webp": {
-          "sha256": "c3fcd5e6c5160dd886cfc6e38645564c8cfaee4ad68a7a142534df05e651f0c3",
-          "bytes": 210734,
+          "sha256": "3565c9c69e535f7a2877552a083109301c15fd069e179e4aad99c541bc312bc3",
+          "bytes": 210824,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-13-preview.webp": {
-          "sha256": "c30dc98c6bd43194ba5846a2a88f5438f7af95bfaf06901ab1095ccfc03a05fb",
-          "bytes": 49892,
+          "sha256": "555f97db769c5259f33fa07f3e1cadec1ee02d2867b9f429e8ea237e7f8c6fc9",
+          "bytes": 49888,
           "width": 540,
           "height": 720
         }
