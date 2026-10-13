@@ -289,7 +289,7 @@ export const conference2026 = {
           period: '上午',
           time: '09:00-10:00',
           sourceTime: '10.18上午',
-          title: '自由讨论 + 茶歇',
+          title: '茶歇',
         },
         {
           id: 'oct18-am-sessions',
@@ -314,14 +314,6 @@ export const conference2026 = {
             { time: '', title: '', speaker: '', affiliation: '' },
             { time: '', title: '', speaker: '', affiliation: '' },
           ],
-        },
-        {
-          id: 'oct18-pm-poster',
-          category: 'poster',
-          period: '下午',
-          time: '16:00-18:30',
-          title: 'Rising Stars Poster 展示',
-          notes: ['Rising Stars Poster 展示'],
         },
       ],
     },

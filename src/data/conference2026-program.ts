@@ -32,19 +32,29 @@ const confirmedTalkTitles = new Map([
   ['许洪腾', 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow'],
   ['刘方辉', '深度学习理论的技术科学道路'],
   ['王淏楠', 'Signal and Noise in On-Policy Distillation: 1% of Tokens Can Be Enough'],
+  ['周峰', 'Rethinking Riemannian MeanFlow: Geometric Gaps and Geometry-Aligned Flow Maps'],
 ]);
 // The organizer's October 9 biography confirms his current employer.
 const confirmedAffiliations = new Map([['王淏楠', 'Sharpa']]);
-const revisedSessions = sourceSessions.map((session) => ({
-  ...session,
-  speakers: session.speakers.map((person) => {
-    const talkTitle = confirmedTalkTitles.get(person.name);
-    const affiliation = confirmedAffiliations.get(person.name);
-    return {
-      ...person,
-      ...(talkTitle ? { talkTitle } : {}),
-      ...(affiliation ? { affiliation } : {}),
-    };
-  }),
-}));
+const revisedSessions = sourceSessions.map((session) => {
+  // Organizer-confirmed October 13 lineup: Zhou Feng gives the final talk.
+  const speakers = session.title === 'AI的数理和计算基础'
+    ? [
+      ...session.speakers.filter((person) => !['周帆', '毛小介', '周峰'].includes(person.name)),
+      { name: '周峰', affiliation: '中国人民大学' },
+    ]
+    : session.speakers;
+  return {
+    ...session,
+    speakers: speakers.map((person) => {
+      const talkTitle = confirmedTalkTitles.get(person.name);
+      const affiliation = confirmedAffiliations.get(person.name);
+      return {
+        ...person,
+        ...(talkTitle ? { talkTitle } : {}),
+        ...(affiliation ? { affiliation } : {}),
+      };
+    }),
+  };
+});
 export const conference2026ProgramSessions = withOrganizerRemarks(revisedSessions);

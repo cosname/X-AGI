@@ -2,6 +2,7 @@
 import { conference2026, type ScheduleDay } from '../../../data/conference2026';
 import { conference2026PersonForName } from '../../../data/conference2026-people.ts';
 import SchedulePersonProfile from './SchedulePersonProfile.astro';
+import ScheduleOverview from './ScheduleOverview.astro';
 
 const program = conference2026.programPreview;
 const scheduleDays: readonly ScheduleDay[] = conference2026.schedule;
@@ -61,6 +62,7 @@ const sessionNumbers = new Map(
 
 <main class="main-content" data-schedule-page>
   <div class="published-inner-container">
+    <ScheduleOverview />
     <section class="schedule-confirmed" aria-label="大会日程与嘉宾">
       {programGroups.map((group) => (
         <section

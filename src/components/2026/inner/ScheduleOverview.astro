@@ -1,0 +1,636 @@
+---
+import { conference2026, type ScheduleDay } from '../../../data/conference2026';
+
+const schedule: readonly ScheduleDay[] = conference2026.schedule;
+const days = schedule.filter((day) => day.sessions.some((session) => session.category !== 'arrival'));
+const topics = conference2026.programPreview.sessions.map((session, index) => ({
+  ...session,
+  href: `#schedule-session-${String(index + 1).padStart(2, '0')}`,
+}));
+const periods = ['上午', '下午', 'Poster'] as const;
+
+function dateLabel(date: string) {
+  const [, month, day] = date.split('.');
+  return `${Number(month)} 月 ${Number(day)} 日`;
+}
+
+function eventsFor(day: ScheduleDay, period: (typeof periods)[number]) {
+  return day.sessions.filter((session) => period === 'Poster'
+    ? session.category === 'poster'
+    : session.period === period && session.category !== 'poster');
+}
+
+function roomLabel(venue: string) {
+  return venue.replace(/^(\d+)会$/u, '$1号会议室');
+}
+---
+
+<details class="schedule-overview" id="schedule-overview">
+  <summary class="schedule-overview__summary">
+    <span class="schedule-overview__label">
+      <span class="schedule-overview__title">日程总览</span>
+      <span class="schedule-overview__range">10 月 17-18 日</span>
+    </span>
+    <span class="schedule-overview__toggle">
+      <span class="schedule-overview__expand">展开</span>
+      <span class="schedule-overview__collapse">收起</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+  </summary>
+  <div class="schedule-overview__content">
+    <header class="schedule-overview__heading">
+      <p>点击主题查看报告与嘉宾，报告会场均位于友谊宫二层。</p>
+    </header>
+
+    <div class="schedule-overview__tabs" role="tablist" aria-label="选择日程日期" hidden>
+      {days.map((day, index) => (
+        <button
+          id={`overview-tab-${day.dateTime}`}
+          type="button"
+          role="tab"
+          aria-controls={`overview-panel-${day.dateTime}`}
+          aria-selected={index === 0 ? 'true' : 'false'}
+          tabindex={index === 0 ? 0 : -1}
+        >
+          <span>{dateLabel(day.date)}</span><span>{day.weekday}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="schedule-overview__grid">
+      {days.map((day) => (
+        <article class="schedule-overview__day" id={`overview-panel-${day.dateTime}`} aria-labelledby={`overview-${day.dateTime}`} data-overview-day={day.dateTime}>
+          <header class="schedule-overview__date">
+            <h3 id={`overview-${day.dateTime}`}><time datetime={day.dateTime}>{dateLabel(day.date)}</time></h3>
+            <span>{day.weekday}</span>
+          </header>
+          {periods.filter((period) => eventsFor(day, period).length > 0).map((period) => (
+            <section class:list={['schedule-overview__period', { 'schedule-overview__period--poster': period === 'Poster' }]} aria-label={period}>
+              <h4 class="schedule-overview__period-label">{period}</h4>
+              {eventsFor(day, period).map((event) => {
+                const eventTopics = topics.filter((topic) => topic.sourceTime === event.sourceTime);
+                return (
+                  <div class="schedule-overview__event" data-overview-event={event.id}>
+                    {event.category === 'poster' ? (
+                      <a class="schedule-overview__poster" href={`#${event.id}`}>
+                        <span class="schedule-overview__time">{event.time}</span>
+                        <strong>Rising Stars Poster</strong>
+                        <span class="schedule-overview__arrow" aria-hidden="true">↗</span>
+                      </a>
+                    ) : event.category === 'discussion' ? (
+                      <p class="schedule-overview__discussion">
+                        <span class="schedule-overview__time">{event.time}</span>
+                        <span>{event.title}</span>
+                      </p>
+                    ) : (
+                      <>
+                        <p class="schedule-overview__event-heading">
+                          <span class="schedule-overview__time">{event.time}</span>
+                        </p>
+                        <ul class:list={['schedule-overview__topics', { 'schedule-overview__topics--keynote': event.category === 'keynote' }]}>
+                          {eventTopics.map((topic) => (
+                            <li>
+                              <a href={topic.href} data-overview-topic title={`${topic.title} · ${topic.venue ?? ''}（${conference2026.venue.roomDetails.get(topic.venue ?? '') ?? ''}）`}>
+                                <strong>{topic.title}</strong>
+                                {topic.venue && <span class="schedule-overview__room">{roomLabel(topic.venue)}</span>}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                        {event.category === 'keynote' && event.talks && (
+                          <ol class="schedule-overview__keynote-times">
+                            {event.talks.map((talk) => (
+                              <li><span>{talk.time}</span><span>{talk.title}</span></li>
+                            ))}
+                          </ol>
+                        )}
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </section>
+          ))}
+        </article>
+      ))}
+    </div>
+    <p class="schedule-overview__mobile-hint">点击主题查看嘉宾与报告 · 会场位于友谊宫二层</p>
+  </div>
+</details>
+
+<script>
+  const overview = document.getElementById('schedule-overview');
+  const tablist = overview?.querySelector<HTMLElement>('[role="tablist"]');
+  const tabs = [...(tablist?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ?? [])];
+  const panels = [...(overview?.querySelectorAll<HTMLElement>('[data-overview-day]') ?? [])];
+  const compact = window.matchMedia('(max-width: 59.99rem)');
+
+  if (overview && tablist && tabs.length === panels.length) {
+    let selected = 0;
+
+    function update() {
+      if (!overview || !tablist) return;
+      tablist.hidden = !compact.matches;
+      overview.toggleAttribute('data-compact-tabs', compact.matches);
+      panels.forEach((panel, index) => {
+        const active = index === selected;
+        panel.hidden = compact.matches && !active;
+        tabs[index].setAttribute('aria-selected', String(active));
+        tabs[index].tabIndex = active ? 0 : -1;
+        panel.setAttribute('aria-labelledby', compact.matches
+          ? tabs[index].id
+          : `overview-${panel.dataset.overviewDay}`);
+        if (compact.matches) panel.setAttribute('role', 'tabpanel');
+        else panel.removeAttribute('role');
+      });
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        selected = index;
+        update();
+      });
+      tab.addEventListener('keydown', (event) => {
+        const next = event.key === 'Home' ? 0
+          : event.key === 'End' ? tabs.length - 1
+          : event.key === 'ArrowRight' ? (index + 1) % tabs.length
+          : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length
+          : undefined;
+        if (next === undefined) return;
+        event.preventDefault();
+        selected = next;
+        update();
+        tabs[next].focus();
+      });
+    });
+    compact.addEventListener('change', update);
+    update();
+  }
+</script>
+
+<style is:inline>
+  .schedule-overview {
+    margin: 0 0 2rem;
+    border: 1px solid #d6cce8;
+    border-radius: 1rem;
+    color: #242047;
+    background: #f8f4fc;
+    scroll-margin-top: calc(var(--site-header-height) + 2rem);
+  }
+
+  .schedule-overview__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4.5rem;
+    padding: 1rem 1.4rem;
+    border-radius: inherit;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .schedule-overview__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .schedule-overview__summary::marker {
+    content: '';
+  }
+
+  .schedule-overview__summary:hover {
+    background: rgb(228 218 244 / 0.35);
+  }
+
+  .schedule-overview__summary:focus-visible {
+    outline: 3px solid #6752c8;
+    outline-offset: 3px;
+  }
+
+  .schedule-overview__label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 1rem;
+    min-width: 0;
+  }
+
+  .schedule-overview__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .schedule-overview__range {
+    color: #7d6f8e;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .schedule-overview__toggle {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6250ad;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .schedule-overview__collapse,
+  .schedule-overview[open] .schedule-overview__expand {
+    display: none;
+  }
+
+  .schedule-overview[open] .schedule-overview__collapse {
+    display: inline;
+  }
+
+  .schedule-overview[open] .schedule-overview__toggle svg {
+    transform: rotate(180deg);
+  }
+
+  .schedule-overview__content {
+    padding: 0 1.4rem 1.4rem;
+  }
+
+  .schedule-overview__heading {
+    margin-bottom: 1.3rem;
+  }
+
+  .schedule-overview__heading p {
+    margin: 0.55rem 0 0;
+    color: #686478;
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .schedule-overview__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid #d6cce8;
+    border-radius: 1.1rem;
+    background: #d6cce8;
+  }
+
+  .schedule-overview__tabs[hidden],
+  .schedule-overview__day[hidden],
+  .schedule-overview__mobile-hint {
+    display: none;
+  }
+
+  .schedule-overview__day {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-row: span 4;
+    gap: 0;
+    min-width: 0;
+    background: #fdf9f3;
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .schedule-overview__day {
+      grid-template-rows: subgrid;
+    }
+  }
+
+  .schedule-overview__date {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    padding: 1rem 1.4rem;
+    background: linear-gradient(105deg, #e8e0f7, #f2edf7);
+  }
+
+  .schedule-overview__date h3 {
+    margin: 0;
+    color: #33275c;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .schedule-overview__date > span {
+    color: #6b5a8c;
+    font-size: 0.85rem;
+  }
+
+  .schedule-overview__period {
+    min-width: 0;
+    padding: 1rem 1.4rem 1.2rem;
+    border-top: 1px solid #e3dceb;
+  }
+
+  .schedule-overview__period-label {
+    margin: 0 0 0.65rem;
+    color: #82758e;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  .schedule-overview__event + .schedule-overview__event {
+    margin-top: 1rem;
+  }
+
+  .schedule-overview p.schedule-overview__event-heading,
+  .schedule-overview p.schedule-overview__discussion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.85rem;
+    margin: 0 0 0.7rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  .schedule-overview__time {
+    color: #3d315d;
+    font-size: 0.98rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .schedule-overview__topics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .schedule-overview__topics--keynote {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-overview__topics a {
+    display: flex;
+    height: 100%;
+    min-height: 3rem;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.4rem;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid #e0d8eb;
+    border-radius: 0.6rem;
+    color: #423367;
+    background: rgb(255 255 255 / 0.65);
+    text-decoration: none;
+  }
+
+  .schedule-overview__topics strong {
+    font-size: 0.86rem;
+    font-weight: 600;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .schedule-overview__room {
+    color: #7d6f8e;
+    font-size: 0.73rem;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  .schedule-overview__topics--keynote a {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .schedule-overview__topics a:hover {
+    border-color: #9b83c9;
+    background: #f0eaf9;
+  }
+
+  .schedule-overview__topics a:focus-visible,
+  .schedule-overview__poster:focus-visible {
+    outline: 3px solid #6752c8;
+    outline-offset: 2px;
+  }
+
+  .schedule-overview__keynote-times {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.85rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .schedule-overview__keynote-times li {
+    display: grid;
+    grid-template-columns: 6.9rem 1fr;
+    gap: 0.65rem;
+    color: #6e6579;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .schedule-overview__period--poster {
+    background: #f2edf9;
+  }
+
+  .schedule-overview__poster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.9rem;
+    min-height: 2.75rem;
+    color: #58419a;
+    text-decoration: none;
+  }
+
+  .schedule-overview__poster strong {
+    font-size: 0.94rem;
+    line-height: 1.4;
+  }
+
+  .schedule-overview__poster:hover strong {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .schedule-overview__arrow {
+    margin-left: auto;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 59.99rem) {
+    .schedule-overview {
+      margin-bottom: 1.5rem;
+    }
+
+    .schedule-overview__summary {
+      min-height: 4rem;
+      gap: 0.6rem;
+      padding: 0.85rem 1rem;
+    }
+
+    .schedule-overview__title {
+      font-size: 1rem;
+    }
+
+    .schedule-overview__range {
+      font-size: 0.72rem;
+    }
+
+    .schedule-overview__label {
+      gap: 0.2rem 0.65rem;
+    }
+
+    .schedule-overview__toggle {
+      gap: 0.3rem;
+      font-size: 0.78rem;
+    }
+
+    .schedule-overview__content {
+      padding: 0 0.75rem 0.8rem;
+    }
+
+    .schedule-overview__heading {
+      display: none;
+    }
+
+    .schedule-overview__tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.35rem;
+      margin-bottom: 0.55rem;
+      padding: 0.25rem;
+      border: 1px solid #cfc3e2;
+      border-radius: 0.8rem;
+      background: rgb(231 223 242 / 0.72);
+    }
+
+    .schedule-overview__tabs button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 2.75rem;
+      padding: 0.4rem 0.55rem;
+      border: 0;
+      border-radius: 0.55rem;
+      color: #625377;
+      background: transparent;
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .schedule-overview__tabs button span + span {
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .schedule-overview__tabs button[aria-selected='true'] {
+      color: #fff;
+      background: #6250ad;
+      box-shadow: 0 2px 5px rgb(46 30 80 / 0.13);
+    }
+
+    .schedule-overview__tabs button:focus-visible {
+      outline: 3px solid #3d2a7a;
+      outline-offset: 2px;
+    }
+
+    .schedule-overview__grid {
+      display: block;
+      overflow: visible;
+      border: 0;
+      background: none;
+    }
+
+    .schedule-overview__day {
+      display: block;
+      overflow: hidden;
+      border: 1px solid #d6cce8;
+      border-radius: 1rem;
+    }
+
+    .schedule-overview__day + .schedule-overview__day {
+      margin-top: 1.25rem;
+    }
+
+    .schedule-overview[data-compact-tabs] .schedule-overview__day + .schedule-overview__day {
+      margin-top: 0;
+    }
+
+    .schedule-overview[data-compact-tabs] .schedule-overview__date,
+    .schedule-overview__keynote-times,
+    .schedule-overview__period-label {
+      display: none;
+    }
+
+    .schedule-overview__date,
+    .schedule-overview__period {
+      padding: 0.7rem 0.85rem;
+    }
+
+    .schedule-overview__period:first-of-type {
+      border-top: 0;
+    }
+
+    .schedule-overview p.schedule-overview__event-heading,
+    .schedule-overview p.schedule-overview__discussion {
+      gap: 0.3rem 0.75rem;
+      margin: 0 0 0.4rem;
+      font-size: 0.75rem;
+    }
+
+    .schedule-overview__event + .schedule-overview__event {
+      margin-top: 0.6rem;
+    }
+
+    .schedule-overview__time {
+      font-size: 0.82rem;
+    }
+
+    .schedule-overview__topics {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .schedule-overview__topics a {
+      min-height: 2.75rem;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.45rem;
+    }
+
+    .schedule-overview__topics strong {
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .schedule-overview__room {
+      flex-shrink: 0;
+      font-size: 0.75rem;
+    }
+
+    .schedule-overview__poster {
+      gap: 0.4rem 0.65rem;
+    }
+
+    .schedule-overview__poster strong {
+      font-size: 0.82rem;
+    }
+
+    .schedule-overview p.schedule-overview__mobile-hint {
+      display: block;
+      margin: 0.65rem 0 0;
+      color: #756b7e;
+      font-size: 0.66rem;
+      line-height: 1.5;
+    }
+  }
+</style>
