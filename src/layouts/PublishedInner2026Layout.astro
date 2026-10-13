@@ -25,7 +25,7 @@ const {
 
 const canonical = new URL(canonicalPath, Astro.site);
 const shareTitle = title.includes(edition.title)
-  ? title.replace(edition.title, edition.titleZh)
+  ? title.replace(edition.title, `${edition.titleZh} 交叉智能大会`)
   : title;
 ---
 
@@ -34,12 +34,11 @@ const shareTitle = title.includes(edition.title)
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <title>{shareTitle}</title>
     <link rel="canonical" href={canonical} />
     <ShareMeta title={shareTitle} description={description} canonical={canonical} />
     <meta name="theme-color" content="#fdf8f1" />
     <link rel="icon" type="image/png" href="/2026/brand/favicon.png" />
-    <link rel="apple-touch-icon" href="/2026/brand/xagi-connect-logo.png" />
   </head>
   <body class="edition-site edition-2026 edition-2026-inner edition-goal-2026">
     <SiteHeader edition={edition} activePage={activePage} behavior="overlay-scroll" />

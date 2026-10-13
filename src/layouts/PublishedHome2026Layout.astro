@@ -17,11 +17,12 @@ const {
   canonicalPath,
   bodyClass,
 } = Astro.props;
+const shareTitle = `${edition.titleZh} 交叉智能大会`;
 ---
 
 <BaseLayout
-  title={edition.title}
-  shareTitle={edition.titleZh}
+  title={shareTitle}
+  shareTitle={shareTitle}
   description={description ?? edition.description}
   canonicalPath={canonicalPath}
   bodyClass={`edition-site edition-${edition.year}${bodyClass ? ` ${bodyClass}` : ''}`}

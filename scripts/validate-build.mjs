@@ -109,6 +109,7 @@ const virtualOutputFiles = new Map([
 ]);
 
 const runtimeBrandFiles = [
+  'apple-touch-icon.png',
   'favicon.png',
   'goal-paper-texture.webp',
   'share-2026.png',

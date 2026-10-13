@@ -20,8 +20,10 @@ const {
 } = Astro.props;
 
 const imageUrl = new URL(imagePath, Astro.site);
+const appleTouchIcon = new URL('/2026/brand/apple-touch-icon.png', Astro.site);
 ---
 
+<link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon} />
 <meta name="description" content={description} />
 <meta itemprop="name" content={title} />
 <meta itemprop="description" content={description} />
@@ -42,3 +44,4 @@ const imageUrl = new URL(imagePath, Astro.site);
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={title} />

@@ -233,12 +233,16 @@ const sessionNumbers = new Map(
               );
             })}
             {group.poster && (
-              <article class="schedule-poster-event" id={group.poster.id} aria-labelledby={`${group.poster.id}-title`}>
-                <div class="schedule-poster-event__heading">
+              <article class="info-card schedule-poster-event" id={group.poster.id} aria-labelledby={`${group.poster.id}-title`}>
+                <div class="schedule-poster-event__content">
+                  <p class="schedule-poster-event__eyebrow">海报展示与交流</p>
                   <h4 id={`${group.poster.id}-title`}>Rising Stars Poster</h4>
-                  <span class="schedule-inline-time">{group.poster.time}</span>
+                  <p class="schedule-poster-event__description">展示研究成果，与青年研究者面对面交流。</p>
                 </div>
-                <a href="/poster/">查看海报 →</a>
+                <div class="schedule-poster-event__details">
+                  <span class="schedule-poster-event__time">{group.poster.time}</span>
+                  <a href="/poster/#poster-research">查看全部海报 <span aria-hidden="true">→</span></a>
+                </div>
               </article>
             )}
           </div>
@@ -645,8 +649,7 @@ const sessionNumbers = new Map(
     white-space: nowrap;
   }
 
-  .edition-2026-inner .schedule-interlude,
-  .edition-2026-inner .schedule-poster-event__heading {
+  .edition-2026-inner .schedule-interlude {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -677,25 +680,87 @@ const sessionNumbers = new Map(
   .edition-2026-inner .schedule-poster-event {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
-    gap: 0.65rem 1.5rem;
-    padding: 1.25rem 0.25rem;
-    border-top: 1px solid rgb(103 82 200 / 0.25);
+    gap: 1.5rem 2rem;
+    min-height: 13.5rem;
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    border: 2px solid rgb(103 82 200 / 0.48);
+    border-radius: 1.25rem;
+    background: linear-gradient(120deg, #f5f0ff, #fffaf1 75%);
+    box-shadow: 0 8px 28px rgb(66 44 126 / 0.09), inset 0 0 0 1px rgb(255 255 255 / 0.8);
     scroll-margin-top: calc(var(--site-header-height) + 2.25rem);
+  }
+
+  .edition-2026-inner .schedule-poster-event__content {
+    flex: 1 1 22rem;
+    min-width: 0;
+  }
+
+  .edition-2026-inner .schedule-poster-event__eyebrow {
+    margin: 0 0 0.65rem;
+    color: #6752c8;
+    font-size: 0.85rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
   }
 
   .edition-2026-inner .schedule-poster-event h4 {
     margin: 0;
     color: #171a48;
-    font-size: clamp(1.15rem, 1.6vw, 1.35rem);
-    font-weight: 650;
+    font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.2;
+    text-wrap: balance;
   }
 
-  .edition-2026-inner .schedule-poster-event > a {
-    font-size: 0.9rem;
-    text-underline-offset: 0.2em;
+  .edition-2026-inner .schedule-poster-event__description {
+    margin: 0.85rem 0 0;
+    color: #55536f;
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .edition-2026-inner .schedule-poster-event__details {
+    display: flex;
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+
+  .edition-2026-inner .schedule-poster-event__time {
+    color: #34305c;
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
+  }
+
+  .edition-2026-inner .schedule-poster-event__details a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 3rem;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid #6752c8;
+    border-radius: 999px;
+    background: #6752c8;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .edition-2026-inner .schedule-poster-event__details a:hover {
+    background: #4f3caf;
+  }
+
+  .edition-2026-inner .schedule-poster-event__details a:focus-visible {
+    outline: 3px solid #6752c8;
+    outline-offset: 4px;
   }
 
   .edition-2026-inner .schedule-confirmed__note {
