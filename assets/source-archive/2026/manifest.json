@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-10-13",
+  "lastExtendedOn": "2026-10-15",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 284,
-  "uniquePayloadCount": 283,
-  "archiveFileCount": 282,
+  "sourceEntryCount": 287,
+  "uniquePayloadCount": 286,
+  "archiveFileCount": 285,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1629,7 +1629,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.568Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1662,7 +1662,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.572Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1695,7 +1695,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.577Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1728,7 +1728,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.581Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1761,7 +1761,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.585Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1794,7 +1794,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.590Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1827,7 +1827,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.594Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1860,7 +1860,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.600Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1893,7 +1893,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.604Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1926,7 +1926,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.608Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1959,7 +1959,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.613Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -1992,7 +1992,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.618Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -2000,14 +2000,14 @@
       "originalPath": "session-posters-20260916/session-12-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-12-print.png",
       "status": "archived",
-      "sha256": "28c59d20309805c6eaa4145a47f58b730aa5d00b03c2b3742953d84e322b3b6c",
-      "bytes": 1648918,
+      "sha256": "a8ccf2910770f5bf99aff6b23ac1ad7738dbb01dfb7b2a2be637dd40e9f132fd",
+      "bytes": 1605409,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T07:57:18.619Z",
+      "sourceModifiedAt": "2026-10-15T15:44:31.490Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2025,7 +2025,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.622Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -2033,14 +2033,14 @@
       "originalPath": "session-posters-20260916/session-13-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-13-print.png",
       "status": "archived",
-      "sha256": "12cc6b31d9cace93dbbc32674e3ddf417fa53c7904fdea94b26888af0373460d",
-      "bytes": 1912944,
+      "sha256": "b286fb2725cecdc5a52535e33faae032b1ee852500a501a33494767351132b4a",
+      "bytes": 1894688,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-13T13:35:45.976Z",
+      "sourceModifiedAt": "2026-10-15T15:43:16.619Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2058,7 +2058,7 @@
         "width": 1086,
         "height": 1448
       },
-      "sourceModifiedAt": "2026-10-08T15:40:48.000Z",
+      "sourceModifiedAt": "2026-09-15T18:44:29.628Z",
       "runtimeCounterparts": [],
       "note": "Original text-free session poster background generated with the built-in image tool for the 2026-09-16 poster collection. The archived PNG preserves the original generated image."
     },
@@ -3597,6 +3597,22 @@
       "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
     },
     {
+      "originalPath": "partner-logos-2026-10-02/cos.svg",
+      "canonicalPath": "assets/source-archive/2026/partner-logos-2026-10-02/cos.svg",
+      "status": "archived",
+      "sha256": "3d850658bd6f460719b68837542177843c2177305816c1368e01e14f8a06a11b",
+      "bytes": 98423,
+      "mediaType": "image/svg+xml",
+      "dimensions": {
+        "width": 1625,
+        "height": 392
+      },
+      "runtimeCounterparts": [
+        "public/2026/logos/cos.svg"
+      ],
+      "note": "Organizer-supplied selected vector logo. Source preserved exactly; runtime may add a viewBox for responsive sizing."
+    },
+    {
       "originalPath": "partner-logos-2026-10-05/tsinghua-sem-graduate.svg",
       "canonicalPath": "assets/source-archive/2026/partner-logos-2026-10-05/tsinghua-sem-graduate.svg",
       "status": "archived",
@@ -3734,19 +3750,6 @@
         "public/2026/research-posters/poster-6dd712cfb147-full.webp"
       ],
       "note": "Author-submitted research poster, matched to poster-6dd712cfb147 on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
-    },
-    {
-      "originalPath": "submitted-research-posters/吴彦辰-清华大学-xagi2026海报.pdf",
-      "canonicalPath": "assets/source-archive/2026/research-posters/poster-adaptively-grouped-bandits-poster.pdf",
-      "status": "archived",
-      "sha256": "b0743706f68f52179135ef8d4d1424a08782084dd52000c63341d7b2aac66f16",
-      "bytes": 406589,
-      "mediaType": "application/pdf",
-      "runtimeCounterparts": [
-        "public/2026/research-posters/poster-adaptively-grouped-bandits-thumbnail.webp",
-        "public/2026/research-posters/poster-adaptively-grouped-bandits-full.webp"
-      ],
-      "note": "Author-submitted research poster, matched to poster-adaptively-grouped-bandits on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
     },
     {
       "originalPath": "submitted-research-posters/徐秉煜-中国科学院大学-xagi2026海报.（2）.pdf",
@@ -4256,19 +4259,6 @@
       "note": "Author-submitted research poster, matched to poster-ff3e2ccd47e8 on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
     },
     {
-      "originalPath": "submitted-research-posters/王晨瑞-中国人民大学-xagi2026海报.pdf",
-      "canonicalPath": "assets/source-archive/2026/research-posters/poster-f4aea6615498-poster.pdf",
-      "status": "archived",
-      "sha256": "0843a827f81d18677df3012078052b1f59b5ddc33d118220d84462d18bd85a59",
-      "bytes": 923122,
-      "mediaType": "application/pdf",
-      "runtimeCounterparts": [
-        "public/2026/research-posters/poster-f4aea6615498-thumbnail.webp",
-        "public/2026/research-posters/poster-f4aea6615498-full.webp"
-      ],
-      "note": "Author-submitted research poster, matched to poster-f4aea6615498 on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
-    },
-    {
       "originalPath": "submitted-research-posters/巫国诚-香港中文大学(深圳)-xagi2026 海报.pdf",
       "canonicalPath": "assets/source-archive/2026/research-posters/poster-20d7627de19e-poster.pdf",
       "status": "archived",
@@ -4321,17 +4311,17 @@
       "note": "Author-submitted research poster, matched to poster-beb01cdc9c2c on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
     },
     {
-      "originalPath": "submitted-research-posters/张书宁-清华大学-xagi2026海报.pdf",
-      "canonicalPath": "assets/source-archive/2026/research-posters/poster-pervasive-blind-spot-poster.pdf",
+      "originalPath": "submitted-research-posters/王晨瑞-中国人民大学-xagi2026海报.pdf",
+      "canonicalPath": "assets/source-archive/2026/research-posters/poster-f4aea6615498-poster.pdf",
       "status": "archived",
-      "sha256": "24fc9460b16073eb9a5e3976f66173e0c23813fd9ee41d09b28f19dbed4ffa2a",
-      "bytes": 1089034,
+      "sha256": "0843a827f81d18677df3012078052b1f59b5ddc33d118220d84462d18bd85a59",
+      "bytes": 923122,
       "mediaType": "application/pdf",
       "runtimeCounterparts": [
-        "public/2026/research-posters/poster-pervasive-blind-spot-thumbnail.webp",
-        "public/2026/research-posters/poster-pervasive-blind-spot-full.webp"
+        "public/2026/research-posters/poster-f4aea6615498-thumbnail.webp",
+        "public/2026/research-posters/poster-f4aea6615498-full.webp"
       ],
-      "note": "Author-submitted research poster, matched to poster-pervasive-blind-spot on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
+      "note": "Author-submitted research poster, matched to poster-f4aea6615498 on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
     },
     {
       "originalPath": "submitted-research-posters/杜云涛-山东大学-xagi2026海报.pdf",
@@ -4371,6 +4361,32 @@
         "public/2026/research-posters/poster-70d62481de5a-full.webp"
       ],
       "note": "Author-submitted research poster, matched to poster-70d62481de5a on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
+    },
+    {
+      "originalPath": "submitted-research-posters/吴彦辰-清华大学-xagi2026海报.pdf",
+      "canonicalPath": "assets/source-archive/2026/research-posters/poster-adaptively-grouped-bandits-poster.pdf",
+      "status": "archived",
+      "sha256": "b0743706f68f52179135ef8d4d1424a08782084dd52000c63341d7b2aac66f16",
+      "bytes": 406589,
+      "mediaType": "application/pdf",
+      "runtimeCounterparts": [
+        "public/2026/research-posters/poster-adaptively-grouped-bandits-thumbnail.webp",
+        "public/2026/research-posters/poster-adaptively-grouped-bandits-full.webp"
+      ],
+      "note": "Author-submitted research poster, matched to poster-adaptively-grouped-bandits on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
+    },
+    {
+      "originalPath": "submitted-research-posters/张书宁-清华大学-xagi2026海报.pdf",
+      "canonicalPath": "assets/source-archive/2026/research-posters/poster-pervasive-blind-spot-poster.pdf",
+      "status": "archived",
+      "sha256": "24fc9460b16073eb9a5e3976f66173e0c23813fd9ee41d09b28f19dbed4ffa2a",
+      "bytes": 1089034,
+      "mediaType": "application/pdf",
+      "runtimeCounterparts": [
+        "public/2026/research-posters/poster-pervasive-blind-spot-thumbnail.webp",
+        "public/2026/research-posters/poster-pervasive-blind-spot-full.webp"
+      ],
+      "note": "Author-submitted research poster, matched to poster-pervasive-blind-spot on 2026-10-08. Original PDF bytes preserved; only raster previews are published."
     },
     {
       "originalPath": "submitted-research-posters/熊耀中-中国人民大学-xagi2026海报.pdf",
@@ -4455,6 +4471,46 @@
         "public/2026/research-posters/poster-0adb00382599-full.webp"
       ],
       "note": "Author-submitted research poster, matched to poster-0adb00382599 on 2026-10-10. Original PDF bytes preserved; only raster previews are published."
+    },
+    {
+      "originalPath": "wechat-attendee-guide-2026-10-15/friendship-hotel-lunch-location.webp",
+      "canonicalPath": "assets/source-archive/2026/attendee-guide/friendship-hotel-lunch-location.webp",
+      "status": "archived",
+      "sha256": "f14498faef0aed85c31e9890a40ec5eb95891ad8c49f9bf43268aff2355b8c7d",
+      "bytes": 62420,
+      "mediaType": "image/webp",
+      "dimensions": {
+        "width": 1080,
+        "height": 762
+      },
+      "runtimeCounterparts": [
+        "src/assets/2026/venue/friendship-hotel-lunch-location.webp"
+      ],
+      "provenanceUrls": [
+        "https://mp.weixin.qq.com/s/BQUB-cLRgkHGEJubxzfipQ",
+        "https://mmbiz.qpic.cn/mmbiz_png/2LbgdqibAmPRzjBxDZJ5FIuGu9Mic7q0Its8dJjpiaOrynp1DBum9LODmxINKNUiabJ0icnMHdhECuo5zN4TVc5BhUXAIib4wicQ6KA67JeaLdDVqk/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=4"
+      ],
+      "note": "Original WeChat image bytes from the user-supplied attendee guide. Content is WebP despite the PNG URL parameter."
+    },
+    {
+      "originalPath": "wechat-attendee-guide-2026-10-15/sishi-tongtang-banquet-location.webp",
+      "canonicalPath": "assets/source-archive/2026/attendee-guide/sishi-tongtang-banquet-location.webp",
+      "status": "archived",
+      "sha256": "cdd790a9ec5298ea9cfb8071edd69226e0e49aa363e8e17ec62f2c4aea27088e",
+      "bytes": 65562,
+      "mediaType": "image/webp",
+      "dimensions": {
+        "width": 891,
+        "height": 1024
+      },
+      "runtimeCounterparts": [
+        "src/assets/2026/venue/sishi-tongtang-banquet-location.webp"
+      ],
+      "provenanceUrls": [
+        "https://mp.weixin.qq.com/s/BQUB-cLRgkHGEJubxzfipQ",
+        "https://mmbiz.qpic.cn/mmbiz_png/2LbgdqibAmPQtNv8TRcJDBBoMBlp6Mwq4T5xscZheoSaGDIm9Gww6vNNJJghQDzx2eUib2R4fsWHCdS1oJpTujdDiaaLhrcKGbx9ibibsBYyjRVQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=5"
+      ],
+      "note": "Original WeChat image bytes from the user-supplied attendee guide. Content is WebP despite the PNG URL parameter."
     }
   ]
 }

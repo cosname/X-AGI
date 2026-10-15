@@ -173,6 +173,7 @@ npm test
 `src/data/partner-logo-assets-2026.ts` 为首页和会议简介共用的 Logo 映射。
 2026-09-28 版优先使用会务单独补发的 FAI、OScholar 及统计之都文件，其余使用当天提供的选定矢量文件。
 2026-10-01 仅更新 FAI 和统计之都，使用会务补发的 `fai.svg` 和 `cos-clean-vector.svg`，后者发布为 `cos.svg`。
+2026-10-02 使用会务补发的 `cos(1).svg` 更新统计之都 Logo，原件归档于 `assets/source-archive/2026/partner-logos-2026-10-02/cos.svg`，发布路径仍为 `cos.svg`。
 整理好与映射同名的 SVG 后，可用 `node scripts/import-partner-logos.mjs <整理后的SVG目录> <YYYY-MM-DD>` 导入并登记来源。
 只更新部分单位时，在日期后列出文件名，例如 `node scripts/import-partner-logos.mjs <整理后的SVG目录> <YYYY-MM-DD> fai.svg cos.svg`。
 原始素材保持归档，发布目录每个单位只保留一个选定版本。

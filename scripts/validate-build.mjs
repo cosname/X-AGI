@@ -129,6 +129,8 @@ const brandMasterFiles = [
 const venueSourceFiles = [
   'beijing-friendship-hotel-plan.jpg',
   'friendship-hotel-xagi-offer-code.png',
+  'friendship-hotel-lunch-location.webp',
+  'sishi-tongtang-banquet-location.webp',
   'friendship-palace-floor-2.jpg',
 ];
 
@@ -578,12 +580,14 @@ const researchPosterFiles = researchPosters.flatMap((poster) => [poster.thumbnai
 await validatePublicCopies('2026 research posters', path.resolve('public/2026/research-posters'), researchPosterFiles);
 
 const public2026Root = path.resolve('public/2026');
+await validatePublicCopies('2026 invitation download', path.join(public2026Root, 'downloads'), ['x-agi-2026-invitation.pdf']);
 validateExactSet(
   '2026 public asset tree',
   (await walk(public2026Root)).map((file) => relativeTo(public2026Root, file)),
   [
     ...runtimeBrandFiles.map((file) => `brand/${file}`),
     'legal/beian-icon.png',
+    'downloads/x-agi-2026-invitation.pdf',
     ...selectedLogoFiles.map((file) => `logos/${file}`),
     ...personPortraitFiles.map((file) => `people/${file}`),
     ...posterFiles.map((file) => `session-posters/${file}`),

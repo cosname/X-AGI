@@ -1724,6 +1724,34 @@
   justify-content: flex-start;
 }
 
+.edition-2026.edition-goal-home .conference-hero__invitation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-decoration: none;
+  text-underline-offset: 0.22em;
+}
+
+.edition-2026.edition-goal-home .conference-hero__invitation:hover {
+  color: var(--blue-deep);
+  text-decoration: underline;
+}
+
+.edition-2026.edition-goal-home .conference-hero__invitation:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.conference-hero__invitation-format {
+  font-size: 0.75rem;
+}
+
 @media (max-width: 64rem) {
   .edition-2026.edition-goal-home .conference-hero--badge {
     --badge-title-size: min(clamp(5.6rem, 9.6vw, 7rem), calc(min(42rem, 62vw) / 7.2));

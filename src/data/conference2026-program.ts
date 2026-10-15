@@ -32,13 +32,38 @@ const confirmedTalkTitles = new Map([
   ['许洪腾', 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow'],
   ['刘方辉', '深度学习理论的技术科学道路'],
   ['王淏楠', 'Signal and Noise in On-Policy Distillation: 1% of Tokens Can Be Enough'],
-  ['周峰', 'Rethinking Riemannian MeanFlow: Geometric Gaps and Geometry-Aligned Flow Maps'],
+  ['周峰', '高效大模型'],
 ]);
 // The organizer's October 9 biography confirms his current employer.
 const confirmedAffiliations = new Map([['王淏楠', 'Sharpa']]);
 // Organizer-confirmed withdrawals, 2026-10-13.
 const withdrawnSpeakers = new Set(['周帆', '毛小介', '张华枫', '刘子寅']);
-const revisedSessions = sourceSessions.map((session) => {
+const revisedSessions = sourceSessions.map((sourceSession) => {
+  // Organizer-confirmed October 15 title and three-speaker lineup.
+  // Keep this correction until the next Tencent snapshot includes it.
+  const session: Conference2026ProgramSourceSession = ['语言模型基础', '扩散语言模型'].includes(sourceSession.title)
+    ? {
+      ...sourceSession,
+      title: '扩散语言模型',
+      speakers: [
+        {
+          name: '刘华斌',
+          affiliation: '蚂蚁集团',
+          talkTitle: 'Parallel Generation, Iterative Refinement: The Evolution of LLaDA 2.x in Practice',
+        },
+        {
+          name: '胡天阳',
+          affiliation: '香港中文大学（深圳）',
+          talkTitle: '扩散式语言建模探索：从掩码扩散到连续扩散',
+        },
+        {
+          name: '李根',
+          affiliation: '香港中文大学',
+          talkTitle: 'ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings',
+        },
+      ],
+    }
+    : sourceSession;
   const availableSpeakers = session.speakers.filter((person) => !withdrawnSpeakers.has(person.name));
   // Organizer-confirmed October 13 lineup: Zhou Feng gives the final talk.
   const speakers = session.title === 'AI的数理和计算基础'

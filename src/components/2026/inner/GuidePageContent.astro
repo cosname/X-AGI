@@ -3,7 +3,11 @@ import { conference2026 } from '../../../data/conference2026';
 import hotelPlan from '../../../assets/2026/venue/beijing-friendship-hotel-plan.jpg';
 import palaceFloor from '../../../assets/2026/venue/friendship-palace-floor-2.jpg';
 import hotelOfferCode from '../../../assets/2026/venue/friendship-hotel-xagi-offer-code.png';
+import lunchMap from '../../../assets/2026/venue/friendship-hotel-lunch-location.webp';
+import banquetMap from '../../../assets/2026/venue/sishi-tongtang-banquet-location.webp';
 import { currentEdition, editionPath } from '../../../config/site';
+
+const guide = conference2026.attendeeGuide;
 
 const maps = [
   {
@@ -24,8 +28,25 @@ const maps = [
 <main class="main-content">
   <div class="published-inner-container">
     <div class="info-card">
-      <div class="card-header">会议场地</div>
+      <div class="card-header">日程与签到</div>
       <div class="card-body">
+        <p>{guide.scheduleNote} <a href={editionPath(currentEdition, 'schedule')}>查看大会日程</a></p>
+        <div class="service-section">
+          <h4>会议签到</h4>
+          <p>{guide.checkIn.preparation}</p>
+          <ul>{guide.checkIn.locations.map((location) => <li>{location}</li>)}</ul>
+          <p>{guide.checkIn.suggestion}</p>
+          <p><strong>{guide.checkIn.help}</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-header">交通与会场</div>
+      <div class="card-body">
+        <div class="service-section">
+          <ul>{guide.transport.map((item) => <li>{item}</li>)}</ul>
+        </div>
         <div class="venue-details">
           <p class="venue-address">
             <span class="guide-icon" aria-hidden="true">⌖</span>
@@ -47,6 +68,35 @@ const maps = [
               </figcaption>
             </figure>
           ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-header">用餐指南</div>
+      <div class="card-body">
+        <div class="service-section">
+          <h4>自助午餐</h4>
+          <p>{guide.lunch.eligibility}</p>
+          <ul>{guide.lunch.locations.map((location) => <li>{location}</li>)}</ul>
+          <p>{guide.lunch.note}</p>
+          <figure class="guide-dining-map">
+            <img src={lunchMap.src} alt={guide.lunch.mapAlt} width={lunchMap.width} height={lunchMap.height} loading="lazy" decoding="async" />
+            <figcaption>{guide.lunch.mapTitle}</figcaption>
+          </figure>
+        </div>
+        <div class="service-section">
+          <h4>大会晚宴</h4>
+          <p>{guide.banquet.eligibility}</p>
+          <ul>
+            <li>时间：<time datetime={guide.banquet.dateTime}>{guide.banquet.time}</time>。</li>
+            <li>地点：{guide.banquet.location}。</li>
+            <li>{guide.banquet.directions}</li>
+          </ul>
+          <figure class="guide-dining-map guide-dining-map--route">
+            <img src={banquetMap.src} alt={guide.banquet.mapAlt} width={banquetMap.width} height={banquetMap.height} loading="lazy" decoding="async" />
+            <figcaption>{guide.banquet.mapTitle}</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -87,6 +137,32 @@ const maps = [
       </div>
     </div>
 
+    <p>会务信息来源：<a href={guide.sourceUrl} target="_blank" rel="noopener noreferrer">大会参会指南推送</a>（10 月 15 日）。</p>
     <p id="travel-grant"><a href={editionPath(currentEdition, 'travel-grant')}>本科生差旅补助</a></p>
   </div>
 </main>
+
+<style>
+  .guide-dining-map {
+    margin: 24px auto 0;
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .guide-dining-map--route {
+    max-width: 480px;
+  }
+
+  .guide-dining-map img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .guide-dining-map figcaption {
+    margin-top: 10px;
+    color: rgb(17 19 66 / 0.78);
+    font-size: 14px;
+  }
+</style>

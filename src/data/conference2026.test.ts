@@ -126,7 +126,22 @@ describe('conference schedule contracts', () => {
       '4会', '8会', '3会', '5会', '7会', '4会', '3会',
     ]);
     assert.deepEqual(conference2026ProgramSessions.flatMap((session, index) => session.livestream ? [index + 1] : []), [1, 5, 10, 14]);
-    assert.deepEqual(conference2026ProgramSessions[11].speakers.map((speaker) => speaker.name), ['刘威杨', '刘华斌', '李根', '王淏楠']);
+    assert.equal(conference2026ProgramSessions[11].title, '扩散语言模型');
+    assert.equal(conference2026ProgramSessions[11].sourceTime, '10.18上午');
+    assert.deepEqual(conference2026ProgramSessions[11].speakers, [
+      {
+        name: '刘华斌', affiliation: '蚂蚁集团',
+        talkTitle: 'Parallel Generation, Iterative Refinement: The Evolution of LLaDA 2.x in Practice',
+      },
+      {
+        name: '胡天阳', affiliation: '香港中文大学（深圳）',
+        talkTitle: '扩散式语言建模探索：从掩码扩散到连续扩散',
+      },
+      {
+        name: '李根', affiliation: '香港中文大学',
+        talkTitle: 'ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings',
+      },
+    ]);
     assert.deepEqual(conference2026ProgramSessions[11].chairs.map((chair) => chair.name), ['胡天阳']);
   });
 

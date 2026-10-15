@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/render-session-posters.mjs",
-  "generatedAt": "2026-10-13T13:35:47.362Z",
+  "generatedAt": "2026-10-15T15:45:40.018Z",
   "renderEnvironment": "Chrome on macOS; PingFang SC and embedded IBM Plex Sans Condensed",
   "posters": [
     {
@@ -396,7 +396,7 @@
     },
     {
       "id": "session-12",
-      "contentHash": "a7c92b979f5fc85b89a71663eebb7baa8ece57fcab4c40db558f5c072e31d1d3",
+      "contentHash": "3f4a2bc369fe96aea09d6c16fab5ef9129caab44a7201837f69282ff396c4441",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "a8d1071f2b6bfac22e2a84b87869bd788cf1b259522036b8033dc406a1e34f31",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
@@ -404,27 +404,26 @@
         "src/assets/fonts/ibm-plex-sans-condensed-latin.woff2": "14f5664488a30d14cc3bd664d4376fabc2bc053a68d1232a5a589d6ccc8000a7",
         "src/data/portrait-framing.ts": "2ddb2d9b0de548eff59212a0e47e70376161f781b0f33496d75c0567be7b5378",
         "assets/source-archive/2026/session-posters/session-12-background.png": "02340600fb2950ab6926ecffee1e7840c2d0997dd241c86ac5ba2ca971a2c5a2",
-        "public/2026/people/liu-weiyang-portrait.webp": "3c27ca6a58c624765ee166720f618ac89608e30fd81c8d7f6dc10c9e02b7d433",
         "public/2026/people/liu-huabin-portrait.webp": "f6ff2e3a1be43fe0746e1fb21a407d2c000241adbe20b720824b7a1ae43a960b",
-        "public/2026/people/li-gen-portrait.webp": "70fc435f912b31558a32bb48d51c8dabc7ebe03d57d881ea2d85c468766696da",
-        "public/2026/people/wang-haonan-portrait.webp": "df7b62962e6c02397c6b945ee3d59b3384b261b27d77bd1877d94d2c4a353d9f"
+        "public/2026/people/hu-tianyang-portrait.webp": "5dd14b634549922de5425327b20123bd7c1fc104246e7a76647eb83cd094917e",
+        "public/2026/people/li-gen-portrait.webp": "70fc435f912b31558a32bb48d51c8dabc7ebe03d57d881ea2d85c468766696da"
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-12-print.png": {
-          "sha256": "28c59d20309805c6eaa4145a47f58b730aa5d00b03c2b3742953d84e322b3b6c",
-          "bytes": 1648918,
+          "sha256": "a8ccf2910770f5bf99aff6b23ac1ad7738dbb01dfb7b2a2be637dd40e9f132fd",
+          "bytes": 1605409,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-12.webp": {
-          "sha256": "96a030567b906c4695bbfceeb17f28be76a33f6b7feccd38843f955c3564aac0",
-          "bytes": 152404,
+          "sha256": "8201e3a128f8402bb48693bd09273a0d3258aae7540366e6c63ce914db817def",
+          "bytes": 133620,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-12-preview.webp": {
-          "sha256": "bbe17748fa4f286f2c817f6490cfc679419340e8f44050c5b0889ed1adbab1a3",
-          "bytes": 43438,
+          "sha256": "a80a2d13a6b14b530566ceca91d70a2dbb7f780d442a7f4cb8826d2f5a9ce39d",
+          "bytes": 36800,
           "width": 540,
           "height": 720
         }
@@ -432,7 +431,7 @@
     },
     {
       "id": "session-13",
-      "contentHash": "bcc51734e34098a4a744dadb687ef26371ebcfe0a58bc3d3a5654840b9706994",
+      "contentHash": "4529e2a61ae39357aa3fd5d74bbf2713bc663c45b51a5008473ad71fecb79b16",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "a8d1071f2b6bfac22e2a84b87869bd788cf1b259522036b8033dc406a1e34f31",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
@@ -446,20 +445,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-13-print.png": {
-          "sha256": "12cc6b31d9cace93dbbc32674e3ddf417fa53c7904fdea94b26888af0373460d",
-          "bytes": 1912944,
+          "sha256": "b286fb2725cecdc5a52535e33faae032b1ee852500a501a33494767351132b4a",
+          "bytes": 1894688,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-13.webp": {
-          "sha256": "3565c9c69e535f7a2877552a083109301c15fd069e179e4aad99c541bc312bc3",
-          "bytes": 210824,
+          "sha256": "7f0215547a6842e8f2972d19464198e5c92e8f800378f0cfc6c9032b15af8ee1",
+          "bytes": 197690,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-13-preview.webp": {
-          "sha256": "555f97db769c5259f33fa07f3e1cadec1ee02d2867b9f429e8ea237e7f8c6fc9",
-          "bytes": 49888,
+          "sha256": "3f4ebc267015a89d73f6cd05cb08971944ee2a19e0edbe40b64054eb340edce6",
+          "bytes": 45468,
           "width": 540,
           "height": 720
         }

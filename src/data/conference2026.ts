@@ -106,6 +106,7 @@ export const conference2026 = {
     '2026 X-AGI Conference（交叉智能大会）将于2026年10月16日至18日在北京友谊宾馆举行。本届主题为“AI Conference for the neXt Generation”，“X”代表未知、交叉与探索。',
     '大会专题涵盖 AI4Math、AI4Science、脑机接口、预训练算法、AI Infra、Agent、Agentic 后训练、LLM 评测与基准、大语言模型基础、生成建模、扩散模型、机器学习理论及 AI+Finance。',
     'XAGI 大会起源于统计之都发起的中国 R 会议，本届为第十九届。迄今，统计之都已联合全国20余所高校与科研机构，在14个城市举办近50次会议，呈现近2000场演讲，吸引线上线下参会者逾50万人次。',
+    'XAGI 2026 由统计之都和FAI（人工智能基础研究）发起，联合清华大学统计与数据科学系、中国人民大学应用统计科学研究中心、中国人民大学统计学院、中国商业统计学会人工智能分会共同主办，OScholar、AI Time、清华大学经济管理学院研究生分会共同协办，黄大年茶思屋科技网站为战略合作伙伴，并获得明汯投资、宽德投资、Will、数启寰宇（QuantVerse）和智统数合的钻石赞助，以及澎峰科技（PerfXLab）的黄金赞助。',
   ],
   conferenceOrganization: {
     committee: {
@@ -185,6 +186,42 @@ export const conference2026 = {
         description: '友谊宫二层会议厅、展示区、工作区与休息区分布。',
       },
     ],
+  },
+  // Source: 统计之都《参会指南 | 2026 X-AGI Conference（交叉智能大会）》, 2026-10-15.
+  attendeeGuide: {
+    sourceUrl: 'https://mp.weixin.qq.com/s/BQUB-cLRgkHGEJubxzfipQ',
+    scheduleNote: '本次会议不提供纸质版会议手册。最新演讲信息和日程请查看大会日程页面。',
+    transport: [
+      '会议会场：北京友谊宾馆友谊宫，地址为北京市海淀区中关村南大街 1 号。',
+      '驾车或打车：前往友谊宫东门。',
+      '地铁：乘坐 4 号线至人民大学站，从 D 西南口出站，向南步行约 200 米。',
+      '停车：会议提供 72 小时停车优免券，请在会场领取。',
+    ],
+    checkIn: {
+      preparation: '会议开始前半小时可入场签到，请提前准备好邮件或短信中的电子票。',
+      locations: [
+        '10 月 16 日下午、10 月 17 日上午：友谊宫一楼。',
+        '10 月 17 日下午、10 月 18 日全天：友谊宫二楼，聚贤厅门口。',
+      ],
+      suggestion: '建议 Speaker、Poster 和专业票参会者在时间允许的情况下，于 10 月 16 日下午到场签到、领取材料、自由交流，以错峰签到。',
+      help: '如有疑问，请咨询佩戴橙色胸牌的大会志愿者。',
+    },
+    lunch: {
+      eligibility: '会议为 Chair、Speaker、Poster、专业票参会者和志愿者提供自助午餐，请携带胸牌前往。',
+      locations: ['10 月 17 日中午：聚福园。', '10 月 18 日中午：咖啡厅。'],
+      note: '建议志愿者错峰用餐，可提前或稍晚前往。',
+      mapTitle: '午餐地点：友谊宫一楼',
+      mapAlt: '友谊宫一楼午餐位置图：10 月 17 日在西侧聚福园，10 月 18 日在东侧咖啡厅。',
+    },
+    banquet: {
+      eligibility: '大会晚宴面向 Chair、Speaker、Poster 和专业票参会者，请携带胸牌前往。',
+      dateTime: '2026-10-17T18:30:00+08:00',
+      time: '10 月 17 日 18:30',
+      location: '四世同堂（魏公村店）二楼',
+      directions: '距离约 667 米，步行约 10 分钟。',
+      mapTitle: '晚宴步行路线',
+      mapAlt: '从北京友谊宾馆步行至四世同堂（魏公村店）的路线图，途中需经过街天桥。',
+    },
   },
   scale: {
     attendees: '600+',
