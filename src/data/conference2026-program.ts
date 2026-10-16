@@ -31,6 +31,7 @@ const confirmedTalkTitles = new Map([
   ['孙茂松', '人工智能随想录'],
   ['许洪腾', 'An Improved SE(3)-Transformer Driven by Hamiltonian Flow'],
   ['刘方辉', '深度学习理论的技术科学道路'],
+  ['罗涛', '数学自然语言的形式化与结构化'],
   ['王淏楠', 'Signal and Noise in On-Policy Distillation: 1% of Tokens Can Be Enough'],
   ['周峰', '高效大模型'],
 ]);

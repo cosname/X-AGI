@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-10-15",
+  "lastExtendedOn": "2026-10-16",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
   "sourceEntryCount": 287,
@@ -1670,14 +1670,14 @@
       "originalPath": "session-posters-20260916/session-02-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-02-print.png",
       "status": "archived",
-      "sha256": "57dcf8e8f7c4ce86321acac21c14ce3682d6ba95af7d3a660452ad7eb9723f17",
-      "bytes": 1629377,
+      "sha256": "f337f2b1aa5a7ae48ec5eb5dd84cb4de8db819f500dfe258d4733813be683596",
+      "bytes": 1629155,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:45.454Z",
+      "sourceModifiedAt": "2026-10-16T04:56:56.111Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
