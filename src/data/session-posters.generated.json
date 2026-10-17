@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/render-session-posters.mjs",
-  "generatedAt": "2026-10-16T04:57:50.133Z",
+  "generatedAt": "2026-10-17T01:52:33.357Z",
   "renderEnvironment": "Chrome on macOS; PingFang SC and embedded IBM Plex Sans Condensed",
   "posters": [
     {
@@ -362,7 +362,7 @@
     },
     {
       "id": "session-11",
-      "contentHash": "9211ab8dbcc681b7ec22d59418e67401ab7fa1bdcbdd7a521de20f1556e2f41c",
+      "contentHash": "9827dca0df3ec0b73758449acf7358936c7492c3dcac8ca21bfa369895b50831",
       "inputs": {
         "scripts/lib/session-poster-template.mjs": "a8d1071f2b6bfac22e2a84b87869bd788cf1b259522036b8033dc406a1e34f31",
         "scripts/render-session-posters.mjs": "4f44dae61b08f39ba4033a3c41ff7d9c5e3b43eadb2b16782892d1a56630f939",
@@ -375,20 +375,20 @@
       },
       "exports": {
         "assets/source-archive/2026/session-posters/session-11-print.png": {
-          "sha256": "840f2b441172e0d5779e91bf58c5f24a6d5a932f500733017d2bf71362a8926d",
-          "bytes": 1827944,
+          "sha256": "920cb90784f216215a377a4cbc372ba305eb2d3c24d5fd002ab235a0bc001bb8",
+          "bytes": 1832953,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-11.webp": {
-          "sha256": "ddc3785189a5d0a4c75aca5d6c4a4dca902e62a18cff0e72704093d36e4f02ec",
-          "bytes": 164106,
+          "sha256": "e1fa8c29708043b9812898181d2340825e441df78b158c7aa2189709b4de797f",
+          "bytes": 169314,
           "width": 1080,
           "height": 1440
         },
         "public/2026/session-posters/session-11-preview.webp": {
-          "sha256": "1294090441471cc659c2f243de36210daaa54f7de767def5deade5e6dd3fba34",
-          "bytes": 37852,
+          "sha256": "be10f874cd829f3ba2444c1fb90f9501121dcb9e3d8f6e1b1dffd7e0f8bd4508",
+          "bytes": 39326,
           "width": 540,
           "height": 720
         }

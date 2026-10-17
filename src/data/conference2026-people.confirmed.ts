@@ -3,6 +3,21 @@ import type { Conference2026PersonSourceRecord } from './conference2026-people.g
 // Organizer-confirmed profiles and biography updates through 2026-10-09.
 // Keep this supplied copy separate from the attendee workbook snapshot.
 export const conference2026ConfirmedPeople: readonly Conference2026PersonSourceRecord[] = [
+  // Biography: https://baike.weixin.qq.com/v10001659227.htm
+  // Title and editorial abstract: organizer-supplied slide.pdf, 2026-10-16.
+  {
+    id: 'luo-di',
+    name: '罗迪',
+    aliases: ['Di Luo'],
+    roles: ['speaker'],
+    affiliation: '清华大学',
+    department: '物理系、高等研究院',
+    bio: '罗迪（Di Luo），清华大学物理系副教授、清华大学高等研究院双聘研究员，智源青年学者。曾任麻省理工学院与哈佛大学博士后、美国人工智能与基本相互作用研究所（IAIFI）Fellow，以及加州大学洛杉矶分校助理教授。他的研究聚焦人工智能与量子物理的交叉领域，既利用神经网络研究量子多体系统，也以量子理论和统计物理启发人工智能模型设计。他提出“物理第一性 AI”研究范式，探索从物理学基本原理出发理解和构建人工智能系统，并入选2025年度《麻省理工科技评论》中国区“35岁以下科技创新35人”。',
+    talkTitle: '物理第一性 AI：从物理到智能',
+    abstract: '物理规律不仅为人工智能提供应用场景，也能为模型结构、表征能力与学习机制提供设计依据。本报告围绕“物理第一性 AI”，探讨物理与人工智能的双向启发。首先，从神经网络量子态出发，介绍如何将费米反对称性与规范对称性融入网络结构，以表征和模拟复杂量子系统。其次，从自由能视角引入沃尔什度，刻画函数中不同阶数的变量交互，讨论其与多层感知机（MLP）的宽度和深度、限制玻尔兹曼机（RBM）的隐藏单元数和连接度之间的关系，以及基底选择对量子态表征的影响。最后，介绍量子理论对人工智能的启发，包括用于大语言模型高效高秩微调的量子启发张量适配（QuanTA）、语言模型的信息结构与互信息标度，以及从物理过程构建生成模型的思路。报告将据此讨论如何把物理中的对称性、复杂度与信息结构转化为人工智能模型的设计原则。',
+    hasSubmittedPortrait: false,
+    sourceOrder: -1,
+  },
   {
     id: 'liu-huabin',
     name: '刘华斌',

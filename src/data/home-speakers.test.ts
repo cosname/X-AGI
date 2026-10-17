@@ -10,13 +10,13 @@ const scheduledChairs = new Set(conference2026ProgramSessions.flatMap((session) 
 describe('homepage speaker lineup', () => {
   it('includes every confirmed Speaker and Chair exactly once, regardless of portrait or profile availability', () => {
     const expectedNames = new Set([...scheduledSpeakers, ...scheduledChairs].filter((name) => !['待确认', 'TBD'].includes(name)));
-    assert.equal(homeSpeakers.length, 56);
+    assert.equal(homeSpeakers.length, 57);
     assert.equal(new Set(homeSpeakers.map((speaker) => speaker.id)).size, homeSpeakers.length);
     assert.deepEqual(new Set(homeSpeakers.map((speaker) => speaker.name)), expectedNames);
     for (const speaker of homeSpeakers) {
       assert.equal(speaker.portraitSrc, conference2026PersonForName(speaker.name)?.portraitSrc);
     }
-    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 3);
+    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 4);
   });
 
   it('places missing portraits last, preserves order within both groups and keeps dual-role speaker links', () => {

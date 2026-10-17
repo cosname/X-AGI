@@ -73,9 +73,9 @@ const revisedSessions = sourceSessions.map((sourceSession) => {
       { name: '周峰', affiliation: '中国人民大学' },
     ]
     : availableSpeakers;
-  // The organizer reserved a third 40-minute talk; the speaker is not confirmed yet.
+  // Organizer-confirmed October 16: Luo Di fills the reserved third 40-minute talk.
   if (session.title === 'Physics of Deep Learning' && speakers.length === 2) {
-    speakers.push({ name: 'TBD' });
+    speakers.push({ name: '罗迪', affiliation: '清华大学', talkTitle: '物理第一性 AI：从物理到智能' });
   }
   return {
     ...session,

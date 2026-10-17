@@ -167,7 +167,7 @@ describe('conference schedule contracts', () => {
       }
     }
     assert.deepEqual(conference2026ProgramSessions[4].speakers.map((speaker) => speaker.name), ['张先轶', '李秀红', '吴晨玮']);
-    assert.deepEqual(conference2026ProgramSessions[10].speakers.map((speaker) => speaker.name), ['刘子鸣', '张耀宇', 'TBD']);
+    assert.deepEqual(conference2026ProgramSessions[10].speakers.map((speaker) => speaker.name), ['刘子鸣', '张耀宇', '罗迪']);
   });
 
   it('requires confirmation instead of inventing slots for a changed session length or speaker count', () => {
