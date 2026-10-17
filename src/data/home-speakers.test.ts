@@ -16,7 +16,7 @@ describe('homepage speaker lineup', () => {
     for (const speaker of homeSpeakers) {
       assert.equal(speaker.portraitSrc, conference2026PersonForName(speaker.name)?.portraitSrc);
     }
-    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 4);
+    assert.equal(homeSpeakers.filter((speaker) => !speaker.portraitSrc).length, 3);
   });
 
   it('places missing portraits last, preserves order within both groups and keeps dual-role speaker links', () => {

@@ -106,9 +106,10 @@ export const conference2026ConfirmedProfileUrls: ReadonlyMap<string, string> = n
   ['xie-tian', 'https://github.com/Unakar'],
 ]);
 
-// Portraits supplied directly by the organizer through 2026-10-06.
+// Organizer-supplied portraits, including Luo Di from the selected encyclopedia page on 2026-10-16.
 // Hu Tianyang's runtime image now uses his September 29 Speaker resubmission.
 export const conference2026ConfirmedPortraits: ReadonlyMap<string, string> = new Map([
+  ['luo-di', '/2026/people/luo-di-portrait.webp'],
   ['liu-zequn', '/2026/people/liu-zequn-portrait.webp'],
   ['liu-ziyin', '/2026/people/liu-ziyin-portrait.webp'],
   ['hu-tianyang', '/2026/people/hu-tianyang-portrait.webp'],

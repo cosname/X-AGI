@@ -5,9 +5,9 @@
   "lastExtendedOn": "2026-10-17",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 287,
-  "uniquePayloadCount": 286,
-  "archiveFileCount": 285,
+  "sourceEntryCount": 288,
+  "uniquePayloadCount": 287,
+  "archiveFileCount": 286,
   "entries": [
     {
       "originalPath": "1.png",
@@ -1644,7 +1644,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:44.313Z",
+      "sourceModifiedAt": "2026-10-17T01:57:52.026Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-01.webp",
         "public/2026/session-posters/session-01-preview.webp"
@@ -1677,7 +1677,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-16T04:56:56.111Z",
+      "sourceModifiedAt": "2026-10-17T01:57:53.140Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-02.webp",
         "public/2026/session-posters/session-02-preview.webp"
@@ -1710,7 +1710,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:46.799Z",
+      "sourceModifiedAt": "2026-10-17T01:57:54.237Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-03.webp",
         "public/2026/session-posters/session-03-preview.webp"
@@ -1743,7 +1743,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:47.897Z",
+      "sourceModifiedAt": "2026-10-17T01:57:55.308Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-04.webp",
         "public/2026/session-posters/session-04-preview.webp"
@@ -1776,7 +1776,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-13T13:17:24.952Z",
+      "sourceModifiedAt": "2026-10-17T01:57:56.372Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-05.webp",
         "public/2026/session-posters/session-05-preview.webp"
@@ -1809,7 +1809,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T07:57:11.351Z",
+      "sourceModifiedAt": "2026-10-17T01:57:57.443Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-06.webp",
         "public/2026/session-posters/session-06-preview.webp"
@@ -1842,7 +1842,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:51.301Z",
+      "sourceModifiedAt": "2026-10-17T01:57:58.541Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-07.webp",
         "public/2026/session-posters/session-07-preview.webp"
@@ -1875,7 +1875,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:52.470Z",
+      "sourceModifiedAt": "2026-10-17T01:57:59.711Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-08.webp",
         "public/2026/session-posters/session-08-preview.webp"
@@ -1908,7 +1908,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:53.671Z",
+      "sourceModifiedAt": "2026-10-17T01:58:00.891Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-09.webp",
         "public/2026/session-posters/session-09-preview.webp"
@@ -1941,7 +1941,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:54.833Z",
+      "sourceModifiedAt": "2026-10-17T01:58:02.022Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-10.webp",
         "public/2026/session-posters/session-10-preview.webp"
@@ -1967,14 +1967,14 @@
       "originalPath": "session-posters-20260916/session-11-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-11-print.png",
       "status": "archived",
-      "sha256": "920cb90784f216215a377a4cbc372ba305eb2d3c24d5fd002ab235a0bc001bb8",
-      "bytes": 1832953,
+      "sha256": "345b8664fe6c6b2c9afc2e347cd60b73beca5f22fe9e2e49d28792b6465cc66b",
+      "bytes": 1858502,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-17T01:52:24.173Z",
+      "sourceModifiedAt": "2026-10-17T01:58:03.157Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-11.webp",
         "public/2026/session-posters/session-11-preview.webp"
@@ -2007,7 +2007,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-15T15:44:31.490Z",
+      "sourceModifiedAt": "2026-10-17T01:58:04.271Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-12.webp",
         "public/2026/session-posters/session-12-preview.webp"
@@ -2033,14 +2033,14 @@
       "originalPath": "session-posters-20260916/session-13-print.png",
       "canonicalPath": "assets/source-archive/2026/session-posters/session-13-print.png",
       "status": "archived",
-      "sha256": "b286fb2725cecdc5a52535e33faae032b1ee852500a501a33494767351132b4a",
-      "bytes": 1894688,
+      "sha256": "ef07995b7ad47e11c788b1dd61c14ef2f66300a6d42873c398ef1c18523329a2",
+      "bytes": 1894824,
       "mediaType": "image/png",
       "dimensions": {
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-15T15:43:16.619Z",
+      "sourceModifiedAt": "2026-10-17T01:58:05.374Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-13.webp",
         "public/2026/session-posters/session-13-preview.webp"
@@ -2073,7 +2073,7 @@
         "width": 1080,
         "height": 1440
       },
-      "sourceModifiedAt": "2026-10-09T04:13:59.467Z",
+      "sourceModifiedAt": "2026-10-17T01:58:06.521Z",
       "runtimeCounterparts": [
         "public/2026/session-posters/session-14.webp",
         "public/2026/session-posters/session-14-preview.webp"
@@ -4511,6 +4511,26 @@
         "https://mmbiz.qpic.cn/mmbiz_png/2LbgdqibAmPQtNv8TRcJDBBoMBlp6Mwq4T5xscZheoSaGDIm9Gww6vNNJJghQDzx2eUib2R4fsWHCdS1oJpTujdDiaaLhrcKGbx9ibibsBYyjRVQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=5"
       ],
       "note": "Original WeChat image bytes from the user-supplied attendee guide. Content is WebP despite the PNG URL parameter."
+    },
+    {
+      "originalPath": "weixin-baike-20261016/luo-di-portrait.jpg",
+      "canonicalPath": "assets/source-archive/2026/people/luo-di-portrait-source.jpg",
+      "status": "archived",
+      "sha256": "a785cdd46fdfde35881fc41c16fc601aaf746c26ec29270f2d509ed4406085a9",
+      "bytes": 590559,
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1527,
+        "height": 1812
+      },
+      "runtimeCounterparts": [
+        "public/2026/people/luo-di-portrait.webp"
+      ],
+      "provenanceUrls": [
+        "https://baike.weixin.qq.com/v10001659227.htm",
+        "https://pic.baike.soso.com/ugc/baikepic2/0/20260812112655-1327673439_jpg_1527_1812_1748778.jpg/0"
+      ],
+      "note": "Portrait from the biography page selected by the organizer. Runtime WebP preserves aspect ratio and excludes private metadata; shared framing is applied separately."
     }
   ]
 }

@@ -9,6 +9,7 @@ type PortraitCrop = {
   background?: string;
 };
 const circularPortraitCrops: Readonly<Record<string, PortraitCrop>> = {
+  'luo-di': { width: 1527, height: 1812, x: 164, y: 20, size: 1200 },
   'liu-huabin': { width: 138, height: 166, x: -14, y: 0, size: 166, background: '#fff' },
   'wang-haonan': { width: 3163, height: 3163, x: 0, y: 0, size: 3163 },
   'liu-zequn': { width: 2217, height: 2956, x: 0, y: 270, size: 2217 },
