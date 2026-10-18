@@ -3,8 +3,8 @@
 This directory is the canonical non-published archive for supplied 2026 source material.
 It preserves editable masters, high-resolution originals, alternate exports, historical candidates, and QA evidence that must not live only on a desktop or in a temporary directory.
 
-The archive contains 158 recorded source entries representing 157 unique payloads.
-One hundred and fifty-six payloads are stored here under semantic names.
+The current source-entry and payload counts are recorded in `manifest.json` and checked by `npm run assets:verify`.
+Payloads are stored here under semantic names.
 One supplied SVG was already byte-identical to `assets/brand-kit/2026/wordmark.svg`, so the manifest points to that existing canonical file instead of storing another copy.
 The supplied `1.png` and `thu.png` files were also byte-identical, so both provenance entries point to one canonical Tsinghua source file.
 
@@ -15,9 +15,11 @@ The supplied `1.png` and `thu.png` files were also byte-identical, so both prove
 - `partner-logos/` contains original organization logo deliveries and editable logo boards.
 - `fonts/` contains the unmodified LXGW WenKai Medium v1.522 font used to generate the homepage title subset.
 - `history/` contains high-resolution or otherwise unselected historical conference images.
-- `people/` contains 38 public portraits supplied through the 2026 attendee workbook, without registration or private contact fields.
+- `people/` contains public portraits supplied through the 2026 attendee workbook and confirmed updates, without registration or private contact fields.
 - `session-posters/` contains 14 original generated backgrounds and 14 PNG posters composed from the public program and speaker portraits.
-- `paper-previews/` contains 33 complete first-page PNG renders from verified public paper PDFs, with public source URLs and PDF hashes recorded in the manifest.
+- `paper-previews/` contains complete first-page PNG renders from the 58 attendee-submitted paper PDFs, with PDF hashes recorded in the manifest.
+- These first-page renders are historical source records.
+  The website displays submitted research posters, so paper-preview WebP exports are no longer published.
 - Portrait source files retain their image pixels while embedded EXIF, XMP, IPTC, GPS, camera identifiers, and creator contact metadata are removed before repository storage.
 - `venue/` contains the original high-resolution hotel and floor-plan files.
 - `qa/` contains annotated review evidence that explains design decisions.

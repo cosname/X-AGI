@@ -18,7 +18,6 @@ import { sessionPosters } from '../src/data/session-posters.ts';
 import { homeSpeakers } from '../src/data/home-speakers.ts';
 import { posterResearchSource, posterResearchPapers as registeredResearchPapers } from '../src/data/poster-research.generated.ts';
 import { posterResearchPapers } from '../src/data/poster-research.ts';
-import { paperPreviews } from '../src/data/paper-previews.ts';
 import { researchPosters, researchPosterById } from '../src/data/research-posters.ts';
 
 const projectRoot = path.resolve('.');
@@ -574,8 +573,9 @@ const posterFiles = sessionPosters.flatMap((poster) => [
   path.basename(poster.previewSrc),
 ]);
 await validatePublicCopies('2026 session posters', path.resolve('public/2026/session-posters'), posterFiles);
-const paperPreviewFiles = paperPreviews.map((paper) => path.basename(paper.src));
-await validatePublicCopies('2026 paper previews', path.resolve('public/2026/paper-previews'), paperPreviewFiles);
+if (outputFiles.some((file) => relativeTo(outputRoot, file).startsWith('2026/paper-previews/'))) {
+  fail('dist/2026/paper-previews: historical paper previews must not be published');
+}
 const researchPosterFiles = researchPosters.flatMap((poster) => [poster.thumbnail.src, poster.full.src]).map((src) => path.basename(src));
 await validatePublicCopies('2026 research posters', path.resolve('public/2026/research-posters'), researchPosterFiles);
 
@@ -591,7 +591,6 @@ validateExactSet(
     ...selectedLogoFiles.map((file) => `logos/${file}`),
     ...personPortraitFiles.map((file) => `people/${file}`),
     ...posterFiles.map((file) => `session-posters/${file}`),
-    ...paperPreviewFiles.map((file) => `paper-previews/${file}`),
     ...researchPosterFiles.map((file) => `research-posters/${file}`),
   ],
 );
