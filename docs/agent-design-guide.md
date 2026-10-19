@@ -3,7 +3,7 @@
 本指南供 coding agent 和 design agent 理解、修改或迁移 X-AGI 2026 网站的设计机制。
 先确定任务涉及的组件，再读取对应入口、运行时、样式和测试。
 本文说明当前正式路由实际使用的实现，不把组件中保留的其他模式视为当前页面效果。
-完整维护约束见 [2026 Design System](2026-design-system.md)，构建与发布方法见 [README](../README.md)。
+完整维护约束见 [2026 Design System](2026-design-system.md)，构建与发布方法见[网站维护指南](maintenance.md)。
 
 ## 先看实际页面
 
@@ -149,7 +149,7 @@
 几何与状态已有定向测试：[液态目标](../src/scripts/glass-action-group.test.ts)、[轮廓](../src/scripts/navigation-capsule.test.ts)、[画廊](../src/scripts/goal-history-gallery.test.ts)、[树波](../src/scripts/hero-pixel-field.test.ts)、[麒麟路径](../src/scripts/qilin-leap.test.ts)。
 这些测试验证函数行为，不能替代对实际字体、材质和交互的浏览器检查。
 仅编辑说明文档时检查链接与源码一致性即可，无需为文档运行全站视觉回归。
-修改本站代码时按 README 执行相关检查，发布前使用项目规定的完整验证。
+修改本站代码时按[网站维护指南](maintenance.md)执行相关检查，发布前使用项目规定的完整验证。
 本指南不增加发布、删除、授权或使用大会素材的权限。
 源素材目录“不进入网站部署”不代表它没有包含在这个公开仓库中。
 仓库目前未声明统一代码许可证，字体许可见字体目录，其他素材保留各自来源与权利归属。
