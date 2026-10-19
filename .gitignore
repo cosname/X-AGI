@@ -1,5 +1,6 @@
 # Operating system and editor files
 .DS_Store
+.vscode/
 
 # Dependencies and generated output
 node_modules/

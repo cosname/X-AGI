@@ -36,8 +36,16 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
-    "astro": "7.2.2",
-    "sharp": "0.35.3",
+    "astro": "7.3.8",
+    "sharp": "0.35.5",
     "typescript": "6.0.3"
+  },
+  "overrides": {
+    "devalue": "5.9.4",
+    "fast-uri": "3.1.8",
+    "http-cache-semantics": "4.3.0",
+    "js-yaml": "4.3.2",
+    "source-map-js": "1.2.2",
+    "svgo": "4.1.0"
   }
 }
