@@ -1,0 +1,25 @@
+---
+import { conferenceRecap, recapIntroduction } from '../../../data/conference-recap';
+import RecapFigure from '../RecapFigure.astro';
+import '../../../styles/conference-recap.css';
+---
+
+<section class="home-recap" id="conference-recap" aria-labelledby="home-recap-title">
+  <header class="home-recap__heading">
+    <div>
+      <p class="home-recap__eyebrow">CONFERENCE RECAP</p>
+      <h2 id="home-recap-title">会议纪要</h2>
+    </div>
+    <p class="home-recap__byline">{conferenceRecap.author} · <time datetime={conferenceRecap.publishedDate}>2026 年 10 月 25 日</time></p>
+  </header>
+  <div class="home-recap__intro">
+    <p>{recapIntroduction[0].text}</p>
+    <div>
+      <p>{recapIntroduction[2].text}</p>
+      <a class="home-recap__link" href="/recap/">阅读完整纪要 <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <div class="home-recap__photos" role="region" aria-label="会议现场照片，可横向浏览" tabindex="0">
+    {conferenceRecap.featuredImages.map((imageId) => <RecapFigure imageId={imageId} sizes="(max-width: 48rem) 82vw, 30vw" />)}
+  </div>
+</section>

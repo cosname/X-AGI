@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "collection": "X-AGI 2026 source archive",
   "importedOn": "2026-08-25",
-  "lastExtendedOn": "2026-10-17",
+  "lastExtendedOn": "2026-10-27",
   "sourceCollection": "Desktop consolidation",
   "namingRule": "<subject>-<role>[-<variant>][-<meaningful-sequence>].<extension>",
-  "sourceEntryCount": 288,
-  "uniquePayloadCount": 287,
-  "archiveFileCount": 286,
+  "sourceEntryCount": 330,
+  "uniquePayloadCount": 328,
+  "archiveFileCount": 327,
   "entries": [
     {
       "originalPath": "1.png",
@@ -4415,6 +4415,713 @@
         "https://pic.baike.soso.com/ugc/baikepic2/0/20260812112655-1327673439_jpg_1527_1812_1748778.jpg/0"
       ],
       "note": "Portrait from the biography page selected by the organizer. Runtime WebP preserves aspect ratio and excludes private metadata; shared framing is applied separately."
+    },
+    {
+      "originalPath": "conference-recap-20261025/article.md",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/conference-recap-article.md",
+      "status": "archived",
+      "sha256": "43f3e5bfd43a8c668f5ec61a0db89ff5241f7d4d0f712175919a175ab6c303ce",
+      "bytes": 15517,
+      "runtimeCounterparts": [],
+      "mediaType": "text/markdown",
+      "note": "Organizer-authored conference recap supplied for republication on the conference website. Original Markdown bytes are preserved."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-00.webp",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-conference-cover.webp",
+      "status": "archived",
+      "sha256": "6dc79161c5c582db7a0bc2d738297af260473f63df8592be408cc9b4f8d5f2fb",
+      "bytes": 72658,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-conference-cover.webp"
+      ],
+      "mediaType": "image/webp",
+      "dimensions": {
+        "width": 1080,
+        "height": 540
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/2LbgdqibAmPQeFkicOcZGvr99bslxt17ZWj4bFgcj0M1r3ibXP94ZPOnujMKDriamfazlUo07tkME0lMXL2hW2iag8ibJuxt8WG32plWCss6GibLUg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-01.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-opening-chair.jpg",
+      "status": "archived",
+      "sha256": "d055209f3f7989a399fc05ae5a6a4de75641ed2a03873239ab9ec149ed36828e",
+      "bytes": 55007,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-opening-chair.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 721
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPSx0gialzyEeNg777qbqo1tCpC4fNUGiafSwia3rAYpMNY5maLy7BCryV5wBWcibmBAPLvibu7LIc75MraeD9VwUP9ECmE2Ggfr8o9w/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-02.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-opening-liu-jun.jpg",
+      "status": "archived",
+      "sha256": "3a9604d278fcb503fe30740c82dcf7d24385ab2a5df640c397552fe30bac9d3f",
+      "bytes": 57769,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-opening-liu-jun.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPSOHmQJL1qNDwN7pjlyWNzRIdOZMWwyibCo2zhfuEYlK1r5zGNZnCszw9TO5QspYK1beiaMAdzzE9t8UYusOL6ibiafBm8ZtcMWRIU/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-03.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-keynote-stage.jpg",
+      "status": "archived",
+      "sha256": "58cc5a1791aa90d3898ce2f34a077638023be28089853fa81c168ea920dee649",
+      "bytes": 105367,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-keynote-stage.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPTyJiaYMJ64YrVk8zwPRuycqibVPvutl9zagcgYSI80FavHx3mFu2queH9g5XXmNvzdlpqTpMJvDLticnrLwQZ89xqbACficFIUyK0/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-05.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-keynote-audience.jpg",
+      "status": "archived",
+      "sha256": "7a77f924db4c7d15f9f19d82b024f50eee79ea1413f29a7ce01dbf7091fc0dd7",
+      "bytes": 134750,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-keynote-audience.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 608
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPR0X7fUoBgOA0F0Zg3icbfYIgzBDb6XXbU9DYRqvSyoazdDf721SFTsUmNYhAjrDCPe9b6rdmmLiaoZcKrr2CjcicWoxSOe5wK228/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-07.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-17-01.jpg",
+      "status": "archived",
+      "sha256": "7f9e01531ef31cf47b43a0ecbf28937687a169fbb939d46c6ccbaa60c242b14a",
+      "bytes": 79492,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-17-01.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPRjW7kvQPtgRjf2b9XxJ4yOWobQNG93o1GMtfNGPicIZ9Nk3SCEclDfY4fDG1PbNuYMFZs0fECn7NCgSETlmG9HkFaGVacG8iatA/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-09.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-17-02.jpg",
+      "status": "archived",
+      "sha256": "4819ed9f6864699c2c82ab17249b78059a11df5b65cc225eb0ed06bffb861275",
+      "bytes": 94912,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-17-02.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPTEhHMy1As437ZJ867BpMLsnQUpclnK7PTAjoOPzuM7BEibjamnWR2uw10ibyxb2cEp9rmYS2QBUibLTEQx6s0reWxFh1hic9DalIo/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-11.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-17-03.jpg",
+      "status": "archived",
+      "sha256": "7f3ec2086d15ea91bd239e8771e48bb80c46f2f713e6a0d8536b309d6f8ec80c",
+      "bytes": 64969,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-17-03.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPRIhn0JeLTlPJdkqhPdQCACpcoaqcAG82P1bLfYFLxYepdMuySrsegDKOafeg5iajr7p4D87Jtzia7EfS2KQlASIUOe5cQ7hFqdA/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-13.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-17-04.jpg",
+      "status": "archived",
+      "sha256": "9220e661d6d2aa3b5d86e43cbba55b3ab6f6094042b5dd4173f8d486c2ddb264",
+      "bytes": 83529,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-17-04.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPQGCCqkZDMjGJprTcwBPyWFu98sMB3EvTLH34QZzg4Q8ScUpjY2KlWoYFYAV7icRBlu7KJj4VqpiapxM9EdPibVtmsj4E3mskhK1g/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-15.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-17-05.jpg",
+      "status": "archived",
+      "sha256": "d9ad998113312303f8f822144422afd8ce8a21d03c37d433de1bc5197cc873b8",
+      "bytes": 78736,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-17-05.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPQg6ichDOnG99BRSFQlBRdnDnD1muLAiaZcOkhmsQwUWX7kFiaObrTCkEPKaQCiaY2NrKo8EJuRicc4YWvaTnmSZwbCQ2fI2vRKP9A4/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-17.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-17-06.jpg",
+      "status": "archived",
+      "sha256": "f500c9df8bbb85eaa2e1bd4adfce5b144faaf0fe9c3c5fb0266294ffddcbdb35",
+      "bytes": 67035,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-17-06.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPQ3qlm9OrqmHhZiadXJOkK0ZHIOvZE5IlXFq7GLJlTcl0jEuj15fEOE6l3v5RtibvnQibqZtOSSAtokcvUDFXFGUo1trIfEEkYpRI/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-18.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-audience-october-17.jpg",
+      "status": "archived",
+      "sha256": "67dd504886e74d63ca771f71db7eeae099a8bfd3c024bb07ae8c2d6028096c69",
+      "bytes": 165276,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-audience-october-17.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 810
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPT4bUicw0ibXyOEeeRrZ49mibF6ajgZ842Cgjgh3uMlictNkW4ApPZZaG1NFsOVia9ee5lQibCcnCIIJFDia2wyao26NkZibfxWxibfekR0/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-19.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-01.jpg",
+      "status": "archived",
+      "sha256": "0bd3f299c3a65724c2911c20ded348ea7d8c324b7e2fc7a58587a5bc18e1bf0b",
+      "bytes": 60275,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-01.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPR451CZUYrbdkymG7zXic52Px76qj1mJAd56We1YZUkp0jbTkHhZaEDJdEo3rk3IIBNdibnXIpYaKmxNCkicibxXppO5bk4qwQxhPw/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-21.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-02.jpg",
+      "status": "archived",
+      "sha256": "462e98e74060cdfdf28b286742a14d2070f70ee7b7e83c3326a70c1447ef1f8e",
+      "bytes": 68236,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-02.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPTUfPqcmnQeU9jXPHSpibTKUo0Uu9uOfFWw2N4YOQQZJOqAgWVe5uEjPHY0icwp6PAEW5vre9BSFrpqsogIT7PCXq40E921avEhY/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-23.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-03.jpg",
+      "status": "archived",
+      "sha256": "ab3040bade32c0cf3c7875eb97c121e9d6885cdd7b6adf1aa339d5443f572054",
+      "bytes": 77434,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-03.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPTZ36oBqZEwfXyb6KVT2YpcGz4UGcl6nFQDHC0bRSELmgwD4EGiaT12TE6DLGwiarbUHWZky4icwp5lbSdNQCtbKbvD8C6sM8umoM/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-25.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-04.jpg",
+      "status": "archived",
+      "sha256": "3e2d2f3f9e807312611b3db341ed4e4157052305ae3e5c772731ff4d74d3f002",
+      "bytes": 59595,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-04.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPRia5T2FfR8uAo0UN2fdSjR7qjEl9Oq5KibtAmF4moXKcbDoac28v0v29OWYLz9Oqt1m1DLkjbMG3PREGD1ILlq6xCtN6RIDibSpY/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-27.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-05.jpg",
+      "status": "archived",
+      "sha256": "b1fb3be1f32d29cb01ae4da2810cc70ddf5c1f75463aca0dd80fa2c031930bc3",
+      "bytes": 62094,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-05.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPRzicRnyGHmDOL0HDibZGRLvxF7bob3w6TuPOniapDYDhq4LWJsJLZQxWkibicb3OA7VVETUWo8UAic2NKrnjicBBJ4GZey6ricwCAFz0k/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-29.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-06.jpg",
+      "status": "archived",
+      "sha256": "51f45c3445db44170cb21e0cde3f5ce9b92edd8e7ca05394c43f06862dadb2e6",
+      "bytes": 110904,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-06.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPSGfXPzgJUWma1tkrHicibRA2BRHPfmf4lWQWwIZC3MJufRPqL2u3icdxvhYOsHSiaUPFkr561PdgUHqt5ySY68ucxhmkHhB4cicGzA/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-31.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-07.jpg",
+      "status": "archived",
+      "sha256": "49f9d383182be50e1510ccfbb26163ef2dba3facd67db454bf030f17866f6eb8",
+      "bytes": 88095,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-07.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPSY5XW0jB8Gv7ICRC97TkBictahUzsykQqic15tNQNfZ6RLLXBiawNAHjfHrUs5ic2pibMlibia3ibOmT4IhibNrURD3ClicQVUAzuw0PhPg/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-33.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-08.jpg",
+      "status": "archived",
+      "sha256": "8b706cba77a897d4fb329532b9481eee55c843cf05a0dffe714ceb30df94d7ff",
+      "bytes": 70188,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-08.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPTrOibO4twhxPzVxicDja5EciaUAIqD7FBDPN5uiaI5wKC82qhmibNylqOWuicL84ib1DpyfJWNj7VnPsZjOLTEhtlMT51OPkzibWNmOBw/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-35.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-09.jpg",
+      "status": "archived",
+      "sha256": "ceb23107fa4834debc0a704ed6abdece3102a92a4cdb9eb29cfb9eb5df36d3da",
+      "bytes": 83891,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-09.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPSJuZmWUn3kIZrfhic2Pf3FcsoiaV0NxKeUcdSZB0413fHOG2pJror2amY4b4XGKqP4QxGWonZmLVerkFcziccpmfm8AZ59Ujliciao/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-37.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-audience-october-18-morning.jpg",
+      "status": "archived",
+      "sha256": "0ed353c910b5a8dd220bc933625ad99fe2d5d5858987d8f91234b3c9dc6ff3a3",
+      "bytes": 148855,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-audience-october-18-morning.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 810
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPS1mgQ6f84cpRlFc7SlgUbILibxCcsY6iaLwIKGia7aPNzziato870G2nm9PaUIjM4qUctuYGASQggqDdJRZOrh3QnibAc5LuUYoiblc/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-38.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-afternoon-01.jpg",
+      "status": "archived",
+      "sha256": "64f04f45ec67042f06cb369b6a0d9d43caf59836914233d6a5f325655265db2d",
+      "bytes": 141580,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-afternoon-01.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPQKu02QUOA9HW88V4VoL37Y1F4LwJj4YtIAPbgVmpsH4Ht8aWDcv6bdibCxibHibicakEocbUoYApdY82wpcic6eHs1nN5glKJvXDG0/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-40.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-afternoon-02.jpg",
+      "status": "archived",
+      "sha256": "ac16a0d71ad1ccf8cdf2340e161c0d511c151dc2912ad6054c82bf4ac5fa0d57",
+      "bytes": 56784,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-afternoon-02.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPR1GmSqMgFmNwnQ495Bc8m3m3PEg7ziaMD46MKPj4yy8ZuY9mEj5VicfkXxc6RYn3rD7tqCBM5RplLYlcF2zwicXdQVGbHekmBwicM/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-42.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-afternoon-03.jpg",
+      "status": "archived",
+      "sha256": "848f3cb5f6b30b4bd0f8a26da45245f373ab9d049d86598f4d9e078c4105752a",
+      "bytes": 69825,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-afternoon-03.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPTQJ9uGz2gEzrcic0W8F3DbkWCSPpnqJPkk4uKlJic0olYJ29HYfUYeNpoc27mW3lUk0ico8ibTDXxMQk0w0YsEObO1NVUNDMKXEEA/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-44.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-afternoon-04.jpg",
+      "status": "archived",
+      "sha256": "cae0fd30ff09dbb71a3a9ca7302a04f542495f4e62459668b1406285d216db37",
+      "bytes": 110178,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-afternoon-04.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPQiaCDelrQASiaE0SUURl6IdON0fLRyHk4qOJH996CDLicYvO3e5aJBhw3gDAqnwAxpx1KNOrib21QTic18licvmia4OHFibaxNj0XFDqM/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-46.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-09.jpg",
+      "status": "exact-duplicate",
+      "sha256": "ceb23107fa4834debc0a704ed6abdece3102a92a4cdb9eb29cfb9eb5df36d3da",
+      "bytes": 83891,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-october-18-morning-09.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPSJuZmWUn3kIZrfhic2Pf3FcsoiaV0NxKeUcdSZB0413fHOG2pJror2amY4b4XGKqP4QxGWonZmLVerkFcziccpmfm8AZ59Ujliciao/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-47.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-session-audience-october-18-afternoon.jpg",
+      "status": "archived",
+      "sha256": "2f2729bf3d030209dd134db263dc7aca1da5f20859f26c41501134c05c4445f3",
+      "bytes": 178796,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-session-audience-october-18-afternoon.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 810
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPTFzMmoaiaxp43ibzFHfAADk7COZTrWwbicNh4Bic4wrAsyjzAW0va4yKrboW1Gx8ypvJjl67F2Jee1C472DW2mo1e1yrlv3DTv0jw/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-48.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-poster-discussion-01.jpg",
+      "status": "archived",
+      "sha256": "af678a84197b11ae60af4b0152065bb2f511c807e2a0f4093d6eb7f4363ef830",
+      "bytes": 99838,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-poster-discussion-01.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 810
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPSicIQLybwQYicDt6LQCQQ3RvZESJYf1Vn6F4ia6T2AtpASXwVyibV37frmOS3J6SjtnuaGDOt6StBJVSzFJn4UWiaD9URQYouOZ8ibk/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-50.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-poster-discussion-02.jpg",
+      "status": "archived",
+      "sha256": "c102108ca5fb327572e85427c3c006f6c1b469a4008561619091a2a3cdd6d4e1",
+      "bytes": 158314,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-poster-discussion-02.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 810
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPQoeRsZe3lEicpIr0uWXPdnoibqYZs4JGL3qw7VicsQCTGD2qLUVPvfkXp2RkT3JFjTAQGzGApqOG7QtaiaPsOYgAYFSJ4gSLc36dY/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-51.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-youth-night-group.jpg",
+      "status": "archived",
+      "sha256": "fd9487db537e0ebe09fb612a5f24278a0fac205cb9379a34da73e603a8de4a5c",
+      "bytes": 125674,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-youth-night-group.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 720
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPQyng3m6xSdjebtZrcTo5o8sJglbShL2ECWb90icoMv0c2BFQqedUX4TKm8kA3wbTwseibZw3ibwcqGNalE5KUrkhtd8HgVUibkiaZU/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-53.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-youth-night-conversations.jpg",
+      "status": "archived",
+      "sha256": "9394d24104ddfa7cc61168c709d36546a6528143877b19e3baacf534fc3f8536",
+      "bytes": 125638,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-youth-night-conversations.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 810
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPSDhxqt8MzOFX74z39wnH194FHbicHLntiarToMbQRehict2ib4a7dOgO2DJ8Uj2FTMFLpwk7RooCJgusB178uFaxbYk6NKKiaZh5F8/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-55.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-youth-night-music.jpg",
+      "status": "archived",
+      "sha256": "4b38f673234d1c6af2671410747fbb5512d3ba9c3a1be2f2cff0686c3f401727",
+      "bytes": 110515,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-youth-night-music.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 809
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPQb6iaicfJoYvjPEmPqau7EflZfG0Aj0Q9r6Ha45YaBn31Dp0oP4LxAUxo53sEJkibBibXw3nb1styToAWtX0ibNGQHgxH1TrswhacM/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-56.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-anniversary-cake.jpg",
+      "status": "archived",
+      "sha256": "088cfeda51b5f9bcee04979d72eadd3731e609d1cf3543a67aa5b8f389605c27",
+      "bytes": 135156,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-anniversary-cake.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 810
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPRLw2lwY610gd23WZiaDPLCMlC55dKccSc33pcgBcorhY6xOwiaMHZm9y1eCcvIULsdA0RxuHj55Ew6WD5UACDiajt5icgs5ZZPgr0/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-58.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-moments-group.jpg",
+      "status": "archived",
+      "sha256": "337ceea1d62b36ad78663a3678d415de08cdf70503445f8ab8e470f36f32654e",
+      "bytes": 183272,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-moments-group.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 1619
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPR7UFxGGp1FhhmfbFHReWFrLHvGUxtUyAAaSlWib6tcLuzInkmjL5lnZG1QK36ibZ4Md2wTOKleLYRSPcPsATpLO0lmreS47QFicc/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-60.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-moments-poster.jpg",
+      "status": "archived",
+      "sha256": "f81b583f9aff239772a0d0498a87dfd0eb50b9db982a9f7e0928b9c7dd7658e0",
+      "bytes": 167640,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-moments-poster.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 1439
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPRx0d0OSxA7ibFVuvfhMLFan5FkYXJY9ALx6p3jB1WspCoiaiaGCQianGdjgIHYw4FLABBpPYZYAV1MGj7cnMaWOmgzr74BVzibWg6k/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-62.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-moments-volunteer.jpg",
+      "status": "archived",
+      "sha256": "e78455a22db1d543b5591ca5ee276a0c9ba608a0a622039cb363976052b07a4e",
+      "bytes": 211661,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-moments-volunteer.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 1441
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPR79LqtVcbeXnJDoH83Qjh3t3O3nnZxs6C3oPJPod8r6n3ZlQhbcI9nOnvJOVrtkmtXOAtNuX25xWxt3vAzhIrP8JCBjZSUvZU/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-64.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-moments-anniversary.jpg",
+      "status": "archived",
+      "sha256": "b6f5ece3e44b6694d2229bf10fa9cc873c5dac0208620945419ead367ed0749e",
+      "bytes": 133125,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-moments-anniversary.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 855,
+        "height": 1280
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPRGUMGRY2ZJKRR54wzs0dTy4Ohj7WfmjxFXaVuqFJZG55rGKOyxAkibofd7gJD9DlFgxlctD4AO1pRDupRlicMibUnwy4HLy6BJicI/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-66.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-moments-question-01.jpg",
+      "status": "archived",
+      "sha256": "3a650f2497ce649d4984e9535539849629c4d04b6551a42396f1b91b5632baa3",
+      "bytes": 116707,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-moments-question-01.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 1620
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPTbmxlJXxgXINXnJEoaLRm4BjyhVNiceKcpMDmR1lAoENjU2ELdyEbCrgictcibkAib6Qp38tXBR0VQoyFTRG2UCcWicF2dgPtX54eM/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-68.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-moments-question-02.jpg",
+      "status": "archived",
+      "sha256": "e75921450f5226e2e5bb0a79f13b9b316aeac4765e5b0bcd445f669ed789d229",
+      "bytes": 165563,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-moments-question-02.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 1620
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/2LbgdqibAmPRj6zuPdic18zy74y93kNRcZLiaukRLnYAd3SACWO8znfbjZrUicoUnHZmPDdrSZkIgupk9OE939oLibUZFuD2RjwfdFb9AWOsfNsg/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
+    },
+    {
+      "originalPath": "conference-recap-20261025/image-70.jpeg",
+      "canonicalPath": "assets/source-archive/2026/conference-recap/recap-moments-anniversary-lights.jpg",
+      "status": "archived",
+      "sha256": "b72749de68d6adb551d29e4f2aba678570ef9c5f3228658f02930b5d629e4ae0",
+      "bytes": 116325,
+      "runtimeCounterparts": [
+        "src/assets/2026/recap/recap-moments-anniversary-lights.webp"
+      ],
+      "mediaType": "image/jpeg",
+      "dimensions": {
+        "width": 1080,
+        "height": 1440
+      },
+      "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/2LbgdqibAmPTUj79Cznia9L9TCDAClpZibgWAfGtU8iasA8sIx5V0qlHThG2cyiaiajb3bcWE6HSzzfYMIN6nOvduYQDhuxlmicVx6dpeRLDFzr7F4/640?wx_fmt=jpeg",
+      "note": "Image from the organizer-supplied recap. Preserve the original bytes; the website uses a metadata-free WebP export."
     }
   ]
 }

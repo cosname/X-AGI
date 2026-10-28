@@ -1,0 +1,267 @@
+.home-recap {
+  width: min(var(--journey-content, 78rem), calc(100% - 3rem));
+  margin-inline: auto;
+  padding-top: clamp(4.5rem, 8vw, 7.5rem);
+  scroll-margin-top: calc(var(--site-header-height, 5rem) + 1rem);
+}
+
+.home-recap__heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem 2rem;
+  border-bottom: 1px solid var(--journey-line);
+  padding-bottom: 1.5rem;
+}
+
+.home-recap__eyebrow {
+  margin: 0 0 0.65rem;
+  color: var(--blue);
+  font-family: var(--font-condensed);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+}
+
+.home-recap__heading h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.home-recap__byline,
+.recap-article__byline {
+  margin: 0;
+  color: var(--muted, #555572);
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+
+.home-recap__intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem clamp(2rem, 5vw, 5rem);
+  padding-block: 1.6rem 2rem;
+}
+
+.home-recap__intro p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.95;
+  text-wrap: pretty;
+}
+
+.home-recap__link,
+.recap-page__home,
+.recap-article__footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 2.75rem;
+  margin-top: 0.6rem;
+  color: var(--blue-deep, #2f3199);
+  font-weight: 600;
+  text-underline-offset: 0.25em;
+}
+
+.home-recap__photos,
+.recap-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.recap-figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.recap-figure a {
+  display: block;
+  color: inherit;
+}
+
+.recap-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.3rem;
+}
+
+.recap-figure figcaption {
+  margin-top: 0.65rem;
+  color: var(--muted, #555572);
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
+
+.recap-page {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 52rem);
+  gap: clamp(2rem, 5vw, 5rem);
+  width: min(76rem, calc(100% - 3rem));
+  margin: 3rem auto 6rem;
+  justify-content: center;
+  color: var(--ink);
+}
+
+.recap-page__contents {
+  position: sticky;
+  top: calc(var(--site-header-height, 5rem) + 1.5rem);
+  align-self: start;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.recap-page__contents > p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.recap-page__contents ol {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recap-page__contents li a {
+  display: inline-block;
+  padding-block: 0.35rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.recap-page__contents li a:hover {
+  color: var(--blue-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.recap-article {
+  min-width: 0;
+  font-size: 1.02rem;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.recap-article__heading {
+  margin-bottom: 2rem;
+}
+
+.recap-article__heading h2 {
+  margin: 0.7rem 0 0;
+  font-size: clamp(1.55rem, 3vw, 2.25rem);
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+}
+
+.recap-article > :is(h2, h3, h4) {
+  scroll-margin-top: calc(var(--site-header-height, 5rem) + 1.5rem);
+  line-height: 1.5;
+}
+
+.recap-article > h2 {
+  margin: 3.5rem 0 1.25rem;
+  border-top: 1px solid rgb(34 33 92 / 0.14);
+  padding-top: 1.5rem;
+  font-size: 1.7rem;
+}
+
+.recap-article > h3 {
+  margin: 2rem 0 0.9rem;
+  color: var(--blue-deep);
+  font-size: 1.2rem;
+}
+
+.recap-article > h4 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1rem;
+}
+
+.recap-article > p {
+  margin: 0 0 1.2rem;
+  text-wrap: pretty;
+}
+
+.recap-article__list {
+  margin: 0 0 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.recap-gallery {
+  margin-block: 1.5rem 2rem;
+  gap: 1.25rem;
+}
+
+.recap-gallery--single {
+  display: block;
+}
+
+.recap-gallery--single .recap-figure {
+  max-width: 100%;
+}
+
+.recap-gallery--pair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.recap-article__footer {
+  margin-top: 3rem;
+  border-top: 1px solid rgb(34 33 92 / 0.14);
+  padding-top: 1rem;
+}
+
+:is(.home-recap, .recap-page) :is(a, [tabindex]):focus-visible {
+  outline: 2px solid var(--blue-deep);
+  outline-offset: 4px;
+}
+
+@media (max-width: 64rem) {
+  .recap-page {
+    display: block;
+    max-width: 52rem;
+  }
+  .recap-page__contents {
+    position: static;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgb(34 33 92 / 0.14);
+  }
+  .recap-page__contents ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  .home-recap,
+  .recap-page {
+    width: calc(100% - 2rem);
+  }
+  .home-recap__intro {
+    grid-template-columns: 1fr;
+  }
+  .home-recap__photos,
+  .recap-gallery:not(.recap-gallery--single) {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 85%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline proximity;
+    padding-bottom: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(103 82 200 / 0.45) transparent;
+  }
+  .recap-figure {
+    scroll-snap-align: start;
+  }
+}

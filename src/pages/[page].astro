@@ -9,6 +9,7 @@ import PosterPageContent from '../components/2026/inner/PosterPageContent.astro'
 import TravelGrantPageContent from '../components/2026/inner/TravelGrantPageContent.astro';
 import GuidePageContent from '../components/2026/inner/GuidePageContent.astro';
 import RegisterPageContent from '../components/2026/inner/RegisterPageContent.astro';
+import RecapPageContent from '../components/2026/inner/RecapPageContent.astro';
 import { currentEditionPageCopy, type CurrentEditionInnerPage } from '../config/edition-status';
 import { currentEdition, editionPath } from '../config/site';
 import { conference2026 } from '../data/conference2026';
@@ -16,7 +17,7 @@ import { conference2026 } from '../data/conference2026';
 type PublishedPage = Exclude<CurrentEditionInnerPage, 'speakers'>;
 
 export const getStaticPaths = (() =>
-  (['about', 'schedule', 'poster', 'travel-grant', 'guide', 'register'] as const satisfies readonly PublishedPage[]).map((page) => ({
+  (['about', 'recap', 'schedule', 'poster', 'travel-grant', 'guide', 'register'] as const satisfies readonly PublishedPage[]).map((page) => ({
     params: { page },
     props: { page },
   }))) satisfies GetStaticPaths;
@@ -45,6 +46,7 @@ const copy = currentEditionPageCopy(page);
       <MastheadPixelField pointerEffect="ripple" />
     </figure>
     {page === 'about' && <AboutPageContent />}
+    {page === 'recap' && <RecapPageContent />}
     {page === 'schedule' && <SchedulePageContent />}
     {page === 'poster' && <PosterPageContent />}
     {page === 'travel-grant' && <TravelGrantPageContent />}

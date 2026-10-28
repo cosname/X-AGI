@@ -19,6 +19,7 @@ import { homeSpeakers } from '../src/data/home-speakers.ts';
 import { posterResearchSource, posterResearchPapers as registeredResearchPapers } from '../src/data/poster-research.generated.ts';
 import { posterResearchPapers } from '../src/data/poster-research.ts';
 import { researchPosters, researchPosterById } from '../src/data/research-posters.ts';
+import { conferenceRecap } from '../src/data/conference-recap.ts';
 
 const projectRoot = path.resolve('.');
 const outputRoot = path.resolve('dist');
@@ -28,6 +29,7 @@ const failures = [];
 
 const expectedHtmlFiles = [
   'index.html',
+  'recap/index.html',
   'about/index.html',
   'schedule/index.html',
   'poster/index.html',
@@ -59,6 +61,7 @@ const expectedHtmlFiles = [
 
 const currentPageFiles = [
   'index.html',
+  'recap/index.html',
   'about/index.html',
   'schedule/index.html',
   'poster/index.html',
@@ -69,6 +72,7 @@ const currentPageFiles = [
 
 const expectedSitemapUrls = [
   '/',
+  '/recap/',
   '/about/',
   '/schedule/',
   '/poster/',
@@ -702,7 +706,7 @@ if (rootIndex.includes('redirect-page')) {
 }
 for (const marker of [
   'data-hero-pixel-field',
-  'data-goal-home-contract="speakers-posters-history-partners"',
+  'data-goal-home-contract="recap-speakers-posters-history-partners"',
   'edition-goal-home--with-lower',
   'id="goal-history"',
   'id="goal-organization"',
@@ -711,11 +715,18 @@ for (const marker of [
   'data-home-speakers',
   'id="goal-poster-research"',
   'data-home-research',
+  'id="conference-recap"',
   'class="goal-partners__legal"',
 ]) {
   if (!rootIndex.includes(marker)) fail(`index.html: missing published homepage marker "${marker}"`);
 }
 const speakerStart = rootIndex.indexOf('id="goal-speakers"');
+const recapStart = rootIndex.indexOf('id="conference-recap"');
+const homeRecapFragment = rootIndex.slice(recapStart, speakerStart);
+if (recapStart < 0 || recapStart >= speakerStart || !homeRecapFragment.includes('href="/recap/"')) {
+  fail('index.html: the conference recap and full-article link must precede the speaker section');
+}
+validateExactSet('homepage recap photos', [...homeRecapFragment.matchAll(/data-recap-image="(\d+)"/g)].map((match) => match[1]), conferenceRecap.featuredImages);
 const homeResearchStart = rootIndex.indexOf('id="goal-poster-research"');
 if (speakerStart < 0 || homeResearchStart <= speakerStart || historyStart <= homeResearchStart) {
   fail('index.html: separate speaker and Poster paper sections must precede conference history, in that order');
@@ -922,6 +933,33 @@ for (const [route, expectedCopy] of officialCopyByRoute) {
 }
 
 const researchSource = await readFile(path.join(outputRoot, 'poster/index.html'), 'utf8');
+const recapSource = await readFile(path.join(outputRoot, 'recap/index.html'), 'utf8');
+const recapText = visibleText(recapSource);
+const recapCuration = JSON.parse(await readFile('src/data/conference-recap-curation.json', 'utf8'));
+if ((await fileIntegrity('assets/source-archive/2026/conference-recap/conference-recap-article.md')).sha256 !== conferenceRecap.sourceSha256) {
+  fail('Conference recap source has changed; rerun scripts/import-conference-recap.mjs');
+}
+validateExactSet('recap curated images', Object.keys(conferenceRecap.images), Object.keys(recapCuration.images));
+validateExactSet('recap source images', (await walk(path.resolve('src/assets/2026/recap'))).map((file) => path.basename(file)),
+  [...new Set(Object.values(conferenceRecap.images).map((image) => image.basename))]);
+for (const [id, image] of Object.entries(conferenceRecap.images)) {
+  if (image.alt !== recapCuration.images[id]?.alt || !image.alt.trim()
+    || (await fileIntegrity(image.sourcePath)).sha256 !== image.sourceSha256) {
+    fail(`Conference recap image ${id} differs from its reviewed source or caption`);
+  }
+}
+for (const value of [conferenceRecap.title, conferenceRecap.author, conferenceRecap.publication,
+  ...conferenceRecap.blocks.flatMap((block) => block.type === 'list' ? block.items : block.type === 'gallery' ? [] : [block.text])]) {
+  if (!recapText.includes(value.replace(/\s+/gu, ' ').trim())) fail(`recap/index.html: missing supplied recap text: ${value}`);
+}
+const expectedRecapImages = conferenceRecap.blocks.flatMap((block) => block.type === 'gallery' ? block.images : []);
+validateExactSet('recap image placements', [...recapSource.matchAll(/data-recap-image="(\d+)"/g)].map((match) => match[1]), expectedRecapImages);
+if (recapSource.includes('mmbiz.qpic.cn') || homeRecapFragment.includes('mmbiz.qpic.cn')) {
+  fail('Conference recap must use local images rather than WeChat hotlinks');
+}
+if ((await initialLocalPayload(path.join(outputRoot, 'recap/index.html'), managedDownloads)) > 1_500_000) {
+  fail('recap/index.html: initial local payload exceeds 1.5 MB');
+}
 const researchCuration = JSON.parse(await readFile(path.resolve('src/data/poster-research-curation.json'), 'utf8'));
 const registrationIds = new Set(registeredResearchPapers.map((paper) => paper.id));
 if (posterResearchSource.status !== 'registration'

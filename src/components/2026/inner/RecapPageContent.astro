@@ -1,0 +1,40 @@
+---
+import { conferenceRecap } from '../../../data/conference-recap';
+import RecapFigure from '../RecapFigure.astro';
+import '../../../styles/conference-recap.css';
+
+const sections = conferenceRecap.blocks.filter((block) => block.type === 'heading' && block.level === 2);
+---
+
+<main class="recap-page">
+  <nav class="recap-page__contents" aria-label="纪要目录">
+    <p>阅读目录</p>
+    <ol>
+      {sections.map((section) => section.type === 'heading' && <li><a href={`#${section.id}`}>{section.text}</a></li>)}
+    </ol>
+    <a class="recap-page__home" href="/#conference-recap">返回首页 <span aria-hidden="true">↗</span></a>
+  </nav>
+  <article class="recap-article" aria-labelledby="recap-article-title">
+    <header class="recap-article__heading">
+      <p class="recap-article__byline">{conferenceRecap.author} · {conferenceRecap.publication} · <time datetime={conferenceRecap.publishedDate}>2026 年 10 月 25 日</time></p>
+      <h2 id="recap-article-title">{conferenceRecap.title}</h2>
+    </header>
+    {conferenceRecap.blocks.map((block) => {
+      if (block.type === 'heading') {
+        const Heading = `h${block.level}` as 'h2' | 'h3' | 'h4';
+        return <Heading id={block.id}>{block.text}</Heading>;
+      }
+      if (block.type === 'paragraph') return <p>{block.text}</p>;
+      if (block.type === 'list') return <ul class="recap-article__list">{block.items.map((item) => <li>{item}</li>)}</ul>;
+      return (
+        <div class:list={['recap-gallery', { 'recap-gallery--single': block.images.length === 1, 'recap-gallery--pair': block.images.length === 2 }]}
+          role={block.images.length > 1 ? 'region' : undefined}
+          aria-label={block.images.length > 1 ? '本节现场照片，可横向浏览' : undefined}
+          tabindex={block.images.length > 1 ? 0 : undefined}>
+          {block.images.map((imageId) => <RecapFigure imageId={imageId} caption={block.images.length > 1} sizes={block.images.length === 1 ? '(max-width: 64rem) 92vw, 52rem' : undefined} />)}
+        </div>
+      );
+    })}
+    <footer class="recap-article__footer"><a href="/#conference-recap">返回会议首页 <span aria-hidden="true">↗</span></a></footer>
+  </article>
+</main>

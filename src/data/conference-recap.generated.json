@@ -1,0 +1,665 @@
+{
+  "generatedBy": "scripts/import-conference-recap.mjs; do not edit by hand",
+  "title": "2026 X-AGI Conference（交叉智能大会）",
+  "author": "X-AGI 组委会",
+  "publication": "统计之都",
+  "publishedDate": "2026-10-25",
+  "sourceSha256": "43f3e5bfd43a8c668f5ec61a0db89ff5241f7d4d0f712175919a175ab6c303ce",
+  "featuredImages": [
+    "18",
+    "50",
+    "51"
+  ],
+  "images": {
+    "0": {
+      "basename": "recap-conference-cover.webp",
+      "alt": "2026 X-AGI 交叉智能大会主视觉与组织单位",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-conference-cover.webp",
+      "sourceSha256": "6dc79161c5c582db7a0bc2d738297af260473f63df8592be408cc9b4f8d5f2fb"
+    },
+    "1": {
+      "basename": "recap-opening-chair.webp",
+      "alt": "大会主席钟轶伦在主会场致辞",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-opening-chair.jpg",
+      "sourceSha256": "d055209f3f7989a399fc05ae5a6a4de75641ed2a03873239ab9ec149ed36828e"
+    },
+    "2": {
+      "basename": "recap-opening-liu-jun.webp",
+      "alt": "刘军教授在主会场致辞",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-opening-liu-jun.jpg",
+      "sourceSha256": "3a9604d278fcb503fe30740c82dcf7d24385ab2a5df640c397552fe30bac9d3f"
+    },
+    "3": {
+      "basename": "recap-keynote-stage.webp",
+      "alt": "Keynote 讲者在主会场分享人工智能研究",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-keynote-stage.jpg",
+      "sourceSha256": "58cc5a1791aa90d3898ce2f34a077638023be28089853fa81c168ea920dee649"
+    },
+    "5": {
+      "basename": "recap-keynote-audience.webp",
+      "alt": "主会场听众聆听关于大模型内部机制的报告",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-keynote-audience.jpg",
+      "sourceSha256": "7a77f924db4c7d15f9f19d82b024f50eee79ea1413f29a7ce01dbf7091fc0dd7"
+    },
+    "7": {
+      "basename": "recap-session-october-17-01.webp",
+      "alt": "10 月 17 日下午，分会场讲者结合投影讲解研究",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-17-01.jpg",
+      "sourceSha256": "7f9e01531ef31cf47b43a0ecbf28937687a169fbb939d46c6ccbaa60c242b14a"
+    },
+    "9": {
+      "basename": "recap-session-october-17-02.webp",
+      "alt": "10 月 17 日下午，分会场讲者展示研究框架",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-17-02.jpg",
+      "sourceSha256": "4819ed9f6864699c2c82ab17249b78059a11df5b65cc225eb0ed06bffb861275"
+    },
+    "11": {
+      "basename": "recap-session-october-17-03.webp",
+      "alt": "10 月 17 日下午，讲者手持话筒与听众交流",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-17-03.jpg",
+      "sourceSha256": "7f3ec2086d15ea91bd239e8771e48bb80c46f2f713e6a0d8536b309d6f8ec80c"
+    },
+    "13": {
+      "basename": "recap-session-october-17-04.webp",
+      "alt": "10 月 17 日下午，分会场讲者站在讲台旁作报告",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-17-04.jpg",
+      "sourceSha256": "9220e661d6d2aa3b5d86e43cbba55b3ab6f6094042b5dd4173f8d486c2ddb264"
+    },
+    "15": {
+      "basename": "recap-session-october-17-05.webp",
+      "alt": "10 月 17 日下午，分会场报告现场",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-17-05.jpg",
+      "sourceSha256": "d9ad998113312303f8f822144422afd8ce8a21d03c37d433de1bc5197cc873b8"
+    },
+    "17": {
+      "basename": "recap-session-october-17-06.webp",
+      "alt": "10 月 17 日下午，讲者在讲台前作报告",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-17-06.jpg",
+      "sourceSha256": "f500c9df8bbb85eaa2e1bd4adfce5b144faaf0fe9c3c5fb0266294ffddcbdb35"
+    },
+    "18": {
+      "basename": "recap-session-audience-october-17.webp",
+      "alt": "10 月 17 日下午，分会场内座无虚席",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-audience-october-17.jpg",
+      "sourceSha256": "67dd504886e74d63ca771f71db7eeae099a8bfd3c024bb07ae8c2d6028096c69"
+    },
+    "19": {
+      "basename": "recap-session-october-18-morning-01.webp",
+      "alt": "10 月 18 日上午，讲者在投影前讲解研究图示",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-01.jpg",
+      "sourceSha256": "0bd3f299c3a65724c2911c20ded348ea7d8c324b7e2fc7a58587a5bc18e1bf0b"
+    },
+    "21": {
+      "basename": "recap-session-october-18-morning-02.webp",
+      "alt": "10 月 18 日上午，听众记录分会场报告",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-02.jpg",
+      "sourceSha256": "462e98e74060cdfdf28b286742a14d2070f70ee7b7e83c3326a70c1447ef1f8e"
+    },
+    "23": {
+      "basename": "recap-session-october-18-morning-03.webp",
+      "alt": "10 月 18 日上午，分会场讲者与听众交流",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-03.jpg",
+      "sourceSha256": "ab3040bade32c0cf3c7875eb97c121e9d6885cdd7b6adf1aa339d5443f572054"
+    },
+    "25": {
+      "basename": "recap-session-october-18-morning-04.webp",
+      "alt": "10 月 18 日上午，关于人工智能与核聚变研究的报告",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-04.jpg",
+      "sourceSha256": "3e2d2f3f9e807312611b3db341ed4e4157052305ae3e5c772731ff4d74d3f002"
+    },
+    "27": {
+      "basename": "recap-session-october-18-morning-05.webp",
+      "alt": "10 月 18 日上午，讲者手持话筒阐述研究观点",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-05.jpg",
+      "sourceSha256": "b1fb3be1f32d29cb01ae4da2810cc70ddf5c1f75463aca0dd80fa2c031930bc3"
+    },
+    "29": {
+      "basename": "recap-session-october-18-morning-06.webp",
+      "alt": "10 月 18 日上午，讲者结合数学表达式介绍研究",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-06.jpg",
+      "sourceSha256": "51f45c3445db44170cb21e0cde3f5ce9b92edd8e7ca05394c43f06862dadb2e6"
+    },
+    "31": {
+      "basename": "recap-session-october-18-morning-07.webp",
+      "alt": "10 月 18 日上午，会场工作人员在电脑前协作",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-07.jpg",
+      "sourceSha256": "49f9d383182be50e1510ccfbb26163ef2dba3facd67db454bf030f17866f6eb8"
+    },
+    "33": {
+      "basename": "recap-session-october-18-morning-08.webp",
+      "alt": "10 月 18 日上午，分会场讲者展示研究结果",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-08.jpg",
+      "sourceSha256": "8b706cba77a897d4fb329532b9481eee55c843cf05a0dffe714ceb30df94d7ff"
+    },
+    "35": {
+      "basename": "recap-session-october-18-morning-09.webp",
+      "alt": "分会场讲者在讲台前与听众交流",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-09.jpg",
+      "sourceSha256": "ceb23107fa4834debc0a704ed6abdece3102a92a4cdb9eb29cfb9eb5df36d3da"
+    },
+    "37": {
+      "basename": "recap-session-audience-october-18-morning.webp",
+      "alt": "10 月 18 日上午，分会场听众专注聆听报告",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-audience-october-18-morning.jpg",
+      "sourceSha256": "0ed353c910b5a8dd220bc933625ad99fe2d5d5858987d8f91234b3c9dc6ff3a3"
+    },
+    "38": {
+      "basename": "recap-session-october-18-afternoon-01.webp",
+      "alt": "10 月 18 日下午，讲者介绍 Navier-Stokes 问题相关研究",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-afternoon-01.jpg",
+      "sourceSha256": "64f04f45ec67042f06cb369b6a0d9d43caf59836914233d6a5f325655265db2d"
+    },
+    "40": {
+      "basename": "recap-session-october-18-afternoon-02.webp",
+      "alt": "10 月 18 日下午，讲者在分会场分享研究进展",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-afternoon-02.jpg",
+      "sourceSha256": "ac16a0d71ad1ccf8cdf2340e161c0d511c151dc2912ad6054c82bf4ac5fa0d57"
+    },
+    "42": {
+      "basename": "recap-session-october-18-afternoon-03.webp",
+      "alt": "10 月 18 日下午，讲者结合公式介绍研究方法",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-afternoon-03.jpg",
+      "sourceSha256": "848f3cb5f6b30b4bd0f8a26da45245f373ab9d049d86598f4d9e078c4105752a"
+    },
+    "44": {
+      "basename": "recap-session-october-18-afternoon-04.webp",
+      "alt": "10 月 18 日下午，讲者展示 PILOTDECK 演示文稿",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-afternoon-04.jpg",
+      "sourceSha256": "cae0fd30ff09dbb71a3a9ca7302a04f542495f4e62459668b1406285d216db37"
+    },
+    "46": {
+      "basename": "recap-session-october-18-morning-09.webp",
+      "alt": "分会场讲者在讲台前与听众交流",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-october-18-morning-09.jpg",
+      "sourceSha256": "ceb23107fa4834debc0a704ed6abdece3102a92a4cdb9eb29cfb9eb5df36d3da"
+    },
+    "47": {
+      "basename": "recap-session-audience-october-18-afternoon.webp",
+      "alt": "10 月 18 日下午，分会场听众与现场拍摄设备",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-session-audience-october-18-afternoon.jpg",
+      "sourceSha256": "2f2729bf3d030209dd134db263dc7aca1da5f20859f26c41501134c05c4445f3"
+    },
+    "48": {
+      "basename": "recap-poster-discussion-01.webp",
+      "alt": "Rising Stars Poster 现场，研究者围绕海报讨论",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-poster-discussion-01.jpg",
+      "sourceSha256": "af678a84197b11ae60af4b0152065bb2f511c807e2a0f4093d6eb7f4363ef830"
+    },
+    "50": {
+      "basename": "recap-poster-discussion-02.webp",
+      "alt": "Rising Stars Poster 现场，参会者交流研究成果",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-poster-discussion-02.jpg",
+      "sourceSha256": "c102108ca5fb327572e85427c3c006f6c1b469a4008561619091a2a3cdd6d4e1"
+    },
+    "51": {
+      "basename": "recap-youth-night-group.webp",
+      "alt": "青年之夜参与者在 AGI Bar 入口合影",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-youth-night-group.jpg",
+      "sourceSha256": "fd9487db537e0ebe09fb612a5f24278a0fac205cb9379a34da73e603a8de4a5c"
+    },
+    "53": {
+      "basename": "recap-youth-night-conversations.webp",
+      "alt": "青年之夜现场，参会者围桌交谈",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-youth-night-conversations.jpg",
+      "sourceSha256": "9394d24104ddfa7cc61168c709d36546a6528143877b19e3baacf534fc3f8536"
+    },
+    "55": {
+      "basename": "recap-youth-night-music.webp",
+      "alt": "青年之夜现场的音乐与交流氛围",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-youth-night-music.jpg",
+      "sourceSha256": "4b38f673234d1c6af2671410747fbb5512d3ba9c3a1be2f2cff0686c3f401727"
+    },
+    "56": {
+      "basename": "recap-anniversary-cake.webp",
+      "alt": "统计之都二十周年纪念蛋糕",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-anniversary-cake.jpg",
+      "sourceSha256": "088cfeda51b5f9bcee04979d72eadd3731e609d1cf3543a67aa5b8f389605c27"
+    },
+    "58": {
+      "basename": "recap-moments-group.webp",
+      "alt": "参会者在青年之夜标志旁合影留念",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-moments-group.jpg",
+      "sourceSha256": "337ceea1d62b36ad78663a3678d415de08cdf70503445f8ab8e470f36f32654e"
+    },
+    "60": {
+      "basename": "recap-moments-poster.webp",
+      "alt": "参会者在海报展示区继续交流",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-moments-poster.jpg",
+      "sourceSha256": "f81b583f9aff239772a0d0498a87dfd0eb50b9db982a9f7e0928b9c7dd7658e0"
+    },
+    "62": {
+      "basename": "recap-moments-volunteer.webp",
+      "alt": "工作人员在海报展示区使用笔记本电脑",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-moments-volunteer.jpg",
+      "sourceSha256": "e78455a22db1d543b5591ca5ee276a0c9ba608a0a622039cb363976052b07a4e"
+    },
+    "64": {
+      "basename": "recap-moments-anniversary.webp",
+      "alt": "参与者围在统计之都二十周年蛋糕旁合影",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-moments-anniversary.jpg",
+      "sourceSha256": "b6f5ece3e44b6694d2229bf10fa9cc873c5dac0208620945419ead367ed0749e"
+    },
+    "66": {
+      "basename": "recap-moments-question-01.webp",
+      "alt": "分会场听众站起身提问",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-moments-question-01.jpg",
+      "sourceSha256": "3a650f2497ce649d4984e9535539849629c4d04b6551a42396f1b91b5632baa3"
+    },
+    "68": {
+      "basename": "recap-moments-question-02.webp",
+      "alt": "分会场听众手持话筒参与讨论",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-moments-question-02.jpg",
+      "sourceSha256": "e75921450f5226e2e5bb0a79f13b9b316aeac4765e5b0bcd445f669ed789d229"
+    },
+    "70": {
+      "basename": "recap-moments-anniversary-lights.webp",
+      "alt": "青年之夜现场的二十周年灯光装饰",
+      "sourcePath": "assets/source-archive/2026/conference-recap/recap-moments-anniversary-lights.jpg",
+      "sourceSha256": "b72749de68d6adb551d29e4f2aba678570ef9c5f3228658f02930b5d629e4ae0"
+    }
+  },
+  "blocks": [
+    {
+      "type": "gallery",
+      "images": [
+        "0"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "introduction",
+      "text": "会议介绍"
+    },
+    {
+      "type": "paragraph",
+      "text": "2026 X-AGI Conference（交叉智能大会）于2026年10月16日至18日在北京友谊宾馆举行，主题为“AI Conference for the neXt Generation”。大会共吸引近700人报名参加。现场直播超过6800人次在线观看，全平台总浏览量突破1.2万次（来源：黄大年茶思屋直播数据）。"
+    },
+    {
+      "type": "paragraph",
+      "text": "XAGI 2026共设14个会场、49场演讲。大会议题包括AI4Science、AI4Math & Theory、AI Infra、Physics of Deep Learning、Agent技术及应用、LLM评测与基准、脑机接口、预训练算法、大语言模型基础、扩散语言模型、机器学习理论、AI的数理和计算基础、AI+Finance、AI+教育等。"
+    },
+    {
+      "type": "paragraph",
+      "text": "大会还特设Rising Stars Poster系列活动，展示50余份海报，资助超20名本科生赴京参会，为AI领域产学研各界同仁特别是青年学子搭建了展示研究成果、促进学术交流的平台，进一步激发创新活力，推动学术与产业协同发展。"
+    },
+    {
+      "type": "paragraph",
+      "text": "在统计之都20周年之际，大会还包场AGI Bar，设置青年之夜活动。现场气氛轻松、愉悦、热烈，为参会者提供了更自在的交流空间，也让周年相聚更有温度和朝气。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "plenary",
+      "text": "主会场"
+    },
+    {
+      "type": "paragraph",
+      "text": "本次会议由大会秘书长，中国人民大学统计学院2024级本科生邱潇锐主持。"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "opening",
+      "text": "会议致辞"
+    },
+    {
+      "type": "paragraph",
+      "text": "会议首先由会议主席中国人民大学统计学院2023级本科生钟轶伦致辞。主席对本次会议进行了简要介绍，并对参会者的到场表示了感谢。"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "1"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "此后致辞的是清华大学统计与数据科学系系主任刘军教授，他回顾统计学科率先进入生物信息等交叉领域的历史经验，指出当前人工智能与大模型基础理论正处于类似窗口，是统计学者的重要机遇。致辞以开源精神根植于分享、交叉学科活化于包容为主旨，并预祝大会圆满成功。"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "2"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "keynotes",
+      "text": "Keynote嘉宾演讲"
+    },
+    {
+      "type": "paragraph",
+      "text": "在开幕致辞结束之后，三位Keynote嘉宾展开了演讲。孙茂松教授以“人工智能随想录”为题，从研究者视角提出生成式 AI 亟待解决的基本问题，并讨论了大学在 AI 产学研模式中角色调整的必要性；冯建峰教授从神经科学数据出发，强调统计工具在解析大脑计算中的必要性，将 AI 视为理解大脑的科学工具；邱子涵老师则聚焦大模型内部机制，对 Attention Sinks 与 Residual Sinks 提出统一的功能性解释，通过干预实验证明异常激活并非噪声，而是与 Softmax、RMSNorm 协同实现高维优化稳定性的缩放机制。"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "3",
+        "5"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "sessions",
+      "text": "分会场"
+    },
+    {
+      "type": "paragraph",
+      "text": "10月17日下午至18日全天十余个分会场相继展开，来自高校、科研机构和产业界的诸多数据科学与人工智能同侪畅所欲言，演讲者既有在校师生，也有业界人士。"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "october-17-afternoon",
+      "text": "10月17日下午分会场"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "7",
+        "9",
+        "11",
+        "13",
+        "15",
+        "17"
+      ]
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "18"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "october-18-morning",
+      "text": "10月18日上午分会场"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "19",
+        "21",
+        "23",
+        "25",
+        "27",
+        "29",
+        "31",
+        "33",
+        "35"
+      ]
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "37"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "october-18-afternoon",
+      "text": "10月18日下午分会场"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "38",
+        "40",
+        "42",
+        "44",
+        "46"
+      ]
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "47"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "rising-stars",
+      "text": "Rising Stars Poster系列活动"
+    },
+    {
+      "type": "paragraph",
+      "text": "Rising Stars Poster 系列活动为来自高校、科研机构与产业界的年轻研究者搭建了展示研究成果、分享思考的开放平台，让他们既能了解前沿进展，也能在与同行的深入交流中获得启发、建立合作；Poster入选者还受邀参加 X-AGI 青年之夜，在更为轻松的氛围中延续对话、结识同道。今年恰逢主办方统计之都二十周年，大家也借此机会一同切开蛋糕，为这个持续推动数据科学与人工智能交流的平台庆生。"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "posters",
+      "text": "Rising Stars Poster"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "48",
+        "50"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "youth-night",
+      "text": "X-AGI青年之夜"
+    },
+    {
+      "type": "paragraph",
+      "text": "X-AGI 青年之夜包下了中关村创业大街的AGI Bar新馆，与 100 多位新老朋友共聚一堂。这也是该新场地的首次对外亮相。在工业废土风的硬朗空间里，虽然部分区域仍带着未完工的质朴，但在志愿者们的紧急补救与现场朋友们的悉心包容下，整场活动圆满落地。音乐、DJ、抽奖与美酒交织，大家自然成群，聚集在一起酣畅交流，从大模型前沿、学术研究到落地实践，空气中弥漫着思想碰撞的热气。期间，大家还切开、品尝了“统计之都” 20 周年的纪念蛋糕，为这场聚会增添了一份沉甸甸的岁月仪式感。夜晚 10 点过后，现场的热情依然未减，不少朋友意犹未尽，关于技术的探讨一直延续到了深夜零点。感谢每一位到场的朋友，期待下一次的相聚！"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "51",
+        "53",
+        "55"
+      ]
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "56"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "moments",
+      "text": "会议花絮"
+    },
+    {
+      "type": "paragraph",
+      "text": "京华十月，秋光正好。今年10月17日恰逢全天大雨，但多个会场仍座无虚席。雨声在外，暖意在内；年轻而朝气蓬勃的参会者，让现场讨论始终热烈。从大模型前沿的主旨演讲到层层深入的分会场专题讨论，从青年之夜到 Rising Stars Poster，既有前沿视野，也有扎实的技术深度；提问专业、交流深入，新朋旧友因交叉智能相聚，也因统计之都廿载多一份纪念意义。蛋糕切开，是二十年坚持与分享的余温；那些冒雨赶来的脚步、散场后仍久久驻足交流的身影，都是这场相聚最温柔的注脚。感谢组委会的周密筹备、各分会场chair的认真组织，以及志愿者们的默默付出。会议落幕，星火未熄，我们明年再见！"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        "58",
+        "60",
+        "62",
+        "64",
+        "66",
+        "68",
+        "70"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "organization",
+      "text": "会议组织"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "committee",
+      "text": "组织委员会"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "id": "chair",
+      "text": "主席"
+    },
+    {
+      "type": "paragraph",
+      "text": "钟轶伦"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "id": "committee-members",
+      "text": "委员"
+    },
+    {
+      "type": "paragraph",
+      "text": "常象宇、陈焕然、陈思明、从鑫、邓柯、戴嘉成、冯凌秉、胡天阳、刘军、刘方辉、陆一平、吕晓玲、李静远、马梓业、邱怡轩、滕佳烨、魏太云、王健桥、王小宁、校一皓、谢天、许成玮、杨朋昆、杨新宇、姚天易、张辉帅、张桐瑞轩、周峰、祝武、邹嘉轩（按姓名拼音排序，下同）"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "speakers",
+      "text": "报告人"
+    },
+    {
+      "type": "paragraph",
+      "text": "常恒、陈焕然、陈晴、从鑫、冯建峰、韩佳乐、胡天阳、胡译文、黄沛、黄睿钊、焦雨领、李根、李鹏、李秋熠、李秀红、刘方辉、刘华斌、刘泽群、刘子鸣、陆一平、罗迪、罗涛、马鉴昊、马俊杰、潘亮铭、邱子涵、沈皓、史作强、孙茂松、涂尚卿、王宏宁、吴晨玮、吴泰霖、谢超、许洪腾、许慧楠、闫宇坤、姚金戈、张华清、张辉帅、张露瑶、张先轶、张耀宇、张元、赵鹏、周沛劼、周峰、邹荻凡"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "secretariat",
+      "text": "大会秘书处"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "id": "secretary-general",
+      "text": "秘书长"
+    },
+    {
+      "type": "paragraph",
+      "text": "邱潇锐"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "id": "members",
+      "text": "成员"
+    },
+    {
+      "type": "paragraph",
+      "text": "程子懿、邓欣怡、黄涵碧、李芷汀、田润泽、王胤博"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "volunteers",
+      "text": "大会志愿者"
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "id": "members-2",
+      "text": "成员"
+    },
+    {
+      "type": "paragraph",
+      "text": "白睿琦、陈锦煌、陈绮璐、陈少瑾、陈思羽、程文晗、程钰森、高赫彤、黄桢、贾宇航、焦慧婧、金文宽、匡洁兴、李苏倩、李婷、李自立、李佳瑶、林香雪、林奕君、刘晟昕、路嘉文、陆语菲、罗海金、卿梓韬、屈琳、司芮安、宋岩岩、陶可、万杰、王昕越、闻新、肖雅慧、辛昱均、许浩然、杨雅淇、尹俪铮、游书菲、曾祥清、章明、张翛然、赵电宇、周超、周诗曼、朱艳菊"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "initiators",
+      "text": "发起单位"
+    },
+    {
+      "type": "list",
+      "items": [
+        "统计之都",
+        "FAI（人工智能基础）"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "organizers",
+      "text": "主办单位"
+    },
+    {
+      "type": "list",
+      "items": [
+        "清华大学统计与数据科学系",
+        "中国人民大学应用统计科学研究中心",
+        "中国人民大学统计学院",
+        "统计之都",
+        "FAI（人工智能基础）",
+        "中国商业统计学会人工智能分会"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "co-organizers",
+      "text": "协办单位"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Oscholar",
+        "AI TIME",
+        "清华大学经济管理学院研究生分会"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "strategic-partners",
+      "text": "战略合作伙伴"
+    },
+    {
+      "type": "list",
+      "items": [
+        "黄大年茶思屋"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "sponsors",
+      "text": "赞助单位"
+    },
+    {
+      "type": "list",
+      "items": [
+        "明汯投资",
+        "宽德投资",
+        "WILL（宽德智能学习实验室）",
+        "Quantverse（数启寰宇）",
+        "智统数合",
+        "澎峰科技"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "contact",
+      "text": "联系方式"
+    },
+    {
+      "type": "list",
+      "items": [
+        "公众号：统计之都",
+        "会议邮箱：xagi2026@cosx.org",
+        "会议官网：www.x-agi.org"
+      ]
+    }
+  ]
+}

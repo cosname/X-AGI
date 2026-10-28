@@ -54,6 +54,13 @@ export function currentEditionPageCopy(
   const registrationOpen = isRegistrationOpen(conference);
 
   switch (page) {
+    case 'recap':
+      return {
+        page,
+        label: '会议纪要',
+        description: '2026 X-AGI 交叉智能大会纪要，回顾主会场、分会场、Rising Stars Poster 与青年之夜。',
+        status: conference.name,
+      };
     case 'about':
       return {
         page,

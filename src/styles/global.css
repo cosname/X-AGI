@@ -437,7 +437,7 @@
   --compact-nav-trigger-height: 3rem;
   --compact-nav-panel-width: min(8rem, calc(100vw - (var(--page-gutter) * 2)));
   --compact-nav-panel-height: auto;
-  --compact-nav-panel-max-height: min(23.75rem, calc(100svh - 1rem));
+  --compact-nav-panel-max-height: min(30rem, calc(100svh - 3rem));
   --compact-nav-morph-duration: 520ms;
   --compact-nav-morph-ease: cubic-bezier(0.2, 0.82, 0.24, 1);
   --compact-nav-glass-surface: var(

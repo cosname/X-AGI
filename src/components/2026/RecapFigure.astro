@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { conferenceRecap } from '../../data/conference-recap';
+
+interface Props {
+  imageId: string;
+  caption?: boolean;
+  sizes?: string;
+}
+
+const { imageId, caption = true, sizes = '(max-width: 48rem) 88vw, (max-width: 64rem) 45vw, 28rem' } = Astro.props;
+const sources = import.meta.glob<{ default: ImageMetadata }>('/src/assets/2026/recap/*.webp', { eager: true });
+const photo = conferenceRecap.images[imageId];
+const source = sources[`/src/assets/2026/recap/${photo.basename}`].default;
+const widths = [...new Set([400, 800, 1200, source.width].filter((width) => width <= source.width))];
+---
+
+<figure class="recap-figure" data-recap-image={imageId}>
+  <a href={source.src} target="_blank" rel="noopener noreferrer" aria-label={`查看大图：${photo.alt}`}>
+    <Image src={source} alt={photo.alt} widths={widths} sizes={sizes} format="webp" quality={82} loading="lazy" decoding="async" />
+  </a>
+  {caption && <figcaption>{photo.alt}</figcaption>}
+</figure>

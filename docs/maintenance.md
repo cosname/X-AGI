@@ -38,6 +38,7 @@
 | 路径 | 页面 |
 | --- | --- |
 | `/` | 首页、17 场历届影像、组织单位和备案信息 |
+| `/recap/` | 2026 会议纪要全文与现场照片 |
 | `/about/` | 会议简介 |
 | `/schedule/` | 日程安排 |
 | `/poster/` | Rising Stars Poster |
@@ -46,6 +47,17 @@
 | `/speakers/` | 跳转至 `/schedule/` |
 
 兼容跳转集中配置在 `astro.config.mjs`。
+
+### 会议纪要
+
+首页首屏下方展示纪要摘要及三张代表照片，导航和“阅读完整纪要”链接通向 `/recap/`。
+正文来源为组委会在统计之都发布的 2026-10-25 纪要，原始 Markdown 与 40 张独立图片保存在 `assets/source-archive/2026/conference-recap/`。
+原文中重复使用的照片共用同一个文件，全文保留 41 处图片展示。
+生成数据位于 `src/data/conference-recap.generated.json`，章节锚点、图片说明和首页选图在 `src/data/conference-recap-curation.json` 中维护。
+修改来源或图片说明后运行 `node scripts/import-conference-recap.mjs`，再运行 `npm test`。
+导入器会同时更新源文件清单、哈希和 `src/assets/2026/recap/` 中去除元数据的 WebP，Astro 按页面用途生成响应式尺寸。
+导入时只清理微信的滑动提示、“Read more”、重复标题及标点，保留正文、署名和组织名单。
+页面不请求微信图片外链，图片链接提供大图，手机上的图片组保留原生横向滚动。
 
 ## 目录结构
 
@@ -165,7 +177,7 @@ npm test
 
 `npm test` 会依次运行单元测试、Astro 类型检查、源素材归档校验、静态构建和构建产物校验。
 类型检查排除 `output/` 中的历史副本和独立的 `youth-night/` 应用。
-修改页面后至少检查 `/`、`/about/`、`/schedule/`、`/poster/`、`/guide/` 和 `/register/` 的桌面与手机布局。
+修改页面后至少检查 `/`、`/recap/`、`/about/`、`/schedule/`、`/poster/`、`/guide/` 和 `/register/` 的桌面与手机布局。
 归档相关改动还需要检查 `/2025/`、`/2025/schedule.html` 和 `/2025/register.html`。
 
 ## 腾讯文档专题同步

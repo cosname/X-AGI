@@ -29,7 +29,8 @@
 | 调整日程阅读体验 | [日程内容](../src/components/2026/inner/SchedulePageContent.astro)、[人物展开区](../src/components/2026/inner/SchedulePersonProfile.astro) | [内页结构](../src/styles/published-inner-2026.css)、[内页皮肤](../src/styles/goal-2026.css) |
 
 `goal-*` 是当前源码命名的一部分，不代表存在可访问的 `/goal/` 页面。
-正式首页依次组合 Hero、嘉宾、海报、历届影像和组织信息。
+正式首页依次组合 Hero、会议纪要、嘉宾、海报、历届影像和组织信息。
+纪要首页组件为 `ConferenceRecap.astro`，全文由 `RecapPageContent.astro` 渲染，正文和照片来源见[维护指南](maintenance.md#会议纪要)。
 不要仅根据 CSS 文件中的旧选择器推断当前页面结构。
 
 ## 当前视觉约定

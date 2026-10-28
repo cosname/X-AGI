@@ -72,6 +72,8 @@ Cyan and orange glints are accents, not complete edge colors.
 
 `src/components/2026/home/PublishedHomeHero.astro` owns the published one-viewport hero.
 `src/components/2026/home/GoalHomeLower.astro` owns the long-page transition from the hero into history and organization content.
+`src/components/2026/home/ConferenceRecap.astro` places the organizer's recap and three local photographs immediately below the hero, with a link to the full `/recap/` article.
+The article uses a quiet paper surface, a section directory, responsive local images, and native horizontal photo scrolling on mobile.
 `src/components/2026/home/GoalHistoryGallery.astro` owns the history semantics and visual structure.
 `src/components/2026/home/GoalPartnerFooter.astro` owns organization groups, contact, and legal information.
 
@@ -118,7 +120,7 @@ Escape restores focus to the trigger.
 
 ## Inner pages
 
-The five current inner pages are `/about/`, `/schedule/`, `/poster/`, `/guide/`, and `/register/`.
+The current inner pages are `/recap/`, `/about/`, `/schedule/`, `/poster/`, `/travel-grant/`, `/guide/`, and `/register/`.
 Their content components live under `src/components/2026/inner/`.
 `src/layouts/PublishedInner2026Layout.astro` provides the current document shell, Meta, favicon, shared navigation, and current styles.
 `src/styles/published-inner-2026.css` provides self-contained structural rules.
